@@ -19,9 +19,9 @@ export interface LoadNbaPbpRow {
   type_text?: string | null;
   /** Text description of the play / record. `String` */
   text?: string | null;
-  /** Away team score at the time of the play. `Int32` */
+  /** Away team's score after the play. Rebuilt from the scoring plays in feed order when that reaches the official final (score_source 'rebuilt'), otherwise ESPN's per-play value (score_source 'espn'). Seasons published before the repair carry ESPN's per-play value. `Int32` */
   away_score?: number | null;
-  /** Home team score at the time of the play. `Int32` */
+  /** Home team's score after the play. Rebuilt from the scoring plays in feed order when that reaches the official final (score_source 'rebuilt'), otherwise ESPN's per-play value (score_source 'espn'). Seasons published before the repair carry ESPN's per-play value. `Int32` */
   home_score?: number | null;
   /** Numeric period (1-4 for quarters; 5+ for OT). `Int32` */
   period_number?: number | null;
@@ -141,6 +141,8 @@ export interface LoadNbaPbpRow {
   athlete_name_3?: string | null;
   /** Type abbreviation. `String` */
   type_abbreviation?: string | null;
+  /** Where this game's home_score/away_score come from: 'rebuilt' (summed from the scoring plays and equal to the official final on the last play) or 'espn' (ESPN's per-play values, kept when the rebuild misses the final or the game has no final). Absent from seasons published before the repair. Select it by name: it is the play-by-play builder's last column, but a release can carry columns after it. `String` */
+  score_source?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
 }

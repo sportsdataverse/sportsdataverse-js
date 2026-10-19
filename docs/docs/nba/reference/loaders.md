@@ -56,7 +56,7 @@ sidebar_position: 50
 | [`loadNbaStatsStandings`](#loadnbastatsstandings) | [nba_stats_standings](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_standings) | 1996+ |
 | [`loadNbaStatsTeamBoxscores`](#loadnbastatsteamboxscores) | [nba_stats_team_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_team_boxscores) | 1996+ |
 | [`loadNbaStatsTeamSeasonStats`](#loadnbastatsteamseasonstats) | [nba_stats_team_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_team_season_stats) | 1996+ |
-| [`loadNbaPlayerCrosswalk`](#loadnbaplayercrosswalk) | [nba_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_crosswalk) | 2026+ |
+| [`loadNbaPlayerCrosswalk`](#loadnbaplayercrosswalk) | [nba_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_crosswalk) | 2002+ |
 | [`loadNbaScheduleCrosswalk`](#loadnbaschedulecrosswalk) | [nba_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_crosswalk) | 2026+ |
 | [`loadNbaTeamCrosswalk`](#loadnbateamcrosswalk) | [nba_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_crosswalk) | 2026+ |
 | [`loadNbaPlayerCore`](#loadnbaplayercore) | [espn_nba_player_core](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_nba_player_core) | 2002+ |
@@ -95,8 +95,8 @@ const rows = await sdv.nba.loadNbaPbp({ seasons: 2024, columns: ['game_id', 'seq
 | `type_id` | `string` | Type identifier (numeric). |
 | `type_text` | `string` | Display text for the type field. |
 | `text` | `string` | Text description of the play / record. |
-| `away_score` | `number` | Away team score at the time of the play. |
-| `home_score` | `number` | Home team score at the time of the play. |
+| `away_score` | `number` | Away team's score after the play. Rebuilt from the scoring plays in feed order when that reaches the official final (score_source 'rebuilt'), otherwise ESPN's per-play value (score_source 'espn'). Seasons published before the repair carry ESPN's per-play value. |
+| `home_score` | `number` | Home team's score after the play. Rebuilt from the scoring plays in feed order when that reaches the official final (score_source 'rebuilt'), otherwise ESPN's per-play value (score_source 'espn'). Seasons published before the repair carry ESPN's per-play value. |
 | `period_number` | `number` | Numeric period (1-4 for quarters; 5+ for OT). |
 | `period_display_value` | `string` | Period display label (e.g. '1st Quarter', 'OT'). |
 | `clock_display_value` | `string` | Game clock display string (e.g. '8:32'). |
@@ -156,6 +156,7 @@ const rows = await sdv.nba.loadNbaPbp({ seasons: 2024, columns: ['game_id', 'seq
 | `athlete_name_2` | `string` | Name of the secondary athlete involved in the play (e.g. the assister or fouled player). |
 | `athlete_name_3` | `string` | Name of the tertiary athlete involved in the play. |
 | `type_abbreviation` | `string` | Type abbreviation. |
+| `score_source` | `string` | Where this game's home_score/away_score come from: 'rebuilt' (summed from the scoring plays and equal to the official final on the last play) or 'espn' (ESPN's per-play values, kept when the rebuild misses the final or the game has no final). Absent from seasons published before the repair. Select it by name: it is the play-by-play builder's last column, but a release can carry columns after it. |
 
 ## `loadNbaPlayerBoxscore`
 
@@ -2459,7 +2460,7 @@ Release: [nba_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |

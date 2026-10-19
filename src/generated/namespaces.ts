@@ -7688,6 +7688,458 @@ export interface EplWrappers {
   espnEplVenues: Wrapper<Row[], EspnVenuesParams>;
 }
 
+/** The generated wrappers of `sdv.fiba` (and their deprecated pre-v4 names). */
+export interface FibaWrappers {
+  /** FIBA — award (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/awards/{award_id}` */
+  espn_fiba_award: Wrapper<Row[], EspnAwardParams>;
+  /** FIBA — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/awards` */
+  espn_fiba_awards: Wrapper<Row[], EspnAwardsParams>;
+  /** FIBA — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/calendar` */
+  espn_fiba_calendar: Wrapper<Row[], EspnCalendarParams>;
+  /** FIBA — coach (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/coaches/{coach_id}` */
+  espn_fiba_coach: Wrapper<Row[], EspnCoachParams>;
+  /** FIBA — coach record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/coaches/{coach_id}/record/{record_type}` */
+  espn_fiba_coach_record: Wrapper<Row[], EspnCoachRecordParams>;
+  /** FIBA — coach season (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/coaches/{coach_id}/seasons/{season}` */
+  espn_fiba_coach_season: Wrapper<Row[], EspnCoachSeasonParams>;
+  /** FIBA — conferences (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/groups` */
+  espn_fiba_conferences: Wrapper<Row[], EspnConferencesParams>;
+  /** FIBA — draft (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/draft` */
+  espn_fiba_draft: Wrapper<Row[], EspnDraftParams>;
+  /** FIBA — fpi (ESPN site.web.api.espn.com (FPI, fitt v3)). `GET https://site.web.api.espn.com/apis/fitt/v3/sports/basketball/fiba/powerindex` */
+  espn_fiba_fpi: Wrapper<Row[], EspnFpiParams>;
+  /** FIBA — franchise (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/franchises/{franchise_id}` */
+  espn_fiba_franchise: Wrapper<Row[], EspnFranchiseParams>;
+  /** FIBA — franchises (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/franchises` */
+  espn_fiba_franchises: Wrapper<Row[], EspnFranchisesParams>;
+  /** FIBA — game (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}` */
+  espn_fiba_game: Wrapper<Row[], EspnEventParams>;
+  /** FIBA — game broadcasts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/broadcasts` */
+  espn_fiba_game_broadcasts: Wrapper<Row[], EspnEventBroadcastsParams>;
+  /** FIBA — game competition (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}` */
+  espn_fiba_game_competition: Wrapper<Row[], EspnEventCompetitionParams>;
+  /** FIBA — game leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/leaders` */
+  espn_fiba_game_leaders: Wrapper<Row[], EspnEventLeadersParams>;
+  /** FIBA — game odds (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/odds` */
+  espn_fiba_game_odds: Wrapper<Row[], EspnEventOddsParams>;
+  /** FIBA — game official detail (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/officials/{official_id}` */
+  espn_fiba_game_official_detail: Wrapper<Row[], EspnEventOfficialDetailParams>;
+  /** FIBA — game officials (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/officials` */
+  espn_fiba_game_officials: Wrapper<Row[], EspnEventOfficialsParams>;
+  /** FIBA — game play (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/plays/{play_id}` */
+  espn_fiba_game_play: Wrapper<Row[], EspnEventPlayParams>;
+  /** FIBA — game play personnel (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` */
+  espn_fiba_game_play_personnel: Wrapper<Row[], EspnEventPlayPersonnelParams>;
+  /** FIBA — game plays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/plays` */
+  espn_fiba_game_plays: Wrapper<Row[], EspnEventPlaysParams>;
+  /** FIBA — game powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/powerindex` */
+  espn_fiba_game_powerindex: Wrapper<Row[], EspnEventPowerindexParams>;
+  /** FIBA — game predictor (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/predictor` */
+  espn_fiba_game_predictor: Wrapper<Row[], EspnEventPredictorParams>;
+  /** FIBA — game probabilities (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/probabilities` */
+  espn_fiba_game_probabilities: Wrapper<Row[], EspnEventProbabilitiesParams>;
+  /** FIBA — game propbets (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/propbets` */
+  espn_fiba_game_propbets: Wrapper<Row[], EspnEventPropbetsParams>;
+  /** FIBA — game scoringplays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/scoringplays` */
+  espn_fiba_game_scoringplays: Wrapper<Row[], EspnEventScoringplaysParams>;
+  /** FIBA — game situation (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/situation` */
+  espn_fiba_game_situation: Wrapper<Row[], EspnEventSituationParams>;
+  /** FIBA — game status (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/status` */
+  espn_fiba_game_status: Wrapper<Row[], EspnEventStatusParams>;
+  /** FIBA — game team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/competitors/{team_id}` */
+  espn_fiba_game_team: Wrapper<Row[], EspnEventCompetitorParams>;
+  /** FIBA — game team leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` */
+  espn_fiba_game_team_leaders: Wrapper<Row[], EspnEventCompetitorLeadersParams>;
+  /** FIBA — game team linescores (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` */
+  espn_fiba_game_team_linescores: Wrapper<Row[], EspnEventCompetitorLinescoresParams>;
+  /** FIBA — game team record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` */
+  espn_fiba_game_team_record: Wrapper<Row[], EspnEventCompetitorRecordParams>;
+  /** FIBA — game team roster (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` */
+  espn_fiba_game_team_roster: Wrapper<Row[], EspnEventCompetitorRosterParams>;
+  /** FIBA — game team statistics (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` */
+  espn_fiba_game_team_statistics: Wrapper<Row[], EspnEventCompetitorStatisticsParams>;
+  /** FIBA — game teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/competitors` */
+  espn_fiba_game_teams: Wrapper<Row[], EspnEventCompetitorsParams>;
+  /** FIBA — games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events` */
+  espn_fiba_games: Wrapper<Row[], EspnEventsParams>;
+  /** FIBA — injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/injuries` */
+  espn_fiba_injuries: Wrapper<Row[], EspnInjuriesParams>;
+  /** FIBA — leaders (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/fiba/statistics/byathlete` */
+  espn_fiba_leaders: Wrapper<Row[], EspnLeadersParams>;
+  /** FIBA — leaders core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/leaders` */
+  espn_fiba_leaders_core: Wrapper<Row[], EspnLeadersCoreParams>;
+  /** FIBA — league notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/notes` */
+  espn_fiba_league_notes: Wrapper<Row[], EspnLeagueNotesParams>;
+  /** FIBA — league root (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba` */
+  espn_fiba_league_root: Wrapper<Row[], EspnLeagueRootParams>;
+  /** FIBA — news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/news` */
+  espn_fiba_news: Wrapper<Row[], EspnNewsParams>;
+  /** FIBA — player awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/athletes/{athlete_id}/awards` */
+  espn_fiba_player_awards: Wrapper<Row[], EspnAthleteAwardsParams>;
+  /** FIBA — player bio (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/athletes/{athlete_id}/bio` */
+  espn_fiba_player_bio: Wrapper<Row[], EspnAthleteBioParams>;
+  /** FIBA — player career stats (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/athletes/{athlete_id}/statistics[/{stat_type}]` */
+  espn_fiba_player_career_stats: Wrapper<Row[], EspnAthleteCareerStatsParams>;
+  /** FIBA — player contracts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/athletes/{athlete_id}/contracts` */
+  espn_fiba_player_contracts: Wrapper<Row[], EspnAthleteContractsParams>;
+  /** FIBA — player core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/athletes/{athlete_id}` */
+  espn_fiba_player_core: Wrapper<Row[], EspnAthleteCoreParams>;
+  /** FIBA — player eventlog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/athletes/{athlete_id}/eventlog` */
+  espn_fiba_player_eventlog: Wrapper<Row[], EspnAthleteEventlogParams>;
+  /** FIBA — player gamelog (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/fiba/athletes/{athlete_id}/gamelog` */
+  espn_fiba_player_gamelog: Wrapper<Row[], EspnAthleteGamelogParams>;
+  /** FIBA — player info (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/athletes/{athlete_id}` */
+  espn_fiba_player_info: Wrapper<Row[], EspnAthleteInfoParams>;
+  /** FIBA — player injuries (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/athletes/{athlete_id}/injuries` */
+  espn_fiba_player_injuries: Wrapper<Row[], EspnAthleteInjuriesParams>;
+  /** FIBA — player news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/athletes/{athlete_id}/news` */
+  espn_fiba_player_news: Wrapper<Row[], EspnAthleteNewsParams>;
+  /** FIBA — player notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/athletes/{athlete_id}/notes` */
+  espn_fiba_player_notes: Wrapper<Row[], EspnAthleteNotesParams>;
+  /** FIBA — player overview (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/fiba/athletes/{athlete_id}/overview` */
+  espn_fiba_player_overview: Wrapper<Row[], EspnAthleteOverviewParams>;
+  /** FIBA — player records (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/athletes/{athlete_id}/records` */
+  espn_fiba_player_records: Wrapper<Row[], EspnAthleteRecordsParams>;
+  /** FIBA — player seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/athletes/{athlete_id}/seasons` */
+  espn_fiba_player_seasons: Wrapper<Row[], EspnAthleteSeasonsParams>;
+  /** FIBA — player splits (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/fiba/athletes/{athlete_id}/splits` */
+  espn_fiba_player_splits: Wrapper<Row[], EspnAthleteSplitsParams>;
+  /** FIBA — player statisticslog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/athletes/{athlete_id}/statisticslog` */
+  espn_fiba_player_statisticslog: Wrapper<Row[], EspnAthleteStatisticslogParams>;
+  /** FIBA — player stats (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/fiba/athletes/{athlete_id}/stats` */
+  espn_fiba_player_stats: Wrapper<Row[], EspnAthleteStatsParams>;
+  /** FIBA — player vs player (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/athletes/{athlete_id}/vsathlete/{opp_id}` */
+  espn_fiba_player_vs_player: Wrapper<Row[], EspnAthleteVsAthleteParams>;
+  /** FIBA — players index (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/athletes` */
+  espn_fiba_players_index: Wrapper<Row[], EspnAthletesIndexParams>;
+  /** FIBA — position (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/positions/{position_id}` */
+  espn_fiba_position: Wrapper<Row[], EspnPositionParams>;
+  /** FIBA — positions (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/positions` */
+  espn_fiba_positions: Wrapper<Row[], EspnPositionsParams>;
+  /** FIBA — scoreboard (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/scoreboard` */
+  espn_fiba_scoreboard: Wrapper<Row[], EspnScoreboardParams>;
+  /** FIBA — season awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/awards` */
+  espn_fiba_season_awards: Wrapper<Row[], EspnSeasonAwardsParams>;
+  /** FIBA — season coaches (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/coaches` */
+  espn_fiba_season_coaches: Wrapper<Row[], EspnSeasonCoachesParams>;
+  /** FIBA — season draft (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/draft` */
+  espn_fiba_season_draft: Wrapper<Row[], EspnSeasonDraftParams>;
+  /** FIBA — season draft round picks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/draft/rounds/{round_num}/picks` */
+  espn_fiba_season_draft_round_picks: Wrapper<Row[], EspnSeasonDraftRoundPicksParams>;
+  /** FIBA — season freeagents (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/freeagents` */
+  espn_fiba_season_freeagents: Wrapper<Row[], EspnSeasonFreeagentsParams>;
+  /** FIBA — season futures (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/futures` */
+  espn_fiba_season_futures: Wrapper<Row[], EspnSeasonFuturesParams>;
+  /** FIBA — season group (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/types/{season_type}/groups/{group_id}` */
+  espn_fiba_season_group: Wrapper<Row[], EspnSeasonGroupParams>;
+  /** FIBA — season group children (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/types/{season_type}/groups/{group_id}/children` */
+  espn_fiba_season_group_children: Wrapper<Row[], EspnSeasonGroupChildrenParams>;
+  /** FIBA — season group teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/types/{season_type}/groups/{group_id}/teams` */
+  espn_fiba_season_group_teams: Wrapper<Row[], EspnSeasonGroupTeamsParams>;
+  /** FIBA — season groups (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/types/{season_type}/groups` */
+  espn_fiba_season_groups: Wrapper<Row[], EspnSeasonGroupsParams>;
+  /** FIBA — season info (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}` */
+  espn_fiba_season_info: Wrapper<Row[], EspnSeasonInfoParams>;
+  /** FIBA — season players (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/athletes` */
+  espn_fiba_season_players: Wrapper<Row[], EspnSeasonAthletesParams>;
+  /** FIBA — season pointer (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/season` */
+  espn_fiba_season_pointer: Wrapper<Row[], EspnSeasonPointerParams>;
+  /** FIBA — season powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/powerindex[/{team_id}]` */
+  espn_fiba_season_powerindex: Wrapper<Row[], EspnSeasonPowerindexParams>;
+  /** FIBA — season powerindex leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/powerindex/leaders` */
+  espn_fiba_season_powerindex_leaders: Wrapper<Row[], EspnSeasonPowerindexLeadersParams>;
+  /** FIBA — season team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/teams/{team_id}` */
+  espn_fiba_season_team: Wrapper<Row[], EspnSeasonTeamParams>;
+  /** FIBA — season teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/teams` */
+  espn_fiba_season_teams: Wrapper<Row[], EspnSeasonTeamsParams>;
+  /** FIBA — season type (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/types/{season_type}` */
+  espn_fiba_season_type: Wrapper<Row[], EspnSeasonTypeParams>;
+  /** FIBA — season type corrections (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/types/{season_type}/corrections` */
+  espn_fiba_season_type_corrections: Wrapper<Row[], EspnSeasonTypeCorrectionsParams>;
+  /** FIBA — season type leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/types/{season_type}/leaders` */
+  espn_fiba_season_type_leaders: Wrapper<Row[], EspnSeasonTypeLeadersParams>;
+  /** FIBA — season types (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/types` */
+  espn_fiba_season_types: Wrapper<Row[], EspnSeasonTypesParams>;
+  /** FIBA — season week (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/types/{season_type}/weeks/{week}` */
+  espn_fiba_season_week: Wrapper<Row[], EspnSeasonWeekParams>;
+  /** FIBA — season week games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/types/{season_type}/weeks/{week}/events` */
+  espn_fiba_season_week_games: Wrapper<Row[], EspnSeasonWeekEventsParams>;
+  /** FIBA — season week powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/types/{season_type}/weeks/{week}/powerindex` */
+  espn_fiba_season_week_powerindex: Wrapper<Row[], EspnSeasonWeekPowerindexParams>;
+  /** FIBA — season weeks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/types/{season_type}/weeks` */
+  espn_fiba_season_weeks: Wrapper<Row[], EspnSeasonWeeksParams>;
+  /** FIBA — seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons` */
+  espn_fiba_seasons: Wrapper<Row[], EspnSeasonsParams>;
+  /** FIBA — standings (ESPN site.api.espn.com (v2)). `GET https://site.api.espn.com/apis/v2/sports/basketball/fiba/standings` */
+  espn_fiba_standings: Wrapper<Row[], EspnStandingsParams>;
+  /** FIBA — standings core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/standings` */
+  espn_fiba_standings_core: Wrapper<Row[], EspnStandingsCoreParams>;
+  /** FIBA — statistics league (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/statistics` */
+  espn_fiba_statistics_league: Wrapper<Row[], EspnStatisticsLeagueParams>;
+  /** FIBA — summary (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/summary` */
+  espn_fiba_summary: SectionedWrapper<ParsedTables, {}, EspnSummaryParams>;
+  /** FIBA — talentpicks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/talentpicks` */
+  espn_fiba_talentpicks: Wrapper<Row[], EspnTalentpicksParams>;
+  /** FIBA — team (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/teams/{team_id}` */
+  espn_fiba_team: Wrapper<Row[], EspnTeamParams>;
+  /** FIBA — team core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/teams/{team_id}` */
+  espn_fiba_team_core: Wrapper<Row[], EspnTeamCoreParams>;
+  /** FIBA — team depthcharts (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/teams/{team_id}/depthcharts` */
+  espn_fiba_team_depthcharts: Wrapper<Row[], EspnTeamDepthchartsParams>;
+  /** FIBA — team history (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/teams/{team_id}/history` */
+  espn_fiba_team_history: Wrapper<Row[], EspnTeamHistoryParams>;
+  /** FIBA — team injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/teams/{team_id}/injuries` */
+  espn_fiba_team_injuries: Wrapper<Row[], EspnTeamInjuriesParams>;
+  /** FIBA — team leaders (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/teams/{team_id}/leaders` */
+  espn_fiba_team_leaders: Wrapper<Row[], EspnTeamLeadersParams>;
+  /** FIBA — team news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/teams/{team_id}/news` */
+  espn_fiba_team_news: Wrapper<Row[], EspnTeamNewsParams>;
+  /** FIBA — team record (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/teams/{team_id}/record` */
+  espn_fiba_team_record: Wrapper<Row[], EspnTeamRecordParams>;
+  /** FIBA — team roster (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/teams/{team_id}/roster` */
+  espn_fiba_team_roster: Wrapper<Row[], EspnTeamRosterParams>;
+  /** FIBA — team schedule (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/teams/{team_id}/schedule` */
+  espn_fiba_team_schedule: Wrapper<Row[], EspnTeamScheduleParams>;
+  /** FIBA — team transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/teams/{team_id}/transactions` */
+  espn_fiba_team_transactions: Wrapper<Row[], EspnTeamTransactionsParams>;
+  /** FIBA — teams core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/teams` */
+  espn_fiba_teams_core: Wrapper<Row[], EspnTeamsCoreParams>;
+  /** FIBA — teams site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/teams` */
+  espn_fiba_teams_site: Wrapper<Row[], EspnTeamsSiteParams>;
+  /** FIBA — tournaments (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/tournaments` */
+  espn_fiba_tournaments: Wrapper<Row[], EspnTournamentsParams>;
+  /** FIBA — transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/transactions` */
+  espn_fiba_transactions: Wrapper<Row[], EspnTransactionsParams>;
+  /** FIBA — venue (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/venues/{venue_id}` */
+  espn_fiba_venue: Wrapper<Row[], EspnVenueParams>;
+  /** FIBA — venues (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/venues` */
+  espn_fiba_venues: Wrapper<Row[], EspnVenuesParams>;
+  /** FIBA — award (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/awards/{award_id}` */
+  espnFibaAward: Wrapper<Row[], EspnAwardParams>;
+  /** FIBA — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/awards` */
+  espnFibaAwards: Wrapper<Row[], EspnAwardsParams>;
+  /** FIBA — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/calendar` */
+  espnFibaCalendar: Wrapper<Row[], EspnCalendarParams>;
+  /** FIBA — coach (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/coaches/{coach_id}` */
+  espnFibaCoach: Wrapper<Row[], EspnCoachParams>;
+  /** FIBA — coach record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/coaches/{coach_id}/record/{record_type}` */
+  espnFibaCoachRecord: Wrapper<Row[], EspnCoachRecordParams>;
+  /** FIBA — coach season (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/coaches/{coach_id}/seasons/{season}` */
+  espnFibaCoachSeason: Wrapper<Row[], EspnCoachSeasonParams>;
+  /** FIBA — conferences (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/groups` */
+  espnFibaConferences: Wrapper<Row[], EspnConferencesParams>;
+  /** FIBA — draft (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/draft` */
+  espnFibaDraft: Wrapper<Row[], EspnDraftParams>;
+  /** FIBA — fpi (ESPN site.web.api.espn.com (FPI, fitt v3)). `GET https://site.web.api.espn.com/apis/fitt/v3/sports/basketball/fiba/powerindex` */
+  espnFibaFpi: Wrapper<Row[], EspnFpiParams>;
+  /** FIBA — franchise (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/franchises/{franchise_id}` */
+  espnFibaFranchise: Wrapper<Row[], EspnFranchiseParams>;
+  /** FIBA — franchises (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/franchises` */
+  espnFibaFranchises: Wrapper<Row[], EspnFranchisesParams>;
+  /** FIBA — game (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}` */
+  espnFibaGame: Wrapper<Row[], EspnEventParams>;
+  /** FIBA — game broadcasts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/broadcasts` */
+  espnFibaGameBroadcasts: Wrapper<Row[], EspnEventBroadcastsParams>;
+  /** FIBA — game competition (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}` */
+  espnFibaGameCompetition: Wrapper<Row[], EspnEventCompetitionParams>;
+  /** FIBA — game leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/leaders` */
+  espnFibaGameLeaders: Wrapper<Row[], EspnEventLeadersParams>;
+  /** FIBA — game odds (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/odds` */
+  espnFibaGameOdds: Wrapper<Row[], EspnEventOddsParams>;
+  /** FIBA — game official detail (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/officials/{official_id}` */
+  espnFibaGameOfficialDetail: Wrapper<Row[], EspnEventOfficialDetailParams>;
+  /** FIBA — game officials (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/officials` */
+  espnFibaGameOfficials: Wrapper<Row[], EspnEventOfficialsParams>;
+  /** FIBA — game play (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/plays/{play_id}` */
+  espnFibaGamePlay: Wrapper<Row[], EspnEventPlayParams>;
+  /** FIBA — game play personnel (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` */
+  espnFibaGamePlayPersonnel: Wrapper<Row[], EspnEventPlayPersonnelParams>;
+  /** FIBA — game plays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/plays` */
+  espnFibaGamePlays: Wrapper<Row[], EspnEventPlaysParams>;
+  /** FIBA — game powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/powerindex` */
+  espnFibaGamePowerindex: Wrapper<Row[], EspnEventPowerindexParams>;
+  /** FIBA — game predictor (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/predictor` */
+  espnFibaGamePredictor: Wrapper<Row[], EspnEventPredictorParams>;
+  /** FIBA — game probabilities (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/probabilities` */
+  espnFibaGameProbabilities: Wrapper<Row[], EspnEventProbabilitiesParams>;
+  /** FIBA — game propbets (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/propbets` */
+  espnFibaGamePropbets: Wrapper<Row[], EspnEventPropbetsParams>;
+  /** FIBA — games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events` */
+  espnFibaGames: Wrapper<Row[], EspnEventsParams>;
+  /** FIBA — game scoringplays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/scoringplays` */
+  espnFibaGameScoringplays: Wrapper<Row[], EspnEventScoringplaysParams>;
+  /** FIBA — game situation (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/situation` */
+  espnFibaGameSituation: Wrapper<Row[], EspnEventSituationParams>;
+  /** FIBA — game status (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/status` */
+  espnFibaGameStatus: Wrapper<Row[], EspnEventStatusParams>;
+  /** FIBA — game team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/competitors/{team_id}` */
+  espnFibaGameTeam: Wrapper<Row[], EspnEventCompetitorParams>;
+  /** FIBA — game team leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` */
+  espnFibaGameTeamLeaders: Wrapper<Row[], EspnEventCompetitorLeadersParams>;
+  /** FIBA — game team linescores (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` */
+  espnFibaGameTeamLinescores: Wrapper<Row[], EspnEventCompetitorLinescoresParams>;
+  /** FIBA — game team record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` */
+  espnFibaGameTeamRecord: Wrapper<Row[], EspnEventCompetitorRecordParams>;
+  /** FIBA — game team roster (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` */
+  espnFibaGameTeamRoster: Wrapper<Row[], EspnEventCompetitorRosterParams>;
+  /** FIBA — game teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/competitors` */
+  espnFibaGameTeams: Wrapper<Row[], EspnEventCompetitorsParams>;
+  /** FIBA — game team statistics (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` */
+  espnFibaGameTeamStatistics: Wrapper<Row[], EspnEventCompetitorStatisticsParams>;
+  /** FIBA — injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/injuries` */
+  espnFibaInjuries: Wrapper<Row[], EspnInjuriesParams>;
+  /** FIBA — leaders (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/fiba/statistics/byathlete` */
+  espnFibaLeaders: Wrapper<Row[], EspnLeadersParams>;
+  /** FIBA — leaders core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/leaders` */
+  espnFibaLeadersCore: Wrapper<Row[], EspnLeadersCoreParams>;
+  /** FIBA — league notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/notes` */
+  espnFibaLeagueNotes: Wrapper<Row[], EspnLeagueNotesParams>;
+  /** FIBA — league root (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba` */
+  espnFibaLeagueRoot: Wrapper<Row[], EspnLeagueRootParams>;
+  /** FIBA — news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/news` */
+  espnFibaNews: Wrapper<Row[], EspnNewsParams>;
+  /** FIBA — player awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/athletes/{athlete_id}/awards` */
+  espnFibaPlayerAwards: Wrapper<Row[], EspnAthleteAwardsParams>;
+  /** FIBA — player bio (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/athletes/{athlete_id}/bio` */
+  espnFibaPlayerBio: Wrapper<Row[], EspnAthleteBioParams>;
+  /** FIBA — player career stats (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/athletes/{athlete_id}/statistics[/{stat_type}]` */
+  espnFibaPlayerCareerStats: Wrapper<Row[], EspnAthleteCareerStatsParams>;
+  /** FIBA — player contracts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/athletes/{athlete_id}/contracts` */
+  espnFibaPlayerContracts: Wrapper<Row[], EspnAthleteContractsParams>;
+  /** FIBA — player core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/athletes/{athlete_id}` */
+  espnFibaPlayerCore: Wrapper<Row[], EspnAthleteCoreParams>;
+  /** FIBA — player eventlog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/athletes/{athlete_id}/eventlog` */
+  espnFibaPlayerEventlog: Wrapper<Row[], EspnAthleteEventlogParams>;
+  /** FIBA — player gamelog (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/fiba/athletes/{athlete_id}/gamelog` */
+  espnFibaPlayerGamelog: Wrapper<Row[], EspnAthleteGamelogParams>;
+  /** FIBA — player info (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/athletes/{athlete_id}` */
+  espnFibaPlayerInfo: Wrapper<Row[], EspnAthleteInfoParams>;
+  /** FIBA — player injuries (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/athletes/{athlete_id}/injuries` */
+  espnFibaPlayerInjuries: Wrapper<Row[], EspnAthleteInjuriesParams>;
+  /** FIBA — player news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/athletes/{athlete_id}/news` */
+  espnFibaPlayerNews: Wrapper<Row[], EspnAthleteNewsParams>;
+  /** FIBA — player notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/athletes/{athlete_id}/notes` */
+  espnFibaPlayerNotes: Wrapper<Row[], EspnAthleteNotesParams>;
+  /** FIBA — player overview (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/fiba/athletes/{athlete_id}/overview` */
+  espnFibaPlayerOverview: Wrapper<Row[], EspnAthleteOverviewParams>;
+  /** FIBA — player records (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/athletes/{athlete_id}/records` */
+  espnFibaPlayerRecords: Wrapper<Row[], EspnAthleteRecordsParams>;
+  /** FIBA — player seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/athletes/{athlete_id}/seasons` */
+  espnFibaPlayerSeasons: Wrapper<Row[], EspnAthleteSeasonsParams>;
+  /** FIBA — players index (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/athletes` */
+  espnFibaPlayersIndex: Wrapper<Row[], EspnAthletesIndexParams>;
+  /** FIBA — player splits (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/fiba/athletes/{athlete_id}/splits` */
+  espnFibaPlayerSplits: Wrapper<Row[], EspnAthleteSplitsParams>;
+  /** FIBA — player statisticslog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/athletes/{athlete_id}/statisticslog` */
+  espnFibaPlayerStatisticslog: Wrapper<Row[], EspnAthleteStatisticslogParams>;
+  /** FIBA — player stats (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/fiba/athletes/{athlete_id}/stats` */
+  espnFibaPlayerStats: Wrapper<Row[], EspnAthleteStatsParams>;
+  /** FIBA — player vs player (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/athletes/{athlete_id}/vsathlete/{opp_id}` */
+  espnFibaPlayerVsPlayer: Wrapper<Row[], EspnAthleteVsAthleteParams>;
+  /** FIBA — position (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/positions/{position_id}` */
+  espnFibaPosition: Wrapper<Row[], EspnPositionParams>;
+  /** FIBA — positions (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/positions` */
+  espnFibaPositions: Wrapper<Row[], EspnPositionsParams>;
+  /** FIBA — scoreboard (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/scoreboard` */
+  espnFibaScoreboard: Wrapper<Row[], EspnScoreboardParams>;
+  /** FIBA — season awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/awards` */
+  espnFibaSeasonAwards: Wrapper<Row[], EspnSeasonAwardsParams>;
+  /** FIBA — season coaches (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/coaches` */
+  espnFibaSeasonCoaches: Wrapper<Row[], EspnSeasonCoachesParams>;
+  /** FIBA — season draft (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/draft` */
+  espnFibaSeasonDraft: Wrapper<Row[], EspnSeasonDraftParams>;
+  /** FIBA — season draft round picks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/draft/rounds/{round_num}/picks` */
+  espnFibaSeasonDraftRoundPicks: Wrapper<Row[], EspnSeasonDraftRoundPicksParams>;
+  /** FIBA — season freeagents (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/freeagents` */
+  espnFibaSeasonFreeagents: Wrapper<Row[], EspnSeasonFreeagentsParams>;
+  /** FIBA — season futures (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/futures` */
+  espnFibaSeasonFutures: Wrapper<Row[], EspnSeasonFuturesParams>;
+  /** FIBA — season group (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/types/{season_type}/groups/{group_id}` */
+  espnFibaSeasonGroup: Wrapper<Row[], EspnSeasonGroupParams>;
+  /** FIBA — season group children (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/types/{season_type}/groups/{group_id}/children` */
+  espnFibaSeasonGroupChildren: Wrapper<Row[], EspnSeasonGroupChildrenParams>;
+  /** FIBA — season groups (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/types/{season_type}/groups` */
+  espnFibaSeasonGroups: Wrapper<Row[], EspnSeasonGroupsParams>;
+  /** FIBA — season group teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/types/{season_type}/groups/{group_id}/teams` */
+  espnFibaSeasonGroupTeams: Wrapper<Row[], EspnSeasonGroupTeamsParams>;
+  /** FIBA — season info (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}` */
+  espnFibaSeasonInfo: Wrapper<Row[], EspnSeasonInfoParams>;
+  /** FIBA — season players (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/athletes` */
+  espnFibaSeasonPlayers: Wrapper<Row[], EspnSeasonAthletesParams>;
+  /** FIBA — season pointer (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/season` */
+  espnFibaSeasonPointer: Wrapper<Row[], EspnSeasonPointerParams>;
+  /** FIBA — season powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/powerindex[/{team_id}]` */
+  espnFibaSeasonPowerindex: Wrapper<Row[], EspnSeasonPowerindexParams>;
+  /** FIBA — season powerindex leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/powerindex/leaders` */
+  espnFibaSeasonPowerindexLeaders: Wrapper<Row[], EspnSeasonPowerindexLeadersParams>;
+  /** FIBA — seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons` */
+  espnFibaSeasons: Wrapper<Row[], EspnSeasonsParams>;
+  /** FIBA — season team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/teams/{team_id}` */
+  espnFibaSeasonTeam: Wrapper<Row[], EspnSeasonTeamParams>;
+  /** FIBA — season teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/teams` */
+  espnFibaSeasonTeams: Wrapper<Row[], EspnSeasonTeamsParams>;
+  /** FIBA — season type (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/types/{season_type}` */
+  espnFibaSeasonType: Wrapper<Row[], EspnSeasonTypeParams>;
+  /** FIBA — season type corrections (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/types/{season_type}/corrections` */
+  espnFibaSeasonTypeCorrections: Wrapper<Row[], EspnSeasonTypeCorrectionsParams>;
+  /** FIBA — season type leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/types/{season_type}/leaders` */
+  espnFibaSeasonTypeLeaders: Wrapper<Row[], EspnSeasonTypeLeadersParams>;
+  /** FIBA — season types (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/types` */
+  espnFibaSeasonTypes: Wrapper<Row[], EspnSeasonTypesParams>;
+  /** FIBA — season week (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/types/{season_type}/weeks/{week}` */
+  espnFibaSeasonWeek: Wrapper<Row[], EspnSeasonWeekParams>;
+  /** FIBA — season week games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/types/{season_type}/weeks/{week}/events` */
+  espnFibaSeasonWeekGames: Wrapper<Row[], EspnSeasonWeekEventsParams>;
+  /** FIBA — season week powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/types/{season_type}/weeks/{week}/powerindex` */
+  espnFibaSeasonWeekPowerindex: Wrapper<Row[], EspnSeasonWeekPowerindexParams>;
+  /** FIBA — season weeks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/seasons/{season}/types/{season_type}/weeks` */
+  espnFibaSeasonWeeks: Wrapper<Row[], EspnSeasonWeeksParams>;
+  /** FIBA — standings (ESPN site.api.espn.com (v2)). `GET https://site.api.espn.com/apis/v2/sports/basketball/fiba/standings` */
+  espnFibaStandings: Wrapper<Row[], EspnStandingsParams>;
+  /** FIBA — standings core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/standings` */
+  espnFibaStandingsCore: Wrapper<Row[], EspnStandingsCoreParams>;
+  /** FIBA — statistics league (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/statistics` */
+  espnFibaStatisticsLeague: Wrapper<Row[], EspnStatisticsLeagueParams>;
+  /** FIBA — summary (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/summary` */
+  espnFibaSummary: SectionedWrapper<ParsedTables, {}, EspnSummaryParams>;
+  /** FIBA — talentpicks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/talentpicks` */
+  espnFibaTalentpicks: Wrapper<Row[], EspnTalentpicksParams>;
+  /** FIBA — team (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/teams/{team_id}` */
+  espnFibaTeam: Wrapper<Row[], EspnTeamParams>;
+  /** FIBA — team core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/teams/{team_id}` */
+  espnFibaTeamCore: Wrapper<Row[], EspnTeamCoreParams>;
+  /** FIBA — team depthcharts (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/teams/{team_id}/depthcharts` */
+  espnFibaTeamDepthcharts: Wrapper<Row[], EspnTeamDepthchartsParams>;
+  /** FIBA — team history (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/teams/{team_id}/history` */
+  espnFibaTeamHistory: Wrapper<Row[], EspnTeamHistoryParams>;
+  /** FIBA — team injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/teams/{team_id}/injuries` */
+  espnFibaTeamInjuries: Wrapper<Row[], EspnTeamInjuriesParams>;
+  /** FIBA — team leaders (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/teams/{team_id}/leaders` */
+  espnFibaTeamLeaders: Wrapper<Row[], EspnTeamLeadersParams>;
+  /** FIBA — team news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/teams/{team_id}/news` */
+  espnFibaTeamNews: Wrapper<Row[], EspnTeamNewsParams>;
+  /** FIBA — team record (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/teams/{team_id}/record` */
+  espnFibaTeamRecord: Wrapper<Row[], EspnTeamRecordParams>;
+  /** FIBA — team roster (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/teams/{team_id}/roster` */
+  espnFibaTeamRoster: Wrapper<Row[], EspnTeamRosterParams>;
+  /** FIBA — team schedule (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/teams/{team_id}/schedule` */
+  espnFibaTeamSchedule: Wrapper<Row[], EspnTeamScheduleParams>;
+  /** FIBA — teams core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/teams` */
+  espnFibaTeamsCore: Wrapper<Row[], EspnTeamsCoreParams>;
+  /** FIBA — teams site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/teams` */
+  espnFibaTeamsSite: Wrapper<Row[], EspnTeamsSiteParams>;
+  /** FIBA — team transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/teams/{team_id}/transactions` */
+  espnFibaTeamTransactions: Wrapper<Row[], EspnTeamTransactionsParams>;
+  /** FIBA — tournaments (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/tournaments` */
+  espnFibaTournaments: Wrapper<Row[], EspnTournamentsParams>;
+  /** FIBA — transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/fiba/transactions` */
+  espnFibaTransactions: Wrapper<Row[], EspnTransactionsParams>;
+  /** FIBA — venue (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/venues/{venue_id}` */
+  espnFibaVenue: Wrapper<Row[], EspnVenueParams>;
+  /** FIBA — venues (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/fiba/venues` */
+  espnFibaVenues: Wrapper<Row[], EspnVenuesParams>;
+}
+
 /** The generated wrappers of `sdv.fox` (and their deprecated pre-v4 names). */
 export interface FoxWrappers {
   /** Fox Sports — event data. `GET https://api.foxsports.com/bifrost/v1/{sport}/event/{event_id}/data` */
@@ -15312,6 +15764,3170 @@ export interface NbaglWrappers {
   espnNbaglVenues: Wrapper<Row[], EspnVenuesParams>;
 }
 
+/** The generated wrappers of `sdv.nbasl_ca` (and their deprecated pre-v4 names). */
+export interface NbaslCaWrappers {
+  /** NBASL_CA — award (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/awards/{award_id}` */
+  espn_nbasl_ca_award: Wrapper<Row[], EspnAwardParams>;
+  /** NBASL_CA — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/awards` */
+  espn_nbasl_ca_awards: Wrapper<Row[], EspnAwardsParams>;
+  /** NBASL_CA — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/calendar` */
+  espn_nbasl_ca_calendar: Wrapper<Row[], EspnCalendarParams>;
+  /** NBASL_CA — coach (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/coaches/{coach_id}` */
+  espn_nbasl_ca_coach: Wrapper<Row[], EspnCoachParams>;
+  /** NBASL_CA — coach record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/coaches/{coach_id}/record/{record_type}` */
+  espn_nbasl_ca_coach_record: Wrapper<Row[], EspnCoachRecordParams>;
+  /** NBASL_CA — coach season (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/coaches/{coach_id}/seasons/{season}` */
+  espn_nbasl_ca_coach_season: Wrapper<Row[], EspnCoachSeasonParams>;
+  /** NBASL_CA — conferences (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/groups` */
+  espn_nbasl_ca_conferences: Wrapper<Row[], EspnConferencesParams>;
+  /** NBASL_CA — draft (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/draft` */
+  espn_nbasl_ca_draft: Wrapper<Row[], EspnDraftParams>;
+  /** NBASL_CA — fpi (ESPN site.web.api.espn.com (FPI, fitt v3)). `GET https://site.web.api.espn.com/apis/fitt/v3/sports/basketball/nba-summer-california/powerindex` */
+  espn_nbasl_ca_fpi: Wrapper<Row[], EspnFpiParams>;
+  /** NBASL_CA — franchise (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/franchises/{franchise_id}` */
+  espn_nbasl_ca_franchise: Wrapper<Row[], EspnFranchiseParams>;
+  /** NBASL_CA — franchises (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/franchises` */
+  espn_nbasl_ca_franchises: Wrapper<Row[], EspnFranchisesParams>;
+  /** NBASL_CA — game (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}` */
+  espn_nbasl_ca_game: Wrapper<Row[], EspnEventParams>;
+  /** NBASL_CA — game broadcasts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/broadcasts` */
+  espn_nbasl_ca_game_broadcasts: Wrapper<Row[], EspnEventBroadcastsParams>;
+  /** NBASL_CA — game competition (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}` */
+  espn_nbasl_ca_game_competition: Wrapper<Row[], EspnEventCompetitionParams>;
+  /** NBASL_CA — game leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/leaders` */
+  espn_nbasl_ca_game_leaders: Wrapper<Row[], EspnEventLeadersParams>;
+  /** NBASL_CA — game odds (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/odds` */
+  espn_nbasl_ca_game_odds: Wrapper<Row[], EspnEventOddsParams>;
+  /** NBASL_CA — game official detail (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/officials/{official_id}` */
+  espn_nbasl_ca_game_official_detail: Wrapper<Row[], EspnEventOfficialDetailParams>;
+  /** NBASL_CA — game officials (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/officials` */
+  espn_nbasl_ca_game_officials: Wrapper<Row[], EspnEventOfficialsParams>;
+  /** NBASL_CA — game play (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/plays/{play_id}` */
+  espn_nbasl_ca_game_play: Wrapper<Row[], EspnEventPlayParams>;
+  /** NBASL_CA — game play personnel (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` */
+  espn_nbasl_ca_game_play_personnel: Wrapper<Row[], EspnEventPlayPersonnelParams>;
+  /** NBASL_CA — game plays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/plays` */
+  espn_nbasl_ca_game_plays: Wrapper<Row[], EspnEventPlaysParams>;
+  /** NBASL_CA — game powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/powerindex` */
+  espn_nbasl_ca_game_powerindex: Wrapper<Row[], EspnEventPowerindexParams>;
+  /** NBASL_CA — game predictor (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/predictor` */
+  espn_nbasl_ca_game_predictor: Wrapper<Row[], EspnEventPredictorParams>;
+  /** NBASL_CA — game probabilities (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/probabilities` */
+  espn_nbasl_ca_game_probabilities: Wrapper<Row[], EspnEventProbabilitiesParams>;
+  /** NBASL_CA — game propbets (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/propbets` */
+  espn_nbasl_ca_game_propbets: Wrapper<Row[], EspnEventPropbetsParams>;
+  /** NBASL_CA — game scoringplays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/scoringplays` */
+  espn_nbasl_ca_game_scoringplays: Wrapper<Row[], EspnEventScoringplaysParams>;
+  /** NBASL_CA — game situation (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/situation` */
+  espn_nbasl_ca_game_situation: Wrapper<Row[], EspnEventSituationParams>;
+  /** NBASL_CA — game status (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/status` */
+  espn_nbasl_ca_game_status: Wrapper<Row[], EspnEventStatusParams>;
+  /** NBASL_CA — game team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/competitors/{team_id}` */
+  espn_nbasl_ca_game_team: Wrapper<Row[], EspnEventCompetitorParams>;
+  /** NBASL_CA — game team leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` */
+  espn_nbasl_ca_game_team_leaders: Wrapper<Row[], EspnEventCompetitorLeadersParams>;
+  /** NBASL_CA — game team linescores (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` */
+  espn_nbasl_ca_game_team_linescores: Wrapper<Row[], EspnEventCompetitorLinescoresParams>;
+  /** NBASL_CA — game team record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` */
+  espn_nbasl_ca_game_team_record: Wrapper<Row[], EspnEventCompetitorRecordParams>;
+  /** NBASL_CA — game team roster (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` */
+  espn_nbasl_ca_game_team_roster: Wrapper<Row[], EspnEventCompetitorRosterParams>;
+  /** NBASL_CA — game team statistics (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` */
+  espn_nbasl_ca_game_team_statistics: Wrapper<Row[], EspnEventCompetitorStatisticsParams>;
+  /** NBASL_CA — game teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/competitors` */
+  espn_nbasl_ca_game_teams: Wrapper<Row[], EspnEventCompetitorsParams>;
+  /** NBASL_CA — games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events` */
+  espn_nbasl_ca_games: Wrapper<Row[], EspnEventsParams>;
+  /** NBASL_CA — injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/injuries` */
+  espn_nbasl_ca_injuries: Wrapper<Row[], EspnInjuriesParams>;
+  /** NBASL_CA — leaders (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-california/statistics/byathlete` */
+  espn_nbasl_ca_leaders: Wrapper<Row[], EspnLeadersParams>;
+  /** NBASL_CA — leaders core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/leaders` */
+  espn_nbasl_ca_leaders_core: Wrapper<Row[], EspnLeadersCoreParams>;
+  /** NBASL_CA — league notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/notes` */
+  espn_nbasl_ca_league_notes: Wrapper<Row[], EspnLeagueNotesParams>;
+  /** NBASL_CA — league root (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california` */
+  espn_nbasl_ca_league_root: Wrapper<Row[], EspnLeagueRootParams>;
+  /** NBASL_CA — news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/news` */
+  espn_nbasl_ca_news: Wrapper<Row[], EspnNewsParams>;
+  /** NBASL_CA — player awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/athletes/{athlete_id}/awards` */
+  espn_nbasl_ca_player_awards: Wrapper<Row[], EspnAthleteAwardsParams>;
+  /** NBASL_CA — player bio (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/athletes/{athlete_id}/bio` */
+  espn_nbasl_ca_player_bio: Wrapper<Row[], EspnAthleteBioParams>;
+  /** NBASL_CA — player career stats (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/athletes/{athlete_id}/statistics[/{stat_type}]` */
+  espn_nbasl_ca_player_career_stats: Wrapper<Row[], EspnAthleteCareerStatsParams>;
+  /** NBASL_CA — player contracts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/athletes/{athlete_id}/contracts` */
+  espn_nbasl_ca_player_contracts: Wrapper<Row[], EspnAthleteContractsParams>;
+  /** NBASL_CA — player core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/athletes/{athlete_id}` */
+  espn_nbasl_ca_player_core: Wrapper<Row[], EspnAthleteCoreParams>;
+  /** NBASL_CA — player eventlog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/athletes/{athlete_id}/eventlog` */
+  espn_nbasl_ca_player_eventlog: Wrapper<Row[], EspnAthleteEventlogParams>;
+  /** NBASL_CA — player gamelog (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-california/athletes/{athlete_id}/gamelog` */
+  espn_nbasl_ca_player_gamelog: Wrapper<Row[], EspnAthleteGamelogParams>;
+  /** NBASL_CA — player info (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/athletes/{athlete_id}` */
+  espn_nbasl_ca_player_info: Wrapper<Row[], EspnAthleteInfoParams>;
+  /** NBASL_CA — player injuries (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/athletes/{athlete_id}/injuries` */
+  espn_nbasl_ca_player_injuries: Wrapper<Row[], EspnAthleteInjuriesParams>;
+  /** NBASL_CA — player news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/athletes/{athlete_id}/news` */
+  espn_nbasl_ca_player_news: Wrapper<Row[], EspnAthleteNewsParams>;
+  /** NBASL_CA — player notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/athletes/{athlete_id}/notes` */
+  espn_nbasl_ca_player_notes: Wrapper<Row[], EspnAthleteNotesParams>;
+  /** NBASL_CA — player overview (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-california/athletes/{athlete_id}/overview` */
+  espn_nbasl_ca_player_overview: Wrapper<Row[], EspnAthleteOverviewParams>;
+  /** NBASL_CA — player records (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/athletes/{athlete_id}/records` */
+  espn_nbasl_ca_player_records: Wrapper<Row[], EspnAthleteRecordsParams>;
+  /** NBASL_CA — player seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/athletes/{athlete_id}/seasons` */
+  espn_nbasl_ca_player_seasons: Wrapper<Row[], EspnAthleteSeasonsParams>;
+  /** NBASL_CA — player splits (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-california/athletes/{athlete_id}/splits` */
+  espn_nbasl_ca_player_splits: Wrapper<Row[], EspnAthleteSplitsParams>;
+  /** NBASL_CA — player statisticslog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/athletes/{athlete_id}/statisticslog` */
+  espn_nbasl_ca_player_statisticslog: Wrapper<Row[], EspnAthleteStatisticslogParams>;
+  /** NBASL_CA — player stats (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-california/athletes/{athlete_id}/stats` */
+  espn_nbasl_ca_player_stats: Wrapper<Row[], EspnAthleteStatsParams>;
+  /** NBASL_CA — player vs player (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/athletes/{athlete_id}/vsathlete/{opp_id}` */
+  espn_nbasl_ca_player_vs_player: Wrapper<Row[], EspnAthleteVsAthleteParams>;
+  /** NBASL_CA — players index (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/athletes` */
+  espn_nbasl_ca_players_index: Wrapper<Row[], EspnAthletesIndexParams>;
+  /** NBASL_CA — position (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/positions/{position_id}` */
+  espn_nbasl_ca_position: Wrapper<Row[], EspnPositionParams>;
+  /** NBASL_CA — positions (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/positions` */
+  espn_nbasl_ca_positions: Wrapper<Row[], EspnPositionsParams>;
+  /** NBASL_CA — scoreboard (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/scoreboard` */
+  espn_nbasl_ca_scoreboard: Wrapper<Row[], EspnScoreboardParams>;
+  /** NBASL_CA — season awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/awards` */
+  espn_nbasl_ca_season_awards: Wrapper<Row[], EspnSeasonAwardsParams>;
+  /** NBASL_CA — season coaches (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/coaches` */
+  espn_nbasl_ca_season_coaches: Wrapper<Row[], EspnSeasonCoachesParams>;
+  /** NBASL_CA — season draft (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/draft` */
+  espn_nbasl_ca_season_draft: Wrapper<Row[], EspnSeasonDraftParams>;
+  /** NBASL_CA — season draft round picks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/draft/rounds/{round_num}/picks` */
+  espn_nbasl_ca_season_draft_round_picks: Wrapper<Row[], EspnSeasonDraftRoundPicksParams>;
+  /** NBASL_CA — season freeagents (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/freeagents` */
+  espn_nbasl_ca_season_freeagents: Wrapper<Row[], EspnSeasonFreeagentsParams>;
+  /** NBASL_CA — season futures (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/futures` */
+  espn_nbasl_ca_season_futures: Wrapper<Row[], EspnSeasonFuturesParams>;
+  /** NBASL_CA — season group (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/types/{season_type}/groups/{group_id}` */
+  espn_nbasl_ca_season_group: Wrapper<Row[], EspnSeasonGroupParams>;
+  /** NBASL_CA — season group children (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/types/{season_type}/groups/{group_id}/children` */
+  espn_nbasl_ca_season_group_children: Wrapper<Row[], EspnSeasonGroupChildrenParams>;
+  /** NBASL_CA — season group teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/types/{season_type}/groups/{group_id}/teams` */
+  espn_nbasl_ca_season_group_teams: Wrapper<Row[], EspnSeasonGroupTeamsParams>;
+  /** NBASL_CA — season groups (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/types/{season_type}/groups` */
+  espn_nbasl_ca_season_groups: Wrapper<Row[], EspnSeasonGroupsParams>;
+  /** NBASL_CA — season info (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}` */
+  espn_nbasl_ca_season_info: Wrapper<Row[], EspnSeasonInfoParams>;
+  /** NBASL_CA — season players (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/athletes` */
+  espn_nbasl_ca_season_players: Wrapper<Row[], EspnSeasonAthletesParams>;
+  /** NBASL_CA — season pointer (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/season` */
+  espn_nbasl_ca_season_pointer: Wrapper<Row[], EspnSeasonPointerParams>;
+  /** NBASL_CA — season powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/powerindex[/{team_id}]` */
+  espn_nbasl_ca_season_powerindex: Wrapper<Row[], EspnSeasonPowerindexParams>;
+  /** NBASL_CA — season powerindex leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/powerindex/leaders` */
+  espn_nbasl_ca_season_powerindex_leaders: Wrapper<Row[], EspnSeasonPowerindexLeadersParams>;
+  /** NBASL_CA — season team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/teams/{team_id}` */
+  espn_nbasl_ca_season_team: Wrapper<Row[], EspnSeasonTeamParams>;
+  /** NBASL_CA — season teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/teams` */
+  espn_nbasl_ca_season_teams: Wrapper<Row[], EspnSeasonTeamsParams>;
+  /** NBASL_CA — season type (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/types/{season_type}` */
+  espn_nbasl_ca_season_type: Wrapper<Row[], EspnSeasonTypeParams>;
+  /** NBASL_CA — season type corrections (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/types/{season_type}/corrections` */
+  espn_nbasl_ca_season_type_corrections: Wrapper<Row[], EspnSeasonTypeCorrectionsParams>;
+  /** NBASL_CA — season type leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/types/{season_type}/leaders` */
+  espn_nbasl_ca_season_type_leaders: Wrapper<Row[], EspnSeasonTypeLeadersParams>;
+  /** NBASL_CA — season types (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/types` */
+  espn_nbasl_ca_season_types: Wrapper<Row[], EspnSeasonTypesParams>;
+  /** NBASL_CA — season week (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/types/{season_type}/weeks/{week}` */
+  espn_nbasl_ca_season_week: Wrapper<Row[], EspnSeasonWeekParams>;
+  /** NBASL_CA — season week games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/types/{season_type}/weeks/{week}/events` */
+  espn_nbasl_ca_season_week_games: Wrapper<Row[], EspnSeasonWeekEventsParams>;
+  /** NBASL_CA — season week powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/types/{season_type}/weeks/{week}/powerindex` */
+  espn_nbasl_ca_season_week_powerindex: Wrapper<Row[], EspnSeasonWeekPowerindexParams>;
+  /** NBASL_CA — season weeks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/types/{season_type}/weeks` */
+  espn_nbasl_ca_season_weeks: Wrapper<Row[], EspnSeasonWeeksParams>;
+  /** NBASL_CA — seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons` */
+  espn_nbasl_ca_seasons: Wrapper<Row[], EspnSeasonsParams>;
+  /** NBASL_CA — standings (ESPN site.api.espn.com (v2)). `GET https://site.api.espn.com/apis/v2/sports/basketball/nba-summer-california/standings` */
+  espn_nbasl_ca_standings: Wrapper<Row[], EspnStandingsParams>;
+  /** NBASL_CA — standings core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/standings` */
+  espn_nbasl_ca_standings_core: Wrapper<Row[], EspnStandingsCoreParams>;
+  /** NBASL_CA — statistics league (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/statistics` */
+  espn_nbasl_ca_statistics_league: Wrapper<Row[], EspnStatisticsLeagueParams>;
+  /** NBASL_CA — summary (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/summary` */
+  espn_nbasl_ca_summary: SectionedWrapper<ParsedTables, {}, EspnSummaryParams>;
+  /** NBASL_CA — talentpicks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/talentpicks` */
+  espn_nbasl_ca_talentpicks: Wrapper<Row[], EspnTalentpicksParams>;
+  /** NBASL_CA — team (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/teams/{team_id}` */
+  espn_nbasl_ca_team: Wrapper<Row[], EspnTeamParams>;
+  /** NBASL_CA — team core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/teams/{team_id}` */
+  espn_nbasl_ca_team_core: Wrapper<Row[], EspnTeamCoreParams>;
+  /** NBASL_CA — team depthcharts (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/teams/{team_id}/depthcharts` */
+  espn_nbasl_ca_team_depthcharts: Wrapper<Row[], EspnTeamDepthchartsParams>;
+  /** NBASL_CA — team history (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/teams/{team_id}/history` */
+  espn_nbasl_ca_team_history: Wrapper<Row[], EspnTeamHistoryParams>;
+  /** NBASL_CA — team injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/teams/{team_id}/injuries` */
+  espn_nbasl_ca_team_injuries: Wrapper<Row[], EspnTeamInjuriesParams>;
+  /** NBASL_CA — team leaders (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/teams/{team_id}/leaders` */
+  espn_nbasl_ca_team_leaders: Wrapper<Row[], EspnTeamLeadersParams>;
+  /** NBASL_CA — team news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/teams/{team_id}/news` */
+  espn_nbasl_ca_team_news: Wrapper<Row[], EspnTeamNewsParams>;
+  /** NBASL_CA — team record (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/teams/{team_id}/record` */
+  espn_nbasl_ca_team_record: Wrapper<Row[], EspnTeamRecordParams>;
+  /** NBASL_CA — team roster (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/teams/{team_id}/roster` */
+  espn_nbasl_ca_team_roster: Wrapper<Row[], EspnTeamRosterParams>;
+  /** NBASL_CA — team schedule (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/teams/{team_id}/schedule` */
+  espn_nbasl_ca_team_schedule: Wrapper<Row[], EspnTeamScheduleParams>;
+  /** NBASL_CA — team transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/teams/{team_id}/transactions` */
+  espn_nbasl_ca_team_transactions: Wrapper<Row[], EspnTeamTransactionsParams>;
+  /** NBASL_CA — teams core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/teams` */
+  espn_nbasl_ca_teams_core: Wrapper<Row[], EspnTeamsCoreParams>;
+  /** NBASL_CA — teams site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/teams` */
+  espn_nbasl_ca_teams_site: Wrapper<Row[], EspnTeamsSiteParams>;
+  /** NBASL_CA — tournaments (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/tournaments` */
+  espn_nbasl_ca_tournaments: Wrapper<Row[], EspnTournamentsParams>;
+  /** NBASL_CA — transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/transactions` */
+  espn_nbasl_ca_transactions: Wrapper<Row[], EspnTransactionsParams>;
+  /** NBASL_CA — venue (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/venues/{venue_id}` */
+  espn_nbasl_ca_venue: Wrapper<Row[], EspnVenueParams>;
+  /** NBASL_CA — venues (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/venues` */
+  espn_nbasl_ca_venues: Wrapper<Row[], EspnVenuesParams>;
+  /** NBASL_CA — award (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/awards/{award_id}` */
+  espnNbaslCaAward: Wrapper<Row[], EspnAwardParams>;
+  /** NBASL_CA — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/awards` */
+  espnNbaslCaAwards: Wrapper<Row[], EspnAwardsParams>;
+  /** NBASL_CA — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/calendar` */
+  espnNbaslCaCalendar: Wrapper<Row[], EspnCalendarParams>;
+  /** NBASL_CA — coach (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/coaches/{coach_id}` */
+  espnNbaslCaCoach: Wrapper<Row[], EspnCoachParams>;
+  /** NBASL_CA — coach record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/coaches/{coach_id}/record/{record_type}` */
+  espnNbaslCaCoachRecord: Wrapper<Row[], EspnCoachRecordParams>;
+  /** NBASL_CA — coach season (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/coaches/{coach_id}/seasons/{season}` */
+  espnNbaslCaCoachSeason: Wrapper<Row[], EspnCoachSeasonParams>;
+  /** NBASL_CA — conferences (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/groups` */
+  espnNbaslCaConferences: Wrapper<Row[], EspnConferencesParams>;
+  /** NBASL_CA — draft (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/draft` */
+  espnNbaslCaDraft: Wrapper<Row[], EspnDraftParams>;
+  /** NBASL_CA — fpi (ESPN site.web.api.espn.com (FPI, fitt v3)). `GET https://site.web.api.espn.com/apis/fitt/v3/sports/basketball/nba-summer-california/powerindex` */
+  espnNbaslCaFpi: Wrapper<Row[], EspnFpiParams>;
+  /** NBASL_CA — franchise (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/franchises/{franchise_id}` */
+  espnNbaslCaFranchise: Wrapper<Row[], EspnFranchiseParams>;
+  /** NBASL_CA — franchises (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/franchises` */
+  espnNbaslCaFranchises: Wrapper<Row[], EspnFranchisesParams>;
+  /** NBASL_CA — game (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}` */
+  espnNbaslCaGame: Wrapper<Row[], EspnEventParams>;
+  /** NBASL_CA — game broadcasts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/broadcasts` */
+  espnNbaslCaGameBroadcasts: Wrapper<Row[], EspnEventBroadcastsParams>;
+  /** NBASL_CA — game competition (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}` */
+  espnNbaslCaGameCompetition: Wrapper<Row[], EspnEventCompetitionParams>;
+  /** NBASL_CA — game leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/leaders` */
+  espnNbaslCaGameLeaders: Wrapper<Row[], EspnEventLeadersParams>;
+  /** NBASL_CA — game odds (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/odds` */
+  espnNbaslCaGameOdds: Wrapper<Row[], EspnEventOddsParams>;
+  /** NBASL_CA — game official detail (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/officials/{official_id}` */
+  espnNbaslCaGameOfficialDetail: Wrapper<Row[], EspnEventOfficialDetailParams>;
+  /** NBASL_CA — game officials (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/officials` */
+  espnNbaslCaGameOfficials: Wrapper<Row[], EspnEventOfficialsParams>;
+  /** NBASL_CA — game play (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/plays/{play_id}` */
+  espnNbaslCaGamePlay: Wrapper<Row[], EspnEventPlayParams>;
+  /** NBASL_CA — game play personnel (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` */
+  espnNbaslCaGamePlayPersonnel: Wrapper<Row[], EspnEventPlayPersonnelParams>;
+  /** NBASL_CA — game plays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/plays` */
+  espnNbaslCaGamePlays: Wrapper<Row[], EspnEventPlaysParams>;
+  /** NBASL_CA — game powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/powerindex` */
+  espnNbaslCaGamePowerindex: Wrapper<Row[], EspnEventPowerindexParams>;
+  /** NBASL_CA — game predictor (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/predictor` */
+  espnNbaslCaGamePredictor: Wrapper<Row[], EspnEventPredictorParams>;
+  /** NBASL_CA — game probabilities (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/probabilities` */
+  espnNbaslCaGameProbabilities: Wrapper<Row[], EspnEventProbabilitiesParams>;
+  /** NBASL_CA — game propbets (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/propbets` */
+  espnNbaslCaGamePropbets: Wrapper<Row[], EspnEventPropbetsParams>;
+  /** NBASL_CA — games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events` */
+  espnNbaslCaGames: Wrapper<Row[], EspnEventsParams>;
+  /** NBASL_CA — game scoringplays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/scoringplays` */
+  espnNbaslCaGameScoringplays: Wrapper<Row[], EspnEventScoringplaysParams>;
+  /** NBASL_CA — game situation (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/situation` */
+  espnNbaslCaGameSituation: Wrapper<Row[], EspnEventSituationParams>;
+  /** NBASL_CA — game status (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/status` */
+  espnNbaslCaGameStatus: Wrapper<Row[], EspnEventStatusParams>;
+  /** NBASL_CA — game team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/competitors/{team_id}` */
+  espnNbaslCaGameTeam: Wrapper<Row[], EspnEventCompetitorParams>;
+  /** NBASL_CA — game team leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` */
+  espnNbaslCaGameTeamLeaders: Wrapper<Row[], EspnEventCompetitorLeadersParams>;
+  /** NBASL_CA — game team linescores (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` */
+  espnNbaslCaGameTeamLinescores: Wrapper<Row[], EspnEventCompetitorLinescoresParams>;
+  /** NBASL_CA — game team record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` */
+  espnNbaslCaGameTeamRecord: Wrapper<Row[], EspnEventCompetitorRecordParams>;
+  /** NBASL_CA — game team roster (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` */
+  espnNbaslCaGameTeamRoster: Wrapper<Row[], EspnEventCompetitorRosterParams>;
+  /** NBASL_CA — game teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/competitors` */
+  espnNbaslCaGameTeams: Wrapper<Row[], EspnEventCompetitorsParams>;
+  /** NBASL_CA — game team statistics (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` */
+  espnNbaslCaGameTeamStatistics: Wrapper<Row[], EspnEventCompetitorStatisticsParams>;
+  /** NBASL_CA — injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/injuries` */
+  espnNbaslCaInjuries: Wrapper<Row[], EspnInjuriesParams>;
+  /** NBASL_CA — leaders (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-california/statistics/byathlete` */
+  espnNbaslCaLeaders: Wrapper<Row[], EspnLeadersParams>;
+  /** NBASL_CA — leaders core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/leaders` */
+  espnNbaslCaLeadersCore: Wrapper<Row[], EspnLeadersCoreParams>;
+  /** NBASL_CA — league notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/notes` */
+  espnNbaslCaLeagueNotes: Wrapper<Row[], EspnLeagueNotesParams>;
+  /** NBASL_CA — league root (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california` */
+  espnNbaslCaLeagueRoot: Wrapper<Row[], EspnLeagueRootParams>;
+  /** NBASL_CA — news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/news` */
+  espnNbaslCaNews: Wrapper<Row[], EspnNewsParams>;
+  /** NBASL_CA — player awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/athletes/{athlete_id}/awards` */
+  espnNbaslCaPlayerAwards: Wrapper<Row[], EspnAthleteAwardsParams>;
+  /** NBASL_CA — player bio (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/athletes/{athlete_id}/bio` */
+  espnNbaslCaPlayerBio: Wrapper<Row[], EspnAthleteBioParams>;
+  /** NBASL_CA — player career stats (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/athletes/{athlete_id}/statistics[/{stat_type}]` */
+  espnNbaslCaPlayerCareerStats: Wrapper<Row[], EspnAthleteCareerStatsParams>;
+  /** NBASL_CA — player contracts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/athletes/{athlete_id}/contracts` */
+  espnNbaslCaPlayerContracts: Wrapper<Row[], EspnAthleteContractsParams>;
+  /** NBASL_CA — player core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/athletes/{athlete_id}` */
+  espnNbaslCaPlayerCore: Wrapper<Row[], EspnAthleteCoreParams>;
+  /** NBASL_CA — player eventlog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/athletes/{athlete_id}/eventlog` */
+  espnNbaslCaPlayerEventlog: Wrapper<Row[], EspnAthleteEventlogParams>;
+  /** NBASL_CA — player gamelog (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-california/athletes/{athlete_id}/gamelog` */
+  espnNbaslCaPlayerGamelog: Wrapper<Row[], EspnAthleteGamelogParams>;
+  /** NBASL_CA — player info (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/athletes/{athlete_id}` */
+  espnNbaslCaPlayerInfo: Wrapper<Row[], EspnAthleteInfoParams>;
+  /** NBASL_CA — player injuries (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/athletes/{athlete_id}/injuries` */
+  espnNbaslCaPlayerInjuries: Wrapper<Row[], EspnAthleteInjuriesParams>;
+  /** NBASL_CA — player news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/athletes/{athlete_id}/news` */
+  espnNbaslCaPlayerNews: Wrapper<Row[], EspnAthleteNewsParams>;
+  /** NBASL_CA — player notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/athletes/{athlete_id}/notes` */
+  espnNbaslCaPlayerNotes: Wrapper<Row[], EspnAthleteNotesParams>;
+  /** NBASL_CA — player overview (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-california/athletes/{athlete_id}/overview` */
+  espnNbaslCaPlayerOverview: Wrapper<Row[], EspnAthleteOverviewParams>;
+  /** NBASL_CA — player records (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/athletes/{athlete_id}/records` */
+  espnNbaslCaPlayerRecords: Wrapper<Row[], EspnAthleteRecordsParams>;
+  /** NBASL_CA — player seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/athletes/{athlete_id}/seasons` */
+  espnNbaslCaPlayerSeasons: Wrapper<Row[], EspnAthleteSeasonsParams>;
+  /** NBASL_CA — players index (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/athletes` */
+  espnNbaslCaPlayersIndex: Wrapper<Row[], EspnAthletesIndexParams>;
+  /** NBASL_CA — player splits (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-california/athletes/{athlete_id}/splits` */
+  espnNbaslCaPlayerSplits: Wrapper<Row[], EspnAthleteSplitsParams>;
+  /** NBASL_CA — player statisticslog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/athletes/{athlete_id}/statisticslog` */
+  espnNbaslCaPlayerStatisticslog: Wrapper<Row[], EspnAthleteStatisticslogParams>;
+  /** NBASL_CA — player stats (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-california/athletes/{athlete_id}/stats` */
+  espnNbaslCaPlayerStats: Wrapper<Row[], EspnAthleteStatsParams>;
+  /** NBASL_CA — player vs player (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/athletes/{athlete_id}/vsathlete/{opp_id}` */
+  espnNbaslCaPlayerVsPlayer: Wrapper<Row[], EspnAthleteVsAthleteParams>;
+  /** NBASL_CA — position (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/positions/{position_id}` */
+  espnNbaslCaPosition: Wrapper<Row[], EspnPositionParams>;
+  /** NBASL_CA — positions (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/positions` */
+  espnNbaslCaPositions: Wrapper<Row[], EspnPositionsParams>;
+  /** NBASL_CA — scoreboard (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/scoreboard` */
+  espnNbaslCaScoreboard: Wrapper<Row[], EspnScoreboardParams>;
+  /** NBASL_CA — season awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/awards` */
+  espnNbaslCaSeasonAwards: Wrapper<Row[], EspnSeasonAwardsParams>;
+  /** NBASL_CA — season coaches (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/coaches` */
+  espnNbaslCaSeasonCoaches: Wrapper<Row[], EspnSeasonCoachesParams>;
+  /** NBASL_CA — season draft (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/draft` */
+  espnNbaslCaSeasonDraft: Wrapper<Row[], EspnSeasonDraftParams>;
+  /** NBASL_CA — season draft round picks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/draft/rounds/{round_num}/picks` */
+  espnNbaslCaSeasonDraftRoundPicks: Wrapper<Row[], EspnSeasonDraftRoundPicksParams>;
+  /** NBASL_CA — season freeagents (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/freeagents` */
+  espnNbaslCaSeasonFreeagents: Wrapper<Row[], EspnSeasonFreeagentsParams>;
+  /** NBASL_CA — season futures (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/futures` */
+  espnNbaslCaSeasonFutures: Wrapper<Row[], EspnSeasonFuturesParams>;
+  /** NBASL_CA — season group (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/types/{season_type}/groups/{group_id}` */
+  espnNbaslCaSeasonGroup: Wrapper<Row[], EspnSeasonGroupParams>;
+  /** NBASL_CA — season group children (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/types/{season_type}/groups/{group_id}/children` */
+  espnNbaslCaSeasonGroupChildren: Wrapper<Row[], EspnSeasonGroupChildrenParams>;
+  /** NBASL_CA — season groups (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/types/{season_type}/groups` */
+  espnNbaslCaSeasonGroups: Wrapper<Row[], EspnSeasonGroupsParams>;
+  /** NBASL_CA — season group teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/types/{season_type}/groups/{group_id}/teams` */
+  espnNbaslCaSeasonGroupTeams: Wrapper<Row[], EspnSeasonGroupTeamsParams>;
+  /** NBASL_CA — season info (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}` */
+  espnNbaslCaSeasonInfo: Wrapper<Row[], EspnSeasonInfoParams>;
+  /** NBASL_CA — season players (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/athletes` */
+  espnNbaslCaSeasonPlayers: Wrapper<Row[], EspnSeasonAthletesParams>;
+  /** NBASL_CA — season pointer (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/season` */
+  espnNbaslCaSeasonPointer: Wrapper<Row[], EspnSeasonPointerParams>;
+  /** NBASL_CA — season powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/powerindex[/{team_id}]` */
+  espnNbaslCaSeasonPowerindex: Wrapper<Row[], EspnSeasonPowerindexParams>;
+  /** NBASL_CA — season powerindex leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/powerindex/leaders` */
+  espnNbaslCaSeasonPowerindexLeaders: Wrapper<Row[], EspnSeasonPowerindexLeadersParams>;
+  /** NBASL_CA — seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons` */
+  espnNbaslCaSeasons: Wrapper<Row[], EspnSeasonsParams>;
+  /** NBASL_CA — season team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/teams/{team_id}` */
+  espnNbaslCaSeasonTeam: Wrapper<Row[], EspnSeasonTeamParams>;
+  /** NBASL_CA — season teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/teams` */
+  espnNbaslCaSeasonTeams: Wrapper<Row[], EspnSeasonTeamsParams>;
+  /** NBASL_CA — season type (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/types/{season_type}` */
+  espnNbaslCaSeasonType: Wrapper<Row[], EspnSeasonTypeParams>;
+  /** NBASL_CA — season type corrections (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/types/{season_type}/corrections` */
+  espnNbaslCaSeasonTypeCorrections: Wrapper<Row[], EspnSeasonTypeCorrectionsParams>;
+  /** NBASL_CA — season type leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/types/{season_type}/leaders` */
+  espnNbaslCaSeasonTypeLeaders: Wrapper<Row[], EspnSeasonTypeLeadersParams>;
+  /** NBASL_CA — season types (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/types` */
+  espnNbaslCaSeasonTypes: Wrapper<Row[], EspnSeasonTypesParams>;
+  /** NBASL_CA — season week (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/types/{season_type}/weeks/{week}` */
+  espnNbaslCaSeasonWeek: Wrapper<Row[], EspnSeasonWeekParams>;
+  /** NBASL_CA — season week games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/types/{season_type}/weeks/{week}/events` */
+  espnNbaslCaSeasonWeekGames: Wrapper<Row[], EspnSeasonWeekEventsParams>;
+  /** NBASL_CA — season week powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/types/{season_type}/weeks/{week}/powerindex` */
+  espnNbaslCaSeasonWeekPowerindex: Wrapper<Row[], EspnSeasonWeekPowerindexParams>;
+  /** NBASL_CA — season weeks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/seasons/{season}/types/{season_type}/weeks` */
+  espnNbaslCaSeasonWeeks: Wrapper<Row[], EspnSeasonWeeksParams>;
+  /** NBASL_CA — standings (ESPN site.api.espn.com (v2)). `GET https://site.api.espn.com/apis/v2/sports/basketball/nba-summer-california/standings` */
+  espnNbaslCaStandings: Wrapper<Row[], EspnStandingsParams>;
+  /** NBASL_CA — standings core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/standings` */
+  espnNbaslCaStandingsCore: Wrapper<Row[], EspnStandingsCoreParams>;
+  /** NBASL_CA — statistics league (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/statistics` */
+  espnNbaslCaStatisticsLeague: Wrapper<Row[], EspnStatisticsLeagueParams>;
+  /** NBASL_CA — summary (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/summary` */
+  espnNbaslCaSummary: SectionedWrapper<ParsedTables, {}, EspnSummaryParams>;
+  /** NBASL_CA — talentpicks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/talentpicks` */
+  espnNbaslCaTalentpicks: Wrapper<Row[], EspnTalentpicksParams>;
+  /** NBASL_CA — team (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/teams/{team_id}` */
+  espnNbaslCaTeam: Wrapper<Row[], EspnTeamParams>;
+  /** NBASL_CA — team core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/teams/{team_id}` */
+  espnNbaslCaTeamCore: Wrapper<Row[], EspnTeamCoreParams>;
+  /** NBASL_CA — team depthcharts (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/teams/{team_id}/depthcharts` */
+  espnNbaslCaTeamDepthcharts: Wrapper<Row[], EspnTeamDepthchartsParams>;
+  /** NBASL_CA — team history (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/teams/{team_id}/history` */
+  espnNbaslCaTeamHistory: Wrapper<Row[], EspnTeamHistoryParams>;
+  /** NBASL_CA — team injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/teams/{team_id}/injuries` */
+  espnNbaslCaTeamInjuries: Wrapper<Row[], EspnTeamInjuriesParams>;
+  /** NBASL_CA — team leaders (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/teams/{team_id}/leaders` */
+  espnNbaslCaTeamLeaders: Wrapper<Row[], EspnTeamLeadersParams>;
+  /** NBASL_CA — team news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/teams/{team_id}/news` */
+  espnNbaslCaTeamNews: Wrapper<Row[], EspnTeamNewsParams>;
+  /** NBASL_CA — team record (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/teams/{team_id}/record` */
+  espnNbaslCaTeamRecord: Wrapper<Row[], EspnTeamRecordParams>;
+  /** NBASL_CA — team roster (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/teams/{team_id}/roster` */
+  espnNbaslCaTeamRoster: Wrapper<Row[], EspnTeamRosterParams>;
+  /** NBASL_CA — team schedule (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/teams/{team_id}/schedule` */
+  espnNbaslCaTeamSchedule: Wrapper<Row[], EspnTeamScheduleParams>;
+  /** NBASL_CA — teams core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/teams` */
+  espnNbaslCaTeamsCore: Wrapper<Row[], EspnTeamsCoreParams>;
+  /** NBASL_CA — teams site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/teams` */
+  espnNbaslCaTeamsSite: Wrapper<Row[], EspnTeamsSiteParams>;
+  /** NBASL_CA — team transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/teams/{team_id}/transactions` */
+  espnNbaslCaTeamTransactions: Wrapper<Row[], EspnTeamTransactionsParams>;
+  /** NBASL_CA — tournaments (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/tournaments` */
+  espnNbaslCaTournaments: Wrapper<Row[], EspnTournamentsParams>;
+  /** NBASL_CA — transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-california/transactions` */
+  espnNbaslCaTransactions: Wrapper<Row[], EspnTransactionsParams>;
+  /** NBASL_CA — venue (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/venues/{venue_id}` */
+  espnNbaslCaVenue: Wrapper<Row[], EspnVenueParams>;
+  /** NBASL_CA — venues (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-california/venues` */
+  espnNbaslCaVenues: Wrapper<Row[], EspnVenuesParams>;
+}
+
+/** The generated wrappers of `sdv.nbasl_gs` (and their deprecated pre-v4 names). */
+export interface NbaslGsWrappers {
+  /** NBASL_GS — award (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/awards/{award_id}` */
+  espn_nbasl_gs_award: Wrapper<Row[], EspnAwardParams>;
+  /** NBASL_GS — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/awards` */
+  espn_nbasl_gs_awards: Wrapper<Row[], EspnAwardsParams>;
+  /** NBASL_GS — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/calendar` */
+  espn_nbasl_gs_calendar: Wrapper<Row[], EspnCalendarParams>;
+  /** NBASL_GS — coach (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/coaches/{coach_id}` */
+  espn_nbasl_gs_coach: Wrapper<Row[], EspnCoachParams>;
+  /** NBASL_GS — coach record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/coaches/{coach_id}/record/{record_type}` */
+  espn_nbasl_gs_coach_record: Wrapper<Row[], EspnCoachRecordParams>;
+  /** NBASL_GS — coach season (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/coaches/{coach_id}/seasons/{season}` */
+  espn_nbasl_gs_coach_season: Wrapper<Row[], EspnCoachSeasonParams>;
+  /** NBASL_GS — conferences (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/groups` */
+  espn_nbasl_gs_conferences: Wrapper<Row[], EspnConferencesParams>;
+  /** NBASL_GS — draft (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/draft` */
+  espn_nbasl_gs_draft: Wrapper<Row[], EspnDraftParams>;
+  /** NBASL_GS — fpi (ESPN site.web.api.espn.com (FPI, fitt v3)). `GET https://site.web.api.espn.com/apis/fitt/v3/sports/basketball/nba-summer-golden-state/powerindex` */
+  espn_nbasl_gs_fpi: Wrapper<Row[], EspnFpiParams>;
+  /** NBASL_GS — franchise (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/franchises/{franchise_id}` */
+  espn_nbasl_gs_franchise: Wrapper<Row[], EspnFranchiseParams>;
+  /** NBASL_GS — franchises (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/franchises` */
+  espn_nbasl_gs_franchises: Wrapper<Row[], EspnFranchisesParams>;
+  /** NBASL_GS — game (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}` */
+  espn_nbasl_gs_game: Wrapper<Row[], EspnEventParams>;
+  /** NBASL_GS — game broadcasts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/broadcasts` */
+  espn_nbasl_gs_game_broadcasts: Wrapper<Row[], EspnEventBroadcastsParams>;
+  /** NBASL_GS — game competition (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}` */
+  espn_nbasl_gs_game_competition: Wrapper<Row[], EspnEventCompetitionParams>;
+  /** NBASL_GS — game leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/leaders` */
+  espn_nbasl_gs_game_leaders: Wrapper<Row[], EspnEventLeadersParams>;
+  /** NBASL_GS — game odds (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/odds` */
+  espn_nbasl_gs_game_odds: Wrapper<Row[], EspnEventOddsParams>;
+  /** NBASL_GS — game official detail (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/officials/{official_id}` */
+  espn_nbasl_gs_game_official_detail: Wrapper<Row[], EspnEventOfficialDetailParams>;
+  /** NBASL_GS — game officials (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/officials` */
+  espn_nbasl_gs_game_officials: Wrapper<Row[], EspnEventOfficialsParams>;
+  /** NBASL_GS — game play (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/plays/{play_id}` */
+  espn_nbasl_gs_game_play: Wrapper<Row[], EspnEventPlayParams>;
+  /** NBASL_GS — game play personnel (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` */
+  espn_nbasl_gs_game_play_personnel: Wrapper<Row[], EspnEventPlayPersonnelParams>;
+  /** NBASL_GS — game plays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/plays` */
+  espn_nbasl_gs_game_plays: Wrapper<Row[], EspnEventPlaysParams>;
+  /** NBASL_GS — game powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/powerindex` */
+  espn_nbasl_gs_game_powerindex: Wrapper<Row[], EspnEventPowerindexParams>;
+  /** NBASL_GS — game predictor (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/predictor` */
+  espn_nbasl_gs_game_predictor: Wrapper<Row[], EspnEventPredictorParams>;
+  /** NBASL_GS — game probabilities (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/probabilities` */
+  espn_nbasl_gs_game_probabilities: Wrapper<Row[], EspnEventProbabilitiesParams>;
+  /** NBASL_GS — game propbets (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/propbets` */
+  espn_nbasl_gs_game_propbets: Wrapper<Row[], EspnEventPropbetsParams>;
+  /** NBASL_GS — game scoringplays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/scoringplays` */
+  espn_nbasl_gs_game_scoringplays: Wrapper<Row[], EspnEventScoringplaysParams>;
+  /** NBASL_GS — game situation (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/situation` */
+  espn_nbasl_gs_game_situation: Wrapper<Row[], EspnEventSituationParams>;
+  /** NBASL_GS — game status (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/status` */
+  espn_nbasl_gs_game_status: Wrapper<Row[], EspnEventStatusParams>;
+  /** NBASL_GS — game team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/competitors/{team_id}` */
+  espn_nbasl_gs_game_team: Wrapper<Row[], EspnEventCompetitorParams>;
+  /** NBASL_GS — game team leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` */
+  espn_nbasl_gs_game_team_leaders: Wrapper<Row[], EspnEventCompetitorLeadersParams>;
+  /** NBASL_GS — game team linescores (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` */
+  espn_nbasl_gs_game_team_linescores: Wrapper<Row[], EspnEventCompetitorLinescoresParams>;
+  /** NBASL_GS — game team record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` */
+  espn_nbasl_gs_game_team_record: Wrapper<Row[], EspnEventCompetitorRecordParams>;
+  /** NBASL_GS — game team roster (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` */
+  espn_nbasl_gs_game_team_roster: Wrapper<Row[], EspnEventCompetitorRosterParams>;
+  /** NBASL_GS — game team statistics (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` */
+  espn_nbasl_gs_game_team_statistics: Wrapper<Row[], EspnEventCompetitorStatisticsParams>;
+  /** NBASL_GS — game teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/competitors` */
+  espn_nbasl_gs_game_teams: Wrapper<Row[], EspnEventCompetitorsParams>;
+  /** NBASL_GS — games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events` */
+  espn_nbasl_gs_games: Wrapper<Row[], EspnEventsParams>;
+  /** NBASL_GS — injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/injuries` */
+  espn_nbasl_gs_injuries: Wrapper<Row[], EspnInjuriesParams>;
+  /** NBASL_GS — leaders (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-golden-state/statistics/byathlete` */
+  espn_nbasl_gs_leaders: Wrapper<Row[], EspnLeadersParams>;
+  /** NBASL_GS — leaders core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/leaders` */
+  espn_nbasl_gs_leaders_core: Wrapper<Row[], EspnLeadersCoreParams>;
+  /** NBASL_GS — league notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/notes` */
+  espn_nbasl_gs_league_notes: Wrapper<Row[], EspnLeagueNotesParams>;
+  /** NBASL_GS — league root (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state` */
+  espn_nbasl_gs_league_root: Wrapper<Row[], EspnLeagueRootParams>;
+  /** NBASL_GS — news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/news` */
+  espn_nbasl_gs_news: Wrapper<Row[], EspnNewsParams>;
+  /** NBASL_GS — player awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/athletes/{athlete_id}/awards` */
+  espn_nbasl_gs_player_awards: Wrapper<Row[], EspnAthleteAwardsParams>;
+  /** NBASL_GS — player bio (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/athletes/{athlete_id}/bio` */
+  espn_nbasl_gs_player_bio: Wrapper<Row[], EspnAthleteBioParams>;
+  /** NBASL_GS — player career stats (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/athletes/{athlete_id}/statistics[/{stat_type}]` */
+  espn_nbasl_gs_player_career_stats: Wrapper<Row[], EspnAthleteCareerStatsParams>;
+  /** NBASL_GS — player contracts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/athletes/{athlete_id}/contracts` */
+  espn_nbasl_gs_player_contracts: Wrapper<Row[], EspnAthleteContractsParams>;
+  /** NBASL_GS — player core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/athletes/{athlete_id}` */
+  espn_nbasl_gs_player_core: Wrapper<Row[], EspnAthleteCoreParams>;
+  /** NBASL_GS — player eventlog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/athletes/{athlete_id}/eventlog` */
+  espn_nbasl_gs_player_eventlog: Wrapper<Row[], EspnAthleteEventlogParams>;
+  /** NBASL_GS — player gamelog (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-golden-state/athletes/{athlete_id}/gamelog` */
+  espn_nbasl_gs_player_gamelog: Wrapper<Row[], EspnAthleteGamelogParams>;
+  /** NBASL_GS — player info (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/athletes/{athlete_id}` */
+  espn_nbasl_gs_player_info: Wrapper<Row[], EspnAthleteInfoParams>;
+  /** NBASL_GS — player injuries (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/athletes/{athlete_id}/injuries` */
+  espn_nbasl_gs_player_injuries: Wrapper<Row[], EspnAthleteInjuriesParams>;
+  /** NBASL_GS — player news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/athletes/{athlete_id}/news` */
+  espn_nbasl_gs_player_news: Wrapper<Row[], EspnAthleteNewsParams>;
+  /** NBASL_GS — player notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/athletes/{athlete_id}/notes` */
+  espn_nbasl_gs_player_notes: Wrapper<Row[], EspnAthleteNotesParams>;
+  /** NBASL_GS — player overview (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-golden-state/athletes/{athlete_id}/overview` */
+  espn_nbasl_gs_player_overview: Wrapper<Row[], EspnAthleteOverviewParams>;
+  /** NBASL_GS — player records (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/athletes/{athlete_id}/records` */
+  espn_nbasl_gs_player_records: Wrapper<Row[], EspnAthleteRecordsParams>;
+  /** NBASL_GS — player seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/athletes/{athlete_id}/seasons` */
+  espn_nbasl_gs_player_seasons: Wrapper<Row[], EspnAthleteSeasonsParams>;
+  /** NBASL_GS — player splits (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-golden-state/athletes/{athlete_id}/splits` */
+  espn_nbasl_gs_player_splits: Wrapper<Row[], EspnAthleteSplitsParams>;
+  /** NBASL_GS — player statisticslog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/athletes/{athlete_id}/statisticslog` */
+  espn_nbasl_gs_player_statisticslog: Wrapper<Row[], EspnAthleteStatisticslogParams>;
+  /** NBASL_GS — player stats (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-golden-state/athletes/{athlete_id}/stats` */
+  espn_nbasl_gs_player_stats: Wrapper<Row[], EspnAthleteStatsParams>;
+  /** NBASL_GS — player vs player (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/athletes/{athlete_id}/vsathlete/{opp_id}` */
+  espn_nbasl_gs_player_vs_player: Wrapper<Row[], EspnAthleteVsAthleteParams>;
+  /** NBASL_GS — players index (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/athletes` */
+  espn_nbasl_gs_players_index: Wrapper<Row[], EspnAthletesIndexParams>;
+  /** NBASL_GS — position (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/positions/{position_id}` */
+  espn_nbasl_gs_position: Wrapper<Row[], EspnPositionParams>;
+  /** NBASL_GS — positions (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/positions` */
+  espn_nbasl_gs_positions: Wrapper<Row[], EspnPositionsParams>;
+  /** NBASL_GS — scoreboard (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/scoreboard` */
+  espn_nbasl_gs_scoreboard: Wrapper<Row[], EspnScoreboardParams>;
+  /** NBASL_GS — season awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/awards` */
+  espn_nbasl_gs_season_awards: Wrapper<Row[], EspnSeasonAwardsParams>;
+  /** NBASL_GS — season coaches (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/coaches` */
+  espn_nbasl_gs_season_coaches: Wrapper<Row[], EspnSeasonCoachesParams>;
+  /** NBASL_GS — season draft (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/draft` */
+  espn_nbasl_gs_season_draft: Wrapper<Row[], EspnSeasonDraftParams>;
+  /** NBASL_GS — season draft round picks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/draft/rounds/{round_num}/picks` */
+  espn_nbasl_gs_season_draft_round_picks: Wrapper<Row[], EspnSeasonDraftRoundPicksParams>;
+  /** NBASL_GS — season freeagents (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/freeagents` */
+  espn_nbasl_gs_season_freeagents: Wrapper<Row[], EspnSeasonFreeagentsParams>;
+  /** NBASL_GS — season futures (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/futures` */
+  espn_nbasl_gs_season_futures: Wrapper<Row[], EspnSeasonFuturesParams>;
+  /** NBASL_GS — season group (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/types/{season_type}/groups/{group_id}` */
+  espn_nbasl_gs_season_group: Wrapper<Row[], EspnSeasonGroupParams>;
+  /** NBASL_GS — season group children (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/types/{season_type}/groups/{group_id}/children` */
+  espn_nbasl_gs_season_group_children: Wrapper<Row[], EspnSeasonGroupChildrenParams>;
+  /** NBASL_GS — season group teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/types/{season_type}/groups/{group_id}/teams` */
+  espn_nbasl_gs_season_group_teams: Wrapper<Row[], EspnSeasonGroupTeamsParams>;
+  /** NBASL_GS — season groups (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/types/{season_type}/groups` */
+  espn_nbasl_gs_season_groups: Wrapper<Row[], EspnSeasonGroupsParams>;
+  /** NBASL_GS — season info (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}` */
+  espn_nbasl_gs_season_info: Wrapper<Row[], EspnSeasonInfoParams>;
+  /** NBASL_GS — season players (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/athletes` */
+  espn_nbasl_gs_season_players: Wrapper<Row[], EspnSeasonAthletesParams>;
+  /** NBASL_GS — season pointer (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/season` */
+  espn_nbasl_gs_season_pointer: Wrapper<Row[], EspnSeasonPointerParams>;
+  /** NBASL_GS — season powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/powerindex[/{team_id}]` */
+  espn_nbasl_gs_season_powerindex: Wrapper<Row[], EspnSeasonPowerindexParams>;
+  /** NBASL_GS — season powerindex leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/powerindex/leaders` */
+  espn_nbasl_gs_season_powerindex_leaders: Wrapper<Row[], EspnSeasonPowerindexLeadersParams>;
+  /** NBASL_GS — season team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/teams/{team_id}` */
+  espn_nbasl_gs_season_team: Wrapper<Row[], EspnSeasonTeamParams>;
+  /** NBASL_GS — season teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/teams` */
+  espn_nbasl_gs_season_teams: Wrapper<Row[], EspnSeasonTeamsParams>;
+  /** NBASL_GS — season type (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/types/{season_type}` */
+  espn_nbasl_gs_season_type: Wrapper<Row[], EspnSeasonTypeParams>;
+  /** NBASL_GS — season type corrections (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/types/{season_type}/corrections` */
+  espn_nbasl_gs_season_type_corrections: Wrapper<Row[], EspnSeasonTypeCorrectionsParams>;
+  /** NBASL_GS — season type leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/types/{season_type}/leaders` */
+  espn_nbasl_gs_season_type_leaders: Wrapper<Row[], EspnSeasonTypeLeadersParams>;
+  /** NBASL_GS — season types (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/types` */
+  espn_nbasl_gs_season_types: Wrapper<Row[], EspnSeasonTypesParams>;
+  /** NBASL_GS — season week (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/types/{season_type}/weeks/{week}` */
+  espn_nbasl_gs_season_week: Wrapper<Row[], EspnSeasonWeekParams>;
+  /** NBASL_GS — season week games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/types/{season_type}/weeks/{week}/events` */
+  espn_nbasl_gs_season_week_games: Wrapper<Row[], EspnSeasonWeekEventsParams>;
+  /** NBASL_GS — season week powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/types/{season_type}/weeks/{week}/powerindex` */
+  espn_nbasl_gs_season_week_powerindex: Wrapper<Row[], EspnSeasonWeekPowerindexParams>;
+  /** NBASL_GS — season weeks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/types/{season_type}/weeks` */
+  espn_nbasl_gs_season_weeks: Wrapper<Row[], EspnSeasonWeeksParams>;
+  /** NBASL_GS — seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons` */
+  espn_nbasl_gs_seasons: Wrapper<Row[], EspnSeasonsParams>;
+  /** NBASL_GS — standings (ESPN site.api.espn.com (v2)). `GET https://site.api.espn.com/apis/v2/sports/basketball/nba-summer-golden-state/standings` */
+  espn_nbasl_gs_standings: Wrapper<Row[], EspnStandingsParams>;
+  /** NBASL_GS — standings core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/standings` */
+  espn_nbasl_gs_standings_core: Wrapper<Row[], EspnStandingsCoreParams>;
+  /** NBASL_GS — statistics league (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/statistics` */
+  espn_nbasl_gs_statistics_league: Wrapper<Row[], EspnStatisticsLeagueParams>;
+  /** NBASL_GS — summary (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/summary` */
+  espn_nbasl_gs_summary: SectionedWrapper<ParsedTables, {}, EspnSummaryParams>;
+  /** NBASL_GS — talentpicks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/talentpicks` */
+  espn_nbasl_gs_talentpicks: Wrapper<Row[], EspnTalentpicksParams>;
+  /** NBASL_GS — team (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/teams/{team_id}` */
+  espn_nbasl_gs_team: Wrapper<Row[], EspnTeamParams>;
+  /** NBASL_GS — team core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/teams/{team_id}` */
+  espn_nbasl_gs_team_core: Wrapper<Row[], EspnTeamCoreParams>;
+  /** NBASL_GS — team depthcharts (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/teams/{team_id}/depthcharts` */
+  espn_nbasl_gs_team_depthcharts: Wrapper<Row[], EspnTeamDepthchartsParams>;
+  /** NBASL_GS — team history (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/teams/{team_id}/history` */
+  espn_nbasl_gs_team_history: Wrapper<Row[], EspnTeamHistoryParams>;
+  /** NBASL_GS — team injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/teams/{team_id}/injuries` */
+  espn_nbasl_gs_team_injuries: Wrapper<Row[], EspnTeamInjuriesParams>;
+  /** NBASL_GS — team leaders (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/teams/{team_id}/leaders` */
+  espn_nbasl_gs_team_leaders: Wrapper<Row[], EspnTeamLeadersParams>;
+  /** NBASL_GS — team news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/teams/{team_id}/news` */
+  espn_nbasl_gs_team_news: Wrapper<Row[], EspnTeamNewsParams>;
+  /** NBASL_GS — team record (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/teams/{team_id}/record` */
+  espn_nbasl_gs_team_record: Wrapper<Row[], EspnTeamRecordParams>;
+  /** NBASL_GS — team roster (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/teams/{team_id}/roster` */
+  espn_nbasl_gs_team_roster: Wrapper<Row[], EspnTeamRosterParams>;
+  /** NBASL_GS — team schedule (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/teams/{team_id}/schedule` */
+  espn_nbasl_gs_team_schedule: Wrapper<Row[], EspnTeamScheduleParams>;
+  /** NBASL_GS — team transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/teams/{team_id}/transactions` */
+  espn_nbasl_gs_team_transactions: Wrapper<Row[], EspnTeamTransactionsParams>;
+  /** NBASL_GS — teams core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/teams` */
+  espn_nbasl_gs_teams_core: Wrapper<Row[], EspnTeamsCoreParams>;
+  /** NBASL_GS — teams site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/teams` */
+  espn_nbasl_gs_teams_site: Wrapper<Row[], EspnTeamsSiteParams>;
+  /** NBASL_GS — tournaments (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/tournaments` */
+  espn_nbasl_gs_tournaments: Wrapper<Row[], EspnTournamentsParams>;
+  /** NBASL_GS — transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/transactions` */
+  espn_nbasl_gs_transactions: Wrapper<Row[], EspnTransactionsParams>;
+  /** NBASL_GS — venue (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/venues/{venue_id}` */
+  espn_nbasl_gs_venue: Wrapper<Row[], EspnVenueParams>;
+  /** NBASL_GS — venues (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/venues` */
+  espn_nbasl_gs_venues: Wrapper<Row[], EspnVenuesParams>;
+  /** NBASL_GS — award (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/awards/{award_id}` */
+  espnNbaslGsAward: Wrapper<Row[], EspnAwardParams>;
+  /** NBASL_GS — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/awards` */
+  espnNbaslGsAwards: Wrapper<Row[], EspnAwardsParams>;
+  /** NBASL_GS — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/calendar` */
+  espnNbaslGsCalendar: Wrapper<Row[], EspnCalendarParams>;
+  /** NBASL_GS — coach (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/coaches/{coach_id}` */
+  espnNbaslGsCoach: Wrapper<Row[], EspnCoachParams>;
+  /** NBASL_GS — coach record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/coaches/{coach_id}/record/{record_type}` */
+  espnNbaslGsCoachRecord: Wrapper<Row[], EspnCoachRecordParams>;
+  /** NBASL_GS — coach season (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/coaches/{coach_id}/seasons/{season}` */
+  espnNbaslGsCoachSeason: Wrapper<Row[], EspnCoachSeasonParams>;
+  /** NBASL_GS — conferences (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/groups` */
+  espnNbaslGsConferences: Wrapper<Row[], EspnConferencesParams>;
+  /** NBASL_GS — draft (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/draft` */
+  espnNbaslGsDraft: Wrapper<Row[], EspnDraftParams>;
+  /** NBASL_GS — fpi (ESPN site.web.api.espn.com (FPI, fitt v3)). `GET https://site.web.api.espn.com/apis/fitt/v3/sports/basketball/nba-summer-golden-state/powerindex` */
+  espnNbaslGsFpi: Wrapper<Row[], EspnFpiParams>;
+  /** NBASL_GS — franchise (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/franchises/{franchise_id}` */
+  espnNbaslGsFranchise: Wrapper<Row[], EspnFranchiseParams>;
+  /** NBASL_GS — franchises (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/franchises` */
+  espnNbaslGsFranchises: Wrapper<Row[], EspnFranchisesParams>;
+  /** NBASL_GS — game (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}` */
+  espnNbaslGsGame: Wrapper<Row[], EspnEventParams>;
+  /** NBASL_GS — game broadcasts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/broadcasts` */
+  espnNbaslGsGameBroadcasts: Wrapper<Row[], EspnEventBroadcastsParams>;
+  /** NBASL_GS — game competition (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}` */
+  espnNbaslGsGameCompetition: Wrapper<Row[], EspnEventCompetitionParams>;
+  /** NBASL_GS — game leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/leaders` */
+  espnNbaslGsGameLeaders: Wrapper<Row[], EspnEventLeadersParams>;
+  /** NBASL_GS — game odds (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/odds` */
+  espnNbaslGsGameOdds: Wrapper<Row[], EspnEventOddsParams>;
+  /** NBASL_GS — game official detail (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/officials/{official_id}` */
+  espnNbaslGsGameOfficialDetail: Wrapper<Row[], EspnEventOfficialDetailParams>;
+  /** NBASL_GS — game officials (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/officials` */
+  espnNbaslGsGameOfficials: Wrapper<Row[], EspnEventOfficialsParams>;
+  /** NBASL_GS — game play (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/plays/{play_id}` */
+  espnNbaslGsGamePlay: Wrapper<Row[], EspnEventPlayParams>;
+  /** NBASL_GS — game play personnel (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` */
+  espnNbaslGsGamePlayPersonnel: Wrapper<Row[], EspnEventPlayPersonnelParams>;
+  /** NBASL_GS — game plays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/plays` */
+  espnNbaslGsGamePlays: Wrapper<Row[], EspnEventPlaysParams>;
+  /** NBASL_GS — game powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/powerindex` */
+  espnNbaslGsGamePowerindex: Wrapper<Row[], EspnEventPowerindexParams>;
+  /** NBASL_GS — game predictor (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/predictor` */
+  espnNbaslGsGamePredictor: Wrapper<Row[], EspnEventPredictorParams>;
+  /** NBASL_GS — game probabilities (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/probabilities` */
+  espnNbaslGsGameProbabilities: Wrapper<Row[], EspnEventProbabilitiesParams>;
+  /** NBASL_GS — game propbets (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/propbets` */
+  espnNbaslGsGamePropbets: Wrapper<Row[], EspnEventPropbetsParams>;
+  /** NBASL_GS — games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events` */
+  espnNbaslGsGames: Wrapper<Row[], EspnEventsParams>;
+  /** NBASL_GS — game scoringplays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/scoringplays` */
+  espnNbaslGsGameScoringplays: Wrapper<Row[], EspnEventScoringplaysParams>;
+  /** NBASL_GS — game situation (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/situation` */
+  espnNbaslGsGameSituation: Wrapper<Row[], EspnEventSituationParams>;
+  /** NBASL_GS — game status (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/status` */
+  espnNbaslGsGameStatus: Wrapper<Row[], EspnEventStatusParams>;
+  /** NBASL_GS — game team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/competitors/{team_id}` */
+  espnNbaslGsGameTeam: Wrapper<Row[], EspnEventCompetitorParams>;
+  /** NBASL_GS — game team leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` */
+  espnNbaslGsGameTeamLeaders: Wrapper<Row[], EspnEventCompetitorLeadersParams>;
+  /** NBASL_GS — game team linescores (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` */
+  espnNbaslGsGameTeamLinescores: Wrapper<Row[], EspnEventCompetitorLinescoresParams>;
+  /** NBASL_GS — game team record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` */
+  espnNbaslGsGameTeamRecord: Wrapper<Row[], EspnEventCompetitorRecordParams>;
+  /** NBASL_GS — game team roster (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` */
+  espnNbaslGsGameTeamRoster: Wrapper<Row[], EspnEventCompetitorRosterParams>;
+  /** NBASL_GS — game teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/competitors` */
+  espnNbaslGsGameTeams: Wrapper<Row[], EspnEventCompetitorsParams>;
+  /** NBASL_GS — game team statistics (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` */
+  espnNbaslGsGameTeamStatistics: Wrapper<Row[], EspnEventCompetitorStatisticsParams>;
+  /** NBASL_GS — injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/injuries` */
+  espnNbaslGsInjuries: Wrapper<Row[], EspnInjuriesParams>;
+  /** NBASL_GS — leaders (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-golden-state/statistics/byathlete` */
+  espnNbaslGsLeaders: Wrapper<Row[], EspnLeadersParams>;
+  /** NBASL_GS — leaders core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/leaders` */
+  espnNbaslGsLeadersCore: Wrapper<Row[], EspnLeadersCoreParams>;
+  /** NBASL_GS — league notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/notes` */
+  espnNbaslGsLeagueNotes: Wrapper<Row[], EspnLeagueNotesParams>;
+  /** NBASL_GS — league root (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state` */
+  espnNbaslGsLeagueRoot: Wrapper<Row[], EspnLeagueRootParams>;
+  /** NBASL_GS — news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/news` */
+  espnNbaslGsNews: Wrapper<Row[], EspnNewsParams>;
+  /** NBASL_GS — player awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/athletes/{athlete_id}/awards` */
+  espnNbaslGsPlayerAwards: Wrapper<Row[], EspnAthleteAwardsParams>;
+  /** NBASL_GS — player bio (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/athletes/{athlete_id}/bio` */
+  espnNbaslGsPlayerBio: Wrapper<Row[], EspnAthleteBioParams>;
+  /** NBASL_GS — player career stats (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/athletes/{athlete_id}/statistics[/{stat_type}]` */
+  espnNbaslGsPlayerCareerStats: Wrapper<Row[], EspnAthleteCareerStatsParams>;
+  /** NBASL_GS — player contracts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/athletes/{athlete_id}/contracts` */
+  espnNbaslGsPlayerContracts: Wrapper<Row[], EspnAthleteContractsParams>;
+  /** NBASL_GS — player core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/athletes/{athlete_id}` */
+  espnNbaslGsPlayerCore: Wrapper<Row[], EspnAthleteCoreParams>;
+  /** NBASL_GS — player eventlog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/athletes/{athlete_id}/eventlog` */
+  espnNbaslGsPlayerEventlog: Wrapper<Row[], EspnAthleteEventlogParams>;
+  /** NBASL_GS — player gamelog (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-golden-state/athletes/{athlete_id}/gamelog` */
+  espnNbaslGsPlayerGamelog: Wrapper<Row[], EspnAthleteGamelogParams>;
+  /** NBASL_GS — player info (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/athletes/{athlete_id}` */
+  espnNbaslGsPlayerInfo: Wrapper<Row[], EspnAthleteInfoParams>;
+  /** NBASL_GS — player injuries (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/athletes/{athlete_id}/injuries` */
+  espnNbaslGsPlayerInjuries: Wrapper<Row[], EspnAthleteInjuriesParams>;
+  /** NBASL_GS — player news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/athletes/{athlete_id}/news` */
+  espnNbaslGsPlayerNews: Wrapper<Row[], EspnAthleteNewsParams>;
+  /** NBASL_GS — player notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/athletes/{athlete_id}/notes` */
+  espnNbaslGsPlayerNotes: Wrapper<Row[], EspnAthleteNotesParams>;
+  /** NBASL_GS — player overview (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-golden-state/athletes/{athlete_id}/overview` */
+  espnNbaslGsPlayerOverview: Wrapper<Row[], EspnAthleteOverviewParams>;
+  /** NBASL_GS — player records (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/athletes/{athlete_id}/records` */
+  espnNbaslGsPlayerRecords: Wrapper<Row[], EspnAthleteRecordsParams>;
+  /** NBASL_GS — player seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/athletes/{athlete_id}/seasons` */
+  espnNbaslGsPlayerSeasons: Wrapper<Row[], EspnAthleteSeasonsParams>;
+  /** NBASL_GS — players index (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/athletes` */
+  espnNbaslGsPlayersIndex: Wrapper<Row[], EspnAthletesIndexParams>;
+  /** NBASL_GS — player splits (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-golden-state/athletes/{athlete_id}/splits` */
+  espnNbaslGsPlayerSplits: Wrapper<Row[], EspnAthleteSplitsParams>;
+  /** NBASL_GS — player statisticslog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/athletes/{athlete_id}/statisticslog` */
+  espnNbaslGsPlayerStatisticslog: Wrapper<Row[], EspnAthleteStatisticslogParams>;
+  /** NBASL_GS — player stats (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-golden-state/athletes/{athlete_id}/stats` */
+  espnNbaslGsPlayerStats: Wrapper<Row[], EspnAthleteStatsParams>;
+  /** NBASL_GS — player vs player (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/athletes/{athlete_id}/vsathlete/{opp_id}` */
+  espnNbaslGsPlayerVsPlayer: Wrapper<Row[], EspnAthleteVsAthleteParams>;
+  /** NBASL_GS — position (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/positions/{position_id}` */
+  espnNbaslGsPosition: Wrapper<Row[], EspnPositionParams>;
+  /** NBASL_GS — positions (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/positions` */
+  espnNbaslGsPositions: Wrapper<Row[], EspnPositionsParams>;
+  /** NBASL_GS — scoreboard (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/scoreboard` */
+  espnNbaslGsScoreboard: Wrapper<Row[], EspnScoreboardParams>;
+  /** NBASL_GS — season awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/awards` */
+  espnNbaslGsSeasonAwards: Wrapper<Row[], EspnSeasonAwardsParams>;
+  /** NBASL_GS — season coaches (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/coaches` */
+  espnNbaslGsSeasonCoaches: Wrapper<Row[], EspnSeasonCoachesParams>;
+  /** NBASL_GS — season draft (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/draft` */
+  espnNbaslGsSeasonDraft: Wrapper<Row[], EspnSeasonDraftParams>;
+  /** NBASL_GS — season draft round picks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/draft/rounds/{round_num}/picks` */
+  espnNbaslGsSeasonDraftRoundPicks: Wrapper<Row[], EspnSeasonDraftRoundPicksParams>;
+  /** NBASL_GS — season freeagents (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/freeagents` */
+  espnNbaslGsSeasonFreeagents: Wrapper<Row[], EspnSeasonFreeagentsParams>;
+  /** NBASL_GS — season futures (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/futures` */
+  espnNbaslGsSeasonFutures: Wrapper<Row[], EspnSeasonFuturesParams>;
+  /** NBASL_GS — season group (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/types/{season_type}/groups/{group_id}` */
+  espnNbaslGsSeasonGroup: Wrapper<Row[], EspnSeasonGroupParams>;
+  /** NBASL_GS — season group children (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/types/{season_type}/groups/{group_id}/children` */
+  espnNbaslGsSeasonGroupChildren: Wrapper<Row[], EspnSeasonGroupChildrenParams>;
+  /** NBASL_GS — season groups (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/types/{season_type}/groups` */
+  espnNbaslGsSeasonGroups: Wrapper<Row[], EspnSeasonGroupsParams>;
+  /** NBASL_GS — season group teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/types/{season_type}/groups/{group_id}/teams` */
+  espnNbaslGsSeasonGroupTeams: Wrapper<Row[], EspnSeasonGroupTeamsParams>;
+  /** NBASL_GS — season info (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}` */
+  espnNbaslGsSeasonInfo: Wrapper<Row[], EspnSeasonInfoParams>;
+  /** NBASL_GS — season players (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/athletes` */
+  espnNbaslGsSeasonPlayers: Wrapper<Row[], EspnSeasonAthletesParams>;
+  /** NBASL_GS — season pointer (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/season` */
+  espnNbaslGsSeasonPointer: Wrapper<Row[], EspnSeasonPointerParams>;
+  /** NBASL_GS — season powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/powerindex[/{team_id}]` */
+  espnNbaslGsSeasonPowerindex: Wrapper<Row[], EspnSeasonPowerindexParams>;
+  /** NBASL_GS — season powerindex leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/powerindex/leaders` */
+  espnNbaslGsSeasonPowerindexLeaders: Wrapper<Row[], EspnSeasonPowerindexLeadersParams>;
+  /** NBASL_GS — seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons` */
+  espnNbaslGsSeasons: Wrapper<Row[], EspnSeasonsParams>;
+  /** NBASL_GS — season team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/teams/{team_id}` */
+  espnNbaslGsSeasonTeam: Wrapper<Row[], EspnSeasonTeamParams>;
+  /** NBASL_GS — season teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/teams` */
+  espnNbaslGsSeasonTeams: Wrapper<Row[], EspnSeasonTeamsParams>;
+  /** NBASL_GS — season type (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/types/{season_type}` */
+  espnNbaslGsSeasonType: Wrapper<Row[], EspnSeasonTypeParams>;
+  /** NBASL_GS — season type corrections (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/types/{season_type}/corrections` */
+  espnNbaslGsSeasonTypeCorrections: Wrapper<Row[], EspnSeasonTypeCorrectionsParams>;
+  /** NBASL_GS — season type leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/types/{season_type}/leaders` */
+  espnNbaslGsSeasonTypeLeaders: Wrapper<Row[], EspnSeasonTypeLeadersParams>;
+  /** NBASL_GS — season types (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/types` */
+  espnNbaslGsSeasonTypes: Wrapper<Row[], EspnSeasonTypesParams>;
+  /** NBASL_GS — season week (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/types/{season_type}/weeks/{week}` */
+  espnNbaslGsSeasonWeek: Wrapper<Row[], EspnSeasonWeekParams>;
+  /** NBASL_GS — season week games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/types/{season_type}/weeks/{week}/events` */
+  espnNbaslGsSeasonWeekGames: Wrapper<Row[], EspnSeasonWeekEventsParams>;
+  /** NBASL_GS — season week powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/types/{season_type}/weeks/{week}/powerindex` */
+  espnNbaslGsSeasonWeekPowerindex: Wrapper<Row[], EspnSeasonWeekPowerindexParams>;
+  /** NBASL_GS — season weeks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/seasons/{season}/types/{season_type}/weeks` */
+  espnNbaslGsSeasonWeeks: Wrapper<Row[], EspnSeasonWeeksParams>;
+  /** NBASL_GS — standings (ESPN site.api.espn.com (v2)). `GET https://site.api.espn.com/apis/v2/sports/basketball/nba-summer-golden-state/standings` */
+  espnNbaslGsStandings: Wrapper<Row[], EspnStandingsParams>;
+  /** NBASL_GS — standings core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/standings` */
+  espnNbaslGsStandingsCore: Wrapper<Row[], EspnStandingsCoreParams>;
+  /** NBASL_GS — statistics league (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/statistics` */
+  espnNbaslGsStatisticsLeague: Wrapper<Row[], EspnStatisticsLeagueParams>;
+  /** NBASL_GS — summary (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/summary` */
+  espnNbaslGsSummary: SectionedWrapper<ParsedTables, {}, EspnSummaryParams>;
+  /** NBASL_GS — talentpicks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/talentpicks` */
+  espnNbaslGsTalentpicks: Wrapper<Row[], EspnTalentpicksParams>;
+  /** NBASL_GS — team (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/teams/{team_id}` */
+  espnNbaslGsTeam: Wrapper<Row[], EspnTeamParams>;
+  /** NBASL_GS — team core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/teams/{team_id}` */
+  espnNbaslGsTeamCore: Wrapper<Row[], EspnTeamCoreParams>;
+  /** NBASL_GS — team depthcharts (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/teams/{team_id}/depthcharts` */
+  espnNbaslGsTeamDepthcharts: Wrapper<Row[], EspnTeamDepthchartsParams>;
+  /** NBASL_GS — team history (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/teams/{team_id}/history` */
+  espnNbaslGsTeamHistory: Wrapper<Row[], EspnTeamHistoryParams>;
+  /** NBASL_GS — team injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/teams/{team_id}/injuries` */
+  espnNbaslGsTeamInjuries: Wrapper<Row[], EspnTeamInjuriesParams>;
+  /** NBASL_GS — team leaders (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/teams/{team_id}/leaders` */
+  espnNbaslGsTeamLeaders: Wrapper<Row[], EspnTeamLeadersParams>;
+  /** NBASL_GS — team news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/teams/{team_id}/news` */
+  espnNbaslGsTeamNews: Wrapper<Row[], EspnTeamNewsParams>;
+  /** NBASL_GS — team record (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/teams/{team_id}/record` */
+  espnNbaslGsTeamRecord: Wrapper<Row[], EspnTeamRecordParams>;
+  /** NBASL_GS — team roster (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/teams/{team_id}/roster` */
+  espnNbaslGsTeamRoster: Wrapper<Row[], EspnTeamRosterParams>;
+  /** NBASL_GS — team schedule (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/teams/{team_id}/schedule` */
+  espnNbaslGsTeamSchedule: Wrapper<Row[], EspnTeamScheduleParams>;
+  /** NBASL_GS — teams core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/teams` */
+  espnNbaslGsTeamsCore: Wrapper<Row[], EspnTeamsCoreParams>;
+  /** NBASL_GS — teams site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/teams` */
+  espnNbaslGsTeamsSite: Wrapper<Row[], EspnTeamsSiteParams>;
+  /** NBASL_GS — team transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/teams/{team_id}/transactions` */
+  espnNbaslGsTeamTransactions: Wrapper<Row[], EspnTeamTransactionsParams>;
+  /** NBASL_GS — tournaments (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/tournaments` */
+  espnNbaslGsTournaments: Wrapper<Row[], EspnTournamentsParams>;
+  /** NBASL_GS — transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-golden-state/transactions` */
+  espnNbaslGsTransactions: Wrapper<Row[], EspnTransactionsParams>;
+  /** NBASL_GS — venue (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/venues/{venue_id}` */
+  espnNbaslGsVenue: Wrapper<Row[], EspnVenueParams>;
+  /** NBASL_GS — venues (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-golden-state/venues` */
+  espnNbaslGsVenues: Wrapper<Row[], EspnVenuesParams>;
+}
+
+/** The generated wrappers of `sdv.nbasl_lv` (and their deprecated pre-v4 names). */
+export interface NbaslLvWrappers {
+  /** NBASL_LV — award (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/awards/{award_id}` */
+  espn_nbasl_lv_award: Wrapper<Row[], EspnAwardParams>;
+  /** NBASL_LV — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/awards` */
+  espn_nbasl_lv_awards: Wrapper<Row[], EspnAwardsParams>;
+  /** NBASL_LV — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/calendar` */
+  espn_nbasl_lv_calendar: Wrapper<Row[], EspnCalendarParams>;
+  /** NBASL_LV — coach (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/coaches/{coach_id}` */
+  espn_nbasl_lv_coach: Wrapper<Row[], EspnCoachParams>;
+  /** NBASL_LV — coach record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/coaches/{coach_id}/record/{record_type}` */
+  espn_nbasl_lv_coach_record: Wrapper<Row[], EspnCoachRecordParams>;
+  /** NBASL_LV — coach season (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/coaches/{coach_id}/seasons/{season}` */
+  espn_nbasl_lv_coach_season: Wrapper<Row[], EspnCoachSeasonParams>;
+  /** NBASL_LV — conferences (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/groups` */
+  espn_nbasl_lv_conferences: Wrapper<Row[], EspnConferencesParams>;
+  /** NBASL_LV — draft (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/draft` */
+  espn_nbasl_lv_draft: Wrapper<Row[], EspnDraftParams>;
+  /** NBASL_LV — fpi (ESPN site.web.api.espn.com (FPI, fitt v3)). `GET https://site.web.api.espn.com/apis/fitt/v3/sports/basketball/nba-summer-las-vegas/powerindex` */
+  espn_nbasl_lv_fpi: Wrapper<Row[], EspnFpiParams>;
+  /** NBASL_LV — franchise (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/franchises/{franchise_id}` */
+  espn_nbasl_lv_franchise: Wrapper<Row[], EspnFranchiseParams>;
+  /** NBASL_LV — franchises (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/franchises` */
+  espn_nbasl_lv_franchises: Wrapper<Row[], EspnFranchisesParams>;
+  /** NBASL_LV — game (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}` */
+  espn_nbasl_lv_game: Wrapper<Row[], EspnEventParams>;
+  /** NBASL_LV — game broadcasts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/broadcasts` */
+  espn_nbasl_lv_game_broadcasts: Wrapper<Row[], EspnEventBroadcastsParams>;
+  /** NBASL_LV — game competition (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}` */
+  espn_nbasl_lv_game_competition: Wrapper<Row[], EspnEventCompetitionParams>;
+  /** NBASL_LV — game leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/leaders` */
+  espn_nbasl_lv_game_leaders: Wrapper<Row[], EspnEventLeadersParams>;
+  /** NBASL_LV — game odds (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/odds` */
+  espn_nbasl_lv_game_odds: Wrapper<Row[], EspnEventOddsParams>;
+  /** NBASL_LV — game official detail (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/officials/{official_id}` */
+  espn_nbasl_lv_game_official_detail: Wrapper<Row[], EspnEventOfficialDetailParams>;
+  /** NBASL_LV — game officials (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/officials` */
+  espn_nbasl_lv_game_officials: Wrapper<Row[], EspnEventOfficialsParams>;
+  /** NBASL_LV — game play (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/plays/{play_id}` */
+  espn_nbasl_lv_game_play: Wrapper<Row[], EspnEventPlayParams>;
+  /** NBASL_LV — game play personnel (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` */
+  espn_nbasl_lv_game_play_personnel: Wrapper<Row[], EspnEventPlayPersonnelParams>;
+  /** NBASL_LV — game plays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/plays` */
+  espn_nbasl_lv_game_plays: Wrapper<Row[], EspnEventPlaysParams>;
+  /** NBASL_LV — game powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/powerindex` */
+  espn_nbasl_lv_game_powerindex: Wrapper<Row[], EspnEventPowerindexParams>;
+  /** NBASL_LV — game predictor (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/predictor` */
+  espn_nbasl_lv_game_predictor: Wrapper<Row[], EspnEventPredictorParams>;
+  /** NBASL_LV — game probabilities (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/probabilities` */
+  espn_nbasl_lv_game_probabilities: Wrapper<Row[], EspnEventProbabilitiesParams>;
+  /** NBASL_LV — game propbets (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/propbets` */
+  espn_nbasl_lv_game_propbets: Wrapper<Row[], EspnEventPropbetsParams>;
+  /** NBASL_LV — game scoringplays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/scoringplays` */
+  espn_nbasl_lv_game_scoringplays: Wrapper<Row[], EspnEventScoringplaysParams>;
+  /** NBASL_LV — game situation (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/situation` */
+  espn_nbasl_lv_game_situation: Wrapper<Row[], EspnEventSituationParams>;
+  /** NBASL_LV — game status (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/status` */
+  espn_nbasl_lv_game_status: Wrapper<Row[], EspnEventStatusParams>;
+  /** NBASL_LV — game team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/competitors/{team_id}` */
+  espn_nbasl_lv_game_team: Wrapper<Row[], EspnEventCompetitorParams>;
+  /** NBASL_LV — game team leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` */
+  espn_nbasl_lv_game_team_leaders: Wrapper<Row[], EspnEventCompetitorLeadersParams>;
+  /** NBASL_LV — game team linescores (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` */
+  espn_nbasl_lv_game_team_linescores: Wrapper<Row[], EspnEventCompetitorLinescoresParams>;
+  /** NBASL_LV — game team record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` */
+  espn_nbasl_lv_game_team_record: Wrapper<Row[], EspnEventCompetitorRecordParams>;
+  /** NBASL_LV — game team roster (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` */
+  espn_nbasl_lv_game_team_roster: Wrapper<Row[], EspnEventCompetitorRosterParams>;
+  /** NBASL_LV — game team statistics (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` */
+  espn_nbasl_lv_game_team_statistics: Wrapper<Row[], EspnEventCompetitorStatisticsParams>;
+  /** NBASL_LV — game teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/competitors` */
+  espn_nbasl_lv_game_teams: Wrapper<Row[], EspnEventCompetitorsParams>;
+  /** NBASL_LV — games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events` */
+  espn_nbasl_lv_games: Wrapper<Row[], EspnEventsParams>;
+  /** NBASL_LV — injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/injuries` */
+  espn_nbasl_lv_injuries: Wrapper<Row[], EspnInjuriesParams>;
+  /** NBASL_LV — leaders (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-las-vegas/statistics/byathlete` */
+  espn_nbasl_lv_leaders: Wrapper<Row[], EspnLeadersParams>;
+  /** NBASL_LV — leaders core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/leaders` */
+  espn_nbasl_lv_leaders_core: Wrapper<Row[], EspnLeadersCoreParams>;
+  /** NBASL_LV — league notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/notes` */
+  espn_nbasl_lv_league_notes: Wrapper<Row[], EspnLeagueNotesParams>;
+  /** NBASL_LV — league root (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas` */
+  espn_nbasl_lv_league_root: Wrapper<Row[], EspnLeagueRootParams>;
+  /** NBASL_LV — news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/news` */
+  espn_nbasl_lv_news: Wrapper<Row[], EspnNewsParams>;
+  /** NBASL_LV — player awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/athletes/{athlete_id}/awards` */
+  espn_nbasl_lv_player_awards: Wrapper<Row[], EspnAthleteAwardsParams>;
+  /** NBASL_LV — player bio (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/athletes/{athlete_id}/bio` */
+  espn_nbasl_lv_player_bio: Wrapper<Row[], EspnAthleteBioParams>;
+  /** NBASL_LV — player career stats (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/athletes/{athlete_id}/statistics[/{stat_type}]` */
+  espn_nbasl_lv_player_career_stats: Wrapper<Row[], EspnAthleteCareerStatsParams>;
+  /** NBASL_LV — player contracts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/athletes/{athlete_id}/contracts` */
+  espn_nbasl_lv_player_contracts: Wrapper<Row[], EspnAthleteContractsParams>;
+  /** NBASL_LV — player core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/athletes/{athlete_id}` */
+  espn_nbasl_lv_player_core: Wrapper<Row[], EspnAthleteCoreParams>;
+  /** NBASL_LV — player eventlog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/athletes/{athlete_id}/eventlog` */
+  espn_nbasl_lv_player_eventlog: Wrapper<Row[], EspnAthleteEventlogParams>;
+  /** NBASL_LV — player gamelog (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-las-vegas/athletes/{athlete_id}/gamelog` */
+  espn_nbasl_lv_player_gamelog: Wrapper<Row[], EspnAthleteGamelogParams>;
+  /** NBASL_LV — player info (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/athletes/{athlete_id}` */
+  espn_nbasl_lv_player_info: Wrapper<Row[], EspnAthleteInfoParams>;
+  /** NBASL_LV — player injuries (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/athletes/{athlete_id}/injuries` */
+  espn_nbasl_lv_player_injuries: Wrapper<Row[], EspnAthleteInjuriesParams>;
+  /** NBASL_LV — player news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/athletes/{athlete_id}/news` */
+  espn_nbasl_lv_player_news: Wrapper<Row[], EspnAthleteNewsParams>;
+  /** NBASL_LV — player notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/athletes/{athlete_id}/notes` */
+  espn_nbasl_lv_player_notes: Wrapper<Row[], EspnAthleteNotesParams>;
+  /** NBASL_LV — player overview (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-las-vegas/athletes/{athlete_id}/overview` */
+  espn_nbasl_lv_player_overview: Wrapper<Row[], EspnAthleteOverviewParams>;
+  /** NBASL_LV — player records (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/athletes/{athlete_id}/records` */
+  espn_nbasl_lv_player_records: Wrapper<Row[], EspnAthleteRecordsParams>;
+  /** NBASL_LV — player seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/athletes/{athlete_id}/seasons` */
+  espn_nbasl_lv_player_seasons: Wrapper<Row[], EspnAthleteSeasonsParams>;
+  /** NBASL_LV — player splits (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-las-vegas/athletes/{athlete_id}/splits` */
+  espn_nbasl_lv_player_splits: Wrapper<Row[], EspnAthleteSplitsParams>;
+  /** NBASL_LV — player statisticslog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/athletes/{athlete_id}/statisticslog` */
+  espn_nbasl_lv_player_statisticslog: Wrapper<Row[], EspnAthleteStatisticslogParams>;
+  /** NBASL_LV — player stats (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-las-vegas/athletes/{athlete_id}/stats` */
+  espn_nbasl_lv_player_stats: Wrapper<Row[], EspnAthleteStatsParams>;
+  /** NBASL_LV — player vs player (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/athletes/{athlete_id}/vsathlete/{opp_id}` */
+  espn_nbasl_lv_player_vs_player: Wrapper<Row[], EspnAthleteVsAthleteParams>;
+  /** NBASL_LV — players index (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/athletes` */
+  espn_nbasl_lv_players_index: Wrapper<Row[], EspnAthletesIndexParams>;
+  /** NBASL_LV — position (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/positions/{position_id}` */
+  espn_nbasl_lv_position: Wrapper<Row[], EspnPositionParams>;
+  /** NBASL_LV — positions (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/positions` */
+  espn_nbasl_lv_positions: Wrapper<Row[], EspnPositionsParams>;
+  /** NBASL_LV — scoreboard (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/scoreboard` */
+  espn_nbasl_lv_scoreboard: Wrapper<Row[], EspnScoreboardParams>;
+  /** NBASL_LV — season awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/awards` */
+  espn_nbasl_lv_season_awards: Wrapper<Row[], EspnSeasonAwardsParams>;
+  /** NBASL_LV — season coaches (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/coaches` */
+  espn_nbasl_lv_season_coaches: Wrapper<Row[], EspnSeasonCoachesParams>;
+  /** NBASL_LV — season draft (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/draft` */
+  espn_nbasl_lv_season_draft: Wrapper<Row[], EspnSeasonDraftParams>;
+  /** NBASL_LV — season draft round picks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/draft/rounds/{round_num}/picks` */
+  espn_nbasl_lv_season_draft_round_picks: Wrapper<Row[], EspnSeasonDraftRoundPicksParams>;
+  /** NBASL_LV — season freeagents (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/freeagents` */
+  espn_nbasl_lv_season_freeagents: Wrapper<Row[], EspnSeasonFreeagentsParams>;
+  /** NBASL_LV — season futures (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/futures` */
+  espn_nbasl_lv_season_futures: Wrapper<Row[], EspnSeasonFuturesParams>;
+  /** NBASL_LV — season group (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/types/{season_type}/groups/{group_id}` */
+  espn_nbasl_lv_season_group: Wrapper<Row[], EspnSeasonGroupParams>;
+  /** NBASL_LV — season group children (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/types/{season_type}/groups/{group_id}/children` */
+  espn_nbasl_lv_season_group_children: Wrapper<Row[], EspnSeasonGroupChildrenParams>;
+  /** NBASL_LV — season group teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/types/{season_type}/groups/{group_id}/teams` */
+  espn_nbasl_lv_season_group_teams: Wrapper<Row[], EspnSeasonGroupTeamsParams>;
+  /** NBASL_LV — season groups (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/types/{season_type}/groups` */
+  espn_nbasl_lv_season_groups: Wrapper<Row[], EspnSeasonGroupsParams>;
+  /** NBASL_LV — season info (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}` */
+  espn_nbasl_lv_season_info: Wrapper<Row[], EspnSeasonInfoParams>;
+  /** NBASL_LV — season players (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/athletes` */
+  espn_nbasl_lv_season_players: Wrapper<Row[], EspnSeasonAthletesParams>;
+  /** NBASL_LV — season pointer (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/season` */
+  espn_nbasl_lv_season_pointer: Wrapper<Row[], EspnSeasonPointerParams>;
+  /** NBASL_LV — season powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/powerindex[/{team_id}]` */
+  espn_nbasl_lv_season_powerindex: Wrapper<Row[], EspnSeasonPowerindexParams>;
+  /** NBASL_LV — season powerindex leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/powerindex/leaders` */
+  espn_nbasl_lv_season_powerindex_leaders: Wrapper<Row[], EspnSeasonPowerindexLeadersParams>;
+  /** NBASL_LV — season team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/teams/{team_id}` */
+  espn_nbasl_lv_season_team: Wrapper<Row[], EspnSeasonTeamParams>;
+  /** NBASL_LV — season teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/teams` */
+  espn_nbasl_lv_season_teams: Wrapper<Row[], EspnSeasonTeamsParams>;
+  /** NBASL_LV — season type (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/types/{season_type}` */
+  espn_nbasl_lv_season_type: Wrapper<Row[], EspnSeasonTypeParams>;
+  /** NBASL_LV — season type corrections (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/types/{season_type}/corrections` */
+  espn_nbasl_lv_season_type_corrections: Wrapper<Row[], EspnSeasonTypeCorrectionsParams>;
+  /** NBASL_LV — season type leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/types/{season_type}/leaders` */
+  espn_nbasl_lv_season_type_leaders: Wrapper<Row[], EspnSeasonTypeLeadersParams>;
+  /** NBASL_LV — season types (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/types` */
+  espn_nbasl_lv_season_types: Wrapper<Row[], EspnSeasonTypesParams>;
+  /** NBASL_LV — season week (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/types/{season_type}/weeks/{week}` */
+  espn_nbasl_lv_season_week: Wrapper<Row[], EspnSeasonWeekParams>;
+  /** NBASL_LV — season week games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/types/{season_type}/weeks/{week}/events` */
+  espn_nbasl_lv_season_week_games: Wrapper<Row[], EspnSeasonWeekEventsParams>;
+  /** NBASL_LV — season week powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/types/{season_type}/weeks/{week}/powerindex` */
+  espn_nbasl_lv_season_week_powerindex: Wrapper<Row[], EspnSeasonWeekPowerindexParams>;
+  /** NBASL_LV — season weeks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/types/{season_type}/weeks` */
+  espn_nbasl_lv_season_weeks: Wrapper<Row[], EspnSeasonWeeksParams>;
+  /** NBASL_LV — seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons` */
+  espn_nbasl_lv_seasons: Wrapper<Row[], EspnSeasonsParams>;
+  /** NBASL_LV — standings (ESPN site.api.espn.com (v2)). `GET https://site.api.espn.com/apis/v2/sports/basketball/nba-summer-las-vegas/standings` */
+  espn_nbasl_lv_standings: Wrapper<Row[], EspnStandingsParams>;
+  /** NBASL_LV — standings core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/standings` */
+  espn_nbasl_lv_standings_core: Wrapper<Row[], EspnStandingsCoreParams>;
+  /** NBASL_LV — statistics league (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/statistics` */
+  espn_nbasl_lv_statistics_league: Wrapper<Row[], EspnStatisticsLeagueParams>;
+  /** NBASL_LV — summary (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/summary` */
+  espn_nbasl_lv_summary: SectionedWrapper<ParsedTables, {}, EspnSummaryParams>;
+  /** NBASL_LV — talentpicks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/talentpicks` */
+  espn_nbasl_lv_talentpicks: Wrapper<Row[], EspnTalentpicksParams>;
+  /** NBASL_LV — team (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/teams/{team_id}` */
+  espn_nbasl_lv_team: Wrapper<Row[], EspnTeamParams>;
+  /** NBASL_LV — team core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/teams/{team_id}` */
+  espn_nbasl_lv_team_core: Wrapper<Row[], EspnTeamCoreParams>;
+  /** NBASL_LV — team depthcharts (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/teams/{team_id}/depthcharts` */
+  espn_nbasl_lv_team_depthcharts: Wrapper<Row[], EspnTeamDepthchartsParams>;
+  /** NBASL_LV — team history (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/teams/{team_id}/history` */
+  espn_nbasl_lv_team_history: Wrapper<Row[], EspnTeamHistoryParams>;
+  /** NBASL_LV — team injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/teams/{team_id}/injuries` */
+  espn_nbasl_lv_team_injuries: Wrapper<Row[], EspnTeamInjuriesParams>;
+  /** NBASL_LV — team leaders (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/teams/{team_id}/leaders` */
+  espn_nbasl_lv_team_leaders: Wrapper<Row[], EspnTeamLeadersParams>;
+  /** NBASL_LV — team news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/teams/{team_id}/news` */
+  espn_nbasl_lv_team_news: Wrapper<Row[], EspnTeamNewsParams>;
+  /** NBASL_LV — team record (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/teams/{team_id}/record` */
+  espn_nbasl_lv_team_record: Wrapper<Row[], EspnTeamRecordParams>;
+  /** NBASL_LV — team roster (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/teams/{team_id}/roster` */
+  espn_nbasl_lv_team_roster: Wrapper<Row[], EspnTeamRosterParams>;
+  /** NBASL_LV — team schedule (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/teams/{team_id}/schedule` */
+  espn_nbasl_lv_team_schedule: Wrapper<Row[], EspnTeamScheduleParams>;
+  /** NBASL_LV — team transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/teams/{team_id}/transactions` */
+  espn_nbasl_lv_team_transactions: Wrapper<Row[], EspnTeamTransactionsParams>;
+  /** NBASL_LV — teams core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/teams` */
+  espn_nbasl_lv_teams_core: Wrapper<Row[], EspnTeamsCoreParams>;
+  /** NBASL_LV — teams site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/teams` */
+  espn_nbasl_lv_teams_site: Wrapper<Row[], EspnTeamsSiteParams>;
+  /** NBASL_LV — tournaments (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/tournaments` */
+  espn_nbasl_lv_tournaments: Wrapper<Row[], EspnTournamentsParams>;
+  /** NBASL_LV — transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/transactions` */
+  espn_nbasl_lv_transactions: Wrapper<Row[], EspnTransactionsParams>;
+  /** NBASL_LV — venue (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/venues/{venue_id}` */
+  espn_nbasl_lv_venue: Wrapper<Row[], EspnVenueParams>;
+  /** NBASL_LV — venues (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/venues` */
+  espn_nbasl_lv_venues: Wrapper<Row[], EspnVenuesParams>;
+  /** NBASL_LV — award (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/awards/{award_id}` */
+  espnNbaslLvAward: Wrapper<Row[], EspnAwardParams>;
+  /** NBASL_LV — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/awards` */
+  espnNbaslLvAwards: Wrapper<Row[], EspnAwardsParams>;
+  /** NBASL_LV — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/calendar` */
+  espnNbaslLvCalendar: Wrapper<Row[], EspnCalendarParams>;
+  /** NBASL_LV — coach (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/coaches/{coach_id}` */
+  espnNbaslLvCoach: Wrapper<Row[], EspnCoachParams>;
+  /** NBASL_LV — coach record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/coaches/{coach_id}/record/{record_type}` */
+  espnNbaslLvCoachRecord: Wrapper<Row[], EspnCoachRecordParams>;
+  /** NBASL_LV — coach season (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/coaches/{coach_id}/seasons/{season}` */
+  espnNbaslLvCoachSeason: Wrapper<Row[], EspnCoachSeasonParams>;
+  /** NBASL_LV — conferences (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/groups` */
+  espnNbaslLvConferences: Wrapper<Row[], EspnConferencesParams>;
+  /** NBASL_LV — draft (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/draft` */
+  espnNbaslLvDraft: Wrapper<Row[], EspnDraftParams>;
+  /** NBASL_LV — fpi (ESPN site.web.api.espn.com (FPI, fitt v3)). `GET https://site.web.api.espn.com/apis/fitt/v3/sports/basketball/nba-summer-las-vegas/powerindex` */
+  espnNbaslLvFpi: Wrapper<Row[], EspnFpiParams>;
+  /** NBASL_LV — franchise (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/franchises/{franchise_id}` */
+  espnNbaslLvFranchise: Wrapper<Row[], EspnFranchiseParams>;
+  /** NBASL_LV — franchises (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/franchises` */
+  espnNbaslLvFranchises: Wrapper<Row[], EspnFranchisesParams>;
+  /** NBASL_LV — game (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}` */
+  espnNbaslLvGame: Wrapper<Row[], EspnEventParams>;
+  /** NBASL_LV — game broadcasts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/broadcasts` */
+  espnNbaslLvGameBroadcasts: Wrapper<Row[], EspnEventBroadcastsParams>;
+  /** NBASL_LV — game competition (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}` */
+  espnNbaslLvGameCompetition: Wrapper<Row[], EspnEventCompetitionParams>;
+  /** NBASL_LV — game leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/leaders` */
+  espnNbaslLvGameLeaders: Wrapper<Row[], EspnEventLeadersParams>;
+  /** NBASL_LV — game odds (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/odds` */
+  espnNbaslLvGameOdds: Wrapper<Row[], EspnEventOddsParams>;
+  /** NBASL_LV — game official detail (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/officials/{official_id}` */
+  espnNbaslLvGameOfficialDetail: Wrapper<Row[], EspnEventOfficialDetailParams>;
+  /** NBASL_LV — game officials (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/officials` */
+  espnNbaslLvGameOfficials: Wrapper<Row[], EspnEventOfficialsParams>;
+  /** NBASL_LV — game play (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/plays/{play_id}` */
+  espnNbaslLvGamePlay: Wrapper<Row[], EspnEventPlayParams>;
+  /** NBASL_LV — game play personnel (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` */
+  espnNbaslLvGamePlayPersonnel: Wrapper<Row[], EspnEventPlayPersonnelParams>;
+  /** NBASL_LV — game plays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/plays` */
+  espnNbaslLvGamePlays: Wrapper<Row[], EspnEventPlaysParams>;
+  /** NBASL_LV — game powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/powerindex` */
+  espnNbaslLvGamePowerindex: Wrapper<Row[], EspnEventPowerindexParams>;
+  /** NBASL_LV — game predictor (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/predictor` */
+  espnNbaslLvGamePredictor: Wrapper<Row[], EspnEventPredictorParams>;
+  /** NBASL_LV — game probabilities (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/probabilities` */
+  espnNbaslLvGameProbabilities: Wrapper<Row[], EspnEventProbabilitiesParams>;
+  /** NBASL_LV — game propbets (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/propbets` */
+  espnNbaslLvGamePropbets: Wrapper<Row[], EspnEventPropbetsParams>;
+  /** NBASL_LV — games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events` */
+  espnNbaslLvGames: Wrapper<Row[], EspnEventsParams>;
+  /** NBASL_LV — game scoringplays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/scoringplays` */
+  espnNbaslLvGameScoringplays: Wrapper<Row[], EspnEventScoringplaysParams>;
+  /** NBASL_LV — game situation (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/situation` */
+  espnNbaslLvGameSituation: Wrapper<Row[], EspnEventSituationParams>;
+  /** NBASL_LV — game status (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/status` */
+  espnNbaslLvGameStatus: Wrapper<Row[], EspnEventStatusParams>;
+  /** NBASL_LV — game team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/competitors/{team_id}` */
+  espnNbaslLvGameTeam: Wrapper<Row[], EspnEventCompetitorParams>;
+  /** NBASL_LV — game team leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` */
+  espnNbaslLvGameTeamLeaders: Wrapper<Row[], EspnEventCompetitorLeadersParams>;
+  /** NBASL_LV — game team linescores (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` */
+  espnNbaslLvGameTeamLinescores: Wrapper<Row[], EspnEventCompetitorLinescoresParams>;
+  /** NBASL_LV — game team record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` */
+  espnNbaslLvGameTeamRecord: Wrapper<Row[], EspnEventCompetitorRecordParams>;
+  /** NBASL_LV — game team roster (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` */
+  espnNbaslLvGameTeamRoster: Wrapper<Row[], EspnEventCompetitorRosterParams>;
+  /** NBASL_LV — game teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/competitors` */
+  espnNbaslLvGameTeams: Wrapper<Row[], EspnEventCompetitorsParams>;
+  /** NBASL_LV — game team statistics (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` */
+  espnNbaslLvGameTeamStatistics: Wrapper<Row[], EspnEventCompetitorStatisticsParams>;
+  /** NBASL_LV — injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/injuries` */
+  espnNbaslLvInjuries: Wrapper<Row[], EspnInjuriesParams>;
+  /** NBASL_LV — leaders (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-las-vegas/statistics/byathlete` */
+  espnNbaslLvLeaders: Wrapper<Row[], EspnLeadersParams>;
+  /** NBASL_LV — leaders core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/leaders` */
+  espnNbaslLvLeadersCore: Wrapper<Row[], EspnLeadersCoreParams>;
+  /** NBASL_LV — league notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/notes` */
+  espnNbaslLvLeagueNotes: Wrapper<Row[], EspnLeagueNotesParams>;
+  /** NBASL_LV — league root (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas` */
+  espnNbaslLvLeagueRoot: Wrapper<Row[], EspnLeagueRootParams>;
+  /** NBASL_LV — news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/news` */
+  espnNbaslLvNews: Wrapper<Row[], EspnNewsParams>;
+  /** NBASL_LV — player awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/athletes/{athlete_id}/awards` */
+  espnNbaslLvPlayerAwards: Wrapper<Row[], EspnAthleteAwardsParams>;
+  /** NBASL_LV — player bio (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/athletes/{athlete_id}/bio` */
+  espnNbaslLvPlayerBio: Wrapper<Row[], EspnAthleteBioParams>;
+  /** NBASL_LV — player career stats (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/athletes/{athlete_id}/statistics[/{stat_type}]` */
+  espnNbaslLvPlayerCareerStats: Wrapper<Row[], EspnAthleteCareerStatsParams>;
+  /** NBASL_LV — player contracts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/athletes/{athlete_id}/contracts` */
+  espnNbaslLvPlayerContracts: Wrapper<Row[], EspnAthleteContractsParams>;
+  /** NBASL_LV — player core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/athletes/{athlete_id}` */
+  espnNbaslLvPlayerCore: Wrapper<Row[], EspnAthleteCoreParams>;
+  /** NBASL_LV — player eventlog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/athletes/{athlete_id}/eventlog` */
+  espnNbaslLvPlayerEventlog: Wrapper<Row[], EspnAthleteEventlogParams>;
+  /** NBASL_LV — player gamelog (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-las-vegas/athletes/{athlete_id}/gamelog` */
+  espnNbaslLvPlayerGamelog: Wrapper<Row[], EspnAthleteGamelogParams>;
+  /** NBASL_LV — player info (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/athletes/{athlete_id}` */
+  espnNbaslLvPlayerInfo: Wrapper<Row[], EspnAthleteInfoParams>;
+  /** NBASL_LV — player injuries (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/athletes/{athlete_id}/injuries` */
+  espnNbaslLvPlayerInjuries: Wrapper<Row[], EspnAthleteInjuriesParams>;
+  /** NBASL_LV — player news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/athletes/{athlete_id}/news` */
+  espnNbaslLvPlayerNews: Wrapper<Row[], EspnAthleteNewsParams>;
+  /** NBASL_LV — player notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/athletes/{athlete_id}/notes` */
+  espnNbaslLvPlayerNotes: Wrapper<Row[], EspnAthleteNotesParams>;
+  /** NBASL_LV — player overview (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-las-vegas/athletes/{athlete_id}/overview` */
+  espnNbaslLvPlayerOverview: Wrapper<Row[], EspnAthleteOverviewParams>;
+  /** NBASL_LV — player records (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/athletes/{athlete_id}/records` */
+  espnNbaslLvPlayerRecords: Wrapper<Row[], EspnAthleteRecordsParams>;
+  /** NBASL_LV — player seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/athletes/{athlete_id}/seasons` */
+  espnNbaslLvPlayerSeasons: Wrapper<Row[], EspnAthleteSeasonsParams>;
+  /** NBASL_LV — players index (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/athletes` */
+  espnNbaslLvPlayersIndex: Wrapper<Row[], EspnAthletesIndexParams>;
+  /** NBASL_LV — player splits (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-las-vegas/athletes/{athlete_id}/splits` */
+  espnNbaslLvPlayerSplits: Wrapper<Row[], EspnAthleteSplitsParams>;
+  /** NBASL_LV — player statisticslog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/athletes/{athlete_id}/statisticslog` */
+  espnNbaslLvPlayerStatisticslog: Wrapper<Row[], EspnAthleteStatisticslogParams>;
+  /** NBASL_LV — player stats (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-las-vegas/athletes/{athlete_id}/stats` */
+  espnNbaslLvPlayerStats: Wrapper<Row[], EspnAthleteStatsParams>;
+  /** NBASL_LV — player vs player (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/athletes/{athlete_id}/vsathlete/{opp_id}` */
+  espnNbaslLvPlayerVsPlayer: Wrapper<Row[], EspnAthleteVsAthleteParams>;
+  /** NBASL_LV — position (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/positions/{position_id}` */
+  espnNbaslLvPosition: Wrapper<Row[], EspnPositionParams>;
+  /** NBASL_LV — positions (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/positions` */
+  espnNbaslLvPositions: Wrapper<Row[], EspnPositionsParams>;
+  /** NBASL_LV — scoreboard (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/scoreboard` */
+  espnNbaslLvScoreboard: Wrapper<Row[], EspnScoreboardParams>;
+  /** NBASL_LV — season awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/awards` */
+  espnNbaslLvSeasonAwards: Wrapper<Row[], EspnSeasonAwardsParams>;
+  /** NBASL_LV — season coaches (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/coaches` */
+  espnNbaslLvSeasonCoaches: Wrapper<Row[], EspnSeasonCoachesParams>;
+  /** NBASL_LV — season draft (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/draft` */
+  espnNbaslLvSeasonDraft: Wrapper<Row[], EspnSeasonDraftParams>;
+  /** NBASL_LV — season draft round picks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/draft/rounds/{round_num}/picks` */
+  espnNbaslLvSeasonDraftRoundPicks: Wrapper<Row[], EspnSeasonDraftRoundPicksParams>;
+  /** NBASL_LV — season freeagents (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/freeagents` */
+  espnNbaslLvSeasonFreeagents: Wrapper<Row[], EspnSeasonFreeagentsParams>;
+  /** NBASL_LV — season futures (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/futures` */
+  espnNbaslLvSeasonFutures: Wrapper<Row[], EspnSeasonFuturesParams>;
+  /** NBASL_LV — season group (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/types/{season_type}/groups/{group_id}` */
+  espnNbaslLvSeasonGroup: Wrapper<Row[], EspnSeasonGroupParams>;
+  /** NBASL_LV — season group children (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/types/{season_type}/groups/{group_id}/children` */
+  espnNbaslLvSeasonGroupChildren: Wrapper<Row[], EspnSeasonGroupChildrenParams>;
+  /** NBASL_LV — season groups (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/types/{season_type}/groups` */
+  espnNbaslLvSeasonGroups: Wrapper<Row[], EspnSeasonGroupsParams>;
+  /** NBASL_LV — season group teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/types/{season_type}/groups/{group_id}/teams` */
+  espnNbaslLvSeasonGroupTeams: Wrapper<Row[], EspnSeasonGroupTeamsParams>;
+  /** NBASL_LV — season info (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}` */
+  espnNbaslLvSeasonInfo: Wrapper<Row[], EspnSeasonInfoParams>;
+  /** NBASL_LV — season players (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/athletes` */
+  espnNbaslLvSeasonPlayers: Wrapper<Row[], EspnSeasonAthletesParams>;
+  /** NBASL_LV — season pointer (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/season` */
+  espnNbaslLvSeasonPointer: Wrapper<Row[], EspnSeasonPointerParams>;
+  /** NBASL_LV — season powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/powerindex[/{team_id}]` */
+  espnNbaslLvSeasonPowerindex: Wrapper<Row[], EspnSeasonPowerindexParams>;
+  /** NBASL_LV — season powerindex leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/powerindex/leaders` */
+  espnNbaslLvSeasonPowerindexLeaders: Wrapper<Row[], EspnSeasonPowerindexLeadersParams>;
+  /** NBASL_LV — seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons` */
+  espnNbaslLvSeasons: Wrapper<Row[], EspnSeasonsParams>;
+  /** NBASL_LV — season team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/teams/{team_id}` */
+  espnNbaslLvSeasonTeam: Wrapper<Row[], EspnSeasonTeamParams>;
+  /** NBASL_LV — season teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/teams` */
+  espnNbaslLvSeasonTeams: Wrapper<Row[], EspnSeasonTeamsParams>;
+  /** NBASL_LV — season type (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/types/{season_type}` */
+  espnNbaslLvSeasonType: Wrapper<Row[], EspnSeasonTypeParams>;
+  /** NBASL_LV — season type corrections (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/types/{season_type}/corrections` */
+  espnNbaslLvSeasonTypeCorrections: Wrapper<Row[], EspnSeasonTypeCorrectionsParams>;
+  /** NBASL_LV — season type leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/types/{season_type}/leaders` */
+  espnNbaslLvSeasonTypeLeaders: Wrapper<Row[], EspnSeasonTypeLeadersParams>;
+  /** NBASL_LV — season types (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/types` */
+  espnNbaslLvSeasonTypes: Wrapper<Row[], EspnSeasonTypesParams>;
+  /** NBASL_LV — season week (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/types/{season_type}/weeks/{week}` */
+  espnNbaslLvSeasonWeek: Wrapper<Row[], EspnSeasonWeekParams>;
+  /** NBASL_LV — season week games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/types/{season_type}/weeks/{week}/events` */
+  espnNbaslLvSeasonWeekGames: Wrapper<Row[], EspnSeasonWeekEventsParams>;
+  /** NBASL_LV — season week powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/types/{season_type}/weeks/{week}/powerindex` */
+  espnNbaslLvSeasonWeekPowerindex: Wrapper<Row[], EspnSeasonWeekPowerindexParams>;
+  /** NBASL_LV — season weeks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/seasons/{season}/types/{season_type}/weeks` */
+  espnNbaslLvSeasonWeeks: Wrapper<Row[], EspnSeasonWeeksParams>;
+  /** NBASL_LV — standings (ESPN site.api.espn.com (v2)). `GET https://site.api.espn.com/apis/v2/sports/basketball/nba-summer-las-vegas/standings` */
+  espnNbaslLvStandings: Wrapper<Row[], EspnStandingsParams>;
+  /** NBASL_LV — standings core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/standings` */
+  espnNbaslLvStandingsCore: Wrapper<Row[], EspnStandingsCoreParams>;
+  /** NBASL_LV — statistics league (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/statistics` */
+  espnNbaslLvStatisticsLeague: Wrapper<Row[], EspnStatisticsLeagueParams>;
+  /** NBASL_LV — summary (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/summary` */
+  espnNbaslLvSummary: SectionedWrapper<ParsedTables, {}, EspnSummaryParams>;
+  /** NBASL_LV — talentpicks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/talentpicks` */
+  espnNbaslLvTalentpicks: Wrapper<Row[], EspnTalentpicksParams>;
+  /** NBASL_LV — team (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/teams/{team_id}` */
+  espnNbaslLvTeam: Wrapper<Row[], EspnTeamParams>;
+  /** NBASL_LV — team core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/teams/{team_id}` */
+  espnNbaslLvTeamCore: Wrapper<Row[], EspnTeamCoreParams>;
+  /** NBASL_LV — team depthcharts (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/teams/{team_id}/depthcharts` */
+  espnNbaslLvTeamDepthcharts: Wrapper<Row[], EspnTeamDepthchartsParams>;
+  /** NBASL_LV — team history (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/teams/{team_id}/history` */
+  espnNbaslLvTeamHistory: Wrapper<Row[], EspnTeamHistoryParams>;
+  /** NBASL_LV — team injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/teams/{team_id}/injuries` */
+  espnNbaslLvTeamInjuries: Wrapper<Row[], EspnTeamInjuriesParams>;
+  /** NBASL_LV — team leaders (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/teams/{team_id}/leaders` */
+  espnNbaslLvTeamLeaders: Wrapper<Row[], EspnTeamLeadersParams>;
+  /** NBASL_LV — team news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/teams/{team_id}/news` */
+  espnNbaslLvTeamNews: Wrapper<Row[], EspnTeamNewsParams>;
+  /** NBASL_LV — team record (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/teams/{team_id}/record` */
+  espnNbaslLvTeamRecord: Wrapper<Row[], EspnTeamRecordParams>;
+  /** NBASL_LV — team roster (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/teams/{team_id}/roster` */
+  espnNbaslLvTeamRoster: Wrapper<Row[], EspnTeamRosterParams>;
+  /** NBASL_LV — team schedule (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/teams/{team_id}/schedule` */
+  espnNbaslLvTeamSchedule: Wrapper<Row[], EspnTeamScheduleParams>;
+  /** NBASL_LV — teams core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/teams` */
+  espnNbaslLvTeamsCore: Wrapper<Row[], EspnTeamsCoreParams>;
+  /** NBASL_LV — teams site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/teams` */
+  espnNbaslLvTeamsSite: Wrapper<Row[], EspnTeamsSiteParams>;
+  /** NBASL_LV — team transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/teams/{team_id}/transactions` */
+  espnNbaslLvTeamTransactions: Wrapper<Row[], EspnTeamTransactionsParams>;
+  /** NBASL_LV — tournaments (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/tournaments` */
+  espnNbaslLvTournaments: Wrapper<Row[], EspnTournamentsParams>;
+  /** NBASL_LV — transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-las-vegas/transactions` */
+  espnNbaslLvTransactions: Wrapper<Row[], EspnTransactionsParams>;
+  /** NBASL_LV — venue (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/venues/{venue_id}` */
+  espnNbaslLvVenue: Wrapper<Row[], EspnVenueParams>;
+  /** NBASL_LV — venues (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-las-vegas/venues` */
+  espnNbaslLvVenues: Wrapper<Row[], EspnVenuesParams>;
+}
+
+/** The generated wrappers of `sdv.nbasl_orl` (and their deprecated pre-v4 names). */
+export interface NbaslOrlWrappers {
+  /** NBASL_ORL — award (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/awards/{award_id}` */
+  espn_nbasl_orl_award: Wrapper<Row[], EspnAwardParams>;
+  /** NBASL_ORL — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/awards` */
+  espn_nbasl_orl_awards: Wrapper<Row[], EspnAwardsParams>;
+  /** NBASL_ORL — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/calendar` */
+  espn_nbasl_orl_calendar: Wrapper<Row[], EspnCalendarParams>;
+  /** NBASL_ORL — coach (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/coaches/{coach_id}` */
+  espn_nbasl_orl_coach: Wrapper<Row[], EspnCoachParams>;
+  /** NBASL_ORL — coach record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/coaches/{coach_id}/record/{record_type}` */
+  espn_nbasl_orl_coach_record: Wrapper<Row[], EspnCoachRecordParams>;
+  /** NBASL_ORL — coach season (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/coaches/{coach_id}/seasons/{season}` */
+  espn_nbasl_orl_coach_season: Wrapper<Row[], EspnCoachSeasonParams>;
+  /** NBASL_ORL — conferences (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/groups` */
+  espn_nbasl_orl_conferences: Wrapper<Row[], EspnConferencesParams>;
+  /** NBASL_ORL — draft (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/draft` */
+  espn_nbasl_orl_draft: Wrapper<Row[], EspnDraftParams>;
+  /** NBASL_ORL — fpi (ESPN site.web.api.espn.com (FPI, fitt v3)). `GET https://site.web.api.espn.com/apis/fitt/v3/sports/basketball/nba-summer-orlando/powerindex` */
+  espn_nbasl_orl_fpi: Wrapper<Row[], EspnFpiParams>;
+  /** NBASL_ORL — franchise (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/franchises/{franchise_id}` */
+  espn_nbasl_orl_franchise: Wrapper<Row[], EspnFranchiseParams>;
+  /** NBASL_ORL — franchises (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/franchises` */
+  espn_nbasl_orl_franchises: Wrapper<Row[], EspnFranchisesParams>;
+  /** NBASL_ORL — game (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}` */
+  espn_nbasl_orl_game: Wrapper<Row[], EspnEventParams>;
+  /** NBASL_ORL — game broadcasts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/broadcasts` */
+  espn_nbasl_orl_game_broadcasts: Wrapper<Row[], EspnEventBroadcastsParams>;
+  /** NBASL_ORL — game competition (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}` */
+  espn_nbasl_orl_game_competition: Wrapper<Row[], EspnEventCompetitionParams>;
+  /** NBASL_ORL — game leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/leaders` */
+  espn_nbasl_orl_game_leaders: Wrapper<Row[], EspnEventLeadersParams>;
+  /** NBASL_ORL — game odds (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/odds` */
+  espn_nbasl_orl_game_odds: Wrapper<Row[], EspnEventOddsParams>;
+  /** NBASL_ORL — game official detail (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/officials/{official_id}` */
+  espn_nbasl_orl_game_official_detail: Wrapper<Row[], EspnEventOfficialDetailParams>;
+  /** NBASL_ORL — game officials (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/officials` */
+  espn_nbasl_orl_game_officials: Wrapper<Row[], EspnEventOfficialsParams>;
+  /** NBASL_ORL — game play (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/plays/{play_id}` */
+  espn_nbasl_orl_game_play: Wrapper<Row[], EspnEventPlayParams>;
+  /** NBASL_ORL — game play personnel (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` */
+  espn_nbasl_orl_game_play_personnel: Wrapper<Row[], EspnEventPlayPersonnelParams>;
+  /** NBASL_ORL — game plays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/plays` */
+  espn_nbasl_orl_game_plays: Wrapper<Row[], EspnEventPlaysParams>;
+  /** NBASL_ORL — game powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/powerindex` */
+  espn_nbasl_orl_game_powerindex: Wrapper<Row[], EspnEventPowerindexParams>;
+  /** NBASL_ORL — game predictor (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/predictor` */
+  espn_nbasl_orl_game_predictor: Wrapper<Row[], EspnEventPredictorParams>;
+  /** NBASL_ORL — game probabilities (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/probabilities` */
+  espn_nbasl_orl_game_probabilities: Wrapper<Row[], EspnEventProbabilitiesParams>;
+  /** NBASL_ORL — game propbets (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/propbets` */
+  espn_nbasl_orl_game_propbets: Wrapper<Row[], EspnEventPropbetsParams>;
+  /** NBASL_ORL — game scoringplays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/scoringplays` */
+  espn_nbasl_orl_game_scoringplays: Wrapper<Row[], EspnEventScoringplaysParams>;
+  /** NBASL_ORL — game situation (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/situation` */
+  espn_nbasl_orl_game_situation: Wrapper<Row[], EspnEventSituationParams>;
+  /** NBASL_ORL — game status (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/status` */
+  espn_nbasl_orl_game_status: Wrapper<Row[], EspnEventStatusParams>;
+  /** NBASL_ORL — game team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/competitors/{team_id}` */
+  espn_nbasl_orl_game_team: Wrapper<Row[], EspnEventCompetitorParams>;
+  /** NBASL_ORL — game team leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` */
+  espn_nbasl_orl_game_team_leaders: Wrapper<Row[], EspnEventCompetitorLeadersParams>;
+  /** NBASL_ORL — game team linescores (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` */
+  espn_nbasl_orl_game_team_linescores: Wrapper<Row[], EspnEventCompetitorLinescoresParams>;
+  /** NBASL_ORL — game team record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` */
+  espn_nbasl_orl_game_team_record: Wrapper<Row[], EspnEventCompetitorRecordParams>;
+  /** NBASL_ORL — game team roster (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` */
+  espn_nbasl_orl_game_team_roster: Wrapper<Row[], EspnEventCompetitorRosterParams>;
+  /** NBASL_ORL — game team statistics (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` */
+  espn_nbasl_orl_game_team_statistics: Wrapper<Row[], EspnEventCompetitorStatisticsParams>;
+  /** NBASL_ORL — game teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/competitors` */
+  espn_nbasl_orl_game_teams: Wrapper<Row[], EspnEventCompetitorsParams>;
+  /** NBASL_ORL — games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events` */
+  espn_nbasl_orl_games: Wrapper<Row[], EspnEventsParams>;
+  /** NBASL_ORL — injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/injuries` */
+  espn_nbasl_orl_injuries: Wrapper<Row[], EspnInjuriesParams>;
+  /** NBASL_ORL — leaders (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-orlando/statistics/byathlete` */
+  espn_nbasl_orl_leaders: Wrapper<Row[], EspnLeadersParams>;
+  /** NBASL_ORL — leaders core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/leaders` */
+  espn_nbasl_orl_leaders_core: Wrapper<Row[], EspnLeadersCoreParams>;
+  /** NBASL_ORL — league notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/notes` */
+  espn_nbasl_orl_league_notes: Wrapper<Row[], EspnLeagueNotesParams>;
+  /** NBASL_ORL — league root (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando` */
+  espn_nbasl_orl_league_root: Wrapper<Row[], EspnLeagueRootParams>;
+  /** NBASL_ORL — news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/news` */
+  espn_nbasl_orl_news: Wrapper<Row[], EspnNewsParams>;
+  /** NBASL_ORL — player awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/athletes/{athlete_id}/awards` */
+  espn_nbasl_orl_player_awards: Wrapper<Row[], EspnAthleteAwardsParams>;
+  /** NBASL_ORL — player bio (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/athletes/{athlete_id}/bio` */
+  espn_nbasl_orl_player_bio: Wrapper<Row[], EspnAthleteBioParams>;
+  /** NBASL_ORL — player career stats (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/athletes/{athlete_id}/statistics[/{stat_type}]` */
+  espn_nbasl_orl_player_career_stats: Wrapper<Row[], EspnAthleteCareerStatsParams>;
+  /** NBASL_ORL — player contracts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/athletes/{athlete_id}/contracts` */
+  espn_nbasl_orl_player_contracts: Wrapper<Row[], EspnAthleteContractsParams>;
+  /** NBASL_ORL — player core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/athletes/{athlete_id}` */
+  espn_nbasl_orl_player_core: Wrapper<Row[], EspnAthleteCoreParams>;
+  /** NBASL_ORL — player eventlog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/athletes/{athlete_id}/eventlog` */
+  espn_nbasl_orl_player_eventlog: Wrapper<Row[], EspnAthleteEventlogParams>;
+  /** NBASL_ORL — player gamelog (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-orlando/athletes/{athlete_id}/gamelog` */
+  espn_nbasl_orl_player_gamelog: Wrapper<Row[], EspnAthleteGamelogParams>;
+  /** NBASL_ORL — player info (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/athletes/{athlete_id}` */
+  espn_nbasl_orl_player_info: Wrapper<Row[], EspnAthleteInfoParams>;
+  /** NBASL_ORL — player injuries (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/athletes/{athlete_id}/injuries` */
+  espn_nbasl_orl_player_injuries: Wrapper<Row[], EspnAthleteInjuriesParams>;
+  /** NBASL_ORL — player news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/athletes/{athlete_id}/news` */
+  espn_nbasl_orl_player_news: Wrapper<Row[], EspnAthleteNewsParams>;
+  /** NBASL_ORL — player notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/athletes/{athlete_id}/notes` */
+  espn_nbasl_orl_player_notes: Wrapper<Row[], EspnAthleteNotesParams>;
+  /** NBASL_ORL — player overview (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-orlando/athletes/{athlete_id}/overview` */
+  espn_nbasl_orl_player_overview: Wrapper<Row[], EspnAthleteOverviewParams>;
+  /** NBASL_ORL — player records (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/athletes/{athlete_id}/records` */
+  espn_nbasl_orl_player_records: Wrapper<Row[], EspnAthleteRecordsParams>;
+  /** NBASL_ORL — player seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/athletes/{athlete_id}/seasons` */
+  espn_nbasl_orl_player_seasons: Wrapper<Row[], EspnAthleteSeasonsParams>;
+  /** NBASL_ORL — player splits (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-orlando/athletes/{athlete_id}/splits` */
+  espn_nbasl_orl_player_splits: Wrapper<Row[], EspnAthleteSplitsParams>;
+  /** NBASL_ORL — player statisticslog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/athletes/{athlete_id}/statisticslog` */
+  espn_nbasl_orl_player_statisticslog: Wrapper<Row[], EspnAthleteStatisticslogParams>;
+  /** NBASL_ORL — player stats (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-orlando/athletes/{athlete_id}/stats` */
+  espn_nbasl_orl_player_stats: Wrapper<Row[], EspnAthleteStatsParams>;
+  /** NBASL_ORL — player vs player (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/athletes/{athlete_id}/vsathlete/{opp_id}` */
+  espn_nbasl_orl_player_vs_player: Wrapper<Row[], EspnAthleteVsAthleteParams>;
+  /** NBASL_ORL — players index (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/athletes` */
+  espn_nbasl_orl_players_index: Wrapper<Row[], EspnAthletesIndexParams>;
+  /** NBASL_ORL — position (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/positions/{position_id}` */
+  espn_nbasl_orl_position: Wrapper<Row[], EspnPositionParams>;
+  /** NBASL_ORL — positions (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/positions` */
+  espn_nbasl_orl_positions: Wrapper<Row[], EspnPositionsParams>;
+  /** NBASL_ORL — scoreboard (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/scoreboard` */
+  espn_nbasl_orl_scoreboard: Wrapper<Row[], EspnScoreboardParams>;
+  /** NBASL_ORL — season awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/awards` */
+  espn_nbasl_orl_season_awards: Wrapper<Row[], EspnSeasonAwardsParams>;
+  /** NBASL_ORL — season coaches (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/coaches` */
+  espn_nbasl_orl_season_coaches: Wrapper<Row[], EspnSeasonCoachesParams>;
+  /** NBASL_ORL — season draft (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/draft` */
+  espn_nbasl_orl_season_draft: Wrapper<Row[], EspnSeasonDraftParams>;
+  /** NBASL_ORL — season draft round picks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/draft/rounds/{round_num}/picks` */
+  espn_nbasl_orl_season_draft_round_picks: Wrapper<Row[], EspnSeasonDraftRoundPicksParams>;
+  /** NBASL_ORL — season freeagents (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/freeagents` */
+  espn_nbasl_orl_season_freeagents: Wrapper<Row[], EspnSeasonFreeagentsParams>;
+  /** NBASL_ORL — season futures (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/futures` */
+  espn_nbasl_orl_season_futures: Wrapper<Row[], EspnSeasonFuturesParams>;
+  /** NBASL_ORL — season group (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/types/{season_type}/groups/{group_id}` */
+  espn_nbasl_orl_season_group: Wrapper<Row[], EspnSeasonGroupParams>;
+  /** NBASL_ORL — season group children (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/types/{season_type}/groups/{group_id}/children` */
+  espn_nbasl_orl_season_group_children: Wrapper<Row[], EspnSeasonGroupChildrenParams>;
+  /** NBASL_ORL — season group teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/types/{season_type}/groups/{group_id}/teams` */
+  espn_nbasl_orl_season_group_teams: Wrapper<Row[], EspnSeasonGroupTeamsParams>;
+  /** NBASL_ORL — season groups (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/types/{season_type}/groups` */
+  espn_nbasl_orl_season_groups: Wrapper<Row[], EspnSeasonGroupsParams>;
+  /** NBASL_ORL — season info (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}` */
+  espn_nbasl_orl_season_info: Wrapper<Row[], EspnSeasonInfoParams>;
+  /** NBASL_ORL — season players (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/athletes` */
+  espn_nbasl_orl_season_players: Wrapper<Row[], EspnSeasonAthletesParams>;
+  /** NBASL_ORL — season pointer (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/season` */
+  espn_nbasl_orl_season_pointer: Wrapper<Row[], EspnSeasonPointerParams>;
+  /** NBASL_ORL — season powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/powerindex[/{team_id}]` */
+  espn_nbasl_orl_season_powerindex: Wrapper<Row[], EspnSeasonPowerindexParams>;
+  /** NBASL_ORL — season powerindex leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/powerindex/leaders` */
+  espn_nbasl_orl_season_powerindex_leaders: Wrapper<Row[], EspnSeasonPowerindexLeadersParams>;
+  /** NBASL_ORL — season team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/teams/{team_id}` */
+  espn_nbasl_orl_season_team: Wrapper<Row[], EspnSeasonTeamParams>;
+  /** NBASL_ORL — season teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/teams` */
+  espn_nbasl_orl_season_teams: Wrapper<Row[], EspnSeasonTeamsParams>;
+  /** NBASL_ORL — season type (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/types/{season_type}` */
+  espn_nbasl_orl_season_type: Wrapper<Row[], EspnSeasonTypeParams>;
+  /** NBASL_ORL — season type corrections (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/types/{season_type}/corrections` */
+  espn_nbasl_orl_season_type_corrections: Wrapper<Row[], EspnSeasonTypeCorrectionsParams>;
+  /** NBASL_ORL — season type leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/types/{season_type}/leaders` */
+  espn_nbasl_orl_season_type_leaders: Wrapper<Row[], EspnSeasonTypeLeadersParams>;
+  /** NBASL_ORL — season types (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/types` */
+  espn_nbasl_orl_season_types: Wrapper<Row[], EspnSeasonTypesParams>;
+  /** NBASL_ORL — season week (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/types/{season_type}/weeks/{week}` */
+  espn_nbasl_orl_season_week: Wrapper<Row[], EspnSeasonWeekParams>;
+  /** NBASL_ORL — season week games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/types/{season_type}/weeks/{week}/events` */
+  espn_nbasl_orl_season_week_games: Wrapper<Row[], EspnSeasonWeekEventsParams>;
+  /** NBASL_ORL — season week powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/types/{season_type}/weeks/{week}/powerindex` */
+  espn_nbasl_orl_season_week_powerindex: Wrapper<Row[], EspnSeasonWeekPowerindexParams>;
+  /** NBASL_ORL — season weeks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/types/{season_type}/weeks` */
+  espn_nbasl_orl_season_weeks: Wrapper<Row[], EspnSeasonWeeksParams>;
+  /** NBASL_ORL — seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons` */
+  espn_nbasl_orl_seasons: Wrapper<Row[], EspnSeasonsParams>;
+  /** NBASL_ORL — standings (ESPN site.api.espn.com (v2)). `GET https://site.api.espn.com/apis/v2/sports/basketball/nba-summer-orlando/standings` */
+  espn_nbasl_orl_standings: Wrapper<Row[], EspnStandingsParams>;
+  /** NBASL_ORL — standings core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/standings` */
+  espn_nbasl_orl_standings_core: Wrapper<Row[], EspnStandingsCoreParams>;
+  /** NBASL_ORL — statistics league (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/statistics` */
+  espn_nbasl_orl_statistics_league: Wrapper<Row[], EspnStatisticsLeagueParams>;
+  /** NBASL_ORL — summary (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/summary` */
+  espn_nbasl_orl_summary: SectionedWrapper<ParsedTables, {}, EspnSummaryParams>;
+  /** NBASL_ORL — talentpicks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/talentpicks` */
+  espn_nbasl_orl_talentpicks: Wrapper<Row[], EspnTalentpicksParams>;
+  /** NBASL_ORL — team (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/teams/{team_id}` */
+  espn_nbasl_orl_team: Wrapper<Row[], EspnTeamParams>;
+  /** NBASL_ORL — team core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/teams/{team_id}` */
+  espn_nbasl_orl_team_core: Wrapper<Row[], EspnTeamCoreParams>;
+  /** NBASL_ORL — team depthcharts (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/teams/{team_id}/depthcharts` */
+  espn_nbasl_orl_team_depthcharts: Wrapper<Row[], EspnTeamDepthchartsParams>;
+  /** NBASL_ORL — team history (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/teams/{team_id}/history` */
+  espn_nbasl_orl_team_history: Wrapper<Row[], EspnTeamHistoryParams>;
+  /** NBASL_ORL — team injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/teams/{team_id}/injuries` */
+  espn_nbasl_orl_team_injuries: Wrapper<Row[], EspnTeamInjuriesParams>;
+  /** NBASL_ORL — team leaders (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/teams/{team_id}/leaders` */
+  espn_nbasl_orl_team_leaders: Wrapper<Row[], EspnTeamLeadersParams>;
+  /** NBASL_ORL — team news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/teams/{team_id}/news` */
+  espn_nbasl_orl_team_news: Wrapper<Row[], EspnTeamNewsParams>;
+  /** NBASL_ORL — team record (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/teams/{team_id}/record` */
+  espn_nbasl_orl_team_record: Wrapper<Row[], EspnTeamRecordParams>;
+  /** NBASL_ORL — team roster (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/teams/{team_id}/roster` */
+  espn_nbasl_orl_team_roster: Wrapper<Row[], EspnTeamRosterParams>;
+  /** NBASL_ORL — team schedule (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/teams/{team_id}/schedule` */
+  espn_nbasl_orl_team_schedule: Wrapper<Row[], EspnTeamScheduleParams>;
+  /** NBASL_ORL — team transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/teams/{team_id}/transactions` */
+  espn_nbasl_orl_team_transactions: Wrapper<Row[], EspnTeamTransactionsParams>;
+  /** NBASL_ORL — teams core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/teams` */
+  espn_nbasl_orl_teams_core: Wrapper<Row[], EspnTeamsCoreParams>;
+  /** NBASL_ORL — teams site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/teams` */
+  espn_nbasl_orl_teams_site: Wrapper<Row[], EspnTeamsSiteParams>;
+  /** NBASL_ORL — tournaments (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/tournaments` */
+  espn_nbasl_orl_tournaments: Wrapper<Row[], EspnTournamentsParams>;
+  /** NBASL_ORL — transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/transactions` */
+  espn_nbasl_orl_transactions: Wrapper<Row[], EspnTransactionsParams>;
+  /** NBASL_ORL — venue (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/venues/{venue_id}` */
+  espn_nbasl_orl_venue: Wrapper<Row[], EspnVenueParams>;
+  /** NBASL_ORL — venues (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/venues` */
+  espn_nbasl_orl_venues: Wrapper<Row[], EspnVenuesParams>;
+  /** NBASL_ORL — award (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/awards/{award_id}` */
+  espnNbaslOrlAward: Wrapper<Row[], EspnAwardParams>;
+  /** NBASL_ORL — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/awards` */
+  espnNbaslOrlAwards: Wrapper<Row[], EspnAwardsParams>;
+  /** NBASL_ORL — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/calendar` */
+  espnNbaslOrlCalendar: Wrapper<Row[], EspnCalendarParams>;
+  /** NBASL_ORL — coach (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/coaches/{coach_id}` */
+  espnNbaslOrlCoach: Wrapper<Row[], EspnCoachParams>;
+  /** NBASL_ORL — coach record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/coaches/{coach_id}/record/{record_type}` */
+  espnNbaslOrlCoachRecord: Wrapper<Row[], EspnCoachRecordParams>;
+  /** NBASL_ORL — coach season (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/coaches/{coach_id}/seasons/{season}` */
+  espnNbaslOrlCoachSeason: Wrapper<Row[], EspnCoachSeasonParams>;
+  /** NBASL_ORL — conferences (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/groups` */
+  espnNbaslOrlConferences: Wrapper<Row[], EspnConferencesParams>;
+  /** NBASL_ORL — draft (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/draft` */
+  espnNbaslOrlDraft: Wrapper<Row[], EspnDraftParams>;
+  /** NBASL_ORL — fpi (ESPN site.web.api.espn.com (FPI, fitt v3)). `GET https://site.web.api.espn.com/apis/fitt/v3/sports/basketball/nba-summer-orlando/powerindex` */
+  espnNbaslOrlFpi: Wrapper<Row[], EspnFpiParams>;
+  /** NBASL_ORL — franchise (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/franchises/{franchise_id}` */
+  espnNbaslOrlFranchise: Wrapper<Row[], EspnFranchiseParams>;
+  /** NBASL_ORL — franchises (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/franchises` */
+  espnNbaslOrlFranchises: Wrapper<Row[], EspnFranchisesParams>;
+  /** NBASL_ORL — game (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}` */
+  espnNbaslOrlGame: Wrapper<Row[], EspnEventParams>;
+  /** NBASL_ORL — game broadcasts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/broadcasts` */
+  espnNbaslOrlGameBroadcasts: Wrapper<Row[], EspnEventBroadcastsParams>;
+  /** NBASL_ORL — game competition (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}` */
+  espnNbaslOrlGameCompetition: Wrapper<Row[], EspnEventCompetitionParams>;
+  /** NBASL_ORL — game leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/leaders` */
+  espnNbaslOrlGameLeaders: Wrapper<Row[], EspnEventLeadersParams>;
+  /** NBASL_ORL — game odds (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/odds` */
+  espnNbaslOrlGameOdds: Wrapper<Row[], EspnEventOddsParams>;
+  /** NBASL_ORL — game official detail (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/officials/{official_id}` */
+  espnNbaslOrlGameOfficialDetail: Wrapper<Row[], EspnEventOfficialDetailParams>;
+  /** NBASL_ORL — game officials (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/officials` */
+  espnNbaslOrlGameOfficials: Wrapper<Row[], EspnEventOfficialsParams>;
+  /** NBASL_ORL — game play (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/plays/{play_id}` */
+  espnNbaslOrlGamePlay: Wrapper<Row[], EspnEventPlayParams>;
+  /** NBASL_ORL — game play personnel (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` */
+  espnNbaslOrlGamePlayPersonnel: Wrapper<Row[], EspnEventPlayPersonnelParams>;
+  /** NBASL_ORL — game plays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/plays` */
+  espnNbaslOrlGamePlays: Wrapper<Row[], EspnEventPlaysParams>;
+  /** NBASL_ORL — game powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/powerindex` */
+  espnNbaslOrlGamePowerindex: Wrapper<Row[], EspnEventPowerindexParams>;
+  /** NBASL_ORL — game predictor (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/predictor` */
+  espnNbaslOrlGamePredictor: Wrapper<Row[], EspnEventPredictorParams>;
+  /** NBASL_ORL — game probabilities (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/probabilities` */
+  espnNbaslOrlGameProbabilities: Wrapper<Row[], EspnEventProbabilitiesParams>;
+  /** NBASL_ORL — game propbets (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/propbets` */
+  espnNbaslOrlGamePropbets: Wrapper<Row[], EspnEventPropbetsParams>;
+  /** NBASL_ORL — games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events` */
+  espnNbaslOrlGames: Wrapper<Row[], EspnEventsParams>;
+  /** NBASL_ORL — game scoringplays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/scoringplays` */
+  espnNbaslOrlGameScoringplays: Wrapper<Row[], EspnEventScoringplaysParams>;
+  /** NBASL_ORL — game situation (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/situation` */
+  espnNbaslOrlGameSituation: Wrapper<Row[], EspnEventSituationParams>;
+  /** NBASL_ORL — game status (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/status` */
+  espnNbaslOrlGameStatus: Wrapper<Row[], EspnEventStatusParams>;
+  /** NBASL_ORL — game team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/competitors/{team_id}` */
+  espnNbaslOrlGameTeam: Wrapper<Row[], EspnEventCompetitorParams>;
+  /** NBASL_ORL — game team leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` */
+  espnNbaslOrlGameTeamLeaders: Wrapper<Row[], EspnEventCompetitorLeadersParams>;
+  /** NBASL_ORL — game team linescores (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` */
+  espnNbaslOrlGameTeamLinescores: Wrapper<Row[], EspnEventCompetitorLinescoresParams>;
+  /** NBASL_ORL — game team record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` */
+  espnNbaslOrlGameTeamRecord: Wrapper<Row[], EspnEventCompetitorRecordParams>;
+  /** NBASL_ORL — game team roster (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` */
+  espnNbaslOrlGameTeamRoster: Wrapper<Row[], EspnEventCompetitorRosterParams>;
+  /** NBASL_ORL — game teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/competitors` */
+  espnNbaslOrlGameTeams: Wrapper<Row[], EspnEventCompetitorsParams>;
+  /** NBASL_ORL — game team statistics (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` */
+  espnNbaslOrlGameTeamStatistics: Wrapper<Row[], EspnEventCompetitorStatisticsParams>;
+  /** NBASL_ORL — injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/injuries` */
+  espnNbaslOrlInjuries: Wrapper<Row[], EspnInjuriesParams>;
+  /** NBASL_ORL — leaders (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-orlando/statistics/byathlete` */
+  espnNbaslOrlLeaders: Wrapper<Row[], EspnLeadersParams>;
+  /** NBASL_ORL — leaders core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/leaders` */
+  espnNbaslOrlLeadersCore: Wrapper<Row[], EspnLeadersCoreParams>;
+  /** NBASL_ORL — league notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/notes` */
+  espnNbaslOrlLeagueNotes: Wrapper<Row[], EspnLeagueNotesParams>;
+  /** NBASL_ORL — league root (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando` */
+  espnNbaslOrlLeagueRoot: Wrapper<Row[], EspnLeagueRootParams>;
+  /** NBASL_ORL — news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/news` */
+  espnNbaslOrlNews: Wrapper<Row[], EspnNewsParams>;
+  /** NBASL_ORL — player awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/athletes/{athlete_id}/awards` */
+  espnNbaslOrlPlayerAwards: Wrapper<Row[], EspnAthleteAwardsParams>;
+  /** NBASL_ORL — player bio (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/athletes/{athlete_id}/bio` */
+  espnNbaslOrlPlayerBio: Wrapper<Row[], EspnAthleteBioParams>;
+  /** NBASL_ORL — player career stats (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/athletes/{athlete_id}/statistics[/{stat_type}]` */
+  espnNbaslOrlPlayerCareerStats: Wrapper<Row[], EspnAthleteCareerStatsParams>;
+  /** NBASL_ORL — player contracts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/athletes/{athlete_id}/contracts` */
+  espnNbaslOrlPlayerContracts: Wrapper<Row[], EspnAthleteContractsParams>;
+  /** NBASL_ORL — player core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/athletes/{athlete_id}` */
+  espnNbaslOrlPlayerCore: Wrapper<Row[], EspnAthleteCoreParams>;
+  /** NBASL_ORL — player eventlog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/athletes/{athlete_id}/eventlog` */
+  espnNbaslOrlPlayerEventlog: Wrapper<Row[], EspnAthleteEventlogParams>;
+  /** NBASL_ORL — player gamelog (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-orlando/athletes/{athlete_id}/gamelog` */
+  espnNbaslOrlPlayerGamelog: Wrapper<Row[], EspnAthleteGamelogParams>;
+  /** NBASL_ORL — player info (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/athletes/{athlete_id}` */
+  espnNbaslOrlPlayerInfo: Wrapper<Row[], EspnAthleteInfoParams>;
+  /** NBASL_ORL — player injuries (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/athletes/{athlete_id}/injuries` */
+  espnNbaslOrlPlayerInjuries: Wrapper<Row[], EspnAthleteInjuriesParams>;
+  /** NBASL_ORL — player news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/athletes/{athlete_id}/news` */
+  espnNbaslOrlPlayerNews: Wrapper<Row[], EspnAthleteNewsParams>;
+  /** NBASL_ORL — player notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/athletes/{athlete_id}/notes` */
+  espnNbaslOrlPlayerNotes: Wrapper<Row[], EspnAthleteNotesParams>;
+  /** NBASL_ORL — player overview (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-orlando/athletes/{athlete_id}/overview` */
+  espnNbaslOrlPlayerOverview: Wrapper<Row[], EspnAthleteOverviewParams>;
+  /** NBASL_ORL — player records (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/athletes/{athlete_id}/records` */
+  espnNbaslOrlPlayerRecords: Wrapper<Row[], EspnAthleteRecordsParams>;
+  /** NBASL_ORL — player seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/athletes/{athlete_id}/seasons` */
+  espnNbaslOrlPlayerSeasons: Wrapper<Row[], EspnAthleteSeasonsParams>;
+  /** NBASL_ORL — players index (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/athletes` */
+  espnNbaslOrlPlayersIndex: Wrapper<Row[], EspnAthletesIndexParams>;
+  /** NBASL_ORL — player splits (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-orlando/athletes/{athlete_id}/splits` */
+  espnNbaslOrlPlayerSplits: Wrapper<Row[], EspnAthleteSplitsParams>;
+  /** NBASL_ORL — player statisticslog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/athletes/{athlete_id}/statisticslog` */
+  espnNbaslOrlPlayerStatisticslog: Wrapper<Row[], EspnAthleteStatisticslogParams>;
+  /** NBASL_ORL — player stats (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-orlando/athletes/{athlete_id}/stats` */
+  espnNbaslOrlPlayerStats: Wrapper<Row[], EspnAthleteStatsParams>;
+  /** NBASL_ORL — player vs player (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/athletes/{athlete_id}/vsathlete/{opp_id}` */
+  espnNbaslOrlPlayerVsPlayer: Wrapper<Row[], EspnAthleteVsAthleteParams>;
+  /** NBASL_ORL — position (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/positions/{position_id}` */
+  espnNbaslOrlPosition: Wrapper<Row[], EspnPositionParams>;
+  /** NBASL_ORL — positions (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/positions` */
+  espnNbaslOrlPositions: Wrapper<Row[], EspnPositionsParams>;
+  /** NBASL_ORL — scoreboard (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/scoreboard` */
+  espnNbaslOrlScoreboard: Wrapper<Row[], EspnScoreboardParams>;
+  /** NBASL_ORL — season awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/awards` */
+  espnNbaslOrlSeasonAwards: Wrapper<Row[], EspnSeasonAwardsParams>;
+  /** NBASL_ORL — season coaches (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/coaches` */
+  espnNbaslOrlSeasonCoaches: Wrapper<Row[], EspnSeasonCoachesParams>;
+  /** NBASL_ORL — season draft (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/draft` */
+  espnNbaslOrlSeasonDraft: Wrapper<Row[], EspnSeasonDraftParams>;
+  /** NBASL_ORL — season draft round picks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/draft/rounds/{round_num}/picks` */
+  espnNbaslOrlSeasonDraftRoundPicks: Wrapper<Row[], EspnSeasonDraftRoundPicksParams>;
+  /** NBASL_ORL — season freeagents (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/freeagents` */
+  espnNbaslOrlSeasonFreeagents: Wrapper<Row[], EspnSeasonFreeagentsParams>;
+  /** NBASL_ORL — season futures (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/futures` */
+  espnNbaslOrlSeasonFutures: Wrapper<Row[], EspnSeasonFuturesParams>;
+  /** NBASL_ORL — season group (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/types/{season_type}/groups/{group_id}` */
+  espnNbaslOrlSeasonGroup: Wrapper<Row[], EspnSeasonGroupParams>;
+  /** NBASL_ORL — season group children (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/types/{season_type}/groups/{group_id}/children` */
+  espnNbaslOrlSeasonGroupChildren: Wrapper<Row[], EspnSeasonGroupChildrenParams>;
+  /** NBASL_ORL — season groups (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/types/{season_type}/groups` */
+  espnNbaslOrlSeasonGroups: Wrapper<Row[], EspnSeasonGroupsParams>;
+  /** NBASL_ORL — season group teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/types/{season_type}/groups/{group_id}/teams` */
+  espnNbaslOrlSeasonGroupTeams: Wrapper<Row[], EspnSeasonGroupTeamsParams>;
+  /** NBASL_ORL — season info (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}` */
+  espnNbaslOrlSeasonInfo: Wrapper<Row[], EspnSeasonInfoParams>;
+  /** NBASL_ORL — season players (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/athletes` */
+  espnNbaslOrlSeasonPlayers: Wrapper<Row[], EspnSeasonAthletesParams>;
+  /** NBASL_ORL — season pointer (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/season` */
+  espnNbaslOrlSeasonPointer: Wrapper<Row[], EspnSeasonPointerParams>;
+  /** NBASL_ORL — season powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/powerindex[/{team_id}]` */
+  espnNbaslOrlSeasonPowerindex: Wrapper<Row[], EspnSeasonPowerindexParams>;
+  /** NBASL_ORL — season powerindex leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/powerindex/leaders` */
+  espnNbaslOrlSeasonPowerindexLeaders: Wrapper<Row[], EspnSeasonPowerindexLeadersParams>;
+  /** NBASL_ORL — seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons` */
+  espnNbaslOrlSeasons: Wrapper<Row[], EspnSeasonsParams>;
+  /** NBASL_ORL — season team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/teams/{team_id}` */
+  espnNbaslOrlSeasonTeam: Wrapper<Row[], EspnSeasonTeamParams>;
+  /** NBASL_ORL — season teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/teams` */
+  espnNbaslOrlSeasonTeams: Wrapper<Row[], EspnSeasonTeamsParams>;
+  /** NBASL_ORL — season type (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/types/{season_type}` */
+  espnNbaslOrlSeasonType: Wrapper<Row[], EspnSeasonTypeParams>;
+  /** NBASL_ORL — season type corrections (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/types/{season_type}/corrections` */
+  espnNbaslOrlSeasonTypeCorrections: Wrapper<Row[], EspnSeasonTypeCorrectionsParams>;
+  /** NBASL_ORL — season type leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/types/{season_type}/leaders` */
+  espnNbaslOrlSeasonTypeLeaders: Wrapper<Row[], EspnSeasonTypeLeadersParams>;
+  /** NBASL_ORL — season types (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/types` */
+  espnNbaslOrlSeasonTypes: Wrapper<Row[], EspnSeasonTypesParams>;
+  /** NBASL_ORL — season week (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/types/{season_type}/weeks/{week}` */
+  espnNbaslOrlSeasonWeek: Wrapper<Row[], EspnSeasonWeekParams>;
+  /** NBASL_ORL — season week games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/types/{season_type}/weeks/{week}/events` */
+  espnNbaslOrlSeasonWeekGames: Wrapper<Row[], EspnSeasonWeekEventsParams>;
+  /** NBASL_ORL — season week powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/types/{season_type}/weeks/{week}/powerindex` */
+  espnNbaslOrlSeasonWeekPowerindex: Wrapper<Row[], EspnSeasonWeekPowerindexParams>;
+  /** NBASL_ORL — season weeks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/seasons/{season}/types/{season_type}/weeks` */
+  espnNbaslOrlSeasonWeeks: Wrapper<Row[], EspnSeasonWeeksParams>;
+  /** NBASL_ORL — standings (ESPN site.api.espn.com (v2)). `GET https://site.api.espn.com/apis/v2/sports/basketball/nba-summer-orlando/standings` */
+  espnNbaslOrlStandings: Wrapper<Row[], EspnStandingsParams>;
+  /** NBASL_ORL — standings core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/standings` */
+  espnNbaslOrlStandingsCore: Wrapper<Row[], EspnStandingsCoreParams>;
+  /** NBASL_ORL — statistics league (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/statistics` */
+  espnNbaslOrlStatisticsLeague: Wrapper<Row[], EspnStatisticsLeagueParams>;
+  /** NBASL_ORL — summary (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/summary` */
+  espnNbaslOrlSummary: SectionedWrapper<ParsedTables, {}, EspnSummaryParams>;
+  /** NBASL_ORL — talentpicks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/talentpicks` */
+  espnNbaslOrlTalentpicks: Wrapper<Row[], EspnTalentpicksParams>;
+  /** NBASL_ORL — team (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/teams/{team_id}` */
+  espnNbaslOrlTeam: Wrapper<Row[], EspnTeamParams>;
+  /** NBASL_ORL — team core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/teams/{team_id}` */
+  espnNbaslOrlTeamCore: Wrapper<Row[], EspnTeamCoreParams>;
+  /** NBASL_ORL — team depthcharts (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/teams/{team_id}/depthcharts` */
+  espnNbaslOrlTeamDepthcharts: Wrapper<Row[], EspnTeamDepthchartsParams>;
+  /** NBASL_ORL — team history (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/teams/{team_id}/history` */
+  espnNbaslOrlTeamHistory: Wrapper<Row[], EspnTeamHistoryParams>;
+  /** NBASL_ORL — team injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/teams/{team_id}/injuries` */
+  espnNbaslOrlTeamInjuries: Wrapper<Row[], EspnTeamInjuriesParams>;
+  /** NBASL_ORL — team leaders (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/teams/{team_id}/leaders` */
+  espnNbaslOrlTeamLeaders: Wrapper<Row[], EspnTeamLeadersParams>;
+  /** NBASL_ORL — team news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/teams/{team_id}/news` */
+  espnNbaslOrlTeamNews: Wrapper<Row[], EspnTeamNewsParams>;
+  /** NBASL_ORL — team record (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/teams/{team_id}/record` */
+  espnNbaslOrlTeamRecord: Wrapper<Row[], EspnTeamRecordParams>;
+  /** NBASL_ORL — team roster (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/teams/{team_id}/roster` */
+  espnNbaslOrlTeamRoster: Wrapper<Row[], EspnTeamRosterParams>;
+  /** NBASL_ORL — team schedule (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/teams/{team_id}/schedule` */
+  espnNbaslOrlTeamSchedule: Wrapper<Row[], EspnTeamScheduleParams>;
+  /** NBASL_ORL — teams core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/teams` */
+  espnNbaslOrlTeamsCore: Wrapper<Row[], EspnTeamsCoreParams>;
+  /** NBASL_ORL — teams site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/teams` */
+  espnNbaslOrlTeamsSite: Wrapper<Row[], EspnTeamsSiteParams>;
+  /** NBASL_ORL — team transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/teams/{team_id}/transactions` */
+  espnNbaslOrlTeamTransactions: Wrapper<Row[], EspnTeamTransactionsParams>;
+  /** NBASL_ORL — tournaments (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/tournaments` */
+  espnNbaslOrlTournaments: Wrapper<Row[], EspnTournamentsParams>;
+  /** NBASL_ORL — transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-orlando/transactions` */
+  espnNbaslOrlTransactions: Wrapper<Row[], EspnTransactionsParams>;
+  /** NBASL_ORL — venue (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/venues/{venue_id}` */
+  espnNbaslOrlVenue: Wrapper<Row[], EspnVenueParams>;
+  /** NBASL_ORL — venues (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-orlando/venues` */
+  espnNbaslOrlVenues: Wrapper<Row[], EspnVenuesParams>;
+}
+
+/** The generated wrappers of `sdv.nbasl_sac` (and their deprecated pre-v4 names). */
+export interface NbaslSacWrappers {
+  /** NBASL_SAC — award (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/awards/{award_id}` */
+  espn_nbasl_sac_award: Wrapper<Row[], EspnAwardParams>;
+  /** NBASL_SAC — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/awards` */
+  espn_nbasl_sac_awards: Wrapper<Row[], EspnAwardsParams>;
+  /** NBASL_SAC — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/calendar` */
+  espn_nbasl_sac_calendar: Wrapper<Row[], EspnCalendarParams>;
+  /** NBASL_SAC — coach (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/coaches/{coach_id}` */
+  espn_nbasl_sac_coach: Wrapper<Row[], EspnCoachParams>;
+  /** NBASL_SAC — coach record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/coaches/{coach_id}/record/{record_type}` */
+  espn_nbasl_sac_coach_record: Wrapper<Row[], EspnCoachRecordParams>;
+  /** NBASL_SAC — coach season (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/coaches/{coach_id}/seasons/{season}` */
+  espn_nbasl_sac_coach_season: Wrapper<Row[], EspnCoachSeasonParams>;
+  /** NBASL_SAC — conferences (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/groups` */
+  espn_nbasl_sac_conferences: Wrapper<Row[], EspnConferencesParams>;
+  /** NBASL_SAC — draft (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/draft` */
+  espn_nbasl_sac_draft: Wrapper<Row[], EspnDraftParams>;
+  /** NBASL_SAC — fpi (ESPN site.web.api.espn.com (FPI, fitt v3)). `GET https://site.web.api.espn.com/apis/fitt/v3/sports/basketball/nba-summer-sacramento/powerindex` */
+  espn_nbasl_sac_fpi: Wrapper<Row[], EspnFpiParams>;
+  /** NBASL_SAC — franchise (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/franchises/{franchise_id}` */
+  espn_nbasl_sac_franchise: Wrapper<Row[], EspnFranchiseParams>;
+  /** NBASL_SAC — franchises (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/franchises` */
+  espn_nbasl_sac_franchises: Wrapper<Row[], EspnFranchisesParams>;
+  /** NBASL_SAC — game (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}` */
+  espn_nbasl_sac_game: Wrapper<Row[], EspnEventParams>;
+  /** NBASL_SAC — game broadcasts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/broadcasts` */
+  espn_nbasl_sac_game_broadcasts: Wrapper<Row[], EspnEventBroadcastsParams>;
+  /** NBASL_SAC — game competition (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}` */
+  espn_nbasl_sac_game_competition: Wrapper<Row[], EspnEventCompetitionParams>;
+  /** NBASL_SAC — game leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/leaders` */
+  espn_nbasl_sac_game_leaders: Wrapper<Row[], EspnEventLeadersParams>;
+  /** NBASL_SAC — game odds (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/odds` */
+  espn_nbasl_sac_game_odds: Wrapper<Row[], EspnEventOddsParams>;
+  /** NBASL_SAC — game official detail (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/officials/{official_id}` */
+  espn_nbasl_sac_game_official_detail: Wrapper<Row[], EspnEventOfficialDetailParams>;
+  /** NBASL_SAC — game officials (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/officials` */
+  espn_nbasl_sac_game_officials: Wrapper<Row[], EspnEventOfficialsParams>;
+  /** NBASL_SAC — game play (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/plays/{play_id}` */
+  espn_nbasl_sac_game_play: Wrapper<Row[], EspnEventPlayParams>;
+  /** NBASL_SAC — game play personnel (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` */
+  espn_nbasl_sac_game_play_personnel: Wrapper<Row[], EspnEventPlayPersonnelParams>;
+  /** NBASL_SAC — game plays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/plays` */
+  espn_nbasl_sac_game_plays: Wrapper<Row[], EspnEventPlaysParams>;
+  /** NBASL_SAC — game powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/powerindex` */
+  espn_nbasl_sac_game_powerindex: Wrapper<Row[], EspnEventPowerindexParams>;
+  /** NBASL_SAC — game predictor (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/predictor` */
+  espn_nbasl_sac_game_predictor: Wrapper<Row[], EspnEventPredictorParams>;
+  /** NBASL_SAC — game probabilities (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/probabilities` */
+  espn_nbasl_sac_game_probabilities: Wrapper<Row[], EspnEventProbabilitiesParams>;
+  /** NBASL_SAC — game propbets (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/propbets` */
+  espn_nbasl_sac_game_propbets: Wrapper<Row[], EspnEventPropbetsParams>;
+  /** NBASL_SAC — game scoringplays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/scoringplays` */
+  espn_nbasl_sac_game_scoringplays: Wrapper<Row[], EspnEventScoringplaysParams>;
+  /** NBASL_SAC — game situation (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/situation` */
+  espn_nbasl_sac_game_situation: Wrapper<Row[], EspnEventSituationParams>;
+  /** NBASL_SAC — game status (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/status` */
+  espn_nbasl_sac_game_status: Wrapper<Row[], EspnEventStatusParams>;
+  /** NBASL_SAC — game team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/competitors/{team_id}` */
+  espn_nbasl_sac_game_team: Wrapper<Row[], EspnEventCompetitorParams>;
+  /** NBASL_SAC — game team leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` */
+  espn_nbasl_sac_game_team_leaders: Wrapper<Row[], EspnEventCompetitorLeadersParams>;
+  /** NBASL_SAC — game team linescores (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` */
+  espn_nbasl_sac_game_team_linescores: Wrapper<Row[], EspnEventCompetitorLinescoresParams>;
+  /** NBASL_SAC — game team record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` */
+  espn_nbasl_sac_game_team_record: Wrapper<Row[], EspnEventCompetitorRecordParams>;
+  /** NBASL_SAC — game team roster (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` */
+  espn_nbasl_sac_game_team_roster: Wrapper<Row[], EspnEventCompetitorRosterParams>;
+  /** NBASL_SAC — game team statistics (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` */
+  espn_nbasl_sac_game_team_statistics: Wrapper<Row[], EspnEventCompetitorStatisticsParams>;
+  /** NBASL_SAC — game teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/competitors` */
+  espn_nbasl_sac_game_teams: Wrapper<Row[], EspnEventCompetitorsParams>;
+  /** NBASL_SAC — games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events` */
+  espn_nbasl_sac_games: Wrapper<Row[], EspnEventsParams>;
+  /** NBASL_SAC — injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/injuries` */
+  espn_nbasl_sac_injuries: Wrapper<Row[], EspnInjuriesParams>;
+  /** NBASL_SAC — leaders (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-sacramento/statistics/byathlete` */
+  espn_nbasl_sac_leaders: Wrapper<Row[], EspnLeadersParams>;
+  /** NBASL_SAC — leaders core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/leaders` */
+  espn_nbasl_sac_leaders_core: Wrapper<Row[], EspnLeadersCoreParams>;
+  /** NBASL_SAC — league notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/notes` */
+  espn_nbasl_sac_league_notes: Wrapper<Row[], EspnLeagueNotesParams>;
+  /** NBASL_SAC — league root (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento` */
+  espn_nbasl_sac_league_root: Wrapper<Row[], EspnLeagueRootParams>;
+  /** NBASL_SAC — news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/news` */
+  espn_nbasl_sac_news: Wrapper<Row[], EspnNewsParams>;
+  /** NBASL_SAC — player awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/athletes/{athlete_id}/awards` */
+  espn_nbasl_sac_player_awards: Wrapper<Row[], EspnAthleteAwardsParams>;
+  /** NBASL_SAC — player bio (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/athletes/{athlete_id}/bio` */
+  espn_nbasl_sac_player_bio: Wrapper<Row[], EspnAthleteBioParams>;
+  /** NBASL_SAC — player career stats (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/athletes/{athlete_id}/statistics[/{stat_type}]` */
+  espn_nbasl_sac_player_career_stats: Wrapper<Row[], EspnAthleteCareerStatsParams>;
+  /** NBASL_SAC — player contracts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/athletes/{athlete_id}/contracts` */
+  espn_nbasl_sac_player_contracts: Wrapper<Row[], EspnAthleteContractsParams>;
+  /** NBASL_SAC — player core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/athletes/{athlete_id}` */
+  espn_nbasl_sac_player_core: Wrapper<Row[], EspnAthleteCoreParams>;
+  /** NBASL_SAC — player eventlog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/athletes/{athlete_id}/eventlog` */
+  espn_nbasl_sac_player_eventlog: Wrapper<Row[], EspnAthleteEventlogParams>;
+  /** NBASL_SAC — player gamelog (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-sacramento/athletes/{athlete_id}/gamelog` */
+  espn_nbasl_sac_player_gamelog: Wrapper<Row[], EspnAthleteGamelogParams>;
+  /** NBASL_SAC — player info (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/athletes/{athlete_id}` */
+  espn_nbasl_sac_player_info: Wrapper<Row[], EspnAthleteInfoParams>;
+  /** NBASL_SAC — player injuries (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/athletes/{athlete_id}/injuries` */
+  espn_nbasl_sac_player_injuries: Wrapper<Row[], EspnAthleteInjuriesParams>;
+  /** NBASL_SAC — player news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/athletes/{athlete_id}/news` */
+  espn_nbasl_sac_player_news: Wrapper<Row[], EspnAthleteNewsParams>;
+  /** NBASL_SAC — player notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/athletes/{athlete_id}/notes` */
+  espn_nbasl_sac_player_notes: Wrapper<Row[], EspnAthleteNotesParams>;
+  /** NBASL_SAC — player overview (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-sacramento/athletes/{athlete_id}/overview` */
+  espn_nbasl_sac_player_overview: Wrapper<Row[], EspnAthleteOverviewParams>;
+  /** NBASL_SAC — player records (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/athletes/{athlete_id}/records` */
+  espn_nbasl_sac_player_records: Wrapper<Row[], EspnAthleteRecordsParams>;
+  /** NBASL_SAC — player seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/athletes/{athlete_id}/seasons` */
+  espn_nbasl_sac_player_seasons: Wrapper<Row[], EspnAthleteSeasonsParams>;
+  /** NBASL_SAC — player splits (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-sacramento/athletes/{athlete_id}/splits` */
+  espn_nbasl_sac_player_splits: Wrapper<Row[], EspnAthleteSplitsParams>;
+  /** NBASL_SAC — player statisticslog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/athletes/{athlete_id}/statisticslog` */
+  espn_nbasl_sac_player_statisticslog: Wrapper<Row[], EspnAthleteStatisticslogParams>;
+  /** NBASL_SAC — player stats (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-sacramento/athletes/{athlete_id}/stats` */
+  espn_nbasl_sac_player_stats: Wrapper<Row[], EspnAthleteStatsParams>;
+  /** NBASL_SAC — player vs player (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/athletes/{athlete_id}/vsathlete/{opp_id}` */
+  espn_nbasl_sac_player_vs_player: Wrapper<Row[], EspnAthleteVsAthleteParams>;
+  /** NBASL_SAC — players index (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/athletes` */
+  espn_nbasl_sac_players_index: Wrapper<Row[], EspnAthletesIndexParams>;
+  /** NBASL_SAC — position (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/positions/{position_id}` */
+  espn_nbasl_sac_position: Wrapper<Row[], EspnPositionParams>;
+  /** NBASL_SAC — positions (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/positions` */
+  espn_nbasl_sac_positions: Wrapper<Row[], EspnPositionsParams>;
+  /** NBASL_SAC — scoreboard (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/scoreboard` */
+  espn_nbasl_sac_scoreboard: Wrapper<Row[], EspnScoreboardParams>;
+  /** NBASL_SAC — season awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/awards` */
+  espn_nbasl_sac_season_awards: Wrapper<Row[], EspnSeasonAwardsParams>;
+  /** NBASL_SAC — season coaches (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/coaches` */
+  espn_nbasl_sac_season_coaches: Wrapper<Row[], EspnSeasonCoachesParams>;
+  /** NBASL_SAC — season draft (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/draft` */
+  espn_nbasl_sac_season_draft: Wrapper<Row[], EspnSeasonDraftParams>;
+  /** NBASL_SAC — season draft round picks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/draft/rounds/{round_num}/picks` */
+  espn_nbasl_sac_season_draft_round_picks: Wrapper<Row[], EspnSeasonDraftRoundPicksParams>;
+  /** NBASL_SAC — season freeagents (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/freeagents` */
+  espn_nbasl_sac_season_freeagents: Wrapper<Row[], EspnSeasonFreeagentsParams>;
+  /** NBASL_SAC — season futures (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/futures` */
+  espn_nbasl_sac_season_futures: Wrapper<Row[], EspnSeasonFuturesParams>;
+  /** NBASL_SAC — season group (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/types/{season_type}/groups/{group_id}` */
+  espn_nbasl_sac_season_group: Wrapper<Row[], EspnSeasonGroupParams>;
+  /** NBASL_SAC — season group children (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/types/{season_type}/groups/{group_id}/children` */
+  espn_nbasl_sac_season_group_children: Wrapper<Row[], EspnSeasonGroupChildrenParams>;
+  /** NBASL_SAC — season group teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/types/{season_type}/groups/{group_id}/teams` */
+  espn_nbasl_sac_season_group_teams: Wrapper<Row[], EspnSeasonGroupTeamsParams>;
+  /** NBASL_SAC — season groups (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/types/{season_type}/groups` */
+  espn_nbasl_sac_season_groups: Wrapper<Row[], EspnSeasonGroupsParams>;
+  /** NBASL_SAC — season info (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}` */
+  espn_nbasl_sac_season_info: Wrapper<Row[], EspnSeasonInfoParams>;
+  /** NBASL_SAC — season players (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/athletes` */
+  espn_nbasl_sac_season_players: Wrapper<Row[], EspnSeasonAthletesParams>;
+  /** NBASL_SAC — season pointer (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/season` */
+  espn_nbasl_sac_season_pointer: Wrapper<Row[], EspnSeasonPointerParams>;
+  /** NBASL_SAC — season powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/powerindex[/{team_id}]` */
+  espn_nbasl_sac_season_powerindex: Wrapper<Row[], EspnSeasonPowerindexParams>;
+  /** NBASL_SAC — season powerindex leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/powerindex/leaders` */
+  espn_nbasl_sac_season_powerindex_leaders: Wrapper<Row[], EspnSeasonPowerindexLeadersParams>;
+  /** NBASL_SAC — season team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/teams/{team_id}` */
+  espn_nbasl_sac_season_team: Wrapper<Row[], EspnSeasonTeamParams>;
+  /** NBASL_SAC — season teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/teams` */
+  espn_nbasl_sac_season_teams: Wrapper<Row[], EspnSeasonTeamsParams>;
+  /** NBASL_SAC — season type (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/types/{season_type}` */
+  espn_nbasl_sac_season_type: Wrapper<Row[], EspnSeasonTypeParams>;
+  /** NBASL_SAC — season type corrections (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/types/{season_type}/corrections` */
+  espn_nbasl_sac_season_type_corrections: Wrapper<Row[], EspnSeasonTypeCorrectionsParams>;
+  /** NBASL_SAC — season type leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/types/{season_type}/leaders` */
+  espn_nbasl_sac_season_type_leaders: Wrapper<Row[], EspnSeasonTypeLeadersParams>;
+  /** NBASL_SAC — season types (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/types` */
+  espn_nbasl_sac_season_types: Wrapper<Row[], EspnSeasonTypesParams>;
+  /** NBASL_SAC — season week (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/types/{season_type}/weeks/{week}` */
+  espn_nbasl_sac_season_week: Wrapper<Row[], EspnSeasonWeekParams>;
+  /** NBASL_SAC — season week games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/types/{season_type}/weeks/{week}/events` */
+  espn_nbasl_sac_season_week_games: Wrapper<Row[], EspnSeasonWeekEventsParams>;
+  /** NBASL_SAC — season week powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/types/{season_type}/weeks/{week}/powerindex` */
+  espn_nbasl_sac_season_week_powerindex: Wrapper<Row[], EspnSeasonWeekPowerindexParams>;
+  /** NBASL_SAC — season weeks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/types/{season_type}/weeks` */
+  espn_nbasl_sac_season_weeks: Wrapper<Row[], EspnSeasonWeeksParams>;
+  /** NBASL_SAC — seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons` */
+  espn_nbasl_sac_seasons: Wrapper<Row[], EspnSeasonsParams>;
+  /** NBASL_SAC — standings (ESPN site.api.espn.com (v2)). `GET https://site.api.espn.com/apis/v2/sports/basketball/nba-summer-sacramento/standings` */
+  espn_nbasl_sac_standings: Wrapper<Row[], EspnStandingsParams>;
+  /** NBASL_SAC — standings core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/standings` */
+  espn_nbasl_sac_standings_core: Wrapper<Row[], EspnStandingsCoreParams>;
+  /** NBASL_SAC — statistics league (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/statistics` */
+  espn_nbasl_sac_statistics_league: Wrapper<Row[], EspnStatisticsLeagueParams>;
+  /** NBASL_SAC — summary (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/summary` */
+  espn_nbasl_sac_summary: SectionedWrapper<ParsedTables, {}, EspnSummaryParams>;
+  /** NBASL_SAC — talentpicks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/talentpicks` */
+  espn_nbasl_sac_talentpicks: Wrapper<Row[], EspnTalentpicksParams>;
+  /** NBASL_SAC — team (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/teams/{team_id}` */
+  espn_nbasl_sac_team: Wrapper<Row[], EspnTeamParams>;
+  /** NBASL_SAC — team core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/teams/{team_id}` */
+  espn_nbasl_sac_team_core: Wrapper<Row[], EspnTeamCoreParams>;
+  /** NBASL_SAC — team depthcharts (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/teams/{team_id}/depthcharts` */
+  espn_nbasl_sac_team_depthcharts: Wrapper<Row[], EspnTeamDepthchartsParams>;
+  /** NBASL_SAC — team history (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/teams/{team_id}/history` */
+  espn_nbasl_sac_team_history: Wrapper<Row[], EspnTeamHistoryParams>;
+  /** NBASL_SAC — team injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/teams/{team_id}/injuries` */
+  espn_nbasl_sac_team_injuries: Wrapper<Row[], EspnTeamInjuriesParams>;
+  /** NBASL_SAC — team leaders (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/teams/{team_id}/leaders` */
+  espn_nbasl_sac_team_leaders: Wrapper<Row[], EspnTeamLeadersParams>;
+  /** NBASL_SAC — team news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/teams/{team_id}/news` */
+  espn_nbasl_sac_team_news: Wrapper<Row[], EspnTeamNewsParams>;
+  /** NBASL_SAC — team record (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/teams/{team_id}/record` */
+  espn_nbasl_sac_team_record: Wrapper<Row[], EspnTeamRecordParams>;
+  /** NBASL_SAC — team roster (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/teams/{team_id}/roster` */
+  espn_nbasl_sac_team_roster: Wrapper<Row[], EspnTeamRosterParams>;
+  /** NBASL_SAC — team schedule (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/teams/{team_id}/schedule` */
+  espn_nbasl_sac_team_schedule: Wrapper<Row[], EspnTeamScheduleParams>;
+  /** NBASL_SAC — team transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/teams/{team_id}/transactions` */
+  espn_nbasl_sac_team_transactions: Wrapper<Row[], EspnTeamTransactionsParams>;
+  /** NBASL_SAC — teams core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/teams` */
+  espn_nbasl_sac_teams_core: Wrapper<Row[], EspnTeamsCoreParams>;
+  /** NBASL_SAC — teams site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/teams` */
+  espn_nbasl_sac_teams_site: Wrapper<Row[], EspnTeamsSiteParams>;
+  /** NBASL_SAC — tournaments (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/tournaments` */
+  espn_nbasl_sac_tournaments: Wrapper<Row[], EspnTournamentsParams>;
+  /** NBASL_SAC — transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/transactions` */
+  espn_nbasl_sac_transactions: Wrapper<Row[], EspnTransactionsParams>;
+  /** NBASL_SAC — venue (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/venues/{venue_id}` */
+  espn_nbasl_sac_venue: Wrapper<Row[], EspnVenueParams>;
+  /** NBASL_SAC — venues (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/venues` */
+  espn_nbasl_sac_venues: Wrapper<Row[], EspnVenuesParams>;
+  /** NBASL_SAC — award (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/awards/{award_id}` */
+  espnNbaslSacAward: Wrapper<Row[], EspnAwardParams>;
+  /** NBASL_SAC — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/awards` */
+  espnNbaslSacAwards: Wrapper<Row[], EspnAwardsParams>;
+  /** NBASL_SAC — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/calendar` */
+  espnNbaslSacCalendar: Wrapper<Row[], EspnCalendarParams>;
+  /** NBASL_SAC — coach (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/coaches/{coach_id}` */
+  espnNbaslSacCoach: Wrapper<Row[], EspnCoachParams>;
+  /** NBASL_SAC — coach record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/coaches/{coach_id}/record/{record_type}` */
+  espnNbaslSacCoachRecord: Wrapper<Row[], EspnCoachRecordParams>;
+  /** NBASL_SAC — coach season (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/coaches/{coach_id}/seasons/{season}` */
+  espnNbaslSacCoachSeason: Wrapper<Row[], EspnCoachSeasonParams>;
+  /** NBASL_SAC — conferences (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/groups` */
+  espnNbaslSacConferences: Wrapper<Row[], EspnConferencesParams>;
+  /** NBASL_SAC — draft (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/draft` */
+  espnNbaslSacDraft: Wrapper<Row[], EspnDraftParams>;
+  /** NBASL_SAC — fpi (ESPN site.web.api.espn.com (FPI, fitt v3)). `GET https://site.web.api.espn.com/apis/fitt/v3/sports/basketball/nba-summer-sacramento/powerindex` */
+  espnNbaslSacFpi: Wrapper<Row[], EspnFpiParams>;
+  /** NBASL_SAC — franchise (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/franchises/{franchise_id}` */
+  espnNbaslSacFranchise: Wrapper<Row[], EspnFranchiseParams>;
+  /** NBASL_SAC — franchises (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/franchises` */
+  espnNbaslSacFranchises: Wrapper<Row[], EspnFranchisesParams>;
+  /** NBASL_SAC — game (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}` */
+  espnNbaslSacGame: Wrapper<Row[], EspnEventParams>;
+  /** NBASL_SAC — game broadcasts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/broadcasts` */
+  espnNbaslSacGameBroadcasts: Wrapper<Row[], EspnEventBroadcastsParams>;
+  /** NBASL_SAC — game competition (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}` */
+  espnNbaslSacGameCompetition: Wrapper<Row[], EspnEventCompetitionParams>;
+  /** NBASL_SAC — game leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/leaders` */
+  espnNbaslSacGameLeaders: Wrapper<Row[], EspnEventLeadersParams>;
+  /** NBASL_SAC — game odds (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/odds` */
+  espnNbaslSacGameOdds: Wrapper<Row[], EspnEventOddsParams>;
+  /** NBASL_SAC — game official detail (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/officials/{official_id}` */
+  espnNbaslSacGameOfficialDetail: Wrapper<Row[], EspnEventOfficialDetailParams>;
+  /** NBASL_SAC — game officials (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/officials` */
+  espnNbaslSacGameOfficials: Wrapper<Row[], EspnEventOfficialsParams>;
+  /** NBASL_SAC — game play (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/plays/{play_id}` */
+  espnNbaslSacGamePlay: Wrapper<Row[], EspnEventPlayParams>;
+  /** NBASL_SAC — game play personnel (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` */
+  espnNbaslSacGamePlayPersonnel: Wrapper<Row[], EspnEventPlayPersonnelParams>;
+  /** NBASL_SAC — game plays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/plays` */
+  espnNbaslSacGamePlays: Wrapper<Row[], EspnEventPlaysParams>;
+  /** NBASL_SAC — game powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/powerindex` */
+  espnNbaslSacGamePowerindex: Wrapper<Row[], EspnEventPowerindexParams>;
+  /** NBASL_SAC — game predictor (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/predictor` */
+  espnNbaslSacGamePredictor: Wrapper<Row[], EspnEventPredictorParams>;
+  /** NBASL_SAC — game probabilities (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/probabilities` */
+  espnNbaslSacGameProbabilities: Wrapper<Row[], EspnEventProbabilitiesParams>;
+  /** NBASL_SAC — game propbets (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/propbets` */
+  espnNbaslSacGamePropbets: Wrapper<Row[], EspnEventPropbetsParams>;
+  /** NBASL_SAC — games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events` */
+  espnNbaslSacGames: Wrapper<Row[], EspnEventsParams>;
+  /** NBASL_SAC — game scoringplays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/scoringplays` */
+  espnNbaslSacGameScoringplays: Wrapper<Row[], EspnEventScoringplaysParams>;
+  /** NBASL_SAC — game situation (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/situation` */
+  espnNbaslSacGameSituation: Wrapper<Row[], EspnEventSituationParams>;
+  /** NBASL_SAC — game status (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/status` */
+  espnNbaslSacGameStatus: Wrapper<Row[], EspnEventStatusParams>;
+  /** NBASL_SAC — game team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/competitors/{team_id}` */
+  espnNbaslSacGameTeam: Wrapper<Row[], EspnEventCompetitorParams>;
+  /** NBASL_SAC — game team leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` */
+  espnNbaslSacGameTeamLeaders: Wrapper<Row[], EspnEventCompetitorLeadersParams>;
+  /** NBASL_SAC — game team linescores (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` */
+  espnNbaslSacGameTeamLinescores: Wrapper<Row[], EspnEventCompetitorLinescoresParams>;
+  /** NBASL_SAC — game team record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` */
+  espnNbaslSacGameTeamRecord: Wrapper<Row[], EspnEventCompetitorRecordParams>;
+  /** NBASL_SAC — game team roster (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` */
+  espnNbaslSacGameTeamRoster: Wrapper<Row[], EspnEventCompetitorRosterParams>;
+  /** NBASL_SAC — game teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/competitors` */
+  espnNbaslSacGameTeams: Wrapper<Row[], EspnEventCompetitorsParams>;
+  /** NBASL_SAC — game team statistics (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` */
+  espnNbaslSacGameTeamStatistics: Wrapper<Row[], EspnEventCompetitorStatisticsParams>;
+  /** NBASL_SAC — injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/injuries` */
+  espnNbaslSacInjuries: Wrapper<Row[], EspnInjuriesParams>;
+  /** NBASL_SAC — leaders (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-sacramento/statistics/byathlete` */
+  espnNbaslSacLeaders: Wrapper<Row[], EspnLeadersParams>;
+  /** NBASL_SAC — leaders core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/leaders` */
+  espnNbaslSacLeadersCore: Wrapper<Row[], EspnLeadersCoreParams>;
+  /** NBASL_SAC — league notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/notes` */
+  espnNbaslSacLeagueNotes: Wrapper<Row[], EspnLeagueNotesParams>;
+  /** NBASL_SAC — league root (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento` */
+  espnNbaslSacLeagueRoot: Wrapper<Row[], EspnLeagueRootParams>;
+  /** NBASL_SAC — news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/news` */
+  espnNbaslSacNews: Wrapper<Row[], EspnNewsParams>;
+  /** NBASL_SAC — player awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/athletes/{athlete_id}/awards` */
+  espnNbaslSacPlayerAwards: Wrapper<Row[], EspnAthleteAwardsParams>;
+  /** NBASL_SAC — player bio (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/athletes/{athlete_id}/bio` */
+  espnNbaslSacPlayerBio: Wrapper<Row[], EspnAthleteBioParams>;
+  /** NBASL_SAC — player career stats (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/athletes/{athlete_id}/statistics[/{stat_type}]` */
+  espnNbaslSacPlayerCareerStats: Wrapper<Row[], EspnAthleteCareerStatsParams>;
+  /** NBASL_SAC — player contracts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/athletes/{athlete_id}/contracts` */
+  espnNbaslSacPlayerContracts: Wrapper<Row[], EspnAthleteContractsParams>;
+  /** NBASL_SAC — player core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/athletes/{athlete_id}` */
+  espnNbaslSacPlayerCore: Wrapper<Row[], EspnAthleteCoreParams>;
+  /** NBASL_SAC — player eventlog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/athletes/{athlete_id}/eventlog` */
+  espnNbaslSacPlayerEventlog: Wrapper<Row[], EspnAthleteEventlogParams>;
+  /** NBASL_SAC — player gamelog (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-sacramento/athletes/{athlete_id}/gamelog` */
+  espnNbaslSacPlayerGamelog: Wrapper<Row[], EspnAthleteGamelogParams>;
+  /** NBASL_SAC — player info (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/athletes/{athlete_id}` */
+  espnNbaslSacPlayerInfo: Wrapper<Row[], EspnAthleteInfoParams>;
+  /** NBASL_SAC — player injuries (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/athletes/{athlete_id}/injuries` */
+  espnNbaslSacPlayerInjuries: Wrapper<Row[], EspnAthleteInjuriesParams>;
+  /** NBASL_SAC — player news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/athletes/{athlete_id}/news` */
+  espnNbaslSacPlayerNews: Wrapper<Row[], EspnAthleteNewsParams>;
+  /** NBASL_SAC — player notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/athletes/{athlete_id}/notes` */
+  espnNbaslSacPlayerNotes: Wrapper<Row[], EspnAthleteNotesParams>;
+  /** NBASL_SAC — player overview (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-sacramento/athletes/{athlete_id}/overview` */
+  espnNbaslSacPlayerOverview: Wrapper<Row[], EspnAthleteOverviewParams>;
+  /** NBASL_SAC — player records (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/athletes/{athlete_id}/records` */
+  espnNbaslSacPlayerRecords: Wrapper<Row[], EspnAthleteRecordsParams>;
+  /** NBASL_SAC — player seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/athletes/{athlete_id}/seasons` */
+  espnNbaslSacPlayerSeasons: Wrapper<Row[], EspnAthleteSeasonsParams>;
+  /** NBASL_SAC — players index (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/athletes` */
+  espnNbaslSacPlayersIndex: Wrapper<Row[], EspnAthletesIndexParams>;
+  /** NBASL_SAC — player splits (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-sacramento/athletes/{athlete_id}/splits` */
+  espnNbaslSacPlayerSplits: Wrapper<Row[], EspnAthleteSplitsParams>;
+  /** NBASL_SAC — player statisticslog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/athletes/{athlete_id}/statisticslog` */
+  espnNbaslSacPlayerStatisticslog: Wrapper<Row[], EspnAthleteStatisticslogParams>;
+  /** NBASL_SAC — player stats (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-sacramento/athletes/{athlete_id}/stats` */
+  espnNbaslSacPlayerStats: Wrapper<Row[], EspnAthleteStatsParams>;
+  /** NBASL_SAC — player vs player (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/athletes/{athlete_id}/vsathlete/{opp_id}` */
+  espnNbaslSacPlayerVsPlayer: Wrapper<Row[], EspnAthleteVsAthleteParams>;
+  /** NBASL_SAC — position (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/positions/{position_id}` */
+  espnNbaslSacPosition: Wrapper<Row[], EspnPositionParams>;
+  /** NBASL_SAC — positions (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/positions` */
+  espnNbaslSacPositions: Wrapper<Row[], EspnPositionsParams>;
+  /** NBASL_SAC — scoreboard (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/scoreboard` */
+  espnNbaslSacScoreboard: Wrapper<Row[], EspnScoreboardParams>;
+  /** NBASL_SAC — season awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/awards` */
+  espnNbaslSacSeasonAwards: Wrapper<Row[], EspnSeasonAwardsParams>;
+  /** NBASL_SAC — season coaches (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/coaches` */
+  espnNbaslSacSeasonCoaches: Wrapper<Row[], EspnSeasonCoachesParams>;
+  /** NBASL_SAC — season draft (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/draft` */
+  espnNbaslSacSeasonDraft: Wrapper<Row[], EspnSeasonDraftParams>;
+  /** NBASL_SAC — season draft round picks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/draft/rounds/{round_num}/picks` */
+  espnNbaslSacSeasonDraftRoundPicks: Wrapper<Row[], EspnSeasonDraftRoundPicksParams>;
+  /** NBASL_SAC — season freeagents (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/freeagents` */
+  espnNbaslSacSeasonFreeagents: Wrapper<Row[], EspnSeasonFreeagentsParams>;
+  /** NBASL_SAC — season futures (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/futures` */
+  espnNbaslSacSeasonFutures: Wrapper<Row[], EspnSeasonFuturesParams>;
+  /** NBASL_SAC — season group (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/types/{season_type}/groups/{group_id}` */
+  espnNbaslSacSeasonGroup: Wrapper<Row[], EspnSeasonGroupParams>;
+  /** NBASL_SAC — season group children (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/types/{season_type}/groups/{group_id}/children` */
+  espnNbaslSacSeasonGroupChildren: Wrapper<Row[], EspnSeasonGroupChildrenParams>;
+  /** NBASL_SAC — season groups (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/types/{season_type}/groups` */
+  espnNbaslSacSeasonGroups: Wrapper<Row[], EspnSeasonGroupsParams>;
+  /** NBASL_SAC — season group teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/types/{season_type}/groups/{group_id}/teams` */
+  espnNbaslSacSeasonGroupTeams: Wrapper<Row[], EspnSeasonGroupTeamsParams>;
+  /** NBASL_SAC — season info (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}` */
+  espnNbaslSacSeasonInfo: Wrapper<Row[], EspnSeasonInfoParams>;
+  /** NBASL_SAC — season players (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/athletes` */
+  espnNbaslSacSeasonPlayers: Wrapper<Row[], EspnSeasonAthletesParams>;
+  /** NBASL_SAC — season pointer (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/season` */
+  espnNbaslSacSeasonPointer: Wrapper<Row[], EspnSeasonPointerParams>;
+  /** NBASL_SAC — season powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/powerindex[/{team_id}]` */
+  espnNbaslSacSeasonPowerindex: Wrapper<Row[], EspnSeasonPowerindexParams>;
+  /** NBASL_SAC — season powerindex leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/powerindex/leaders` */
+  espnNbaslSacSeasonPowerindexLeaders: Wrapper<Row[], EspnSeasonPowerindexLeadersParams>;
+  /** NBASL_SAC — seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons` */
+  espnNbaslSacSeasons: Wrapper<Row[], EspnSeasonsParams>;
+  /** NBASL_SAC — season team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/teams/{team_id}` */
+  espnNbaslSacSeasonTeam: Wrapper<Row[], EspnSeasonTeamParams>;
+  /** NBASL_SAC — season teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/teams` */
+  espnNbaslSacSeasonTeams: Wrapper<Row[], EspnSeasonTeamsParams>;
+  /** NBASL_SAC — season type (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/types/{season_type}` */
+  espnNbaslSacSeasonType: Wrapper<Row[], EspnSeasonTypeParams>;
+  /** NBASL_SAC — season type corrections (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/types/{season_type}/corrections` */
+  espnNbaslSacSeasonTypeCorrections: Wrapper<Row[], EspnSeasonTypeCorrectionsParams>;
+  /** NBASL_SAC — season type leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/types/{season_type}/leaders` */
+  espnNbaslSacSeasonTypeLeaders: Wrapper<Row[], EspnSeasonTypeLeadersParams>;
+  /** NBASL_SAC — season types (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/types` */
+  espnNbaslSacSeasonTypes: Wrapper<Row[], EspnSeasonTypesParams>;
+  /** NBASL_SAC — season week (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/types/{season_type}/weeks/{week}` */
+  espnNbaslSacSeasonWeek: Wrapper<Row[], EspnSeasonWeekParams>;
+  /** NBASL_SAC — season week games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/types/{season_type}/weeks/{week}/events` */
+  espnNbaslSacSeasonWeekGames: Wrapper<Row[], EspnSeasonWeekEventsParams>;
+  /** NBASL_SAC — season week powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/types/{season_type}/weeks/{week}/powerindex` */
+  espnNbaslSacSeasonWeekPowerindex: Wrapper<Row[], EspnSeasonWeekPowerindexParams>;
+  /** NBASL_SAC — season weeks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/seasons/{season}/types/{season_type}/weeks` */
+  espnNbaslSacSeasonWeeks: Wrapper<Row[], EspnSeasonWeeksParams>;
+  /** NBASL_SAC — standings (ESPN site.api.espn.com (v2)). `GET https://site.api.espn.com/apis/v2/sports/basketball/nba-summer-sacramento/standings` */
+  espnNbaslSacStandings: Wrapper<Row[], EspnStandingsParams>;
+  /** NBASL_SAC — standings core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/standings` */
+  espnNbaslSacStandingsCore: Wrapper<Row[], EspnStandingsCoreParams>;
+  /** NBASL_SAC — statistics league (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/statistics` */
+  espnNbaslSacStatisticsLeague: Wrapper<Row[], EspnStatisticsLeagueParams>;
+  /** NBASL_SAC — summary (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/summary` */
+  espnNbaslSacSummary: SectionedWrapper<ParsedTables, {}, EspnSummaryParams>;
+  /** NBASL_SAC — talentpicks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/talentpicks` */
+  espnNbaslSacTalentpicks: Wrapper<Row[], EspnTalentpicksParams>;
+  /** NBASL_SAC — team (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/teams/{team_id}` */
+  espnNbaslSacTeam: Wrapper<Row[], EspnTeamParams>;
+  /** NBASL_SAC — team core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/teams/{team_id}` */
+  espnNbaslSacTeamCore: Wrapper<Row[], EspnTeamCoreParams>;
+  /** NBASL_SAC — team depthcharts (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/teams/{team_id}/depthcharts` */
+  espnNbaslSacTeamDepthcharts: Wrapper<Row[], EspnTeamDepthchartsParams>;
+  /** NBASL_SAC — team history (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/teams/{team_id}/history` */
+  espnNbaslSacTeamHistory: Wrapper<Row[], EspnTeamHistoryParams>;
+  /** NBASL_SAC — team injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/teams/{team_id}/injuries` */
+  espnNbaslSacTeamInjuries: Wrapper<Row[], EspnTeamInjuriesParams>;
+  /** NBASL_SAC — team leaders (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/teams/{team_id}/leaders` */
+  espnNbaslSacTeamLeaders: Wrapper<Row[], EspnTeamLeadersParams>;
+  /** NBASL_SAC — team news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/teams/{team_id}/news` */
+  espnNbaslSacTeamNews: Wrapper<Row[], EspnTeamNewsParams>;
+  /** NBASL_SAC — team record (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/teams/{team_id}/record` */
+  espnNbaslSacTeamRecord: Wrapper<Row[], EspnTeamRecordParams>;
+  /** NBASL_SAC — team roster (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/teams/{team_id}/roster` */
+  espnNbaslSacTeamRoster: Wrapper<Row[], EspnTeamRosterParams>;
+  /** NBASL_SAC — team schedule (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/teams/{team_id}/schedule` */
+  espnNbaslSacTeamSchedule: Wrapper<Row[], EspnTeamScheduleParams>;
+  /** NBASL_SAC — teams core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/teams` */
+  espnNbaslSacTeamsCore: Wrapper<Row[], EspnTeamsCoreParams>;
+  /** NBASL_SAC — teams site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/teams` */
+  espnNbaslSacTeamsSite: Wrapper<Row[], EspnTeamsSiteParams>;
+  /** NBASL_SAC — team transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/teams/{team_id}/transactions` */
+  espnNbaslSacTeamTransactions: Wrapper<Row[], EspnTeamTransactionsParams>;
+  /** NBASL_SAC — tournaments (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/tournaments` */
+  espnNbaslSacTournaments: Wrapper<Row[], EspnTournamentsParams>;
+  /** NBASL_SAC — transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-sacramento/transactions` */
+  espnNbaslSacTransactions: Wrapper<Row[], EspnTransactionsParams>;
+  /** NBASL_SAC — venue (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/venues/{venue_id}` */
+  espnNbaslSacVenue: Wrapper<Row[], EspnVenueParams>;
+  /** NBASL_SAC — venues (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-sacramento/venues` */
+  espnNbaslSacVenues: Wrapper<Row[], EspnVenuesParams>;
+}
+
+/** The generated wrappers of `sdv.nbasl_ut` (and their deprecated pre-v4 names). */
+export interface NbaslUtWrappers {
+  /** NBASL_UT — award (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/awards/{award_id}` */
+  espn_nbasl_ut_award: Wrapper<Row[], EspnAwardParams>;
+  /** NBASL_UT — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/awards` */
+  espn_nbasl_ut_awards: Wrapper<Row[], EspnAwardsParams>;
+  /** NBASL_UT — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/calendar` */
+  espn_nbasl_ut_calendar: Wrapper<Row[], EspnCalendarParams>;
+  /** NBASL_UT — coach (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/coaches/{coach_id}` */
+  espn_nbasl_ut_coach: Wrapper<Row[], EspnCoachParams>;
+  /** NBASL_UT — coach record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/coaches/{coach_id}/record/{record_type}` */
+  espn_nbasl_ut_coach_record: Wrapper<Row[], EspnCoachRecordParams>;
+  /** NBASL_UT — coach season (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/coaches/{coach_id}/seasons/{season}` */
+  espn_nbasl_ut_coach_season: Wrapper<Row[], EspnCoachSeasonParams>;
+  /** NBASL_UT — conferences (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/groups` */
+  espn_nbasl_ut_conferences: Wrapper<Row[], EspnConferencesParams>;
+  /** NBASL_UT — draft (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/draft` */
+  espn_nbasl_ut_draft: Wrapper<Row[], EspnDraftParams>;
+  /** NBASL_UT — fpi (ESPN site.web.api.espn.com (FPI, fitt v3)). `GET https://site.web.api.espn.com/apis/fitt/v3/sports/basketball/nba-summer-utah/powerindex` */
+  espn_nbasl_ut_fpi: Wrapper<Row[], EspnFpiParams>;
+  /** NBASL_UT — franchise (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/franchises/{franchise_id}` */
+  espn_nbasl_ut_franchise: Wrapper<Row[], EspnFranchiseParams>;
+  /** NBASL_UT — franchises (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/franchises` */
+  espn_nbasl_ut_franchises: Wrapper<Row[], EspnFranchisesParams>;
+  /** NBASL_UT — game (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}` */
+  espn_nbasl_ut_game: Wrapper<Row[], EspnEventParams>;
+  /** NBASL_UT — game broadcasts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/broadcasts` */
+  espn_nbasl_ut_game_broadcasts: Wrapper<Row[], EspnEventBroadcastsParams>;
+  /** NBASL_UT — game competition (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}` */
+  espn_nbasl_ut_game_competition: Wrapper<Row[], EspnEventCompetitionParams>;
+  /** NBASL_UT — game leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/leaders` */
+  espn_nbasl_ut_game_leaders: Wrapper<Row[], EspnEventLeadersParams>;
+  /** NBASL_UT — game odds (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/odds` */
+  espn_nbasl_ut_game_odds: Wrapper<Row[], EspnEventOddsParams>;
+  /** NBASL_UT — game official detail (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/officials/{official_id}` */
+  espn_nbasl_ut_game_official_detail: Wrapper<Row[], EspnEventOfficialDetailParams>;
+  /** NBASL_UT — game officials (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/officials` */
+  espn_nbasl_ut_game_officials: Wrapper<Row[], EspnEventOfficialsParams>;
+  /** NBASL_UT — game play (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/plays/{play_id}` */
+  espn_nbasl_ut_game_play: Wrapper<Row[], EspnEventPlayParams>;
+  /** NBASL_UT — game play personnel (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` */
+  espn_nbasl_ut_game_play_personnel: Wrapper<Row[], EspnEventPlayPersonnelParams>;
+  /** NBASL_UT — game plays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/plays` */
+  espn_nbasl_ut_game_plays: Wrapper<Row[], EspnEventPlaysParams>;
+  /** NBASL_UT — game powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/powerindex` */
+  espn_nbasl_ut_game_powerindex: Wrapper<Row[], EspnEventPowerindexParams>;
+  /** NBASL_UT — game predictor (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/predictor` */
+  espn_nbasl_ut_game_predictor: Wrapper<Row[], EspnEventPredictorParams>;
+  /** NBASL_UT — game probabilities (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/probabilities` */
+  espn_nbasl_ut_game_probabilities: Wrapper<Row[], EspnEventProbabilitiesParams>;
+  /** NBASL_UT — game propbets (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/propbets` */
+  espn_nbasl_ut_game_propbets: Wrapper<Row[], EspnEventPropbetsParams>;
+  /** NBASL_UT — game scoringplays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/scoringplays` */
+  espn_nbasl_ut_game_scoringplays: Wrapper<Row[], EspnEventScoringplaysParams>;
+  /** NBASL_UT — game situation (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/situation` */
+  espn_nbasl_ut_game_situation: Wrapper<Row[], EspnEventSituationParams>;
+  /** NBASL_UT — game status (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/status` */
+  espn_nbasl_ut_game_status: Wrapper<Row[], EspnEventStatusParams>;
+  /** NBASL_UT — game team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/competitors/{team_id}` */
+  espn_nbasl_ut_game_team: Wrapper<Row[], EspnEventCompetitorParams>;
+  /** NBASL_UT — game team leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` */
+  espn_nbasl_ut_game_team_leaders: Wrapper<Row[], EspnEventCompetitorLeadersParams>;
+  /** NBASL_UT — game team linescores (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` */
+  espn_nbasl_ut_game_team_linescores: Wrapper<Row[], EspnEventCompetitorLinescoresParams>;
+  /** NBASL_UT — game team record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` */
+  espn_nbasl_ut_game_team_record: Wrapper<Row[], EspnEventCompetitorRecordParams>;
+  /** NBASL_UT — game team roster (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` */
+  espn_nbasl_ut_game_team_roster: Wrapper<Row[], EspnEventCompetitorRosterParams>;
+  /** NBASL_UT — game team statistics (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` */
+  espn_nbasl_ut_game_team_statistics: Wrapper<Row[], EspnEventCompetitorStatisticsParams>;
+  /** NBASL_UT — game teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/competitors` */
+  espn_nbasl_ut_game_teams: Wrapper<Row[], EspnEventCompetitorsParams>;
+  /** NBASL_UT — games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events` */
+  espn_nbasl_ut_games: Wrapper<Row[], EspnEventsParams>;
+  /** NBASL_UT — injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/injuries` */
+  espn_nbasl_ut_injuries: Wrapper<Row[], EspnInjuriesParams>;
+  /** NBASL_UT — leaders (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-utah/statistics/byathlete` */
+  espn_nbasl_ut_leaders: Wrapper<Row[], EspnLeadersParams>;
+  /** NBASL_UT — leaders core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/leaders` */
+  espn_nbasl_ut_leaders_core: Wrapper<Row[], EspnLeadersCoreParams>;
+  /** NBASL_UT — league notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/notes` */
+  espn_nbasl_ut_league_notes: Wrapper<Row[], EspnLeagueNotesParams>;
+  /** NBASL_UT — league root (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah` */
+  espn_nbasl_ut_league_root: Wrapper<Row[], EspnLeagueRootParams>;
+  /** NBASL_UT — news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/news` */
+  espn_nbasl_ut_news: Wrapper<Row[], EspnNewsParams>;
+  /** NBASL_UT — player awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/athletes/{athlete_id}/awards` */
+  espn_nbasl_ut_player_awards: Wrapper<Row[], EspnAthleteAwardsParams>;
+  /** NBASL_UT — player bio (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/athletes/{athlete_id}/bio` */
+  espn_nbasl_ut_player_bio: Wrapper<Row[], EspnAthleteBioParams>;
+  /** NBASL_UT — player career stats (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/athletes/{athlete_id}/statistics[/{stat_type}]` */
+  espn_nbasl_ut_player_career_stats: Wrapper<Row[], EspnAthleteCareerStatsParams>;
+  /** NBASL_UT — player contracts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/athletes/{athlete_id}/contracts` */
+  espn_nbasl_ut_player_contracts: Wrapper<Row[], EspnAthleteContractsParams>;
+  /** NBASL_UT — player core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/athletes/{athlete_id}` */
+  espn_nbasl_ut_player_core: Wrapper<Row[], EspnAthleteCoreParams>;
+  /** NBASL_UT — player eventlog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/athletes/{athlete_id}/eventlog` */
+  espn_nbasl_ut_player_eventlog: Wrapper<Row[], EspnAthleteEventlogParams>;
+  /** NBASL_UT — player gamelog (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-utah/athletes/{athlete_id}/gamelog` */
+  espn_nbasl_ut_player_gamelog: Wrapper<Row[], EspnAthleteGamelogParams>;
+  /** NBASL_UT — player info (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/athletes/{athlete_id}` */
+  espn_nbasl_ut_player_info: Wrapper<Row[], EspnAthleteInfoParams>;
+  /** NBASL_UT — player injuries (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/athletes/{athlete_id}/injuries` */
+  espn_nbasl_ut_player_injuries: Wrapper<Row[], EspnAthleteInjuriesParams>;
+  /** NBASL_UT — player news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/athletes/{athlete_id}/news` */
+  espn_nbasl_ut_player_news: Wrapper<Row[], EspnAthleteNewsParams>;
+  /** NBASL_UT — player notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/athletes/{athlete_id}/notes` */
+  espn_nbasl_ut_player_notes: Wrapper<Row[], EspnAthleteNotesParams>;
+  /** NBASL_UT — player overview (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-utah/athletes/{athlete_id}/overview` */
+  espn_nbasl_ut_player_overview: Wrapper<Row[], EspnAthleteOverviewParams>;
+  /** NBASL_UT — player records (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/athletes/{athlete_id}/records` */
+  espn_nbasl_ut_player_records: Wrapper<Row[], EspnAthleteRecordsParams>;
+  /** NBASL_UT — player seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/athletes/{athlete_id}/seasons` */
+  espn_nbasl_ut_player_seasons: Wrapper<Row[], EspnAthleteSeasonsParams>;
+  /** NBASL_UT — player splits (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-utah/athletes/{athlete_id}/splits` */
+  espn_nbasl_ut_player_splits: Wrapper<Row[], EspnAthleteSplitsParams>;
+  /** NBASL_UT — player statisticslog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/athletes/{athlete_id}/statisticslog` */
+  espn_nbasl_ut_player_statisticslog: Wrapper<Row[], EspnAthleteStatisticslogParams>;
+  /** NBASL_UT — player stats (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-utah/athletes/{athlete_id}/stats` */
+  espn_nbasl_ut_player_stats: Wrapper<Row[], EspnAthleteStatsParams>;
+  /** NBASL_UT — player vs player (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/athletes/{athlete_id}/vsathlete/{opp_id}` */
+  espn_nbasl_ut_player_vs_player: Wrapper<Row[], EspnAthleteVsAthleteParams>;
+  /** NBASL_UT — players index (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/athletes` */
+  espn_nbasl_ut_players_index: Wrapper<Row[], EspnAthletesIndexParams>;
+  /** NBASL_UT — position (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/positions/{position_id}` */
+  espn_nbasl_ut_position: Wrapper<Row[], EspnPositionParams>;
+  /** NBASL_UT — positions (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/positions` */
+  espn_nbasl_ut_positions: Wrapper<Row[], EspnPositionsParams>;
+  /** NBASL_UT — scoreboard (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/scoreboard` */
+  espn_nbasl_ut_scoreboard: Wrapper<Row[], EspnScoreboardParams>;
+  /** NBASL_UT — season awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/awards` */
+  espn_nbasl_ut_season_awards: Wrapper<Row[], EspnSeasonAwardsParams>;
+  /** NBASL_UT — season coaches (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/coaches` */
+  espn_nbasl_ut_season_coaches: Wrapper<Row[], EspnSeasonCoachesParams>;
+  /** NBASL_UT — season draft (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/draft` */
+  espn_nbasl_ut_season_draft: Wrapper<Row[], EspnSeasonDraftParams>;
+  /** NBASL_UT — season draft round picks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/draft/rounds/{round_num}/picks` */
+  espn_nbasl_ut_season_draft_round_picks: Wrapper<Row[], EspnSeasonDraftRoundPicksParams>;
+  /** NBASL_UT — season freeagents (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/freeagents` */
+  espn_nbasl_ut_season_freeagents: Wrapper<Row[], EspnSeasonFreeagentsParams>;
+  /** NBASL_UT — season futures (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/futures` */
+  espn_nbasl_ut_season_futures: Wrapper<Row[], EspnSeasonFuturesParams>;
+  /** NBASL_UT — season group (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/types/{season_type}/groups/{group_id}` */
+  espn_nbasl_ut_season_group: Wrapper<Row[], EspnSeasonGroupParams>;
+  /** NBASL_UT — season group children (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/types/{season_type}/groups/{group_id}/children` */
+  espn_nbasl_ut_season_group_children: Wrapper<Row[], EspnSeasonGroupChildrenParams>;
+  /** NBASL_UT — season group teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/types/{season_type}/groups/{group_id}/teams` */
+  espn_nbasl_ut_season_group_teams: Wrapper<Row[], EspnSeasonGroupTeamsParams>;
+  /** NBASL_UT — season groups (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/types/{season_type}/groups` */
+  espn_nbasl_ut_season_groups: Wrapper<Row[], EspnSeasonGroupsParams>;
+  /** NBASL_UT — season info (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}` */
+  espn_nbasl_ut_season_info: Wrapper<Row[], EspnSeasonInfoParams>;
+  /** NBASL_UT — season players (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/athletes` */
+  espn_nbasl_ut_season_players: Wrapper<Row[], EspnSeasonAthletesParams>;
+  /** NBASL_UT — season pointer (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/season` */
+  espn_nbasl_ut_season_pointer: Wrapper<Row[], EspnSeasonPointerParams>;
+  /** NBASL_UT — season powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/powerindex[/{team_id}]` */
+  espn_nbasl_ut_season_powerindex: Wrapper<Row[], EspnSeasonPowerindexParams>;
+  /** NBASL_UT — season powerindex leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/powerindex/leaders` */
+  espn_nbasl_ut_season_powerindex_leaders: Wrapper<Row[], EspnSeasonPowerindexLeadersParams>;
+  /** NBASL_UT — season team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/teams/{team_id}` */
+  espn_nbasl_ut_season_team: Wrapper<Row[], EspnSeasonTeamParams>;
+  /** NBASL_UT — season teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/teams` */
+  espn_nbasl_ut_season_teams: Wrapper<Row[], EspnSeasonTeamsParams>;
+  /** NBASL_UT — season type (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/types/{season_type}` */
+  espn_nbasl_ut_season_type: Wrapper<Row[], EspnSeasonTypeParams>;
+  /** NBASL_UT — season type corrections (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/types/{season_type}/corrections` */
+  espn_nbasl_ut_season_type_corrections: Wrapper<Row[], EspnSeasonTypeCorrectionsParams>;
+  /** NBASL_UT — season type leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/types/{season_type}/leaders` */
+  espn_nbasl_ut_season_type_leaders: Wrapper<Row[], EspnSeasonTypeLeadersParams>;
+  /** NBASL_UT — season types (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/types` */
+  espn_nbasl_ut_season_types: Wrapper<Row[], EspnSeasonTypesParams>;
+  /** NBASL_UT — season week (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/types/{season_type}/weeks/{week}` */
+  espn_nbasl_ut_season_week: Wrapper<Row[], EspnSeasonWeekParams>;
+  /** NBASL_UT — season week games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/types/{season_type}/weeks/{week}/events` */
+  espn_nbasl_ut_season_week_games: Wrapper<Row[], EspnSeasonWeekEventsParams>;
+  /** NBASL_UT — season week powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/types/{season_type}/weeks/{week}/powerindex` */
+  espn_nbasl_ut_season_week_powerindex: Wrapper<Row[], EspnSeasonWeekPowerindexParams>;
+  /** NBASL_UT — season weeks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/types/{season_type}/weeks` */
+  espn_nbasl_ut_season_weeks: Wrapper<Row[], EspnSeasonWeeksParams>;
+  /** NBASL_UT — seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons` */
+  espn_nbasl_ut_seasons: Wrapper<Row[], EspnSeasonsParams>;
+  /** NBASL_UT — standings (ESPN site.api.espn.com (v2)). `GET https://site.api.espn.com/apis/v2/sports/basketball/nba-summer-utah/standings` */
+  espn_nbasl_ut_standings: Wrapper<Row[], EspnStandingsParams>;
+  /** NBASL_UT — standings core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/standings` */
+  espn_nbasl_ut_standings_core: Wrapper<Row[], EspnStandingsCoreParams>;
+  /** NBASL_UT — statistics league (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/statistics` */
+  espn_nbasl_ut_statistics_league: Wrapper<Row[], EspnStatisticsLeagueParams>;
+  /** NBASL_UT — summary (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/summary` */
+  espn_nbasl_ut_summary: SectionedWrapper<ParsedTables, {}, EspnSummaryParams>;
+  /** NBASL_UT — talentpicks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/talentpicks` */
+  espn_nbasl_ut_talentpicks: Wrapper<Row[], EspnTalentpicksParams>;
+  /** NBASL_UT — team (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/teams/{team_id}` */
+  espn_nbasl_ut_team: Wrapper<Row[], EspnTeamParams>;
+  /** NBASL_UT — team core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/teams/{team_id}` */
+  espn_nbasl_ut_team_core: Wrapper<Row[], EspnTeamCoreParams>;
+  /** NBASL_UT — team depthcharts (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/teams/{team_id}/depthcharts` */
+  espn_nbasl_ut_team_depthcharts: Wrapper<Row[], EspnTeamDepthchartsParams>;
+  /** NBASL_UT — team history (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/teams/{team_id}/history` */
+  espn_nbasl_ut_team_history: Wrapper<Row[], EspnTeamHistoryParams>;
+  /** NBASL_UT — team injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/teams/{team_id}/injuries` */
+  espn_nbasl_ut_team_injuries: Wrapper<Row[], EspnTeamInjuriesParams>;
+  /** NBASL_UT — team leaders (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/teams/{team_id}/leaders` */
+  espn_nbasl_ut_team_leaders: Wrapper<Row[], EspnTeamLeadersParams>;
+  /** NBASL_UT — team news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/teams/{team_id}/news` */
+  espn_nbasl_ut_team_news: Wrapper<Row[], EspnTeamNewsParams>;
+  /** NBASL_UT — team record (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/teams/{team_id}/record` */
+  espn_nbasl_ut_team_record: Wrapper<Row[], EspnTeamRecordParams>;
+  /** NBASL_UT — team roster (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/teams/{team_id}/roster` */
+  espn_nbasl_ut_team_roster: Wrapper<Row[], EspnTeamRosterParams>;
+  /** NBASL_UT — team schedule (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/teams/{team_id}/schedule` */
+  espn_nbasl_ut_team_schedule: Wrapper<Row[], EspnTeamScheduleParams>;
+  /** NBASL_UT — team transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/teams/{team_id}/transactions` */
+  espn_nbasl_ut_team_transactions: Wrapper<Row[], EspnTeamTransactionsParams>;
+  /** NBASL_UT — teams core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/teams` */
+  espn_nbasl_ut_teams_core: Wrapper<Row[], EspnTeamsCoreParams>;
+  /** NBASL_UT — teams site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/teams` */
+  espn_nbasl_ut_teams_site: Wrapper<Row[], EspnTeamsSiteParams>;
+  /** NBASL_UT — tournaments (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/tournaments` */
+  espn_nbasl_ut_tournaments: Wrapper<Row[], EspnTournamentsParams>;
+  /** NBASL_UT — transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/transactions` */
+  espn_nbasl_ut_transactions: Wrapper<Row[], EspnTransactionsParams>;
+  /** NBASL_UT — venue (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/venues/{venue_id}` */
+  espn_nbasl_ut_venue: Wrapper<Row[], EspnVenueParams>;
+  /** NBASL_UT — venues (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/venues` */
+  espn_nbasl_ut_venues: Wrapper<Row[], EspnVenuesParams>;
+  /** NBASL_UT — award (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/awards/{award_id}` */
+  espnNbaslUtAward: Wrapper<Row[], EspnAwardParams>;
+  /** NBASL_UT — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/awards` */
+  espnNbaslUtAwards: Wrapper<Row[], EspnAwardsParams>;
+  /** NBASL_UT — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/calendar` */
+  espnNbaslUtCalendar: Wrapper<Row[], EspnCalendarParams>;
+  /** NBASL_UT — coach (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/coaches/{coach_id}` */
+  espnNbaslUtCoach: Wrapper<Row[], EspnCoachParams>;
+  /** NBASL_UT — coach record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/coaches/{coach_id}/record/{record_type}` */
+  espnNbaslUtCoachRecord: Wrapper<Row[], EspnCoachRecordParams>;
+  /** NBASL_UT — coach season (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/coaches/{coach_id}/seasons/{season}` */
+  espnNbaslUtCoachSeason: Wrapper<Row[], EspnCoachSeasonParams>;
+  /** NBASL_UT — conferences (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/groups` */
+  espnNbaslUtConferences: Wrapper<Row[], EspnConferencesParams>;
+  /** NBASL_UT — draft (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/draft` */
+  espnNbaslUtDraft: Wrapper<Row[], EspnDraftParams>;
+  /** NBASL_UT — fpi (ESPN site.web.api.espn.com (FPI, fitt v3)). `GET https://site.web.api.espn.com/apis/fitt/v3/sports/basketball/nba-summer-utah/powerindex` */
+  espnNbaslUtFpi: Wrapper<Row[], EspnFpiParams>;
+  /** NBASL_UT — franchise (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/franchises/{franchise_id}` */
+  espnNbaslUtFranchise: Wrapper<Row[], EspnFranchiseParams>;
+  /** NBASL_UT — franchises (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/franchises` */
+  espnNbaslUtFranchises: Wrapper<Row[], EspnFranchisesParams>;
+  /** NBASL_UT — game (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}` */
+  espnNbaslUtGame: Wrapper<Row[], EspnEventParams>;
+  /** NBASL_UT — game broadcasts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/broadcasts` */
+  espnNbaslUtGameBroadcasts: Wrapper<Row[], EspnEventBroadcastsParams>;
+  /** NBASL_UT — game competition (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}` */
+  espnNbaslUtGameCompetition: Wrapper<Row[], EspnEventCompetitionParams>;
+  /** NBASL_UT — game leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/leaders` */
+  espnNbaslUtGameLeaders: Wrapper<Row[], EspnEventLeadersParams>;
+  /** NBASL_UT — game odds (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/odds` */
+  espnNbaslUtGameOdds: Wrapper<Row[], EspnEventOddsParams>;
+  /** NBASL_UT — game official detail (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/officials/{official_id}` */
+  espnNbaslUtGameOfficialDetail: Wrapper<Row[], EspnEventOfficialDetailParams>;
+  /** NBASL_UT — game officials (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/officials` */
+  espnNbaslUtGameOfficials: Wrapper<Row[], EspnEventOfficialsParams>;
+  /** NBASL_UT — game play (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/plays/{play_id}` */
+  espnNbaslUtGamePlay: Wrapper<Row[], EspnEventPlayParams>;
+  /** NBASL_UT — game play personnel (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` */
+  espnNbaslUtGamePlayPersonnel: Wrapper<Row[], EspnEventPlayPersonnelParams>;
+  /** NBASL_UT — game plays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/plays` */
+  espnNbaslUtGamePlays: Wrapper<Row[], EspnEventPlaysParams>;
+  /** NBASL_UT — game powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/powerindex` */
+  espnNbaslUtGamePowerindex: Wrapper<Row[], EspnEventPowerindexParams>;
+  /** NBASL_UT — game predictor (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/predictor` */
+  espnNbaslUtGamePredictor: Wrapper<Row[], EspnEventPredictorParams>;
+  /** NBASL_UT — game probabilities (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/probabilities` */
+  espnNbaslUtGameProbabilities: Wrapper<Row[], EspnEventProbabilitiesParams>;
+  /** NBASL_UT — game propbets (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/propbets` */
+  espnNbaslUtGamePropbets: Wrapper<Row[], EspnEventPropbetsParams>;
+  /** NBASL_UT — games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events` */
+  espnNbaslUtGames: Wrapper<Row[], EspnEventsParams>;
+  /** NBASL_UT — game scoringplays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/scoringplays` */
+  espnNbaslUtGameScoringplays: Wrapper<Row[], EspnEventScoringplaysParams>;
+  /** NBASL_UT — game situation (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/situation` */
+  espnNbaslUtGameSituation: Wrapper<Row[], EspnEventSituationParams>;
+  /** NBASL_UT — game status (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/status` */
+  espnNbaslUtGameStatus: Wrapper<Row[], EspnEventStatusParams>;
+  /** NBASL_UT — game team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/competitors/{team_id}` */
+  espnNbaslUtGameTeam: Wrapper<Row[], EspnEventCompetitorParams>;
+  /** NBASL_UT — game team leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` */
+  espnNbaslUtGameTeamLeaders: Wrapper<Row[], EspnEventCompetitorLeadersParams>;
+  /** NBASL_UT — game team linescores (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` */
+  espnNbaslUtGameTeamLinescores: Wrapper<Row[], EspnEventCompetitorLinescoresParams>;
+  /** NBASL_UT — game team record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` */
+  espnNbaslUtGameTeamRecord: Wrapper<Row[], EspnEventCompetitorRecordParams>;
+  /** NBASL_UT — game team roster (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` */
+  espnNbaslUtGameTeamRoster: Wrapper<Row[], EspnEventCompetitorRosterParams>;
+  /** NBASL_UT — game teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/competitors` */
+  espnNbaslUtGameTeams: Wrapper<Row[], EspnEventCompetitorsParams>;
+  /** NBASL_UT — game team statistics (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` */
+  espnNbaslUtGameTeamStatistics: Wrapper<Row[], EspnEventCompetitorStatisticsParams>;
+  /** NBASL_UT — injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/injuries` */
+  espnNbaslUtInjuries: Wrapper<Row[], EspnInjuriesParams>;
+  /** NBASL_UT — leaders (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-utah/statistics/byathlete` */
+  espnNbaslUtLeaders: Wrapper<Row[], EspnLeadersParams>;
+  /** NBASL_UT — leaders core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/leaders` */
+  espnNbaslUtLeadersCore: Wrapper<Row[], EspnLeadersCoreParams>;
+  /** NBASL_UT — league notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/notes` */
+  espnNbaslUtLeagueNotes: Wrapper<Row[], EspnLeagueNotesParams>;
+  /** NBASL_UT — league root (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah` */
+  espnNbaslUtLeagueRoot: Wrapper<Row[], EspnLeagueRootParams>;
+  /** NBASL_UT — news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/news` */
+  espnNbaslUtNews: Wrapper<Row[], EspnNewsParams>;
+  /** NBASL_UT — player awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/athletes/{athlete_id}/awards` */
+  espnNbaslUtPlayerAwards: Wrapper<Row[], EspnAthleteAwardsParams>;
+  /** NBASL_UT — player bio (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/athletes/{athlete_id}/bio` */
+  espnNbaslUtPlayerBio: Wrapper<Row[], EspnAthleteBioParams>;
+  /** NBASL_UT — player career stats (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/athletes/{athlete_id}/statistics[/{stat_type}]` */
+  espnNbaslUtPlayerCareerStats: Wrapper<Row[], EspnAthleteCareerStatsParams>;
+  /** NBASL_UT — player contracts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/athletes/{athlete_id}/contracts` */
+  espnNbaslUtPlayerContracts: Wrapper<Row[], EspnAthleteContractsParams>;
+  /** NBASL_UT — player core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/athletes/{athlete_id}` */
+  espnNbaslUtPlayerCore: Wrapper<Row[], EspnAthleteCoreParams>;
+  /** NBASL_UT — player eventlog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/athletes/{athlete_id}/eventlog` */
+  espnNbaslUtPlayerEventlog: Wrapper<Row[], EspnAthleteEventlogParams>;
+  /** NBASL_UT — player gamelog (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-utah/athletes/{athlete_id}/gamelog` */
+  espnNbaslUtPlayerGamelog: Wrapper<Row[], EspnAthleteGamelogParams>;
+  /** NBASL_UT — player info (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/athletes/{athlete_id}` */
+  espnNbaslUtPlayerInfo: Wrapper<Row[], EspnAthleteInfoParams>;
+  /** NBASL_UT — player injuries (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/athletes/{athlete_id}/injuries` */
+  espnNbaslUtPlayerInjuries: Wrapper<Row[], EspnAthleteInjuriesParams>;
+  /** NBASL_UT — player news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/athletes/{athlete_id}/news` */
+  espnNbaslUtPlayerNews: Wrapper<Row[], EspnAthleteNewsParams>;
+  /** NBASL_UT — player notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/athletes/{athlete_id}/notes` */
+  espnNbaslUtPlayerNotes: Wrapper<Row[], EspnAthleteNotesParams>;
+  /** NBASL_UT — player overview (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-utah/athletes/{athlete_id}/overview` */
+  espnNbaslUtPlayerOverview: Wrapper<Row[], EspnAthleteOverviewParams>;
+  /** NBASL_UT — player records (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/athletes/{athlete_id}/records` */
+  espnNbaslUtPlayerRecords: Wrapper<Row[], EspnAthleteRecordsParams>;
+  /** NBASL_UT — player seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/athletes/{athlete_id}/seasons` */
+  espnNbaslUtPlayerSeasons: Wrapper<Row[], EspnAthleteSeasonsParams>;
+  /** NBASL_UT — players index (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/athletes` */
+  espnNbaslUtPlayersIndex: Wrapper<Row[], EspnAthletesIndexParams>;
+  /** NBASL_UT — player splits (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-utah/athletes/{athlete_id}/splits` */
+  espnNbaslUtPlayerSplits: Wrapper<Row[], EspnAthleteSplitsParams>;
+  /** NBASL_UT — player statisticslog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/athletes/{athlete_id}/statisticslog` */
+  espnNbaslUtPlayerStatisticslog: Wrapper<Row[], EspnAthleteStatisticslogParams>;
+  /** NBASL_UT — player stats (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba-summer-utah/athletes/{athlete_id}/stats` */
+  espnNbaslUtPlayerStats: Wrapper<Row[], EspnAthleteStatsParams>;
+  /** NBASL_UT — player vs player (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/athletes/{athlete_id}/vsathlete/{opp_id}` */
+  espnNbaslUtPlayerVsPlayer: Wrapper<Row[], EspnAthleteVsAthleteParams>;
+  /** NBASL_UT — position (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/positions/{position_id}` */
+  espnNbaslUtPosition: Wrapper<Row[], EspnPositionParams>;
+  /** NBASL_UT — positions (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/positions` */
+  espnNbaslUtPositions: Wrapper<Row[], EspnPositionsParams>;
+  /** NBASL_UT — scoreboard (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/scoreboard` */
+  espnNbaslUtScoreboard: Wrapper<Row[], EspnScoreboardParams>;
+  /** NBASL_UT — season awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/awards` */
+  espnNbaslUtSeasonAwards: Wrapper<Row[], EspnSeasonAwardsParams>;
+  /** NBASL_UT — season coaches (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/coaches` */
+  espnNbaslUtSeasonCoaches: Wrapper<Row[], EspnSeasonCoachesParams>;
+  /** NBASL_UT — season draft (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/draft` */
+  espnNbaslUtSeasonDraft: Wrapper<Row[], EspnSeasonDraftParams>;
+  /** NBASL_UT — season draft round picks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/draft/rounds/{round_num}/picks` */
+  espnNbaslUtSeasonDraftRoundPicks: Wrapper<Row[], EspnSeasonDraftRoundPicksParams>;
+  /** NBASL_UT — season freeagents (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/freeagents` */
+  espnNbaslUtSeasonFreeagents: Wrapper<Row[], EspnSeasonFreeagentsParams>;
+  /** NBASL_UT — season futures (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/futures` */
+  espnNbaslUtSeasonFutures: Wrapper<Row[], EspnSeasonFuturesParams>;
+  /** NBASL_UT — season group (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/types/{season_type}/groups/{group_id}` */
+  espnNbaslUtSeasonGroup: Wrapper<Row[], EspnSeasonGroupParams>;
+  /** NBASL_UT — season group children (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/types/{season_type}/groups/{group_id}/children` */
+  espnNbaslUtSeasonGroupChildren: Wrapper<Row[], EspnSeasonGroupChildrenParams>;
+  /** NBASL_UT — season groups (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/types/{season_type}/groups` */
+  espnNbaslUtSeasonGroups: Wrapper<Row[], EspnSeasonGroupsParams>;
+  /** NBASL_UT — season group teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/types/{season_type}/groups/{group_id}/teams` */
+  espnNbaslUtSeasonGroupTeams: Wrapper<Row[], EspnSeasonGroupTeamsParams>;
+  /** NBASL_UT — season info (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}` */
+  espnNbaslUtSeasonInfo: Wrapper<Row[], EspnSeasonInfoParams>;
+  /** NBASL_UT — season players (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/athletes` */
+  espnNbaslUtSeasonPlayers: Wrapper<Row[], EspnSeasonAthletesParams>;
+  /** NBASL_UT — season pointer (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/season` */
+  espnNbaslUtSeasonPointer: Wrapper<Row[], EspnSeasonPointerParams>;
+  /** NBASL_UT — season powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/powerindex[/{team_id}]` */
+  espnNbaslUtSeasonPowerindex: Wrapper<Row[], EspnSeasonPowerindexParams>;
+  /** NBASL_UT — season powerindex leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/powerindex/leaders` */
+  espnNbaslUtSeasonPowerindexLeaders: Wrapper<Row[], EspnSeasonPowerindexLeadersParams>;
+  /** NBASL_UT — seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons` */
+  espnNbaslUtSeasons: Wrapper<Row[], EspnSeasonsParams>;
+  /** NBASL_UT — season team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/teams/{team_id}` */
+  espnNbaslUtSeasonTeam: Wrapper<Row[], EspnSeasonTeamParams>;
+  /** NBASL_UT — season teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/teams` */
+  espnNbaslUtSeasonTeams: Wrapper<Row[], EspnSeasonTeamsParams>;
+  /** NBASL_UT — season type (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/types/{season_type}` */
+  espnNbaslUtSeasonType: Wrapper<Row[], EspnSeasonTypeParams>;
+  /** NBASL_UT — season type corrections (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/types/{season_type}/corrections` */
+  espnNbaslUtSeasonTypeCorrections: Wrapper<Row[], EspnSeasonTypeCorrectionsParams>;
+  /** NBASL_UT — season type leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/types/{season_type}/leaders` */
+  espnNbaslUtSeasonTypeLeaders: Wrapper<Row[], EspnSeasonTypeLeadersParams>;
+  /** NBASL_UT — season types (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/types` */
+  espnNbaslUtSeasonTypes: Wrapper<Row[], EspnSeasonTypesParams>;
+  /** NBASL_UT — season week (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/types/{season_type}/weeks/{week}` */
+  espnNbaslUtSeasonWeek: Wrapper<Row[], EspnSeasonWeekParams>;
+  /** NBASL_UT — season week games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/types/{season_type}/weeks/{week}/events` */
+  espnNbaslUtSeasonWeekGames: Wrapper<Row[], EspnSeasonWeekEventsParams>;
+  /** NBASL_UT — season week powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/types/{season_type}/weeks/{week}/powerindex` */
+  espnNbaslUtSeasonWeekPowerindex: Wrapper<Row[], EspnSeasonWeekPowerindexParams>;
+  /** NBASL_UT — season weeks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/seasons/{season}/types/{season_type}/weeks` */
+  espnNbaslUtSeasonWeeks: Wrapper<Row[], EspnSeasonWeeksParams>;
+  /** NBASL_UT — standings (ESPN site.api.espn.com (v2)). `GET https://site.api.espn.com/apis/v2/sports/basketball/nba-summer-utah/standings` */
+  espnNbaslUtStandings: Wrapper<Row[], EspnStandingsParams>;
+  /** NBASL_UT — standings core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/standings` */
+  espnNbaslUtStandingsCore: Wrapper<Row[], EspnStandingsCoreParams>;
+  /** NBASL_UT — statistics league (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/statistics` */
+  espnNbaslUtStatisticsLeague: Wrapper<Row[], EspnStatisticsLeagueParams>;
+  /** NBASL_UT — summary (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/summary` */
+  espnNbaslUtSummary: SectionedWrapper<ParsedTables, {}, EspnSummaryParams>;
+  /** NBASL_UT — talentpicks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/talentpicks` */
+  espnNbaslUtTalentpicks: Wrapper<Row[], EspnTalentpicksParams>;
+  /** NBASL_UT — team (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/teams/{team_id}` */
+  espnNbaslUtTeam: Wrapper<Row[], EspnTeamParams>;
+  /** NBASL_UT — team core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/teams/{team_id}` */
+  espnNbaslUtTeamCore: Wrapper<Row[], EspnTeamCoreParams>;
+  /** NBASL_UT — team depthcharts (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/teams/{team_id}/depthcharts` */
+  espnNbaslUtTeamDepthcharts: Wrapper<Row[], EspnTeamDepthchartsParams>;
+  /** NBASL_UT — team history (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/teams/{team_id}/history` */
+  espnNbaslUtTeamHistory: Wrapper<Row[], EspnTeamHistoryParams>;
+  /** NBASL_UT — team injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/teams/{team_id}/injuries` */
+  espnNbaslUtTeamInjuries: Wrapper<Row[], EspnTeamInjuriesParams>;
+  /** NBASL_UT — team leaders (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/teams/{team_id}/leaders` */
+  espnNbaslUtTeamLeaders: Wrapper<Row[], EspnTeamLeadersParams>;
+  /** NBASL_UT — team news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/teams/{team_id}/news` */
+  espnNbaslUtTeamNews: Wrapper<Row[], EspnTeamNewsParams>;
+  /** NBASL_UT — team record (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/teams/{team_id}/record` */
+  espnNbaslUtTeamRecord: Wrapper<Row[], EspnTeamRecordParams>;
+  /** NBASL_UT — team roster (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/teams/{team_id}/roster` */
+  espnNbaslUtTeamRoster: Wrapper<Row[], EspnTeamRosterParams>;
+  /** NBASL_UT — team schedule (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/teams/{team_id}/schedule` */
+  espnNbaslUtTeamSchedule: Wrapper<Row[], EspnTeamScheduleParams>;
+  /** NBASL_UT — teams core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/teams` */
+  espnNbaslUtTeamsCore: Wrapper<Row[], EspnTeamsCoreParams>;
+  /** NBASL_UT — teams site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/teams` */
+  espnNbaslUtTeamsSite: Wrapper<Row[], EspnTeamsSiteParams>;
+  /** NBASL_UT — team transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/teams/{team_id}/transactions` */
+  espnNbaslUtTeamTransactions: Wrapper<Row[], EspnTeamTransactionsParams>;
+  /** NBASL_UT — tournaments (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/tournaments` */
+  espnNbaslUtTournaments: Wrapper<Row[], EspnTournamentsParams>;
+  /** NBASL_UT — transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba-summer-utah/transactions` */
+  espnNbaslUtTransactions: Wrapper<Row[], EspnTransactionsParams>;
+  /** NBASL_UT — venue (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/venues/{venue_id}` */
+  espnNbaslUtVenue: Wrapper<Row[], EspnVenueParams>;
+  /** NBASL_UT — venues (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba-summer-utah/venues` */
+  espnNbaslUtVenues: Wrapper<Row[], EspnVenuesParams>;
+}
+
+/** The generated wrappers of `sdv.nbl` (and their deprecated pre-v4 names). */
+export interface NblWrappers {
+  /** NBL — award (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/awards/{award_id}` */
+  espn_nbl_award: Wrapper<Row[], EspnAwardParams>;
+  /** NBL — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/awards` */
+  espn_nbl_awards: Wrapper<Row[], EspnAwardsParams>;
+  /** NBL — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/calendar` */
+  espn_nbl_calendar: Wrapper<Row[], EspnCalendarParams>;
+  /** NBL — coach (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/coaches/{coach_id}` */
+  espn_nbl_coach: Wrapper<Row[], EspnCoachParams>;
+  /** NBL — coach record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/coaches/{coach_id}/record/{record_type}` */
+  espn_nbl_coach_record: Wrapper<Row[], EspnCoachRecordParams>;
+  /** NBL — coach season (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/coaches/{coach_id}/seasons/{season}` */
+  espn_nbl_coach_season: Wrapper<Row[], EspnCoachSeasonParams>;
+  /** NBL — conferences (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/groups` */
+  espn_nbl_conferences: Wrapper<Row[], EspnConferencesParams>;
+  /** NBL — draft (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/draft` */
+  espn_nbl_draft: Wrapper<Row[], EspnDraftParams>;
+  /** NBL — fpi (ESPN site.web.api.espn.com (FPI, fitt v3)). `GET https://site.web.api.espn.com/apis/fitt/v3/sports/basketball/nbl/powerindex` */
+  espn_nbl_fpi: Wrapper<Row[], EspnFpiParams>;
+  /** NBL — franchise (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/franchises/{franchise_id}` */
+  espn_nbl_franchise: Wrapper<Row[], EspnFranchiseParams>;
+  /** NBL — franchises (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/franchises` */
+  espn_nbl_franchises: Wrapper<Row[], EspnFranchisesParams>;
+  /** NBL — game (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}` */
+  espn_nbl_game: Wrapper<Row[], EspnEventParams>;
+  /** NBL — game broadcasts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/broadcasts` */
+  espn_nbl_game_broadcasts: Wrapper<Row[], EspnEventBroadcastsParams>;
+  /** NBL — game competition (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}` */
+  espn_nbl_game_competition: Wrapper<Row[], EspnEventCompetitionParams>;
+  /** NBL — game leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/leaders` */
+  espn_nbl_game_leaders: Wrapper<Row[], EspnEventLeadersParams>;
+  /** NBL — game odds (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/odds` */
+  espn_nbl_game_odds: Wrapper<Row[], EspnEventOddsParams>;
+  /** NBL — game official detail (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/officials/{official_id}` */
+  espn_nbl_game_official_detail: Wrapper<Row[], EspnEventOfficialDetailParams>;
+  /** NBL — game officials (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/officials` */
+  espn_nbl_game_officials: Wrapper<Row[], EspnEventOfficialsParams>;
+  /** NBL — game play (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/plays/{play_id}` */
+  espn_nbl_game_play: Wrapper<Row[], EspnEventPlayParams>;
+  /** NBL — game play personnel (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` */
+  espn_nbl_game_play_personnel: Wrapper<Row[], EspnEventPlayPersonnelParams>;
+  /** NBL — game plays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/plays` */
+  espn_nbl_game_plays: Wrapper<Row[], EspnEventPlaysParams>;
+  /** NBL — game powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/powerindex` */
+  espn_nbl_game_powerindex: Wrapper<Row[], EspnEventPowerindexParams>;
+  /** NBL — game predictor (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/predictor` */
+  espn_nbl_game_predictor: Wrapper<Row[], EspnEventPredictorParams>;
+  /** NBL — game probabilities (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/probabilities` */
+  espn_nbl_game_probabilities: Wrapper<Row[], EspnEventProbabilitiesParams>;
+  /** NBL — game propbets (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/propbets` */
+  espn_nbl_game_propbets: Wrapper<Row[], EspnEventPropbetsParams>;
+  /** NBL — game scoringplays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/scoringplays` */
+  espn_nbl_game_scoringplays: Wrapper<Row[], EspnEventScoringplaysParams>;
+  /** NBL — game situation (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/situation` */
+  espn_nbl_game_situation: Wrapper<Row[], EspnEventSituationParams>;
+  /** NBL — game status (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/status` */
+  espn_nbl_game_status: Wrapper<Row[], EspnEventStatusParams>;
+  /** NBL — game team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/competitors/{team_id}` */
+  espn_nbl_game_team: Wrapper<Row[], EspnEventCompetitorParams>;
+  /** NBL — game team leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` */
+  espn_nbl_game_team_leaders: Wrapper<Row[], EspnEventCompetitorLeadersParams>;
+  /** NBL — game team linescores (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` */
+  espn_nbl_game_team_linescores: Wrapper<Row[], EspnEventCompetitorLinescoresParams>;
+  /** NBL — game team record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` */
+  espn_nbl_game_team_record: Wrapper<Row[], EspnEventCompetitorRecordParams>;
+  /** NBL — game team roster (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` */
+  espn_nbl_game_team_roster: Wrapper<Row[], EspnEventCompetitorRosterParams>;
+  /** NBL — game team statistics (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` */
+  espn_nbl_game_team_statistics: Wrapper<Row[], EspnEventCompetitorStatisticsParams>;
+  /** NBL — game teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/competitors` */
+  espn_nbl_game_teams: Wrapper<Row[], EspnEventCompetitorsParams>;
+  /** NBL — games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events` */
+  espn_nbl_games: Wrapper<Row[], EspnEventsParams>;
+  /** NBL — injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/injuries` */
+  espn_nbl_injuries: Wrapper<Row[], EspnInjuriesParams>;
+  /** NBL — leaders (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nbl/statistics/byathlete` */
+  espn_nbl_leaders: Wrapper<Row[], EspnLeadersParams>;
+  /** NBL — leaders core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/leaders` */
+  espn_nbl_leaders_core: Wrapper<Row[], EspnLeadersCoreParams>;
+  /** NBL — league notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/notes` */
+  espn_nbl_league_notes: Wrapper<Row[], EspnLeagueNotesParams>;
+  /** NBL — league root (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl` */
+  espn_nbl_league_root: Wrapper<Row[], EspnLeagueRootParams>;
+  /** NBL — news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/news` */
+  espn_nbl_news: Wrapper<Row[], EspnNewsParams>;
+  /** NBL — player awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/athletes/{athlete_id}/awards` */
+  espn_nbl_player_awards: Wrapper<Row[], EspnAthleteAwardsParams>;
+  /** NBL — player bio (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/athletes/{athlete_id}/bio` */
+  espn_nbl_player_bio: Wrapper<Row[], EspnAthleteBioParams>;
+  /** NBL — player career stats (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/athletes/{athlete_id}/statistics[/{stat_type}]` */
+  espn_nbl_player_career_stats: Wrapper<Row[], EspnAthleteCareerStatsParams>;
+  /** NBL — player contracts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/athletes/{athlete_id}/contracts` */
+  espn_nbl_player_contracts: Wrapper<Row[], EspnAthleteContractsParams>;
+  /** NBL — player core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/athletes/{athlete_id}` */
+  espn_nbl_player_core: Wrapper<Row[], EspnAthleteCoreParams>;
+  /** NBL — player eventlog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/athletes/{athlete_id}/eventlog` */
+  espn_nbl_player_eventlog: Wrapper<Row[], EspnAthleteEventlogParams>;
+  /** NBL — player gamelog (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nbl/athletes/{athlete_id}/gamelog` */
+  espn_nbl_player_gamelog: Wrapper<Row[], EspnAthleteGamelogParams>;
+  /** NBL — player info (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/athletes/{athlete_id}` */
+  espn_nbl_player_info: Wrapper<Row[], EspnAthleteInfoParams>;
+  /** NBL — player injuries (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/athletes/{athlete_id}/injuries` */
+  espn_nbl_player_injuries: Wrapper<Row[], EspnAthleteInjuriesParams>;
+  /** NBL — player news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/athletes/{athlete_id}/news` */
+  espn_nbl_player_news: Wrapper<Row[], EspnAthleteNewsParams>;
+  /** NBL — player notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/athletes/{athlete_id}/notes` */
+  espn_nbl_player_notes: Wrapper<Row[], EspnAthleteNotesParams>;
+  /** NBL — player overview (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nbl/athletes/{athlete_id}/overview` */
+  espn_nbl_player_overview: Wrapper<Row[], EspnAthleteOverviewParams>;
+  /** NBL — player records (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/athletes/{athlete_id}/records` */
+  espn_nbl_player_records: Wrapper<Row[], EspnAthleteRecordsParams>;
+  /** NBL — player seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/athletes/{athlete_id}/seasons` */
+  espn_nbl_player_seasons: Wrapper<Row[], EspnAthleteSeasonsParams>;
+  /** NBL — player splits (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nbl/athletes/{athlete_id}/splits` */
+  espn_nbl_player_splits: Wrapper<Row[], EspnAthleteSplitsParams>;
+  /** NBL — player statisticslog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/athletes/{athlete_id}/statisticslog` */
+  espn_nbl_player_statisticslog: Wrapper<Row[], EspnAthleteStatisticslogParams>;
+  /** NBL — player stats (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nbl/athletes/{athlete_id}/stats` */
+  espn_nbl_player_stats: Wrapper<Row[], EspnAthleteStatsParams>;
+  /** NBL — player vs player (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/athletes/{athlete_id}/vsathlete/{opp_id}` */
+  espn_nbl_player_vs_player: Wrapper<Row[], EspnAthleteVsAthleteParams>;
+  /** NBL — players index (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/athletes` */
+  espn_nbl_players_index: Wrapper<Row[], EspnAthletesIndexParams>;
+  /** NBL — position (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/positions/{position_id}` */
+  espn_nbl_position: Wrapper<Row[], EspnPositionParams>;
+  /** NBL — positions (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/positions` */
+  espn_nbl_positions: Wrapper<Row[], EspnPositionsParams>;
+  /** NBL — scoreboard (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/scoreboard` */
+  espn_nbl_scoreboard: Wrapper<Row[], EspnScoreboardParams>;
+  /** NBL — season awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/awards` */
+  espn_nbl_season_awards: Wrapper<Row[], EspnSeasonAwardsParams>;
+  /** NBL — season coaches (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/coaches` */
+  espn_nbl_season_coaches: Wrapper<Row[], EspnSeasonCoachesParams>;
+  /** NBL — season draft (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/draft` */
+  espn_nbl_season_draft: Wrapper<Row[], EspnSeasonDraftParams>;
+  /** NBL — season draft round picks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/draft/rounds/{round_num}/picks` */
+  espn_nbl_season_draft_round_picks: Wrapper<Row[], EspnSeasonDraftRoundPicksParams>;
+  /** NBL — season freeagents (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/freeagents` */
+  espn_nbl_season_freeagents: Wrapper<Row[], EspnSeasonFreeagentsParams>;
+  /** NBL — season futures (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/futures` */
+  espn_nbl_season_futures: Wrapper<Row[], EspnSeasonFuturesParams>;
+  /** NBL — season group (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/types/{season_type}/groups/{group_id}` */
+  espn_nbl_season_group: Wrapper<Row[], EspnSeasonGroupParams>;
+  /** NBL — season group children (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/types/{season_type}/groups/{group_id}/children` */
+  espn_nbl_season_group_children: Wrapper<Row[], EspnSeasonGroupChildrenParams>;
+  /** NBL — season group teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/types/{season_type}/groups/{group_id}/teams` */
+  espn_nbl_season_group_teams: Wrapper<Row[], EspnSeasonGroupTeamsParams>;
+  /** NBL — season groups (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/types/{season_type}/groups` */
+  espn_nbl_season_groups: Wrapper<Row[], EspnSeasonGroupsParams>;
+  /** NBL — season info (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}` */
+  espn_nbl_season_info: Wrapper<Row[], EspnSeasonInfoParams>;
+  /** NBL — season players (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/athletes` */
+  espn_nbl_season_players: Wrapper<Row[], EspnSeasonAthletesParams>;
+  /** NBL — season pointer (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/season` */
+  espn_nbl_season_pointer: Wrapper<Row[], EspnSeasonPointerParams>;
+  /** NBL — season powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/powerindex[/{team_id}]` */
+  espn_nbl_season_powerindex: Wrapper<Row[], EspnSeasonPowerindexParams>;
+  /** NBL — season powerindex leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/powerindex/leaders` */
+  espn_nbl_season_powerindex_leaders: Wrapper<Row[], EspnSeasonPowerindexLeadersParams>;
+  /** NBL — season team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/teams/{team_id}` */
+  espn_nbl_season_team: Wrapper<Row[], EspnSeasonTeamParams>;
+  /** NBL — season teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/teams` */
+  espn_nbl_season_teams: Wrapper<Row[], EspnSeasonTeamsParams>;
+  /** NBL — season type (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/types/{season_type}` */
+  espn_nbl_season_type: Wrapper<Row[], EspnSeasonTypeParams>;
+  /** NBL — season type corrections (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/types/{season_type}/corrections` */
+  espn_nbl_season_type_corrections: Wrapper<Row[], EspnSeasonTypeCorrectionsParams>;
+  /** NBL — season type leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/types/{season_type}/leaders` */
+  espn_nbl_season_type_leaders: Wrapper<Row[], EspnSeasonTypeLeadersParams>;
+  /** NBL — season types (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/types` */
+  espn_nbl_season_types: Wrapper<Row[], EspnSeasonTypesParams>;
+  /** NBL — season week (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/types/{season_type}/weeks/{week}` */
+  espn_nbl_season_week: Wrapper<Row[], EspnSeasonWeekParams>;
+  /** NBL — season week games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/types/{season_type}/weeks/{week}/events` */
+  espn_nbl_season_week_games: Wrapper<Row[], EspnSeasonWeekEventsParams>;
+  /** NBL — season week powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/types/{season_type}/weeks/{week}/powerindex` */
+  espn_nbl_season_week_powerindex: Wrapper<Row[], EspnSeasonWeekPowerindexParams>;
+  /** NBL — season weeks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/types/{season_type}/weeks` */
+  espn_nbl_season_weeks: Wrapper<Row[], EspnSeasonWeeksParams>;
+  /** NBL — seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons` */
+  espn_nbl_seasons: Wrapper<Row[], EspnSeasonsParams>;
+  /** NBL — standings (ESPN site.api.espn.com (v2)). `GET https://site.api.espn.com/apis/v2/sports/basketball/nbl/standings` */
+  espn_nbl_standings: Wrapper<Row[], EspnStandingsParams>;
+  /** NBL — standings core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/standings` */
+  espn_nbl_standings_core: Wrapper<Row[], EspnStandingsCoreParams>;
+  /** NBL — statistics league (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/statistics` */
+  espn_nbl_statistics_league: Wrapper<Row[], EspnStatisticsLeagueParams>;
+  /** NBL — summary (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/summary` */
+  espn_nbl_summary: SectionedWrapper<ParsedTables, {}, EspnSummaryParams>;
+  /** NBL — talentpicks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/talentpicks` */
+  espn_nbl_talentpicks: Wrapper<Row[], EspnTalentpicksParams>;
+  /** NBL — team (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/teams/{team_id}` */
+  espn_nbl_team: Wrapper<Row[], EspnTeamParams>;
+  /** NBL — team core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/teams/{team_id}` */
+  espn_nbl_team_core: Wrapper<Row[], EspnTeamCoreParams>;
+  /** NBL — team depthcharts (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/teams/{team_id}/depthcharts` */
+  espn_nbl_team_depthcharts: Wrapper<Row[], EspnTeamDepthchartsParams>;
+  /** NBL — team history (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/teams/{team_id}/history` */
+  espn_nbl_team_history: Wrapper<Row[], EspnTeamHistoryParams>;
+  /** NBL — team injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/teams/{team_id}/injuries` */
+  espn_nbl_team_injuries: Wrapper<Row[], EspnTeamInjuriesParams>;
+  /** NBL — team leaders (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/teams/{team_id}/leaders` */
+  espn_nbl_team_leaders: Wrapper<Row[], EspnTeamLeadersParams>;
+  /** NBL — team news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/teams/{team_id}/news` */
+  espn_nbl_team_news: Wrapper<Row[], EspnTeamNewsParams>;
+  /** NBL — team record (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/teams/{team_id}/record` */
+  espn_nbl_team_record: Wrapper<Row[], EspnTeamRecordParams>;
+  /** NBL — team roster (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/teams/{team_id}/roster` */
+  espn_nbl_team_roster: Wrapper<Row[], EspnTeamRosterParams>;
+  /** NBL — team schedule (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/teams/{team_id}/schedule` */
+  espn_nbl_team_schedule: Wrapper<Row[], EspnTeamScheduleParams>;
+  /** NBL — team transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/teams/{team_id}/transactions` */
+  espn_nbl_team_transactions: Wrapper<Row[], EspnTeamTransactionsParams>;
+  /** NBL — teams core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/teams` */
+  espn_nbl_teams_core: Wrapper<Row[], EspnTeamsCoreParams>;
+  /** NBL — teams site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/teams` */
+  espn_nbl_teams_site: Wrapper<Row[], EspnTeamsSiteParams>;
+  /** NBL — tournaments (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/tournaments` */
+  espn_nbl_tournaments: Wrapper<Row[], EspnTournamentsParams>;
+  /** NBL — transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/transactions` */
+  espn_nbl_transactions: Wrapper<Row[], EspnTransactionsParams>;
+  /** NBL — venue (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/venues/{venue_id}` */
+  espn_nbl_venue: Wrapper<Row[], EspnVenueParams>;
+  /** NBL — venues (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/venues` */
+  espn_nbl_venues: Wrapper<Row[], EspnVenuesParams>;
+  /** NBL — award (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/awards/{award_id}` */
+  espnNblAward: Wrapper<Row[], EspnAwardParams>;
+  /** NBL — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/awards` */
+  espnNblAwards: Wrapper<Row[], EspnAwardsParams>;
+  /** NBL — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/calendar` */
+  espnNblCalendar: Wrapper<Row[], EspnCalendarParams>;
+  /** NBL — coach (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/coaches/{coach_id}` */
+  espnNblCoach: Wrapper<Row[], EspnCoachParams>;
+  /** NBL — coach record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/coaches/{coach_id}/record/{record_type}` */
+  espnNblCoachRecord: Wrapper<Row[], EspnCoachRecordParams>;
+  /** NBL — coach season (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/coaches/{coach_id}/seasons/{season}` */
+  espnNblCoachSeason: Wrapper<Row[], EspnCoachSeasonParams>;
+  /** NBL — conferences (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/groups` */
+  espnNblConferences: Wrapper<Row[], EspnConferencesParams>;
+  /** NBL — draft (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/draft` */
+  espnNblDraft: Wrapper<Row[], EspnDraftParams>;
+  /** NBL — fpi (ESPN site.web.api.espn.com (FPI, fitt v3)). `GET https://site.web.api.espn.com/apis/fitt/v3/sports/basketball/nbl/powerindex` */
+  espnNblFpi: Wrapper<Row[], EspnFpiParams>;
+  /** NBL — franchise (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/franchises/{franchise_id}` */
+  espnNblFranchise: Wrapper<Row[], EspnFranchiseParams>;
+  /** NBL — franchises (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/franchises` */
+  espnNblFranchises: Wrapper<Row[], EspnFranchisesParams>;
+  /** NBL — game (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}` */
+  espnNblGame: Wrapper<Row[], EspnEventParams>;
+  /** NBL — game broadcasts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/broadcasts` */
+  espnNblGameBroadcasts: Wrapper<Row[], EspnEventBroadcastsParams>;
+  /** NBL — game competition (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}` */
+  espnNblGameCompetition: Wrapper<Row[], EspnEventCompetitionParams>;
+  /** NBL — game leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/leaders` */
+  espnNblGameLeaders: Wrapper<Row[], EspnEventLeadersParams>;
+  /** NBL — game odds (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/odds` */
+  espnNblGameOdds: Wrapper<Row[], EspnEventOddsParams>;
+  /** NBL — game official detail (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/officials/{official_id}` */
+  espnNblGameOfficialDetail: Wrapper<Row[], EspnEventOfficialDetailParams>;
+  /** NBL — game officials (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/officials` */
+  espnNblGameOfficials: Wrapper<Row[], EspnEventOfficialsParams>;
+  /** NBL — game play (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/plays/{play_id}` */
+  espnNblGamePlay: Wrapper<Row[], EspnEventPlayParams>;
+  /** NBL — game play personnel (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` */
+  espnNblGamePlayPersonnel: Wrapper<Row[], EspnEventPlayPersonnelParams>;
+  /** NBL — game plays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/plays` */
+  espnNblGamePlays: Wrapper<Row[], EspnEventPlaysParams>;
+  /** NBL — game powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/powerindex` */
+  espnNblGamePowerindex: Wrapper<Row[], EspnEventPowerindexParams>;
+  /** NBL — game predictor (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/predictor` */
+  espnNblGamePredictor: Wrapper<Row[], EspnEventPredictorParams>;
+  /** NBL — game probabilities (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/probabilities` */
+  espnNblGameProbabilities: Wrapper<Row[], EspnEventProbabilitiesParams>;
+  /** NBL — game propbets (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/propbets` */
+  espnNblGamePropbets: Wrapper<Row[], EspnEventPropbetsParams>;
+  /** NBL — games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events` */
+  espnNblGames: Wrapper<Row[], EspnEventsParams>;
+  /** NBL — game scoringplays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/scoringplays` */
+  espnNblGameScoringplays: Wrapper<Row[], EspnEventScoringplaysParams>;
+  /** NBL — game situation (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/situation` */
+  espnNblGameSituation: Wrapper<Row[], EspnEventSituationParams>;
+  /** NBL — game status (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/status` */
+  espnNblGameStatus: Wrapper<Row[], EspnEventStatusParams>;
+  /** NBL — game team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/competitors/{team_id}` */
+  espnNblGameTeam: Wrapper<Row[], EspnEventCompetitorParams>;
+  /** NBL — game team leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` */
+  espnNblGameTeamLeaders: Wrapper<Row[], EspnEventCompetitorLeadersParams>;
+  /** NBL — game team linescores (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` */
+  espnNblGameTeamLinescores: Wrapper<Row[], EspnEventCompetitorLinescoresParams>;
+  /** NBL — game team record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` */
+  espnNblGameTeamRecord: Wrapper<Row[], EspnEventCompetitorRecordParams>;
+  /** NBL — game team roster (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` */
+  espnNblGameTeamRoster: Wrapper<Row[], EspnEventCompetitorRosterParams>;
+  /** NBL — game teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/competitors` */
+  espnNblGameTeams: Wrapper<Row[], EspnEventCompetitorsParams>;
+  /** NBL — game team statistics (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` */
+  espnNblGameTeamStatistics: Wrapper<Row[], EspnEventCompetitorStatisticsParams>;
+  /** NBL — injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/injuries` */
+  espnNblInjuries: Wrapper<Row[], EspnInjuriesParams>;
+  /** NBL — leaders (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nbl/statistics/byathlete` */
+  espnNblLeaders: Wrapper<Row[], EspnLeadersParams>;
+  /** NBL — leaders core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/leaders` */
+  espnNblLeadersCore: Wrapper<Row[], EspnLeadersCoreParams>;
+  /** NBL — league notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/notes` */
+  espnNblLeagueNotes: Wrapper<Row[], EspnLeagueNotesParams>;
+  /** NBL — league root (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl` */
+  espnNblLeagueRoot: Wrapper<Row[], EspnLeagueRootParams>;
+  /** NBL — news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/news` */
+  espnNblNews: Wrapper<Row[], EspnNewsParams>;
+  /** NBL — player awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/athletes/{athlete_id}/awards` */
+  espnNblPlayerAwards: Wrapper<Row[], EspnAthleteAwardsParams>;
+  /** NBL — player bio (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/athletes/{athlete_id}/bio` */
+  espnNblPlayerBio: Wrapper<Row[], EspnAthleteBioParams>;
+  /** NBL — player career stats (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/athletes/{athlete_id}/statistics[/{stat_type}]` */
+  espnNblPlayerCareerStats: Wrapper<Row[], EspnAthleteCareerStatsParams>;
+  /** NBL — player contracts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/athletes/{athlete_id}/contracts` */
+  espnNblPlayerContracts: Wrapper<Row[], EspnAthleteContractsParams>;
+  /** NBL — player core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/athletes/{athlete_id}` */
+  espnNblPlayerCore: Wrapper<Row[], EspnAthleteCoreParams>;
+  /** NBL — player eventlog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/athletes/{athlete_id}/eventlog` */
+  espnNblPlayerEventlog: Wrapper<Row[], EspnAthleteEventlogParams>;
+  /** NBL — player gamelog (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nbl/athletes/{athlete_id}/gamelog` */
+  espnNblPlayerGamelog: Wrapper<Row[], EspnAthleteGamelogParams>;
+  /** NBL — player info (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/athletes/{athlete_id}` */
+  espnNblPlayerInfo: Wrapper<Row[], EspnAthleteInfoParams>;
+  /** NBL — player injuries (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/athletes/{athlete_id}/injuries` */
+  espnNblPlayerInjuries: Wrapper<Row[], EspnAthleteInjuriesParams>;
+  /** NBL — player news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/athletes/{athlete_id}/news` */
+  espnNblPlayerNews: Wrapper<Row[], EspnAthleteNewsParams>;
+  /** NBL — player notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/athletes/{athlete_id}/notes` */
+  espnNblPlayerNotes: Wrapper<Row[], EspnAthleteNotesParams>;
+  /** NBL — player overview (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nbl/athletes/{athlete_id}/overview` */
+  espnNblPlayerOverview: Wrapper<Row[], EspnAthleteOverviewParams>;
+  /** NBL — player records (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/athletes/{athlete_id}/records` */
+  espnNblPlayerRecords: Wrapper<Row[], EspnAthleteRecordsParams>;
+  /** NBL — player seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/athletes/{athlete_id}/seasons` */
+  espnNblPlayerSeasons: Wrapper<Row[], EspnAthleteSeasonsParams>;
+  /** NBL — players index (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/athletes` */
+  espnNblPlayersIndex: Wrapper<Row[], EspnAthletesIndexParams>;
+  /** NBL — player splits (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nbl/athletes/{athlete_id}/splits` */
+  espnNblPlayerSplits: Wrapper<Row[], EspnAthleteSplitsParams>;
+  /** NBL — player statisticslog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/athletes/{athlete_id}/statisticslog` */
+  espnNblPlayerStatisticslog: Wrapper<Row[], EspnAthleteStatisticslogParams>;
+  /** NBL — player stats (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/nbl/athletes/{athlete_id}/stats` */
+  espnNblPlayerStats: Wrapper<Row[], EspnAthleteStatsParams>;
+  /** NBL — player vs player (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/athletes/{athlete_id}/vsathlete/{opp_id}` */
+  espnNblPlayerVsPlayer: Wrapper<Row[], EspnAthleteVsAthleteParams>;
+  /** NBL — position (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/positions/{position_id}` */
+  espnNblPosition: Wrapper<Row[], EspnPositionParams>;
+  /** NBL — positions (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/positions` */
+  espnNblPositions: Wrapper<Row[], EspnPositionsParams>;
+  /** NBL — scoreboard (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/scoreboard` */
+  espnNblScoreboard: Wrapper<Row[], EspnScoreboardParams>;
+  /** NBL — season awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/awards` */
+  espnNblSeasonAwards: Wrapper<Row[], EspnSeasonAwardsParams>;
+  /** NBL — season coaches (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/coaches` */
+  espnNblSeasonCoaches: Wrapper<Row[], EspnSeasonCoachesParams>;
+  /** NBL — season draft (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/draft` */
+  espnNblSeasonDraft: Wrapper<Row[], EspnSeasonDraftParams>;
+  /** NBL — season draft round picks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/draft/rounds/{round_num}/picks` */
+  espnNblSeasonDraftRoundPicks: Wrapper<Row[], EspnSeasonDraftRoundPicksParams>;
+  /** NBL — season freeagents (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/freeagents` */
+  espnNblSeasonFreeagents: Wrapper<Row[], EspnSeasonFreeagentsParams>;
+  /** NBL — season futures (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/futures` */
+  espnNblSeasonFutures: Wrapper<Row[], EspnSeasonFuturesParams>;
+  /** NBL — season group (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/types/{season_type}/groups/{group_id}` */
+  espnNblSeasonGroup: Wrapper<Row[], EspnSeasonGroupParams>;
+  /** NBL — season group children (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/types/{season_type}/groups/{group_id}/children` */
+  espnNblSeasonGroupChildren: Wrapper<Row[], EspnSeasonGroupChildrenParams>;
+  /** NBL — season groups (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/types/{season_type}/groups` */
+  espnNblSeasonGroups: Wrapper<Row[], EspnSeasonGroupsParams>;
+  /** NBL — season group teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/types/{season_type}/groups/{group_id}/teams` */
+  espnNblSeasonGroupTeams: Wrapper<Row[], EspnSeasonGroupTeamsParams>;
+  /** NBL — season info (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}` */
+  espnNblSeasonInfo: Wrapper<Row[], EspnSeasonInfoParams>;
+  /** NBL — season players (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/athletes` */
+  espnNblSeasonPlayers: Wrapper<Row[], EspnSeasonAthletesParams>;
+  /** NBL — season pointer (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/season` */
+  espnNblSeasonPointer: Wrapper<Row[], EspnSeasonPointerParams>;
+  /** NBL — season powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/powerindex[/{team_id}]` */
+  espnNblSeasonPowerindex: Wrapper<Row[], EspnSeasonPowerindexParams>;
+  /** NBL — season powerindex leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/powerindex/leaders` */
+  espnNblSeasonPowerindexLeaders: Wrapper<Row[], EspnSeasonPowerindexLeadersParams>;
+  /** NBL — seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons` */
+  espnNblSeasons: Wrapper<Row[], EspnSeasonsParams>;
+  /** NBL — season team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/teams/{team_id}` */
+  espnNblSeasonTeam: Wrapper<Row[], EspnSeasonTeamParams>;
+  /** NBL — season teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/teams` */
+  espnNblSeasonTeams: Wrapper<Row[], EspnSeasonTeamsParams>;
+  /** NBL — season type (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/types/{season_type}` */
+  espnNblSeasonType: Wrapper<Row[], EspnSeasonTypeParams>;
+  /** NBL — season type corrections (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/types/{season_type}/corrections` */
+  espnNblSeasonTypeCorrections: Wrapper<Row[], EspnSeasonTypeCorrectionsParams>;
+  /** NBL — season type leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/types/{season_type}/leaders` */
+  espnNblSeasonTypeLeaders: Wrapper<Row[], EspnSeasonTypeLeadersParams>;
+  /** NBL — season types (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/types` */
+  espnNblSeasonTypes: Wrapper<Row[], EspnSeasonTypesParams>;
+  /** NBL — season week (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/types/{season_type}/weeks/{week}` */
+  espnNblSeasonWeek: Wrapper<Row[], EspnSeasonWeekParams>;
+  /** NBL — season week games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/types/{season_type}/weeks/{week}/events` */
+  espnNblSeasonWeekGames: Wrapper<Row[], EspnSeasonWeekEventsParams>;
+  /** NBL — season week powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/types/{season_type}/weeks/{week}/powerindex` */
+  espnNblSeasonWeekPowerindex: Wrapper<Row[], EspnSeasonWeekPowerindexParams>;
+  /** NBL — season weeks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/seasons/{season}/types/{season_type}/weeks` */
+  espnNblSeasonWeeks: Wrapper<Row[], EspnSeasonWeeksParams>;
+  /** NBL — standings (ESPN site.api.espn.com (v2)). `GET https://site.api.espn.com/apis/v2/sports/basketball/nbl/standings` */
+  espnNblStandings: Wrapper<Row[], EspnStandingsParams>;
+  /** NBL — standings core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/standings` */
+  espnNblStandingsCore: Wrapper<Row[], EspnStandingsCoreParams>;
+  /** NBL — statistics league (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/statistics` */
+  espnNblStatisticsLeague: Wrapper<Row[], EspnStatisticsLeagueParams>;
+  /** NBL — summary (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/summary` */
+  espnNblSummary: SectionedWrapper<ParsedTables, {}, EspnSummaryParams>;
+  /** NBL — talentpicks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/talentpicks` */
+  espnNblTalentpicks: Wrapper<Row[], EspnTalentpicksParams>;
+  /** NBL — team (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/teams/{team_id}` */
+  espnNblTeam: Wrapper<Row[], EspnTeamParams>;
+  /** NBL — team core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/teams/{team_id}` */
+  espnNblTeamCore: Wrapper<Row[], EspnTeamCoreParams>;
+  /** NBL — team depthcharts (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/teams/{team_id}/depthcharts` */
+  espnNblTeamDepthcharts: Wrapper<Row[], EspnTeamDepthchartsParams>;
+  /** NBL — team history (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/teams/{team_id}/history` */
+  espnNblTeamHistory: Wrapper<Row[], EspnTeamHistoryParams>;
+  /** NBL — team injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/teams/{team_id}/injuries` */
+  espnNblTeamInjuries: Wrapper<Row[], EspnTeamInjuriesParams>;
+  /** NBL — team leaders (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/teams/{team_id}/leaders` */
+  espnNblTeamLeaders: Wrapper<Row[], EspnTeamLeadersParams>;
+  /** NBL — team news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/teams/{team_id}/news` */
+  espnNblTeamNews: Wrapper<Row[], EspnTeamNewsParams>;
+  /** NBL — team record (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/teams/{team_id}/record` */
+  espnNblTeamRecord: Wrapper<Row[], EspnTeamRecordParams>;
+  /** NBL — team roster (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/teams/{team_id}/roster` */
+  espnNblTeamRoster: Wrapper<Row[], EspnTeamRosterParams>;
+  /** NBL — team schedule (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/teams/{team_id}/schedule` */
+  espnNblTeamSchedule: Wrapper<Row[], EspnTeamScheduleParams>;
+  /** NBL — teams core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/teams` */
+  espnNblTeamsCore: Wrapper<Row[], EspnTeamsCoreParams>;
+  /** NBL — teams site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/teams` */
+  espnNblTeamsSite: Wrapper<Row[], EspnTeamsSiteParams>;
+  /** NBL — team transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/teams/{team_id}/transactions` */
+  espnNblTeamTransactions: Wrapper<Row[], EspnTeamTransactionsParams>;
+  /** NBL — tournaments (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/tournaments` */
+  espnNblTournaments: Wrapper<Row[], EspnTournamentsParams>;
+  /** NBL — transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nbl/transactions` */
+  espnNblTransactions: Wrapper<Row[], EspnTransactionsParams>;
+  /** NBL — venue (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/venues/{venue_id}` */
+  espnNblVenue: Wrapper<Row[], EspnVenueParams>;
+  /** NBL — venues (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nbl/venues` */
+  espnNblVenues: Wrapper<Row[], EspnVenuesParams>;
+}
+
 /** The generated wrappers of `sdv.nfl` (and their deprecated pre-v4 names). */
 export interface NflWrappers {
   /** Pre-v4 name of `espn_nfl_player_awards`: forwards to it and warns once per process. @deprecated Renamed `espn_nfl_player_awards` in v4. */
@@ -18398,6 +22014,910 @@ export interface OddsWrappers {
   oddsApiSportsParticipants: Wrapper<Row[], OddsApiSportsParticipantsParams>;
   /** The Odds API — sports scores. `GET https://api.the-odds-api.com/v4/sports/{sport_key}/scores` */
   oddsApiSportsScores: Wrapper<Row[], OddsApiSportsScoresParams>;
+}
+
+/** The generated wrappers of `sdv.olympics_mbk` (and their deprecated pre-v4 names). */
+export interface OlympicsMbkWrappers {
+  /** OLYMPICS_MBK — award (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/awards/{award_id}` */
+  espn_olympics_mbk_award: Wrapper<Row[], EspnAwardParams>;
+  /** OLYMPICS_MBK — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/awards` */
+  espn_olympics_mbk_awards: Wrapper<Row[], EspnAwardsParams>;
+  /** OLYMPICS_MBK — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/calendar` */
+  espn_olympics_mbk_calendar: Wrapper<Row[], EspnCalendarParams>;
+  /** OLYMPICS_MBK — coach (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/coaches/{coach_id}` */
+  espn_olympics_mbk_coach: Wrapper<Row[], EspnCoachParams>;
+  /** OLYMPICS_MBK — coach record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/coaches/{coach_id}/record/{record_type}` */
+  espn_olympics_mbk_coach_record: Wrapper<Row[], EspnCoachRecordParams>;
+  /** OLYMPICS_MBK — coach season (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/coaches/{coach_id}/seasons/{season}` */
+  espn_olympics_mbk_coach_season: Wrapper<Row[], EspnCoachSeasonParams>;
+  /** OLYMPICS_MBK — conferences (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/groups` */
+  espn_olympics_mbk_conferences: Wrapper<Row[], EspnConferencesParams>;
+  /** OLYMPICS_MBK — draft (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/draft` */
+  espn_olympics_mbk_draft: Wrapper<Row[], EspnDraftParams>;
+  /** OLYMPICS_MBK — fpi (ESPN site.web.api.espn.com (FPI, fitt v3)). `GET https://site.web.api.espn.com/apis/fitt/v3/sports/basketball/mens-olympics-basketball/powerindex` */
+  espn_olympics_mbk_fpi: Wrapper<Row[], EspnFpiParams>;
+  /** OLYMPICS_MBK — franchise (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/franchises/{franchise_id}` */
+  espn_olympics_mbk_franchise: Wrapper<Row[], EspnFranchiseParams>;
+  /** OLYMPICS_MBK — franchises (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/franchises` */
+  espn_olympics_mbk_franchises: Wrapper<Row[], EspnFranchisesParams>;
+  /** OLYMPICS_MBK — game (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}` */
+  espn_olympics_mbk_game: Wrapper<Row[], EspnEventParams>;
+  /** OLYMPICS_MBK — game broadcasts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/broadcasts` */
+  espn_olympics_mbk_game_broadcasts: Wrapper<Row[], EspnEventBroadcastsParams>;
+  /** OLYMPICS_MBK — game competition (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}` */
+  espn_olympics_mbk_game_competition: Wrapper<Row[], EspnEventCompetitionParams>;
+  /** OLYMPICS_MBK — game leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/leaders` */
+  espn_olympics_mbk_game_leaders: Wrapper<Row[], EspnEventLeadersParams>;
+  /** OLYMPICS_MBK — game odds (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/odds` */
+  espn_olympics_mbk_game_odds: Wrapper<Row[], EspnEventOddsParams>;
+  /** OLYMPICS_MBK — game official detail (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/officials/{official_id}` */
+  espn_olympics_mbk_game_official_detail: Wrapper<Row[], EspnEventOfficialDetailParams>;
+  /** OLYMPICS_MBK — game officials (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/officials` */
+  espn_olympics_mbk_game_officials: Wrapper<Row[], EspnEventOfficialsParams>;
+  /** OLYMPICS_MBK — game play (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/plays/{play_id}` */
+  espn_olympics_mbk_game_play: Wrapper<Row[], EspnEventPlayParams>;
+  /** OLYMPICS_MBK — game play personnel (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` */
+  espn_olympics_mbk_game_play_personnel: Wrapper<Row[], EspnEventPlayPersonnelParams>;
+  /** OLYMPICS_MBK — game plays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/plays` */
+  espn_olympics_mbk_game_plays: Wrapper<Row[], EspnEventPlaysParams>;
+  /** OLYMPICS_MBK — game powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/powerindex` */
+  espn_olympics_mbk_game_powerindex: Wrapper<Row[], EspnEventPowerindexParams>;
+  /** OLYMPICS_MBK — game predictor (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/predictor` */
+  espn_olympics_mbk_game_predictor: Wrapper<Row[], EspnEventPredictorParams>;
+  /** OLYMPICS_MBK — game probabilities (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/probabilities` */
+  espn_olympics_mbk_game_probabilities: Wrapper<Row[], EspnEventProbabilitiesParams>;
+  /** OLYMPICS_MBK — game propbets (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/propbets` */
+  espn_olympics_mbk_game_propbets: Wrapper<Row[], EspnEventPropbetsParams>;
+  /** OLYMPICS_MBK — game scoringplays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/scoringplays` */
+  espn_olympics_mbk_game_scoringplays: Wrapper<Row[], EspnEventScoringplaysParams>;
+  /** OLYMPICS_MBK — game situation (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/situation` */
+  espn_olympics_mbk_game_situation: Wrapper<Row[], EspnEventSituationParams>;
+  /** OLYMPICS_MBK — game status (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/status` */
+  espn_olympics_mbk_game_status: Wrapper<Row[], EspnEventStatusParams>;
+  /** OLYMPICS_MBK — game team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}` */
+  espn_olympics_mbk_game_team: Wrapper<Row[], EspnEventCompetitorParams>;
+  /** OLYMPICS_MBK — game team leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` */
+  espn_olympics_mbk_game_team_leaders: Wrapper<Row[], EspnEventCompetitorLeadersParams>;
+  /** OLYMPICS_MBK — game team linescores (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` */
+  espn_olympics_mbk_game_team_linescores: Wrapper<Row[], EspnEventCompetitorLinescoresParams>;
+  /** OLYMPICS_MBK — game team record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` */
+  espn_olympics_mbk_game_team_record: Wrapper<Row[], EspnEventCompetitorRecordParams>;
+  /** OLYMPICS_MBK — game team roster (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` */
+  espn_olympics_mbk_game_team_roster: Wrapper<Row[], EspnEventCompetitorRosterParams>;
+  /** OLYMPICS_MBK — game team statistics (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` */
+  espn_olympics_mbk_game_team_statistics: Wrapper<Row[], EspnEventCompetitorStatisticsParams>;
+  /** OLYMPICS_MBK — game teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/competitors` */
+  espn_olympics_mbk_game_teams: Wrapper<Row[], EspnEventCompetitorsParams>;
+  /** OLYMPICS_MBK — games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events` */
+  espn_olympics_mbk_games: Wrapper<Row[], EspnEventsParams>;
+  /** OLYMPICS_MBK — injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/injuries` */
+  espn_olympics_mbk_injuries: Wrapper<Row[], EspnInjuriesParams>;
+  /** OLYMPICS_MBK — leaders (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/mens-olympics-basketball/statistics/byathlete` */
+  espn_olympics_mbk_leaders: Wrapper<Row[], EspnLeadersParams>;
+  /** OLYMPICS_MBK — leaders core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/leaders` */
+  espn_olympics_mbk_leaders_core: Wrapper<Row[], EspnLeadersCoreParams>;
+  /** OLYMPICS_MBK — league notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/notes` */
+  espn_olympics_mbk_league_notes: Wrapper<Row[], EspnLeagueNotesParams>;
+  /** OLYMPICS_MBK — league root (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball` */
+  espn_olympics_mbk_league_root: Wrapper<Row[], EspnLeagueRootParams>;
+  /** OLYMPICS_MBK — news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/news` */
+  espn_olympics_mbk_news: Wrapper<Row[], EspnNewsParams>;
+  /** OLYMPICS_MBK — player awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/athletes/{athlete_id}/awards` */
+  espn_olympics_mbk_player_awards: Wrapper<Row[], EspnAthleteAwardsParams>;
+  /** OLYMPICS_MBK — player bio (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/athletes/{athlete_id}/bio` */
+  espn_olympics_mbk_player_bio: Wrapper<Row[], EspnAthleteBioParams>;
+  /** OLYMPICS_MBK — player career stats (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/athletes/{athlete_id}/statistics[/{stat_type}]` */
+  espn_olympics_mbk_player_career_stats: Wrapper<Row[], EspnAthleteCareerStatsParams>;
+  /** OLYMPICS_MBK — player contracts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/athletes/{athlete_id}/contracts` */
+  espn_olympics_mbk_player_contracts: Wrapper<Row[], EspnAthleteContractsParams>;
+  /** OLYMPICS_MBK — player core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/athletes/{athlete_id}` */
+  espn_olympics_mbk_player_core: Wrapper<Row[], EspnAthleteCoreParams>;
+  /** OLYMPICS_MBK — player eventlog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/athletes/{athlete_id}/eventlog` */
+  espn_olympics_mbk_player_eventlog: Wrapper<Row[], EspnAthleteEventlogParams>;
+  /** OLYMPICS_MBK — player gamelog (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/mens-olympics-basketball/athletes/{athlete_id}/gamelog` */
+  espn_olympics_mbk_player_gamelog: Wrapper<Row[], EspnAthleteGamelogParams>;
+  /** OLYMPICS_MBK — player info (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/athletes/{athlete_id}` */
+  espn_olympics_mbk_player_info: Wrapper<Row[], EspnAthleteInfoParams>;
+  /** OLYMPICS_MBK — player injuries (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/athletes/{athlete_id}/injuries` */
+  espn_olympics_mbk_player_injuries: Wrapper<Row[], EspnAthleteInjuriesParams>;
+  /** OLYMPICS_MBK — player news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/athletes/{athlete_id}/news` */
+  espn_olympics_mbk_player_news: Wrapper<Row[], EspnAthleteNewsParams>;
+  /** OLYMPICS_MBK — player notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/athletes/{athlete_id}/notes` */
+  espn_olympics_mbk_player_notes: Wrapper<Row[], EspnAthleteNotesParams>;
+  /** OLYMPICS_MBK — player overview (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/mens-olympics-basketball/athletes/{athlete_id}/overview` */
+  espn_olympics_mbk_player_overview: Wrapper<Row[], EspnAthleteOverviewParams>;
+  /** OLYMPICS_MBK — player records (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/athletes/{athlete_id}/records` */
+  espn_olympics_mbk_player_records: Wrapper<Row[], EspnAthleteRecordsParams>;
+  /** OLYMPICS_MBK — player seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/athletes/{athlete_id}/seasons` */
+  espn_olympics_mbk_player_seasons: Wrapper<Row[], EspnAthleteSeasonsParams>;
+  /** OLYMPICS_MBK — player splits (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/mens-olympics-basketball/athletes/{athlete_id}/splits` */
+  espn_olympics_mbk_player_splits: Wrapper<Row[], EspnAthleteSplitsParams>;
+  /** OLYMPICS_MBK — player statisticslog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/athletes/{athlete_id}/statisticslog` */
+  espn_olympics_mbk_player_statisticslog: Wrapper<Row[], EspnAthleteStatisticslogParams>;
+  /** OLYMPICS_MBK — player stats (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/mens-olympics-basketball/athletes/{athlete_id}/stats` */
+  espn_olympics_mbk_player_stats: Wrapper<Row[], EspnAthleteStatsParams>;
+  /** OLYMPICS_MBK — player vs player (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/athletes/{athlete_id}/vsathlete/{opp_id}` */
+  espn_olympics_mbk_player_vs_player: Wrapper<Row[], EspnAthleteVsAthleteParams>;
+  /** OLYMPICS_MBK — players index (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/athletes` */
+  espn_olympics_mbk_players_index: Wrapper<Row[], EspnAthletesIndexParams>;
+  /** OLYMPICS_MBK — position (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/positions/{position_id}` */
+  espn_olympics_mbk_position: Wrapper<Row[], EspnPositionParams>;
+  /** OLYMPICS_MBK — positions (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/positions` */
+  espn_olympics_mbk_positions: Wrapper<Row[], EspnPositionsParams>;
+  /** OLYMPICS_MBK — scoreboard (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/scoreboard` */
+  espn_olympics_mbk_scoreboard: Wrapper<Row[], EspnScoreboardParams>;
+  /** OLYMPICS_MBK — season awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/awards` */
+  espn_olympics_mbk_season_awards: Wrapper<Row[], EspnSeasonAwardsParams>;
+  /** OLYMPICS_MBK — season coaches (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/coaches` */
+  espn_olympics_mbk_season_coaches: Wrapper<Row[], EspnSeasonCoachesParams>;
+  /** OLYMPICS_MBK — season draft (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/draft` */
+  espn_olympics_mbk_season_draft: Wrapper<Row[], EspnSeasonDraftParams>;
+  /** OLYMPICS_MBK — season draft round picks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/draft/rounds/{round_num}/picks` */
+  espn_olympics_mbk_season_draft_round_picks: Wrapper<Row[], EspnSeasonDraftRoundPicksParams>;
+  /** OLYMPICS_MBK — season freeagents (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/freeagents` */
+  espn_olympics_mbk_season_freeagents: Wrapper<Row[], EspnSeasonFreeagentsParams>;
+  /** OLYMPICS_MBK — season futures (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/futures` */
+  espn_olympics_mbk_season_futures: Wrapper<Row[], EspnSeasonFuturesParams>;
+  /** OLYMPICS_MBK — season group (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/types/{season_type}/groups/{group_id}` */
+  espn_olympics_mbk_season_group: Wrapper<Row[], EspnSeasonGroupParams>;
+  /** OLYMPICS_MBK — season group children (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/types/{season_type}/groups/{group_id}/children` */
+  espn_olympics_mbk_season_group_children: Wrapper<Row[], EspnSeasonGroupChildrenParams>;
+  /** OLYMPICS_MBK — season group teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/types/{season_type}/groups/{group_id}/teams` */
+  espn_olympics_mbk_season_group_teams: Wrapper<Row[], EspnSeasonGroupTeamsParams>;
+  /** OLYMPICS_MBK — season groups (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/types/{season_type}/groups` */
+  espn_olympics_mbk_season_groups: Wrapper<Row[], EspnSeasonGroupsParams>;
+  /** OLYMPICS_MBK — season info (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}` */
+  espn_olympics_mbk_season_info: Wrapper<Row[], EspnSeasonInfoParams>;
+  /** OLYMPICS_MBK — season players (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/athletes` */
+  espn_olympics_mbk_season_players: Wrapper<Row[], EspnSeasonAthletesParams>;
+  /** OLYMPICS_MBK — season pointer (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/season` */
+  espn_olympics_mbk_season_pointer: Wrapper<Row[], EspnSeasonPointerParams>;
+  /** OLYMPICS_MBK — season powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/powerindex[/{team_id}]` */
+  espn_olympics_mbk_season_powerindex: Wrapper<Row[], EspnSeasonPowerindexParams>;
+  /** OLYMPICS_MBK — season powerindex leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/powerindex/leaders` */
+  espn_olympics_mbk_season_powerindex_leaders: Wrapper<Row[], EspnSeasonPowerindexLeadersParams>;
+  /** OLYMPICS_MBK — season team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/teams/{team_id}` */
+  espn_olympics_mbk_season_team: Wrapper<Row[], EspnSeasonTeamParams>;
+  /** OLYMPICS_MBK — season teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/teams` */
+  espn_olympics_mbk_season_teams: Wrapper<Row[], EspnSeasonTeamsParams>;
+  /** OLYMPICS_MBK — season type (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/types/{season_type}` */
+  espn_olympics_mbk_season_type: Wrapper<Row[], EspnSeasonTypeParams>;
+  /** OLYMPICS_MBK — season type corrections (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/types/{season_type}/corrections` */
+  espn_olympics_mbk_season_type_corrections: Wrapper<Row[], EspnSeasonTypeCorrectionsParams>;
+  /** OLYMPICS_MBK — season type leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/types/{season_type}/leaders` */
+  espn_olympics_mbk_season_type_leaders: Wrapper<Row[], EspnSeasonTypeLeadersParams>;
+  /** OLYMPICS_MBK — season types (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/types` */
+  espn_olympics_mbk_season_types: Wrapper<Row[], EspnSeasonTypesParams>;
+  /** OLYMPICS_MBK — season week (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/types/{season_type}/weeks/{week}` */
+  espn_olympics_mbk_season_week: Wrapper<Row[], EspnSeasonWeekParams>;
+  /** OLYMPICS_MBK — season week games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/types/{season_type}/weeks/{week}/events` */
+  espn_olympics_mbk_season_week_games: Wrapper<Row[], EspnSeasonWeekEventsParams>;
+  /** OLYMPICS_MBK — season week powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/types/{season_type}/weeks/{week}/powerindex` */
+  espn_olympics_mbk_season_week_powerindex: Wrapper<Row[], EspnSeasonWeekPowerindexParams>;
+  /** OLYMPICS_MBK — season weeks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/types/{season_type}/weeks` */
+  espn_olympics_mbk_season_weeks: Wrapper<Row[], EspnSeasonWeeksParams>;
+  /** OLYMPICS_MBK — seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons` */
+  espn_olympics_mbk_seasons: Wrapper<Row[], EspnSeasonsParams>;
+  /** OLYMPICS_MBK — standings (ESPN site.api.espn.com (v2)). `GET https://site.api.espn.com/apis/v2/sports/basketball/mens-olympics-basketball/standings` */
+  espn_olympics_mbk_standings: Wrapper<Row[], EspnStandingsParams>;
+  /** OLYMPICS_MBK — standings core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/standings` */
+  espn_olympics_mbk_standings_core: Wrapper<Row[], EspnStandingsCoreParams>;
+  /** OLYMPICS_MBK — statistics league (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/statistics` */
+  espn_olympics_mbk_statistics_league: Wrapper<Row[], EspnStatisticsLeagueParams>;
+  /** OLYMPICS_MBK — summary (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/summary` */
+  espn_olympics_mbk_summary: SectionedWrapper<ParsedTables, {}, EspnSummaryParams>;
+  /** OLYMPICS_MBK — talentpicks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/talentpicks` */
+  espn_olympics_mbk_talentpicks: Wrapper<Row[], EspnTalentpicksParams>;
+  /** OLYMPICS_MBK — team (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/teams/{team_id}` */
+  espn_olympics_mbk_team: Wrapper<Row[], EspnTeamParams>;
+  /** OLYMPICS_MBK — team core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/teams/{team_id}` */
+  espn_olympics_mbk_team_core: Wrapper<Row[], EspnTeamCoreParams>;
+  /** OLYMPICS_MBK — team depthcharts (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/teams/{team_id}/depthcharts` */
+  espn_olympics_mbk_team_depthcharts: Wrapper<Row[], EspnTeamDepthchartsParams>;
+  /** OLYMPICS_MBK — team history (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/teams/{team_id}/history` */
+  espn_olympics_mbk_team_history: Wrapper<Row[], EspnTeamHistoryParams>;
+  /** OLYMPICS_MBK — team injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/teams/{team_id}/injuries` */
+  espn_olympics_mbk_team_injuries: Wrapper<Row[], EspnTeamInjuriesParams>;
+  /** OLYMPICS_MBK — team leaders (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/teams/{team_id}/leaders` */
+  espn_olympics_mbk_team_leaders: Wrapper<Row[], EspnTeamLeadersParams>;
+  /** OLYMPICS_MBK — team news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/teams/{team_id}/news` */
+  espn_olympics_mbk_team_news: Wrapper<Row[], EspnTeamNewsParams>;
+  /** OLYMPICS_MBK — team record (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/teams/{team_id}/record` */
+  espn_olympics_mbk_team_record: Wrapper<Row[], EspnTeamRecordParams>;
+  /** OLYMPICS_MBK — team roster (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/teams/{team_id}/roster` */
+  espn_olympics_mbk_team_roster: Wrapper<Row[], EspnTeamRosterParams>;
+  /** OLYMPICS_MBK — team schedule (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/teams/{team_id}/schedule` */
+  espn_olympics_mbk_team_schedule: Wrapper<Row[], EspnTeamScheduleParams>;
+  /** OLYMPICS_MBK — team transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/teams/{team_id}/transactions` */
+  espn_olympics_mbk_team_transactions: Wrapper<Row[], EspnTeamTransactionsParams>;
+  /** OLYMPICS_MBK — teams core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/teams` */
+  espn_olympics_mbk_teams_core: Wrapper<Row[], EspnTeamsCoreParams>;
+  /** OLYMPICS_MBK — teams site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/teams` */
+  espn_olympics_mbk_teams_site: Wrapper<Row[], EspnTeamsSiteParams>;
+  /** OLYMPICS_MBK — tournaments (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/tournaments` */
+  espn_olympics_mbk_tournaments: Wrapper<Row[], EspnTournamentsParams>;
+  /** OLYMPICS_MBK — transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/transactions` */
+  espn_olympics_mbk_transactions: Wrapper<Row[], EspnTransactionsParams>;
+  /** OLYMPICS_MBK — venue (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/venues/{venue_id}` */
+  espn_olympics_mbk_venue: Wrapper<Row[], EspnVenueParams>;
+  /** OLYMPICS_MBK — venues (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/venues` */
+  espn_olympics_mbk_venues: Wrapper<Row[], EspnVenuesParams>;
+  /** OLYMPICS_MBK — award (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/awards/{award_id}` */
+  espnOlympicsMbkAward: Wrapper<Row[], EspnAwardParams>;
+  /** OLYMPICS_MBK — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/awards` */
+  espnOlympicsMbkAwards: Wrapper<Row[], EspnAwardsParams>;
+  /** OLYMPICS_MBK — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/calendar` */
+  espnOlympicsMbkCalendar: Wrapper<Row[], EspnCalendarParams>;
+  /** OLYMPICS_MBK — coach (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/coaches/{coach_id}` */
+  espnOlympicsMbkCoach: Wrapper<Row[], EspnCoachParams>;
+  /** OLYMPICS_MBK — coach record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/coaches/{coach_id}/record/{record_type}` */
+  espnOlympicsMbkCoachRecord: Wrapper<Row[], EspnCoachRecordParams>;
+  /** OLYMPICS_MBK — coach season (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/coaches/{coach_id}/seasons/{season}` */
+  espnOlympicsMbkCoachSeason: Wrapper<Row[], EspnCoachSeasonParams>;
+  /** OLYMPICS_MBK — conferences (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/groups` */
+  espnOlympicsMbkConferences: Wrapper<Row[], EspnConferencesParams>;
+  /** OLYMPICS_MBK — draft (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/draft` */
+  espnOlympicsMbkDraft: Wrapper<Row[], EspnDraftParams>;
+  /** OLYMPICS_MBK — fpi (ESPN site.web.api.espn.com (FPI, fitt v3)). `GET https://site.web.api.espn.com/apis/fitt/v3/sports/basketball/mens-olympics-basketball/powerindex` */
+  espnOlympicsMbkFpi: Wrapper<Row[], EspnFpiParams>;
+  /** OLYMPICS_MBK — franchise (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/franchises/{franchise_id}` */
+  espnOlympicsMbkFranchise: Wrapper<Row[], EspnFranchiseParams>;
+  /** OLYMPICS_MBK — franchises (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/franchises` */
+  espnOlympicsMbkFranchises: Wrapper<Row[], EspnFranchisesParams>;
+  /** OLYMPICS_MBK — game (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}` */
+  espnOlympicsMbkGame: Wrapper<Row[], EspnEventParams>;
+  /** OLYMPICS_MBK — game broadcasts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/broadcasts` */
+  espnOlympicsMbkGameBroadcasts: Wrapper<Row[], EspnEventBroadcastsParams>;
+  /** OLYMPICS_MBK — game competition (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}` */
+  espnOlympicsMbkGameCompetition: Wrapper<Row[], EspnEventCompetitionParams>;
+  /** OLYMPICS_MBK — game leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/leaders` */
+  espnOlympicsMbkGameLeaders: Wrapper<Row[], EspnEventLeadersParams>;
+  /** OLYMPICS_MBK — game odds (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/odds` */
+  espnOlympicsMbkGameOdds: Wrapper<Row[], EspnEventOddsParams>;
+  /** OLYMPICS_MBK — game official detail (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/officials/{official_id}` */
+  espnOlympicsMbkGameOfficialDetail: Wrapper<Row[], EspnEventOfficialDetailParams>;
+  /** OLYMPICS_MBK — game officials (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/officials` */
+  espnOlympicsMbkGameOfficials: Wrapper<Row[], EspnEventOfficialsParams>;
+  /** OLYMPICS_MBK — game play (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/plays/{play_id}` */
+  espnOlympicsMbkGamePlay: Wrapper<Row[], EspnEventPlayParams>;
+  /** OLYMPICS_MBK — game play personnel (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` */
+  espnOlympicsMbkGamePlayPersonnel: Wrapper<Row[], EspnEventPlayPersonnelParams>;
+  /** OLYMPICS_MBK — game plays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/plays` */
+  espnOlympicsMbkGamePlays: Wrapper<Row[], EspnEventPlaysParams>;
+  /** OLYMPICS_MBK — game powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/powerindex` */
+  espnOlympicsMbkGamePowerindex: Wrapper<Row[], EspnEventPowerindexParams>;
+  /** OLYMPICS_MBK — game predictor (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/predictor` */
+  espnOlympicsMbkGamePredictor: Wrapper<Row[], EspnEventPredictorParams>;
+  /** OLYMPICS_MBK — game probabilities (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/probabilities` */
+  espnOlympicsMbkGameProbabilities: Wrapper<Row[], EspnEventProbabilitiesParams>;
+  /** OLYMPICS_MBK — game propbets (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/propbets` */
+  espnOlympicsMbkGamePropbets: Wrapper<Row[], EspnEventPropbetsParams>;
+  /** OLYMPICS_MBK — games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events` */
+  espnOlympicsMbkGames: Wrapper<Row[], EspnEventsParams>;
+  /** OLYMPICS_MBK — game scoringplays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/scoringplays` */
+  espnOlympicsMbkGameScoringplays: Wrapper<Row[], EspnEventScoringplaysParams>;
+  /** OLYMPICS_MBK — game situation (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/situation` */
+  espnOlympicsMbkGameSituation: Wrapper<Row[], EspnEventSituationParams>;
+  /** OLYMPICS_MBK — game status (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/status` */
+  espnOlympicsMbkGameStatus: Wrapper<Row[], EspnEventStatusParams>;
+  /** OLYMPICS_MBK — game team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}` */
+  espnOlympicsMbkGameTeam: Wrapper<Row[], EspnEventCompetitorParams>;
+  /** OLYMPICS_MBK — game team leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` */
+  espnOlympicsMbkGameTeamLeaders: Wrapper<Row[], EspnEventCompetitorLeadersParams>;
+  /** OLYMPICS_MBK — game team linescores (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` */
+  espnOlympicsMbkGameTeamLinescores: Wrapper<Row[], EspnEventCompetitorLinescoresParams>;
+  /** OLYMPICS_MBK — game team record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` */
+  espnOlympicsMbkGameTeamRecord: Wrapper<Row[], EspnEventCompetitorRecordParams>;
+  /** OLYMPICS_MBK — game team roster (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` */
+  espnOlympicsMbkGameTeamRoster: Wrapper<Row[], EspnEventCompetitorRosterParams>;
+  /** OLYMPICS_MBK — game teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/competitors` */
+  espnOlympicsMbkGameTeams: Wrapper<Row[], EspnEventCompetitorsParams>;
+  /** OLYMPICS_MBK — game team statistics (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` */
+  espnOlympicsMbkGameTeamStatistics: Wrapper<Row[], EspnEventCompetitorStatisticsParams>;
+  /** OLYMPICS_MBK — injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/injuries` */
+  espnOlympicsMbkInjuries: Wrapper<Row[], EspnInjuriesParams>;
+  /** OLYMPICS_MBK — leaders (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/mens-olympics-basketball/statistics/byathlete` */
+  espnOlympicsMbkLeaders: Wrapper<Row[], EspnLeadersParams>;
+  /** OLYMPICS_MBK — leaders core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/leaders` */
+  espnOlympicsMbkLeadersCore: Wrapper<Row[], EspnLeadersCoreParams>;
+  /** OLYMPICS_MBK — league notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/notes` */
+  espnOlympicsMbkLeagueNotes: Wrapper<Row[], EspnLeagueNotesParams>;
+  /** OLYMPICS_MBK — league root (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball` */
+  espnOlympicsMbkLeagueRoot: Wrapper<Row[], EspnLeagueRootParams>;
+  /** OLYMPICS_MBK — news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/news` */
+  espnOlympicsMbkNews: Wrapper<Row[], EspnNewsParams>;
+  /** OLYMPICS_MBK — player awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/athletes/{athlete_id}/awards` */
+  espnOlympicsMbkPlayerAwards: Wrapper<Row[], EspnAthleteAwardsParams>;
+  /** OLYMPICS_MBK — player bio (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/athletes/{athlete_id}/bio` */
+  espnOlympicsMbkPlayerBio: Wrapper<Row[], EspnAthleteBioParams>;
+  /** OLYMPICS_MBK — player career stats (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/athletes/{athlete_id}/statistics[/{stat_type}]` */
+  espnOlympicsMbkPlayerCareerStats: Wrapper<Row[], EspnAthleteCareerStatsParams>;
+  /** OLYMPICS_MBK — player contracts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/athletes/{athlete_id}/contracts` */
+  espnOlympicsMbkPlayerContracts: Wrapper<Row[], EspnAthleteContractsParams>;
+  /** OLYMPICS_MBK — player core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/athletes/{athlete_id}` */
+  espnOlympicsMbkPlayerCore: Wrapper<Row[], EspnAthleteCoreParams>;
+  /** OLYMPICS_MBK — player eventlog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/athletes/{athlete_id}/eventlog` */
+  espnOlympicsMbkPlayerEventlog: Wrapper<Row[], EspnAthleteEventlogParams>;
+  /** OLYMPICS_MBK — player gamelog (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/mens-olympics-basketball/athletes/{athlete_id}/gamelog` */
+  espnOlympicsMbkPlayerGamelog: Wrapper<Row[], EspnAthleteGamelogParams>;
+  /** OLYMPICS_MBK — player info (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/athletes/{athlete_id}` */
+  espnOlympicsMbkPlayerInfo: Wrapper<Row[], EspnAthleteInfoParams>;
+  /** OLYMPICS_MBK — player injuries (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/athletes/{athlete_id}/injuries` */
+  espnOlympicsMbkPlayerInjuries: Wrapper<Row[], EspnAthleteInjuriesParams>;
+  /** OLYMPICS_MBK — player news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/athletes/{athlete_id}/news` */
+  espnOlympicsMbkPlayerNews: Wrapper<Row[], EspnAthleteNewsParams>;
+  /** OLYMPICS_MBK — player notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/athletes/{athlete_id}/notes` */
+  espnOlympicsMbkPlayerNotes: Wrapper<Row[], EspnAthleteNotesParams>;
+  /** OLYMPICS_MBK — player overview (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/mens-olympics-basketball/athletes/{athlete_id}/overview` */
+  espnOlympicsMbkPlayerOverview: Wrapper<Row[], EspnAthleteOverviewParams>;
+  /** OLYMPICS_MBK — player records (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/athletes/{athlete_id}/records` */
+  espnOlympicsMbkPlayerRecords: Wrapper<Row[], EspnAthleteRecordsParams>;
+  /** OLYMPICS_MBK — player seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/athletes/{athlete_id}/seasons` */
+  espnOlympicsMbkPlayerSeasons: Wrapper<Row[], EspnAthleteSeasonsParams>;
+  /** OLYMPICS_MBK — players index (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/athletes` */
+  espnOlympicsMbkPlayersIndex: Wrapper<Row[], EspnAthletesIndexParams>;
+  /** OLYMPICS_MBK — player splits (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/mens-olympics-basketball/athletes/{athlete_id}/splits` */
+  espnOlympicsMbkPlayerSplits: Wrapper<Row[], EspnAthleteSplitsParams>;
+  /** OLYMPICS_MBK — player statisticslog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/athletes/{athlete_id}/statisticslog` */
+  espnOlympicsMbkPlayerStatisticslog: Wrapper<Row[], EspnAthleteStatisticslogParams>;
+  /** OLYMPICS_MBK — player stats (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/mens-olympics-basketball/athletes/{athlete_id}/stats` */
+  espnOlympicsMbkPlayerStats: Wrapper<Row[], EspnAthleteStatsParams>;
+  /** OLYMPICS_MBK — player vs player (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/athletes/{athlete_id}/vsathlete/{opp_id}` */
+  espnOlympicsMbkPlayerVsPlayer: Wrapper<Row[], EspnAthleteVsAthleteParams>;
+  /** OLYMPICS_MBK — position (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/positions/{position_id}` */
+  espnOlympicsMbkPosition: Wrapper<Row[], EspnPositionParams>;
+  /** OLYMPICS_MBK — positions (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/positions` */
+  espnOlympicsMbkPositions: Wrapper<Row[], EspnPositionsParams>;
+  /** OLYMPICS_MBK — scoreboard (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/scoreboard` */
+  espnOlympicsMbkScoreboard: Wrapper<Row[], EspnScoreboardParams>;
+  /** OLYMPICS_MBK — season awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/awards` */
+  espnOlympicsMbkSeasonAwards: Wrapper<Row[], EspnSeasonAwardsParams>;
+  /** OLYMPICS_MBK — season coaches (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/coaches` */
+  espnOlympicsMbkSeasonCoaches: Wrapper<Row[], EspnSeasonCoachesParams>;
+  /** OLYMPICS_MBK — season draft (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/draft` */
+  espnOlympicsMbkSeasonDraft: Wrapper<Row[], EspnSeasonDraftParams>;
+  /** OLYMPICS_MBK — season draft round picks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/draft/rounds/{round_num}/picks` */
+  espnOlympicsMbkSeasonDraftRoundPicks: Wrapper<Row[], EspnSeasonDraftRoundPicksParams>;
+  /** OLYMPICS_MBK — season freeagents (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/freeagents` */
+  espnOlympicsMbkSeasonFreeagents: Wrapper<Row[], EspnSeasonFreeagentsParams>;
+  /** OLYMPICS_MBK — season futures (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/futures` */
+  espnOlympicsMbkSeasonFutures: Wrapper<Row[], EspnSeasonFuturesParams>;
+  /** OLYMPICS_MBK — season group (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/types/{season_type}/groups/{group_id}` */
+  espnOlympicsMbkSeasonGroup: Wrapper<Row[], EspnSeasonGroupParams>;
+  /** OLYMPICS_MBK — season group children (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/types/{season_type}/groups/{group_id}/children` */
+  espnOlympicsMbkSeasonGroupChildren: Wrapper<Row[], EspnSeasonGroupChildrenParams>;
+  /** OLYMPICS_MBK — season groups (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/types/{season_type}/groups` */
+  espnOlympicsMbkSeasonGroups: Wrapper<Row[], EspnSeasonGroupsParams>;
+  /** OLYMPICS_MBK — season group teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/types/{season_type}/groups/{group_id}/teams` */
+  espnOlympicsMbkSeasonGroupTeams: Wrapper<Row[], EspnSeasonGroupTeamsParams>;
+  /** OLYMPICS_MBK — season info (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}` */
+  espnOlympicsMbkSeasonInfo: Wrapper<Row[], EspnSeasonInfoParams>;
+  /** OLYMPICS_MBK — season players (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/athletes` */
+  espnOlympicsMbkSeasonPlayers: Wrapper<Row[], EspnSeasonAthletesParams>;
+  /** OLYMPICS_MBK — season pointer (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/season` */
+  espnOlympicsMbkSeasonPointer: Wrapper<Row[], EspnSeasonPointerParams>;
+  /** OLYMPICS_MBK — season powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/powerindex[/{team_id}]` */
+  espnOlympicsMbkSeasonPowerindex: Wrapper<Row[], EspnSeasonPowerindexParams>;
+  /** OLYMPICS_MBK — season powerindex leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/powerindex/leaders` */
+  espnOlympicsMbkSeasonPowerindexLeaders: Wrapper<Row[], EspnSeasonPowerindexLeadersParams>;
+  /** OLYMPICS_MBK — seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons` */
+  espnOlympicsMbkSeasons: Wrapper<Row[], EspnSeasonsParams>;
+  /** OLYMPICS_MBK — season team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/teams/{team_id}` */
+  espnOlympicsMbkSeasonTeam: Wrapper<Row[], EspnSeasonTeamParams>;
+  /** OLYMPICS_MBK — season teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/teams` */
+  espnOlympicsMbkSeasonTeams: Wrapper<Row[], EspnSeasonTeamsParams>;
+  /** OLYMPICS_MBK — season type (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/types/{season_type}` */
+  espnOlympicsMbkSeasonType: Wrapper<Row[], EspnSeasonTypeParams>;
+  /** OLYMPICS_MBK — season type corrections (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/types/{season_type}/corrections` */
+  espnOlympicsMbkSeasonTypeCorrections: Wrapper<Row[], EspnSeasonTypeCorrectionsParams>;
+  /** OLYMPICS_MBK — season type leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/types/{season_type}/leaders` */
+  espnOlympicsMbkSeasonTypeLeaders: Wrapper<Row[], EspnSeasonTypeLeadersParams>;
+  /** OLYMPICS_MBK — season types (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/types` */
+  espnOlympicsMbkSeasonTypes: Wrapper<Row[], EspnSeasonTypesParams>;
+  /** OLYMPICS_MBK — season week (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/types/{season_type}/weeks/{week}` */
+  espnOlympicsMbkSeasonWeek: Wrapper<Row[], EspnSeasonWeekParams>;
+  /** OLYMPICS_MBK — season week games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/types/{season_type}/weeks/{week}/events` */
+  espnOlympicsMbkSeasonWeekGames: Wrapper<Row[], EspnSeasonWeekEventsParams>;
+  /** OLYMPICS_MBK — season week powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/types/{season_type}/weeks/{week}/powerindex` */
+  espnOlympicsMbkSeasonWeekPowerindex: Wrapper<Row[], EspnSeasonWeekPowerindexParams>;
+  /** OLYMPICS_MBK — season weeks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/seasons/{season}/types/{season_type}/weeks` */
+  espnOlympicsMbkSeasonWeeks: Wrapper<Row[], EspnSeasonWeeksParams>;
+  /** OLYMPICS_MBK — standings (ESPN site.api.espn.com (v2)). `GET https://site.api.espn.com/apis/v2/sports/basketball/mens-olympics-basketball/standings` */
+  espnOlympicsMbkStandings: Wrapper<Row[], EspnStandingsParams>;
+  /** OLYMPICS_MBK — standings core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/standings` */
+  espnOlympicsMbkStandingsCore: Wrapper<Row[], EspnStandingsCoreParams>;
+  /** OLYMPICS_MBK — statistics league (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/statistics` */
+  espnOlympicsMbkStatisticsLeague: Wrapper<Row[], EspnStatisticsLeagueParams>;
+  /** OLYMPICS_MBK — summary (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/summary` */
+  espnOlympicsMbkSummary: SectionedWrapper<ParsedTables, {}, EspnSummaryParams>;
+  /** OLYMPICS_MBK — talentpicks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/talentpicks` */
+  espnOlympicsMbkTalentpicks: Wrapper<Row[], EspnTalentpicksParams>;
+  /** OLYMPICS_MBK — team (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/teams/{team_id}` */
+  espnOlympicsMbkTeam: Wrapper<Row[], EspnTeamParams>;
+  /** OLYMPICS_MBK — team core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/teams/{team_id}` */
+  espnOlympicsMbkTeamCore: Wrapper<Row[], EspnTeamCoreParams>;
+  /** OLYMPICS_MBK — team depthcharts (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/teams/{team_id}/depthcharts` */
+  espnOlympicsMbkTeamDepthcharts: Wrapper<Row[], EspnTeamDepthchartsParams>;
+  /** OLYMPICS_MBK — team history (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/teams/{team_id}/history` */
+  espnOlympicsMbkTeamHistory: Wrapper<Row[], EspnTeamHistoryParams>;
+  /** OLYMPICS_MBK — team injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/teams/{team_id}/injuries` */
+  espnOlympicsMbkTeamInjuries: Wrapper<Row[], EspnTeamInjuriesParams>;
+  /** OLYMPICS_MBK — team leaders (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/teams/{team_id}/leaders` */
+  espnOlympicsMbkTeamLeaders: Wrapper<Row[], EspnTeamLeadersParams>;
+  /** OLYMPICS_MBK — team news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/teams/{team_id}/news` */
+  espnOlympicsMbkTeamNews: Wrapper<Row[], EspnTeamNewsParams>;
+  /** OLYMPICS_MBK — team record (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/teams/{team_id}/record` */
+  espnOlympicsMbkTeamRecord: Wrapper<Row[], EspnTeamRecordParams>;
+  /** OLYMPICS_MBK — team roster (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/teams/{team_id}/roster` */
+  espnOlympicsMbkTeamRoster: Wrapper<Row[], EspnTeamRosterParams>;
+  /** OLYMPICS_MBK — team schedule (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/teams/{team_id}/schedule` */
+  espnOlympicsMbkTeamSchedule: Wrapper<Row[], EspnTeamScheduleParams>;
+  /** OLYMPICS_MBK — teams core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/teams` */
+  espnOlympicsMbkTeamsCore: Wrapper<Row[], EspnTeamsCoreParams>;
+  /** OLYMPICS_MBK — teams site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/teams` */
+  espnOlympicsMbkTeamsSite: Wrapper<Row[], EspnTeamsSiteParams>;
+  /** OLYMPICS_MBK — team transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/teams/{team_id}/transactions` */
+  espnOlympicsMbkTeamTransactions: Wrapper<Row[], EspnTeamTransactionsParams>;
+  /** OLYMPICS_MBK — tournaments (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/tournaments` */
+  espnOlympicsMbkTournaments: Wrapper<Row[], EspnTournamentsParams>;
+  /** OLYMPICS_MBK — transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-olympics-basketball/transactions` */
+  espnOlympicsMbkTransactions: Wrapper<Row[], EspnTransactionsParams>;
+  /** OLYMPICS_MBK — venue (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/venues/{venue_id}` */
+  espnOlympicsMbkVenue: Wrapper<Row[], EspnVenueParams>;
+  /** OLYMPICS_MBK — venues (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-olympics-basketball/venues` */
+  espnOlympicsMbkVenues: Wrapper<Row[], EspnVenuesParams>;
+}
+
+/** The generated wrappers of `sdv.olympics_wbk` (and their deprecated pre-v4 names). */
+export interface OlympicsWbkWrappers {
+  /** OLYMPICS_WBK — award (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/awards/{award_id}` */
+  espn_olympics_wbk_award: Wrapper<Row[], EspnAwardParams>;
+  /** OLYMPICS_WBK — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/awards` */
+  espn_olympics_wbk_awards: Wrapper<Row[], EspnAwardsParams>;
+  /** OLYMPICS_WBK — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/calendar` */
+  espn_olympics_wbk_calendar: Wrapper<Row[], EspnCalendarParams>;
+  /** OLYMPICS_WBK — coach (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/coaches/{coach_id}` */
+  espn_olympics_wbk_coach: Wrapper<Row[], EspnCoachParams>;
+  /** OLYMPICS_WBK — coach record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/coaches/{coach_id}/record/{record_type}` */
+  espn_olympics_wbk_coach_record: Wrapper<Row[], EspnCoachRecordParams>;
+  /** OLYMPICS_WBK — coach season (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/coaches/{coach_id}/seasons/{season}` */
+  espn_olympics_wbk_coach_season: Wrapper<Row[], EspnCoachSeasonParams>;
+  /** OLYMPICS_WBK — conferences (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/groups` */
+  espn_olympics_wbk_conferences: Wrapper<Row[], EspnConferencesParams>;
+  /** OLYMPICS_WBK — draft (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/draft` */
+  espn_olympics_wbk_draft: Wrapper<Row[], EspnDraftParams>;
+  /** OLYMPICS_WBK — fpi (ESPN site.web.api.espn.com (FPI, fitt v3)). `GET https://site.web.api.espn.com/apis/fitt/v3/sports/basketball/womens-olympics-basketball/powerindex` */
+  espn_olympics_wbk_fpi: Wrapper<Row[], EspnFpiParams>;
+  /** OLYMPICS_WBK — franchise (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/franchises/{franchise_id}` */
+  espn_olympics_wbk_franchise: Wrapper<Row[], EspnFranchiseParams>;
+  /** OLYMPICS_WBK — franchises (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/franchises` */
+  espn_olympics_wbk_franchises: Wrapper<Row[], EspnFranchisesParams>;
+  /** OLYMPICS_WBK — game (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}` */
+  espn_olympics_wbk_game: Wrapper<Row[], EspnEventParams>;
+  /** OLYMPICS_WBK — game broadcasts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/broadcasts` */
+  espn_olympics_wbk_game_broadcasts: Wrapper<Row[], EspnEventBroadcastsParams>;
+  /** OLYMPICS_WBK — game competition (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}` */
+  espn_olympics_wbk_game_competition: Wrapper<Row[], EspnEventCompetitionParams>;
+  /** OLYMPICS_WBK — game leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/leaders` */
+  espn_olympics_wbk_game_leaders: Wrapper<Row[], EspnEventLeadersParams>;
+  /** OLYMPICS_WBK — game odds (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/odds` */
+  espn_olympics_wbk_game_odds: Wrapper<Row[], EspnEventOddsParams>;
+  /** OLYMPICS_WBK — game official detail (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/officials/{official_id}` */
+  espn_olympics_wbk_game_official_detail: Wrapper<Row[], EspnEventOfficialDetailParams>;
+  /** OLYMPICS_WBK — game officials (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/officials` */
+  espn_olympics_wbk_game_officials: Wrapper<Row[], EspnEventOfficialsParams>;
+  /** OLYMPICS_WBK — game play (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/plays/{play_id}` */
+  espn_olympics_wbk_game_play: Wrapper<Row[], EspnEventPlayParams>;
+  /** OLYMPICS_WBK — game play personnel (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` */
+  espn_olympics_wbk_game_play_personnel: Wrapper<Row[], EspnEventPlayPersonnelParams>;
+  /** OLYMPICS_WBK — game plays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/plays` */
+  espn_olympics_wbk_game_plays: Wrapper<Row[], EspnEventPlaysParams>;
+  /** OLYMPICS_WBK — game powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/powerindex` */
+  espn_olympics_wbk_game_powerindex: Wrapper<Row[], EspnEventPowerindexParams>;
+  /** OLYMPICS_WBK — game predictor (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/predictor` */
+  espn_olympics_wbk_game_predictor: Wrapper<Row[], EspnEventPredictorParams>;
+  /** OLYMPICS_WBK — game probabilities (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/probabilities` */
+  espn_olympics_wbk_game_probabilities: Wrapper<Row[], EspnEventProbabilitiesParams>;
+  /** OLYMPICS_WBK — game propbets (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/propbets` */
+  espn_olympics_wbk_game_propbets: Wrapper<Row[], EspnEventPropbetsParams>;
+  /** OLYMPICS_WBK — game scoringplays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/scoringplays` */
+  espn_olympics_wbk_game_scoringplays: Wrapper<Row[], EspnEventScoringplaysParams>;
+  /** OLYMPICS_WBK — game situation (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/situation` */
+  espn_olympics_wbk_game_situation: Wrapper<Row[], EspnEventSituationParams>;
+  /** OLYMPICS_WBK — game status (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/status` */
+  espn_olympics_wbk_game_status: Wrapper<Row[], EspnEventStatusParams>;
+  /** OLYMPICS_WBK — game team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}` */
+  espn_olympics_wbk_game_team: Wrapper<Row[], EspnEventCompetitorParams>;
+  /** OLYMPICS_WBK — game team leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` */
+  espn_olympics_wbk_game_team_leaders: Wrapper<Row[], EspnEventCompetitorLeadersParams>;
+  /** OLYMPICS_WBK — game team linescores (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` */
+  espn_olympics_wbk_game_team_linescores: Wrapper<Row[], EspnEventCompetitorLinescoresParams>;
+  /** OLYMPICS_WBK — game team record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` */
+  espn_olympics_wbk_game_team_record: Wrapper<Row[], EspnEventCompetitorRecordParams>;
+  /** OLYMPICS_WBK — game team roster (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` */
+  espn_olympics_wbk_game_team_roster: Wrapper<Row[], EspnEventCompetitorRosterParams>;
+  /** OLYMPICS_WBK — game team statistics (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` */
+  espn_olympics_wbk_game_team_statistics: Wrapper<Row[], EspnEventCompetitorStatisticsParams>;
+  /** OLYMPICS_WBK — game teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/competitors` */
+  espn_olympics_wbk_game_teams: Wrapper<Row[], EspnEventCompetitorsParams>;
+  /** OLYMPICS_WBK — games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events` */
+  espn_olympics_wbk_games: Wrapper<Row[], EspnEventsParams>;
+  /** OLYMPICS_WBK — injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/injuries` */
+  espn_olympics_wbk_injuries: Wrapper<Row[], EspnInjuriesParams>;
+  /** OLYMPICS_WBK — leaders (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/womens-olympics-basketball/statistics/byathlete` */
+  espn_olympics_wbk_leaders: Wrapper<Row[], EspnLeadersParams>;
+  /** OLYMPICS_WBK — leaders core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/leaders` */
+  espn_olympics_wbk_leaders_core: Wrapper<Row[], EspnLeadersCoreParams>;
+  /** OLYMPICS_WBK — league notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/notes` */
+  espn_olympics_wbk_league_notes: Wrapper<Row[], EspnLeagueNotesParams>;
+  /** OLYMPICS_WBK — league root (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball` */
+  espn_olympics_wbk_league_root: Wrapper<Row[], EspnLeagueRootParams>;
+  /** OLYMPICS_WBK — news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/news` */
+  espn_olympics_wbk_news: Wrapper<Row[], EspnNewsParams>;
+  /** OLYMPICS_WBK — player awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/athletes/{athlete_id}/awards` */
+  espn_olympics_wbk_player_awards: Wrapper<Row[], EspnAthleteAwardsParams>;
+  /** OLYMPICS_WBK — player bio (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/athletes/{athlete_id}/bio` */
+  espn_olympics_wbk_player_bio: Wrapper<Row[], EspnAthleteBioParams>;
+  /** OLYMPICS_WBK — player career stats (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/athletes/{athlete_id}/statistics[/{stat_type}]` */
+  espn_olympics_wbk_player_career_stats: Wrapper<Row[], EspnAthleteCareerStatsParams>;
+  /** OLYMPICS_WBK — player contracts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/athletes/{athlete_id}/contracts` */
+  espn_olympics_wbk_player_contracts: Wrapper<Row[], EspnAthleteContractsParams>;
+  /** OLYMPICS_WBK — player core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/athletes/{athlete_id}` */
+  espn_olympics_wbk_player_core: Wrapper<Row[], EspnAthleteCoreParams>;
+  /** OLYMPICS_WBK — player eventlog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/athletes/{athlete_id}/eventlog` */
+  espn_olympics_wbk_player_eventlog: Wrapper<Row[], EspnAthleteEventlogParams>;
+  /** OLYMPICS_WBK — player gamelog (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/womens-olympics-basketball/athletes/{athlete_id}/gamelog` */
+  espn_olympics_wbk_player_gamelog: Wrapper<Row[], EspnAthleteGamelogParams>;
+  /** OLYMPICS_WBK — player info (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/athletes/{athlete_id}` */
+  espn_olympics_wbk_player_info: Wrapper<Row[], EspnAthleteInfoParams>;
+  /** OLYMPICS_WBK — player injuries (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/athletes/{athlete_id}/injuries` */
+  espn_olympics_wbk_player_injuries: Wrapper<Row[], EspnAthleteInjuriesParams>;
+  /** OLYMPICS_WBK — player news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/athletes/{athlete_id}/news` */
+  espn_olympics_wbk_player_news: Wrapper<Row[], EspnAthleteNewsParams>;
+  /** OLYMPICS_WBK — player notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/athletes/{athlete_id}/notes` */
+  espn_olympics_wbk_player_notes: Wrapper<Row[], EspnAthleteNotesParams>;
+  /** OLYMPICS_WBK — player overview (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/womens-olympics-basketball/athletes/{athlete_id}/overview` */
+  espn_olympics_wbk_player_overview: Wrapper<Row[], EspnAthleteOverviewParams>;
+  /** OLYMPICS_WBK — player records (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/athletes/{athlete_id}/records` */
+  espn_olympics_wbk_player_records: Wrapper<Row[], EspnAthleteRecordsParams>;
+  /** OLYMPICS_WBK — player seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/athletes/{athlete_id}/seasons` */
+  espn_olympics_wbk_player_seasons: Wrapper<Row[], EspnAthleteSeasonsParams>;
+  /** OLYMPICS_WBK — player splits (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/womens-olympics-basketball/athletes/{athlete_id}/splits` */
+  espn_olympics_wbk_player_splits: Wrapper<Row[], EspnAthleteSplitsParams>;
+  /** OLYMPICS_WBK — player statisticslog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/athletes/{athlete_id}/statisticslog` */
+  espn_olympics_wbk_player_statisticslog: Wrapper<Row[], EspnAthleteStatisticslogParams>;
+  /** OLYMPICS_WBK — player stats (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/womens-olympics-basketball/athletes/{athlete_id}/stats` */
+  espn_olympics_wbk_player_stats: Wrapper<Row[], EspnAthleteStatsParams>;
+  /** OLYMPICS_WBK — player vs player (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/athletes/{athlete_id}/vsathlete/{opp_id}` */
+  espn_olympics_wbk_player_vs_player: Wrapper<Row[], EspnAthleteVsAthleteParams>;
+  /** OLYMPICS_WBK — players index (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/athletes` */
+  espn_olympics_wbk_players_index: Wrapper<Row[], EspnAthletesIndexParams>;
+  /** OLYMPICS_WBK — position (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/positions/{position_id}` */
+  espn_olympics_wbk_position: Wrapper<Row[], EspnPositionParams>;
+  /** OLYMPICS_WBK — positions (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/positions` */
+  espn_olympics_wbk_positions: Wrapper<Row[], EspnPositionsParams>;
+  /** OLYMPICS_WBK — scoreboard (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/scoreboard` */
+  espn_olympics_wbk_scoreboard: Wrapper<Row[], EspnScoreboardParams>;
+  /** OLYMPICS_WBK — season awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/awards` */
+  espn_olympics_wbk_season_awards: Wrapper<Row[], EspnSeasonAwardsParams>;
+  /** OLYMPICS_WBK — season coaches (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/coaches` */
+  espn_olympics_wbk_season_coaches: Wrapper<Row[], EspnSeasonCoachesParams>;
+  /** OLYMPICS_WBK — season draft (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/draft` */
+  espn_olympics_wbk_season_draft: Wrapper<Row[], EspnSeasonDraftParams>;
+  /** OLYMPICS_WBK — season draft round picks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/draft/rounds/{round_num}/picks` */
+  espn_olympics_wbk_season_draft_round_picks: Wrapper<Row[], EspnSeasonDraftRoundPicksParams>;
+  /** OLYMPICS_WBK — season freeagents (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/freeagents` */
+  espn_olympics_wbk_season_freeagents: Wrapper<Row[], EspnSeasonFreeagentsParams>;
+  /** OLYMPICS_WBK — season futures (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/futures` */
+  espn_olympics_wbk_season_futures: Wrapper<Row[], EspnSeasonFuturesParams>;
+  /** OLYMPICS_WBK — season group (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/types/{season_type}/groups/{group_id}` */
+  espn_olympics_wbk_season_group: Wrapper<Row[], EspnSeasonGroupParams>;
+  /** OLYMPICS_WBK — season group children (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/types/{season_type}/groups/{group_id}/children` */
+  espn_olympics_wbk_season_group_children: Wrapper<Row[], EspnSeasonGroupChildrenParams>;
+  /** OLYMPICS_WBK — season group teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/types/{season_type}/groups/{group_id}/teams` */
+  espn_olympics_wbk_season_group_teams: Wrapper<Row[], EspnSeasonGroupTeamsParams>;
+  /** OLYMPICS_WBK — season groups (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/types/{season_type}/groups` */
+  espn_olympics_wbk_season_groups: Wrapper<Row[], EspnSeasonGroupsParams>;
+  /** OLYMPICS_WBK — season info (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}` */
+  espn_olympics_wbk_season_info: Wrapper<Row[], EspnSeasonInfoParams>;
+  /** OLYMPICS_WBK — season players (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/athletes` */
+  espn_olympics_wbk_season_players: Wrapper<Row[], EspnSeasonAthletesParams>;
+  /** OLYMPICS_WBK — season pointer (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/season` */
+  espn_olympics_wbk_season_pointer: Wrapper<Row[], EspnSeasonPointerParams>;
+  /** OLYMPICS_WBK — season powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/powerindex[/{team_id}]` */
+  espn_olympics_wbk_season_powerindex: Wrapper<Row[], EspnSeasonPowerindexParams>;
+  /** OLYMPICS_WBK — season powerindex leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/powerindex/leaders` */
+  espn_olympics_wbk_season_powerindex_leaders: Wrapper<Row[], EspnSeasonPowerindexLeadersParams>;
+  /** OLYMPICS_WBK — season team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/teams/{team_id}` */
+  espn_olympics_wbk_season_team: Wrapper<Row[], EspnSeasonTeamParams>;
+  /** OLYMPICS_WBK — season teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/teams` */
+  espn_olympics_wbk_season_teams: Wrapper<Row[], EspnSeasonTeamsParams>;
+  /** OLYMPICS_WBK — season type (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/types/{season_type}` */
+  espn_olympics_wbk_season_type: Wrapper<Row[], EspnSeasonTypeParams>;
+  /** OLYMPICS_WBK — season type corrections (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/types/{season_type}/corrections` */
+  espn_olympics_wbk_season_type_corrections: Wrapper<Row[], EspnSeasonTypeCorrectionsParams>;
+  /** OLYMPICS_WBK — season type leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/types/{season_type}/leaders` */
+  espn_olympics_wbk_season_type_leaders: Wrapper<Row[], EspnSeasonTypeLeadersParams>;
+  /** OLYMPICS_WBK — season types (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/types` */
+  espn_olympics_wbk_season_types: Wrapper<Row[], EspnSeasonTypesParams>;
+  /** OLYMPICS_WBK — season week (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/types/{season_type}/weeks/{week}` */
+  espn_olympics_wbk_season_week: Wrapper<Row[], EspnSeasonWeekParams>;
+  /** OLYMPICS_WBK — season week games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/types/{season_type}/weeks/{week}/events` */
+  espn_olympics_wbk_season_week_games: Wrapper<Row[], EspnSeasonWeekEventsParams>;
+  /** OLYMPICS_WBK — season week powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/types/{season_type}/weeks/{week}/powerindex` */
+  espn_olympics_wbk_season_week_powerindex: Wrapper<Row[], EspnSeasonWeekPowerindexParams>;
+  /** OLYMPICS_WBK — season weeks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/types/{season_type}/weeks` */
+  espn_olympics_wbk_season_weeks: Wrapper<Row[], EspnSeasonWeeksParams>;
+  /** OLYMPICS_WBK — seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons` */
+  espn_olympics_wbk_seasons: Wrapper<Row[], EspnSeasonsParams>;
+  /** OLYMPICS_WBK — standings (ESPN site.api.espn.com (v2)). `GET https://site.api.espn.com/apis/v2/sports/basketball/womens-olympics-basketball/standings` */
+  espn_olympics_wbk_standings: Wrapper<Row[], EspnStandingsParams>;
+  /** OLYMPICS_WBK — standings core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/standings` */
+  espn_olympics_wbk_standings_core: Wrapper<Row[], EspnStandingsCoreParams>;
+  /** OLYMPICS_WBK — statistics league (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/statistics` */
+  espn_olympics_wbk_statistics_league: Wrapper<Row[], EspnStatisticsLeagueParams>;
+  /** OLYMPICS_WBK — summary (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/summary` */
+  espn_olympics_wbk_summary: SectionedWrapper<ParsedTables, {}, EspnSummaryParams>;
+  /** OLYMPICS_WBK — talentpicks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/talentpicks` */
+  espn_olympics_wbk_talentpicks: Wrapper<Row[], EspnTalentpicksParams>;
+  /** OLYMPICS_WBK — team (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/teams/{team_id}` */
+  espn_olympics_wbk_team: Wrapper<Row[], EspnTeamParams>;
+  /** OLYMPICS_WBK — team core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/teams/{team_id}` */
+  espn_olympics_wbk_team_core: Wrapper<Row[], EspnTeamCoreParams>;
+  /** OLYMPICS_WBK — team depthcharts (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/teams/{team_id}/depthcharts` */
+  espn_olympics_wbk_team_depthcharts: Wrapper<Row[], EspnTeamDepthchartsParams>;
+  /** OLYMPICS_WBK — team history (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/teams/{team_id}/history` */
+  espn_olympics_wbk_team_history: Wrapper<Row[], EspnTeamHistoryParams>;
+  /** OLYMPICS_WBK — team injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/teams/{team_id}/injuries` */
+  espn_olympics_wbk_team_injuries: Wrapper<Row[], EspnTeamInjuriesParams>;
+  /** OLYMPICS_WBK — team leaders (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/teams/{team_id}/leaders` */
+  espn_olympics_wbk_team_leaders: Wrapper<Row[], EspnTeamLeadersParams>;
+  /** OLYMPICS_WBK — team news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/teams/{team_id}/news` */
+  espn_olympics_wbk_team_news: Wrapper<Row[], EspnTeamNewsParams>;
+  /** OLYMPICS_WBK — team record (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/teams/{team_id}/record` */
+  espn_olympics_wbk_team_record: Wrapper<Row[], EspnTeamRecordParams>;
+  /** OLYMPICS_WBK — team roster (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/teams/{team_id}/roster` */
+  espn_olympics_wbk_team_roster: Wrapper<Row[], EspnTeamRosterParams>;
+  /** OLYMPICS_WBK — team schedule (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/teams/{team_id}/schedule` */
+  espn_olympics_wbk_team_schedule: Wrapper<Row[], EspnTeamScheduleParams>;
+  /** OLYMPICS_WBK — team transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/teams/{team_id}/transactions` */
+  espn_olympics_wbk_team_transactions: Wrapper<Row[], EspnTeamTransactionsParams>;
+  /** OLYMPICS_WBK — teams core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/teams` */
+  espn_olympics_wbk_teams_core: Wrapper<Row[], EspnTeamsCoreParams>;
+  /** OLYMPICS_WBK — teams site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/teams` */
+  espn_olympics_wbk_teams_site: Wrapper<Row[], EspnTeamsSiteParams>;
+  /** OLYMPICS_WBK — tournaments (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/tournaments` */
+  espn_olympics_wbk_tournaments: Wrapper<Row[], EspnTournamentsParams>;
+  /** OLYMPICS_WBK — transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/transactions` */
+  espn_olympics_wbk_transactions: Wrapper<Row[], EspnTransactionsParams>;
+  /** OLYMPICS_WBK — venue (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/venues/{venue_id}` */
+  espn_olympics_wbk_venue: Wrapper<Row[], EspnVenueParams>;
+  /** OLYMPICS_WBK — venues (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/venues` */
+  espn_olympics_wbk_venues: Wrapper<Row[], EspnVenuesParams>;
+  /** OLYMPICS_WBK — award (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/awards/{award_id}` */
+  espnOlympicsWbkAward: Wrapper<Row[], EspnAwardParams>;
+  /** OLYMPICS_WBK — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/awards` */
+  espnOlympicsWbkAwards: Wrapper<Row[], EspnAwardsParams>;
+  /** OLYMPICS_WBK — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/calendar` */
+  espnOlympicsWbkCalendar: Wrapper<Row[], EspnCalendarParams>;
+  /** OLYMPICS_WBK — coach (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/coaches/{coach_id}` */
+  espnOlympicsWbkCoach: Wrapper<Row[], EspnCoachParams>;
+  /** OLYMPICS_WBK — coach record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/coaches/{coach_id}/record/{record_type}` */
+  espnOlympicsWbkCoachRecord: Wrapper<Row[], EspnCoachRecordParams>;
+  /** OLYMPICS_WBK — coach season (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/coaches/{coach_id}/seasons/{season}` */
+  espnOlympicsWbkCoachSeason: Wrapper<Row[], EspnCoachSeasonParams>;
+  /** OLYMPICS_WBK — conferences (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/groups` */
+  espnOlympicsWbkConferences: Wrapper<Row[], EspnConferencesParams>;
+  /** OLYMPICS_WBK — draft (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/draft` */
+  espnOlympicsWbkDraft: Wrapper<Row[], EspnDraftParams>;
+  /** OLYMPICS_WBK — fpi (ESPN site.web.api.espn.com (FPI, fitt v3)). `GET https://site.web.api.espn.com/apis/fitt/v3/sports/basketball/womens-olympics-basketball/powerindex` */
+  espnOlympicsWbkFpi: Wrapper<Row[], EspnFpiParams>;
+  /** OLYMPICS_WBK — franchise (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/franchises/{franchise_id}` */
+  espnOlympicsWbkFranchise: Wrapper<Row[], EspnFranchiseParams>;
+  /** OLYMPICS_WBK — franchises (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/franchises` */
+  espnOlympicsWbkFranchises: Wrapper<Row[], EspnFranchisesParams>;
+  /** OLYMPICS_WBK — game (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}` */
+  espnOlympicsWbkGame: Wrapper<Row[], EspnEventParams>;
+  /** OLYMPICS_WBK — game broadcasts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/broadcasts` */
+  espnOlympicsWbkGameBroadcasts: Wrapper<Row[], EspnEventBroadcastsParams>;
+  /** OLYMPICS_WBK — game competition (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}` */
+  espnOlympicsWbkGameCompetition: Wrapper<Row[], EspnEventCompetitionParams>;
+  /** OLYMPICS_WBK — game leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/leaders` */
+  espnOlympicsWbkGameLeaders: Wrapper<Row[], EspnEventLeadersParams>;
+  /** OLYMPICS_WBK — game odds (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/odds` */
+  espnOlympicsWbkGameOdds: Wrapper<Row[], EspnEventOddsParams>;
+  /** OLYMPICS_WBK — game official detail (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/officials/{official_id}` */
+  espnOlympicsWbkGameOfficialDetail: Wrapper<Row[], EspnEventOfficialDetailParams>;
+  /** OLYMPICS_WBK — game officials (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/officials` */
+  espnOlympicsWbkGameOfficials: Wrapper<Row[], EspnEventOfficialsParams>;
+  /** OLYMPICS_WBK — game play (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/plays/{play_id}` */
+  espnOlympicsWbkGamePlay: Wrapper<Row[], EspnEventPlayParams>;
+  /** OLYMPICS_WBK — game play personnel (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/plays/{play_id}/personnel` */
+  espnOlympicsWbkGamePlayPersonnel: Wrapper<Row[], EspnEventPlayPersonnelParams>;
+  /** OLYMPICS_WBK — game plays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/plays` */
+  espnOlympicsWbkGamePlays: Wrapper<Row[], EspnEventPlaysParams>;
+  /** OLYMPICS_WBK — game powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/powerindex` */
+  espnOlympicsWbkGamePowerindex: Wrapper<Row[], EspnEventPowerindexParams>;
+  /** OLYMPICS_WBK — game predictor (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/predictor` */
+  espnOlympicsWbkGamePredictor: Wrapper<Row[], EspnEventPredictorParams>;
+  /** OLYMPICS_WBK — game probabilities (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/probabilities` */
+  espnOlympicsWbkGameProbabilities: Wrapper<Row[], EspnEventProbabilitiesParams>;
+  /** OLYMPICS_WBK — game propbets (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/propbets` */
+  espnOlympicsWbkGamePropbets: Wrapper<Row[], EspnEventPropbetsParams>;
+  /** OLYMPICS_WBK — games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events` */
+  espnOlympicsWbkGames: Wrapper<Row[], EspnEventsParams>;
+  /** OLYMPICS_WBK — game scoringplays (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/scoringplays` */
+  espnOlympicsWbkGameScoringplays: Wrapper<Row[], EspnEventScoringplaysParams>;
+  /** OLYMPICS_WBK — game situation (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/situation` */
+  espnOlympicsWbkGameSituation: Wrapper<Row[], EspnEventSituationParams>;
+  /** OLYMPICS_WBK — game status (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/status` */
+  espnOlympicsWbkGameStatus: Wrapper<Row[], EspnEventStatusParams>;
+  /** OLYMPICS_WBK — game team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}` */
+  espnOlympicsWbkGameTeam: Wrapper<Row[], EspnEventCompetitorParams>;
+  /** OLYMPICS_WBK — game team leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/leaders` */
+  espnOlympicsWbkGameTeamLeaders: Wrapper<Row[], EspnEventCompetitorLeadersParams>;
+  /** OLYMPICS_WBK — game team linescores (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/linescores` */
+  espnOlympicsWbkGameTeamLinescores: Wrapper<Row[], EspnEventCompetitorLinescoresParams>;
+  /** OLYMPICS_WBK — game team record (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/record` */
+  espnOlympicsWbkGameTeamRecord: Wrapper<Row[], EspnEventCompetitorRecordParams>;
+  /** OLYMPICS_WBK — game team roster (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/roster` */
+  espnOlympicsWbkGameTeamRoster: Wrapper<Row[], EspnEventCompetitorRosterParams>;
+  /** OLYMPICS_WBK — game teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/competitors` */
+  espnOlympicsWbkGameTeams: Wrapper<Row[], EspnEventCompetitorsParams>;
+  /** OLYMPICS_WBK — game team statistics (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/events/{event_id}/competitions/{cid}/competitors/{team_id}/statistics` */
+  espnOlympicsWbkGameTeamStatistics: Wrapper<Row[], EspnEventCompetitorStatisticsParams>;
+  /** OLYMPICS_WBK — injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/injuries` */
+  espnOlympicsWbkInjuries: Wrapper<Row[], EspnInjuriesParams>;
+  /** OLYMPICS_WBK — leaders (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/womens-olympics-basketball/statistics/byathlete` */
+  espnOlympicsWbkLeaders: Wrapper<Row[], EspnLeadersParams>;
+  /** OLYMPICS_WBK — leaders core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/leaders` */
+  espnOlympicsWbkLeadersCore: Wrapper<Row[], EspnLeadersCoreParams>;
+  /** OLYMPICS_WBK — league notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/notes` */
+  espnOlympicsWbkLeagueNotes: Wrapper<Row[], EspnLeagueNotesParams>;
+  /** OLYMPICS_WBK — league root (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball` */
+  espnOlympicsWbkLeagueRoot: Wrapper<Row[], EspnLeagueRootParams>;
+  /** OLYMPICS_WBK — news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/news` */
+  espnOlympicsWbkNews: Wrapper<Row[], EspnNewsParams>;
+  /** OLYMPICS_WBK — player awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/athletes/{athlete_id}/awards` */
+  espnOlympicsWbkPlayerAwards: Wrapper<Row[], EspnAthleteAwardsParams>;
+  /** OLYMPICS_WBK — player bio (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/athletes/{athlete_id}/bio` */
+  espnOlympicsWbkPlayerBio: Wrapper<Row[], EspnAthleteBioParams>;
+  /** OLYMPICS_WBK — player career stats (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/athletes/{athlete_id}/statistics[/{stat_type}]` */
+  espnOlympicsWbkPlayerCareerStats: Wrapper<Row[], EspnAthleteCareerStatsParams>;
+  /** OLYMPICS_WBK — player contracts (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/athletes/{athlete_id}/contracts` */
+  espnOlympicsWbkPlayerContracts: Wrapper<Row[], EspnAthleteContractsParams>;
+  /** OLYMPICS_WBK — player core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/athletes/{athlete_id}` */
+  espnOlympicsWbkPlayerCore: Wrapper<Row[], EspnAthleteCoreParams>;
+  /** OLYMPICS_WBK — player eventlog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/athletes/{athlete_id}/eventlog` */
+  espnOlympicsWbkPlayerEventlog: Wrapper<Row[], EspnAthleteEventlogParams>;
+  /** OLYMPICS_WBK — player gamelog (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/womens-olympics-basketball/athletes/{athlete_id}/gamelog` */
+  espnOlympicsWbkPlayerGamelog: Wrapper<Row[], EspnAthleteGamelogParams>;
+  /** OLYMPICS_WBK — player info (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/athletes/{athlete_id}` */
+  espnOlympicsWbkPlayerInfo: Wrapper<Row[], EspnAthleteInfoParams>;
+  /** OLYMPICS_WBK — player injuries (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/athletes/{athlete_id}/injuries` */
+  espnOlympicsWbkPlayerInjuries: Wrapper<Row[], EspnAthleteInjuriesParams>;
+  /** OLYMPICS_WBK — player news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/athletes/{athlete_id}/news` */
+  espnOlympicsWbkPlayerNews: Wrapper<Row[], EspnAthleteNewsParams>;
+  /** OLYMPICS_WBK — player notes (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/athletes/{athlete_id}/notes` */
+  espnOlympicsWbkPlayerNotes: Wrapper<Row[], EspnAthleteNotesParams>;
+  /** OLYMPICS_WBK — player overview (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/womens-olympics-basketball/athletes/{athlete_id}/overview` */
+  espnOlympicsWbkPlayerOverview: Wrapper<Row[], EspnAthleteOverviewParams>;
+  /** OLYMPICS_WBK — player records (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/athletes/{athlete_id}/records` */
+  espnOlympicsWbkPlayerRecords: Wrapper<Row[], EspnAthleteRecordsParams>;
+  /** OLYMPICS_WBK — player seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/athletes/{athlete_id}/seasons` */
+  espnOlympicsWbkPlayerSeasons: Wrapper<Row[], EspnAthleteSeasonsParams>;
+  /** OLYMPICS_WBK — players index (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/athletes` */
+  espnOlympicsWbkPlayersIndex: Wrapper<Row[], EspnAthletesIndexParams>;
+  /** OLYMPICS_WBK — player splits (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/womens-olympics-basketball/athletes/{athlete_id}/splits` */
+  espnOlympicsWbkPlayerSplits: Wrapper<Row[], EspnAthleteSplitsParams>;
+  /** OLYMPICS_WBK — player statisticslog (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/athletes/{athlete_id}/statisticslog` */
+  espnOlympicsWbkPlayerStatisticslog: Wrapper<Row[], EspnAthleteStatisticslogParams>;
+  /** OLYMPICS_WBK — player stats (ESPN site.web.api.espn.com (web v3)). `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/womens-olympics-basketball/athletes/{athlete_id}/stats` */
+  espnOlympicsWbkPlayerStats: Wrapper<Row[], EspnAthleteStatsParams>;
+  /** OLYMPICS_WBK — player vs player (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/athletes/{athlete_id}/vsathlete/{opp_id}` */
+  espnOlympicsWbkPlayerVsPlayer: Wrapper<Row[], EspnAthleteVsAthleteParams>;
+  /** OLYMPICS_WBK — position (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/positions/{position_id}` */
+  espnOlympicsWbkPosition: Wrapper<Row[], EspnPositionParams>;
+  /** OLYMPICS_WBK — positions (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/positions` */
+  espnOlympicsWbkPositions: Wrapper<Row[], EspnPositionsParams>;
+  /** OLYMPICS_WBK — scoreboard (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/scoreboard` */
+  espnOlympicsWbkScoreboard: Wrapper<Row[], EspnScoreboardParams>;
+  /** OLYMPICS_WBK — season awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/awards` */
+  espnOlympicsWbkSeasonAwards: Wrapper<Row[], EspnSeasonAwardsParams>;
+  /** OLYMPICS_WBK — season coaches (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/coaches` */
+  espnOlympicsWbkSeasonCoaches: Wrapper<Row[], EspnSeasonCoachesParams>;
+  /** OLYMPICS_WBK — season draft (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/draft` */
+  espnOlympicsWbkSeasonDraft: Wrapper<Row[], EspnSeasonDraftParams>;
+  /** OLYMPICS_WBK — season draft round picks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/draft/rounds/{round_num}/picks` */
+  espnOlympicsWbkSeasonDraftRoundPicks: Wrapper<Row[], EspnSeasonDraftRoundPicksParams>;
+  /** OLYMPICS_WBK — season freeagents (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/freeagents` */
+  espnOlympicsWbkSeasonFreeagents: Wrapper<Row[], EspnSeasonFreeagentsParams>;
+  /** OLYMPICS_WBK — season futures (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/futures` */
+  espnOlympicsWbkSeasonFutures: Wrapper<Row[], EspnSeasonFuturesParams>;
+  /** OLYMPICS_WBK — season group (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/types/{season_type}/groups/{group_id}` */
+  espnOlympicsWbkSeasonGroup: Wrapper<Row[], EspnSeasonGroupParams>;
+  /** OLYMPICS_WBK — season group children (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/types/{season_type}/groups/{group_id}/children` */
+  espnOlympicsWbkSeasonGroupChildren: Wrapper<Row[], EspnSeasonGroupChildrenParams>;
+  /** OLYMPICS_WBK — season groups (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/types/{season_type}/groups` */
+  espnOlympicsWbkSeasonGroups: Wrapper<Row[], EspnSeasonGroupsParams>;
+  /** OLYMPICS_WBK — season group teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/types/{season_type}/groups/{group_id}/teams` */
+  espnOlympicsWbkSeasonGroupTeams: Wrapper<Row[], EspnSeasonGroupTeamsParams>;
+  /** OLYMPICS_WBK — season info (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}` */
+  espnOlympicsWbkSeasonInfo: Wrapper<Row[], EspnSeasonInfoParams>;
+  /** OLYMPICS_WBK — season players (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/athletes` */
+  espnOlympicsWbkSeasonPlayers: Wrapper<Row[], EspnSeasonAthletesParams>;
+  /** OLYMPICS_WBK — season pointer (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/season` */
+  espnOlympicsWbkSeasonPointer: Wrapper<Row[], EspnSeasonPointerParams>;
+  /** OLYMPICS_WBK — season powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/powerindex[/{team_id}]` */
+  espnOlympicsWbkSeasonPowerindex: Wrapper<Row[], EspnSeasonPowerindexParams>;
+  /** OLYMPICS_WBK — season powerindex leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/powerindex/leaders` */
+  espnOlympicsWbkSeasonPowerindexLeaders: Wrapper<Row[], EspnSeasonPowerindexLeadersParams>;
+  /** OLYMPICS_WBK — seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons` */
+  espnOlympicsWbkSeasons: Wrapper<Row[], EspnSeasonsParams>;
+  /** OLYMPICS_WBK — season team (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/teams/{team_id}` */
+  espnOlympicsWbkSeasonTeam: Wrapper<Row[], EspnSeasonTeamParams>;
+  /** OLYMPICS_WBK — season teams (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/teams` */
+  espnOlympicsWbkSeasonTeams: Wrapper<Row[], EspnSeasonTeamsParams>;
+  /** OLYMPICS_WBK — season type (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/types/{season_type}` */
+  espnOlympicsWbkSeasonType: Wrapper<Row[], EspnSeasonTypeParams>;
+  /** OLYMPICS_WBK — season type corrections (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/types/{season_type}/corrections` */
+  espnOlympicsWbkSeasonTypeCorrections: Wrapper<Row[], EspnSeasonTypeCorrectionsParams>;
+  /** OLYMPICS_WBK — season type leaders (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/types/{season_type}/leaders` */
+  espnOlympicsWbkSeasonTypeLeaders: Wrapper<Row[], EspnSeasonTypeLeadersParams>;
+  /** OLYMPICS_WBK — season types (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/types` */
+  espnOlympicsWbkSeasonTypes: Wrapper<Row[], EspnSeasonTypesParams>;
+  /** OLYMPICS_WBK — season week (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/types/{season_type}/weeks/{week}` */
+  espnOlympicsWbkSeasonWeek: Wrapper<Row[], EspnSeasonWeekParams>;
+  /** OLYMPICS_WBK — season week games (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/types/{season_type}/weeks/{week}/events` */
+  espnOlympicsWbkSeasonWeekGames: Wrapper<Row[], EspnSeasonWeekEventsParams>;
+  /** OLYMPICS_WBK — season week powerindex (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/types/{season_type}/weeks/{week}/powerindex` */
+  espnOlympicsWbkSeasonWeekPowerindex: Wrapper<Row[], EspnSeasonWeekPowerindexParams>;
+  /** OLYMPICS_WBK — season weeks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/seasons/{season}/types/{season_type}/weeks` */
+  espnOlympicsWbkSeasonWeeks: Wrapper<Row[], EspnSeasonWeeksParams>;
+  /** OLYMPICS_WBK — standings (ESPN site.api.espn.com (v2)). `GET https://site.api.espn.com/apis/v2/sports/basketball/womens-olympics-basketball/standings` */
+  espnOlympicsWbkStandings: Wrapper<Row[], EspnStandingsParams>;
+  /** OLYMPICS_WBK — standings core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/standings` */
+  espnOlympicsWbkStandingsCore: Wrapper<Row[], EspnStandingsCoreParams>;
+  /** OLYMPICS_WBK — statistics league (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/statistics` */
+  espnOlympicsWbkStatisticsLeague: Wrapper<Row[], EspnStatisticsLeagueParams>;
+  /** OLYMPICS_WBK — summary (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/summary` */
+  espnOlympicsWbkSummary: SectionedWrapper<ParsedTables, {}, EspnSummaryParams>;
+  /** OLYMPICS_WBK — talentpicks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/talentpicks` */
+  espnOlympicsWbkTalentpicks: Wrapper<Row[], EspnTalentpicksParams>;
+  /** OLYMPICS_WBK — team (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/teams/{team_id}` */
+  espnOlympicsWbkTeam: Wrapper<Row[], EspnTeamParams>;
+  /** OLYMPICS_WBK — team core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/teams/{team_id}` */
+  espnOlympicsWbkTeamCore: Wrapper<Row[], EspnTeamCoreParams>;
+  /** OLYMPICS_WBK — team depthcharts (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/teams/{team_id}/depthcharts` */
+  espnOlympicsWbkTeamDepthcharts: Wrapper<Row[], EspnTeamDepthchartsParams>;
+  /** OLYMPICS_WBK — team history (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/teams/{team_id}/history` */
+  espnOlympicsWbkTeamHistory: Wrapper<Row[], EspnTeamHistoryParams>;
+  /** OLYMPICS_WBK — team injuries (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/teams/{team_id}/injuries` */
+  espnOlympicsWbkTeamInjuries: Wrapper<Row[], EspnTeamInjuriesParams>;
+  /** OLYMPICS_WBK — team leaders (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/teams/{team_id}/leaders` */
+  espnOlympicsWbkTeamLeaders: Wrapper<Row[], EspnTeamLeadersParams>;
+  /** OLYMPICS_WBK — team news (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/teams/{team_id}/news` */
+  espnOlympicsWbkTeamNews: Wrapper<Row[], EspnTeamNewsParams>;
+  /** OLYMPICS_WBK — team record (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/teams/{team_id}/record` */
+  espnOlympicsWbkTeamRecord: Wrapper<Row[], EspnTeamRecordParams>;
+  /** OLYMPICS_WBK — team roster (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/teams/{team_id}/roster` */
+  espnOlympicsWbkTeamRoster: Wrapper<Row[], EspnTeamRosterParams>;
+  /** OLYMPICS_WBK — team schedule (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/teams/{team_id}/schedule` */
+  espnOlympicsWbkTeamSchedule: Wrapper<Row[], EspnTeamScheduleParams>;
+  /** OLYMPICS_WBK — teams core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/teams` */
+  espnOlympicsWbkTeamsCore: Wrapper<Row[], EspnTeamsCoreParams>;
+  /** OLYMPICS_WBK — teams site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/teams` */
+  espnOlympicsWbkTeamsSite: Wrapper<Row[], EspnTeamsSiteParams>;
+  /** OLYMPICS_WBK — team transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/teams/{team_id}/transactions` */
+  espnOlympicsWbkTeamTransactions: Wrapper<Row[], EspnTeamTransactionsParams>;
+  /** OLYMPICS_WBK — tournaments (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/tournaments` */
+  espnOlympicsWbkTournaments: Wrapper<Row[], EspnTournamentsParams>;
+  /** OLYMPICS_WBK — transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-olympics-basketball/transactions` */
+  espnOlympicsWbkTransactions: Wrapper<Row[], EspnTransactionsParams>;
+  /** OLYMPICS_WBK — venue (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/venues/{venue_id}` */
+  espnOlympicsWbkVenue: Wrapper<Row[], EspnVenueParams>;
+  /** OLYMPICS_WBK — venues (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-olympics-basketball/venues` */
+  espnOlympicsWbkVenues: Wrapper<Row[], EspnVenuesParams>;
 }
 
 /** The generated wrappers of `sdv.on3` (and their deprecated pre-v4 names). */
@@ -27560,6 +32080,8 @@ export interface GeneratedNamespaces {
   cricket: CricketWrappers;
   /** `sdv.epl`. */
   epl: EplWrappers;
+  /** `sdv.fiba`. */
+  fiba: FibaWrappers;
   /** `sdv.fox`. */
   fox: FoxWrappers;
   /** `sdv.hockeytech`. */
@@ -27582,6 +32104,20 @@ export interface GeneratedNamespaces {
   nba: NbaWrappers & typeof loaders_nba;
   /** `sdv.nbagl`. */
   nbagl: NbaglWrappers;
+  /** `sdv.nbasl_ca`. */
+  nbasl_ca: NbaslCaWrappers;
+  /** `sdv.nbasl_gs`. */
+  nbasl_gs: NbaslGsWrappers;
+  /** `sdv.nbasl_lv`. */
+  nbasl_lv: NbaslLvWrappers;
+  /** `sdv.nbasl_orl`. */
+  nbasl_orl: NbaslOrlWrappers;
+  /** `sdv.nbasl_sac`. */
+  nbasl_sac: NbaslSacWrappers;
+  /** `sdv.nbasl_ut`. */
+  nbasl_ut: NbaslUtWrappers;
+  /** `sdv.nbl`. */
+  nbl: NblWrappers;
   /** `sdv.nfl`. */
   nfl: NflWrappers & typeof loaders_nfl;
   /** `sdv.nhl`. */
@@ -27590,6 +32126,10 @@ export interface GeneratedNamespaces {
   nwsl: NwslWrappers;
   /** `sdv.odds`. */
   odds: OddsWrappers;
+  /** `sdv.olympics_mbk`. */
+  olympics_mbk: OlympicsMbkWrappers;
+  /** `sdv.olympics_wbk`. */
+  olympics_wbk: OlympicsWbkWrappers;
   /** `sdv.on3`. */
   on3: On3Wrappers;
   /** `sdv.pwhl`. */

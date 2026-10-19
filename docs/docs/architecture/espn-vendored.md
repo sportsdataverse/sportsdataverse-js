@@ -15,7 +15,7 @@ returns schemas (`tools/codegen/schemas/espn/*.yaml`) are JS-owned: the JS parse
 `src/parsers/espn.ts` are ports of sdv-py's, and their columns were captured from real payloads.
 
 <!-- gen:status -->
-sdv-py pin: [`79dd939371d2`](https://github.com/sportsdataverse/sportsdataverse-py/commit/79dd939371d245b0935362b491b03f50d63f8a8d).
+sdv-py pin: [`b4229f1ceda5`](https://github.com/sportsdataverse/sportsdataverse-py/commit/b4229f1ceda5734973fdd96742ca6ff724fd5b0c).
 
 | Family YAML | Host |
 |---|---|
@@ -25,7 +25,7 @@ sdv-py pin: [`79dd939371d2`](https://github.com/sportsdataverse/sportsdataverse-
 | `tools/codegen/endpoints/espn_fitt_v3.yaml` | `site.web.api.espn.com` (FPI) |
 | `tools/codegen/endpoints/espn_cdn.yaml` | `cdn.espn.com` |
 
-126 endpoint shorts bound on 30 leagues.
+126 endpoint shorts bound on 40 leagues.
 <!-- /gen:status -->
 
 **Generator step:** `generate.mjs` loads the family YAML, applies sdv-py's emit-time naming

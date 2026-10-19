@@ -1,7 +1,7 @@
 ---
 title: odds
 sidebar_label: odds
-sidebar_position: 32
+sidebar_position: 42
 toc_max_heading_level: 2
 ---
 

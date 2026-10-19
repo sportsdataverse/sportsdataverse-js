@@ -3,7 +3,7 @@
   "totals": {
     "sources": 23,
     "espnShorts": 126,
-    "espnLeagues": 30,
+    "espnLeagues": 40,
     "flatWrappers": 1060,
     "flatFamilies": 27,
     "loaders": 326
@@ -54,6 +54,16 @@
         "nba",
         "wnba",
         "nbagl",
+        "nbl",
+        "fiba",
+        "olympics_mbk",
+        "olympics_wbk",
+        "nbasl_lv",
+        "nbasl_ut",
+        "nbasl_ca",
+        "nbasl_sac",
+        "nbasl_orl",
+        "nbasl_gs",
         "mbb",
         "wbb",
         "cfb",
@@ -90,8 +100,8 @@
       "ownership": "vendored",
       "parity": null,
       "descriptionFill": {
-        "filled": 4382,
-        "total": 7262
+        "filled": 5471,
+        "total": 9442
       },
       "docsPath": "/docs/reference/",
       "note": "Site v2 / Core v2 / Web v3 / FPI / CDN, one wrapper set bound on every league."
@@ -870,8 +880,8 @@
       "ownership": "loaders",
       "parity": null,
       "descriptionFill": {
-        "filled": 15669,
-        "total": 15925
+        "filled": 15673,
+        "total": 15929
       },
       "docsPath": "/docs/reference/#dataset-loaders",
       "note": "Pre-built parquet datasets (`load*`) published as GitHub release assets."
