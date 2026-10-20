@@ -176,7 +176,7 @@ Output of `node examples/13_discover_and_utilities.mjs` (offline, against the co
 | sdv.wbb   | 220       |
 | sdv.yahoo | 214       |
 | sdv.cbs   | 180       |
-(43 rows, first 10 shown)
+(53 rows, first 10 shown)
 
 ## sdv.nhl functions matching "shot" (10)
 | name                       |
@@ -209,18 +209,18 @@ PARSERS: 128 flat parsers registered; parseEndpoint('espn', 'scoreboard', raw) â
 | 401704874 | NO @ NY    | Final                   | 118        | 85         |
 (10 rows, first 4 shown)
 
-## LEAGUES (30 entries)
-| prefix | sport      | league                    | scopes                  |
-| ------ | ---------- | ------------------------- | ----------------------- |
-| nba    | basketball | nba                       | universal               |
-| wnba   | basketball | wnba                      | universal               |
-| nbagl  | basketball | nba-development           | universal               |
-| mbb    | basketball | mens-college-basketball   | universal+ncaa          |
-| wbb    | basketball | womens-college-basketball | universal+ncaa          |
-| cfb    | football   | college-football          | universal+ncaa+football |
-| nfl    | football   | nfl                       | universal+football      |
-| mlb    | baseball   | mlb                       | universal+mlb           |
-(30 rows, first 8 shown)
+## LEAGUES (40 entries)
+| prefix       | sport      | league                     | scopes    |
+| ------------ | ---------- | -------------------------- | --------- |
+| nba          | basketball | nba                        | universal |
+| wnba         | basketball | wnba                       | universal |
+| nbagl        | basketball | nba-development            | universal |
+| nbl          | basketball | nbl                        | universal |
+| fiba         | basketball | fiba                       | universal |
+| olympics_mbk | basketball | mens-olympics-basketball   | universal |
+| olympics_wbk | basketball | womens-olympics-basketball | universal |
+| nbasl_lv     | basketball | nba-summer-las-vegas       | universal |
+(40 rows, first 8 shown)
 ```
 
 <!-- /inject -->

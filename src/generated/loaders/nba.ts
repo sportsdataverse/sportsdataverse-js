@@ -832,20 +832,20 @@ export const loadNbaStatsTeamSeasonStats = seasonLoader<LoadNbaStatsTeamSeasonSt
 /** snake_case alias of {@link loadNbaStatsTeamSeasonStats} (py/R parity). */
 export const load_nba_stats_team_season_stats = loadNbaStatsTeamSeasonStats;
 
-const LOAD_NBA_PLAYER_CROSSWALK: ReleaseLoaderDef = {"fn":"load_nba_player_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_crosswalk/nba_player_crosswalk_{season}.parquet","minSeason":2026};
+const LOAD_NBA_PLAYER_CROSSWALK: ReleaseLoaderDef = {"fn":"load_nba_player_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_crosswalk/nba_player_crosswalk_{season}.parquet","minSeason":2002};
 
 /**
  * Load `nba_crosswalk` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_crosswalk
  *
- * @param opts.seasons - a season or a list of seasons (>= 2026); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2026.
+ * @throws SeasonNotFoundError if a season is below 2002.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaPlayerCrosswalk({ seasons: 2026 });

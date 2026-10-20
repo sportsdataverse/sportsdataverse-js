@@ -61,7 +61,7 @@ One row per game on a Site v2 scoreboard (teams, score, status, odds).
 | `venue_city` | character |  |
 | `venue_state` | character |  |
 | `venue_indoor` | logical |  |
-| `broadcast` | character |  |
+| `broadcast` | character | Every network name of the competition in feed order, deduped and ", "-joined (an entry with no names gives its market); "" when the game lists no broadcast. |
 | `note` | character | Event note text from the competition (e.g. a series or game label such as 'World Series - Game 1', or a shootout result); an empty string when there is none. |
 | `home_id` | character |  |
 | `home_name` | character |  |
@@ -508,7 +508,7 @@ CDN scoreboard page: its `sbData` (a Site v2 scoreboard), one row per game — t
 | `venue_city` | character |  |
 | `venue_state` | character |  |
 | `venue_indoor` | logical |  |
-| `broadcast` | character |  |
+| `broadcast` | character | Every network name of the competition in feed order, deduped and ", "-joined (an entry with no names gives its market); "" when the game lists no broadcast. |
 | `note` | character | Event note text from the competition (e.g. a series or game label such as 'World Series - Game 1', or a shootout result); an empty string when there is none. |
 | `home_id` | character |  |
 | `home_name` | character |  |
@@ -567,7 +567,7 @@ CDN schedule page: every day's games, one row per game — the `parse_scoreboard
 | `venue_city` | character |  |
 | `venue_state` | character |  |
 | `venue_indoor` | logical |  |
-| `broadcast` | character |  |
+| `broadcast` | character | Every network name of the competition in feed order, deduped and ", "-joined (an entry with no names gives its market); "" when the game lists no broadcast. |
 | `note` | character | Event note text from the competition (e.g. a series or game label such as 'World Series - Game 1', or a shootout result); an empty string when there is none. |
 | `home_id` | character |  |
 | `home_name` | character |  |

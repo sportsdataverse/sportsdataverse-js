@@ -12,6 +12,7 @@ import * as collegeBaseballEspn from "./college_baseball.js";
 import * as collegeSoftballEspn from "./college_softball.js";
 import * as cricketEspn from "./cricket.js";
 import * as eplEspn from "./epl.js";
+import * as fibaEspn from "./fiba.js";
 import * as laligaEspn from "./laliga.js";
 import * as ligamxEspn from "./ligamx.js";
 import * as ligue1Espn from "./ligue1.js";
@@ -21,9 +22,18 @@ import * as mlbEspn from "./mlb.js";
 import * as mlsEspn from "./mls.js";
 import * as nbaEspn from "./nba.js";
 import * as nbaglEspn from "./nbagl.js";
+import * as nbaslCaEspn from "./nbasl_ca.js";
+import * as nbaslGsEspn from "./nbasl_gs.js";
+import * as nbaslLvEspn from "./nbasl_lv.js";
+import * as nbaslOrlEspn from "./nbasl_orl.js";
+import * as nbaslSacEspn from "./nbasl_sac.js";
+import * as nbaslUtEspn from "./nbasl_ut.js";
+import * as nblEspn from "./nbl.js";
 import * as nflEspn from "./nfl.js";
 import * as nhlEspn from "./nhl.js";
 import * as nwslEspn from "./nwsl.js";
+import * as olympicsMbkEspn from "./olympics_mbk.js";
+import * as olympicsWbkEspn from "./olympics_wbk.js";
 import * as serieaEspn from "./seriea.js";
 import * as soccerEspn from "./soccer.js";
 import * as uclEspn from "./ucl.js";
@@ -44,6 +54,7 @@ export const WRITTEN_ESPN: Record<string, Record<string, WrapperFn>> = {
   college_softball: collegeSoftballEspn,
   cricket: cricketEspn,
   epl: eplEspn,
+  fiba: fibaEspn,
   laliga: laligaEspn,
   ligamx: ligamxEspn,
   ligue1: ligue1Espn,
@@ -53,9 +64,18 @@ export const WRITTEN_ESPN: Record<string, Record<string, WrapperFn>> = {
   mls: mlsEspn,
   nba: nbaEspn,
   nbagl: nbaglEspn,
+  nbasl_ca: nbaslCaEspn,
+  nbasl_gs: nbaslGsEspn,
+  nbasl_lv: nbaslLvEspn,
+  nbasl_orl: nbaslOrlEspn,
+  nbasl_sac: nbaslSacEspn,
+  nbasl_ut: nbaslUtEspn,
+  nbl: nblEspn,
   nfl: nflEspn,
   nhl: nhlEspn,
   nwsl: nwslEspn,
+  olympics_mbk: olympicsMbkEspn,
+  olympics_wbk: olympicsWbkEspn,
   seriea: serieaEspn,
   soccer: soccerEspn,
   ucl: uclEspn,

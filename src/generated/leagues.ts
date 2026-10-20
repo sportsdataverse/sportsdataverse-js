@@ -35,6 +35,86 @@ export const LEAGUES: LeagueConfig[] = [
     ]
   },
   {
+    "prefix": "nbl",
+    "sport": "basketball",
+    "league": "nbl",
+    "scopes": [
+      "universal"
+    ]
+  },
+  {
+    "prefix": "fiba",
+    "sport": "basketball",
+    "league": "fiba",
+    "scopes": [
+      "universal"
+    ]
+  },
+  {
+    "prefix": "olympics_mbk",
+    "sport": "basketball",
+    "league": "mens-olympics-basketball",
+    "scopes": [
+      "universal"
+    ]
+  },
+  {
+    "prefix": "olympics_wbk",
+    "sport": "basketball",
+    "league": "womens-olympics-basketball",
+    "scopes": [
+      "universal"
+    ]
+  },
+  {
+    "prefix": "nbasl_lv",
+    "sport": "basketball",
+    "league": "nba-summer-las-vegas",
+    "scopes": [
+      "universal"
+    ]
+  },
+  {
+    "prefix": "nbasl_ut",
+    "sport": "basketball",
+    "league": "nba-summer-utah",
+    "scopes": [
+      "universal"
+    ]
+  },
+  {
+    "prefix": "nbasl_ca",
+    "sport": "basketball",
+    "league": "nba-summer-california",
+    "scopes": [
+      "universal"
+    ]
+  },
+  {
+    "prefix": "nbasl_sac",
+    "sport": "basketball",
+    "league": "nba-summer-sacramento",
+    "scopes": [
+      "universal"
+    ]
+  },
+  {
+    "prefix": "nbasl_orl",
+    "sport": "basketball",
+    "league": "nba-summer-orlando",
+    "scopes": [
+      "universal"
+    ]
+  },
+  {
+    "prefix": "nbasl_gs",
+    "sport": "basketball",
+    "league": "nba-summer-golden-state",
+    "scopes": [
+      "universal"
+    ]
+  },
+  {
     "prefix": "mbb",
     "sport": "basketball",
     "league": "mens-college-basketball",

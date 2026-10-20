@@ -1,4 +1,4 @@
-# VENDORED from sportsdataverse/sportsdataverse-py@79dd939371d245b0935362b491b03f50d63f8a8d
+# VENDORED from sportsdataverse/sportsdataverse-py@b4229f1ceda5734973fdd96742ca6ff724fd5b0c
 # tools/codegen/endpoints/mls_api.yaml by tools/codegen/vendor.mjs.
 # DO NOT EDIT: run `npm run vendor`. JS-only endpoints / patches go in
 # tools/codegen/overlay/mls_api.yaml; shared changes land in sdv-py first.

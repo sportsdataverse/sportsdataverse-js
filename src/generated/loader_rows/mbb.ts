@@ -19,9 +19,9 @@ export interface LoadMbbPbpRow {
   type_text?: string | null;
   /** Text description of the play / record. `String` */
   text?: string | null;
-  /** Away team score at the time of the play. `Int32` */
+  /** Away team's score after the play. Rebuilt from the scoring plays in feed order when that reaches the official final (score_source 'rebuilt'), otherwise ESPN's per-play value (score_source 'espn'). Seasons published before the repair carry ESPN's per-play value. `Int32` */
   away_score?: number | null;
-  /** Home team score at the time of the play. `Int32` */
+  /** Home team's score after the play. Rebuilt from the scoring plays in feed order when that reaches the official final (score_source 'rebuilt'), otherwise ESPN's per-play value (score_source 'espn'). Seasons published before the repair carry ESPN's per-play value. `Int32` */
   home_score?: number | null;
   /** Numeric period (1-4 for quarters; 5+ for OT). `Int32` */
   period_number?: number | null;
@@ -129,6 +129,8 @@ export interface LoadMbbPbpRow {
   athlete_name_3?: string | null;
   /** Media identifier (video / image). `String` (an id) */
   media_id?: string | null;
+  /** Where this game's home_score/away_score come from: 'rebuilt' (summed from the scoring plays and equal to the official final on the last play) or 'espn' (ESPN's per-play values, kept when the rebuild misses the final or the game has no final). Absent from seasons published before the repair. Select it by name: it is the play-by-play builder's last column, but a release can carry columns after it. `String` */
+  score_source?: string | null;
   /** Model's pre-game win probability for the home team (0-1), constant within a game. Present only on assets published with the WP model (2003, 2006-07 to 2019-20 and the 2021+ republishes); absent on other seasons (rules/mbb.yaml#mbb-2003-pbp-wp-columns). `Float64` */
   pregame_home_prob?: number | null;
   /** `Float64` */

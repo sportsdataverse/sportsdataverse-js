@@ -35,7 +35,7 @@ sidebar_position: 50
 | [`loadWnbaShots`](#loadwnbashots) | [espn_wnba_shots](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_shots) | 2024+ |
 | [`loadWnbaStandings`](#loadwnbastandings) | [espn_wnba_standings](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_standings) | 2024+ |
 | [`loadWnbaTeamSeasonStats`](#loadwnbateamseasonstats) | [espn_wnba_team_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_team_season_stats) | 2024+ |
-| [`loadWnbaPlayerCrosswalk`](#loadwnbaplayercrosswalk) | [wnba_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_crosswalk) | 2026+ |
+| [`loadWnbaPlayerCrosswalk`](#loadwnbaplayercrosswalk) | [wnba_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_crosswalk) | 2002+ |
 | [`loadWnbaScheduleCrosswalk`](#loadwnbaschedulecrosswalk) | [wnba_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_crosswalk) | 2026+ |
 | [`loadWnbaTeamCrosswalk`](#loadwnbateamcrosswalk) | [wnba_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_crosswalk) | 2026+ |
 | [`loadWnbaPlayerCore`](#loadwnbaplayercore) | [espn_wnba_player_core](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_player_core) | 2003+ |
@@ -48,10 +48,10 @@ sidebar_position: 50
 | [`loadWnbaStatsPossessions`](#loadwnbastatspossessions) | [wnba_stats_possessions](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_possessions) | 1997+ |
 | [`loadWnbaStatsGameLineups`](#loadwnbastatsgamelineups) | [wnba_stats_game_lineups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_game_lineups) | 1997+ |
 | [`loadWnbaStatsPlayerBoxscores`](#loadwnbastatsplayerboxscores) | [wnba_stats_player_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_player_boxscores) | 2026+ |
-| [`loadWnbaStatsPlayerGameLogs`](#loadwnbastatsplayergamelogs) | [wnba_stats_player_game_logs](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_player_game_logs) | 2025+ |
+| [`loadWnbaStatsPlayerGameLogs`](#loadwnbastatsplayergamelogs) | [wnba_stats_player_game_logs](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_player_game_logs) | 1997+ |
 | [`loadWnbaStatsRosters`](#loadwnbastatsrosters) | [wnba_stats_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_rosters) | 2026+ |
 | [`loadWnbaStatsSchedules`](#loadwnbastatsschedules) | [wnba_stats_schedules](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_schedules) | 1997+ |
-| [`loadWnbaStatsShots`](#loadwnbastatsshots) | [wnba_stats_shots](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_shots) | 2026+ |
+| [`loadWnbaStatsShots`](#loadwnbastatsshots) | [wnba_stats_shots](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_shots) | 1997+ |
 | [`loadWnbaStatsTeamBoxscores`](#loadwnbastatsteamboxscores) | [wnba_stats_team_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_team_boxscores) | 2026+ |
 | [`loadWnbaGroups`](#loadwnbagroups) | [wnba_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_groups) | one asset |
 | [`loadWnbaGroupSeasons`](#loadwnbagroupseasons) | [wnba_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_groups) | one asset |
@@ -87,8 +87,8 @@ const rows = await sdv.wnba.loadWnbaPbp({ seasons: 2024, columns: ['game_id', 's
 | `type_id` | `string` | Type identifier (numeric). |
 | `type_text` | `string` | Play type text, passed through verbatim from ESPN. ESPN labels the free-throw play type "MadeFreeThrow" for made AND missed free throws; filter makes vs. misses with scoring_play, not type_text. |
 | `text` | `string` | Text description of the play / record. |
-| `away_score` | `number` | Away team score at the time of the play. |
-| `home_score` | `number` | Home team score at the time of the play. |
+| `away_score` | `number` | Away team's score after the play. Rebuilt from the scoring plays in feed order when that reaches the official final (score_source 'rebuilt'), otherwise ESPN's per-play value (score_source 'espn'). Seasons published before the repair carry ESPN's per-play value. |
+| `home_score` | `number` | Home team's score after the play. Rebuilt from the scoring plays in feed order when that reaches the official final (score_source 'rebuilt'), otherwise ESPN's per-play value (score_source 'espn'). Seasons published before the repair carry ESPN's per-play value. |
 | `period_number` | `number` | Numeric period (1-4 for quarters; 5+ for OT). |
 | `period_display_value` | `string` | Period display label (e.g. '1st Quarter', 'OT'). |
 | `clock_display_value` | `string` | Game clock display string (e.g. '8:32'). |
@@ -148,6 +148,7 @@ const rows = await sdv.wnba.loadWnbaPbp({ seasons: 2024, columns: ['game_id', 's
 | `athlete_name_2` | `string` | Display name of the secondary athlete on the play (e.g. the assister or fouled player), when present. |
 | `athlete_name_3` | `string` | Display name of the third athlete listed on the play, when present. |
 | `type_abbreviation` | `string` | Play type abbreviation |
+| `score_source` | `string` | Where this game's home_score/away_score come from: 'rebuilt' (summed from the scoring plays and equal to the official final on the last play) or 'espn' (ESPN's per-play values, kept when the rebuild misses the final or the game has no final). Absent from seasons published before the repair. Select it by name: it is the play-by-play builder's last column, but a release can carry columns after it. |
 
 ## `loadWnbaPlayerBoxscore`
 
@@ -792,7 +793,7 @@ Release: [wnba_crosswalk](https://github.com/sportsdataverse/sportsdataverse-dat
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -1385,7 +1386,7 @@ Release: [wnba_stats_player_game_logs](https://github.com/sportsdataverse/sports
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2025) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 1997) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -1525,7 +1526,7 @@ Release: [wnba_stats_shots](https://github.com/sportsdataverse/sportsdataverse-d
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 1997) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |

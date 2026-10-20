@@ -25,6 +25,16 @@ Some leagues additionally ship **native (non-ESPN) API** wrappers — NBA Stats 
 | [nba](../nba/) | `basketball` | `nba` | universal | 116 | 128 |
 | [wnba](../wnba/) | `basketball` | `wnba` | universal | 116 | 111 |
 | [nbagl](../nbagl/) | `basketball` | `nba-development` | universal | 112 | — |
+| [nbl](../nbl/) | `basketball` | `nbl` | universal | 112 | — |
+| [fiba](../fiba/) | `basketball` | `fiba` | universal | 112 | — |
+| [olympics_mbk](../olympics_mbk/) | `basketball` | `mens-olympics-basketball` | universal | 112 | — |
+| [olympics_wbk](../olympics_wbk/) | `basketball` | `womens-olympics-basketball` | universal | 112 | — |
+| [nbasl_lv](../nbasl_lv/) | `basketball` | `nba-summer-las-vegas` | universal | 112 | — |
+| [nbasl_ut](../nbasl_ut/) | `basketball` | `nba-summer-utah` | universal | 112 | — |
+| [nbasl_ca](../nbasl_ca/) | `basketball` | `nba-summer-california` | universal | 112 | — |
+| [nbasl_sac](../nbasl_sac/) | `basketball` | `nba-summer-sacramento` | universal | 112 | — |
+| [nbasl_orl](../nbasl_orl/) | `basketball` | `nba-summer-orlando` | universal | 112 | — |
+| [nbasl_gs](../nbasl_gs/) | `basketball` | `nba-summer-golden-state` | universal | 112 | — |
 | [mbb](../mbb/) | `basketball` | `mens-college-basketball` | universal, ncaa | 122 | 30 |
 | [wbb](../wbb/) | `basketball` | `womens-college-basketball` | universal, ncaa | 122 | — |
 | [cfb](../cfb/) | `football` | `college-football` | universal, ncaa, football | 125 | — |

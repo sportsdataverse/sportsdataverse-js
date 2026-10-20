@@ -1,7 +1,7 @@
 ---
 title: hockeytech
 sidebar_label: hockeytech
-sidebar_position: 38
+sidebar_position: 48
 toc_max_heading_level: 2
 ---
 

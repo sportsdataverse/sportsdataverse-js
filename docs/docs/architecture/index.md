@@ -28,13 +28,13 @@ codegen:check` (every generated output, this site's pages included), `npm run ap
 <!-- gen:status -->
 | Surface | Source of truth | Generated | Count |
 |---|---|---|---:|
-| [ESPN (vendored)](./espn-vendored) | sdv-py `espn_*.yaml` at the pin | `src/generated/espn/*.ts`, `docs/docs/<league>/` | 126 endpoints × 30 leagues |
+| [ESPN (vendored)](./espn-vendored) | sdv-py `espn_*.yaml` at the pin | `src/generated/espn/*.ts`, `docs/docs/<league>/` | 126 endpoints × 40 leagues |
 | [Native, vendored](./flat-vendored) | sdv-py `<family>.yaml` at the pin | `src/generated/flat/*.ts` | 23 families |
 | [Native, JS-owned](./flat-js-owned) | `tools/codegen/endpoints/<family>.yaml` in this repo | `src/generated/flat/*.ts` | 4 families |
 | [Dataset loaders](./loaders) | sdv-py `releases.yaml` + `loader_schemas.yaml` | `src/generated/loaders/*.ts` | 326 loaders |
 | [Hand-written](./hand-written) | TypeScript under `src/` | `src/generated/utilities.ts`, `docs/docs/utilities/` | 208 utility exports |
 
-sdv-py pin: [`79dd939371d2`](https://github.com/sportsdataverse/sportsdataverse-py/commit/79dd939371d245b0935362b491b03f50d63f8a8d). 1060 native wrappers in total; 440 verified endpoints carry row types; 25 breaking changes on record.
+sdv-py pin: [`b4229f1ceda5`](https://github.com/sportsdataverse/sportsdataverse-py/commit/b4229f1ceda5734973fdd96742ca6ff724fd5b0c). 1060 native wrappers in total; 440 verified endpoints carry row types; 25 breaking changes on record.
 <!-- /gen:status -->
 
 ## The surfaces

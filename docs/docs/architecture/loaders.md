@@ -12,7 +12,7 @@ sidebar_position: 5
 every loader's frame, captured from the release parquet), both vendored verbatim at the pin.
 
 <!-- gen:status -->
-sdv-py pin: [`79dd939371d2`](https://github.com/sportsdataverse/sportsdataverse-py/commit/79dd939371d245b0935362b491b03f50d63f8a8d).
+sdv-py pin: [`b4229f1ceda5`](https://github.com/sportsdataverse/sportsdataverse-py/commit/b4229f1ceda5734973fdd96742ca6ff724fd5b0c).
 
 326 loaders on 9 namespaces: `sdv.cfb`, `sdv.mbb`, `sdv.mlb`, `sdv.nba`, `sdv.nhl`, `sdv.wbb`, `sdv.wnba`, `sdv.pwhl`, `sdv.nfl`.
 <!-- /gen:status -->

@@ -13,9 +13,9 @@
       "rate": 0.957
     },
     "espn": {
-      "filled": 4382,
-      "total": 7262,
-      "rate": 0.6034
+      "filled": 6311,
+      "total": 9442,
+      "rate": 0.6684
     },
     "fox": {
       "filled": 193,
@@ -28,8 +28,8 @@
       "rate": 1
     },
     "loaders": {
-      "filled": 15669,
-      "total": 15925,
+      "filled": 15673,
+      "total": 15929,
       "rate": 0.9839
     },
     "mlb": {
@@ -139,9 +139,9 @@
     }
   },
   "totals": {
-    "filled": 60373,
-    "total": 64718,
-    "rate": 0.9329
+    "filled": 62306,
+    "total": 66902,
+    "rate": 0.9313
   },
-  "breaking_pages": 213
+  "breaking_pages": 263
 }

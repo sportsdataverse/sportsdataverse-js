@@ -64,7 +64,7 @@ UCL — cdn scoreboard (ESPN cdn.espn.com (espn.com page data)).
 | `venue_city` | character |  |
 | `venue_state` | character |  |
 | `venue_indoor` | logical |  |
-| `broadcast` | character |  |
+| `broadcast` | character | Every network name of the competition in feed order, deduped and ", "-joined (an entry with no names gives its market); "" when the game lists no broadcast. |
 | `note` | character | Event note text from the competition (e.g. a series or game label such as 'World Series - Game 1', or a shootout result); an empty string when there is none. |
 | `home_id` | character |  |
 | `home_name` | character |  |

@@ -87,8 +87,8 @@ const rows = await sdv.wbb.loadWbbPbp({ seasons: 2024, columns: ['game_id', 'seq
 | `type_id` | `string` | Type identifier (numeric). |
 | `type_text` | `string` | Play type text, passed through verbatim from ESPN. ESPN labels the free-throw play type "MadeFreeThrow" for made AND missed free throws; filter makes vs. misses with scoring_play, not type_text. |
 | `text` | `string` | Text description of the play / record. |
-| `away_score` | `number` | Away team score at the time of the play. |
-| `home_score` | `number` | Home team score at the time of the play. |
+| `away_score` | `number` | Away team's score after the play. Rebuilt from the scoring plays in feed order when that reaches the official final (score_source 'rebuilt'), otherwise ESPN's per-play value (score_source 'espn'). Seasons published before the repair carry ESPN's per-play value. |
+| `home_score` | `number` | Home team's score after the play. Rebuilt from the scoring plays in feed order when that reaches the official final (score_source 'rebuilt'), otherwise ESPN's per-play value (score_source 'espn'). Seasons published before the repair carry ESPN's per-play value. |
 | `period_number` | `number` | Numeric period (1-4 for quarters; 5+ for OT). |
 | `period_display_value` | `string` | Period display label (e.g. '1st Quarter', 'OT'). |
 | `clock_display_value` | `string` | Game clock display string (e.g. '8:32'). |
@@ -149,6 +149,7 @@ const rows = await sdv.wbb.loadWbbPbp({ seasons: 2024, columns: ['game_id', 'seq
 | `athlete_name_1` | `string` | Display name of the first athlete in the ESPN play participants (e.g., the shooter on a shot attempt). |
 | `athlete_name_2` | `string` | Display name of the second athlete in the ESPN play participants (e.g., the assisting player), when present. |
 | `athlete_name_3` | `string` | Display name of the third athlete in the ESPN play participants, when present. |
+| `score_source` | `string` | Where this game's home_score/away_score come from: 'rebuilt' (summed from the scoring plays and equal to the official final on the last play) or 'espn' (ESPN's per-play values, kept when the rebuild misses the final or the game has no final). Absent from seasons published before the repair. Select it by name: it is the play-by-play builder's last column, but a release can carry columns after it. |
 | `pregame_home_prob` | `number` | Model's pre-game win probability for the home team (0-1), constant within a game. Present only on assets published with the WP model (2012-13 onward); absent on earlier seasons (rules/wbb.yaml#wbb-2013-pbp-wp-columns). |
 | `home_win_prob` | `number` |  |
 

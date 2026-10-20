@@ -1,14 +1,24 @@
 {
   "_generated": "tools/codegen/generate.mjs — do not edit by hand",
-  "leagueCount": 30,
+  "leagueCount": 40,
   "sportCount": 6,
   "sports": [
     {
       "sport": "basketball",
       "prefixes": [
+        "fiba",
         "mbb",
         "nba",
         "nbagl",
+        "nbasl_ca",
+        "nbasl_gs",
+        "nbasl_lv",
+        "nbasl_orl",
+        "nbasl_sac",
+        "nbasl_ut",
+        "nbl",
+        "olympics_mbk",
+        "olympics_wbk",
         "torvik",
         "wbb",
         "wnba"
