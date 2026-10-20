@@ -10,7 +10,7 @@ data: the cross-league ESPN API, the leagues' own live APIs, a set of cross-spor
 providers, and the published SportsDataverse / nflverse release datasets — with one
 parser layer, one error vocabulary and TypeScript types for every call.
 
-- **126 ESPN endpoints** on **30 leagues**, identical on every league.
+- **126 ESPN endpoints** on **40 leagues**, identical on every league.
 - **1060 flat-API wrappers across 27 families** — 14 league families on their league
   namespace (MLB Stats, Statcast, NHL ×4, NFL.com, stats.nba.com, …) and 13 provider
   families on their own (HockeyTech, The Odds API, CBS, Fox, Yahoo, 247Sports, On3, …).
@@ -46,7 +46,7 @@ and `playwright` (the NFL Pro email / password login).
 
 | Source | Host | Families (wrappers) | Where | Auth |
 |---|---|---|---|---|
-| ESPN | `site.api.espn.com`, `sports.core.api.espn.com`, `site.web.api.espn.com`, fitt v3, `cdn.espn.com` | `site_v2` 25 · `core_v2` 90 · `web_v3` 5 · `fitt_v3` 1 · `cdn` 5 shorts | every league namespace (`sdv.nba` … `sdv.wwc`), 30 leagues | none |
+| ESPN | `site.api.espn.com`, `sports.core.api.espn.com`, `site.web.api.espn.com`, fitt v3, `cdn.espn.com` | `site_v2` 25 · `core_v2` 90 · `web_v3` 5 · `fitt_v3` 1 · `cdn` 5 shorts | every league namespace (`sdv.nba` … `sdv.wwc`), 40 leagues | none |
 | MLB Stats API | `statsapi.mlb.com` | `mlb` 78 | `sdv.mlb` | none |
 | Baseball Savant / Statcast | `baseballsavant.mlb.com` | `mlb_statcast` 39 (+ the date-chunked search) | `sdv.mlb` | none |
 | NHL | `api-web.nhle.com`, `api.nhle.com/stats/rest`, `records.nhl.com` | `nhl_api_web` 27 · `nhl_edge` 35 · `nhl_stats_rest` 21 · `nhl_records` 44 | `sdv.nhl` | none |
@@ -236,7 +236,7 @@ drift gate (`npm run codegen:check`) in CI. Five surfaces, each documented under
 [How this library is built](https://js.sportsdataverse.org/docs/architecture/):
 
 - **ESPN, vendored** — sdv-py's `espn_*.yaml` (copied at a pinned commit by `npm run vendor`,
-  hash-locked) → `src/generated/espn/<league>.ts`, 126 endpoints × 30 leagues.
+  hash-locked) → `src/generated/espn/<league>.ts`, 126 endpoints × 40 leagues.
 - **Native families, vendored** — sdv-py's `<family>.yaml` + returns schemas → `src/generated/flat/*.ts` (23 families).
 - **Native families, JS-owned** — `tools/codegen/endpoints/{hockeytech,odds_api,yahoo_scores,recruiting}.yaml`, edited here.
 - **Dataset loaders** — sdv-py's `releases.yaml` + `loader_schemas.yaml` → `src/generated/loaders/*.ts` + `Load<Name>Row` types.

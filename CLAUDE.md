@@ -35,7 +35,7 @@ roster, standings, odds, and many other surfaces across the major leagues.
 As of **v4.0.0** the package is a **cross-league ESPN client _plus_ a native
 (non-ESPN) live-API client** with a tidy parser layer:
 
-- **126 ESPN endpoint short names** generated for **30 leagues**,
+- **126 ESPN endpoint short names** generated for **40 leagues**,
   exposed as `espn_<league>_<short>` (snake) + `espn<League><Short>` (camelCase).
 - **1060 flat-API wrappers across 27 families** — 14 merged onto a league namespace
   and 13 on standalone provider namespaces (see
@@ -258,7 +258,7 @@ endpoints carry an `include_prefixes` league allowlist and a family `fixed_param
 `src/generated/wrappers.ts`. The pattern is **one core, parameterized on
 `(sport, league)` slugs**, wrapped once per URL family.
 
-- **126 distinct short names** are exposed across **30 leagues** (`leagues.yaml`).
+- **126 distinct short names** are exposed across **40 leagues** (`leagues.yaml`).
 - Each wrapper is registered under BOTH its sdv-py snake_case name (py/R parity)
   and the camelCase form (idiomatic JS) — both resolve to the same function.
 - **v4 names are sdv-py's.** `tools/codegen/generate.mjs` ports py's emit-time rename
