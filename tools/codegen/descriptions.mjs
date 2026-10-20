@@ -47,6 +47,17 @@ export const LEAGUE_R_PACKAGES = {
   kenpom: ["hoopR", "wehoop"],
   wnba: ["wehoop", "hoopR"],
   wbb: ["wehoop", "hoopR"],
+  // ESPN's other basketball leagues: men's first, women's Olympics wehoop first
+  fiba: ["hoopR", "wehoop"],
+  nbl: ["hoopR", "wehoop"],
+  nbasl_ca: ["hoopR", "wehoop"],
+  nbasl_gs: ["hoopR", "wehoop"],
+  nbasl_lv: ["hoopR", "wehoop"],
+  nbasl_orl: ["hoopR", "wehoop"],
+  nbasl_sac: ["hoopR", "wehoop"],
+  nbasl_ut: ["hoopR", "wehoop"],
+  olympics_mbk: ["hoopR", "wehoop"],
+  olympics_wbk: ["wehoop", "hoopR"],
   // football
   cfb: ["cfbfastR"],
   nfl: ["nflreadr", "nflfastR"],

@@ -1942,15 +1942,15 @@ NBL — standings core (ESPN sports.core.api.espn.com (core v2)).
 | `group_name` | character |  |
 | `group_abbreviation` | character |  |
 | `team_id` | character | ESPN team id |
-| `team_name` | character |  |
+| `team_name` | character | Full team display name (e.g. 'Las Vegas Aces'). |
 | `team_abbreviation` | character | Team abbreviation |
 | `team_display_name` | character | Team display name |
-| `team_location` | character |  |
-| `team_logo` | character |  |
+| `team_location` | character | Team city or location string. |
+| `team_logo` | character | Team logo image URL. |
 | `avg_points_against` | number |  |
 | `avg_points_for` | number |  |
-| `clincher` | integer |  |
-| `differential` | integer |  |
+| `clincher` | integer | Clincher. |
+| `differential` | integer | Differential. |
 | `division_win_percent` | number |  |
 | `games_behind` | integer |  |
 | `league_win_percent` | number |  |
@@ -1960,13 +1960,13 @@ NBL — standings core (ESPN sports.core.api.espn.com (core v2)).
 | `points` | integer | Competition points. |
 | `points_against` | integer | Goals conceded. |
 | `points_for` | integer | Goals (or runs) scored by the team. |
-| `streak` | integer |  |
-| `win_percent` | number |  |
+| `streak` | integer | Current streak (e.g. 'W3' for three-game win streak). |
+| `win_percent` | number | Win percent. |
 | `wins` | integer | Number of matches the team has won. |
 | `games_ahead` | integer |  |
 | `overall` | character | Overall record summary as published by ESPN. |
-| `home` | character |  |
-| `road` | character |  |
+| `home` | character | Home. |
+| `road` | character | Road. |
 | `vs_div` | character |  |
 | `vs_conf` | character |  |
 | `last_ten_games` | character |  |
