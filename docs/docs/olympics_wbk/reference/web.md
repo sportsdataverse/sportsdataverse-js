@@ -162,12 +162,12 @@ OLYMPICS_WBK — leaders (ESPN site.web.api.espn.com (web v3)).
 
 | API param | JS | required | description |
 |---|---|---|---|
-| `category` | `category` | no | `number \| string` — the statistics category |
+| `category` | `category` | no | `number \| string` — Leaderboard population: the athletes ranked in that category, whose values it fills (other categories come back null). Football takes `<group>:<category>` (`offense:passing`, `offense:rushing`, `offense:receiving`, `defense:defensive`, `scoring:scoring`); a bare `passing` is rejected with HTTP 400 (ValueError). Basketball takes the bare name (`offensive`) |
 | `season` | `season` | no | `number \| string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25) |
 | `seasontype` | `season_type` | no | `number \| string` — the season type: `1` preseason, `2` regular season, `3` postseason |
 | `limit` | `limit` | no | `number \| string` — the maximum number of items to return; default `50` |
 | `page` | `page` | no | `number \| string` — the page of a paginated Core v2 list (1-based); default `1` |
-| `sort` | `sort` | no | `number \| string` — the sort key and direction, e.g. `offensive.avgPoints:desc` |
+| `sort` | `sort` | no | `number \| string` — Sort key `<category>.<statName>:<asc\|desc>`, the names in the payload's categories (`passing.passingYards:desc`, `offensive.avgPoints:desc`). A stat without its category is rejected with HTTP 400 (ValueError) |
 | — | `parsed` | no | `boolean` — return tidy rows instead of raw JSON |
 
 **Returns** (with `{ parsed: true }`, via `parse_leaders`):

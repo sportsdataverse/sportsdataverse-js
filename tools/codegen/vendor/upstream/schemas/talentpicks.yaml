@@ -23,7 +23,7 @@ columns:
   type: character
   description: ''
 - name: pick_person_id
-  type: character
+  type: integer
   description: ''
 - name: pick_person_last_name
   type: character
@@ -36,4 +36,10 @@ columns:
   description: ''
 - name: week_record_stats
   type: character
+  description: ''
+- name: count
+  type: integer
+  description: ''
+- name: page_count
+  type: integer
   description: ''

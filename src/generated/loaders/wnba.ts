@@ -311,7 +311,7 @@ export const loadWnbaTeamSeasonStats = seasonLoader<LoadWnbaTeamSeasonStatsRow>(
 /** snake_case alias of {@link loadWnbaTeamSeasonStats} (py/R parity). */
 export const load_wnba_team_season_stats = loadWnbaTeamSeasonStats;
 
-const LOAD_WNBA_PLAYER_CROSSWALK: ReleaseLoaderDef = {"fn":"load_wnba_player_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wnba_crosswalk/wnba_player_crosswalk_{season}.parquet","minSeason":2002};
+const LOAD_WNBA_PLAYER_CROSSWALK: ReleaseLoaderDef = {"fn":"load_wnba_player_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wnba_crosswalk/wnba_player_crosswalk_{season}.parquet","minSeason":2002,"idInt64":["espn_team_id","espn_athlete_id"]};
 
 /**
  * Load `wnba_crosswalk` (sportsdataverse-data releases).
@@ -333,7 +333,7 @@ export const loadWnbaPlayerCrosswalk = seasonLoader<LoadWnbaPlayerCrosswalkRow>(
 /** snake_case alias of {@link loadWnbaPlayerCrosswalk} (py/R parity). */
 export const load_wnba_player_crosswalk = loadWnbaPlayerCrosswalk;
 
-const LOAD_WNBA_SCHEDULE_CROSSWALK: ReleaseLoaderDef = {"fn":"load_wnba_schedule_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wnba_crosswalk/wnba_schedule_crosswalk_{season}.parquet","minSeason":2026};
+const LOAD_WNBA_SCHEDULE_CROSSWALK: ReleaseLoaderDef = {"fn":"load_wnba_schedule_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wnba_crosswalk/wnba_schedule_crosswalk_{season}.parquet","minSeason":2026,"idInt64":["espn_game_id","home_espn_team_id","away_espn_team_id"]};
 
 /**
  * Load `wnba_crosswalk` (sportsdataverse-data releases).
@@ -355,7 +355,7 @@ export const loadWnbaScheduleCrosswalk = seasonLoader<LoadWnbaScheduleCrosswalkR
 /** snake_case alias of {@link loadWnbaScheduleCrosswalk} (py/R parity). */
 export const load_wnba_schedule_crosswalk = loadWnbaScheduleCrosswalk;
 
-const LOAD_WNBA_TEAM_CROSSWALK: ReleaseLoaderDef = {"fn":"load_wnba_team_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wnba_crosswalk/wnba_team_crosswalk_{season}.parquet","minSeason":2026};
+const LOAD_WNBA_TEAM_CROSSWALK: ReleaseLoaderDef = {"fn":"load_wnba_team_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wnba_crosswalk/wnba_team_crosswalk_{season}.parquet","minSeason":2026,"idInt64":["espn_team_id"]};
 
 /**
  * Load `wnba_crosswalk` (sportsdataverse-data releases).

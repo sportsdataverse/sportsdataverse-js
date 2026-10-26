@@ -153,7 +153,7 @@ Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-we
 | `winning_goalie_last_name_default` | character | Winning goalie last name (default language). |
 | `away_team_airline_link` | character | Link to away team airline info. |
 | `away_team_airline_desc` | character | Away team airline description. |
-| `winning_goal_scorer_player_id` | double | Winning goal scorer player identifier. |
+| `winning_goal_scorer_player_id` | integer | Winning goal scorer player identifier. |
 | `winning_goal_scorer_first_initial_default` | character | Winning goal scorer first initial (default). |
 | `winning_goal_scorer_last_name_default` | character | Winning goal scorer last name (default language). |
 | `three_min_recap` | character | Link to the three-minute recap. |
@@ -161,7 +161,7 @@ Flat (non-ESPN) wrappers for the modern NHL game-feed API. Host: `https://api-we
 | `condensed_game` | character | Link to the condensed game video. |
 | `venue_es` | character | Venue name (Spanish). |
 | `venue_fr` | character | Venue name (French). |
-| `special_event_parent_id` | double | NHL api-web identifier for the parent special-event record grouping multiple games under the same marquee event umbrella. |
+| `special_event_parent_id` | integer | NHL api-web identifier for the parent special-event record grouping multiple games under the same marquee event umbrella. |
 | `special_event_name_default` | character | English display name for a special promotional or marquee event designation attached to the game (e.g., 'Winter Classic', 'Heritage Classic'). |
 | `special_event_name_fr` | character | French display name for a special promotional or marquee event designation attached to the game, used in bilingual NHL communications. |
 | `away_team_hotel_link` | character | Link to away team hotel info. |
@@ -464,33 +464,33 @@ With `{ parsed: true }`: an object of tables, one per key below.
 | `period_descriptor_number` | integer | Period number. |
 | `period_descriptor_period_type` | character | Period type (e.g., REG, OT). |
 | `period_descriptor_max_regulation_periods` | integer | Maximum number of regulation periods. |
-| `details_event_owner_team_id` | double | NHL api-web team identifier for the team credited with or responsible for the play event in the play-by-play feed. |
-| `details_losing_player_id` | double | NHL api-web player identifier for the skater who lost the faceoff on a faceoff event in the play-by-play feed. |
-| `details_winning_player_id` | double | NHL api-web player identifier for the skater who won the faceoff on a faceoff event in the play-by-play feed. |
+| `details_event_owner_team_id` | integer | NHL api-web team identifier for the team credited with or responsible for the play event in the play-by-play feed. |
+| `details_losing_player_id` | integer | NHL api-web player identifier for the skater who lost the faceoff on a faceoff event in the play-by-play feed. |
+| `details_winning_player_id` | integer | NHL api-web player identifier for the skater who won the faceoff on a faceoff event in the play-by-play feed. |
 | `details_x_coord` | double | Horizontal rink coordinate (feet from centre ice, positive toward right side) of the play event location in the NHL api-web play-by-play feed. |
 | `details_y_coord` | double | Vertical rink coordinate (feet from centre ice, positive toward one end) of the play event location in the NHL api-web play-by-play feed. |
 | `details_zone_code` | character | Ice zone where the play event occurred, coded as 'O' (offensive), 'D' (defensive), or 'N' (neutral) relative to the event owner team in the play-by-play feed. |
 | `details_shot_type` | character | Classification of the shot attempt (e.g., wrist shot, slap shot, backhand, deflection) as provided in the NHL api-web play-by-play details. |
-| `details_shooting_player_id` | double | NHL api-web player identifier for the skater who took the shot on a shot-on-goal, missed-shot, or blocked-shot event in the play-by-play feed. |
-| `details_goalie_in_net_id` | double | NHL api-web player identifier for the goaltender who was in the net at the time of the shot, goal, or missed-shot event in the play-by-play feed. |
+| `details_shooting_player_id` | integer | NHL api-web player identifier for the skater who took the shot on a shot-on-goal, missed-shot, or blocked-shot event in the play-by-play feed. |
+| `details_goalie_in_net_id` | integer | NHL api-web player identifier for the goaltender who was in the net at the time of the shot, goal, or missed-shot event in the play-by-play feed. |
 | `details_away_sog` | double | Cumulative shots on goal by the away team at the moment of the play event in the NHL api-web play-by-play feed. |
 | `details_home_sog` | double | Cumulative shots on goal by the home team at the moment of the play event in the NHL api-web play-by-play feed. |
 | `details_reason` | character | Primary reason or description for the play event (e.g., specific penalty infraction name) as provided in the NHL api-web play-by-play details. |
-| `details_blocking_player_id` | double | NHL api-web player identifier for the skater who blocked a shot on the blocked-shot event in the play-by-play feed. |
-| `details_hitting_player_id` | double | NHL api-web player identifier for the skater who delivered the body check on a hit event in the play-by-play feed. |
-| `details_hittee_player_id` | double | NHL api-web player identifier for the skater who received the body check on a hit event in the play-by-play feed. |
-| `details_player_id` | double | NHL api-web player identifier for the primary player involved in the play event (used on giveaway, takeaway, and similar single-player events). |
+| `details_blocking_player_id` | integer | NHL api-web player identifier for the skater who blocked a shot on the blocked-shot event in the play-by-play feed. |
+| `details_hitting_player_id` | integer | NHL api-web player identifier for the skater who delivered the body check on a hit event in the play-by-play feed. |
+| `details_hittee_player_id` | integer | NHL api-web player identifier for the skater who received the body check on a hit event in the play-by-play feed. |
+| `details_player_id` | integer | NHL api-web player identifier for the primary player involved in the play event (used on giveaway, takeaway, and similar single-player events). |
 | `details_type_code` | character | Structured sub-type code providing additional classification within the play event category in the NHL api-web play-by-play feed. |
 | `details_desc_key` | character | Short descriptor key providing additional classification of the play event (e.g., penalty type or shot outcome) in the NHL api-web play-by-play feed. |
 | `details_duration` | double | Duration of the penalty in minutes as specified in the play event details of the NHL api-web play-by-play feed. |
-| `details_committed_by_player_id` | double | NHL api-web player identifier for the player who committed the infraction on a penalty event in the play-by-play feed. |
-| `details_drawn_by_player_id` | double | NHL api-web player identifier for the player who drew (was the victim of) the penalty on a penalty event in the play-by-play feed. |
+| `details_committed_by_player_id` | integer | NHL api-web player identifier for the player who committed the infraction on a penalty event in the play-by-play feed. |
+| `details_drawn_by_player_id` | integer | NHL api-web player identifier for the player who drew (was the victim of) the penalty on a penalty event in the play-by-play feed. |
 | `ppt_replay_url` | character | URL to the power-play tracking replay video associated with this play event in the NHL api-web play-by-play feed. |
-| `details_scoring_player_id` | double | NHL api-web player identifier for the skater who scored the goal on a goal event in the play-by-play feed. |
+| `details_scoring_player_id` | integer | NHL api-web player identifier for the skater who scored the goal on a goal event in the play-by-play feed. |
 | `details_scoring_player_total` | double | Running season goal total for the scoring player at the time of the goal event in the NHL api-web play-by-play feed. |
-| `details_assist1_player_id` | double | NHL api-web player identifier for the primary (first) assist credited on a goal event in the play-by-play feed. |
+| `details_assist1_player_id` | integer | NHL api-web player identifier for the primary (first) assist credited on a goal event in the play-by-play feed. |
 | `details_assist1_player_total` | double | Running season assist total for the primary assist player at the time of the goal event in the play-by-play feed. |
-| `details_assist2_player_id` | double | NHL api-web player identifier for the secondary (second) assist credited on a goal event in the play-by-play feed. |
+| `details_assist2_player_id` | integer | NHL api-web player identifier for the secondary (second) assist credited on a goal event in the play-by-play feed. |
 | `details_assist2_player_total` | double | Running season assist total for the secondary assist player at the time of the goal event in the play-by-play feed. |
 | `details_away_score` | double | Cumulative away-team score at the moment of the play event in the NHL api-web play-by-play feed. |
 | `details_home_score` | double | Cumulative home-team score at the moment of the play event in the NHL api-web play-by-play feed. |
@@ -2621,7 +2621,7 @@ Flat (non-ESPN) wrappers for the NHL Stats REST API. Host: `https://api.nhle.com
 |---|---|---|
 | `save_pctg` | double | Save percentage. |
 | `player_id` | integer | Unique player identifier. |
-| `player_current_team_id` | double | Player's current team identifier. |
+| `player_current_team_id` | integer | Player's current team identifier. |
 | `player_first_name` | character | Player first name. |
 | `player_full_name` | character | Player full name. |
 | `player_last_name` | character | Player last name. |
@@ -2643,7 +2643,7 @@ Flat (non-ESPN) wrappers for the NHL Stats REST API. Host: `https://api.nhle.com
 |---|---|---|
 | `goals` | integer | Goals scored. |
 | `player_id` | integer | Unique player identifier. |
-| `player_current_team_id` | character | Player's current team identifier. |
+| `player_current_team_id` | integer | Player's current team identifier. |
 | `player_first_name` | character | Player first name. |
 | `player_full_name` | character | Player full name. |
 | `player_last_name` | character | Player last name. |
@@ -3113,14 +3113,14 @@ Flat (non-ESPN) wrappers for the NHL Records site API. Host: `https://records.nh
 |---|---|---|
 | `id` | integer | Unique player identifier. |
 | `awarded_posthumously` | logical | Whether the award was given posthumously. |
-| `coach_id` | double | ESPN coach id parsed from the `$ref` URL. |
+| `coach_id` | integer | ESPN coach id parsed from the `$ref` URL. |
 | `created_on` | character | Date the trophy record was created. |
 | `detail_summary` | character | Detail summary flag. |
 | `full_name` | character | Player full name. |
-| `general_manager_id` | double | General manager identifier, if applicable. |
+| `general_manager_id` | integer | General manager identifier, if applicable. |
 | `image_url` | character | Player headshot URL. |
 | `is_rookie` | logical | Whether the player is a rookie. |
-| `player_id` | double | Unique player identifier. |
+| `player_id` | integer | Unique player identifier. |
 | `player_image_caption` | character | Player image caption flag. |
 | `player_image_url` | character | URL to the player image. |
 | `season_id` | integer | Season identifier. |
@@ -3147,7 +3147,7 @@ Flat (non-ESPN) wrappers for the NHL Records site API. Host: `https://records.nh
 | `general_manager_id` | integer | General manager identifier, if applicable. |
 | `image_url` | character | Player headshot URL. |
 | `is_rookie` | logical | Whether the player is a rookie. |
-| `player_id` | character | Unique player identifier. |
+| `player_id` | integer | Unique player identifier. |
 | `player_image_caption` | character | Player image caption flag. |
 | `player_image_url` | character | URL to the player image. |
 | `season_id` | integer | Season identifier. |
@@ -3213,7 +3213,7 @@ Flat (non-ESPN) wrappers for the NHL Records site API. Host: `https://records.nh
 | `nationality_code` | character | Nationality code of the official. |
 | `player_id` | integer | Unique player identifier. |
 | `stanley_cup` | integer | Number of Stanley Cup championships won by the coach as a head coach. |
-| `team_id` | character | Unique team identifier. |
+| `team_id` | integer | Unique team identifier. |
 | `top100_player_link` | character | URL to the coach's entry on the NHL's Top 100 Players list, if applicable. |
 | `twitter` | character | Twitter (X) handle or URL associated with the coach. |
 
@@ -3345,7 +3345,7 @@ Flat (non-ESPN) wrappers for the NHL Records site API. Host: `https://records.nh
 | `active_coach` | logical | Boolean flag indicating whether the coach is currently active as an NHL head coach. |
 | `coach_id` | integer | ESPN coach id parsed from the `$ref` URL. |
 | `coach_name` | character | Full name of the head coach in this Stanley Cup championship record. |
-| `franchise_id` | double | Unique franchise identifier. |
+| `franchise_id` | integer | Unique franchise identifier. |
 | `franchise_name` | character | Franchise name. |
 | `longest_streak` | integer | Maximum number of consecutive seasons in which the coach won the Stanley Cup. |
 | `longest_streak_description` | character | Human-readable description of the coach's longest consecutive Stanley Cup winning streak. |
@@ -3381,9 +3381,9 @@ Flat (non-ESPN) wrappers for the NHL Records site API. Host: `https://records.nh
 | `is_active` | logical | Whether the team is active. |
 | `last_name` | character | Player last name. |
 | `nationality_code` | character | Nationality code of the official. |
-| `player_id` | double | Unique player identifier. |
+| `player_id` | integer | Unique player identifier. |
 | `stanley_cup` | double | Number of Stanley Cup championships won by the coach as a head coach or assistant coach. |
-| `team_id` | character | Unique team identifier. |
+| `team_id` | integer | Unique team identifier. |
 | `top100_player_link` | character | URL to the coach's NHL Top 100 players recognition page, if applicable. |
 | `twitter` | character | Twitter/X handle or profile URL for the coach's official social media presence. |
 
@@ -3398,7 +3398,7 @@ Flat (non-ESPN) wrappers for the NHL Records site API. Host: `https://records.nh
 | `active_streak` | logical | Indicator of whether the streak is active. |
 | `consecutive100_point_seasons` | integer | Number of consecutive NHL regular seasons in which the player reached 100 or more points. |
 | `first_name` | character | Player first name. |
-| `franchise_id` | double | Unique franchise identifier. |
+| `franchise_id` | integer | Unique franchise identifier. |
 | `last_name` | character | Player last name. |
 | `player_id` | integer | Unique player identifier. |
 | `position_code` | character | Player position code. |
@@ -3423,18 +3423,18 @@ Flat (non-ESPN) wrappers for the NHL Records site API. Host: `https://records.nh
 | `birth_date` | character | Player birth date. |
 | `birth_place` | character | Player birth place. |
 | `country_code` | character | Player country code. |
-| `cs_player_id` | character | Central Scouting player identifier. |
+| `cs_player_id` | integer | Central Scouting player identifier. |
 | `draft_date` | character | Date the player was drafted. |
 | `draft_master_id` | integer | Draft master record identifier. |
 | `draft_year` | integer | Draft year the lottery applies to. |
-| `drafted_by_team_id` | character | Identifier of the drafting team. |
+| `drafted_by_team_id` | integer | Identifier of the drafting team. |
 | `first_name` | character | Player first name. |
 | `height` | character | Player height in inches. |
 | `last_name` | character | Player last name. |
 | `notes` | character | Notes flag for the pick. |
 | `overall_pick_number` | integer | Overall pick number in the draft. |
 | `pick_in_round` | integer | Pick number within the round. |
-| `player_id` | character | Unique player identifier. |
+| `player_id` | integer | Unique player identifier. |
 | `player_name` | character | Player name. |
 | `position` | character | Player position. |
 | `removed_outright` | character | Removed-outright indicator. |
@@ -3461,7 +3461,7 @@ Flat (non-ESPN) wrappers for the NHL Records site API. Host: `https://records.nh
 | `birth_date` | character | Player birth date. |
 | `birth_place` | character | Player birth place. |
 | `country_code` | character | Player country code. |
-| `cs_player_id` | character | Central Scouting player identifier. |
+| `cs_player_id` | integer | Central Scouting player identifier. |
 | `draft_date` | character | Date the player was drafted. |
 | `draft_master_id` | integer | Draft master record identifier. |
 | `draft_year` | integer | Draft year the lottery applies to. |
@@ -3472,7 +3472,7 @@ Flat (non-ESPN) wrappers for the NHL Records site API. Host: `https://records.nh
 | `notes` | character | Notes flag for the pick. |
 | `overall_pick_number` | integer | Overall pick number in the draft. |
 | `pick_in_round` | integer | Pick number within the round. |
-| `player_id` | character | Unique player identifier. |
+| `player_id` | integer | Unique player identifier. |
 | `player_name` | character | Player name. |
 | `position` | character | Player position. |
 | `removed_outright` | character | Removed-outright indicator. |
@@ -3644,7 +3644,7 @@ Flat (non-ESPN) wrappers for the NHL Records site API. Host: `https://records.nh
 | `home_overtime_losses` | double | Overtime losses at home. |
 | `home_ties` | double | Ties at home. |
 | `home_wins` | double | Wins at home. |
-| `last_season_id` | double | Season ID of the franchise's last season. |
+| `last_season_id` | integer | Season ID of the franchise's last season. |
 | `losses` | double | Losses. |
 | `overtime_losses` | double | Total overtime losses. |
 | `penalty_minutes` | double | Penalty minutes. |
@@ -3688,7 +3688,7 @@ Flat (non-ESPN) wrappers for the NHL Records site API. Host: `https://records.nh
 | `home_overtime_losses` | double | Overtime losses at home. |
 | `home_ties` | double | Ties at home. |
 | `home_wins` | integer | Wins at home. |
-| `last_season_id` | double | Season ID of the franchise's last season. |
+| `last_season_id` | integer | Season ID of the franchise's last season. |
 | `losses` | integer | Losses. |
 | `overtime_losses` | double | Total overtime losses. |
 | `penalty_minutes` | integer | Penalty minutes. |
@@ -3721,7 +3721,7 @@ Flat (non-ESPN) wrappers for the NHL Records site API. Host: `https://records.nh
 | `id` | integer | Unique player identifier. |
 | `first_season_id` | integer | Season identifier of the first season. |
 | `full_name` | character | Player full name. |
-| `last_season_id` | double | Season ID of the franchise's last season. |
+| `last_season_id` | integer | Season ID of the franchise's last season. |
 | `most_recent_team_id` | integer | Most recent team identifier. |
 | `team_abbrev` | character | Team abbreviation. |
 | `team_common_name` | character | Team common (nickname) name. |
@@ -3834,7 +3834,7 @@ Flat (non-ESPN) wrappers for the NHL Records site API. Host: `https://records.nh
 | `active_player` | logical | Indicator of whether the player is active. |
 | `first_name` | character | Player first name. |
 | `first_season_for_game_type` | integer | First season ID for the game type. |
-| `franchise_id` | double | Unique franchise identifier. |
+| `franchise_id` | integer | Unique franchise identifier. |
 | `game_seven_games_played` | character | Game seven games played. |
 | `game_seven_losses` | character | Game seven losses. |
 | `game_seven_wins` | character | Game seven wins. |
@@ -3877,7 +3877,7 @@ Flat (non-ESPN) wrappers for the NHL Records site API. Host: `https://records.nh
 | `id` | integer | Unique player identifier. |
 | `active_player` | integer | Indicator of whether the player is active. |
 | `first_name` | character | Player first name. |
-| `franchise_id` | double | Unique franchise identifier. |
+| `franchise_id` | integer | Unique franchise identifier. |
 | `games_played` | integer | Games played. |
 | `goals_against` | integer | Goals against. |
 | `goals_against_average` | double | Goals against average. |
@@ -3909,7 +3909,7 @@ Flat (non-ESPN) wrappers for the NHL Records site API. Host: `https://records.nh
 | `consecutive_playoff_seasons` | integer | Number of consecutive playoff seasons in which the goalie appeared for the franchise during this streak. |
 | `end_season` | integer | Last season (in YYYYYYYY format) of the goalie's consecutive playoff appearance streak. |
 | `first_name` | character | Player first name. |
-| `franchise_id` | double | Unique franchise identifier. |
+| `franchise_id` | integer | Unique franchise identifier. |
 | `last_name` | character | Player last name. |
 | `player_id` | integer | Unique player identifier. |
 | `playoff_seasons` | integer | Number of playoff seasons. |
@@ -3926,7 +3926,7 @@ Flat (non-ESPN) wrappers for the NHL Records site API. Host: `https://records.nh
 | `id` | integer | Unique player identifier. |
 | `active_player` | logical | Indicator of whether the player is active. |
 | `first_name` | character | Player first name. |
-| `franchise_id` | double | Unique franchise identifier. |
+| `franchise_id` | integer | Unique franchise identifier. |
 | `game_seven_games_played` | character | Game seven games played. |
 | `game_seven_losses` | character | Game seven losses. |
 | `game_seven_wins` | character | Game seven wins. |
@@ -3993,7 +3993,7 @@ Flat (non-ESPN) wrappers for the NHL Records site API. Host: `https://records.nh
 | `active_streak` | logical | Indicator of whether the streak is active. |
 | `end_date` | character | Season end date. |
 | `first_name` | character | Player first name. |
-| `franchise_id` | double | Unique franchise identifier. |
+| `franchise_id` | integer | Unique franchise identifier. |
 | `game_type_id` | integer | Game type identifier (regular/playoffs). |
 | `last_name` | character | Player last name. |
 | `player_id` | integer | Unique player identifier. |
@@ -4014,7 +4014,7 @@ Flat (non-ESPN) wrappers for the NHL Records site API. Host: `https://records.nh
 | `active_player` | logical | Indicator of whether the player is active. |
 | `first_name` | character | Player first name. |
 | `forty_win_seasons` | integer | Number of seasons in which the goalie recorded 40 or more wins, a rare single-season achievement. |
-| `franchise_id` | double | Unique franchise identifier. |
+| `franchise_id` | integer | Unique franchise identifier. |
 | `last_name` | character | Player last name. |
 | `player_id` | integer | Unique player identifier. |
 | `seasons_played` | integer | Number of seasons played. |
@@ -4034,7 +4034,7 @@ Flat (non-ESPN) wrappers for the NHL Records site API. Host: `https://records.nh
 | `active_streak` | logical | Indicator of whether the streak is active. |
 | `end_date` | character | Season end date. |
 | `first_name` | character | Player first name. |
-| `franchise_id` | double | Unique franchise identifier. |
+| `franchise_id` | integer | Unique franchise identifier. |
 | `game_type_id` | integer | Game type identifier (regular/playoffs). |
 | `last_name` | character | Player last name. |
 | `player_id` | integer | Unique player identifier. |
@@ -4057,7 +4057,7 @@ Flat (non-ESPN) wrappers for the NHL Records site API. Host: `https://records.nh
 | `induction_cat_id` | integer | Induction category identifier. |
 | `misc_full_name` | character | Full name of the inductee. |
 | `office_id` | integer | Office/category identifier. |
-| `official_id` | character | ESPN official id (echoed from arg). |
+| `official_id` | integer | ESPN official id (echoed from arg). |
 | `player_id` | integer | Unique player identifier. |
 
 **Row type:** `NhlRecordsHofPlayersRow` (exported from the package root).
@@ -4071,8 +4071,8 @@ Flat (non-ESPN) wrappers for the NHL Records site API. Host: `https://records.nh
 | `induction_cat_id` | integer | Induction category identifier. |
 | `misc_full_name` | character | Full name of the inductee. |
 | `office_id` | integer | Office/category identifier. |
-| `official_id` | character | ESPN official id (echoed from arg). |
-| `player_id` | character | Unique player identifier. |
+| `official_id` | integer | ESPN official id (echoed from arg). |
+| `player_id` | integer | Unique player identifier. |
 
 **Row type:** `NhlRecordsHofPlayersByOfficeRow` (exported from the package root).
 

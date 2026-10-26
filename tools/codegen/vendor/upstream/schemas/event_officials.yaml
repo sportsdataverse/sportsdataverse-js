@@ -14,7 +14,7 @@ columns:
   type: character
   description: ''
 - name: id
-  type: character
+  type: integer
   description: ''
 - name: last_name
   type: character
@@ -26,8 +26,14 @@ columns:
   type: character
   description: ''
 - name: position_id
-  type: character
+  type: integer
   description: ''
 - name: position_name
   type: character
+  description: ''
+- name: count
+  type: integer
+  description: ''
+- name: page_count
+  type: integer
   description: ''

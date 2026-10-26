@@ -4,10 +4,15 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Dict, List, Optional, Union  # noqa: F401
+from typing import Dict, List, Optional, Union  # noqa: F401
+
+# Imported at runtime, not under TYPE_CHECKING: typing.get_type_hints() evaluates the
+# annotations below and raised NameError on ``pl`` / ``pd`` (R858-4).
+import pandas as pd  # noqa: F401
+import polars as pl  # noqa: F401
 
 from sportsdataverse._codegen_runtime import _get, bool_str
-from sportsdataverse.fox.fox_api_parsers import (
+from sportsdataverse.providers.fox.fox_api_parsers import (
     parse_fox_api,
     parse_fox_api_events,
     parse_fox_api_header,
@@ -19,10 +24,6 @@ from sportsdataverse.fox.fox_api_parsers import (
     parse_fox_api_standings,
     parse_fox_api_trending,
 )
-
-if TYPE_CHECKING:  # pragma: no cover -- annotation-only imports (PEP 563 defers eval)
-    import pandas as pd
-    import polars as pl
 
 __all__ = [
     "fox_api_scoreboard",
@@ -96,7 +97,7 @@ def fox_api_scoreboard(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_scoreboard
+            from sportsdataverse.providers.fox import fox_api_scoreboard
             fox_api_scoreboard(sport='nfl')
 
         See Also:
@@ -156,7 +157,7 @@ def fox_api_scorechip(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_scorechip
+            from sportsdataverse.providers.fox import fox_api_scorechip
             fox_api_scorechip(sport='nfl', chip_id='nfl11195')
 
         See Also:
@@ -214,7 +215,7 @@ def fox_api_topevents_scoreboard_segment(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_topevents_scoreboard_segment
+            from sportsdataverse.providers.fox import fox_api_topevents_scoreboard_segment
             fox_api_topevents_scoreboard_segment(segment='1')
 
         See Also:
@@ -273,7 +274,7 @@ def fox_api_league_conferences(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_league_conferences
+            from sportsdataverse.providers.fox import fox_api_league_conferences
             fox_api_league_conferences(sport='cfb')
 
         See Also:
@@ -332,7 +333,7 @@ def fox_api_league_header(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_league_header
+            from sportsdataverse.providers.fox import fox_api_league_header
             fox_api_league_header(sport='nfl')
 
         See Also:
@@ -393,7 +394,7 @@ def fox_api_league_odds(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_league_odds
+            from sportsdataverse.providers.fox import fox_api_league_odds
             fox_api_league_odds(sport='nfl')
 
         See Also:
@@ -453,7 +454,7 @@ def fox_api_league_playernews(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_league_playernews
+            from sportsdataverse.providers.fox import fox_api_league_playernews
             fox_api_league_playernews(sport='nfl')
 
         See Also:
@@ -512,7 +513,7 @@ def fox_api_league_polls(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_league_polls
+            from sportsdataverse.providers.fox import fox_api_league_polls
             fox_api_league_polls(sport='cfb')
 
         See Also:
@@ -571,7 +572,7 @@ def fox_api_league_schedule(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_league_schedule
+            from sportsdataverse.providers.fox import fox_api_league_schedule
             fox_api_league_schedule(sport='nfl')
 
         See Also:
@@ -630,7 +631,7 @@ def fox_api_league_scores(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_league_scores
+            from sportsdataverse.providers.fox import fox_api_league_scores
             fox_api_league_scores(sport='nfl')
 
         See Also:
@@ -693,7 +694,7 @@ def fox_api_league_scores_segment(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_league_scores_segment
+            from sportsdataverse.providers.fox import fox_api_league_scores_segment
             fox_api_league_scores_segment(sport='nfl', segment_id='2026-3-1')
 
         See Also:
@@ -753,7 +754,7 @@ def fox_api_league_standings(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_league_standings
+            from sportsdataverse.providers.fox import fox_api_league_standings
             fox_api_league_standings(sport='nfl')
 
         See Also:
@@ -812,7 +813,7 @@ def fox_api_league_stats(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_league_stats
+            from sportsdataverse.providers.fox import fox_api_league_stats
             fox_api_league_stats(sport='nfl')
 
         See Also:
@@ -879,7 +880,7 @@ def fox_api_league_stats_con(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_league_stats_con
+            from sportsdataverse.providers.fox import fox_api_league_stats_con
             fox_api_league_stats_con(sport='nfl', who='player', category='passing', page='1')
 
         See Also:
@@ -939,7 +940,7 @@ def fox_api_league_teamnav(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_league_teamnav
+            from sportsdataverse.providers.fox import fox_api_league_teamnav
             fox_api_league_teamnav(sport='nfl')
 
         See Also:
@@ -1000,7 +1001,7 @@ def fox_api_event_data(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_event_data
+            from sportsdataverse.providers.fox import fox_api_event_data
             fox_api_event_data(sport='nfl', event_id='11195')
 
         See Also:
@@ -1061,7 +1062,7 @@ def fox_api_event_matchup(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_event_matchup
+            from sportsdataverse.providers.fox import fox_api_event_matchup
             fox_api_event_matchup(sport='nfl', event_id='11195')
 
         See Also:
@@ -1122,7 +1123,7 @@ def fox_api_event_odds(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_event_odds
+            from sportsdataverse.providers.fox import fox_api_event_odds
             fox_api_event_odds(sport='nfl', event_id='11195')
 
         See Also:
@@ -1183,7 +1184,7 @@ def fox_api_event_recap(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_event_recap
+            from sportsdataverse.providers.fox import fox_api_event_recap
             fox_api_event_recap(sport='nfl', event_id='11195')
 
         See Also:
@@ -1244,7 +1245,7 @@ def fox_api_event_standings(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_event_standings
+            from sportsdataverse.providers.fox import fox_api_event_standings
             fox_api_event_standings(sport='nfl', event_id='11195')
 
         See Also:
@@ -1305,7 +1306,7 @@ def fox_api_team_gamelog(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_team_gamelog
+            from sportsdataverse.providers.fox import fox_api_team_gamelog
             fox_api_team_gamelog(sport='nfl', team_id='25')
 
         See Also:
@@ -1366,7 +1367,7 @@ def fox_api_team_header(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_team_header
+            from sportsdataverse.providers.fox import fox_api_team_header
             fox_api_team_header(sport='nfl', team_id='25')
 
         See Also:
@@ -1427,7 +1428,7 @@ def fox_api_team_roster(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_team_roster
+            from sportsdataverse.providers.fox import fox_api_team_roster
             fox_api_team_roster(sport='nfl', team_id='25')
 
         See Also:
@@ -1488,7 +1489,7 @@ def fox_api_team_standings(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_team_standings
+            from sportsdataverse.providers.fox import fox_api_team_standings
             fox_api_team_standings(sport='nfl', team_id='25')
 
         See Also:
@@ -1549,7 +1550,7 @@ def fox_api_team_stats(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_team_stats
+            from sportsdataverse.providers.fox import fox_api_team_stats
             fox_api_team_stats(sport='nfl', team_id='25')
 
         See Also:
@@ -1608,7 +1609,7 @@ def fox_api_explore_browse(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_explore_browse
+            from sportsdataverse.providers.fox import fox_api_explore_browse
             fox_api_explore_browse(section='sports')
 
         See Also:
@@ -1665,7 +1666,7 @@ def fox_api_explore_odds(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_explore_odds
+            from sportsdataverse.providers.fox import fox_api_explore_odds
             fox_api_explore_odds()
 
         See Also:
@@ -1724,7 +1725,7 @@ def fox_api_search_content(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_search_content
+            from sportsdataverse.providers.fox import fox_api_search_content
             fox_api_search_content(text='mahomes')
 
         See Also:
@@ -1784,7 +1785,7 @@ def fox_api_search_entities(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_search_entities
+            from sportsdataverse.providers.fox import fox_api_search_entities
             fox_api_search_entities(text='mahomes')
 
         See Also:
@@ -1842,7 +1843,7 @@ def fox_api_search_popular(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_search_popular
+            from sportsdataverse.providers.fox import fox_api_search_popular
             fox_api_search_popular()
 
         See Also:
@@ -1903,7 +1904,7 @@ def fox_api_trending_articles(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_trending_articles
+            from sportsdataverse.providers.fox import fox_api_trending_articles
             fox_api_trending_articles()
 
         See Also:
@@ -1966,7 +1967,7 @@ def fox_api_trending_videos(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_trending_videos
+            from sportsdataverse.providers.fox import fox_api_trending_videos
             fox_api_trending_videos()
 
         See Also:
@@ -2027,7 +2028,7 @@ def fox_api_foxpolls(
     Example:
         Quick start::
 
-            from sportsdataverse.fox import fox_api_foxpolls
+            from sportsdataverse.providers.fox import fox_api_foxpolls
             fox_api_foxpolls()
 
         See Also:
@@ -2041,7 +2042,7 @@ def fox_api_foxpolls(
     _params = {
         "apikey": apikey,
         "associatedEntityIds": associated_entity_ids,
-        "includeAnswers": bool_str(include_answers),
+        "includeAnswers": bool_str(include_answers, name="include_answers"),
     }
     _params.update(_caller_params)
     raw = _get(

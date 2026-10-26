@@ -1563,13 +1563,13 @@ const rows = await sdv.wbb.loadNcaaWbbPossessions({ seasons: 2024, columns: ['ga
 | `home_score` | `number \| bigint` | Home team score at the time of the play. |
 | `away_score` | `number \| bigint` | Away team score at the time of the play. |
 | `pts` | `number \| bigint` | Points scored. |
-| `is_assisted` | `number \| bigint` | 1 when the possession's made field goal was assisted, else 0. |
+| `is_assisted` | `number \| bigint` | Count of the possession's events that carry an assisting second player (0, 1, rarely 2) -- a count, not a flag, kept from the R source for parity. |
 | `is_transition` | `number \| bigint` | 1 for transition possessions, else 0. |
 | `is_garbage_time` | `number \| bigint` | 1 for possessions in garbage time under the score-margin and clock rule, else 0. |
-| `start_event_type` | `string` | Event type that opened the possession (e.g., a defensive rebound or a made-basket inbound). |
-| `first_shot_time` | `number \| bigint` | Clock time in seconds at the possession's first shot attempt, from the possession segmentation engine. |
-| `first_shot_type` | `string` | Shot class of the possession's first attempt (rim, mid-range, or three). |
-| `last_event_time` | `number \| bigint` | Clock time in seconds at the possession's final event. |
+| `start_event_type` | `string` | Event type of the play immediately before the possession's first event (what started it, e.g. a defensive rebound or a made basket), not the possession's own first event. |
+| `first_shot_time` | `number \| bigint` | Seconds into the possession (poss_length) at its first field-goal attempt; null when the possession had no shot. |
+| `first_shot_type` | `string` | stats.ncaa.org event name of the possession's first field-goal attempt ("Layup", "Three Point Jumper", "Two Point Jumper", "Hook", "Dunk", "Tip In"); null when the possession had no shot. |
+| `last_event_time` | `number \| bigint` | Seconds into the possession (poss_length) at its final event. |
 | `last_event_type` | `string` | Event type that ended the possession (e.g., a made shot, turnover, or defensive rebound). |
 | `contest_id` | `string` |  |
 | `home_ncaa_team_id` | `string` | stats.ncaa.org team identifier for the home team. |

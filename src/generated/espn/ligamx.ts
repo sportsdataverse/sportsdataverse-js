@@ -1984,12 +1984,12 @@ const LEADERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.web.api.espn.com/apis/common/v3/sports/soccer/mex.1/statistics/byathlete`
  *
- * @param params.category - `number | string` — the statistics category.
+ * @param params.category - `number | string` — Leaderboard population: the athletes ranked in that category, whose values it fills (other categories come back null). Football takes `<group>:<category>` (`offense:passing`, `offense:rushing`, `offense:receiving`, `defense:defensive`, `scoring:scoring`); a bare `passing` is rejected with HTTP 400 (ValueError). Basketball takes the bare name (`offensive`).
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
  * @param params.limit - `number | string` — the maximum number of items to return; default `50`.
  * @param params.page - `number | string` — the page of a paginated Core v2 list (1-based); default `1`.
- * @param params.sort - `number | string` — the sort key and direction, e.g. `offensive.avgPoints:desc`.
+ * @param params.sort - `number | string` — Sort key `<category>.<statName>:<asc|desc>`, the names in the payload's categories (`passing.passingYards:desc`, `offensive.avgPoints:desc`). A stat without its category is rejected with HTTP 400 (ValueError).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.ligamx.espnLigamxLeaders({});

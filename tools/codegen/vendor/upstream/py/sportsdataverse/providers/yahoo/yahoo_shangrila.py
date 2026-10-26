@@ -4,18 +4,19 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Dict, List, Optional, Union  # noqa: F401
+from typing import Dict, List, Optional, Union  # noqa: F401
 
-from sportsdataverse.yahoo.yahoo_shangrila_runtime import _get
-from sportsdataverse.yahoo.yahoo_shangrila_parsers import (
+# Imported at runtime, not under TYPE_CHECKING: typing.get_type_hints() evaluates the
+# annotations below and raised NameError on ``pl`` / ``pd`` (R858-4).
+import pandas as pd  # noqa: F401
+import polars as pl  # noqa: F401
+
+from sportsdataverse.providers.yahoo.yahoo_shangrila_runtime import _get
+from sportsdataverse.providers.yahoo.yahoo_shangrila_parsers import (
     parse_yahoo_editorial,
     parse_yahoo_shangrila,
     parse_yahoo_shangrila_tables,
 )
-
-if TYPE_CHECKING:  # pragma: no cover -- annotation-only imports (PEP 563 defers eval)
-    import pandas as pd
-    import polars as pl
 
 __all__ = [
     "yahoo_oly_medal_count",
@@ -159,7 +160,7 @@ def yahoo_oly_medal_count(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_oly_medal_count
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_oly_medal_count
             yahoo_oly_medal_count()
 
         See Also:
@@ -214,7 +215,7 @@ def yahoo_oly_seasons(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_oly_seasons
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_oly_seasons
             yahoo_oly_seasons()
 
         See Also:
@@ -268,7 +269,7 @@ def yahoo_alias(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_alias
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_alias
             yahoo_alias()
 
         See Also:
@@ -322,7 +323,7 @@ def yahoo_article_list_card_players(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_article_list_card_players
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_article_list_card_players
             yahoo_article_list_card_players()
 
         See Also:
@@ -376,7 +377,7 @@ def yahoo_article_list_card_teams(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_article_list_card_teams
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_article_list_card_teams
             yahoo_article_list_card_teams()
 
         See Also:
@@ -430,7 +431,7 @@ def yahoo_basic_players(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_basic_players
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_basic_players
             yahoo_basic_players()
 
         See Also:
@@ -484,7 +485,7 @@ def yahoo_betting_disclaimer(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_betting_disclaimer
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_betting_disclaimer
             yahoo_betting_disclaimer()
 
         See Also:
@@ -542,7 +543,7 @@ def yahoo_combat_event_fights(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_combat_event_fights
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_combat_event_fights
             yahoo_combat_event_fights()
 
         See Also:
@@ -600,7 +601,7 @@ def yahoo_combat_schedule(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_combat_schedule
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_combat_schedule
             yahoo_combat_schedule()
 
         See Also:
@@ -659,7 +660,7 @@ def yahoo_common_pills(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_common_pills
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_common_pills
             yahoo_common_pills()
 
         See Also:
@@ -725,7 +726,7 @@ def yahoo_consensus_rankings_php(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_consensus_rankings_php
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_consensus_rankings_php
             yahoo_consensus_rankings_php()
 
         See Also:
@@ -786,7 +787,7 @@ def yahoo_draft(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_draft
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_draft
             yahoo_draft()
 
         See Also:
@@ -847,7 +848,7 @@ def yahoo_draft_prospects(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_draft_prospects
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_draft_prospects
             yahoo_draft_prospects()
 
         See Also:
@@ -906,7 +907,7 @@ def yahoo_driver_results(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_driver_results
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_driver_results
             yahoo_driver_results()
 
         See Also:
@@ -961,7 +962,7 @@ def yahoo_driver_splits(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_driver_splits
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_driver_splits
             yahoo_driver_splits()
 
         See Also:
@@ -1013,7 +1014,7 @@ def yahoo_featured_game_ids(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_featured_game_ids
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_featured_game_ids
             yahoo_featured_game_ids()
 
         See Also:
@@ -1065,7 +1066,7 @@ def yahoo_game_prop_bets(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_game_prop_bets
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_game_prop_bets
             yahoo_game_prop_bets()
 
         See Also:
@@ -1435,7 +1436,7 @@ def yahoo_game_stats_leaders(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_game_stats_leaders
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_game_stats_leaders
             yahoo_game_stats_leaders()
 
         See Also:
@@ -1647,7 +1648,7 @@ def yahoo_gametime_game(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_gametime_game
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_gametime_game
             yahoo_gametime_game()
 
         See Also:
@@ -1701,7 +1702,7 @@ def yahoo_gametime_team(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_gametime_team
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_gametime_team
             yahoo_gametime_team()
 
         See Also:
@@ -1755,7 +1756,7 @@ def yahoo_golf_tournament_seasons(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_golf_tournament_seasons
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_golf_tournament_seasons
             yahoo_golf_tournament_seasons()
 
         See Also:
@@ -1813,7 +1814,7 @@ def yahoo_golf_tournaments(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_golf_tournaments
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_golf_tournaments
             yahoo_golf_tournaments()
 
         See Also:
@@ -1873,7 +1874,7 @@ def yahoo_golf_tournaments_basic(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_golf_tournaments_basic
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_golf_tournaments_basic
             yahoo_golf_tournaments_basic()
 
         See Also:
@@ -1931,7 +1932,7 @@ def yahoo_league_conferences(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_league_conferences
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_league_conferences
             yahoo_league_conferences()
 
         See Also:
@@ -1992,7 +1993,7 @@ def yahoo_league_filters_data(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_league_filters_data
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_league_filters_data
             yahoo_league_filters_data()
 
         See Also:
@@ -2051,7 +2052,7 @@ def yahoo_league_future_odds(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_league_future_odds
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_league_future_odds
             yahoo_league_future_odds()
 
         See Also:
@@ -2128,7 +2129,7 @@ def yahoo_league_game_ids(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_league_game_ids
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_league_game_ids
             yahoo_league_game_ids()
 
         See Also:
@@ -2215,7 +2216,7 @@ def yahoo_league_game_ids_by_date(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_league_game_ids_by_date
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_league_game_ids_by_date
             yahoo_league_game_ids_by_date()
 
         See Also:
@@ -2284,7 +2285,7 @@ def yahoo_league_games_by_round(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_league_games_by_round
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_league_games_by_round
             yahoo_league_games_by_round()
 
         See Also:
@@ -2340,7 +2341,7 @@ def yahoo_league_info(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_league_info
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_league_info
             yahoo_league_info()
 
         See Also:
@@ -2394,7 +2395,7 @@ def yahoo_league_injuries(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_league_injuries
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_league_injuries
             yahoo_league_injuries()
 
         See Also:
@@ -2448,7 +2449,7 @@ def yahoo_league_names(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_league_names
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_league_names
             yahoo_league_names()
 
         See Also:
@@ -2504,7 +2505,7 @@ def yahoo_league_prop_odds(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_league_prop_odds
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_league_prop_odds
             yahoo_league_prop_odds()
 
         See Also:
@@ -2563,7 +2564,7 @@ def yahoo_league_standings(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_league_standings
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_league_standings
             yahoo_league_standings()
 
         See Also:
@@ -2633,7 +2634,7 @@ def yahoo_league_stats_by_team(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_league_stats_by_team
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_league_stats_by_team
             yahoo_league_stats_by_team()
 
         See Also:
@@ -2724,7 +2725,7 @@ def yahoo_league_stats_individual(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_league_stats_individual
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_league_stats_individual
             yahoo_league_stats_individual()
 
         See Also:
@@ -2811,7 +2812,7 @@ def yahoo_league_stats_overview(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_league_stats_overview
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_league_stats_overview
             yahoo_league_stats_overview()
 
         See Also:
@@ -2882,7 +2883,7 @@ def yahoo_league_stats_weekly(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_league_stats_weekly
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_league_stats_weekly
             yahoo_league_stats_weekly()
 
         See Also:
@@ -2944,7 +2945,7 @@ def yahoo_league_team_ids(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_league_team_ids
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_league_team_ids
             yahoo_league_team_ids()
 
         See Also:
@@ -3006,7 +3007,7 @@ def yahoo_league_teams(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_league_teams
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_league_teams
             yahoo_league_teams()
 
         See Also:
@@ -3063,7 +3064,7 @@ def yahoo_leagues_season_states(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_leagues_season_states
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_leagues_season_states
             yahoo_leagues_season_states()
 
         See Also:
@@ -3121,7 +3122,7 @@ def yahoo_module_game(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_module_game
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_module_game
             yahoo_module_game()
 
         See Also:
@@ -3179,7 +3180,7 @@ def yahoo_motorsport_standings(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_motorsport_standings
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_motorsport_standings
             yahoo_motorsport_standings()
 
         See Also:
@@ -3234,7 +3235,7 @@ def yahoo_nascar_drivers(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_nascar_drivers
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_nascar_drivers
             yahoo_nascar_drivers()
 
         See Also:
@@ -3267,7 +3268,7 @@ def yahoo_nav_dropdown_tray(
     return_parsed: bool = True,
     return_as_pandas: bool = False,
     **kwargs,
-) -> Union[pl.DataFrame, pd.DataFrame, Dict]:
+) -> Union[Dict[str, pl.DataFrame], Dict[str, pd.DataFrame], Dict]:
     """Yahoo shangrila persisted query `navDropdownTray` -> tables: nfl, nhl, nba, mlb, wnba, ncaab, ncaaf, ncaaw, sportsbook_legal_states
 
     Endpoint: ``GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/navDropdownTray``
@@ -3344,7 +3345,7 @@ def yahoo_pick_distribution(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_pick_distribution
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_pick_distribution
             yahoo_pick_distribution()
 
         See Also:
@@ -3387,7 +3388,7 @@ def yahoo_playbook_boxscore(
     return_parsed: bool = True,
     return_as_pandas: bool = False,
     **kwargs,
-) -> Union[pl.DataFrame, pd.DataFrame, Dict]:
+) -> Union[Dict[str, pl.DataFrame], Dict[str, pd.DataFrame], Dict]:
     """Yahoo shangrila persisted query `playbookBoxscore` -> tables: football_positions, football_stat_types, games
 
     Endpoint: ``GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookBoxscore``
@@ -3461,7 +3462,7 @@ def yahoo_playbook_boxscore_poll(
     return_parsed: bool = True,
     return_as_pandas: bool = False,
     **kwargs,
-) -> Union[pl.DataFrame, pd.DataFrame, Dict]:
+) -> Union[Dict[str, pl.DataFrame], Dict[str, pd.DataFrame], Dict]:
     """Yahoo shangrila persisted query `playbookBoxscorePoll` -> tables: football_positions, football_stat_types, games
 
     Endpoint: ``GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookBoxscorePoll``
@@ -3546,7 +3547,7 @@ def yahoo_playbook_boxscore_social_share(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_playbook_boxscore_social_share
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_playbook_boxscore_social_share
             yahoo_playbook_boxscore_social_share()
 
         See Also:
@@ -3608,7 +3609,7 @@ def yahoo_playbook_combat_match(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_playbook_combat_match
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_playbook_combat_match
             yahoo_playbook_combat_match()
 
         See Also:
@@ -3670,7 +3671,7 @@ def yahoo_playbook_game(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_playbook_game
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_playbook_game
             yahoo_playbook_game()
 
         See Also:
@@ -3728,7 +3729,7 @@ def yahoo_playbook_game_odds_poll(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_playbook_game_odds_poll
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_playbook_game_odds_poll
             yahoo_playbook_game_odds_poll()
 
         See Also:
@@ -3791,7 +3792,7 @@ def yahoo_playbook_golf_tournament(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_playbook_golf_tournament
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_playbook_golf_tournament
             yahoo_playbook_golf_tournament()
 
         See Also:
@@ -3859,7 +3860,7 @@ def yahoo_playbook_league_odds(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_playbook_league_odds
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_playbook_league_odds
             yahoo_playbook_league_odds()
 
         See Also:
@@ -3920,7 +3921,7 @@ def yahoo_playbook_player(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_playbook_player
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_playbook_player
             yahoo_playbook_player()
 
         See Also:
@@ -3975,7 +3976,7 @@ def yahoo_playbook_player_social_share(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_playbook_player_social_share
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_playbook_player_social_share
             yahoo_playbook_player_social_share()
 
         See Also:
@@ -4033,7 +4034,7 @@ def yahoo_playbook_race(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_playbook_race
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_playbook_race
             yahoo_playbook_race()
 
         See Also:
@@ -4071,7 +4072,7 @@ def yahoo_playbook_team(
     return_parsed: bool = True,
     return_as_pandas: bool = False,
     **kwargs,
-) -> Union[pl.DataFrame, pd.DataFrame, Dict]:
+) -> Union[Dict[str, pl.DataFrame], Dict[str, pd.DataFrame], Dict]:
     """Yahoo shangrila persisted query `playbookTeam` -> tables: teams, leagues
 
     Endpoint: ``GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playbookTeam``
@@ -4154,7 +4155,7 @@ def yahoo_playbook_team_basic(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_playbook_team_basic
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_playbook_team_basic
             yahoo_playbook_team_basic()
 
         See Also:
@@ -4210,7 +4211,7 @@ def yahoo_playbook_team_social_share(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_playbook_team_social_share
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_playbook_team_social_share
             yahoo_playbook_team_social_share()
 
         See Also:
@@ -4264,7 +4265,7 @@ def yahoo_playbook_tennis_match(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_playbook_tennis_match
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_playbook_tennis_match
             yahoo_playbook_tennis_match()
 
         See Also:
@@ -4296,7 +4297,7 @@ def yahoo_player_basic(
     return_parsed: bool = True,
     return_as_pandas: bool = False,
     **kwargs,
-) -> Union[pl.DataFrame, pd.DataFrame, Dict]:
+) -> Union[Dict[str, pl.DataFrame], Dict[str, pd.DataFrame], Dict]:
     """Yahoo shangrila persisted query `playerBasic` -> tables: players, leagues
 
     Endpoint: ``GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/playerBasic``
@@ -4379,7 +4380,7 @@ def yahoo_player_career_stats(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_player_career_stats
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_player_career_stats
             yahoo_player_career_stats()
 
         See Also:
@@ -4455,7 +4456,7 @@ def yahoo_player_game_log(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_player_game_log
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_player_game_log
             yahoo_player_game_log()
 
         See Also:
@@ -4517,7 +4518,7 @@ def yahoo_player_props(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_player_props
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_player_props
             yahoo_player_props()
 
         See Also:
@@ -4583,7 +4584,7 @@ def yahoo_player_search(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_player_search
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_player_search
             yahoo_player_search()
 
         See Also:
@@ -4667,7 +4668,7 @@ def yahoo_player_season_stats(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_player_season_stats
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_player_season_stats
             yahoo_player_season_stats()
 
         See Also:
@@ -4741,7 +4742,7 @@ def yahoo_playoff_bracket(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_playoff_bracket
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_playoff_bracket
             yahoo_playoff_bracket()
 
         See Also:
@@ -4799,7 +4800,7 @@ def yahoo_playoff_series_game(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_playoff_series_game
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_playoff_series_game
             yahoo_playoff_series_game()
 
         See Also:
@@ -4853,7 +4854,7 @@ def yahoo_polymarket_game(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_polymarket_game
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_polymarket_game
             yahoo_polymarket_game()
 
         See Also:
@@ -4913,7 +4914,7 @@ def yahoo_racing_schedule(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_racing_schedule
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_racing_schedule
             yahoo_racing_schedule()
 
         See Also:
@@ -4980,7 +4981,7 @@ def yahoo_scoreboard_game(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_scoreboard_game
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_scoreboard_game
             yahoo_scoreboard_game()
 
         See Also:
@@ -5020,7 +5021,7 @@ def yahoo_season_stats_football_defense_ncaaf(
     return_parsed: bool = True,
     return_as_pandas: bool = False,
     **kwargs,
-) -> Union[pl.DataFrame, pd.DataFrame, Dict]:
+) -> Union[Dict[str, pl.DataFrame], Dict[str, pd.DataFrame], Dict]:
     """Legacy player season Defense leaders (NCAAF)
 
     Endpoint: ``GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballDefenseNcaaf``
@@ -5078,7 +5079,7 @@ def yahoo_season_stats_football_kicking_ncaaf(
     return_parsed: bool = True,
     return_as_pandas: bool = False,
     **kwargs,
-) -> Union[pl.DataFrame, pd.DataFrame, Dict]:
+) -> Union[Dict[str, pl.DataFrame], Dict[str, pd.DataFrame], Dict]:
     """Legacy player season Kicking leaders (NCAAF)
 
     Endpoint: ``GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballKickingNcaaf``
@@ -5136,7 +5137,7 @@ def yahoo_season_stats_football_passing_ncaaf(
     return_parsed: bool = True,
     return_as_pandas: bool = False,
     **kwargs,
-) -> Union[pl.DataFrame, pd.DataFrame, Dict]:
+) -> Union[Dict[str, pl.DataFrame], Dict[str, pd.DataFrame], Dict]:
     """Legacy player season Passing leaders (NCAAF)
 
     Endpoint: ``GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballPassingNcaaf``
@@ -5194,7 +5195,7 @@ def yahoo_season_stats_football_punting_ncaaf(
     return_parsed: bool = True,
     return_as_pandas: bool = False,
     **kwargs,
-) -> Union[pl.DataFrame, pd.DataFrame, Dict]:
+) -> Union[Dict[str, pl.DataFrame], Dict[str, pd.DataFrame], Dict]:
     """Legacy player season Punting leaders (NCAAF)
 
     Endpoint: ``GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballPuntingNcaaf``
@@ -5252,7 +5253,7 @@ def yahoo_season_stats_football_receiving_ncaaf(
     return_parsed: bool = True,
     return_as_pandas: bool = False,
     **kwargs,
-) -> Union[pl.DataFrame, pd.DataFrame, Dict]:
+) -> Union[Dict[str, pl.DataFrame], Dict[str, pd.DataFrame], Dict]:
     """Legacy player season Receiving leaders (NCAAF)
 
     Endpoint: ``GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballReceivingNcaaf``
@@ -5310,7 +5311,7 @@ def yahoo_season_stats_football_returns_ncaaf(
     return_parsed: bool = True,
     return_as_pandas: bool = False,
     **kwargs,
-) -> Union[pl.DataFrame, pd.DataFrame, Dict]:
+) -> Union[Dict[str, pl.DataFrame], Dict[str, pd.DataFrame], Dict]:
     """Legacy player season Returns leaders (NCAAF)
 
     Endpoint: ``GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballReturnsNcaaf``
@@ -5368,7 +5369,7 @@ def yahoo_season_stats_football_rushing_ncaaf(
     return_parsed: bool = True,
     return_as_pandas: bool = False,
     **kwargs,
-) -> Union[pl.DataFrame, pd.DataFrame, Dict]:
+) -> Union[Dict[str, pl.DataFrame], Dict[str, pd.DataFrame], Dict]:
     """Legacy player season Rushing leaders (NCAAF)
 
     Endpoint: ``GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonStatsFootballRushingNcaaf``
@@ -5426,7 +5427,7 @@ def yahoo_season_team_stats_football_defense(
     return_parsed: bool = True,
     return_as_pandas: bool = False,
     **kwargs,
-) -> Union[pl.DataFrame, pd.DataFrame, Dict]:
+) -> Union[Dict[str, pl.DataFrame], Dict[str, pd.DataFrame], Dict]:
     """Legacy team season Defense (NCAAF)
 
     Endpoint: ``GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballDefense``
@@ -5484,7 +5485,7 @@ def yahoo_season_team_stats_football_kicking(
     return_parsed: bool = True,
     return_as_pandas: bool = False,
     **kwargs,
-) -> Union[pl.DataFrame, pd.DataFrame, Dict]:
+) -> Union[Dict[str, pl.DataFrame], Dict[str, pd.DataFrame], Dict]:
     """Legacy team season Kicking (NCAAF)
 
     Endpoint: ``GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballKicking``
@@ -5542,7 +5543,7 @@ def yahoo_season_team_stats_football_kickoffs(
     return_parsed: bool = True,
     return_as_pandas: bool = False,
     **kwargs,
-) -> Union[pl.DataFrame, pd.DataFrame, Dict]:
+) -> Union[Dict[str, pl.DataFrame], Dict[str, pd.DataFrame], Dict]:
     """Legacy team season Kickoffs (NCAAF)
 
     Endpoint: ``GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballKickoffs``
@@ -5600,7 +5601,7 @@ def yahoo_season_team_stats_football_offense(
     return_parsed: bool = True,
     return_as_pandas: bool = False,
     **kwargs,
-) -> Union[pl.DataFrame, pd.DataFrame, Dict]:
+) -> Union[Dict[str, pl.DataFrame], Dict[str, pd.DataFrame], Dict]:
     """Legacy team season Offense (NCAAF)
 
     Endpoint: ``GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballOffense``
@@ -5658,7 +5659,7 @@ def yahoo_season_team_stats_football_passing(
     return_parsed: bool = True,
     return_as_pandas: bool = False,
     **kwargs,
-) -> Union[pl.DataFrame, pd.DataFrame, Dict]:
+) -> Union[Dict[str, pl.DataFrame], Dict[str, pd.DataFrame], Dict]:
     """Legacy team season Passing (NCAAF)
 
     Endpoint: ``GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballPassing``
@@ -5716,7 +5717,7 @@ def yahoo_season_team_stats_football_passing_defense(
     return_parsed: bool = True,
     return_as_pandas: bool = False,
     **kwargs,
-) -> Union[pl.DataFrame, pd.DataFrame, Dict]:
+) -> Union[Dict[str, pl.DataFrame], Dict[str, pd.DataFrame], Dict]:
     """Legacy team Passing defense allowed (NCAAF)
 
     Endpoint: ``GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballPassingDefense``
@@ -5774,7 +5775,7 @@ def yahoo_season_team_stats_football_punting(
     return_parsed: bool = True,
     return_as_pandas: bool = False,
     **kwargs,
-) -> Union[pl.DataFrame, pd.DataFrame, Dict]:
+) -> Union[Dict[str, pl.DataFrame], Dict[str, pd.DataFrame], Dict]:
     """Legacy team season Punting (NCAAF)
 
     Endpoint: ``GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballPunting``
@@ -5832,7 +5833,7 @@ def yahoo_season_team_stats_football_receiving(
     return_parsed: bool = True,
     return_as_pandas: bool = False,
     **kwargs,
-) -> Union[pl.DataFrame, pd.DataFrame, Dict]:
+) -> Union[Dict[str, pl.DataFrame], Dict[str, pd.DataFrame], Dict]:
     """Legacy team season Receiving (NCAAF)
 
     Endpoint: ``GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballReceiving``
@@ -5890,7 +5891,7 @@ def yahoo_season_team_stats_football_receiving_defense(
     return_parsed: bool = True,
     return_as_pandas: bool = False,
     **kwargs,
-) -> Union[pl.DataFrame, pd.DataFrame, Dict]:
+) -> Union[Dict[str, pl.DataFrame], Dict[str, pd.DataFrame], Dict]:
     """Legacy team Receiving defense allowed (NCAAF)
 
     Endpoint: ``GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballReceivingDefense``
@@ -5948,7 +5949,7 @@ def yahoo_season_team_stats_football_returns(
     return_parsed: bool = True,
     return_as_pandas: bool = False,
     **kwargs,
-) -> Union[pl.DataFrame, pd.DataFrame, Dict]:
+) -> Union[Dict[str, pl.DataFrame], Dict[str, pd.DataFrame], Dict]:
     """Legacy team season Returns (NCAAF)
 
     Endpoint: ``GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballReturns``
@@ -6006,7 +6007,7 @@ def yahoo_season_team_stats_football_rushing(
     return_parsed: bool = True,
     return_as_pandas: bool = False,
     **kwargs,
-) -> Union[pl.DataFrame, pd.DataFrame, Dict]:
+) -> Union[Dict[str, pl.DataFrame], Dict[str, pd.DataFrame], Dict]:
     """Legacy team season Rushing (NCAAF)
 
     Endpoint: ``GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballRushing``
@@ -6064,7 +6065,7 @@ def yahoo_season_team_stats_football_rushing_defense(
     return_parsed: bool = True,
     return_as_pandas: bool = False,
     **kwargs,
-) -> Union[pl.DataFrame, pd.DataFrame, Dict]:
+) -> Union[Dict[str, pl.DataFrame], Dict[str, pd.DataFrame], Dict]:
     """Legacy team Rushing defense allowed (NCAAF)
 
     Endpoint: ``GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/seasonTeamStatsFootballRushingDefense``
@@ -6141,7 +6142,7 @@ def yahoo_team_injuries(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_team_injuries
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_team_injuries
             yahoo_team_injuries()
 
         See Also:
@@ -6197,7 +6198,7 @@ def yahoo_team_playoff_series(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_team_playoff_series
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_team_playoff_series
             yahoo_team_playoff_series()
 
         See Also:
@@ -6256,7 +6257,7 @@ def yahoo_team_roster(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_team_roster
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_team_roster
             yahoo_team_roster()
 
         See Also:
@@ -6314,7 +6315,7 @@ def yahoo_team_schedule_by_season(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_team_schedule_by_season
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_team_schedule_by_season
             yahoo_team_schedule_by_season()
 
         See Also:
@@ -6373,7 +6374,7 @@ def yahoo_team_search(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_team_search
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_team_search
             yahoo_team_search()
 
         See Also:
@@ -6414,7 +6415,7 @@ def yahoo_team_stats_leaders_v2(
     return_parsed: bool = True,
     return_as_pandas: bool = False,
     **kwargs,
-) -> Union[pl.DataFrame, pd.DataFrame, Dict]:
+) -> Union[Dict[str, pl.DataFrame], Dict[str, pd.DataFrame], Dict]:
     """Yahoo shangrila persisted query `teamStatsLeadersV2` -> tables: leagues, teams
 
     Endpoint: ``GET https://graphite-secure.sports.yahoo.com/v1/query/shangrila/teamStatsLeadersV2``
@@ -6499,7 +6500,7 @@ def yahoo_team_transactions(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_team_transactions
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_team_transactions
             yahoo_team_transactions()
 
         See Also:
@@ -6557,7 +6558,7 @@ def yahoo_teams_basic(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_teams_basic
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_teams_basic
             yahoo_teams_basic()
 
         See Also:
@@ -6617,7 +6618,7 @@ def yahoo_tennis_matches_by_date(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_tennis_matches_by_date
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_tennis_matches_by_date
             yahoo_tennis_matches_by_date()
 
         See Also:
@@ -6675,7 +6676,7 @@ def yahoo_tennis_tournament(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_tennis_tournament
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_tennis_tournament
             yahoo_tennis_tournament()
 
         See Also:
@@ -6734,7 +6735,7 @@ def yahoo_tennis_tournaments(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_tennis_tournaments
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_tennis_tournaments
             yahoo_tennis_tournaments()
 
         See Also:
@@ -6792,7 +6793,7 @@ def yahoo_tennis_tournaments_by_date(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_tennis_tournaments_by_date
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_tennis_tournaments_by_date
             yahoo_tennis_tournaments_by_date()
 
         See Also:
@@ -6851,7 +6852,7 @@ def yahoo_trending_event_ids(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_trending_event_ids
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_trending_event_ids
             yahoo_trending_event_ids()
 
         See Also:
@@ -6913,7 +6914,7 @@ def yahoo_trending_game_ids(
     Example:
         Quick start::
 
-            from sportsdataverse.yahoo.yahoo_shangrila import yahoo_trending_game_ids
+            from sportsdataverse.providers.yahoo.yahoo_shangrila import yahoo_trending_game_ids
             yahoo_trending_game_ids()
 
         See Also:
@@ -6949,7 +6950,7 @@ def yahoo_editorial_boxscore(
     return_parsed: bool = True,
     return_as_pandas: bool = False,
     **kwargs,
-) -> Union[pl.DataFrame, pd.DataFrame, Dict]:
+) -> Union[Dict[str, pl.DataFrame], Dict[str, pd.DataFrame], Dict]:
     """Full game box score + play-by-play (normalized stat dictionaries)
 
     Endpoint: ``GET https://api-secure.sports.yahoo.com/v1/editorial/s/boxscore/{game_id}``
@@ -7003,7 +7004,7 @@ def yahoo_editorial_scoreboard(
     return_parsed: bool = True,
     return_as_pandas: bool = False,
     **kwargs,
-) -> Union[pl.DataFrame, pd.DataFrame, Dict]:
+) -> Union[Dict[str, pl.DataFrame], Dict[str, pd.DataFrame], Dict]:
     """Scoreboard: games + teams + leagues + odds (fat payload)
 
     Endpoint: ``GET https://api-secure.sports.yahoo.com/v1/editorial/s/scoreboard``

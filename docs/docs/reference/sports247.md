@@ -450,7 +450,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `key` | integer | Primary key of this entity (the id used in its `.json` route). |
-| `postal_code` | integer |  |
+| `postal_code` | character |  |
 | `city` | character |  |
 | `state` | integer | U.S. state of the location record, per 247Sports. |
 | `latitude` | numeric |  |
@@ -565,7 +565,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `event_type` | integer | Numeric code for the kind of 247Sports recruiting event on this row. |
 | `event_date` | character |  |
 | `default_asset` | integer | Nested 247Sports image asset for the event (stringified). |
-| `primary_color` | integer |  |
+| `primary_color` | character |  |
 | `year` | integer |  |
 | `default_name` | character | Server-rendered display label for the entity. |
 
@@ -634,7 +634,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | col_name | type | description |
 |---|---|---|
 | `key` | integer | Primary key of this entity (the id used in its `.json` route). |
-| `postal_code` | integer |  |
+| `postal_code` | character |  |
 | `city` | character |  |
 | `state` | integer | U.S. state of the location record, per 247Sports. |
 | `latitude` | numeric |  |
@@ -937,7 +937,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `default_name` | character | Server-rendered display label for the entity. |
 | `star_rating` | integer | Star tier (2-5). |
 | `secondary_institution_prediction_percentage` | numeric | Share of Crystal Ball predictions favoring the second-place institution. |
-| `jersey` | integer |  |
+| `jersey` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1025,7 +1025,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `default_name` | character | Server-rendered display label for the entity. |
 | `star_rating` | integer | Star tier (2-5). |
 | `secondary_institution_prediction_percentage` | numeric | Share of Crystal Ball predictions favoring the second-place institution. |
-| `jersey` | integer |  |
+| `jersey` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1211,7 +1211,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `default_name` | character | Server-rendered display label for the entity. |
 | `star_rating` | integer | Star tier (2-5). |
 | `secondary_institution_prediction_percentage` | numeric | Share of Crystal Ball predictions favoring the second-place institution. |
-| `jersey` | integer |  |
+| `jersey` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1342,7 +1342,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `default_name` | character | Server-rendered display label for the entity. |
 | `star_rating` | integer | Star tier (2-5). |
 | `secondary_institution_prediction_percentage` | numeric | Share of Crystal Ball predictions favoring the second-place institution. |
-| `jersey` | integer |  |
+| `jersey` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 
@@ -1521,7 +1521,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 | `default_name` | character | Server-rendered display label for the entity. |
 | `star_rating` | integer | Star tier (2-5). |
 | `secondary_institution_prediction_percentage` | numeric | Share of Crystal Ball predictions favoring the second-place institution. |
-| `jersey` | integer |  |
+| `jersey` | character |  |
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 

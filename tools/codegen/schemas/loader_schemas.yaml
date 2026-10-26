@@ -4288,6 +4288,8 @@ load_cfb_pbp:
   type: Boolean
 - name: overUnder
   type: Float64
+- name: overUnderAvailable
+  type: Boolean
 - name: homeTeamSpread
   type: Float64
 - name: clock.minutes
@@ -7288,7 +7290,7 @@ load_cfb_team_summaries:
 - name: total_available_yards_off
   type: Float64
 - name: total_gained_yards_off
-  type: Int64
+  type: Float64
 - name: pts_per_opp_off_n
   type: Int64
 - name: pts_per_drive_off_n
@@ -7318,7 +7320,7 @@ load_cfb_team_summaries:
 - name: total_available_yards_def
   type: Float64
 - name: total_gained_yards_def
-  type: Int64
+  type: Float64
 - name: pts_per_opp_def_n
   type: Int64
 - name: pts_per_drive_def_n
@@ -7348,7 +7350,7 @@ load_cfb_team_summaries:
 - name: total_available_yards_margin
   type: Float64
 - name: total_gained_yards_margin
-  type: Int64
+  type: Float64
 - name: available_yards_pct_margin
   type: Float64
 - name: pts_per_opp_margin
@@ -8489,6 +8491,20 @@ load_cfb_team_summaries:
   type: Float64
 - name: def_strength_faced_conf_pct
   type: Float64
+- name: deserved_wins
+  type: Float64
+- name: luck_wins
+  type: Float64
+- name: luck_z
+  type: Float64
+- name: luck_wins_rank
+  type: Float64
+- name: luck_z_rank
+  type: Float64
+- name: paper_index_games_n
+  type: Int64
+- name: paper_index_span
+  type: String
 load_cfb_team_summaries_weekly:
 - name: team_id
   type: Int64
@@ -8851,7 +8867,7 @@ load_cfb_team_summaries_weekly:
 - name: total_available_yards_off
   type: Float64
 - name: total_gained_yards_off
-  type: Int64
+  type: Float64
 - name: pts_per_opp_off_n
   type: Int64
 - name: pts_per_drive_off_n
@@ -8881,7 +8897,7 @@ load_cfb_team_summaries_weekly:
 - name: total_available_yards_def
   type: Float64
 - name: total_gained_yards_def
-  type: Int64
+  type: Float64
 - name: pts_per_opp_def_n
   type: Int64
 - name: pts_per_drive_def_n
@@ -8911,7 +8927,7 @@ load_cfb_team_summaries_weekly:
 - name: total_available_yards_margin
   type: Float64
 - name: total_gained_yards_margin
-  type: Int64
+  type: Float64
 - name: available_yards_pct_margin
   type: Float64
 - name: pts_per_opp_margin
@@ -10052,6 +10068,20 @@ load_cfb_team_summaries_weekly:
   type: Float64
 - name: def_strength_faced_conf_pct
   type: Float64
+- name: deserved_wins
+  type: Float64
+- name: luck_wins
+  type: Float64
+- name: luck_z
+  type: Float64
+- name: luck_wins_rank
+  type: Float64
+- name: luck_z_rank
+  type: Float64
+- name: paper_index_games_n
+  type: Int64
+- name: paper_index_span
+  type: String
 - name: through_week
   type: Int32
 load_cfb_team_talent:
@@ -12433,13 +12463,13 @@ load_mbb_player_crosswalk:
 - name: season
   type: Int32
 - name: espn_team_id
-  type: Int32
+  type: Int64
 - name: team_abbreviation
   type: String
 - name: player_name
   type: String
 - name: espn_athlete_id
-  type: String
+  type: Int64
 - name: espn_full_name
   type: String
 - name: espn_jersey
@@ -12793,11 +12823,11 @@ load_mbb_schedule_crosswalk:
 - name: game_date
   type: Date
 - name: home_espn_team_id
-  type: Int32
+  type: Int64
 - name: away_espn_team_id
-  type: Int32
+  type: Int64
 - name: espn_game_id
-  type: String
+  type: Int64
 - name: bart_muid
   type: String
 - name: bart_team1
@@ -13029,7 +13059,7 @@ load_mbb_team_crosswalk:
 - name: season
   type: Int32
 - name: espn_team_id
-  type: Int32
+  type: Int64
 - name: espn_abbreviation
   type: String
 - name: espn_display_name
@@ -14280,13 +14310,13 @@ load_nba_player_crosswalk:
 - name: season
   type: Int32
 - name: espn_team_id
-  type: Int32
+  type: Int64
 - name: team_abbreviation
   type: String
 - name: player_name
   type: String
 - name: espn_athlete_id
-  type: String
+  type: Int64
 - name: espn_full_name
   type: String
 - name: espn_jersey
@@ -14643,11 +14673,11 @@ load_nba_schedule_crosswalk:
 - name: game_date
   type: Date
 - name: home_espn_team_id
-  type: Int32
+  type: Int64
 - name: away_espn_team_id
-  type: Int32
+  type: Int64
 - name: espn_game_id
-  type: String
+  type: Int64
 - name: nba_game_id
   type: String
 - name: nba_game_code
@@ -17106,7 +17136,7 @@ load_nba_team_crosswalk:
 - name: season
   type: Int32
 - name: espn_team_id
-  type: Int32
+  type: Int64
 - name: espn_abbreviation
   type: String
 - name: espn_display_name
@@ -29715,13 +29745,13 @@ load_wbb_player_crosswalk:
 - name: season
   type: Int32
 - name: espn_team_id
-  type: Int32
+  type: Int64
 - name: team_abbreviation
   type: String
 - name: player_name
   type: String
 - name: espn_athlete_id
-  type: String
+  type: Int64
 - name: espn_full_name
   type: String
 - name: espn_jersey
@@ -30091,11 +30121,11 @@ load_wbb_schedule_crosswalk:
 - name: game_date
   type: Date
 - name: home_espn_team_id
-  type: Int32
+  type: Int64
 - name: away_espn_team_id
-  type: Int32
+  type: Int64
 - name: espn_game_id
-  type: String
+  type: Int64
 - name: bart_muid
   type: String
 - name: bart_team1
@@ -30323,7 +30353,7 @@ load_wbb_team_crosswalk:
 - name: season
   type: Int32
 - name: espn_team_id
-  type: Int32
+  type: Int64
 - name: espn_abbreviation
   type: String
 - name: espn_display_name
@@ -30929,13 +30959,13 @@ load_wnba_player_crosswalk:
 - name: season
   type: Int32
 - name: espn_team_id
-  type: Int32
+  type: Int64
 - name: team_abbreviation
   type: String
 - name: player_name
   type: String
 - name: espn_athlete_id
-  type: String
+  type: Int64
 - name: espn_full_name
   type: String
 - name: espn_jersey
@@ -31294,11 +31324,11 @@ load_wnba_schedule_crosswalk:
 - name: game_date
   type: Date
 - name: home_espn_team_id
-  type: Int32
+  type: Int64
 - name: away_espn_team_id
-  type: Int32
+  type: Int64
 - name: espn_game_id
-  type: String
+  type: Int64
 - name: wnba_game_id
   type: String
 - name: wnba_game_code
@@ -32091,7 +32121,7 @@ load_wnba_team_crosswalk:
 - name: season
   type: Int32
 - name: espn_team_id
-  type: Int32
+  type: Int64
 - name: espn_abbreviation
   type: String
 - name: espn_display_name

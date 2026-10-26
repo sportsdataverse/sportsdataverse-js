@@ -3069,13 +3069,13 @@ export interface LoadNbaStatsTeamSeasonStatsRow {
 export interface LoadNbaPlayerCrosswalkRow {
   /** Season year. `Int32` */
   season?: number | null;
-  /** ESPN team id (canonical key). `Int32` (an id) */
+  /** ESPN team id (canonical key). `Int64` (an id) */
   espn_team_id?: string | null;
   /** Short team abbreviation (e.g. 'LAS'). `String` */
   team_abbreviation?: string | null;
   /** Player name. `String` */
   player_name?: string | null;
-  /** ESPN athlete id. `String` (an id) */
+  /** ESPN athlete id. `Int64` (an id) */
   espn_athlete_id?: string | null;
   /** ESPN full name. `String` */
   espn_full_name?: string | null;
@@ -3121,11 +3121,11 @@ export interface LoadNbaScheduleCrosswalkRow {
   season_type?: string | null;
   /** Game date (YYYY-MM-DD). `Date` */
   game_date?: Date | null;
-  /** ESPN home team id (NA for bart-only rows). `Int32` (an id) */
+  /** ESPN home team id (NA for bart-only rows). `Int64` (an id) */
   home_espn_team_id?: string | null;
-  /** ESPN away team id (NA for bart-only rows). `Int32` (an id) */
+  /** ESPN away team id (NA for bart-only rows). `Int64` (an id) */
   away_espn_team_id?: string | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** ESPN game id (NA for bart-only rows). `Int64` (an id) */
   espn_game_id?: string | null;
   /** NBA Stats 10-character game id matched to the ESPN game in the crosswalk. `String` (an id) */
   nba_game_id?: string | null;
@@ -3155,7 +3155,7 @@ export interface LoadNbaScheduleCrosswalkRow {
 export interface LoadNbaTeamCrosswalkRow {
   /** Season year. `Int32` */
   season?: number | null;
-  /** ESPN team id (canonical key). `Int32` (an id) */
+  /** ESPN team id (canonical key). `Int64` (an id) */
   espn_team_id?: string | null;
   /** ESPN abbreviation. `String` */
   espn_abbreviation?: string | null;

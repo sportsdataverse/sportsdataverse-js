@@ -975,13 +975,13 @@ export interface LoadWbbTeamSeasonStatsRow {
 export interface LoadWbbPlayerCrosswalkRow {
   /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** ESPN team id (canonical key). `Int32` (an id) */
+  /** ESPN team id (canonical key). `Int64` (an id) */
   espn_team_id?: string | null;
   /** Short team abbreviation (e.g. 'LAS'). `String` */
   team_abbreviation?: string | null;
   /** Player name. `String` */
   player_name?: string | null;
-  /** ESPN athlete id. `String` (an id) */
+  /** ESPN athlete id. `Int64` (an id) */
   espn_athlete_id?: string | null;
   /** ESPN full name. `String` */
   espn_full_name?: string | null;
@@ -1017,11 +1017,11 @@ export interface LoadWbbScheduleCrosswalkRow {
   season?: number | null;
   /** Game date (YYYY-MM-DD). `Date` */
   game_date?: Date | null;
-  /** ESPN home team id (NA for bart-only rows). `Int32` (an id) */
+  /** ESPN home team id (NA for bart-only rows). `Int64` (an id) */
   home_espn_team_id?: string | null;
-  /** ESPN away team id (NA for bart-only rows). `Int32` (an id) */
+  /** ESPN away team id (NA for bart-only rows). `Int64` (an id) */
   away_espn_team_id?: string | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** ESPN game id (NA for bart-only rows). `Int64` (an id) */
   espn_game_id?: string | null;
   /** Torvik muid (NA for espn-only rows). `String` */
   bart_muid?: string | null;
@@ -1047,7 +1047,7 @@ export interface LoadWbbScheduleCrosswalkRow {
 export interface LoadWbbTeamCrosswalkRow {
   /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** ESPN team id (canonical key). `Int32` (an id) */
+  /** ESPN team id (canonical key). `Int64` (an id) */
   espn_team_id?: string | null;
   /** ESPN abbreviation. `String` */
   espn_abbreviation?: string | null;
@@ -1921,19 +1921,19 @@ export interface LoadNcaaWbbPossessionsRow {
   away_score?: number | bigint | null;
   /** Points scored. `Int64` */
   pts?: number | bigint | null;
-  /** 1 when the possession's made field goal was assisted, else 0. `Int64` */
+  /** Count of the possession's events that carry an assisting second player (0, 1, rarely 2) -- a count, not a flag, kept from the R source for parity. `Int64` */
   is_assisted?: number | bigint | null;
   /** 1 for transition possessions, else 0. `Int64` */
   is_transition?: number | bigint | null;
   /** 1 for possessions in garbage time under the score-margin and clock rule, else 0. `Int64` */
   is_garbage_time?: number | bigint | null;
-  /** Event type that opened the possession (e.g., a defensive rebound or a made-basket inbound). `String` */
+  /** Event type of the play immediately before the possession's first event (what started it, e.g. a defensive rebound or a made basket), not the possession's own first event. `String` */
   start_event_type?: string | null;
-  /** Clock time in seconds at the possession's first shot attempt, from the possession segmentation engine. `Int64` */
+  /** Seconds into the possession (poss_length) at its first field-goal attempt; null when the possession had no shot. `Int64` */
   first_shot_time?: number | bigint | null;
-  /** Shot class of the possession's first attempt (rim, mid-range, or three). `String` */
+  /** stats.ncaa.org event name of the possession's first field-goal attempt ("Layup", "Three Point Jumper", "Two Point Jumper", "Hook", "Dunk", "Tip In"); null when the possession had no shot. `String` */
   first_shot_type?: string | null;
-  /** Clock time in seconds at the possession's final event. `Int64` */
+  /** Seconds into the possession (poss_length) at its final event. `Int64` */
   last_event_time?: number | bigint | null;
   /** Event type that ended the possession (e.g., a made shot, turnover, or defensive rebound). `String` */
   last_event_type?: string | null;

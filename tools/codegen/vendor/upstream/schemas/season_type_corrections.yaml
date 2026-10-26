@@ -14,11 +14,17 @@ columns:
   type: character
   description: ''
 - name: split_stats_id
-  type: character
+  type: integer
   description: ''
 - name: split_stats_name
   type: character
   description: ''
 - name: team_$ref
   type: character
+  description: ''
+- name: count
+  type: integer
+  description: ''
+- name: page_count
+  type: integer
   description: ''

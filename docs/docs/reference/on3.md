@@ -344,7 +344,7 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 
 ### Returns — `on3_filters_years` / `on3FiltersYears`
 
-No returns table is published for this endpoint: no committed capture with rows, and the row has nested objects whose flattened column names depend on which are null in the data; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
+No returns table is published for this endpoint: no committed capture with rows, and each row is a bare scalar with no named fields; names derived from the OpenAPI response type matched parse_on3_rdb's output on only 7 of the 9 checkable endpoints, so none are published
 
 _Rows are untyped `Row[]` (not parity-verified yet)._
 

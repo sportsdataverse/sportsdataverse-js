@@ -515,7 +515,7 @@ columns:
   type: character
   description: ''
 - name: provider_id
-  type: character
+  type: integer
   description: ''
 - name: provider_name
   type: character
@@ -525,4 +525,10 @@ columns:
   description: ''
 - name: prop_bets_$ref
   type: character
+  description: ''
+- name: count
+  type: integer
+  description: ''
+- name: page_count
+  type: integer
   description: ''
