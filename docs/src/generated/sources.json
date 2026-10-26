@@ -880,8 +880,8 @@
       "ownership": "loaders",
       "parity": null,
       "descriptionFill": {
-        "filled": 15673,
-        "total": 15929
+        "filled": 15688,
+        "total": 15944
       },
       "docsPath": "/docs/reference/#dataset-loaders",
       "note": "Pre-built parquet datasets (`load*`) published as GitHub release assets."

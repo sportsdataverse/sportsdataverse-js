@@ -172,8 +172,8 @@ export interface NhlStatsRestLeadersGoaliesRow {
   save_pctg?: number | null;
   /** Unique player identifier. Schema `integer` (an id). */
   player_id?: string | null;
-  /** Player's current team identifier. Schema `double` (an id). */
-  player_current_team_id?: string | number | null;
+  /** Player's current team identifier. Schema `integer` (an id). */
+  player_current_team_id?: string | null;
   /** Player first name. Schema `character`. */
   player_first_name?: string | null;
   /** Player full name. Schema `character`. */
@@ -208,7 +208,7 @@ export interface NhlStatsRestLeadersSkatersRow {
   goals?: number | null;
   /** Unique player identifier. Schema `integer` (an id). */
   player_id?: string | null;
-  /** Player's current team identifier. Schema `character` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Player's current team identifier. Schema `integer` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_current_team_id?: unknown;
   /** Player first name. Schema `character`. */
   player_first_name?: string | null;

@@ -34,7 +34,7 @@ codegen:check` (every generated output, this site's pages included), `npm run ap
 | [Dataset loaders](./loaders) | sdv-py `releases.yaml` + `loader_schemas.yaml` | `src/generated/loaders/*.ts` | 326 loaders |
 | [Hand-written](./hand-written) | TypeScript under `src/` | `src/generated/utilities.ts`, `docs/docs/utilities/` | 208 utility exports |
 
-sdv-py pin: [`b4229f1ceda5`](https://github.com/sportsdataverse/sportsdataverse-py/commit/b4229f1ceda5734973fdd96742ca6ff724fd5b0c). 1060 native wrappers in total; 440 verified endpoints carry row types; 25 breaking changes on record.
+sdv-py pin: [`c2031afbc72a`](https://github.com/sportsdataverse/sportsdataverse-py/commit/c2031afbc72a0e892a19e56a0c03dd1425f76c40). 1060 native wrappers in total; 440 verified endpoints carry row types; 25 breaking changes on record.
 <!-- /gen:status -->
 
 ## The surfaces

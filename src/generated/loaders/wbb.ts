@@ -333,7 +333,7 @@ export const loadWbbTeamSeasonStats = seasonLoader<LoadWbbTeamSeasonStatsRow>(LO
 /** snake_case alias of {@link loadWbbTeamSeasonStats} (py/R parity). */
 export const load_wbb_team_season_stats = loadWbbTeamSeasonStats;
 
-const LOAD_WBB_PLAYER_CROSSWALK: ReleaseLoaderDef = {"fn":"load_wbb_player_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wbb_crosswalk/wbb_player_crosswalk_{season}.parquet","minSeason":2014};
+const LOAD_WBB_PLAYER_CROSSWALK: ReleaseLoaderDef = {"fn":"load_wbb_player_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wbb_crosswalk/wbb_player_crosswalk_{season}.parquet","minSeason":2014,"idInt64":["espn_team_id","espn_athlete_id"]};
 
 /**
  * Load `wbb_crosswalk` (sportsdataverse-data releases).
@@ -355,7 +355,7 @@ export const loadWbbPlayerCrosswalk = seasonLoader<LoadWbbPlayerCrosswalkRow>(LO
 /** snake_case alias of {@link loadWbbPlayerCrosswalk} (py/R parity). */
 export const load_wbb_player_crosswalk = loadWbbPlayerCrosswalk;
 
-const LOAD_WBB_SCHEDULE_CROSSWALK: ReleaseLoaderDef = {"fn":"load_wbb_schedule_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wbb_crosswalk/wbb_schedule_crosswalk_{season}.parquet","minSeason":2026};
+const LOAD_WBB_SCHEDULE_CROSSWALK: ReleaseLoaderDef = {"fn":"load_wbb_schedule_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wbb_crosswalk/wbb_schedule_crosswalk_{season}.parquet","minSeason":2026,"idInt64":["espn_game_id","home_espn_team_id","away_espn_team_id"]};
 
 /**
  * Load `wbb_crosswalk` (sportsdataverse-data releases).
@@ -377,7 +377,7 @@ export const loadWbbScheduleCrosswalk = seasonLoader<LoadWbbScheduleCrosswalkRow
 /** snake_case alias of {@link loadWbbScheduleCrosswalk} (py/R parity). */
 export const load_wbb_schedule_crosswalk = loadWbbScheduleCrosswalk;
 
-const LOAD_WBB_TEAM_CROSSWALK: ReleaseLoaderDef = {"fn":"load_wbb_team_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wbb_crosswalk/wbb_team_crosswalk_{season}.parquet","minSeason":2014};
+const LOAD_WBB_TEAM_CROSSWALK: ReleaseLoaderDef = {"fn":"load_wbb_team_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wbb_crosswalk/wbb_team_crosswalk_{season}.parquet","minSeason":2014,"idInt64":["espn_team_id"]};
 
 /**
  * Load `wbb_crosswalk` (sportsdataverse-data releases).

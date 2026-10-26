@@ -1364,6 +1364,149 @@ as_of_split:
   pitcher: MLBAM player id of the pitcher.
   player_name: Player name carried through from the input Statcast frame, `Last, First` -- the batter for a default
     mlb_statcast_search pull, the pitcher for a `player_type="pitcher"` search.
+athlete_stats:
+  category: ESPN stat category the row belongs to (e.g., basketball "averages" / "totals" / "miscellaneous", NFL
+    "passing", MLB "career-batting"). The stat columns after `position` are named from each category's own `names`
+    list, so they differ by sport, and the other categories' columns are null on a row.
+  split_name: Season label of the row (e.g., "2010-11") on the Web v3 payload, or "Career" on the row built from the
+    category's career totals; the split's name on payloads that ship named splits.
+  split_category: Category of a named split; null on the Web v3 per-season rows.
+  split_value: Value of a named split; null on the Web v3 per-season rows.
+  season: Season end year of the row (e.g., 2011 for 2010-11); null on the "Career" row.
+  team_id: ESPN team id (Int64) the athlete played that season for; a traded player has one row per team. Null on the
+    "Career" row.
+  position: Position abbreviation the athlete was listed at for that season and team (e.g., "G"); null on the "Career"
+    row.
+  games_played: Games played (GP), as ESPN ships it (a string).
+  games_started: Games started (GS).
+  avg_minutes: Minutes per game (MIN).
+  avg_field_goals_made_avg_field_goals_attempted: Field goals made-attempted per game (FG), one "made-attempted"
+    string (e.g., "3.9-9.0").
+  field_goal_pct: Field goal percentage (FG%), FGM / FGA x 100.
+  avg_three_point_field_goals_made_avg_three_point_field_goals_attempted: Three-point field goals made-attempted per
+    game (3PT), one "made-attempted" string.
+  three_point_field_goal_pct: Three-point field goal percentage (3P%), 3PM / 3PA x 100.
+  avg_free_throws_made_avg_free_throws_attempted: Free throws made-attempted per game (FT), one "made-attempted" string.
+  free_throw_pct: Free throw percentage (FT%), FTM / FTA x 100.
+  avg_offensive_rebounds: Offensive rebounds per game (OR).
+  avg_defensive_rebounds: Defensive rebounds per game (DR).
+  avg_rebounds: Rebounds per game (REB).
+  avg_assists: Assists per game (AST).
+  avg_blocks: Blocks per game (BLK).
+  avg_steals: Steals per game (STL).
+  avg_fouls: Personal fouls per game (PF).
+  avg_turnovers: Turnovers per game (TO).
+  avg_points: Points per game (PTS).
+  field_goals_made_field_goals_attempted: Season field goals made-attempted (FG), one "made-attempted" string.
+  three_point_field_goals_made_three_point_field_goals_attempted: Season three-point field goals made-attempted (3PT),
+    one "made-attempted" string.
+  free_throws_made_free_throws_attempted: Season free throws made-attempted (FT), one "made-attempted" string.
+  offensive_rebounds: Season offensive rebounds (OR).
+  defensive_rebounds: Season defensive rebounds (DR).
+  total_rebounds: Season rebounds (REB).
+  assists: Season assists (AST).
+  blocks: Season blocked shots (BLK).
+  steals: Season steals (STL).
+  fouls: Season personal fouls (PF).
+  turnovers: Season turnovers (TO).
+  points: Season points (PTS).
+  double_double: Games with double figures in two of points, rebounds, assists, steals and blocks (DD2).
+  triple_double: Games with double figures in three of points, rebounds, assists, steals and blocks (TD3).
+  disqualifications: Times the athlete fouled out (DQ).
+  ejections: Times the athlete was ejected (EJECT).
+  technical_fouls: Technical fouls called on the athlete (TECH).
+  flagrant_fouls: Flagrant fouls called on the athlete (FLAG).
+  assist_turnover_ratio: Assists per turnover (AST/TO).
+  steal_turnover_ratio: Steals per turnover (STL/TO).
+  scoring_efficiency: ESPN's scoring efficiency (SC-EFF).
+  shooting_efficiency: ESPN's shooting efficiency (SH-EFF).
+  rating: Player rating (RAT) as ESPN publishes it for college basketball.
+  off_warbr: Offensive wins above replacement (OWAR); ESPN's stat key `offWARBR`, snake-cased.
+  runs_created: Runs created (RC), an estimate of the runs a batter produced.
+  runs_created_per27_outs: Runs created per 27 outs (RC/27).
+  isolated_power: Isolated power (ISOP), slugging percentage minus batting average.
+  secondary_avg: Secondary average (SECA), extra bases from hits plus walks and stolen bases, per at bat.
+  at_bats_per_home_run: At bats per home run (AB/HR).
+  walks_per_plate_appearance: Walks per plate appearance (BB/PA).
+  walk_to_strikeout_ratio: Walks per strikeout (BB/K).
+  ground_balls: Ground-ball outs (GO).
+  fly_balls: Fly-ball outs (FO).
+  ground_to_fly_ratio: Ground outs per fly out (GO/FO).
+  at_bats: At bats (AB), plate appearances minus walks, hit-by-pitches and sacrifices.
+  runs: Runs scored (R).
+  hits: Hits (H), singles through home runs.
+  doubles: Doubles (2B), two-base hits.
+  triples: Triples (3B), three-base hits.
+  home_runs: Home runs (HR).
+  rb_is: Runs batted in (RBI); ESPN's stat key `RBIs`, snake-cased.
+  walks: Walks (BB), bases on balls.
+  hit_by_pitch: Times hit by a pitch (HBP).
+  strikeouts: Strikeouts (SO).
+  stolen_bases: Stolen bases (SB).
+  caught_stealing: Times caught stealing (CS).
+  avg: Batting average (AVG), hits / at bats.
+  on_base_pct: On-base percentage (OBP), (hits + walks + hit-by-pitches) / plate appearances.
+  slug_avg: Slugging percentage (SLG), total bases / at bats.
+  ops: On-base plus slugging (OPS).
+  warbr: Wins above replacement (WAR); ESPN's stat key `WARBR`, snake-cased.
+  plate_appearances: Plate appearances (PA).
+  pitches: Pitches seen (P).
+  pitches_per_plate_appearance: Pitches seen per plate appearance (P/PA).
+  extra_base_hits: Extra-base hits (XBH), doubles plus triples plus home runs.
+  total_bases: Total bases (TB), 1 per single, 2 per double, 3 per triple, 4 per home run.
+  intentional_walks: Intentional walks (IBB).
+  gid_ps: Grounded into double play (GIDP); ESPN's stat key `GIDPs`, snake-cased.
+  sac_hits: Sacrifice bunts (SH).
+  sac_flies: Sacrifice flies (SF).
+  stolen_base_pct: Stolen-base success percentage (SB%).
+  total_tackles: Total tackles (TOT), solo plus assisted.
+  solo_tackles: Unassisted tackles (SOLO).
+  assist_tackles: Assisted tackles (AST).
+  fumbles_forced: Forced fumbles (FF).
+  fumbles_recovered: Fumbles recovered (FR).
+  fumbles_recovered_yards: Return yards after fumble recoveries (YDS).
+  interception_yards: Return yards after interceptions (YDS).
+  avg_interception_yards: Average return yards per interception (AVG).
+  interception_touchdowns: Interceptions returned for a touchdown (TD).
+  long_interception: Longest interception return in yards (LNG).
+  passes_defended: Passes defended (PD).
+  stuffs: Runners stopped at or behind the line of scrimmage (STF).
+  stuff_yards: Yards lost on stuffs (STFYDS).
+  kicks_blocked: Kicks blocked (KB).
+  completions: Pass completions (CMP).
+  passing_attempts: Pass attempts (ATT).
+  completion_pct: Completion percentage (CMP%).
+  passing_yards: Passing yards (YDS).
+  yards_per_pass_attempt: Passing yards per attempt (AVG).
+  passing_touchdowns: Passing touchdowns (TD).
+  interceptions: Passes thrown that were intercepted (INT).
+  long_passing: Longest completed pass in yards (LNG).
+  sacks: Times sacked (SACK) on the passing line; a defender's sacks on the defensive line.
+  qb_rating: NFL passer rating (RTG).
+  adj_qbr: ESPN's adjusted Total QBR (QBR).
+  receptions: Receptions (REC).
+  receiving_targets: Times targeted by a pass (TGTS).
+  receiving_yards: Receiving yards (YDS).
+  yards_per_reception: Receiving yards per reception (AVG).
+  receiving_touchdowns: Receiving touchdowns (TD).
+  long_reception: Longest reception in yards (LNG).
+  receiving_first_downs: First downs gained by reception (FD).
+  receiving_fumbles: Fumbles after a reception (FUM).
+  receiving_fumbles_lost: Fumbles after a reception that the opponent recovered (LST).
+  rushing_attempts: Rushing attempts (CAR).
+  rushing_yards: Rushing yards (YDS).
+  yards_per_rush_attempt: Rushing yards per attempt (AVG).
+  rushing_touchdowns: Rushing touchdowns (TD).
+  long_rushing: Longest run in yards (LNG).
+  rushing_first_downs: First downs gained by rushing (FD).
+  rushing_fumbles: Fumbles on rushing plays (FUM).
+  rushing_fumbles_lost: Fumbles on rushing plays that the opponent recovered (LST).
+  return_touchdowns: Kick and punt return touchdowns (RET).
+  total_touchdowns: Touchdowns of every kind (TD).
+  total_two_point_convs: Successful two-point conversions (2PT).
+  kick_extra_points: Kicked extra points made (PAT).
+  field_goals: Field goals made (FG).
+  total_points: Points scored (PTS).
 away_team_record:
   goals_per_game: Average number of goals the team scored per road game over the recorded period.
 bchl_standings:
@@ -2190,7 +2333,7 @@ cdn_rankings:
   poll_short_name: Short poll label, e.g. 'AP Poll'.
   ranked: TRUE for the poll's ranked teams; FALSE for teams that only received votes, whose rows carry just the team
     name and points.
-  team_id: ESPN team id as a string (the dtype of scoreboard home_id / away_id), read from team_url. Null on
+  team_id: ESPN team id (Int64, like scoreboard home_id / away_id), read from team_url. Null on
     vote-receiving rows and on teams ESPN does not link (most Division II and III entries), so join on it only where
     present.
   team_display_name: Team name as the poll page shows it.
@@ -3535,6 +3678,13 @@ env_adjusted_make_prob:
   base_make_prob: Shipped fg_model make probability (with nfl4th long-kick clamps applied).
   exp_make_prob: Environment-adjusted make probability (logit shift for long-kick clamp correction, wind, temperature and
     altitude).
+espn_cfb_game_rosters:
+  position_abbreviation: Short code of the athlete's listed position (e.g. G, F, RW, OL), from ESPN's position resource.
+  position_display_name: Display form of the athlete's listed position as ESPN renders it; usually equal to position_name.
+  position_id: ESPN's numeric identifier of the athlete's listed position (the Core v2 position resource id).
+  position_leaf: Whether the position is a leaf of ESPN's position tree; False marks a grouping, not a specific role.
+  position_name: Name of the athlete's listed position from ESPN's position resource, e.g. Guard or Offensive Lineman.
+  position_parent_href: ESPN API URL of the broader position group above a leaf position; null for a grouping position.
 espn_cfb_player_stats:
   general_defensive_fumbles_touchdowns: Number of touchdowns scored by the player on fumble recoveries attributed to the defensive
     category.
@@ -3726,6 +3876,7 @@ espn_cfb_schedule:
   home_linescores: Per-period point totals for the home team, stored as an array of quarter/overtime scores.
   home_records: Win-loss record of the home team at the time of the game, as reported by ESPN (e.g., overall or conference
     record).
+  status_type_alt_detail: ESPN's short extra-time label on a final ("OT", "SO"); null when the game ended in regulation.
   venue_address_country: Country in which the game venue is located, as provided by ESPN's venue data.
 espn_mbb_game_rosters:
   athlete_href: ESPN API URL pointing to the full athlete resource for this player.
@@ -3734,7 +3885,12 @@ espn_mbb_game_rosters:
   flag_href: URL to the player's country flag image as supplied by ESPN.
   flag_rel: Relationship descriptor for the country flag link, indicating the link type (e.g., 'country-flag').
   jersey_right: Right-justified or secondary jersey number display string for the player.
+  position_abbreviation: Short code of the athlete's listed position (e.g. G, F, RW, OL), from ESPN's position resource.
+  position_display_name: Display form of the athlete's listed position as ESPN renders it; usually equal to position_name.
   position_href: ESPN API URL pointing to the full position resource for this player's role.
+  position_id: ESPN's numeric identifier of the athlete's listed position (the Core v2 position resource id).
+  position_leaf: Whether the position is a leaf of ESPN's position tree; False marks a grouping, not a specific role.
+  position_name: Name of the athlete's listed position from ESPN's position resource, e.g. Guard or Forward.
   statistics_href: ESPN API URL pointing to the player's statistics resource for this game.
   team_alternate_ids_sdr: Alternate team identifier from ESPN's SDR (Sports Data Repository) system.
 espn_mbb_player_stats:
@@ -3747,6 +3903,21 @@ espn_mbb_schedule:
   home_current_rank: Current national poll ranking of the home team at the time of the game, or null if unranked.
   home_linescores: Period-by-period scoring breakdown for the home team, serialized as a packed integer sequence.
   home_records: Win-loss record string(s) for the home team across applicable record categories (e.g., overall, conference).
+espn_mlb_game_rosters:
+  game_id: ESPN game (event) id the roster belongs to.
+  team_id: ESPN team id of the competitor whose roster the row comes from.
+  home_away: Whether the row's team is the home or the away side of the game ("home" / "away").
+  athlete_id: ESPN athlete id, from the roster entry's playerId (else the id in its athlete $ref).
+  athlete_full_name: The athlete's full name, from his ESPN athlete record (the roster entry carries only a short name).
+  athlete_jersey: The athlete's jersey number as text, from his ESPN athlete record.
+  athlete_position_id: ESPN position id of the athlete's listed position on his athlete record, i.e. his season
+    position, not necessarily where he played in this game (see game_position_id).
+  athlete_position_abbreviation: Abbreviation of the athlete's listed (season) position on his athlete record, e.g. RF or SS.
+  athlete_position_name: Name of the athlete's listed (season) position on his athlete record, e.g. Right Field.
+  game_position_id: ESPN position id the player entered this game at, from the roster entry's own position $ref (e.g.
+    8 for a center fielder; 11 is a pinch hitter and 12 a pinch runner). It is the entry position only, not any later
+    move in the game; differs from athlete_position_id when he played out of his listed position.
+  athlete_starter: Whether the athlete started this game, from the roster entry.
 espn_mlb_player_stats:
   batting_bipa: Batting average on balls in the air (fly balls and line drives), measuring in-play success on airborne contact.
   batting_mlb_rating: ESPN's composite MLB rating for the batter reflecting overall offensive performance.
@@ -3798,6 +3969,12 @@ espn_mlb_player_stats:
   fielding_total_chances: Total fielding chances (putouts + assists + errors) offered to the player during the season.
   fielding_triple_plays: Number of triple plays in which the fielder participated during the season.
   fielding_zone_rating: Percentage of batted balls in the fielder's defined zone that were successfully converted into outs.
+espn_nba_game_rosters:
+  position_abbreviation: Short code of the athlete's listed position (e.g. G, F, RW, OL), from ESPN's position resource.
+  position_display_name: Display form of the athlete's listed position as ESPN renders it; usually equal to position_name.
+  position_id: ESPN's numeric identifier of the athlete's listed position (the Core v2 position resource id).
+  position_leaf: Whether the position is a leaf of ESPN's position tree; False marks a grouping, not a specific role.
+  position_name: Name of the athlete's listed position from ESPN's position resource, e.g. Guard or Forward.
 espn_nba_player_stats:
   defensive_avg48_blocks: Player's average blocked shots per 48 minutes played.
   defensive_avg48_defensive_rebounds: Player's average defensive rebounds per 48 minutes played.
@@ -3838,7 +4015,13 @@ espn_nfl_game_rosters:
   draft_pick_href: ESPN API hyperlink reference URL for the draft-pick record associated with this player.
   draft_team_href: ESPN API hyperlink reference URL for the team that originally drafted this player.
   jersey_right: Secondary or alternate jersey number display string used by ESPN (e.g., for special-game uniforms).
+  position_abbreviation: Short code of the athlete's listed position (e.g. G, F, RW, OL), from ESPN's position resource.
+  position_display_name: Display form of the athlete's listed position as ESPN renders it; usually equal to position_name.
   position_href: ESPN API hyperlink reference URL for the player's positional classification resource.
+  position_id: ESPN's numeric identifier of the athlete's listed position (the Core v2 position resource id).
+  position_leaf: Whether the position is a leaf of ESPN's position tree; False marks a grouping, not a specific role.
+  position_name: Name of the athlete's listed position from ESPN's position resource, e.g. Guard or Offensive Lineman.
+  position_parent_href: ESPN API URL of the broader position group above a leaf position; null for a grouping position.
   projections_href: ESPN API hyperlink reference URL for the player's statistical projection resource.
   statistics_href: ESPN API hyperlink reference URL for the player's career statistics resource.
   team_alternate_ids_sdr: SportsDataverse SDR alternate identifier for the team, used for cross-source joins.
@@ -4038,12 +4221,14 @@ espn_nfl_player_stats:
   scoring_two_point_rec_convs: Number of successful two-point conversion receptions caught by the player.
   scoring_two_point_rush_convs: Number of successful two-point conversion rushes scored by the player.
 espn_nfl_schedule:
-  away_current_rank: Current AP or ESPN power ranking of the away team at the time of the game.
+  away_current_rank: Always null. The NFL has no poll, so ESPN ships no curatedRank; kept so the column set matches the college schedules.
+  away_winner: True when the away team won, from ESPN's winner flag; null before the game ends.
   away_linescores: Comma-separated or serialized quarter-by-quarter score totals for the away team.
   away_records: Serialized win-loss-tie record(s) for the away team (e.g., overall, home, away, conference).
-  home_current_rank: Current AP or ESPN power ranking of the home team at the time of the game.
+  home_current_rank: Always null. The NFL has no poll, so ESPN ships no curatedRank; kept so the column set matches the college schedules.
   home_linescores: Comma-separated or serialized quarter-by-quarter score totals for the home team.
   home_records: Serialized win-loss-tie record(s) for the home team (e.g., overall, home, away, conference).
+  home_winner: True when the home team won, from ESPN's winner flag; null before the game ends.
   status_is_tbd_flex: Boolean flag indicating whether the game's broadcast slot is designated as a flex/TBD window.
   venue_address_country: Two-letter ISO country code or country name for the country where the venue is located.
 espn_nhl_game_rosters:
@@ -4052,7 +4237,13 @@ espn_nhl_game_rosters:
   contracts_href: ESPN API hypermedia URL pointing to the contract history resource for this player.
   draft_team_href: ESPN API hypermedia URL linking to the team that originally drafted this player.
   jersey_right: Right-aligned display string for the player's jersey number, used in ESPN scoreboard rendering contexts.
+  position_abbreviation: Short code of the athlete's listed position (e.g. G, F, RW, OL), from ESPN's position resource.
+  position_display_name: Display form of the athlete's listed position as ESPN renders it; usually equal to position_name.
   position_href: ESPN API hypermedia URL pointing to the position resource that defines this player's positional classification.
+  position_id: ESPN's numeric identifier of the athlete's listed position (the Core v2 position resource id).
+  position_leaf: Whether the position is a leaf of ESPN's position tree; False marks a grouping, not a specific role.
+  position_name: Name of the athlete's listed position from ESPN's position resource, e.g. Right Wing or Defense.
+  position_parent_href: ESPN API URL of the broader position group above a leaf position; null for a grouping position.
   statistics_href: ESPN API hypermedia URL linking to the statistics resource for this player's season or career totals.
   team_alternate_ids_sdr: Alternate team identifier from the ESPN SDR (Sports Data Repository) system, used to cross-reference
     team records across ESPN data sources.
@@ -4198,6 +4389,7 @@ espn_nhl_schedule:
   away_records: Serialized win-loss-overtime record string for the away team at the time of the scheduled game.
   home_linescores: Period-by-period goal totals for the home team, stored as an array of integer scores indexed by period.
   home_records: Serialized win-loss-overtime record string for the home team at the time of the scheduled game.
+  status_type_alt_detail: ESPN's short extra-time label on a final ("OT", "SO"); null when the game ended in regulation.
   venue_address_country: Country name or code for the country in which the game venue is located, as provided by ESPN's schedule
     endpoint.
 espn_wbb_game_officials:
@@ -4209,7 +4401,12 @@ espn_wbb_game_rosters:
   flag_href: URL of the SVG or PNG flag image representing the athlete's country of birth.
   flag_rel: Relationship descriptor for the athlete's country-of-birth flag link (e.g., "flag").
   jersey_right: Jersey number displayed on the right side of the roster card, used for alternate or secondary number representations.
+  position_abbreviation: Short code of the athlete's listed position (e.g. G, F, RW, OL), from ESPN's position resource.
+  position_display_name: Display form of the athlete's listed position as ESPN renders it; usually equal to position_name.
   position_href: ESPN API resource URL for the athlete's position resource.
+  position_id: ESPN's numeric identifier of the athlete's listed position (the Core v2 position resource id).
+  position_leaf: Whether the position is a leaf of ESPN's position tree; False marks a grouping, not a specific role.
+  position_name: Name of the athlete's listed position from ESPN's position resource, e.g. Guard or Forward.
   statistics_href: ESPN API resource URL pointing to the athlete's statistics endpoint.
   team_alternate_ids_sdr: Alternate team identifier from ESPN's SDR (Sports Data Reference) system for the athlete's team.
 espn_wbb_player_stats:
@@ -4225,6 +4422,12 @@ espn_wbb_schedule:
   season: Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted.
 espn_wnba_game_officials:
   season: Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted.
+espn_wnba_game_rosters:
+  position_abbreviation: Short code of the athlete's listed position (e.g. G, F, RW, OL), from ESPN's position resource.
+  position_display_name: Display form of the athlete's listed position as ESPN renders it; usually equal to position_name.
+  position_id: ESPN's numeric identifier of the athlete's listed position (the Core v2 position resource id).
+  position_leaf: Whether the position is a leaf of ESPN's position tree; False marks a grouping, not a specific role.
+  position_name: Name of the athlete's listed position from ESPN's position resource, e.g. Guard or Forward.
 espn_wnba_player_stats:
   defensive_avg48_blocks: Player's blocked shots per 48 minutes of play, drawn from the defensive statistical category.
   defensive_avg48_defensive_rebounds: Player's defensive rebounds per 48 minutes of play, drawn from the defensive statistical
@@ -4262,6 +4465,14 @@ espn_wnba_schedule:
   home_linescores: Period-by-period point totals for the home team, stored as a list of integer scores.
   home_records: Win-loss record strings for the home team across relevant splits (e.g., overall, home/away, conference).
   season: Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted.
+event_competitor_statistics:
+  split_name: Name of the stat split (Core v2 answers one, "All Splits").
+  category_name: ESPN stat category of the row (e.g., "defensive", "general", "offensive").
+  stat_name: ESPN stat key in camelCase (e.g., "blocks", "defensiveRebounds").
+  stat_abbreviation: Short label of the stat (e.g., "BLK").
+  stat_value: Numeric value of the team's stat in this game.
+  stat_display_value: The value as ESPN displays it (a string, e.g., "7").
+  stat_description: ESPN's one-sentence definition of the stat.
 expansion_draft_picks:
   draft_picks: JSON-serialized list of players selected by this franchise in the NHL expansion draft.
 fantasywidget:
@@ -4384,6 +4595,11 @@ fox_cfb_league_scores:
 fox_cfb_league_stat_leaders:
   stat_abbreviation: Fox's short code for the leader's stat (e.g. 'PYDS', 'PTD', 'RECYDS'); some codes contain a space, such
     as 'KR YDS'.
+fox_cfb_pbp:
+  play_player: Name of the athlete Fox credits the play to (its play-level entity link), upper-cased as Fox serves it (e.g.
+    'LANDEN THOMAS'); null on admin rows such as timeouts and period ends.
+  play_team: Club code from the game header (e.g. 'OKLA') of the drive group Fox files the play under, i.e. the possession
+    team; on a kickoff it is the receiving team, since Fox opens the receiver's drive with the kick.
 fox_cfb_schedule:
   segment_id: 'Fox scoreboard segment the game was fetched from: ''{season}-{week}-1'' for a regular-season week (sampled ''2026-3-1''),
     ''{season}-bowls-2'' or ''{season}-cfp-2'' for the postseason.'
@@ -4692,6 +4908,11 @@ fox_nfl_league_standings:
   w_l_t: Team's record as a win-loss-tie string with the tie count shown only when nonzero (e.g. '1-0', '1-1-1').
 fox_nfl_league_stat_leaders:
   stat_abbreviation: Fox's short code for the leader stat (e.g. 'PYDS', 'RTD', 'K-RET YDS').
+fox_nfl_pbp:
+  play_player: Name of the athlete Fox credits the play to (its play-level entity link), upper-cased as Fox serves it (e.g.
+    'DEVIN SINGLETARY'); null on admin rows such as timeouts and period ends.
+  play_team: Club code from the game header (e.g. 'NYG') of the drive group Fox files the play under, i.e. the possession
+    team; on a kickoff it is the receiving team, since Fox opens the receiver's drive with the kick.
 fox_nfl_scoreboard:
   selected: Fox's default-selection flag, which Fox sets only on group-filter (groupList) items; this league's navigation payload
     has no groupList, so the column is null on every row. The current date or week is marked by the payload-level currentSelectionId,
@@ -5605,12 +5826,305 @@ landing:
   venue_location_default: Default-language display string for the city or location associated with the game's venue, as provided
     by the NHL api-web landing endpoint.
 leaders:
-  current_season_type_week_end_date: ISO 8601 end date of the current week within the active season type (e.g., regular season,
-    playoffs).
-  current_season_type_week_number: Ordinal week number within the current season type.
-  current_season_type_week_start_date: ISO 8601 start date of the current week within the active season type.
-  current_season_type_week_text: Human-readable label for the current week within the active season type (e.g., 'Week 14').
-  league_midsize_name: Medium-length display name for the league, between the full name and the short abbreviation.
+  athlete_display_name: Athlete's full display name.
+  athlete_first_name: Athlete's first name.
+  athlete_id: ESPN id of the athlete, the key the athlete endpoints (athlete_overview, athlete_stats) take.
+  athlete_last_name: Athlete's last name.
+  athlete_position: Athlete's position abbreviation (e.g. QB, G, C).
+  athlete_short_name: Athlete's abbreviated name (e.g. 'B. Nix').
+  athlete_status: Athlete's ESPN status name (e.g. Active, Inactive) as ESPN reports it at request time, not for the requested
+    season.
+  athlete_uid: ESPN composite athlete uid (`s:<sport>~l:<league>~a:<athlete id>`), kept as text.
+  batting_at_bats: 'At Bats (ESPN ''batting'' category): The number of times a batter comes up to bat not counting walks and sacrifices.'
+  batting_avg: 'Batting Average (ESPN ''batting'' category): The average number of times the batter reached successfully on base
+    due to a hit: hits / atBats.'
+  batting_doubles: 'Doubles (ESPN ''batting'' category): The number of times that a batter reaches second base as the result of
+    a hit without an error being committed.'
+  batting_games_played: Games Played (ESPN 'batting' category).
+  batting_hits: 'Hits (ESPN ''batting'' category): The number of hits.'
+  batting_home_runs: 'Home Runs (ESPN ''batting'' category): The number of hits that allowed the batter to round the bases and
+    score without the aid of an error of the defense.'
+  batting_on_base_pct: 'On Base Percentage (ESPN ''batting'' category): The ratio of the number of times the batter reached base
+    per plate appearnce: (hits + walks + hbp / plateAppearances).'
+  batting_ops: 'OBP Pct + SLG Pct (ESPN ''batting'' category): The average calculated by adding up on-base percentage and slugging
+    percentage.'
+  batting_rb_is: 'Runs Batted In (ESPN ''batting'' category): The number of runs scored by a batter''s play.'
+  batting_runs: 'Runs (ESPN ''batting'' category): The number of runs scored.'
+  batting_slug_avg: 'Slugging Percentage (ESPN ''batting'' category): Slugging percentage is a metric that is meant to measuring
+    how many bases the hitter safely advances to after making contact with the ball: (totalBases / atBats).'
+  batting_stolen_bases: 'Stolen Bases (ESPN ''batting'' category): The number of bases stolen.'
+  batting_strikeouts: 'Strikeouts (ESPN ''batting'' category): The number of times a player strikes out.'
+  batting_total_bases: 'Total Bases (ESPN ''batting'' category): The number of bases calculated as 1 for a 1B, 2 for a 2B, 3 for
+    a 3B and 4 for a HR.'
+  batting_triples: 'Triples (ESPN ''batting'' category): The number of hits that result in the batter reaching 3rd base without
+    the aid of an error.'
+  batting_walks: 'Walks (ESPN ''batting'' category): The number of times a batter reaches base on four balls.'
+  batting_warbr: Wins Above Replacement (ESPN 'batting' category).
+  defensive_assist_tackles: 'Assist Tackles (ESPN ''defensive'' category): The number of assists on tackles.'
+  defensive_avg_blocks: 'Blocks Per Game (ESPN ''defensive'' category): The average blocks per game.'
+  defensive_avg_goals_against: Goals Against Average (ESPN 'defensive' category).
+  defensive_avg_steals: 'Steals Per Game (ESPN ''defensive'' category): The average steals per game.'
+  defensive_blocks: 'Blocks (ESPN ''defensive'' category): Short for blocked shot, number of times when a defensive player legally
+    deflects a field goal attempt from an offensive player.'
+  defensive_goals_against: 'Goals Against (ESPN ''defensive'' category): Total goals against.'
+  defensive_long_interception: 'Long Interception (ESPN ''defensive'' category): The amount of yards of the longest interception
+    return.'
+  defensive_overtime_losses: 'Overtime Losses (ESPN ''defensive'' category): Total games lost in overtime.'
+  defensive_passes_defended: 'Passes Defended (ESPN ''defensive'' category): The total number of passes defended.'
+  defensive_sack_yards: 'Sack Yards (ESPN ''defensive'' category): The number of yards lost from sacks.'
+  defensive_sacks: 'Sacks (ESPN ''defensive'' category): The total number of sacks.'
+  defensive_save_pct: 'Save Percentage (ESPN ''defensive'' category): Percentage of shots saved.'
+  defensive_saves: 'Saves (ESPN ''defensive'' category): Total saves.'
+  defensive_shootout_save_pct: 'Shootout Save Percentage (ESPN ''defensive'' category): Percentage of shootout shots saved.'
+  defensive_shootout_saves: 'Shootout Saves (ESPN ''defensive'' category): Total shootout saves.'
+  defensive_shootout_shots_against: 'Shootout Shots Against (ESPN ''defensive'' category): Total shootout shots against.'
+  defensive_shots_against: 'Shots Against (ESPN ''defensive'' category): Total shots against.'
+  defensive_shutouts: 'Shutouts (ESPN ''defensive'' category): Total shutouts.'
+  defensive_solo_tackles: 'Solo Tackles (ESPN ''defensive'' category): The number of times a tackle was made unassisted.'
+  defensive_steals: 'Steals (ESPN ''defensive'' category): The number of times a defensive player forced a turnover by intercepting
+    or deflecting a pass or a dribble of an offensive player.'
+  defensive_tackles_for_loss: 'Tackles For Loss (ESPN ''defensive'' category): The number of tackles that result in a loss of yardage.'
+  defensive_total_tackles: 'Total Tackles (ESPN ''defensive'' category): The total number of tackles.'
+  defensiveinterceptions_interception_touchdowns: 'Interception Touchdowns (ESPN ''defensiveinterceptions'' category): The number
+    of times an interception is returned for a touchdown.'
+  defensiveinterceptions_interception_yards: 'Interception Yards (ESPN ''defensiveinterceptions'' category): The number of yards
+    gained after an interception.'
+  defensiveinterceptions_interceptions: 'Interceptions (ESPN ''defensiveinterceptions'' category): The total number of interceptions.'
+  fielding_assists: 'Assists (ESPN ''fielding'' category): The number of times a fielder is involved in an out when the fielder
+    is not the putouter.'
+  fielding_catcher_caught_stealing: 'Caught Stealing (ESPN ''fielding'' category): The number of times a catcher throws a baserunner
+    trying to steal a base.'
+  fielding_catcher_caught_stealing_pct: 'Caught Stealing Percentage (ESPN ''fielding'' category): The percentage of baserunners
+    caught by the catcher given the total number of steal attempts.'
+  fielding_catcher_stolen_bases_allowed: 'Stolen Bases Allowed (ESPN ''fielding'' category): The number of stolen bases that a
+    catcher allows.'
+  fielding_def_warbr: Defensive Wins Above Replacement (ESPN 'fielding' category).
+  fielding_double_plays: 'Double Plays (ESPN ''fielding'' category): The number of double plays a fielder has been a part of as
+    either the assister or putouter.'
+  fielding_errors: 'Errors (ESPN ''fielding'' category): The number of times a fielder fails to make the play they are expected
+    to make.'
+  fielding_fielding_pct: 'Fielding Percentage (ESPN ''fielding'' category): The percentage of plays made by a fielder given the
+    total number of chances.'
+  fielding_full_innings_played: 'Full Innings (ESPN ''fielding'' category): The number of fully completed innings by a fielder.'
+  fielding_games_played: Games Played (ESPN 'fielding' category).
+  fielding_games_started: 'Games Started (ESPN ''fielding'' category): The number of games started by a fielder.'
+  fielding_passed_balls: 'Passed Balls (ESPN ''fielding'' category): The number of times the ball is dropped or passes by the catcher.'
+  fielding_putouts: 'Putouts (ESPN ''fielding'' category): The number of times the fielder tags or forces the out of a baserunner.'
+  fielding_range_factor: 'Range Factor (ESPN ''fielding'' category): The estimation of how much field a fielder can cover.'
+  fielding_total_chances: 'Total Chances (ESPN ''fielding'' category): The number of chances a fielder has to make an out calculated
+    by assists plus putouts plus errors.'
+  general_avg_fouls: 'Fouls Per Game (ESPN ''general'' category): The average fouls committed per game.'
+  general_avg_minutes: 'Minutes Per Game (ESPN ''general'' category): The average number of minutes per game.'
+  general_avg_rebounds: 'Rebounds Per Game (ESPN ''general'' category): The average rebounds per game.'
+  general_double_double: 'Double Double (ESPN ''general'' category): The number of times double digit values were accumulated in
+    2 of the following categories: points, rebounds, assists, steals, and blocked shots.'
+  general_ejections: 'Ejections (ESPN ''general'' category): The number of times a player or coach is removed from the game as
+    a result of a serious offense.'
+  general_flagrant_fouls: 'Flagrant Fouls (ESPN ''general'' category): The number of fouls that the officials thought were unnecessary
+    or excessive.'
+  general_fouls: 'Fouls (ESPN ''general'' category): The number of times a player had illegal contact with the opponent.'
+  general_fumbles_forced: 'Forced Fumbles (ESPN ''general'' category): The total number of forced fumbles.'
+  general_fumbles_recovered: 'Fumbles Recovered (ESPN ''general'' category): The number of fumbles recovered.'
+  general_fumbles_touchdowns: 'Fumbles Touchdowns (ESPN ''general'' category): The number of times a fumbles is recovered and returned
+    for a touchdown.'
+  general_games: 'Games Played (ESPN ''general'' category): Total games played.'
+  general_games_played: Games Played (ESPN 'general' category).
+  general_losses: Losses (ESPN 'general' category).
+  general_minutes: 'Minutes (ESPN ''general'' category): The total number of minutes played.'
+  general_per: 'Player Efficiency Rating (ESPN ''general'' category): A numerical value for each of a player''s accomplishments
+    per-minute and is pace-adjusted for the team they play on. The league average in PER to 15.00 every season.'
+  general_plus_minus: Plus/Minus Rating (ESPN 'general' category).
+  general_production: 'Production (ESPN ''general'' category): Total production.'
+  general_rebounds: 'Rebounds (ESPN ''general'' category): The total number of rebounds (offensive and defensive).'
+  general_shifts: 'Shifts (ESPN ''general'' category): Total shifts.'
+  general_technical_fouls: 'Technical Fouls (ESPN ''general'' category): The number of times an player or coach was called for
+    a technical foul (unsportsmanlike conduct or violations).'
+  general_time_on_ice: 'Time On Ice (ESPN ''general'' category): Total time on ice.'
+  general_time_on_ice_per_game: 'Time On Ice Per Game (ESPN ''general'' category): Total time on ice per game.'
+  general_triple_double: 'Triple Double (ESPN ''general'' category): The number of times double digit values were accumulated in
+    3 of the following categories: points, rebounds, assists, steals, and blocked shots.'
+  general_wins: Wins (ESPN 'general' category).
+  kicking_extra_point_attempts: 'Extra Point Attempts (ESPN ''kicking'' category): The number of extra point attempts.'
+  kicking_extra_point_pct: 'Extra Point Percentage (ESPN ''kicking'' category): The percentage of extra point attempts that are
+    converted.'
+  kicking_extra_points_made: 'Extra Points Made (ESPN ''kicking'' category): The number of extra point attempts made.'
+  kicking_field_goal_attempts: 'Field Goal Attempts (ESPN ''kicking'' category): The number of times a field goal is attempted.'
+  kicking_field_goal_attempts1_19: 'Field Goal Attempts 1-19 (ESPN ''kicking'' category): The number of field goals attempted from
+    1-19 yards.'
+  kicking_field_goal_attempts20_29: 'Field Goal Attempts 20-29 (ESPN ''kicking'' category): The number of field goals attempted
+    from 20-29 yards.'
+  kicking_field_goal_attempts30_39: 'Field Goal Attempts 30-39 (ESPN ''kicking'' category): The number of field goals attempted
+    from 30-39 yards.'
+  kicking_field_goal_attempts40_49: 'Field Goal Attempts 40-49 (ESPN ''kicking'' category): The number of field goals attempted
+    from 40-49 yards.'
+  kicking_field_goal_attempts50: 'Field Goal Attempts 50+ (ESPN ''kicking'' category): The number of field goals attempted from
+    50+ yards.'
+  kicking_field_goal_pct: 'Field Goal Percentage (ESPN ''kicking'' category): The percentage of field goals attempted that are
+    made.'
+  kicking_field_goals_made: 'Field Goal Made (ESPN ''kicking'' category): The number of times a field goal is made.'
+  kicking_field_goals_made1_19: 'Field Goals Made 1-19 (ESPN ''kicking'' category): The number of field goals made from 1-19 yards.'
+  kicking_field_goals_made20_29: 'Field Goals Made 20-29 (ESPN ''kicking'' category): The number of field goals made from 20-29
+    yards.'
+  kicking_field_goals_made30_39: 'Field Goals Made 30-39 (ESPN ''kicking'' category): The number of field goals made from 30-39
+    yards.'
+  kicking_field_goals_made40_49: 'Field Goals Made 40-49 (ESPN ''kicking'' category): The number of field goals made from 40-49
+    yards.'
+  kicking_field_goals_made50: 'Field Goals Made 50+ (ESPN ''kicking'' category): The number of field goals made from 50+ yards.'
+  kicking_long_field_goal_made: 'Long Field Goal Made (ESPN ''kicking'' category): The distance of the longest field goal made.'
+  offensive_assists: 'Assists (ESPN ''Assists'', offensive category): passes that lead directly to a score in basketball; goal
+    assists in hockey.'
+  offensive_avg_assists: 'Assists Per Game (ESPN ''offensive'' category): The average assists per game.'
+  offensive_avg_field_goals_attempted: 'Average Field Goals Attempted (ESPN ''offensive'' category): The average field goals attempted
+    per game.'
+  offensive_avg_field_goals_made: 'Average Field Goals Made (ESPN ''offensive'' category): The average field goals made per game.'
+  offensive_avg_free_throws_attempted: 'Average Free Throws Attempted (ESPN ''offensive'' category): The average free throw shots
+    attempted per game.'
+  offensive_avg_free_throws_made: 'Average Free Throws Made (ESPN ''offensive'' category): The average free throw shots made per
+    game.'
+  offensive_avg_points: 'Points Per Game (ESPN ''offensive'' category): The average number of points scored per game.'
+  offensive_avg_three_point_field_goals_attempted: 'Average 3-Point Field Goals Attempted (ESPN ''offensive'' category): The average
+    three point field goals attempted per game.'
+  offensive_avg_three_point_field_goals_made: 'Average 3-Point Field Goals Made (ESPN ''offensive'' category): The average three
+    point field goals made per game.'
+  offensive_avg_turnovers: 'Turnovers Per Game (ESPN ''offensive'' category): The average turnovers committed per game.'
+  offensive_faceoff_percent: 'Faceoff Win Percent (ESPN ''offensive'' category): Percentage of faceoffs won.'
+  offensive_faceoffs_lost: 'Faceoffs Lost (ESPN ''offensive'' category): Total faceoffs lost.'
+  offensive_faceoffs_won: 'Faceoffs Won (ESPN ''offensive'' category): Total faceoffs won.'
+  offensive_field_goal_pct: 'Field Goal Percentage (ESPN ''offensive'' category): The ratio of field goals made to field goals
+    attempted: FGM / FGA.'
+  offensive_field_goals_attempted: 'Field Goals Attempted (ESPN ''offensive'' category): The number of times a 2pt field goal was
+    attempted.'
+  offensive_field_goals_made: 'Field Goals Made (ESPN ''offensive'' category): The number of times a 2pt field goal was made.'
+  offensive_free_throw_pct: 'Free Throw Percentage (ESPN ''offensive'' category): The ratio of free throws made to free throws
+    attempted: FTM / FTA.'
+  offensive_free_throws_attempted: 'Free Throws Attempted (ESPN ''offensive'' category): The number of times a free throw was attempted.'
+  offensive_free_throws_made: 'Free Throws Made (ESPN ''offensive'' category): The number of times a free throw was made.'
+  offensive_game_winning_goals: 'Game-Winning Goals (ESPN ''offensive'' category): Total game-winning goals.'
+  offensive_goals: 'Goals (ESPN ''offensive'' category): Total goals scored.'
+  offensive_points: 'Points (ESPN ''Points'', offensive category): points scored in basketball; goals plus assists in hockey.'
+  offensive_power_play_assists: 'Power Play Assists (ESPN ''offensive'' category): Total power play assists.'
+  offensive_power_play_goals: 'Power Play Goals (ESPN ''offensive'' category): Total power play goals.'
+  offensive_shooting_pct: 'Shooting Percentage (ESPN ''offensive'' category): Percentage of shots scored.'
+  offensive_shootout_attempts: 'Shootout Attempts (ESPN ''offensive'' category): Total shootout attempts.'
+  offensive_shootout_goals: 'Shootout Goals (ESPN ''offensive'' category): Total shootout goals.'
+  offensive_shootout_shot_pct: 'Shootout Shot Percentage (ESPN ''offensive'' category): Percentage of shootout goals made.'
+  offensive_shots_total: 'Shots (ESPN ''offensive'' category): Total shots.'
+  offensive_three_point_field_goal_pct: '3-Point Field Goal Percentage (ESPN ''offensive'' category): The ratio of 3pt field goals
+    made to 3pt field goals attempted: 3PM / 3PA.'
+  offensive_three_point_field_goals_attempted: '3-Point Field Goals Attempted (ESPN ''offensive'' category): The number of times
+    a 3pt field goal was attempted.'
+  offensive_three_point_field_goals_made: '3-Point Field Goals Made (ESPN ''offensive'' category): The number of times a 3pt field
+    goal was made.'
+  offensive_turnovers: 'Turnovers (ESPN ''offensive'' category): The number of times a player loses possession to the other team.'
+  passing_adj_qbr: 'Adjusted QBR (ESPN ''passing'' category): Adjusted Quarterback Rating.'
+  passing_completion_pct: 'Completion Percentage (ESPN ''passing'' category): The percentage of completed passes.'
+  passing_completions: 'Completions (ESPN ''passing'' category): The times a player completes a pass to another player who is eligible
+    to catch a pass.'
+  passing_interceptions: 'Interceptions (ESPN ''passing'' category): The number of passes thrown that were intercepted by the opposing
+    team.'
+  passing_long_passing: 'Longest Pass (ESPN ''passing'' category): The longest pass play completed in terms of yards.'
+  passing_passing_attempts: 'Passing Attempts (ESPN ''passing'' category): The number of times a pass is attempted.'
+  passing_passing_touchdowns: 'Passing Touchdowns (ESPN ''passing'' category): The total number of passing touchdowns.'
+  passing_passing_yards: 'Passing Yards (ESPN ''passing'' category): The total passing yards.'
+  passing_passing_yards_per_game: 'Passing Yards Per Game (ESPN ''passing'' category): The number of passing yards per game.'
+  passing_qb_rating: Passer Rating (ESPN 'passing' category).
+  passing_qbr: 'Total QBR (ESPN ''passing'' category): Total Quarterback Rating, which values quarterback on all play types on
+    a 0-to-100 scale.'
+  passing_sack_yards_lost: 'Sack Yards Lost (ESPN ''passing'' category): The amount of yards lost due to sacks.'
+  passing_sacks: 'Total Sacks (ESPN ''passing'' category): The total number of sacks.'
+  passing_yards_per_pass_attempt: 'Yards Per Pass Attempt (ESPN ''passing'' category): The average number yards per pass attempt.'
+  penalties_penalty_minutes: 'Penalty Minutes (ESPN ''penalties'' category): Total penalty minutes.'
+  pitching_earned_runs: 'Earned runs (ESPN ''pitching'' category): The number of earned runs surrendered by a pitcher.'
+  pitching_era: 'Earned Run Average (ESPN ''pitching'' category): The average number of runs a pitcher yields per 9 innings thrown.'
+  pitching_games_played: Games Played (ESPN 'pitching' category).
+  pitching_games_started: 'Games Started (ESPN ''pitching'' category): The number of games started by a pitcher.'
+  pitching_hits: 'Hits (ESPN ''pitching'' category): The number of hits surrendered by a pitcher.'
+  pitching_holds: 'Holds (ESPN ''pitching'' category): The number of times a pitcher enters the game with the lead, gets at least
+    an out and leaves the game wihtout having given up the lead.'
+  pitching_home_runs: 'Home Runs (ESPN ''pitching'' category): The number of times a pitcher has allowed a home run.'
+  pitching_innings: 'Innings pitched (ESPN ''pitching'' category): The number of innings pitched.'
+  pitching_losses: 'Losses (ESPN ''pitching'' category): The number of losses for a pitcher.'
+  pitching_quality_starts: 'Quality Starts (ESPN ''pitching'' category): The number of quality starts for a pitcher.'
+  pitching_saves: 'Saves (ESPN ''pitching'' category): The number of times a pitcher enters and finishes the game without surrendering
+    the lead in a save opportunity.'
+  pitching_strikeouts: 'Strikeouts (ESPN ''pitching'' category): The number of times the pitcher struck out a batter.'
+  pitching_strikeouts_per_nine_innings: 'Strikeouts Per 9 Innings (ESPN ''pitching'' category): The average number of strikeouts
+    for a pitcher per 9 innings.'
+  pitching_walks: 'Walks (ESPN ''pitching'' category): The number of times a pitcher surrenders a base on balls.'
+  pitching_warbr: Wins Above Replacement (ESPN 'pitching' category).
+  pitching_whip: 'Walks Plus Hits Per Inning Pitched (ESPN ''pitching'' category): The number representing walks plus hits divided
+    by innings pitched.'
+  pitching_wins: 'Wins (ESPN ''pitching'' category): The number of times the pitcher was attributed with a win.'
+  punting_avg_punt_return_yards: 'Average Punt Return Yards (ESPN ''punting'' category): The average number of yards per punt return.'
+  punting_fair_catches: 'Fair Catches (ESPN ''punting'' category): The number of fair catches.'
+  punting_gross_avg_punt_yards: 'Gross Average Punt Yards (ESPN ''punting'' category): The average gross number of yards per punt.'
+  punting_long_punt: 'Long Punt (ESPN ''punting'' category): The distance of the longest punt.'
+  punting_net_avg_punt_yards: 'Net Average Punt Yards (ESPN ''punting'' category): The average net number of yards per punt.'
+  punting_punt_return_yards: 'Punt Return Yards (ESPN ''punting'' category): The total amount of yardage of punt returns.'
+  punting_punt_returns: 'Punt Returns (ESPN ''punting'' category): The number of times a punt was returned.'
+  punting_punt_yards: 'Punt Yards (ESPN ''punting'' category): The total amount of yardage of punts.'
+  punting_punts: 'Punts (ESPN ''punting'' category): The number of punts taken.'
+  punting_punts_blocked: 'Punts Blocked (ESPN ''punting'' category): The number of times a punt was blocked.'
+  punting_punts_inside20: 'Punts Inside 20 (ESPN ''punting'' category): The number of times a punt is downed inside the 20.'
+  punting_touchbacks: 'Touchbacks (ESPN ''punting'' category): The number of kickoffs that result in touchbacks.'
+  sort_order: 'Position of the athlete in ESPN''s leaderboard order (the requested category or sort), counted across
+    pages: (page - 1) * limit + position on the page. A position, not a rank: tied athletes still count up; ESPN''s
+    per-stat ranks stay in the raw payload (return_parsed=False).'
+  receiving_long_reception: 'Long Reception (ESPN ''receiving'' category): The amount of yards for the longest reception.'
+  receiving_receiving_big_plays: '20+ Yard Receiving Plays (ESPN ''receiving'' category): The number of receiving big plays gained.'
+  receiving_receiving_first_downs: 'Receiving First Downs (ESPN ''receiving'' category): The number of times a first down is picked
+    up by a reception.'
+  receiving_receiving_fumbles: 'Receiving Fumbles (ESPN ''receiving'' category): The number of times a reception is made and then
+    the ball is fumbled.'
+  receiving_receiving_fumbles_lost: 'Receiving Fumbles Lost (ESPN ''receiving'' category): The number of times a reception is made
+    and the balled is fumbled and recovered by the opposing team.'
+  receiving_receiving_targets: 'Receiving Targets (ESPN ''receiving'' category): The number of times a receiver is thrown to.'
+  receiving_receiving_touchdowns: 'Receiving Touchdowns (ESPN ''receiving'' category): The total number of receiving touchdowns.'
+  receiving_receiving_yards: 'Receiving Yards (ESPN ''receiving'' category): The total receiving yards.'
+  receiving_receiving_yards_after_catch: 'Receiving Yards After Catch (ESPN ''receiving'' category): The number of yards gained
+    after the catch has been made.'
+  receiving_receiving_yards_per_game: 'Receiving Yards Per Game (ESPN ''receiving'' category): The average number of receiving
+    yards per game.'
+  receiving_receptions: 'Receptions (ESPN ''receiving'' category): The total number of receptions.'
+  receiving_yards_per_reception: 'Yards Per Reception (ESPN ''receiving'' category): The average number of yards per reception.'
+  returning_kick_return_touchdowns: 'Kick Return Touchdowns (ESPN ''returning'' category): The number of kick return touchdowns.'
+  returning_kick_return_yards: 'Kick Return Yards (ESPN ''returning'' category): The total yardage of kick returns.'
+  returning_kick_returns: 'Kick Returns (ESPN ''returning'' category): The number of kick returns.'
+  returning_long_kick_return: 'Long Kick Return (ESPN ''returning'' category): The longest kick return in yards.'
+  returning_long_punt_return: 'Long Punt Return (ESPN ''returning'' category): The longest punt return in yards.'
+  returning_punt_return_fair_catches: 'Punt Return Fair Catches (ESPN ''returning'' category): The number of punt return fair catches.'
+  returning_punt_return_touchdowns: 'Punt Return Touchdowns (ESPN ''returning'' category): The number of punt return touchdowns.'
+  returning_punt_return_yards: 'Punt Return Yards (ESPN ''returning'' category): The total yardage of punt returns.'
+  returning_punt_returns: 'Punt Returns (ESPN ''returning'' category): The number of punt returns.'
+  returning_yards_per_kick_return: 'Yards Per Kick Return (ESPN ''returning'' category): The average number of yards per kick return.'
+  returning_yards_per_punt_return: 'Yards Per Punt Return (ESPN ''returning'' category): The average number of yards per punt return.'
+  rushing_long_rushing: 'Long Rushing (ESPN ''rushing'' category): The amount of yards for the longest run.'
+  rushing_rushing_attempts: 'Rushing Attempts (ESPN ''rushing'' category): The total number of attempted rushes.'
+  rushing_rushing_big_plays: '20+ Yard Rushing Plays (ESPN ''rushing'' category): The number of rushing big plays gained.'
+  rushing_rushing_first_downs: 'Rushing 1st downs (ESPN ''rushing'' category): The number of times a first down is picked up by
+    a run.'
+  rushing_rushing_fumbles: 'Rushing Fumbles (ESPN ''rushing'' category): The number of times there is a run and then the ball is
+    fumbled.'
+  rushing_rushing_fumbles_lost: 'Rushing Fumbles Lost (ESPN ''rushing'' category): The number of times there is a run and then
+    the ball is fumbled.'
+  rushing_rushing_touchdowns: 'Rushing Touchdowns (ESPN ''rushing'' category): The total number of rushing touchdowns.'
+  rushing_rushing_yards: 'Rushing Yards (ESPN ''rushing'' category): The total rushing yards.'
+  rushing_rushing_yards_per_game: 'Rushing Yards Per Game (ESPN ''rushing'' category): The average number of rushing yards per
+    game.'
+  rushing_yards_per_rush_attempt: 'Yards Per Rush Attempt (ESPN ''rushing'' category): The average number of yards per rush attempt.'
+  scoring_field_goals: 'Field Goals (ESPN ''scoring'' category): The number of field goals made.'
+  scoring_kick_extra_points: 'Kick Extra Points (ESPN ''scoring'' category): The number of extra points made.'
+  scoring_receiving_touchdowns: 'Receiving Touchdowns (ESPN ''scoring'' category): The total number of receiving touchdowns.'
+  scoring_return_touchdowns: 'Return Touchdowns (ESPN ''scoring'' category): The total number of return touchdowns.'
+  scoring_rushing_touchdowns: 'Rushing Touchdowns (ESPN ''scoring'' category): The total number of rushing touchdowns.'
+  scoring_total_points: 'Total Points (ESPN ''scoring'' category): The number of total points scored.'
+  scoring_total_points_per_game: 'Total Points Per Game (ESPN ''scoring'' category): The number of points scored per game.'
+  scoring_total_touchdowns: 'Total Touchdowns (ESPN ''scoring'' category): The number of touchdowns scored in total.'
+  scoring_total_two_point_convs: 'Total Two Point Conversions (ESPN ''scoring'' category): The number of times a 2-point conversion
+    is successful.'
+  team_abbreviation: Abbreviation of the athlete's team in the requested season (ESPN teamShortName, e.g. ORE).
+  team_id: ESPN id of the team the athlete played for in the requested season.
+  team_name: Nickname of the athlete's team in the requested season (ESPN teamName, e.g. Ducks).
 league:
   color_primary: Primary brand colour of the league as six hex digits, inconsistently prefixed with a hash (#003369 for the
     NFL, 002D72 for MLB); null for the leagues CBS carries no palette for.
@@ -9380,7 +9894,8 @@ load_cfb_pbp:
   TFL_rush: True when the play was a tackle for loss on a rush play.
   action_play: True when the play advanced the game state -- excludes timeouts, end-of-period markers and other non-action
     rows.
-  adj_rush_yardage: Rushing yards capped at 8, the input to the line-yards decomposition.
+  adj_rush_yardage: Rushing yards capped at 10, the input to the line-yards decomposition. Assets published before the
+    2026-10 line-yards fix cap at 8.
   air_yardsToEndzone: Yards to the endzone at the catch spot, parsed from the 2025+ vendor catch-spot text; null before 2025
     or when unresolvable.
   awayFinalScore: Final score of the away team from the ESPN game header, repeated on every play of the game; the processing
@@ -9484,7 +9999,7 @@ load_cfb_pbp:
   fg_team: Team id attempting the field goal (the kicking team).
   fg_wp: Make-probability-weighted win probability of attempting the field goal.
   fg_wp_diff: fg_wp minus the recommended option's WP (0 when the field goal is the recommendation, otherwise <= 0).
-  firstHalfKickoffTeamId: ESPN id of the team that received the opening kickoff.
+  firstHalfKickoffTeamId: ESPN id of the team that kicked the opening kickoff (it receives the second-half kickoff), one value per game.
   first_down_created: True when the play produced a first down for the offense.
   first_down_earned: Whether the play earned a first down by means other than yardage (e.g. by penalty).
   first_down_prob: Modeled probability of converting the fourth down when going for it.
@@ -9558,8 +10073,10 @@ load_cfb_pbp:
   lead_wp_before2: Value of wp_before 2 plays ahead, used for sequence-aware derivations.
   lead_wp_before2_naive: Pre-snap naive win probability two plays ahead, used where the immediately following row is a non-play.
   lead_wp_before_naive: Next play's pre-snap naive win probability, used in the end-of-half and change-of-possession adjustments.
-  line_yards: 'Yards credited to the offensive line on a rush, using the standard sliding scale: 1.2x the capped yardage on
-    a loss, all of it through 3 yards, half of each yard from 4 to 8, and a 5.5-yard ceiling beyond that.'
+  line_yards: 'Yards credited to the offensive line on a rush, on the standard adjusted-line-yards band: 1.2x the yardage on
+    a loss, all of yards 0-4, half of each yard from 5 to 10, and nothing beyond 10 (a 7-yard ceiling). Line, second-level
+    and open-field yards sum to the carry on every gain. Assets published before the 2026-10 line-yards fix carry the old
+    band (all of yards 0-3, half of 4-8, a 5.5-yard ceiling).'
   make_fg_wp: Win probability given the field-goal attempt is made.
   mediaId: Identifier of the ESPN media item (video clip) attached to the play in ESPN's play feed, passed through as published;
     null when no clip is attached.
@@ -9568,13 +10085,16 @@ load_cfb_pbp:
   new_distance: Distance to go after the play, including any penalty enforcement.
   new_down: Down after the play, including any penalty enforcement.
   non_fumble_sack: True when the play was a sack that did not produce a fumble.
-  open_field_yards: Rushing yards gained beyond 8, credited to the ball carrier rather than the line.
+  open_field_yards: Rushing yards gained beyond 10, credited to the ball carrier rather than the line. Assets published
+    before the 2026-10 line-yards fix count the yards beyond 8.
   opp_highlight_yards: Highlight yards earned on opportunity runs, isolating carrier production on carries where the blocking
     succeeded. Assets published before the 2026-08 fix are identically 0 here, because the inverted opportunity_run gate could
     never co-occur with non-zero highlight yards.
   opportunity_run: True when a rush reached 4 yards -- the carries on which the blocking did its job. Matches cfbfastR's espn_cfb_15
     definition. Assets published before the 2026-08 fix carry the inverted (4 yards or fewer) flag.
   overUnder: Over/under total used as a model input.
+  overUnderAvailable: False when overUnder is the 55.5 default (the line had a spread and no total), True for a market
+    total; null when an odds_override did not say. Absent from releases built before the column existed.
   pass_breakup: True when a defender broke up the pass.
   pass_breakup_team: Team id credited with the pass breakup (the defense).
   pass_depth: Thrown-pass depth parsed from ESPN play text ("short" or "deep"); null when the text omits it (sacks, screens,
@@ -9644,7 +10164,9 @@ load_cfb_pbp:
   scoringType.name: ESPN's name for the scoring type (e.g. touchdown, field goal).
   scrimmage_play: True when the play is a play from scrimmage rather than a special-teams or administrative row.
   seasonType: ESPN season type for the game (2 = regular season, 3 = postseason).
-  second_level_yards: Rushing yards earned from 4 to 8, split evenly between line and carrier under the line-yards decomposition.
+  second_level_yards: 'The ball carrier''s half of yards 5-10 of a rush (the line takes the other half); 0 on carries of 4
+    yards or fewer. Assets published before the 2026-10 line-yards fix carry the old band here: half of yards 4-8 in college
+    football, half of yards 5-8 in the NFL (where the old parts came up half a yard short of the carry).'
   short_rush_attempt: True when the play is a rush in a short-yardage situation.
   short_rush_success: True when a short-yardage rush gained the yardage needed.
   standard_down: True when the offense is on schedule for the series -- first down, second down needing fewer than 8, or third/fourth
@@ -11049,6 +11571,7 @@ load_cfb_team_summaries:
   def_strength_faced_rank: 'National rank of def_strength_faced, where 1 = toughest slate (the strongest opposing defenses,
     i.e. the lowest def_strength_faced). Ties share the average rank. Null when def_strength_faced is null: unranked, not
     last.'
+  deserved_wins: 'Sum of the team''s paper_share over the games in the row''s span: the wins the Paper Index says its play earned (sportsdataverse.analytics.paper_index.deserved_wins).'
   drive_start_ep_def: Average expected points (EP) at the first snap of a drive, over the drives the side owned, with the
     team on defense (i.e. allowed to opponents).
   drive_start_ep_def_conf_pct: Percentile (0-100) of average expected points (EP) at the first snap of a drive, over the drives
@@ -11561,6 +12084,10 @@ load_cfb_team_summaries:
   line_yards_off_rush_rank: 'National rank of the team''s average line yards credited to the offensive line on rushes on rush
     plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct
     values: unranked, not last.'
+  luck_wins: wins minus deserved_wins; positive means the team won more games than its play deserved.
+  luck_wins_rank: 'National rank of luck_wins, 1 = the most wins above what its play deserved. Null when luck_wins is null: unranked, not last.'
+  luck_z: 'luck_wins / sqrt(sum(p * (1 - p))) over the team''s game shares p: luck in standard deviations of a sum of independent Bernoulli(p) wins; null when that variance is 0.'
+  luck_z_rank: 'National rank of luck_z, 1 = the luckiest in standard deviations. Null when luck_z is null: unranked, not last.'
   net_adj_epa: 'Net opponent-adjusted EPA per play: adj_off_epa minus adj_def_epa. Higher is better.'
   net_adj_epa_conf_pct: Percentile (0-100) of net_adj_epa among teams in the same conference, where 100 is best. Direction
     is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric
@@ -11722,6 +12249,8 @@ load_cfb_team_summaries:
   opportunity_rate_off_rush_rank: 'National rank of the team''s opportunity rate -- the share of rushes gaining 4 or more
     yards on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer
     than two distinct values: unranked, not last.'
+  paper_index_games_n: Games in the row's span that the Paper Index scored for the team (completed, not tied, both sides at least 20 scrimmage snaps); deserved_wins and luck are sums over these games.
+  paper_index_span: 'Where the season sits relative to the Paper Index fit (sportsdataverse.analytics.paper_index TRAIN_SEASONS / HOLDOUT_SEASONS): train (in-sample, its games were part of the fit), holdout (scored out of sample) or out_of_span (scored, never seen by the fit).'
   passrate_def: Share of plays that were pass plays, with the team on defense (i.e. allowed to opponents).
   passrate_def_conf_pct: Percentile (0-100) of share of plays that were pass plays with the team on defense (i.e. allowed
     to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank,
@@ -13174,6 +13703,7 @@ load_cfb_team_summaries_weekly:
   def_strength_faced_rank: 'National rank of def_strength_faced, where 1 = toughest slate (the strongest opposing defenses,
     i.e. the lowest def_strength_faced). Ties share the average rank. Null when def_strength_faced is null: unranked, not
     last.'
+  deserved_wins: 'Sum of the team''s paper_share over the games in the row''s span: the wins the Paper Index says its play earned (sportsdataverse.analytics.paper_index.deserved_wins).'
   drive_start_ep_def: Average expected points (EP) at the first snap of a drive, over the drives the side owned, with the
     team on defense (i.e. allowed to opponents).
   drive_start_ep_def_conf_pct: Percentile (0-100) of average expected points (EP) at the first snap of a drive, over the drives
@@ -13686,6 +14216,10 @@ load_cfb_team_summaries_weekly:
   line_yards_off_rush_rank: 'National rank of the team''s average line yards credited to the offensive line on rushes on rush
     plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct
     values: unranked, not last.'
+  luck_wins: wins minus deserved_wins; positive means the team won more games than its play deserved.
+  luck_wins_rank: 'National rank of luck_wins, 1 = the most wins above what its play deserved. Null when luck_wins is null: unranked, not last.'
+  luck_z: 'luck_wins / sqrt(sum(p * (1 - p))) over the team''s game shares p: luck in standard deviations of a sum of independent Bernoulli(p) wins; null when that variance is 0.'
+  luck_z_rank: 'National rank of luck_z, 1 = the luckiest in standard deviations. Null when luck_z is null: unranked, not last.'
   net_adj_epa: 'Net opponent-adjusted EPA per play: adj_off_epa minus adj_def_epa. Higher is better.'
   net_adj_epa_conf_pct: Percentile (0-100) of net_adj_epa among teams in the same conference, where 100 is best. Direction
     is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric
@@ -13847,6 +14381,8 @@ load_cfb_team_summaries_weekly:
   opportunity_rate_off_rush_rank: 'National rank of the team''s opportunity rate -- the share of rushes gaining 4 or more
     yards on rush plays with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer
     than two distinct values: unranked, not last.'
+  paper_index_games_n: Games in the row's span that the Paper Index scored for the team (completed, not tied, both sides at least 20 scrimmage snaps); deserved_wins and luck are sums over these games.
+  paper_index_span: 'Where the season sits relative to the Paper Index fit (sportsdataverse.analytics.paper_index TRAIN_SEASONS / HOLDOUT_SEASONS): train (in-sample, its games were part of the fit), holdout (scored out of sample) or out_of_span (scored, never seen by the fit).'
   passrate_def: Share of plays that were pass plays, with the team on defense (i.e. allowed to opponents).
   passrate_def_conf_pct: Percentile (0-100) of share of plays that were pass plays with the team on defense (i.e. allowed
     to opponents) among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank,
@@ -16672,6 +17208,20 @@ qmjhl_season_id:
   season_yr: 'End year of the season the row belongs to, read from its name: "2025-26", "2025/26" and "2025-2026" are 2026,
     "26-27" is 2027, a compact "2425" is 2025. A preseason or exhibition named with the one year it starts in belongs to the
     next season ("2026 Pre-season" is 2027). Null when the name holds no year.'
+season_draft:
+  $ref: Core v2 URL of this draft resource.
+  display_name: Full name of the draft (e.g., "2024 National Basketball Association Draft").
+  links: JSON-encoded list of ESPN web links for the draft (href, rel, text).
+  number_of_rounds: Number of rounds in the draft.
+  positions: JSON-encoded list of the position resources the draft uses (Core v2 $ref links with abbreviations).
+  short_display_name: Short name of the draft (e.g., "2024 NBA Draft").
+  uid: ESPN universal id of the draft (e.g., "s:40~l:46~e:draft~y:2024").
+  year: Year the draft was held (e.g., 2024), the season in its Core v2 path.
+  needs: JSON-encoded list of the NFL teams' draft needs, one entry per team (its Core v2 team link and the positions it
+    needs, with abbreviations); NFL only.
+  athletes_$ref: Core v2 URL of the draft's athlete (prospect) collection.
+  rounds_$ref: Core v2 URL of the draft's rounds, which hold the picks.
+  status_$ref: Core v2 URL of the draft's status resource.
 sihf_game_goalie_stats:
   game_id: SIHF game id (Int64 join key; the details link of sihf_results, the searchQuery of the game wrappers).
   team_side: 'Side of the game the row belongs to: "home" or "away".'
@@ -37219,6 +37769,249 @@ wjbl_teams:
     12 = Denso Iris, 8 = ENEOS Sunflowers; all-star sides have their own ids, e.g. 591). The team_id of /team/roster and of
     the site''s /team/roster/?team_id=. Not season_team_id.'
   team_name: Franchise name, Japanese or English ('富士通レッドウェーブ' = Fujitsu Red Wave; 'TEAM シリウス' = all-star side Team Sirius).
+ncaa_mbb_possessions:
+  away: Away team's name as the stats.ncaa.org play-by-play page lists it.
+  away_1: Away on-court player 1 of 5. The full variant sorts the five names alphabetically within the row, so a lineup always
+    occupies the same columns; simple=True keeps on-court order.
+  away_2: Away on-court player 2 of 5 (alphabetical in the full variant, on-court order with simple=True).
+  away_3: Away on-court player 3 of 5 (alphabetical in the full variant, on-court order with simple=True).
+  away_4: Away on-court player 4 of 5 (alphabetical in the full variant, on-court order with simple=True).
+  away_5: Away on-court player 5 of 5 (alphabetical in the full variant, on-court order with simple=True).
+  away_score: Away team's score on the possession's first event row (the page's running score after that event).
+  first_shot_time: Seconds into the possession (poss_length) at its first field-goal attempt; null when the possession had
+    no shot.
+  first_shot_type: Event type of the possession's first field-goal attempt ("Layup", "Three Point Jumper", "Two Point Jumper",
+    "Hook", "Dunk", "Tip In"); null when the possession had no shot.
+  game_id: stats.ncaa.org game id of the play-by-play page the possession comes from.
+  home: Home team's name as the stats.ncaa.org play-by-play page lists it.
+  home_1: Home on-court player 1 of 5. The full variant sorts the five names alphabetically within the row, so a lineup always
+    occupies the same columns; simple=True keeps on-court order.
+  home_2: Home on-court player 2 of 5 (alphabetical in the full variant, on-court order with simple=True).
+  home_3: Home on-court player 3 of 5 (alphabetical in the full variant, on-court order with simple=True).
+  home_4: Home on-court player 4 of 5 (alphabetical in the full variant, on-court order with simple=True).
+  home_5: Home on-court player 5 of 5 (alphabetical in the full variant, on-court order with simple=True).
+  home_score: Home team's score on the possession's first event row (the page's running score after that event).
+  is_assisted: Count of the possession's events that carry a second player (player_2), usually 0 or 1 -- a count, not a flag,
+    kept from bigballR's get_possessions for parity.
+  is_garbage_time: 1 when any event of the possession falls in garbage time, else 0. Garbage time starts at the first event
+    with a margin of 25+ inside the last 10 minutes of regulation (or later), 20+ inside the last 5 or 15+ inside the last
+    2, while at most 3 of the two teams' 10 starters are on the floor, and lasts to the end of the game. Null when any event
+    has no flag.
+  is_transition: '1 when the possession is a transition possession, else 0: its first event (a steal or a shot type, or a
+    foul in the possessing team''s favour) came within 10 seconds of the possession start and the previous possession ended
+    on a terminal event. Null when any event of the possession has no flag.'
+  last_event_time: Seconds into the possession (poss_length) at its final event.
+  last_event_type: Event type of the possession's final event (e.g. a made shot, a turnover or a defensive rebound).
+  period: 'Period number from the stats.ncaa.org page: 1-2 for halves (3+ = overtime), or 1-4 for quarters (5+ = overtime)
+    on a quarters page (women''s games from 2015-16).'
+  poss_num: Possession number within the game, stamped upstream by the play-by-play chain (parse_ncaa_bb_game_pbp).
+  poss_team: Name of the team in possession.
+  pts: Points scored on the possession, summing shot_value (3, 2, or 1 for a free throw) over its made shots.
+  start_event_type: Event type of the play immediately before the possession's first event (what started it, e.g. a defensive
+    rebound or a made basket). Null for a game's first possession (fix_cross_game_leak=True, the default).
+ncaa_wbb_possessions:
+  away: Away team's name as the stats.ncaa.org play-by-play page lists it.
+  away_1: Away on-court player 1 of 5. The full variant sorts the five names alphabetically within the row, so a lineup always
+    occupies the same columns; simple=True keeps on-court order.
+  away_2: Away on-court player 2 of 5 (alphabetical in the full variant, on-court order with simple=True).
+  away_3: Away on-court player 3 of 5 (alphabetical in the full variant, on-court order with simple=True).
+  away_4: Away on-court player 4 of 5 (alphabetical in the full variant, on-court order with simple=True).
+  away_5: Away on-court player 5 of 5 (alphabetical in the full variant, on-court order with simple=True).
+  away_score: Away team's score on the possession's first event row (the page's running score after that event).
+  first_shot_time: Seconds into the possession (poss_length) at its first field-goal attempt; null when the possession had
+    no shot.
+  first_shot_type: Event type of the possession's first field-goal attempt ("Layup", "Three Point Jumper", "Two Point Jumper",
+    "Hook", "Dunk", "Tip In"); null when the possession had no shot.
+  game_id: stats.ncaa.org game id of the play-by-play page the possession comes from.
+  home: Home team's name as the stats.ncaa.org play-by-play page lists it.
+  home_1: Home on-court player 1 of 5. The full variant sorts the five names alphabetically within the row, so a lineup always
+    occupies the same columns; simple=True keeps on-court order.
+  home_2: Home on-court player 2 of 5 (alphabetical in the full variant, on-court order with simple=True).
+  home_3: Home on-court player 3 of 5 (alphabetical in the full variant, on-court order with simple=True).
+  home_4: Home on-court player 4 of 5 (alphabetical in the full variant, on-court order with simple=True).
+  home_5: Home on-court player 5 of 5 (alphabetical in the full variant, on-court order with simple=True).
+  home_score: Home team's score on the possession's first event row (the page's running score after that event).
+  is_assisted: Count of the possession's events that carry a second player (player_2), usually 0 or 1 -- a count, not a flag,
+    kept from bigballR's get_possessions for parity.
+  is_garbage_time: 1 when any event of the possession falls in garbage time, else 0. Garbage time starts at the first event
+    with a margin of 25+ inside the last 10 minutes of regulation (or later), 20+ inside the last 5 or 15+ inside the last
+    2, while at most 3 of the two teams' 10 starters are on the floor, and lasts to the end of the game. Null when any event
+    has no flag.
+  is_transition: '1 when the possession is a transition possession, else 0: its first event (a steal or a shot type, or a
+    foul in the possessing team''s favour) came within 10 seconds of the possession start and the previous possession ended
+    on a terminal event. Null when any event of the possession has no flag.'
+  last_event_time: Seconds into the possession (poss_length) at its final event.
+  last_event_type: Event type of the possession's final event (e.g. a made shot, a turnover or a defensive rebound).
+  period: 'Period number from the stats.ncaa.org page: 1-2 for halves (3+ = overtime), or 1-4 for quarters (5+ = overtime)
+    on a quarters page (women''s games from 2015-16).'
+  poss_num: Possession number within the game, stamped upstream by the play-by-play chain (parse_ncaa_bb_game_pbp).
+  poss_team: Name of the team in possession.
+  pts: Points scored on the possession, summing shot_value (3, 2, or 1 for a free throw) over its made shots.
+  start_event_type: Event type of the play immediately before the possession's first event (what started it, e.g. a defensive
+    rebound or a made basket). Null for a game's first possession (fix_cross_game_leak=True, the default).
+espn_cfb_play_participants:
+  assisted_by_player_id: ESPN athlete id of the play's first participant ESPN types ``assistedBy``; null when the play has
+    none.
+  assisted_by_player_ids: ESPN athlete ids of every participant ESPN types ``assistedBy`` on the play, in ESPN's order; []
+    when none.
+  assisted_by_player_name: Display name of the play's first participant ESPN types ``assistedBy``; null when the play has
+    none.
+  assisted_by_player_names: Display names of every participant ESPN types ``assistedBy`` on the play, in ESPN's order; []
+    when none.
+  assisted_by_position_id: ESPN position id of the play's first participant ESPN types ``assistedBy`` (see sportsdataverse.football.positions);
+    null when none.
+  forced_by_player_id: ESPN athlete id of the play's first participant ESPN types ``forcedBy``; null when the play has none.
+  forced_by_player_ids: ESPN athlete ids of every participant ESPN types ``forcedBy`` on the play, in ESPN's order; [] when
+    none.
+  forced_by_player_name: Display name of the play's first participant ESPN types ``forcedBy``; null when the play has none.
+  forced_by_player_names: Display names of every participant ESPN types ``forcedBy`` on the play, in ESPN's order; [] when
+    none.
+  forced_by_position_id: ESPN position id of the play's first participant ESPN types ``forcedBy`` (see sportsdataverse.football.positions);
+    null when none.
+  fumbler_player_id: ESPN athlete id of the play's first participant ESPN types ``fumbler``; null when the play has none.
+  fumbler_player_ids: ESPN athlete ids of every participant ESPN types ``fumbler`` on the play, in ESPN's order; [] when none.
+  fumbler_player_name: Display name of the play's first participant ESPN types ``fumbler``; null when the play has none.
+  fumbler_player_names: Display names of every participant ESPN types ``fumbler`` on the play, in ESPN's order; [] when none.
+  fumbler_position_id: ESPN position id of the play's first participant ESPN types ``fumbler`` (see sportsdataverse.football.positions);
+    null when none.
+  game_id: ESPN game (event) id.
+  kicker_player_id: ESPN athlete id of the play's first participant ESPN types ``kicker``; null when the play has none.
+  kicker_player_ids: ESPN athlete ids of every participant ESPN types ``kicker`` on the play, in ESPN's order; [] when none.
+  kicker_player_name: Display name of the play's first participant ESPN types ``kicker``; null when the play has none.
+  kicker_player_names: Display names of every participant ESPN types ``kicker`` on the play, in ESPN's order; [] when none.
+  kicker_position_id: ESPN position id of the play's first participant ESPN types ``kicker`` (see sportsdataverse.football.positions);
+    null when none.
+  pass_defender_player_id: ESPN athlete id of the play's first participant ESPN types ``passDefender``; null when the play
+    has none.
+  pass_defender_player_ids: ESPN athlete ids of every participant ESPN types ``passDefender`` on the play, in ESPN's order;
+    [] when none.
+  pass_defender_player_name: Display name of the play's first participant ESPN types ``passDefender``; null when the play
+    has none.
+  pass_defender_player_names: Display names of every participant ESPN types ``passDefender`` on the play, in ESPN's order;
+    [] when none.
+  pass_defender_position_id: ESPN position id of the play's first participant ESPN types ``passDefender`` (see sportsdataverse.football.positions);
+    null when none.
+  passer_player_id: ESPN athlete id of the play's first participant ESPN types ``passer``; null when the play has none.
+  passer_player_ids: ESPN athlete ids of every participant ESPN types ``passer`` on the play, in ESPN's order; [] when none.
+  passer_player_name: Display name of the play's first participant ESPN types ``passer``; null when the play has none.
+  passer_player_names: Display names of every participant ESPN types ``passer`` on the play, in ESPN's order; [] when none.
+  passer_position_id: ESPN position id of the play's first participant ESPN types ``passer`` (see sportsdataverse.football.positions);
+    null when none.
+  pat_passer_player_id: ESPN athlete id of the play's first participant ESPN types ``patPasser``; null when the play has none.
+  pat_passer_player_ids: ESPN athlete ids of every participant ESPN types ``patPasser`` on the play, in ESPN's order; [] when
+    none.
+  pat_passer_player_name: Display name of the play's first participant ESPN types ``patPasser``; null when the play has none.
+  pat_passer_player_names: Display names of every participant ESPN types ``patPasser`` on the play, in ESPN's order; [] when
+    none.
+  pat_passer_position_id: ESPN position id of the play's first participant ESPN types ``patPasser`` (see sportsdataverse.football.positions);
+    null when none.
+  pat_scorer_player_id: ESPN athlete id of the play's first participant ESPN types ``patScorer``; null when the play has none.
+  pat_scorer_player_ids: ESPN athlete ids of every participant ESPN types ``patScorer`` on the play, in ESPN's order; [] when
+    none.
+  pat_scorer_player_name: Display name of the play's first participant ESPN types ``patScorer``; null when the play has none.
+  pat_scorer_player_names: Display names of every participant ESPN types ``patScorer`` on the play, in ESPN's order; [] when
+    none.
+  pat_scorer_position_id: ESPN position id of the play's first participant ESPN types ``patScorer`` (see sportsdataverse.football.positions);
+    null when none.
+  penalized_player_id: ESPN athlete id of the play's first participant ESPN types ``penalized``; null when the play has none.
+  penalized_player_ids: ESPN athlete ids of every participant ESPN types ``penalized`` on the play, in ESPN's order; [] when
+    none.
+  penalized_player_name: Display name of the play's first participant ESPN types ``penalized``; null when the play has none.
+  penalized_player_names: Display names of every participant ESPN types ``penalized`` on the play, in ESPN's order; [] when
+    none.
+  penalized_position_id: ESPN position id of the play's first participant ESPN types ``penalized`` (see sportsdataverse.football.positions);
+    null when none.
+  play_id: ESPN play id, the join key to the play-by-play frame.
+  punter_player_id: ESPN athlete id of the play's first participant ESPN types ``punter``; null when the play has none.
+  punter_player_ids: ESPN athlete ids of every participant ESPN types ``punter`` on the play, in ESPN's order; [] when none.
+  punter_player_name: Display name of the play's first participant ESPN types ``punter``; null when the play has none.
+  punter_player_names: Display names of every participant ESPN types ``punter`` on the play, in ESPN's order; [] when none.
+  punter_position_id: ESPN position id of the play's first participant ESPN types ``punter`` (see sportsdataverse.football.positions);
+    null when none.
+  receiver_player_id: ESPN athlete id of the play's first participant ESPN types ``receiver``; null when the play has none.
+  receiver_player_ids: ESPN athlete ids of every participant ESPN types ``receiver`` on the play, in ESPN's order; [] when
+    none.
+  receiver_player_name: Display name of the play's first participant ESPN types ``receiver``; null when the play has none.
+  receiver_player_names: Display names of every participant ESPN types ``receiver`` on the play, in ESPN's order; [] when
+    none.
+  receiver_position_id: ESPN position id of the play's first participant ESPN types ``receiver`` (see sportsdataverse.football.positions);
+    null when none.
+  recoverer_player_id: ESPN athlete id of the play's first participant ESPN types ``recoverer``; null when the play has none.
+  recoverer_player_ids: ESPN athlete ids of every participant ESPN types ``recoverer`` on the play, in ESPN's order; [] when
+    none.
+  recoverer_player_name: Display name of the play's first participant ESPN types ``recoverer``; null when the play has none.
+  recoverer_player_names: Display names of every participant ESPN types ``recoverer`` on the play, in ESPN's order; [] when
+    none.
+  recoverer_position_id: ESPN position id of the play's first participant ESPN types ``recoverer`` (see sportsdataverse.football.positions);
+    null when none.
+  returner_player_id: ESPN athlete id of the play's first participant ESPN types ``returner``; null when the play has none.
+  returner_player_ids: ESPN athlete ids of every participant ESPN types ``returner`` on the play, in ESPN's order; [] when
+    none.
+  returner_player_name: Display name of the play's first participant ESPN types ``returner``; null when the play has none.
+  returner_player_names: Display names of every participant ESPN types ``returner`` on the play, in ESPN's order; [] when
+    none.
+  returner_position_id: ESPN position id of the play's first participant ESPN types ``returner`` (see sportsdataverse.football.positions);
+    null when none.
+  rusher_player_id: ESPN athlete id of the play's first participant ESPN types ``rusher``; null when the play has none.
+  rusher_player_ids: ESPN athlete ids of every participant ESPN types ``rusher`` on the play, in ESPN's order; [] when none.
+  rusher_player_name: Display name of the play's first participant ESPN types ``rusher``; null when the play has none.
+  rusher_player_names: Display names of every participant ESPN types ``rusher`` on the play, in ESPN's order; [] when none.
+  rusher_position_id: ESPN position id of the play's first participant ESPN types ``rusher`` (see sportsdataverse.football.positions);
+    null when none.
+  sacked_by_player_id: ESPN athlete id of the play's first participant ESPN types ``sackedBy``; null when the play has none.
+  sacked_by_player_ids: ESPN athlete ids of every participant ESPN types ``sackedBy`` on the play, in ESPN's order; [] when
+    none.
+  sacked_by_player_name: Display name of the play's first participant ESPN types ``sackedBy``; null when the play has none.
+  sacked_by_player_names: Display names of every participant ESPN types ``sackedBy`` on the play, in ESPN's order; [] when
+    none.
+  sacked_by_position_id: ESPN position id of the play's first participant ESPN types ``sackedBy`` (see sportsdataverse.football.positions);
+    null when none.
+  scorer_player_id: ESPN athlete id of the play's first participant ESPN types ``scorer``; null when the play has none.
+  scorer_player_ids: ESPN athlete ids of every participant ESPN types ``scorer`` on the play, in ESPN's order; [] when none.
+  scorer_player_name: Display name of the play's first participant ESPN types ``scorer``; null when the play has none.
+  scorer_player_names: Display names of every participant ESPN types ``scorer`` on the play, in ESPN's order; [] when none.
+  scorer_position_id: ESPN position id of the play's first participant ESPN types ``scorer`` (see sportsdataverse.football.positions);
+    null when none.
+  tackler_player_id: ESPN athlete id of the play's first participant ESPN types ``tackler``; null when the play has none.
+  tackler_player_ids: ESPN athlete ids of every participant ESPN types ``tackler`` on the play, in ESPN's order; [] when none.
+  tackler_player_name: Display name of the play's first participant ESPN types ``tackler``; null when the play has none.
+  tackler_player_names: Display names of every participant ESPN types ``tackler`` on the play, in ESPN's order; [] when none.
+  tackler_position_id: ESPN position id of the play's first participant ESPN types ``tackler`` (see sportsdataverse.football.positions);
+    null when none.
+fox_nba_standings:
+  atlantic: Team's position in the Atlantic division table, from the first column whose header is the table name; null on
+    rows from other tables.
+  away: Away record as a 'W-L' string; null on rows from tables without an AWAY column (the preseason table).
+  central: Team's position in the Central division table, from the first column whose header is the table name; null on rows
+    from other tables.
+  conf: Record against conference opponents as a 'W-L' string; null on rows from tables without a CONF column.
+  div: Record against division opponents as a 'W-L' string; null on rows from tables without a DIV column.
+  eastern_conference: Team's position in the Eastern Conference table, from the first column whose header is the table name;
+    null on rows from other tables.
+  entity_id: 'Fox id of the row''s linked team as a string: the trailing number of the row''s entityLink contentUri.'
+  gb: Games behind the table leader as a one-decimal string (e.g. '11.0'), '-' for the table leader; null on rows from tables
+    without a GB column (the preseason table).
+  home: Home record as a 'W-L' string; null on rows from tables without a HOME column (the preseason table).
+  l10: Record over the last 10 games as a 'W-L' string; null on rows from tables without an L10 column.
+  northwest: Team's position in the Northwest division table, from the first column whose header is the table name; null on
+    rows from other tables.
+  pa: Points allowed per game as a one-decimal string.
+  pacific: Team's position in the Pacific division table, from the first column whose header is the table name; null on rows
+    from other tables.
+  pct: Winning percentage as Fox prints it, a string such as '.524' or '1.000'.
+  pf: Points scored per game as a one-decimal string.
+  section: Title of the Fox standings section the row came from ('CONFERENCE', 'DIVISION' or 'PRESEASON'); each team appears
+    once per section.
+  southeast: Team's position in the Southeast division table, from the first column whose header is the table name; null on
+    rows from other tables.
+  southwest: Team's position in the Southwest division table, from the first column whose header is the table name; null on
+    rows from other tables.
+  strk: Current streak, W or L plus its length (e.g. 'W3', 'L10').
+  team_id: The Fox team id the standings were requested for (the path's team id), as a string; the same on every row.
+  v1: Team nickname as Fox displays it (e.g. 'Celtics'); the column is named v1 because its table header cell is blank.
+  w_l: Win-loss record as a 'W-L' string (e.g. '42-40').
+  western_conference: Team's position in the Western Conference table, from the first column whose header is the table name;
+    null on rows from other tables.
 load_contracts:
   cols: Placeholder column retained in the contracts loader output schema; contains no meaningful data in this context.
   contract_history: List of structs, one per contract in the player's OverTheCap contract history (team, contract_type, status,
@@ -39394,8 +40187,9 @@ load_ncaa_mbb_possessions:
   away_5_clean_name: Normalized (diacritics- and punctuation-cleaned) name of the away slot-5 on-floor player.
   away_5_player_id: stats.ncaa.org player identifier for the away slot-5 on-floor player.
   away_ncaa_team_id: stats.ncaa.org team identifier for the away team.
-  first_shot_time: Clock time in seconds at the possession's first shot attempt, from the possession segmentation engine.
-  first_shot_type: Shot class of the possession's first attempt (rim, mid-range, or three).
+  first_shot_time: Seconds into the possession (poss_length) at its first field-goal attempt; null when the possession had no shot.
+  first_shot_type: stats.ncaa.org event name of the possession's first field-goal attempt ("Layup", "Three Point Jumper", "Two
+    Point Jumper", "Hook", "Dunk", "Tip In"); null when the possession had no shot.
   home_1: Name of the home team's on-floor player in lineup slot 1 for the possession, from the substitution walk-forward.
   home_1_clean_name: Normalized (diacritics- and punctuation-cleaned) name of the home slot-1 on-floor player.
   home_1_player_id: stats.ncaa.org player identifier for the home slot-1 on-floor player.
@@ -39412,16 +40206,18 @@ load_ncaa_mbb_possessions:
   home_5_clean_name: Normalized (diacritics- and punctuation-cleaned) name of the home slot-5 on-floor player.
   home_5_player_id: stats.ncaa.org player identifier for the home slot-5 on-floor player.
   home_ncaa_team_id: stats.ncaa.org team identifier for the home team.
-  is_assisted: 1 when the possession's made field goal was assisted, else 0.
+  is_assisted: Count of the possession's events that carry an assisting second player (0, 1, rarely 2) -- a count, not a
+    flag, kept from the R source for parity.
   is_garbage_time: 1 for possessions in garbage time under the score-margin and clock rule, else 0.
   is_transition: 1 for transition possessions, else 0.
-  last_event_time: Clock time in seconds at the possession's final event.
+  last_event_time: Seconds into the possession (poss_length) at its final event.
   last_event_type: Event type that ended the possession (e.g., a made shot, turnover, or defensive rebound).
   poss_num: Sequential possession number within the game.
   poss_team: Name of the team in possession.
   poss_team_espn_team_id: ESPN team identifier of the team in possession, via the NCAA-to-ESPN crosswalk.
   poss_team_ncaa_team_id: stats.ncaa.org team identifier of the team in possession.
-  start_event_type: Event type that opened the possession (e.g., a defensive rebound or a made-basket inbound).
+  start_event_type: Event type of the play immediately before the possession's first event (what started it,
+    e.g. a defensive rebound or a made basket), not the possession's own first event.
 load_ncaa_mbb_rapm:
   def_poss: Defensive possessions the player was on court for; the regression weight behind drapm.
   drapm: 'Defensive regularized adjusted plus-minus: points prevented per 100 possessions on defense (higher is better defense),
@@ -39905,8 +40701,9 @@ load_ncaa_wbb_possessions:
   away_5_clean_name: Normalized (diacritics- and punctuation-cleaned) name of the away slot-5 on-floor player.
   away_5_player_id: stats.ncaa.org player identifier for the away slot-5 on-floor player.
   away_ncaa_team_id: stats.ncaa.org team identifier for the away team.
-  first_shot_time: Clock time in seconds at the possession's first shot attempt, from the possession segmentation engine.
-  first_shot_type: Shot class of the possession's first attempt (rim, mid-range, or three).
+  first_shot_time: Seconds into the possession (poss_length) at its first field-goal attempt; null when the possession had no shot.
+  first_shot_type: stats.ncaa.org event name of the possession's first field-goal attempt ("Layup", "Three Point Jumper", "Two
+    Point Jumper", "Hook", "Dunk", "Tip In"); null when the possession had no shot.
   home_1: Name of the home team's on-floor player in lineup slot 1 for the possession, from the substitution walk-forward.
   home_1_clean_name: Normalized (diacritics- and punctuation-cleaned) name of the home slot-1 on-floor player.
   home_1_player_id: stats.ncaa.org player identifier for the home slot-1 on-floor player.
@@ -39923,17 +40720,19 @@ load_ncaa_wbb_possessions:
   home_5_clean_name: Normalized (diacritics- and punctuation-cleaned) name of the home slot-5 on-floor player.
   home_5_player_id: stats.ncaa.org player identifier for the home slot-5 on-floor player.
   home_ncaa_team_id: stats.ncaa.org team identifier for the home team.
-  is_assisted: 1 when the possession's made field goal was assisted, else 0.
+  is_assisted: Count of the possession's events that carry an assisting second player (0, 1, rarely 2) -- a count, not a
+    flag, kept from the R source for parity.
   is_garbage_time: 1 for possessions in garbage time under the score-margin and clock rule, else 0.
   is_transition: 1 for transition possessions, else 0.
-  last_event_time: Clock time in seconds at the possession's final event.
+  last_event_time: Seconds into the possession (poss_length) at its final event.
   last_event_type: Event type that ended the possession (e.g., a made shot, turnover, or defensive rebound).
   poss_num: Sequential possession number within the game.
   poss_team: Name of the team in possession.
   poss_team_espn_team_id: ESPN team identifier of the team in possession, via the NCAA-to-ESPN crosswalk.
   poss_team_ncaa_team_id: stats.ncaa.org team identifier of the team in possession.
   season: Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted.
-  start_event_type: Event type that opened the possession (e.g., a defensive rebound or a made-basket inbound).
+  start_event_type: Event type of the play immediately before the possession's first event (what started it,
+    e.g. a defensive rebound or a made basket), not the possession's own first event.
 load_ncaa_wbb_rapm:
   def_poss: Defensive possessions the player was on court for; the regression weight behind drapm.
   drapm: 'Defensive regularized adjusted plus-minus: points prevented per 100 possessions on defense (higher is better defense),
@@ -45969,7 +46768,7 @@ ncaa_espn_team_crosswalk:
   conference_id: SportsDataverse conference (group) id for that season, prefixed by the league (e.g. 'mbb:big-ten'), from the
     {mbb,wbb}_team_group_seasons release table joined on espn_team_id and the season's ending year. Stable across renames and
     shared with the {mbb,wbb}_groups tables; null only when that table has no row for the team that season.
-  espn_conference_id: ESPN conference (group) id for that season as a string (e.g. '23' for the Southeastern Conference). ESPN
+  espn_conference_id: ESPN conference (group) id for that season, Int64 (e.g. 23 for the Southeastern Conference). ESPN
     group ids are sport-scoped (Summit League is 49 in men's, 47 in women's) and can change (men's Summit League was 15 before
     2008). Null on the same rows as conference_id.
   espn_conference_name: Conference name for that season as the {mbb,wbb}_group_seasons table records it (e.g. 'Colonial Athletic
@@ -56899,6 +57698,31 @@ pwhl_game_corsi:
     strength in the PWHL game.
   fenwick_for_pct: Share of all unblocked shot attempts belonging to this team, expressed as a decimal (Fenwick For percentage).
   toi_seconds: Total time on ice in seconds for this team at the tracked strength during the PWHL game.
+pwhl_game_info:
+  game_id: HockeyTech game id (the game_id pwhl_game_info was called with).
+  game_number: Game number within the season as the feed labels it, as text (e.g. '72').
+  game_date: Game date as a long display string (e.g. 'Wednesday, March 19, 2025').
+  game_date_iso: Scheduled start as an ISO 8601 date-time with UTC offset (e.g. '2025-03-19T19:00:00-04:00').
+  start_time: Actual puck-drop time as a local display string with time zone (e.g. '7:08 pm EDT').
+  end_time: Time the game ended as a local display string with time zone (e.g. '9:47 pm EDT').
+  game_duration: Elapsed real time from start to end as 'h:mm' (e.g. '2:39').
+  game_venue: Arena and city as one display string (e.g. 'Coca-Cola Coliseum | Toronto').
+  attendance: Announced attendance.
+  game_status: Game status label (e.g. 'Final').
+  game_season_id: HockeyTech season id the game belongs to (resolve to a season with pwhl_season_id).
+  started: 1 when the game has started, 0 otherwise.
+  final: 1 when the game is final, 0 otherwise.
+  home_team_id: HockeyTech team id of the home team.
+  home_team: Full name of the home team (e.g. 'Toronto Sceptres').
+  home_team_abbr: Abbreviation of the home team (e.g. 'TOR').
+  home_score: Goals scored by the home team.
+  away_team_id: HockeyTech team id of the visiting team.
+  away_team: Full name of the visiting team (e.g. 'New York Sirens').
+  away_team_abbr: Abbreviation of the visiting team (e.g. 'NY').
+  away_score: Goals scored by the visiting team.
+  has_shootout: 1 when the game went to a shootout, 0 otherwise.
+  game_report_url: URL of the official HockeyTech game report.
+  boxscore_url: URL of the HockeyTech text box score.
 pwhl_game_shifts:
   end_s: Shift end time in seconds elapsed from the start of the period.
   goal_on_shift: Number of goals scored while this shift was active (0 or 1 in most cases).
@@ -56912,6 +57736,26 @@ pwhl_leaders:
   team_logo_small: URL of the small-format team logo image for the PWHL leader-board entry.
   type_formatted: Human-readable label for the statistical category driving the leader-board ranking (e.g., "Goals", "Save
     Percentage").
+pwhl_player_info:
+  player_id: HockeyTech player id (the player_id pwhl_player_info was called with).
+  person_id: HockeyTech person id; one person keeps it across player and staff records.
+  first_name: Player's first name.
+  last_name: Player's last name.
+  name: First and last name joined by a space.
+  jersey_number: Jersey number as text, on the player's most recent team.
+  position: Position code (e.g. 'LD', 'C', 'G').
+  shoots: Shooting hand, 'L' or 'R'.
+  catches: Catching hand, 'L' or 'R' (the feed fills it for skaters too).
+  height: Height as feet'inches text (e.g. "5'11").
+  weight: Weight in pounds as text; '0' when the feed has none.
+  birthdate: Date of birth as YYYY-MM-DD.
+  birth_place: Birthplace as 'city, region, country' text.
+  nationality: Nationality label (e.g. 'American').
+  player_type: Player kind, 'skater' or 'goalie'.
+  team_name: Full name of the player's most recent team (e.g. 'Boston Fleet').
+  team_nickname: Nickname of the player's most recent team (e.g. 'Fleet').
+  image_url: URL of the player's 240x240 profile image.
+  current_season_id: HockeyTech season id the feed treats as current when answering (not a season the player played).
 pwhl_player_search:
   all_roles: Pipe- or comma-delimited string listing every positional or roster role associated with the player in the PWHL
     HockeyTech system.
@@ -57092,7 +57936,7 @@ rankings:
   week_display: Poll week as ESPN labels it, e.g. 'Week 6'.
   poll_date: Date the poll was released (ISO 8601, UTC).
   ranked: TRUE for the poll's ranked teams; FALSE for teams that only received votes.
-  team_id: ESPN team id as a string (the dtype of scoreboard home_id / away_id).
+  team_id: ESPN team id (Int64, like scoreboard home_id / away_id).
   rank: Position in the poll (1 = top). Null on vote-receiving rows.
   previous_rank: Position in the previous poll; 0 when the team was unranked then.
   points: Poll points received (0 for polls ESPN ships without points, such as USCHO).
@@ -58800,6 +59644,8 @@ season_teams:
     parameter.
   ticket_url: StubHub ticket-purchase URL for the team, either a bare /performer/{id} link or a slugged team-tickets link;
     an empty string for the leagues where CBS carries no StubHub performer.
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
 shiftcharts:
   detail_code: Numeric code identifying the specific detail type or sub-category within the shift or event record.
   event_details: Serialized details describing the on-ice event associated with the shift, such as play type and participants.
@@ -61896,8 +62742,8 @@ toa_sports_odds:
   outcome_description: Copied from the outcome's description field; all null in the sampled data, which held only h2h outcomes.
   outcome_link: Outcome deep link, only sent when include_links=True; all null in the sampled data, which did not request links.
   outcome_name: Outcome the price applies to; on the sampled h2h rows, a team's full name (e.g. 'Buffalo Bills').
-  outcome_point: Copied from the outcome's point field, stored as text; all null in the sampled data, which held only h2h (moneyline)
-    outcomes.
+  outcome_point: The outcome's point field (the spread or total line, e.g. -3.5) as a float; null for outcomes without one,
+    such as h2h (moneyline), the only market in the sampled data.
   outcome_price: Price of the outcome as an integer in American odds under the default odds_format='american' (e.g. -238, 195).
   outcome_sid: Bookmaker-specific source id for the outcome, only sent when include_sids=True; all null in the sampled data,
     which did not request sids.
@@ -61917,8 +62763,8 @@ toa_sports_odds_history:
   outcome_description: Copied from the outcome's description field; all null in the sampled data, which held only h2h outcomes.
   outcome_link: Outcome deep link, only sent when include_links=True; all null in the sampled data, which did not request links.
   outcome_name: Outcome the price applies to; on the sampled h2h rows, a team's full name (e.g. 'Buffalo Bills').
-  outcome_point: Copied from the outcome's point field, stored as text; all null in the sampled data, which held only h2h (moneyline)
-    outcomes.
+  outcome_point: The outcome's point field (the spread or total line, e.g. -3.5) as a float; null for outcomes without one,
+    such as h2h (moneyline), the only market in the sampled data.
   outcome_price: Price of the outcome as an integer in American odds under the default odds_format='american' (e.g. -238, 195).
   outcome_sid: Bookmaker-specific source id for the outcome, only sent when include_sids=True; all null in the sampled data,
     which did not request sids.
@@ -62076,7 +62922,7 @@ torvik_player_stats:
   mid_pct: Field-goal percentage on non-rim twos as a fraction (0-1).
   min_pct: Share of team minutes played, in percent.
   minutes: Share of team minutes played, in percent (as on the Torvik player page).
-  number: Jersey number as listed (Int64).
+  number: Jersey number as listed, as text ("00" is not "0").
   o_rtg: Offensive rating (points produced per 100 individual possessions).
   obpm: Offensive box plus/minus.
   ogbpm: Offensive game box plus/minus.
@@ -70258,3 +71104,328 @@ ibba_segev_game_crosswalk:
 pleague_team_crosswalk:
   team_id: P. LEAGUE+ site team id (1-8), stable across seasons and renames.
   team_uuid: Preciser team uuid of the same club (team_uuid of the pleague_preciser frames).
+espn_cfb_calendar:
+  season: The season argument as passed (null when the call omits it); ondays=True returns a different frame (dates, dateURL, url).
+  week_label: Week label as ESPN's calendar names it, e.g. Week 1.
+  week_alternate_label: Alternate week label ESPN ships next to week_label; usually the same text.
+  week_detail: Date span of the week as display text, e.g. Aug 22-Sep 7.
+  week_start_date: Start of the week window, an ISO 8601 UTC timestamp string (e.g. 2026-08-22T07:00Z).
+  week_end_date: End of the week window, an ISO 8601 UTC timestamp string (the last minute before the next week).
+  season_type_label: Name of the season segment the week belongs to, e.g. Regular Season or Postseason.
+  season_type_start_date: Start of that season segment, an ISO 8601 UTC timestamp string.
+  season_type_end_date: End of that season segment, an ISO 8601 UTC timestamp string.
+espn_nfl_calendar:
+  season: The season argument as passed (null when the call omits it); ondays=True returns a different frame (dates, dateURL, url).
+  week_label: Week label as ESPN's calendar names it, e.g. Week 1.
+  week_alternate_label: Alternate week label ESPN ships next to week_label; usually the same text.
+  week_detail: Date span of the week as display text.
+  week_start_date: Start of the week window, an ISO 8601 UTC timestamp string.
+  week_end_date: End of the week window, an ISO 8601 UTC timestamp string (the last minute before the next week).
+  season_type_label: Name of the season segment the week belongs to, e.g. Regular Season.
+  season_type_start_date: Start of that season segment, an ISO 8601 UTC timestamp string.
+  season_type_end_date: End of that season segment, an ISO 8601 UTC timestamp string.
+espn_mbb_calendar:
+  datetime: The calendar day as ESPN sends it, an ISO 8601 UTC timestamp string (e.g. 2024-11-04T08:00Z).
+  month: Month of the calendar day as a two-digit string, e.g. 11.
+  dateURL: The calendar day as YYYYMMDD, the dates= value of that day's scoreboard request.
+espn_wbb_calendar:
+  datetime: The calendar day as ESPN sends it, an ISO 8601 UTC timestamp string (e.g. 2024-11-04T08:00Z).
+  month: Month of the calendar day as a two-digit string, e.g. 11.
+  dateURL: The calendar day as YYYYMMDD, the dates= value of that day's scoreboard request.
+espn_nba_calendar:
+  datetime: The calendar day as ESPN sends it, an ISO 8601 UTC timestamp string.
+  month: Month of the calendar day as a two-digit string.
+  dateURL: The calendar day as YYYYMMDD, the dates= value of that day's scoreboard request.
+espn_wnba_calendar:
+  datetime: The calendar day as ESPN sends it, an ISO 8601 UTC timestamp string.
+  month: Month of the calendar day as a two-digit string.
+  dateURL: The calendar day as YYYYMMDD, the dates= value of that day's scoreboard request.
+espn_mlb_calendar:
+  month: Month of the game day, as an integer (1-12).
+  day: Day of the month of the game day, as an integer.
+espn_wbb_standings:
+  conference_abbreviation: Abbreviation of the team's conference as ESPN's standings name it.
+  games_back: Games behind the conference leader (0 for the leader).
+  avg_points_for: Points the team scored per game.
+  avg_points_against: Points the team allowed per game.
+  division_wins: Wins against division opponents, as ESPN's standings report them.
+  division_losses: Losses against division opponents, as ESPN's standings report them.
+espn_wnba_standings:
+  conference_abbreviation: Conference abbreviation, E (Eastern) or W (Western).
+  games_back: Games behind the conference leader (0 for the leader).
+  avg_points_for: Points the team scored per game.
+  avg_points_against: Points the team allowed per game.
+  division_wins: Wins against division opponents; the WNBA has no divisions, so ESPN sends 0.
+  division_losses: Losses against division opponents; the WNBA has no divisions, so ESPN sends 0.
+espn_wnba_draft:
+  athlete_first_name: Drafted player's first name; null when ESPN's draft feed omits it (display_name carries the name).
+  athlete_last_name: Drafted player's last name; null when ESPN's draft feed omits it.
+  athlete_full_name: Drafted player's full name; null when ESPN's draft feed omits it.
+  athlete_position_id: ESPN position id of the drafted player.
+  athlete_height: Drafted player's height as display text, e.g. 6'0".
+  athlete_weight: Drafted player's weight in pounds; null when ESPN does not list it.
+  athlete_age: Drafted player's age at the draft; null when ESPN does not list it.
+  athlete_birth_city: Drafted player's birth city; null when ESPN does not list it.
+  athlete_birth_state: Drafted player's birth state; null when ESPN does not list it.
+  school_name: Name of the player's school or club before the draft, e.g. Huskies, or a country for an international pick.
+  school_abbreviation: Abbreviation of that school or club, e.g. CONN or ND.
+blue_chip_ratio:
+  blue_chip_ratio: Share of the team's recruits in the trailing window rated at or above the division's blue-chip star floor (4+ stars for FBS).
+  n_recruits: Recruits in the trailing window of classes eligible for this season.
+  n_blue_chip: Recruits in that window rated at or above the blue-chip star floor.
+x_era:
+  x_woba: Expected wOBA allowed, the mean of Statcast estimated_woba_using_speedangle over the pitcher's pitches that carry one (batted balls).
+  x_era: Parametric xERA, league ERA + (x_woba - league wOBA) / wOBA scale * PA per 9, from the season's league baselines.
+leverage_index:
+  inning_capped: Inning of the state bucket, capped at 9 (extra innings share the ninth's bucket).
+  half: Half inning of the state bucket, top or bottom.
+  base_state: Base occupancy of the state as three characters (first, second, third), e.g. 1_3 for runners on first and third.
+  outs_start: Outs before the play, 0-2.
+  score_diff_bucket: Home minus away score at the state, clipped to [-6, 6].
+load_rosters:
+  status: Roster status code nflverse assigns the player for that season, e.g. ACT (active), RES (reserve) or INA (inactive).
+elh_game_ids:
+  hokejcz_game_id: hokej.cz game id, the file name of the match/{season}/full/{id}.json key.
+  season: Season as its END year (the season the call asked for).
+  key: Full S3 object key of the play-by-play file.
+  last_modified: Time the file was last written, an ISO 8601 UTC timestamp string from the S3 listing.
+  size: File size in bytes; a file of a few hundred bytes is written ahead of a game and holds no events.
+athlete_contracts:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+athlete_seasons:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+athlete_statisticslog:
+  count: Always null, since the statisticslog payload ships its rows under entries with no page envelope.
+  page_count: Always null, since the statisticslog payload ships its rows under entries with no page envelope.
+athletes_index:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+awards:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+event_broadcasts:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+event_competitors:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+event_odds:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+event_officials:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+event_probabilities:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+events:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+franchises:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+positions:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+recruiting_athletes:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+recruiting_rankings:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+recruiting_years:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+season_athletes:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+season_awards:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+season_futures:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+season_group_children:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+season_group_teams:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+season_groups:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+season_powerindex:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+season_powerindex_leaders:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+season_qbr_week:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+season_recruits:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+season_type_corrections:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+season_types:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+season_week_events:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+season_week_rankings:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+season_weeks:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+seasons:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+talentpicks:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+tournaments:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+venues:
+  count: Total items in the ESPN collection across every page (the page envelope's count), the same on every row; more than the row count means this is one page of several (pass the wrapper's limit= or page=).
+  page_count: Pages the collection spans at the requested limit (the page envelope's pageCount), the same on every row; above 1 means rows are missing from this frame.
+build_player_xwalk:
+  player_key: Normalized name-code (diacritics folded, upper-cased, trailing dots dropped) that joins possessions to rosters.
+build_person_keys:
+  clean_name: Normalized (diacritics- and punctuation-cleaned) player name used to join across the NCAA datasets.
+  high_school: High school the player attended, from the stats.ncaa.org roster listing.
+  ht_inches: Player height converted to total inches from the stats.ncaa.org roster listing.
+  player_key: Normalized name-code (diacritics folded, upper-cased, trailing dots dropped) that joins possessions to rosters.
+expand_xwalk_aliases:
+  player_key: Normalized name-code (diacritics folded, upper-cased, trailing dots dropped) that joins possessions to rosters.
+resolve_possessions:
+  away_1: Name of the away team's on-floor player in lineup slot 1 for the possession, from the substitution walk-forward.
+  away_1_clean_name: Normalized (diacritics- and punctuation-cleaned) name of the away slot-1 on-floor player.
+  away_1_id: Resolved player_id of the away slot-1 player; null for a TEAM slot or an unresolved name.
+  away_1_player_id: stats.ncaa.org player identifier for the away slot-1 on-floor player.
+  away_2: Name of the away team's on-floor player in lineup slot 2 for the possession, from the substitution walk-forward.
+  away_2_clean_name: Normalized (diacritics- and punctuation-cleaned) name of the away slot-2 on-floor player.
+  away_2_id: Resolved player_id of the away slot-2 player; null for a TEAM slot or an unresolved name.
+  away_2_player_id: stats.ncaa.org player identifier for the away slot-2 on-floor player.
+  away_3: Name of the away team's on-floor player in lineup slot 3 for the possession, from the substitution walk-forward.
+  away_3_clean_name: Normalized (diacritics- and punctuation-cleaned) name of the away slot-3 on-floor player.
+  away_3_id: Resolved player_id of the away slot-3 player; null for a TEAM slot or an unresolved name.
+  away_3_player_id: stats.ncaa.org player identifier for the away slot-3 on-floor player.
+  away_4: Name of the away team's on-floor player in lineup slot 4 for the possession, from the substitution walk-forward.
+  away_4_clean_name: Normalized (diacritics- and punctuation-cleaned) name of the away slot-4 on-floor player.
+  away_4_id: Resolved player_id of the away slot-4 player; null for a TEAM slot or an unresolved name.
+  away_4_player_id: stats.ncaa.org player identifier for the away slot-4 on-floor player.
+  away_5: Name of the away team's on-floor player in lineup slot 5 for the possession, from the substitution walk-forward.
+  away_5_clean_name: Normalized (diacritics- and punctuation-cleaned) name of the away slot-5 on-floor player.
+  away_5_id: Resolved player_id of the away slot-5 player; null for a TEAM slot or an unresolved name.
+  away_5_player_id: stats.ncaa.org player identifier for the away slot-5 on-floor player.
+  away_ncaa_team_id: stats.ncaa.org team identifier for the away team.
+  contest_id: stats.ncaa.org contest (game) identifier.
+  first_shot_time: Seconds into the possession (poss_length) at its first field-goal attempt; null when the possession had no shot.
+  first_shot_type: stats.ncaa.org event name of the possession's first field-goal attempt ("Layup", "Three Point Jumper", "Two
+    Point Jumper", "Hook", "Dunk", "Tip In"); null when the possession had no shot.
+  home_1: Name of the home team's on-floor player in lineup slot 1 for the possession, from the substitution walk-forward.
+  home_1_clean_name: Normalized (diacritics- and punctuation-cleaned) name of the home slot-1 on-floor player.
+  home_1_id: Resolved player_id of the home slot-1 player; null for a TEAM slot or an unresolved name.
+  home_1_player_id: stats.ncaa.org player identifier for the home slot-1 on-floor player.
+  home_2: Name of the home team's on-floor player in lineup slot 2 for the possession, from the substitution walk-forward.
+  home_2_clean_name: Normalized (diacritics- and punctuation-cleaned) name of the home slot-2 on-floor player.
+  home_2_id: Resolved player_id of the home slot-2 player; null for a TEAM slot or an unresolved name.
+  home_2_player_id: stats.ncaa.org player identifier for the home slot-2 on-floor player.
+  home_3: Name of the home team's on-floor player in lineup slot 3 for the possession, from the substitution walk-forward.
+  home_3_clean_name: Normalized (diacritics- and punctuation-cleaned) name of the home slot-3 on-floor player.
+  home_3_id: Resolved player_id of the home slot-3 player; null for a TEAM slot or an unresolved name.
+  home_3_player_id: stats.ncaa.org player identifier for the home slot-3 on-floor player.
+  home_4: Name of the home team's on-floor player in lineup slot 4 for the possession, from the substitution walk-forward.
+  home_4_clean_name: Normalized (diacritics- and punctuation-cleaned) name of the home slot-4 on-floor player.
+  home_4_id: Resolved player_id of the home slot-4 player; null for a TEAM slot or an unresolved name.
+  home_4_player_id: stats.ncaa.org player identifier for the home slot-4 on-floor player.
+  home_5: Name of the home team's on-floor player in lineup slot 5 for the possession, from the substitution walk-forward.
+  home_5_clean_name: Normalized (diacritics- and punctuation-cleaned) name of the home slot-5 on-floor player.
+  home_5_id: Resolved player_id of the home slot-5 player; null for a TEAM slot or an unresolved name.
+  home_5_player_id: stats.ncaa.org player identifier for the home slot-5 on-floor player.
+  home_ncaa_team_id: stats.ncaa.org team identifier for the home team.
+  is_assisted: Count of the possession's events that carry an assisting second player (0, 1, rarely 2) -- a count, not a
+    flag, kept from the R source for parity.
+  is_garbage_time: 1 for possessions in garbage time under the score-margin and clock rule, else 0.
+  is_transition: 1 for transition possessions, else 0.
+  last_event_time: Seconds into the possession (poss_length) at its final event.
+  last_event_type: Event type that ended the possession (e.g., a made shot, turnover, or defensive rebound).
+  poss_num: Sequential possession number within the game.
+  poss_team: Name of the team in possession.
+  poss_team_espn_team_id: ESPN team identifier of the team in possession, via the NCAA-to-ESPN crosswalk.
+  poss_team_ncaa_team_id: stats.ncaa.org team identifier of the team in possession.
+  start_event_type: Event type of the play immediately before the possession's first event (what started it,
+    e.g. a defensive rebound or a made basket), not the possession's own first event.
+aggregate_stints:
+  def_ids: Sorted player ids of the five defensive players in the stint (a list).
+  def_team: Team on defense during the stint.
+  is_home_offense: True when the home team is on offense, the home-court term of the RAPM design matrix.
+  n_poss: Possessions the five-on-five unit played together in this offensive direction.
+  off_ids: Sorted player ids of the five offensive players in the stint (a list), from the resolved slot ids.
+  off_team: Team on offense during the stint.
+stint_exposure:
+  def_poss: Defensive possessions the player was on court for; the regression weight behind drapm.
+  off_poss: Offensive possessions the player was on court for; the regression weight behind orapm.
+team_aggregate:
+  def_poss: Team's total defensive possessions (n_poss summed over the stints it defended); the weight behind team_drapm.
+  off_poss: Team's total offensive possessions (n_poss summed over the stints it had the ball); the weight behind team_orapm.
+  team_drapm: Possession-weighted mean, over the team's defensive stints, of the on-floor five's summed drapm (per 100).
+  team_net: 'team_orapm plus team_drapm: the team''s net rating implied by its players'' RAPM.'
+  team_orapm: Possession-weighted mean, over the team's offensive stints, of the on-floor five's summed orapm (per 100).
+season_slice:
+  def_poss: Defensive possessions the player was on court for; the regression weight behind drapm.
+  drapm: 'Defensive regularized adjusted plus-minus: points prevented per 100 possessions on defense (higher is better defense),
+    adjusted for the other 9 players on the floor.'
+  drapm_se: Posterior standard error of drapm (per 100 possessions) from the ridge fit.
+  drapm_se_sampling: Frequentist (sandwich) standard error of the shrunk drapm estimate -- its refit-to-refit repeatability,
+    not an interval for the true effect (see drapm_se); near 0 for a player the ridge holds at zero.
+  off_poss: Offensive possessions the player was on court for; the regression weight behind orapm.
+  orapm: 'Offensive regularized adjusted plus-minus: points contributed per 100 possessions on offense, adjusted for the other
+    9 players on the floor.'
+  orapm_se: Posterior standard error of orapm (per 100 possessions) from the ridge fit.
+  orapm_se_sampling: Frequentist (sandwich) standard error of the shrunk orapm estimate -- its refit-to-refit repeatability,
+    not an interval for the true effect (see orapm_se); near 0 for a player the ridge holds at zero.
+  rapm_net: 'Net RAPM (orapm plus drapm): overall point contribution per 100 possessions. Verified against live data: rapm_net
+    == orapm + drapm exactly.'
+  rapm_net_se: Posterior standard error of rapm_net (per 100 possessions) from the ridge fit.
+  rapm_net_se_sampling: Frequentist (sandwich) standard error of the shrunk rapm_net estimate -- its refit-to-refit repeatability,
+    not an interval for the true effect (see rapm_net_se); near 0 for a player the ridge holds at zero.
+possession_deciles:
+  decile: Possession-exposure bin, 0 = the players with the fewest possessions.
+  median_drapm_se: Median drapm_se of the players in the bin.
+  median_drapm_se_sampling: Median drapm_se_sampling of the players in the bin.
+  median_orapm_se: Median orapm_se of the players in the bin.
+  median_orapm_se_sampling: Median orapm_se_sampling of the players in the bin.
+  median_rapm_net_se: Median rapm_net_se of the players in the bin.
+  median_rapm_net_se_sampling: Median rapm_net_se_sampling of the players in the bin.
+  n: Number of players in the bin.
+  poss_max: Most possessions of any player in the bin.
+  poss_min: Fewest possessions of any player in the bin.
+  coverage_orapm: Share of the bin's players whose split-half orapm difference falls within 2 posterior SEs (|z| <= 2);
+    present only on split_half_se_check per_player input, should sit near 0.95.
+  coverage_orapm_sampling: Share of the bin's players whose split-half orapm difference falls within 2 sampling SEs (|z|
+    <= 2); present only on split_half_se_check per_player input, should sit near 0.95.
+  coverage_drapm: Share of the bin's players whose split-half drapm difference falls within 2 posterior SEs (|z| <= 2);
+    present only on split_half_se_check per_player input, should sit near 0.95.
+  coverage_drapm_sampling: Share of the bin's players whose split-half drapm difference falls within 2 sampling SEs (|z|
+    <= 2); present only on split_half_se_check per_player input, should sit near 0.95.
+  coverage_rapm_net: Share of the bin's players whose split-half rapm_net difference falls within 2 posterior SEs (|z|
+    <= 2); present only on split_half_se_check per_player input, should sit near 0.95.
+  coverage_rapm_net_sampling: Share of the bin's players whose split-half rapm_net difference falls within 2 sampling
+    SEs (|z| <= 2); present only on split_half_se_check per_player input, should sit near 0.95.
+stack_seasons:
+  def_ids: Sorted player ids of the five defensive players in the stint (a list).
+  def_team: Team on defense during the stint.
+  fit_weight: 'Season weight in the pooled fit: decay ** (target - season).'
+  is_home_offense: True when the home team is on offense, the home-court term of the RAPM design matrix.
+  n_poss: Possessions the five-on-five unit played together in this offensive direction.
+  off_ids: Sorted player ids of the five offensive players in the stint (a list), from the resolved slot ids.
+  off_team: Team on offense during the stint.
+  y_offset: The row's season per-100 scoring level minus the target season's, so the pool does not credit era pace.

@@ -317,6 +317,7 @@ const rows = await sdv.cfb.loadCfbPbp({ seasons: 2024, columns: ['game_id', 'per
 | `homeFavorite` | `boolean` | True when the home team was favoured by the spread. |
 | `gameSpreadAvailable` | `boolean` | True when a spread was available for the game. |
 | `overUnder` | `number` | Over/under total used as a model input. |
+| `overUnderAvailable` | `boolean` | False when overUnder is the 55.5 default (the line had a spread and no total), True for a market total; null when an odds_override did not say. Absent from releases built before the column existed. |
 | `homeTeamSpread` | `number` | ESPN's home-team Spread for the game, stamped on every play. |
 | `clock.minutes` | `number \| bigint` | Minutes remaining on the game clock at the play. |
 | `clock.seconds` | `number \| bigint` | Seconds component of the game clock at the play. |
@@ -354,7 +355,7 @@ const rows = await sdv.cfb.loadCfbPbp({ seasons: 2024, columns: ['game_id', 'per
 | `start.defPosTeamTimeouts` | `number \| bigint` | ESPN's `defPosTeamTimeouts` value for the play state at the start of the play. |
 | `end.posTeamTimeouts` | `number \| bigint` | ESPN's `posTeamTimeouts` value for the play state at the end of the play. |
 | `end.defPosTeamTimeouts` | `number \| bigint` | ESPN's `defPosTeamTimeouts` value for the play state at the end of the play. |
-| `firstHalfKickoffTeamId` | `string` | ESPN id of the team that received the opening kickoff. |
+| `firstHalfKickoffTeamId` | `string` | ESPN id of the team that kicked the opening kickoff (it receives the second-half kickoff), one value per game. |
 | `start.yard` | `number \| bigint` | ESPN's `yard` value for the play state at the start of the play. |
 | `end.yard` | `number \| bigint` | ESPN's `yard` value for the play state at the end of the play. |
 | `lag_scoringPlay` | `boolean` | Value of scoringPlay on the previous play, used for sequence-aware derivations. |
@@ -466,10 +467,10 @@ const rows = await sdv.cfb.loadCfbPbp({ seasons: 2024, columns: ['game_id', 'per
 | `stopped_run` | `boolean` | True when the rush was stopped at or behind the line of scrimmage. |
 | `opportunity_run` | `boolean` | True when a rush reached 4 yards -- the carries on which the blocking did its job. Matches cfbfastR's espn_cfb_15 definition. Assets published before the 2026-08 fix carry the inverted (4 yards or fewer) flag. |
 | `highlight_run` | `boolean` | True when the rush gained 8 or more yards. |
-| `adj_rush_yardage` | `number \| bigint` | Rushing yards capped at 8, the input to the line-yards decomposition. |
-| `line_yards` | `number` | Yards credited to the offensive line on a rush, using the standard sliding scale: 1.2x the capped yardage on a loss, all of it through 3 yards, half of each yard from 4 to 8, and a 5.5-yard ceiling beyond that. |
-| `second_level_yards` | `number` | Rushing yards earned from 4 to 8, split evenly between line and carrier under the line-yards decomposition. |
-| `open_field_yards` | `number \| bigint` | Rushing yards gained beyond 8, credited to the ball carrier rather than the line. |
+| `adj_rush_yardage` | `number \| bigint` | Rushing yards capped at 10, the input to the line-yards decomposition. Assets published before the 2026-10 line-yards fix cap at 8. |
+| `line_yards` | `number` | Yards credited to the offensive line on a rush, on the standard adjusted-line-yards band: 1.2x the yardage on a loss, all of yards 0-4, half of each yard from 5 to 10, and nothing beyond 10 (a 7-yard ceiling). Line, second-level and open-field yards sum to the carry on every gain. Assets published before the 2026-10 line-yards fix carry the old band (all of yards 0-3, half of 4-8, a 5.5-yard ceiling). |
+| `second_level_yards` | `number` | The ball carrier's half of yards 5-10 of a rush (the line takes the other half); 0 on carries of 4 yards or fewer. Assets published before the 2026-10 line-yards fix carry the old band here: half of yards 4-8 in college football, half of yards 5-8 in the NFL (where the old parts came up half a yard short of the carry). |
+| `open_field_yards` | `number \| bigint` | Rushing yards gained beyond 10, credited to the ball carrier rather than the line. Assets published before the 2026-10 line-yards fix count the yards beyond 8. |
 | `highlight_yards` | `number` | Second-level plus open-field yards -- the yardage credited to the carrier. |
 | `opp_highlight_yards` | `number` | Highlight yards earned on opportunity runs, isolating carrier production on carries where the blocking succeeded. Assets published before the 2026-08 fix are identically 0 here, because the inverted opportunity_run gate could never co-occur with non-zero highlight yards. |
 | `short_rush_success` | `boolean` | True when a short-yardage rush gained the yardage needed. |
@@ -3022,7 +3023,7 @@ const rows = await sdv.cfb.loadCfbTeamSummaries({ seasons: 2024 });
 | `turnover_margin_rank` | `number` | National rank of turnover_margin, 1 = largest margin. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. |
 | `havoc_margin_rank` | `number` | National rank of havoc_margin, 1 = largest margin. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. |
 | `total_available_yards_off` | `number` | Available yards are the yards a drive could theoretically gain, summed from each drive's starting distance to the opponent goal line. Total available yards on the team's own drives (ESPN's drive team). A drive's start is its header oriented to agree with its first snap, or that snap when the header is a 0 or missing placeholder. |
-| `total_gained_yards_off` | `number \| bigint` | Total yards the team gained across its own drives, each drive's gain capped at its available yards. |
+| `total_gained_yards_off` | `number` | Total yards the team gained across its own drives, each drive's gain capped at its available yards. |
 | `pts_per_opp_off_n` | `number \| bigint` | Sample size behind pts_per_opp_off: the number of scoring opportunities on the team's own drives. 0 when there were none, and pts_per_opp_off is then null. |
 | `pts_per_drive_off_n` | `number \| bigint` | Sample size behind pts_per_drive_off: the number of the team's own drives it is computed over. 0 when there were none, and pts_per_drive_off is then null. Can sit slightly below drives_off, which also counts drive ids holding only a stray snap. |
 | `start_position_off` | `number` | Average drive start position, measured in yards from the opponent goal line, with the team on offense. |
@@ -3037,7 +3038,7 @@ const rows = await sdv.cfb.loadCfbTeamSummaries({ seasons: 2024 });
 | `start_position_off_rank` | `number` | National rank of the team's average drive start position, measured in yards from the opponent goal line with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. |
 | `drive_start_ep_off_rank` | `number` | National rank of the team's average expected points (EP) at the first snap of a drive, over the drives the side owned with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. |
 | `total_available_yards_def` | `number` | Available yards are the yards a drive could theoretically gain, summed from each drive's starting distance to the opponent goal line. Total available yards on opponents' drives against the team's defense (ESPN's drive team). A drive's start is its header oriented to agree with its first snap, or that snap when the header is a 0 or missing placeholder. |
-| `total_gained_yards_def` | `number \| bigint` | Total yards the team allowed across opponents' drives against its defense, each drive's gain capped at its available yards. |
+| `total_gained_yards_def` | `number` | Total yards the team allowed across opponents' drives against its defense, each drive's gain capped at its available yards. |
 | `pts_per_opp_def_n` | `number \| bigint` | Sample size behind pts_per_opp_def: the number of scoring opportunities on opponents' drives against the team's defense. 0 when there were none, and pts_per_opp_def is then null. |
 | `pts_per_drive_def_n` | `number \| bigint` | Sample size behind pts_per_drive_def: the number of opponents' drives against the team's defense it is computed over. 0 when there were none, and pts_per_drive_def is then null. Can sit slightly below drives_def, which also counts drive ids holding only a stray snap. |
 | `start_position_def` | `number` | Average drive start position, measured in yards from the opponent goal line, with the team on defense (i.e. allowed to opponents). |
@@ -3052,7 +3053,7 @@ const rows = await sdv.cfb.loadCfbTeamSummaries({ seasons: 2024 });
 | `start_position_def_rank` | `number` | National rank of the team's average drive start position, measured in yards from the opponent goal line with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. |
 | `drive_start_ep_def_rank` | `number` | National rank of the team's average expected points (EP) at the first snap of a drive, over the drives the side owned with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. |
 | `total_available_yards_margin` | `number` | Available yards on the team's own drives minus available yards on drives it defended. |
-| `total_gained_yards_margin` | `number \| bigint` | Yards the team gained minus yards it allowed. |
+| `total_gained_yards_margin` | `number` | Yards the team gained minus yards it allowed. |
 | `available_yards_pct_margin` | `number` | Available-yards share gained by the offense minus the share allowed by the defense. Higher is better. |
 | `pts_per_opp_margin` | `number` | pts_per_opp_off minus pts_per_opp_def. Null when either side is null. Higher is better. |
 | `pts_per_drive_margin` | `number` | pts_per_drive_off minus pts_per_drive_def: attributed drive-result points per owned drive minus those per opponents' owned drive. Null when either side is null. Higher is better. |
@@ -3623,6 +3624,13 @@ const rows = await sdv.cfb.loadCfbTeamSummaries({ seasons: 2024 });
 | `net_adj_epa_conf_pct` | `number` | Percentile (0-100) of net_adj_epa among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. |
 | `off_strength_faced_conf_pct` | `number` | Percentile (0-100) of off_strength_faced among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. |
 | `def_strength_faced_conf_pct` | `number` | Percentile (0-100) of def_strength_faced among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. |
+| `deserved_wins` | `number` | Sum of the team's paper_share over the games in the row's span: the wins the Paper Index says its play earned (sportsdataverse.analytics.paper_index.deserved_wins). |
+| `luck_wins` | `number` | wins minus deserved_wins; positive means the team won more games than its play deserved. |
+| `luck_z` | `number` | luck_wins / sqrt(sum(p * (1 - p))) over the team's game shares p: luck in standard deviations of a sum of independent Bernoulli(p) wins; null when that variance is 0. |
+| `luck_wins_rank` | `number` | National rank of luck_wins, 1 = the most wins above what its play deserved. Null when luck_wins is null: unranked, not last. |
+| `luck_z_rank` | `number` | National rank of luck_z, 1 = the luckiest in standard deviations. Null when luck_z is null: unranked, not last. |
+| `paper_index_games_n` | `number \| bigint` | Games in the row's span that the Paper Index scored for the team (completed, not tied, both sides at least 20 scrimmage snaps); deserved_wins and luck are sums over these games. |
+| `paper_index_span` | `string` | Where the season sits relative to the Paper Index fit (sportsdataverse.analytics.paper_index TRAIN_SEASONS / HOLDOUT_SEASONS): train (in-sample, its games were part of the fit), holdout (scored out of sample) or out_of_span (scored, never seen by the fit). |
 
 ## `loadCfbAdvTeamGamelog`
 
@@ -3984,7 +3992,7 @@ const rows = await sdv.cfb.loadCfbTeamSummariesWeekly({ seasons: 2024 });
 | `turnover_margin_rank` | `number` | National rank of turnover_margin, 1 = largest margin. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. |
 | `havoc_margin_rank` | `number` | National rank of havoc_margin, 1 = largest margin. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. |
 | `total_available_yards_off` | `number` | Available yards are the yards a drive could theoretically gain, summed from each drive's starting distance to the opponent goal line. Total available yards on the team's own drives (ESPN's drive team). A drive's start is its header oriented to agree with its first snap, or that snap when the header is a 0 or missing placeholder. |
-| `total_gained_yards_off` | `number \| bigint` | Total yards the team gained across its own drives, each drive's gain capped at its available yards. |
+| `total_gained_yards_off` | `number` | Total yards the team gained across its own drives, each drive's gain capped at its available yards. |
 | `pts_per_opp_off_n` | `number \| bigint` | Sample size behind pts_per_opp_off: the number of scoring opportunities on the team's own drives. 0 when there were none, and pts_per_opp_off is then null. |
 | `pts_per_drive_off_n` | `number \| bigint` | Sample size behind pts_per_drive_off: the number of the team's own drives it is computed over. 0 when there were none, and pts_per_drive_off is then null. Can sit slightly below drives_off, which also counts drive ids holding only a stray snap. |
 | `start_position_off` | `number` | Average drive start position, measured in yards from the opponent goal line, with the team on offense. |
@@ -3999,7 +4007,7 @@ const rows = await sdv.cfb.loadCfbTeamSummariesWeekly({ seasons: 2024 });
 | `start_position_off_rank` | `number` | National rank of the team's average drive start position, measured in yards from the opponent goal line with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. |
 | `drive_start_ep_off_rank` | `number` | National rank of the team's average expected points (EP) at the first snap of a drive, over the drives the side owned with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. |
 | `total_available_yards_def` | `number` | Available yards are the yards a drive could theoretically gain, summed from each drive's starting distance to the opponent goal line. Total available yards on opponents' drives against the team's defense (ESPN's drive team). A drive's start is its header oriented to agree with its first snap, or that snap when the header is a 0 or missing placeholder. |
-| `total_gained_yards_def` | `number \| bigint` | Total yards the team allowed across opponents' drives against its defense, each drive's gain capped at its available yards. |
+| `total_gained_yards_def` | `number` | Total yards the team allowed across opponents' drives against its defense, each drive's gain capped at its available yards. |
 | `pts_per_opp_def_n` | `number \| bigint` | Sample size behind pts_per_opp_def: the number of scoring opportunities on opponents' drives against the team's defense. 0 when there were none, and pts_per_opp_def is then null. |
 | `pts_per_drive_def_n` | `number \| bigint` | Sample size behind pts_per_drive_def: the number of opponents' drives against the team's defense it is computed over. 0 when there were none, and pts_per_drive_def is then null. Can sit slightly below drives_def, which also counts drive ids holding only a stray snap. |
 | `start_position_def` | `number` | Average drive start position, measured in yards from the opponent goal line, with the team on defense (i.e. allowed to opponents). |
@@ -4014,7 +4022,7 @@ const rows = await sdv.cfb.loadCfbTeamSummariesWeekly({ seasons: 2024 });
 | `start_position_def_rank` | `number` | National rank of the team's average drive start position, measured in yards from the opponent goal line with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. |
 | `drive_start_ep_def_rank` | `number` | National rank of the team's average expected points (EP) at the first snap of a drive, over the drives the side owned with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. |
 | `total_available_yards_margin` | `number` | Available yards on the team's own drives minus available yards on drives it defended. |
-| `total_gained_yards_margin` | `number \| bigint` | Yards the team gained minus yards it allowed. |
+| `total_gained_yards_margin` | `number` | Yards the team gained minus yards it allowed. |
 | `available_yards_pct_margin` | `number` | Available-yards share gained by the offense minus the share allowed by the defense. Higher is better. |
 | `pts_per_opp_margin` | `number` | pts_per_opp_off minus pts_per_opp_def. Null when either side is null. Higher is better. |
 | `pts_per_drive_margin` | `number` | pts_per_drive_off minus pts_per_drive_def: attributed drive-result points per owned drive minus those per opponents' owned drive. Null when either side is null. Higher is better. |
@@ -4585,6 +4593,13 @@ const rows = await sdv.cfb.loadCfbTeamSummariesWeekly({ seasons: 2024 });
 | `net_adj_epa_conf_pct` | `number` | Percentile (0-100) of net_adj_epa among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. |
 | `off_strength_faced_conf_pct` | `number` | Percentile (0-100) of off_strength_faced among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. |
 | `def_strength_faced_conf_pct` | `number` | Percentile (0-100) of def_strength_faced among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. |
+| `deserved_wins` | `number` | Sum of the team's paper_share over the games in the row's span: the wins the Paper Index says its play earned (sportsdataverse.analytics.paper_index.deserved_wins). |
+| `luck_wins` | `number` | wins minus deserved_wins; positive means the team won more games than its play deserved. |
+| `luck_z` | `number` | luck_wins / sqrt(sum(p * (1 - p))) over the team's game shares p: luck in standard deviations of a sum of independent Bernoulli(p) wins; null when that variance is 0. |
+| `luck_wins_rank` | `number` | National rank of luck_wins, 1 = the most wins above what its play deserved. Null when luck_wins is null: unranked, not last. |
+| `luck_z_rank` | `number` | National rank of luck_z, 1 = the luckiest in standard deviations. Null when luck_z is null: unranked, not last. |
+| `paper_index_games_n` | `number \| bigint` | Games in the row's span that the Paper Index scored for the team (completed, not tied, both sides at least 20 scrimmage snaps); deserved_wins and luck are sums over these games. |
+| `paper_index_span` | `string` | Where the season sits relative to the Paper Index fit (sportsdataverse.analytics.paper_index TRAIN_SEASONS / HOLDOUT_SEASONS): train (in-sample, its games were part of the fit), holdout (scored out of sample) or out_of_span (scored, never seen by the fit). |
 | `through_week` | `number` | Regular-season week this cumulative snapshot covers -- the row reflects the team's state through the end of that week. One asset holds every week, so filter on this column. |
 
 ## `loadCfbUsagePlayers`
