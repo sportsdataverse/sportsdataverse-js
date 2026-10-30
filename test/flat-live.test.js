@@ -88,7 +88,7 @@ run('HockeyTech live smoke (PWHL)', function () {
   });
 });
 
-run('247Sports live smoke (sports247 + sports247_site_pages; needs impit)', function () {
+run('247Sports live smoke (public api.247sports.com RDB routes; needs impit)', function () {
   this.timeout(60000);
 
   // Known-positive control first: the RDB teams directory is a public route, so
@@ -99,25 +99,26 @@ run('247Sports live smoke (sports247 + sports247_site_pages; needs impit)', func
     rows[0].should.have.property('team_id');
   });
 
-  it('sports247_recruits (guest-JWT route) returns parsed recruits', async () => {
-    const rows = await sdv.sports247.sports247_recruits({ year: 2026, page_size: 3, parsed: true });
-    rows.length.should.be.above(0);
-    rows[0].should.have.property('key');
-  });
-
   it('sports247_institution_rankings ranks page one from 1', async () => {
     const rows = await sdv.sports247.sports247_institution_rankings({ year: 2026, page_size: 3, parsed: true });
     rows[0].rank.should.equal(1);
   });
-
 });
 
 // 247sports.com's origin (behind Varnish) answers every cache MISS from a flagged IP
 // HTTP 406 with an empty body, whatever the headers or impit profile (probed
 // 2026-10-29: GitHub runners every week; the droplet after ~40 requests), while the
-// api.247sports.com RDB routes above keep serving. Own gate, never set in CI.
-(process.env.SDV_SPORTS247_SITE_LIVE === '1' ? describe : describe.skip)('247Sports site pages live smoke (SDV_SPORTS247_SITE_LIVE=1; needs impit)', function () {
+// public api.247sports.com RDB routes above keep serving. Both the site pages and
+// the guest-JWT mint (GET https://247sports.com/) go through that origin, so they
+// have their own gate, never set in CI.
+(process.env.SDV_SPORTS247_SITE_LIVE === '1' ? describe : describe.skip)('247Sports origin live smoke (site pages + guest JWT; SDV_SPORTS247_SITE_LIVE=1; needs impit)', function () {
   this.timeout(60000);
+
+  it('sports247_recruits (guest-JWT route) returns parsed recruits', async () => {
+    const rows = await sdv.sports247.sports247_recruits({ year: 2026, page_size: 3, parsed: true });
+    rows.length.should.be.above(0);
+    rows[0].should.have.property('key');
+  });
 
   it('sports247_site_pages_institution returns one Institution row', async () => {
     const rows = await sdv.sports247.sports247_site_pages_institution({ key: 24099, parsed: true });

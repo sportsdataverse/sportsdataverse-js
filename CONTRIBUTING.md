@@ -361,7 +361,8 @@ for the wire cases the tests replay.
 - Live suites are gated: `SDV_LIVE=1` (ESPN + keyless families, run by the weekly
   `live-smoke.yml`); `SDV_NBA_STATS_LIVE=1` (stats.nba.com / stats.wnba.com),
   `SDV_TORVIK_LIVE=1` (barttorvik.com 403s datacenter IPs) and
-  `SDV_SPORTS247_SITE_LIVE=1` (247sports.com site pages 406 flagged IPs), all three
+  `SDV_SPORTS247_SITE_LIVE=1` (247sports.com site pages + guest-JWT mint; the origin
+  406s flagged IPs), all three
   never in CI; and per-family gates for the subscription families (`SDV_PFF_LIVE`,
   `SDV_KENPOM_LIVE`, `SDV_NFL_PRO_LIVE`).
 
