@@ -208,7 +208,11 @@ export async function sports247SitePagesGet(
 
 // ponytail: pinned profile — impit's bare "chrome" (chrome124) gets HTTP 406
 // from the 247sports.com `.json` edge (probed 2026-10-05; chrome131+ and firefox
-// pass). Bump when the edge starts rejecting this one.
+// pass). Bump when the edge starts rejecting this one. A 406 alone is not that
+// signal: the 247sports.com origin also answers an empty 406 to every uncached
+// request from an IP it has flagged, whatever the profile or headers (GitHub
+// runners every week; a datacenter IP after ~40 requests; probed 2026-10-29).
+// Retry from a residential IP before bumping. api.247sports.com is unaffected.
 const transport = createImpersonatingTransport({ browser: IMPIT_PROFILE });
 // 403 here is the fingerprint block or a logged-in-only route — never load.
 const retryStatuses = DEFAULT_RETRY_STATUSES.filter((s) => s !== 403);
