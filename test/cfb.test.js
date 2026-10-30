@@ -189,7 +189,9 @@ live('CFB Teams', () => {
 
     });
 });
-live('CFB Recruiting', () => {
+// 247sports.com HTML pages: the origin refuses flagged datacenter IPs (503 on GitHub-hosted
+// runners, an empty 406 elsewhere), so these run only from a residential IP.
+(process.env.SDV_SPORTS247_SITE_LIVE === '1' ? describe : describe.skip)('CFB Recruiting (SDV_SPORTS247_SITE_LIVE)', () => {
 
     it('should return a promise for a list of individual rankings for the given year', async () => {
         const data = await app.cfb.getPlayerRankings({
