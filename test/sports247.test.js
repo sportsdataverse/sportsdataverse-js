@@ -324,6 +324,15 @@ describe('sports247: guest JWT + transport (offline)', () => {
     _impitLoader.load = async () => {
       throw new Error("Cannot find package 'impit'");
     };
+    // The module-level default transport caches its impit client once created; a
+    // live suite that ran first (SDV_LIVE=1) already built it, so the patched
+    // loader would never be consulted. Fresh transports exercise the same path.
+    configure({
+      transport: {
+        sports247: createImpersonatingTransport({ browser: 'chrome142' }),
+        sports247_site_pages: createImpersonatingTransport({ browser: 'chrome142' }),
+      },
+    });
     try {
       for (const call of [() => sdv.sports247.sports247Teams(), () => sdv.sports247.sports247SitePagesInstitution({ key: 1 })]) {
         const err = await call().then(() => null, (e) => e);
