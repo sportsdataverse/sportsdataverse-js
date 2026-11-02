@@ -405,6 +405,8 @@ export interface LoadCfbPbpRow {
   gameSpreadAvailable?: boolean | null;
   /** Over/under total used as a model input. `Float64` */
   overUnder?: number | null;
+  /** False when overUnder is the 55.5 default (the line had a spread and no total), True for a market total; null when an odds_override did not say. Absent from releases built before the column existed. `Boolean` */
+  overUnderAvailable?: boolean | null;
   /** ESPN's home-team Spread for the game, stamped on every play. `Float64` */
   homeTeamSpread?: number | null;
   /** Minutes remaining on the game clock at the play. `Int64` */
@@ -479,7 +481,7 @@ export interface LoadCfbPbpRow {
   "end.posTeamTimeouts"?: number | bigint | null;
   /** ESPN's `defPosTeamTimeouts` value for the play state at the end of the play. `Int64` */
   "end.defPosTeamTimeouts"?: number | bigint | null;
-  /** ESPN id of the team that received the opening kickoff. `Int64` (an id) */
+  /** ESPN id of the team that kicked the opening kickoff (it receives the second-half kickoff), one value per game. `Int64` (an id) */
   firstHalfKickoffTeamId?: string | null;
   /** ESPN's `yard` value for the play state at the start of the play. `Int64` */
   "start.yard"?: number | bigint | null;
@@ -703,13 +705,13 @@ export interface LoadCfbPbpRow {
   opportunity_run?: boolean | null;
   /** True when the rush gained 8 or more yards. `Boolean` */
   highlight_run?: boolean | null;
-  /** Rushing yards capped at 8, the input to the line-yards decomposition. `Int64` */
+  /** Rushing yards capped at 10, the input to the line-yards decomposition. Assets published before the 2026-10 line-yards fix cap at 8. `Int64` */
   adj_rush_yardage?: number | bigint | null;
-  /** Yards credited to the offensive line on a rush, using the standard sliding scale: 1.2x the capped yardage on a loss, all of it through 3 yards, half of each yard from 4 to 8, and a 5.5-yard ceiling beyond that. `Float64` */
+  /** Yards credited to the offensive line on a rush, on the standard adjusted-line-yards band: 1.2x the yardage on a loss, all of yards 0-4, half of each yard from 5 to 10, and nothing beyond 10 (a 7-yard ceiling). Line, second-level and open-field yards sum to the carry on every gain. Assets published before the 2026-10 line-yards fix carry the old band (all of yards 0-3, half of 4-8, a 5.5-yard ceiling). `Float64` */
   line_yards?: number | null;
-  /** Rushing yards earned from 4 to 8, split evenly between line and carrier under the line-yards decomposition. `Float64` */
+  /** The ball carrier's half of yards 5-10 of a rush (the line takes the other half); 0 on carries of 4 yards or fewer. Assets published before the 2026-10 line-yards fix carry the old band here: half of yards 4-8 in college football, half of yards 5-8 in the NFL (where the old parts came up half a yard short of the carry). `Float64` */
   second_level_yards?: number | null;
-  /** Rushing yards gained beyond 8, credited to the ball carrier rather than the line. `Int64` */
+  /** Rushing yards gained beyond 10, credited to the ball carrier rather than the line. Assets published before the 2026-10 line-yards fix count the yards beyond 8. `Int64` */
   open_field_yards?: number | bigint | null;
   /** Second-level plus open-field yards -- the yardage credited to the carrier. `Float64` */
   highlight_yards?: number | null;
@@ -4211,8 +4213,8 @@ export interface LoadCfbTeamSummariesRow {
   havoc_margin_rank?: number | null;
   /** Available yards are the yards a drive could theoretically gain, summed from each drive's starting distance to the opponent goal line. Total available yards on the team's own drives (ESPN's drive team). A drive's start is its header oriented to agree with its first snap, or that snap when the header is a 0 or missing placeholder. `Float64` */
   total_available_yards_off?: number | null;
-  /** Total yards the team gained across its own drives, each drive's gain capped at its available yards. `Int64` */
-  total_gained_yards_off?: number | bigint | null;
+  /** Total yards the team gained across its own drives, each drive's gain capped at its available yards. `Float64` */
+  total_gained_yards_off?: number | null;
   /** Sample size behind pts_per_opp_off: the number of scoring opportunities on the team's own drives. 0 when there were none, and pts_per_opp_off is then null. `Int64` */
   pts_per_opp_off_n?: number | bigint | null;
   /** Sample size behind pts_per_drive_off: the number of the team's own drives it is computed over. 0 when there were none, and pts_per_drive_off is then null. Can sit slightly below drives_off, which also counts drive ids holding only a stray snap. `Int64` */
@@ -4241,8 +4243,8 @@ export interface LoadCfbTeamSummariesRow {
   drive_start_ep_off_rank?: number | null;
   /** Available yards are the yards a drive could theoretically gain, summed from each drive's starting distance to the opponent goal line. Total available yards on opponents' drives against the team's defense (ESPN's drive team). A drive's start is its header oriented to agree with its first snap, or that snap when the header is a 0 or missing placeholder. `Float64` */
   total_available_yards_def?: number | null;
-  /** Total yards the team allowed across opponents' drives against its defense, each drive's gain capped at its available yards. `Int64` */
-  total_gained_yards_def?: number | bigint | null;
+  /** Total yards the team allowed across opponents' drives against its defense, each drive's gain capped at its available yards. `Float64` */
+  total_gained_yards_def?: number | null;
   /** Sample size behind pts_per_opp_def: the number of scoring opportunities on opponents' drives against the team's defense. 0 when there were none, and pts_per_opp_def is then null. `Int64` */
   pts_per_opp_def_n?: number | bigint | null;
   /** Sample size behind pts_per_drive_def: the number of opponents' drives against the team's defense it is computed over. 0 when there were none, and pts_per_drive_def is then null. Can sit slightly below drives_def, which also counts drive ids holding only a stray snap. `Int64` */
@@ -4271,8 +4273,8 @@ export interface LoadCfbTeamSummariesRow {
   drive_start_ep_def_rank?: number | null;
   /** Available yards on the team's own drives minus available yards on drives it defended. `Float64` */
   total_available_yards_margin?: number | null;
-  /** Yards the team gained minus yards it allowed. `Int64` */
-  total_gained_yards_margin?: number | bigint | null;
+  /** Yards the team gained minus yards it allowed. `Float64` */
+  total_gained_yards_margin?: number | null;
   /** Available-yards share gained by the offense minus the share allowed by the defense. Higher is better. `Float64` */
   available_yards_pct_margin?: number | null;
   /** pts_per_opp_off minus pts_per_opp_def. Null when either side is null. Higher is better. `Float64` */
@@ -5413,6 +5415,20 @@ export interface LoadCfbTeamSummariesRow {
   off_strength_faced_conf_pct?: number | null;
   /** Percentile (0-100) of def_strength_faced among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   def_strength_faced_conf_pct?: number | null;
+  /** Sum of the team's paper_share over the games in the row's span: the wins the Paper Index says its play earned (sportsdataverse.analytics.paper_index.deserved_wins). `Float64` */
+  deserved_wins?: number | null;
+  /** wins minus deserved_wins; positive means the team won more games than its play deserved. `Float64` */
+  luck_wins?: number | null;
+  /** luck_wins / sqrt(sum(p * (1 - p))) over the team's game shares p: luck in standard deviations of a sum of independent Bernoulli(p) wins; null when that variance is 0. `Float64` */
+  luck_z?: number | null;
+  /** National rank of luck_wins, 1 = the most wins above what its play deserved. Null when luck_wins is null: unranked, not last. `Float64` */
+  luck_wins_rank?: number | null;
+  /** National rank of luck_z, 1 = the luckiest in standard deviations. Null when luck_z is null: unranked, not last. `Float64` */
+  luck_z_rank?: number | null;
+  /** Games in the row's span that the Paper Index scored for the team (completed, not tied, both sides at least 20 scrimmage snaps); deserved_wins and luck are sums over these games. `Int64` */
+  paper_index_games_n?: number | bigint | null;
+  /** Where the season sits relative to the Paper Index fit (sportsdataverse.analytics.paper_index TRAIN_SEASONS / HOLDOUT_SEASONS): train (in-sample, its games were part of the fit), holdout (scored out of sample) or out_of_span (scored, never seen by the fit). `String` */
+  paper_index_span?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
 }
@@ -6009,8 +6025,8 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   havoc_margin_rank?: number | null;
   /** Available yards are the yards a drive could theoretically gain, summed from each drive's starting distance to the opponent goal line. Total available yards on the team's own drives (ESPN's drive team). A drive's start is its header oriented to agree with its first snap, or that snap when the header is a 0 or missing placeholder. `Float64` */
   total_available_yards_off?: number | null;
-  /** Total yards the team gained across its own drives, each drive's gain capped at its available yards. `Int64` */
-  total_gained_yards_off?: number | bigint | null;
+  /** Total yards the team gained across its own drives, each drive's gain capped at its available yards. `Float64` */
+  total_gained_yards_off?: number | null;
   /** Sample size behind pts_per_opp_off: the number of scoring opportunities on the team's own drives. 0 when there were none, and pts_per_opp_off is then null. `Int64` */
   pts_per_opp_off_n?: number | bigint | null;
   /** Sample size behind pts_per_drive_off: the number of the team's own drives it is computed over. 0 when there were none, and pts_per_drive_off is then null. Can sit slightly below drives_off, which also counts drive ids holding only a stray snap. `Int64` */
@@ -6039,8 +6055,8 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   drive_start_ep_off_rank?: number | null;
   /** Available yards are the yards a drive could theoretically gain, summed from each drive's starting distance to the opponent goal line. Total available yards on opponents' drives against the team's defense (ESPN's drive team). A drive's start is its header oriented to agree with its first snap, or that snap when the header is a 0 or missing placeholder. `Float64` */
   total_available_yards_def?: number | null;
-  /** Total yards the team allowed across opponents' drives against its defense, each drive's gain capped at its available yards. `Int64` */
-  total_gained_yards_def?: number | bigint | null;
+  /** Total yards the team allowed across opponents' drives against its defense, each drive's gain capped at its available yards. `Float64` */
+  total_gained_yards_def?: number | null;
   /** Sample size behind pts_per_opp_def: the number of scoring opportunities on opponents' drives against the team's defense. 0 when there were none, and pts_per_opp_def is then null. `Int64` */
   pts_per_opp_def_n?: number | bigint | null;
   /** Sample size behind pts_per_drive_def: the number of opponents' drives against the team's defense it is computed over. 0 when there were none, and pts_per_drive_def is then null. Can sit slightly below drives_def, which also counts drive ids holding only a stray snap. `Int64` */
@@ -6069,8 +6085,8 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   drive_start_ep_def_rank?: number | null;
   /** Available yards on the team's own drives minus available yards on drives it defended. `Float64` */
   total_available_yards_margin?: number | null;
-  /** Yards the team gained minus yards it allowed. `Int64` */
-  total_gained_yards_margin?: number | bigint | null;
+  /** Yards the team gained minus yards it allowed. `Float64` */
+  total_gained_yards_margin?: number | null;
   /** Available-yards share gained by the offense minus the share allowed by the defense. Higher is better. `Float64` */
   available_yards_pct_margin?: number | null;
   /** pts_per_opp_off minus pts_per_opp_def. Null when either side is null. Higher is better. `Float64` */
@@ -7211,6 +7227,20 @@ export interface LoadCfbTeamSummariesWeeklyRow {
   off_strength_faced_conf_pct?: number | null;
   /** Percentile (0-100) of def_strength_faced among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. `Float64` */
   def_strength_faced_conf_pct?: number | null;
+  /** Sum of the team's paper_share over the games in the row's span: the wins the Paper Index says its play earned (sportsdataverse.analytics.paper_index.deserved_wins). `Float64` */
+  deserved_wins?: number | null;
+  /** wins minus deserved_wins; positive means the team won more games than its play deserved. `Float64` */
+  luck_wins?: number | null;
+  /** luck_wins / sqrt(sum(p * (1 - p))) over the team's game shares p: luck in standard deviations of a sum of independent Bernoulli(p) wins; null when that variance is 0. `Float64` */
+  luck_z?: number | null;
+  /** National rank of luck_wins, 1 = the most wins above what its play deserved. Null when luck_wins is null: unranked, not last. `Float64` */
+  luck_wins_rank?: number | null;
+  /** National rank of luck_z, 1 = the luckiest in standard deviations. Null when luck_z is null: unranked, not last. `Float64` */
+  luck_z_rank?: number | null;
+  /** Games in the row's span that the Paper Index scored for the team (completed, not tied, both sides at least 20 scrimmage snaps); deserved_wins and luck are sums over these games. `Int64` */
+  paper_index_games_n?: number | bigint | null;
+  /** Where the season sits relative to the Paper Index fit (sportsdataverse.analytics.paper_index TRAIN_SEASONS / HOLDOUT_SEASONS): train (in-sample, its games were part of the fit), holdout (scored out of sample) or out_of_span (scored, never seen by the fit). `String` */
+  paper_index_span?: string | null;
   /** Regular-season week this cumulative snapshot covers -- the row reflects the team's state through the end of that week. One asset holds every week, so filter on this column. `Int32` */
   through_week?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */

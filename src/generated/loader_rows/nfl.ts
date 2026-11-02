@@ -1127,6 +1127,8 @@ export interface LoadNflModelPbpRow {
   fumble_recovery_2_team?: string | null;
   /** Yards gained by one of the players with a fumble recovery. `Int64` */
   fumble_recovery_2_yards?: number | bigint | null;
+  /** Numeric drive number in the game. `Int64` */
+  drive?: number | bigint | null;
   /** String indicator for result of two point conversion attempt: success, failure, safety (touchback in defensive endzone is 1 point apparently), or return. `String` */
   two_point_conv_result?: string | null;
   /** String indicator for the result of the extra point attempt: good, failed, blocked, safety (touchback in defensive endzone is 1 point apparently), or aborted. `String` */
@@ -1151,12 +1153,12 @@ export interface LoadNflModelPbpRow {
   run_location?: string | null;
   /** String indicator for line gap of run: end, guard, or tackle `String` */
   run_gap?: string | null;
+  /** Binary indicator for whether or not the QB dropped back on the play (pass attempt, sack, or scrambled). `Int32` */
+  qb_dropback?: number | null;
   /** Binary indicator if the play was a pass play (sacks and scrambles included). `Int64` */
   pass?: number | bigint | null;
   /** Binary indicator if the play was a rushing play. `Int64` */
   rush?: number | bigint | null;
-  /** Binary indicator for whether or not the QB dropped back on the play (pass attempt, sack, or scrambled). `Int32` */
-  qb_dropback?: number | null;
   /** Score the posteam at the start of the play. `Int64` */
   posteam_score?: number | bigint | null;
   /** Score the defteam at the start of the play. `Int64` */
@@ -1207,10 +1209,10 @@ export interface LoadNflModelPbpRow {
   drive_game_clock_start?: string | null;
   /** Game time at the end of a given drive. `String` */
   drive_game_clock_end?: string | null;
-  /** Yards from the offense's line of scrimmage to the opponent's end zone (yardline_100) on the drive's first play, 1-99; the model-pbp parquet stores the numeric spot, not the 'OWN 20' text load_nfl_pbp carries. `Int64` */
-  drive_start_yard_line?: number | bigint | null;
-  /** Yards from the offense's line of scrimmage to the opponent's end zone (yardline_100) on the drive's last play; the model-pbp parquet stores the numeric spot, not the 'OPP 45' text load_nfl_pbp carries. `Int64` */
-  drive_end_yard_line?: number | bigint | null;
+  /** Field position of the drive's first play as nflverse text: the side's team abbreviation and yard line ('ARI 10'), or '50' at midfield. `String` */
+  drive_start_yard_line?: string | null;
+  /** Field position of the drive's last play as nflverse text: the side's team abbreviation and yard line ('ARI 35'), or '50' at midfield. `String` */
+  drive_end_yard_line?: string | null;
   /** Play_id of the first play in the given drive. `Int64` (an id) */
   drive_play_id_started?: string | null;
   /** Play_id of the last play in the given drive. `Int64` (an id) */

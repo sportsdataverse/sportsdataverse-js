@@ -14,7 +14,7 @@ sidebar_position: 50
 
 # `sdv.nba` — dataset loaders
 
-42 loaders reading the published sportsdataverse-data releases (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias and resolves to an array of plain row objects (or `{ [column]: values[] }` with `format: "columns"`).
+43 loaders reading the published sportsdataverse-data releases (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias and resolves to an array of plain row objects (or `{ [column]: values[] }` with `format: "columns"`).
 
 - **Size:** row objects cost ~60-100 bytes per cell on the heap, so before decoding each season a loader adds its rows × columns (from the parquet footer) to a running total and checks it against `maxCells` — by default heap limit / 100 for rows (≈45M cells on Node's default 4 GB heap) and heap limit / 30 for `format: "columns"` — and throws a catchable `SdvError` instead of running out of memory. Play-by-play is the usual case: pass `columns`, use `format: "columns"`, or raise the heap (`node --max-old-space-size=8192`).
 - **Seasons:** `seasons` takes one season or a list. A season with no published asset (HTTP 404) is skipped with a warning (loaders marked so in their `seasons` row — sdv-py's hand-written ones — throw `NoDataError` instead); any other failure raises `AssetFetchError` (a failed download is never an empty season); a season below the loader's floor raises `SeasonNotFoundError` before anything is fetched. Multi-season results union the columns, null-filling gaps, and cast a column whose type changed between seasons to the common type (an integer id that became a string → strings, "123" not "123.0"), as sdv-py's `diagonal_relaxed` concat does.
@@ -46,6 +46,7 @@ sidebar_position: 50
 | [`loadNbaStatsPossessions`](#loadnbastatspossessions) | [nba_stats_possessions](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_possessions) | 1996+ |
 | [`loadNbaStatsGameLineups`](#loadnbastatsgamelineups) | [nba_stats_game_lineups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_game_lineups) | 1996+ |
 | [`loadNbaStatsGameMatchups`](#loadnbastatsgamematchups) | [nba_stats_game_matchups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_game_matchups) | 2017+ |
+| [`loadNbaStatsInjuryReport`](#loadnbastatsinjuryreport) | [nba_stats_injury_report](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_injury_report) | 2018+ |
 | [`loadNbaStatsPbpV3`](#loadnbastatspbpv3) *(deprecated)* | [nba_stats_pbp](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_pbp) | 1996+ |
 | [`loadNbaStatsPlayerBoxscores`](#loadnbastatsplayerboxscores) | [nba_stats_player_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_player_boxscores) | 1996+ |
 | [`loadNbaStatsPlayerGameLogs`](#loadnbastatsplayergamelogs) | [nba_stats_player_game_logs](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_player_game_logs) | 1996+ |
@@ -287,13 +288,13 @@ const rows = await sdv.nba.loadNbaSchedule({ seasons: 2024 });
 | `status_clock` | `number` | Status clock. |
 | `status_display_clock` | `string` | Status display clock. |
 | `status_period` | `number` | Status period. |
-| `status_type_id` | `string` | Unique identifier for status type. |
-| `status_type_name` | `string` | Status type name. |
-| `status_type_state` | `string` | Status type state. |
-| `status_type_completed` | `boolean` | Status type completed. |
-| `status_type_description` | `string` | Status type description. |
-| `status_type_detail` | `string` | Status type detail. |
-| `status_type_short_detail` | `string` | Status type short detail. |
+| `status_type_id` | `string` | ESPN's numeric game-status code, passed through unchanged. ESPN publishes no reference for these codes, so read status_type_name rather than hard-coding numbers. |
+| `status_type_name` | `string` | ESPN's game-status enum (STATUS_FINAL, STATUS_SCHEDULED, STATUS_POSTPONED, STATUS_CANCELED, ...), passed through unchanged. ESPN does not document the full set, and no value certifies an ordinary final as distinct from a forfeit or an awarded result. |
+| `status_type_state` | `string` | ESPN's coarse game state, passed through unchanged: pre, in or post. post covers every game that is over, whatever the reason. |
+| `status_type_completed` | `boolean` | ESPN's completed flag, passed through unchanged: true once ESPN considers the game over. It does not separate an ordinary final from a forfeited, protested, replayed or awarded result; ESPN documents no such distinction. |
+| `status_type_description` | `string` | ESPN's display text for the game status (for example "Final" or "Postponed"), passed through unchanged. |
+| `status_type_detail` | `string` | ESPN's longer status text, passed through unchanged; an overtime final reads like "Final/OT". |
+| `status_type_short_detail` | `string` | ESPN's short status text for scoreboards, passed through unchanged. |
 | `format_regulation_periods` | `number` | Format regulation periods. |
 | `home_id` | `string` | Unique identifier for home. |
 | `home_uid` | `string` | Home team's uid. |
@@ -307,7 +308,7 @@ const rows = await sdv.nba.loadNbaSchedule({ seasons: 2024 });
 | `home_is_active` | `boolean` | Home team's is active. |
 | `home_venue_id` | `string` | Unique identifier for home venue. |
 | `home_logo` | `string` | Home team logo URL. |
-| `home_score` | `number` | Home team score at the time of the play. |
+| `home_score` | `number` | Home team's points as ESPN reports them: once the game is final, the full-game total including every overtime period. ESPN corrects a score in place, so this is the value ESPN showed when the release was last built. Not a final score until status_type_completed is true. |
 | `home_winner` | `boolean` | Home team's winner. |
 | `home_linescores` | `string` | Period-by-period points for the home team, stringified from ESPN's linescores array. |
 | `home_records` | `string` | Home team's records at game time (overall, home, away), stringified from ESPN. |
@@ -323,7 +324,7 @@ const rows = await sdv.nba.loadNbaSchedule({ seasons: 2024 });
 | `away_is_active` | `boolean` | Away team's is active. |
 | `away_venue_id` | `string` | Unique identifier for away venue. |
 | `away_logo` | `string` | Away team logo URL. |
-| `away_score` | `number` | Away team score at the time of the play. |
+| `away_score` | `number` | Away team's points as ESPN reports them: once the game is final, the full-game total including every overtime period. ESPN corrects a score in place, so this is the value ESPN showed when the release was last built. Not a final score until status_type_completed is true. |
 | `away_winner` | `boolean` | Away team's winner. |
 | `away_linescores` | `string` | Period-by-period points for the away team, stringified from ESPN's linescores array. |
 | `away_records` | `string` | Away team's records at game time (overall, home, away), stringified from ESPN. |
@@ -1485,6 +1486,49 @@ const rows = await sdv.nba.loadNbaStatsGameMatchups({ seasons: 2025 });
 | `game_id` | `string` | Unique game identifier. |
 | `season` | `number` | Season year. |
 | `season_type_id` | `string` | Season-type digit: the 3rd character of game_id (and the leading digit of season_id). 1 = preseason, 2 = regular season, 3 = All-Star, 4 = playoffs, 5 = play-in, 6 = NBA Cup final, 9 = international. |
+
+## `loadNbaStatsInjuryReport`
+
+Release: [nba_stats_injury_report](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_injury_report) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_injury_report/injury_report_{season + 1}.parquet`
+
+Pass the season's START year (e.g. `2018` for the 2018-19 season); the asset is keyed by the END year and the loader translates internally, so a `season` column in the rows carries that END year.
+
+| option | type | required | description |
+|---|---|---|---|
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2018) |
+| `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
+| `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
+
+```js
+const rows = await sdv.nba.loadNbaStatsInjuryReport({ seasons: 2025 });
+// snake_case alias (py/R parity): sdv.nba.load_nba_stats_injury_report(...)
+```
+
+**Returns** (one row per record; every column optional and nullable):
+
+**Row type:** `LoadNbaStatsInjuryReportRow` (exported from the package root).
+
+| col_name | type | description |
+|---|---|---|
+| `season` | `number \| bigint` | Season as its ENDING year (2026 = the 2025-26 season), the published asset's stamp. |
+| `report_datetime` | `Date` | Publish time of the report version the row comes from (US Eastern, naive). The league re-publishes the report through the day, so a listing repeats once per version. |
+| `game_date` | `Date` | Game date as the report prints it (US Eastern). |
+| `game_time` | `string` | Tip time as the report prints it ("07:30 (ET)", no AM/PM). |
+| `report_matchup` | `string` | Game as the report prints it, away@home tricodes ("CLE@ATL"). |
+| `away_team_abbr` | `string` | Away team tricode as the report prints it. |
+| `home_team_abbr` | `string` | Home team tricode as the report prints it. |
+| `team` | `string` | Team the listing belongs to, full name as printed ("Cleveland Cavaliers"). |
+| `report_player_name` | `string` | Player as the report prints it, "Last, First" ("James, LeBron"); null on a team's NOT YET SUBMITTED row. |
+| `current_status` | `string` | Listed status in that version: Available, Probable, Questionable, Doubtful or Out; null on a NOT YET SUBMITTED row. |
+| `reason` | `string` | Reason as printed ("Injury/Illness - Left Ankle; Sprain"); "NOT YET SUBMITTED" for a team that had not filed by that version. |
+| `category` | `string` | Category column of the early report format; last printed 2019-11-14, null after. |
+| `previous_status` | `string` | Previous Status column of the early report format; last printed 2019-12-17, null after. |
+| `game_id` | `string` | stats.nba.com game id, joined on the game date and tricodes; null for a game postponed off its printed date, a playoff game that was not needed, or a Summer League game. |
+| `team_id` | `string` | stats.nba.com team id of the listing's team, from its printed name. |
+| `person_id` | `string` | stats.nba.com person id matched from the printed name (see match_method); null when unmatched. |
+| `match_method` | `string` | How person_id was matched: exact (full name on the team's boxscores that season), family (family name and first initial, unique on the team), league (name unique league-wide that season), roster (name on the team's roster, which lists players who have not played), or null. |
 
 ## `loadNbaStatsPbpV3`
 

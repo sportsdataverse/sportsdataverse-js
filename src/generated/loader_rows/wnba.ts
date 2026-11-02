@@ -321,19 +321,19 @@ export interface LoadWnbaScheduleRow {
   status_display_clock?: string | null;
   /** Status period. `Float64` */
   status_period?: number | null;
-  /** Unique identifier for status type. `Int32` (an id) */
+  /** ESPN's numeric game-status code, passed through unchanged. ESPN publishes no reference for these codes, so read status_type_name rather than hard-coding numbers. `Int32` (an id) */
   status_type_id?: string | null;
-  /** Status type name. `String` */
+  /** ESPN's game-status enum (STATUS_FINAL, STATUS_SCHEDULED, STATUS_POSTPONED, STATUS_CANCELED, ...), passed through unchanged. ESPN does not document the full set, and no value certifies an ordinary final as distinct from a forfeit or an awarded result. `String` */
   status_type_name?: string | null;
-  /** Status type state. `String` */
+  /** ESPN's coarse game state, passed through unchanged: pre, in or post. post covers every game that is over, whatever the reason. `String` */
   status_type_state?: string | null;
-  /** Status type completed. `Boolean` */
+  /** ESPN's completed flag, passed through unchanged: true once ESPN considers the game over. It does not separate an ordinary final from a forfeited, protested, replayed or awarded result; ESPN documents no such distinction. `Boolean` */
   status_type_completed?: boolean | null;
-  /** Status type description. `String` */
+  /** ESPN's display text for the game status (for example "Final" or "Postponed"), passed through unchanged. `String` */
   status_type_description?: string | null;
-  /** Status type detail. `String` */
+  /** ESPN's longer status text, passed through unchanged; an overtime final reads like "Final/OT". `String` */
   status_type_detail?: string | null;
-  /** Status type short detail. `String` */
+  /** ESPN's short status text for scoreboards, passed through unchanged. `String` */
   status_type_short_detail?: string | null;
   /** Format regulation periods. `Float64` */
   format_regulation_periods?: number | null;
@@ -361,7 +361,7 @@ export interface LoadWnbaScheduleRow {
   home_venue_id?: string | null;
   /** Home team logo URL. `String` */
   home_logo?: string | null;
-  /** Home team score at the time of the play. `Int32` */
+  /** Home team's points as ESPN reports them: once the game is final, the full-game total including every overtime period. ESPN corrects a score in place, so this is the value ESPN showed when the release was last built. Not a final score until status_type_completed is true. `Int32` */
   home_score?: number | null;
   /** Home team's winner. `Boolean` */
   home_winner?: boolean | null;
@@ -393,7 +393,7 @@ export interface LoadWnbaScheduleRow {
   away_venue_id?: string | null;
   /** Away team logo URL. `String` */
   away_logo?: string | null;
-  /** Away team score at the time of the play. `Int32` */
+  /** Away team's points as ESPN reports them: once the game is final, the full-game total including every overtime period. ESPN corrects a score in place, so this is the value ESPN showed when the release was last built. Not a final score until status_type_completed is true. `Int32` */
   away_score?: number | null;
   /** Away team's winner. `Boolean` */
   away_winner?: boolean | null;
@@ -631,7 +631,7 @@ export interface LoadWnbaDraftRow {
 export interface LoadWnbaGameRostersRow {
   /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** Unique game identifier. `String` (an id) */
+  /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
   /** Unique team identifier. `Int32` (an id) */
   team_id?: string | null;
@@ -681,7 +681,7 @@ export interface LoadWnbaGameRostersRow {
 export interface LoadWnbaOfficialsRow {
   /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** Unique game identifier. `String` (an id) */
+  /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
   /** Unique official / referee identifier. `Int32` (an id) */
   official_id?: string | null;
@@ -763,7 +763,7 @@ export interface LoadWnbaRostersRow {
   team_alternate_color?: string | null;
   /** Team logo image URL. `String` */
   team_logo?: string | null;
-  /** Unique athlete identifier (ESPN). `String` (an id) */
+  /** Unique athlete identifier (ESPN). `Int32` (an id) */
   athlete_id?: string | null;
   /** ESPN UID string. `String` */
   uid?: string | null;
@@ -969,7 +969,7 @@ export interface LoadWnbaPlayerCrosswalkRow {
   team_abbreviation?: string | null;
   /** Player name. `String` */
   player_name?: string | null;
-  /** ESPN athlete id. `String` (an id) */
+  /** ESPN athlete id. `Int32` (an id) */
   espn_athlete_id?: string | null;
   /** ESPN full name. `String` */
   espn_full_name?: string | null;
@@ -977,7 +977,7 @@ export interface LoadWnbaPlayerCrosswalkRow {
   espn_jersey?: string | null;
   /** ESPN position abbreviation. `String` */
   espn_position?: string | null;
-  /** Player identifier on stats.wnba.com matched to the ESPN player. `String` (an id) */
+  /** Player identifier on stats.wnba.com matched to the ESPN player. `Int64` (an id) */
   wnba_player_id?: string | null;
   /** Player display name on the stats.wnba.com side of the crosswalk. `String` */
   wnba_player_name?: string | null;
@@ -1019,15 +1019,15 @@ export interface LoadWnbaScheduleCrosswalkRow {
   home_espn_team_id?: string | null;
   /** ESPN away team id (NA for bart-only rows). `Int32` (an id) */
   away_espn_team_id?: string | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** ESPN game id (NA for bart-only rows). `Int32` (an id) */
   espn_game_id?: string | null;
   /** Game identifier on stats.wnba.com matched to the ESPN game. `String` (an id) */
   wnba_game_id?: string | null;
   /** stats.wnba.com game code (date/matchup slug) for the matched game. `String` */
   wnba_game_code?: string | null;
-  /** Home team identifier on stats.wnba.com for the matched game. `String` (an id) */
+  /** Home team identifier on stats.wnba.com for the matched game. `Int64` (an id) */
   wnba_home_team_id?: string | null;
-  /** Away team identifier on stats.wnba.com for the matched game. `String` (an id) */
+  /** Away team identifier on stats.wnba.com for the matched game. `Int64` (an id) */
   wnba_away_team_id?: string | null;
   /** Fox Sports game id (string), filled when the crosswalk is built with fox=True from Fox's per-date scoreboard, matched on the US-Eastern date and the two teams in either home/away order; null otherwise and where Fox lists no matching game. `String` (an id) */
   fox_game_id?: string | null;
@@ -1061,7 +1061,7 @@ export interface LoadWnbaTeamCrosswalkRow {
   espn_location?: string | null;
   /** ESPN team mascot/nickname. `String` */
   espn_mascot?: string | null;
-  /** WNBA Stats team id. `String` (an id) */
+  /** WNBA Stats team id. `Int64` (an id) */
   wnba_team_id?: string | null;
   /** WNBA Stats tricode. `String` */
   wnba_team_tricode?: string | null;
@@ -1093,7 +1093,7 @@ export interface LoadWnbaTeamCrosswalkRow {
 export interface LoadWnbaPlayerCoreRow {
   /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** Unique athlete identifier (ESPN). `Int64` (an id) */
+  /** Unique athlete identifier (ESPN). `Int32` (an id) */
   athlete_id?: string | null;
   /** Stable cross-league team GUID. `String` */
   guid?: string | null;

@@ -309,19 +309,19 @@ export interface LoadMbbScheduleRow {
   status_display_clock?: string | null;
   /** Status period. `Float64` */
   status_period?: number | null;
-  /** Unique identifier for status type. `Int32` (an id) */
+  /** ESPN's numeric game-status code, passed through unchanged. ESPN publishes no reference for these codes, so read status_type_name rather than hard-coding numbers. `Int32` (an id) */
   status_type_id?: string | null;
-  /** Status type name. `String` */
+  /** ESPN's game-status enum (STATUS_FINAL, STATUS_SCHEDULED, STATUS_POSTPONED, STATUS_CANCELED, ...), passed through unchanged. ESPN does not document the full set, and no value certifies an ordinary final as distinct from a forfeit or an awarded result. `String` */
   status_type_name?: string | null;
-  /** Status type state. `String` */
+  /** ESPN's coarse game state, passed through unchanged: pre, in or post. post covers every game that is over, whatever the reason. `String` */
   status_type_state?: string | null;
-  /** Status type completed. `Boolean` */
+  /** ESPN's completed flag, passed through unchanged: true once ESPN considers the game over. It does not separate an ordinary final from a forfeited, protested, replayed or awarded result; ESPN documents no such distinction. `Boolean` */
   status_type_completed?: boolean | null;
-  /** Status type description. `String` */
+  /** ESPN's display text for the game status (for example "Final" or "Postponed"), passed through unchanged. `String` */
   status_type_description?: string | null;
-  /** Status type detail. `String` */
+  /** ESPN's longer status text, passed through unchanged; an overtime final reads like "Final/OT". `String` */
   status_type_detail?: string | null;
-  /** Status type short detail. `String` */
+  /** ESPN's short status text for scoreboards, passed through unchanged. `String` */
   status_type_short_detail?: string | null;
   /** Format regulation periods. `Float64` */
   format_regulation_periods?: number | null;
@@ -351,7 +351,7 @@ export interface LoadMbbScheduleRow {
   home_logo?: string | null;
   /** Unique identifier for home conference. `Int32` (an id) */
   home_conference_id?: string | null;
-  /** Home team score at the time of the play. `Int32` */
+  /** Home team's points as ESPN reports them: once the game is final, the full-game total including every overtime period. ESPN corrects a score in place, so this is the value ESPN showed when the release was last built. Not a final score until status_type_completed is true. `Int32` */
   home_score?: number | null;
   /** Home team's winner. `Boolean` */
   home_winner?: boolean | null;
@@ -387,7 +387,7 @@ export interface LoadMbbScheduleRow {
   away_logo?: string | null;
   /** Unique identifier for away conference. `Int32` (an id) */
   away_conference_id?: string | null;
-  /** Away team score at the time of the play. `Int32` */
+  /** Away team's points as ESPN reports them: once the game is final, the full-game total including every overtime period. ESPN corrects a score in place, so this is the value ESPN showed when the release was last built. Not a final score until status_type_completed is true. `Int32` */
   away_score?: number | null;
   /** Away team's winner. `Boolean` */
   away_winner?: boolean | null;
@@ -767,7 +767,7 @@ export interface LoadMbbRostersRow {
   team_alternate_color?: string | null;
   /** Team logo image URL. `String` */
   team_logo?: string | null;
-  /** Unique athlete identifier (ESPN). `String` (an id) */
+  /** Unique athlete identifier (ESPN). `Int32` (an id) */
   athlete_id?: string | null;
   /** ESPN UID string. `String` */
   uid?: string | null;
@@ -849,7 +849,7 @@ export interface LoadMbbOfficialsRow {
 export interface LoadMbbGameRostersRow {
   /** Season year. `Int32` */
   season?: number | null;
-  /** Unique game identifier. `String` (an id) */
+  /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
   /** Unique team identifier. `Int32` (an id) */
   team_id?: string | null;
@@ -943,7 +943,7 @@ export interface LoadMbbPlayerCrosswalkRow {
   team_abbreviation?: string | null;
   /** Player name. `String` */
   player_name?: string | null;
-  /** ESPN athlete id. `String` (an id) */
+  /** ESPN athlete id. `Int32` (an id) */
   espn_athlete_id?: string | null;
   /** ESPN full name. `String` */
   espn_full_name?: string | null;
@@ -985,7 +985,7 @@ export interface LoadMbbScheduleCrosswalkRow {
   home_espn_team_id?: string | null;
   /** ESPN away team id (NA for bart-only rows). `Int32` (an id) */
   away_espn_team_id?: string | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** ESPN game id (NA for bart-only rows). `Int32` (an id) */
   espn_game_id?: string | null;
   /** Torvik muid (NA for espn-only rows). `String` */
   bart_muid?: string | null;
@@ -1061,7 +1061,7 @@ export interface LoadMbbTeamCrosswalkRow {
 export interface LoadMbbPlayerCoreRow {
   /** Season year. `Int32` */
   season?: number | null;
-  /** Unique athlete identifier (ESPN). `Int64` (an id) */
+  /** Unique athlete identifier (ESPN). `Int32` (an id) */
   athlete_id?: string | null;
   /** Stable cross-league team GUID. `String` */
   guid?: string | null;
@@ -1209,19 +1209,19 @@ export interface LoadNcaaMbbPbpRow {
   contest_id?: string | null;
   /** stats.ncaa.org team identifier for the home team. `String` (an id) */
   home_ncaa_team_id?: string | null;
-  /** ESPN home team id (NA for bart-only rows). `String` (an id) */
+  /** ESPN home team id (NA for bart-only rows). `Int32` (an id) */
   home_espn_team_id?: string | null;
   /** stats.ncaa.org team identifier for the away team. `String` (an id) */
   away_ncaa_team_id?: string | null;
-  /** ESPN away team id (NA for bart-only rows). `String` (an id) */
+  /** ESPN away team id (NA for bart-only rows). `Int32` (an id) */
   away_espn_team_id?: string | null;
   /** stats.ncaa.org team identifier of the team credited with the event. `String` (an id) */
   event_team_ncaa_team_id?: string | null;
-  /** ESPN team identifier of the team credited with the event, via the NCAA-to-ESPN crosswalk. `String` (an id) */
+  /** ESPN team identifier of the team credited with the event, via the NCAA-to-ESPN crosswalk. `Int32` (an id) */
   event_team_espn_team_id?: string | null;
   /** stats.ncaa.org team identifier of the team in possession. `String` (an id) */
   poss_team_ncaa_team_id?: string | null;
-  /** ESPN team identifier of the team in possession, via the NCAA-to-ESPN crosswalk. `String` (an id) */
+  /** ESPN team identifier of the team in possession, via the NCAA-to-ESPN crosswalk. `Int32` (an id) */
   poss_team_espn_team_id?: string | null;
   /** stats.ncaa.org player identifier for player_1, resolved through the roster name matcher. `String` (an id) */
   player_1_id?: string | null;
@@ -1271,7 +1271,7 @@ export interface LoadNcaaMbbPbpRow {
   away_5_player_id?: string | null;
   /** Normalized (diacritics- and punctuation-cleaned) name of the away slot-5 on-floor player. `String` */
   away_5_clean_name?: string | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** ESPN game id (NA for bart-only rows). `Int32` (an id) */
   espn_game_id?: string | null;
   /** Flag marking the shot as a fast-break attempt, from the stats.ncaa.org play text. `Boolean` */
   is_fastbreak?: boolean | null;
@@ -1569,21 +1569,21 @@ export interface LoadNcaaMbbPlayerBoxRow {
   contest_id?: string | null;
   /** stats.ncaa.org team identifier for the home team. `String` (an id) */
   home_ncaa_team_id?: string | null;
-  /** ESPN home team id (NA for bart-only rows). `String` (an id) */
+  /** ESPN home team id (NA for bart-only rows). `Int32` (an id) */
   home_espn_team_id?: string | null;
   /** stats.ncaa.org team identifier for the away team. `String` (an id) */
   away_ncaa_team_id?: string | null;
-  /** ESPN away team id (NA for bart-only rows). `String` (an id) */
+  /** ESPN away team id (NA for bart-only rows). `Int32` (an id) */
   away_espn_team_id?: string | null;
   /** stats.ncaa.org team identifier of the player's team. `String` (an id) */
   team_ncaa_team_id?: string | null;
-  /** ESPN team identifier of the player's team, via the NCAA-to-ESPN crosswalk. `String` (an id) */
+  /** ESPN team identifier of the player's team, via the NCAA-to-ESPN crosswalk. `Int32` (an id) */
   team_espn_team_id?: string | null;
   /** Unique player identifier. `String` (an id) */
   player_id?: string | null;
   /** Normalized (diacritics- and punctuation-cleaned) player name used to join across the NCAA datasets. `String` */
   clean_name?: string | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** ESPN game id (NA for bart-only rows). `Int32` (an id) */
   espn_game_id?: string | null;
   /** Season year. `Int64` */
   season?: number | bigint | null;
@@ -1741,17 +1741,17 @@ export interface LoadNcaaMbbTeamBoxRow {
   contest_id?: string | null;
   /** stats.ncaa.org team identifier for the home team. `String` (an id) */
   home_ncaa_team_id?: string | null;
-  /** ESPN home team id (NA for bart-only rows). `String` (an id) */
+  /** ESPN home team id (NA for bart-only rows). `Int32` (an id) */
   home_espn_team_id?: string | null;
   /** stats.ncaa.org team identifier for the away team. `String` (an id) */
   away_ncaa_team_id?: string | null;
-  /** ESPN away team id (NA for bart-only rows). `String` (an id) */
+  /** ESPN away team id (NA for bart-only rows). `Int32` (an id) */
   away_espn_team_id?: string | null;
   /** stats.ncaa.org team identifier of the team the row belongs to. `String` (an id) */
   team_ncaa_team_id?: string | null;
-  /** ESPN team identifier of the team, via the NCAA-to-ESPN crosswalk. `String` (an id) */
+  /** ESPN team identifier of the team, via the NCAA-to-ESPN crosswalk. `Int32` (an id) */
   team_espn_team_id?: string | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** ESPN game id (NA for bart-only rows). `Int32` (an id) */
   espn_game_id?: string | null;
   /** Season year. `Int64` */
   season?: number | bigint | null;
@@ -1865,19 +1865,19 @@ export interface LoadNcaaMbbPossessionsRow {
   away_score?: number | bigint | null;
   /** Points scored. `Int64` */
   pts?: number | bigint | null;
-  /** 1 when the possession's made field goal was assisted, else 0. `Int64` */
+  /** Count of the possession's events that carry an assisting second player (0, 1, rarely 2) -- a count, not a flag, kept from the R source for parity. `Int64` */
   is_assisted?: number | bigint | null;
   /** 1 for transition possessions, else 0. `Int64` */
   is_transition?: number | bigint | null;
   /** 1 for possessions in garbage time under the score-margin and clock rule, else 0. `Int64` */
   is_garbage_time?: number | bigint | null;
-  /** Event type that opened the possession (e.g., a defensive rebound or a made-basket inbound). `String` */
+  /** Event type of the play immediately before the possession's first event (what started it, e.g. a defensive rebound or a made basket), not the possession's own first event. `String` */
   start_event_type?: string | null;
-  /** Clock time in seconds at the possession's first shot attempt, from the possession segmentation engine. `Int64` */
+  /** Seconds into the possession (poss_length) at its first field-goal attempt; null when the possession had no shot. `Int64` */
   first_shot_time?: number | bigint | null;
-  /** Shot class of the possession's first attempt (rim, mid-range, or three). `String` */
+  /** stats.ncaa.org event name of the possession's first field-goal attempt ("Layup", "Three Point Jumper", "Two Point Jumper", "Hook", "Dunk", "Tip In"); null when the possession had no shot. `String` */
   first_shot_type?: string | null;
-  /** Clock time in seconds at the possession's final event. `Int64` */
+  /** Seconds into the possession (poss_length) at its final event. `Int64` */
   last_event_time?: number | bigint | null;
   /** Event type that ended the possession (e.g., a made shot, turnover, or defensive rebound). `String` */
   last_event_type?: string | null;
@@ -1885,15 +1885,15 @@ export interface LoadNcaaMbbPossessionsRow {
   contest_id?: string | null;
   /** stats.ncaa.org team identifier for the home team. `String` (an id) */
   home_ncaa_team_id?: string | null;
-  /** ESPN home team id (NA for bart-only rows). `String` (an id) */
+  /** ESPN home team id (NA for bart-only rows). `Int32` (an id) */
   home_espn_team_id?: string | null;
   /** stats.ncaa.org team identifier for the away team. `String` (an id) */
   away_ncaa_team_id?: string | null;
-  /** ESPN away team id (NA for bart-only rows). `String` (an id) */
+  /** ESPN away team id (NA for bart-only rows). `Int32` (an id) */
   away_espn_team_id?: string | null;
   /** stats.ncaa.org team identifier of the team in possession. `String` (an id) */
   poss_team_ncaa_team_id?: string | null;
-  /** ESPN team identifier of the team in possession, via the NCAA-to-ESPN crosswalk. `String` (an id) */
+  /** ESPN team identifier of the team in possession, via the NCAA-to-ESPN crosswalk. `Int32` (an id) */
   poss_team_espn_team_id?: string | null;
   /** stats.ncaa.org player identifier for the home slot-1 on-floor player. `String` (an id) */
   home_1_player_id?: string | null;
@@ -1935,7 +1935,7 @@ export interface LoadNcaaMbbPossessionsRow {
   away_5_player_id?: string | null;
   /** Normalized (diacritics- and punctuation-cleaned) name of the away slot-5 on-floor player. `String` */
   away_5_clean_name?: string | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** ESPN game id (NA for bart-only rows). `Int32` (an id) */
   espn_game_id?: string | null;
   /** Season year. `Int64` */
   season?: number | bigint | null;
@@ -2207,13 +2207,13 @@ export interface LoadNcaaMbbShotsRow {
   contest_id?: string | null;
   /** stats.ncaa.org team identifier of the shooting team. `String` (an id) */
   ncaa_team_id?: string | null;
-  /** ESPN team id (canonical key). `String` (an id) */
+  /** ESPN team id (canonical key). `Int32` (an id) */
   espn_team_id?: string | null;
   /** stats.ncaa.org player identifier of the shooter. `String` (an id) */
   shooter_player_id?: string | null;
   /** Normalized (diacritics- and punctuation-cleaned) name of the shooter. `String` */
   shooter_clean_name?: string | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** ESPN game id (NA for bart-only rows). `Int32` (an id) */
   espn_game_id?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;

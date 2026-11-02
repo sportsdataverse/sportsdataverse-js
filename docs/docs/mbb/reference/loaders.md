@@ -29,7 +29,7 @@ sidebar_position: 50
 | [`loadMbbTeamBoxscore`](#loadmbbteamboxscore) | [espn_mens_college_basketball_team_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_team_boxscores) | 2002+ |
 | [`loadMbbRatings`](#loadmbbratings) | [mbb_ratings](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mbb_ratings) | 2006+ |
 | [`loadMbbPlayerValue`](#loadmbbplayervalue) | [mbb_player_value](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mbb_player_value) | 2006+ |
-| [`loadMbbShots`](#loadmbbshots) | [espn_mens_college_basketball_shots](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_shots) | 2025+ |
+| [`loadMbbShots`](#loadmbbshots) | [espn_mens_college_basketball_shots](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_shots) | 2003+ |
 | [`loadMbbStandings`](#loadmbbstandings) | [espn_mens_college_basketball_standings](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_standings) | 2003+ |
 | [`loadMbbPlayerSeasonStats`](#loadmbbplayerseasonstats) | [espn_mens_college_basketball_player_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_player_season_stats) | 2025+ |
 | [`loadMbbRosters`](#loadmbbrosters) | [espn_mens_college_basketball_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_rosters) | 2025+ |
@@ -274,13 +274,13 @@ const rows = await sdv.mbb.loadMbbSchedule({ seasons: 2024 });
 | `status_clock` | `number` | Status clock. |
 | `status_display_clock` | `string` | Status display clock. |
 | `status_period` | `number` | Status period. |
-| `status_type_id` | `string` | Unique identifier for status type. |
-| `status_type_name` | `string` | Status type name. |
-| `status_type_state` | `string` | Status type state. |
-| `status_type_completed` | `boolean` | Status type completed. |
-| `status_type_description` | `string` | Status type description. |
-| `status_type_detail` | `string` | Status type detail. |
-| `status_type_short_detail` | `string` | Status type short detail. |
+| `status_type_id` | `string` | ESPN's numeric game-status code, passed through unchanged. ESPN publishes no reference for these codes, so read status_type_name rather than hard-coding numbers. |
+| `status_type_name` | `string` | ESPN's game-status enum (STATUS_FINAL, STATUS_SCHEDULED, STATUS_POSTPONED, STATUS_CANCELED, ...), passed through unchanged. ESPN does not document the full set, and no value certifies an ordinary final as distinct from a forfeit or an awarded result. |
+| `status_type_state` | `string` | ESPN's coarse game state, passed through unchanged: pre, in or post. post covers every game that is over, whatever the reason. |
+| `status_type_completed` | `boolean` | ESPN's completed flag, passed through unchanged: true once ESPN considers the game over. It does not separate an ordinary final from a forfeited, protested, replayed or awarded result; ESPN documents no such distinction. |
+| `status_type_description` | `string` | ESPN's display text for the game status (for example "Final" or "Postponed"), passed through unchanged. |
+| `status_type_detail` | `string` | ESPN's longer status text, passed through unchanged; an overtime final reads like "Final/OT". |
+| `status_type_short_detail` | `string` | ESPN's short status text for scoreboards, passed through unchanged. |
 | `format_regulation_periods` | `number` | Format regulation periods. |
 | `home_id` | `string` | Unique identifier for home. |
 | `home_uid` | `string` | Home team's uid. |
@@ -295,7 +295,7 @@ const rows = await sdv.mbb.loadMbbSchedule({ seasons: 2024 });
 | `home_venue_id` | `string` | Unique identifier for home venue. |
 | `home_logo` | `string` | Home team logo URL. |
 | `home_conference_id` | `string` | Unique identifier for home conference. |
-| `home_score` | `number` | Home team score at the time of the play. |
+| `home_score` | `number` | Home team's points as ESPN reports them: once the game is final, the full-game total including every overtime period. ESPN corrects a score in place, so this is the value ESPN showed when the release was last built. Not a final score until status_type_completed is true. |
 | `home_winner` | `boolean` | Home team's winner. |
 | `home_current_rank` | `number` | Poll ranking ESPN listed for the home team at game time (unranked teams carry a sentinel value). |
 | `home_linescores` | `string` | Period-by-period scores for the home team as a delimited string from ESPN's schedule feed. |
@@ -313,7 +313,7 @@ const rows = await sdv.mbb.loadMbbSchedule({ seasons: 2024 });
 | `away_venue_id` | `string` | Unique identifier for away venue. |
 | `away_logo` | `string` | Away team logo URL. |
 | `away_conference_id` | `string` | Unique identifier for away conference. |
-| `away_score` | `number` | Away team score at the time of the play. |
+| `away_score` | `number` | Away team's points as ESPN reports them: once the game is final, the full-game total including every overtime period. ESPN corrects a score in place, so this is the value ESPN showed when the release was last built. Not a final score until status_type_completed is true. |
 | `away_winner` | `boolean` | Away team's winner. |
 | `away_current_rank` | `number` | Poll ranking ESPN listed for the away team at game time (unranked teams carry a sentinel value). |
 | `away_linescores` | `string` | Period-by-period scores for the away team as a delimited string from ESPN's schedule feed. |
@@ -491,9 +491,13 @@ const rows = await sdv.mbb.loadMbbPlayerValue({ seasons: 2025 });
 
 Release: [espn_mens_college_basketball_shots](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_shots) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_mens_college_basketball_shots/shots_{season}.parquet`
 
+:::caution[Coverage]
+Published seasons: 2003 and 2006 onward; the release has no 2004 or 2005 asset (the MBB pbp release has the same gap). A request for either is skipped with a warning, and a request for only those returns the documented columns with zero rows.
+:::
+
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2025) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2003) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -1514,13 +1518,13 @@ const rows = await sdv.mbb.loadNcaaMbbPossessions({ seasons: 2024, columns: ['ga
 | `home_score` | `number \| bigint` | Home team score at the time of the play. |
 | `away_score` | `number \| bigint` | Away team score at the time of the play. |
 | `pts` | `number \| bigint` | Points scored. |
-| `is_assisted` | `number \| bigint` | 1 when the possession's made field goal was assisted, else 0. |
+| `is_assisted` | `number \| bigint` | Count of the possession's events that carry an assisting second player (0, 1, rarely 2) -- a count, not a flag, kept from the R source for parity. |
 | `is_transition` | `number \| bigint` | 1 for transition possessions, else 0. |
 | `is_garbage_time` | `number \| bigint` | 1 for possessions in garbage time under the score-margin and clock rule, else 0. |
-| `start_event_type` | `string` | Event type that opened the possession (e.g., a defensive rebound or a made-basket inbound). |
-| `first_shot_time` | `number \| bigint` | Clock time in seconds at the possession's first shot attempt, from the possession segmentation engine. |
-| `first_shot_type` | `string` | Shot class of the possession's first attempt (rim, mid-range, or three). |
-| `last_event_time` | `number \| bigint` | Clock time in seconds at the possession's final event. |
+| `start_event_type` | `string` | Event type of the play immediately before the possession's first event (what started it, e.g. a defensive rebound or a made basket), not the possession's own first event. |
+| `first_shot_time` | `number \| bigint` | Seconds into the possession (poss_length) at its first field-goal attempt; null when the possession had no shot. |
+| `first_shot_type` | `string` | stats.ncaa.org event name of the possession's first field-goal attempt ("Layup", "Three Point Jumper", "Two Point Jumper", "Hook", "Dunk", "Tip In"); null when the possession had no shot. |
+| `last_event_time` | `number \| bigint` | Seconds into the possession (poss_length) at its final event. |
 | `last_event_type` | `string` | Event type that ended the possession (e.g., a made shot, turnover, or defensive rebound). |
 | `contest_id` | `string` |  |
 | `home_ncaa_team_id` | `string` | stats.ncaa.org team identifier for the home team. |

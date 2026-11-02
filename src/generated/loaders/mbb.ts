@@ -179,20 +179,22 @@ export const loadMbbPlayerValue = seasonLoader<LoadMbbPlayerValueRow>(LOAD_MBB_P
 /** snake_case alias of {@link loadMbbPlayerValue} (py/R parity). */
 export const load_mbb_player_value = loadMbbPlayerValue;
 
-const LOAD_MBB_SHOTS: ReleaseLoaderDef = {"fn":"load_mbb_shots","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_mens_college_basketball_shots/shots_{season}.parquet","minSeason":2025};
+const LOAD_MBB_SHOTS: ReleaseLoaderDef = {"fn":"load_mbb_shots","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_mens_college_basketball_shots/shots_{season}.parquet","minSeason":2003};
 
 /**
  * Load `espn_mens_college_basketball_shots` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_shots
  *
- * @param opts.seasons - a season or a list of seasons (>= 2025); one with no published asset is skipped with a warning.
+ * Note: Published seasons: 2003 and 2006 onward; the release has no 2004 or 2005 asset (the MBB pbp release has the same gap). A request for either is skipped with a warning, and a request for only those returns the documented columns with zero rows.
+ *
+ * @param opts.seasons - a season or a list of seasons (>= 2003); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2025.
+ * @throws SeasonNotFoundError if a season is below 2003.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadMbbShots({ seasons: 2025 });
