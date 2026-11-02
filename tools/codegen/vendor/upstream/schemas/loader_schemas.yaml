@@ -4288,6 +4288,8 @@ load_cfb_pbp:
   type: Boolean
 - name: overUnder
   type: Float64
+- name: overUnderAvailable
+  type: Boolean
 - name: homeTeamSpread
   type: Float64
 - name: clock.minutes
@@ -7288,7 +7290,7 @@ load_cfb_team_summaries:
 - name: total_available_yards_off
   type: Float64
 - name: total_gained_yards_off
-  type: Int64
+  type: Float64
 - name: pts_per_opp_off_n
   type: Int64
 - name: pts_per_drive_off_n
@@ -7318,7 +7320,7 @@ load_cfb_team_summaries:
 - name: total_available_yards_def
   type: Float64
 - name: total_gained_yards_def
-  type: Int64
+  type: Float64
 - name: pts_per_opp_def_n
   type: Int64
 - name: pts_per_drive_def_n
@@ -7348,7 +7350,7 @@ load_cfb_team_summaries:
 - name: total_available_yards_margin
   type: Float64
 - name: total_gained_yards_margin
-  type: Int64
+  type: Float64
 - name: available_yards_pct_margin
   type: Float64
 - name: pts_per_opp_margin
@@ -8489,6 +8491,20 @@ load_cfb_team_summaries:
   type: Float64
 - name: def_strength_faced_conf_pct
   type: Float64
+- name: deserved_wins
+  type: Float64
+- name: luck_wins
+  type: Float64
+- name: luck_z
+  type: Float64
+- name: luck_wins_rank
+  type: Float64
+- name: luck_z_rank
+  type: Float64
+- name: paper_index_games_n
+  type: Int64
+- name: paper_index_span
+  type: String
 load_cfb_team_summaries_weekly:
 - name: team_id
   type: Int64
@@ -8851,7 +8867,7 @@ load_cfb_team_summaries_weekly:
 - name: total_available_yards_off
   type: Float64
 - name: total_gained_yards_off
-  type: Int64
+  type: Float64
 - name: pts_per_opp_off_n
   type: Int64
 - name: pts_per_drive_off_n
@@ -8881,7 +8897,7 @@ load_cfb_team_summaries_weekly:
 - name: total_available_yards_def
   type: Float64
 - name: total_gained_yards_def
-  type: Int64
+  type: Float64
 - name: pts_per_opp_def_n
   type: Int64
 - name: pts_per_drive_def_n
@@ -8911,7 +8927,7 @@ load_cfb_team_summaries_weekly:
 - name: total_available_yards_margin
   type: Float64
 - name: total_gained_yards_margin
-  type: Int64
+  type: Float64
 - name: available_yards_pct_margin
   type: Float64
 - name: pts_per_opp_margin
@@ -10052,6 +10068,20 @@ load_cfb_team_summaries_weekly:
   type: Float64
 - name: def_strength_faced_conf_pct
   type: Float64
+- name: deserved_wins
+  type: Float64
+- name: luck_wins
+  type: Float64
+- name: luck_z
+  type: Float64
+- name: luck_wins_rank
+  type: Float64
+- name: luck_z_rank
+  type: Float64
+- name: paper_index_games_n
+  type: Int64
+- name: paper_index_span
+  type: String
 - name: through_week
   type: Int32
 load_cfb_team_talent:
@@ -12011,7 +12041,7 @@ load_mbb_game_rosters:
 - name: season
   type: Int32
 - name: game_id
-  type: String
+  type: Int32
 - name: team_id
   type: Int32
 - name: team_slug
@@ -12360,7 +12390,7 @@ load_mbb_player_core:
 - name: season
   type: Int32
 - name: athlete_id
-  type: Int64
+  type: Int32
 - name: guid
   type: String
 - name: uid
@@ -12439,7 +12469,7 @@ load_mbb_player_crosswalk:
 - name: player_name
   type: String
 - name: espn_athlete_id
-  type: String
+  type: Int32
 - name: espn_full_name
   type: String
 - name: espn_jersey
@@ -12559,7 +12589,7 @@ load_mbb_rosters:
 - name: team_logo
   type: String
 - name: athlete_id
-  type: String
+  type: Int32
 - name: uid
   type: String
 - name: guid
@@ -12797,7 +12827,7 @@ load_mbb_schedule_crosswalk:
 - name: away_espn_team_id
   type: Int32
 - name: espn_game_id
-  type: String
+  type: Int32
 - name: bart_muid
   type: String
 - name: bart_team1
@@ -13846,7 +13876,7 @@ load_nba_game_rosters:
 - name: season
   type: Int32
 - name: game_id
-  type: String
+  type: Int32
 - name: team_id
   type: Int32
 - name: team_slug
@@ -14207,7 +14237,7 @@ load_nba_player_core:
 - name: season
   type: Int32
 - name: athlete_id
-  type: Int64
+  type: Int32
 - name: guid
   type: String
 - name: uid
@@ -14286,7 +14316,7 @@ load_nba_player_crosswalk:
 - name: player_name
   type: String
 - name: espn_athlete_id
-  type: String
+  type: Int32
 - name: espn_full_name
   type: String
 - name: espn_jersey
@@ -14427,7 +14457,7 @@ load_nba_rosters:
 - name: team_logo
   type: String
 - name: athlete_id
-  type: String
+  type: Int32
 - name: uid
   type: String
 - name: guid
@@ -14647,7 +14677,7 @@ load_nba_schedule_crosswalk:
 - name: away_espn_team_id
   type: Int32
 - name: espn_game_id
-  type: String
+  type: Int32
 - name: nba_game_id
   type: String
 - name: nba_game_code
@@ -14962,6 +14992,41 @@ load_nba_stats_game_rosters:
 - name: game_id
   type: String
 - name: season_type_id
+  type: String
+load_nba_stats_injury_report:
+- name: season
+  type: Int64
+- name: report_datetime
+  type: Datetime(time_unit='us', time_zone=None)
+- name: game_date
+  type: Date
+- name: game_time
+  type: String
+- name: report_matchup
+  type: String
+- name: away_team_abbr
+  type: String
+- name: home_team_abbr
+  type: String
+- name: team
+  type: String
+- name: report_player_name
+  type: String
+- name: current_status
+  type: String
+- name: reason
+  type: String
+- name: category
+  type: String
+- name: previous_status
+  type: String
+- name: game_id
+  type: String
+- name: team_id
+  type: Int64
+- name: person_id
+  type: Int64
+- name: match_method
   type: String
 load_nba_stats_lineups:
 - name: group_set
@@ -17984,19 +18049,19 @@ load_ncaa_mbb_pbp:
 - name: home_ncaa_team_id
   type: String
 - name: home_espn_team_id
-  type: String
+  type: Int32
 - name: away_ncaa_team_id
   type: String
 - name: away_espn_team_id
-  type: String
+  type: Int32
 - name: event_team_ncaa_team_id
   type: String
 - name: event_team_espn_team_id
-  type: String
+  type: Int32
 - name: poss_team_ncaa_team_id
   type: String
 - name: poss_team_espn_team_id
-  type: String
+  type: Int32
 - name: player_1_id
   type: String
 - name: player_1_clean_name
@@ -18046,7 +18111,7 @@ load_ncaa_mbb_pbp:
 - name: away_5_clean_name
   type: String
 - name: espn_game_id
-  type: String
+  type: Int32
 - name: is_fastbreak
   type: Boolean
 - name: is_from_turnover
@@ -18319,21 +18384,21 @@ load_ncaa_mbb_player_box:
 - name: home_ncaa_team_id
   type: String
 - name: home_espn_team_id
-  type: String
+  type: Int32
 - name: away_ncaa_team_id
   type: String
 - name: away_espn_team_id
-  type: String
+  type: Int32
 - name: team_ncaa_team_id
   type: String
 - name: team_espn_team_id
-  type: String
+  type: Int32
 - name: player_id
   type: String
 - name: clean_name
   type: String
 - name: espn_game_id
-  type: String
+  type: Int32
 - name: season
   type: Int64
 load_ncaa_mbb_possessions:
@@ -18396,15 +18461,15 @@ load_ncaa_mbb_possessions:
 - name: home_ncaa_team_id
   type: String
 - name: home_espn_team_id
-  type: String
+  type: Int32
 - name: away_ncaa_team_id
   type: String
 - name: away_espn_team_id
-  type: String
+  type: Int32
 - name: poss_team_ncaa_team_id
   type: String
 - name: poss_team_espn_team_id
-  type: String
+  type: Int32
 - name: home_1_player_id
   type: String
 - name: home_1_clean_name
@@ -18446,7 +18511,7 @@ load_ncaa_mbb_possessions:
 - name: away_5_clean_name
   type: String
 - name: espn_game_id
-  type: String
+  type: Int32
 - name: season
   type: Int64
 load_ncaa_mbb_rapm:
@@ -18551,13 +18616,13 @@ load_ncaa_mbb_shots:
 - name: ncaa_team_id
   type: String
 - name: espn_team_id
-  type: String
+  type: Int32
 - name: shooter_player_id
   type: String
 - name: shooter_clean_name
   type: String
 - name: espn_game_id
-  type: String
+  type: Int32
 load_ncaa_mbb_team_box:
 - name: home
   type: String
@@ -18708,17 +18773,17 @@ load_ncaa_mbb_team_box:
 - name: home_ncaa_team_id
   type: String
 - name: home_espn_team_id
-  type: String
+  type: Int32
 - name: away_ncaa_team_id
   type: String
 - name: away_espn_team_id
-  type: String
+  type: Int32
 - name: team_ncaa_team_id
   type: String
 - name: team_espn_team_id
-  type: String
+  type: Int32
 - name: espn_game_id
-  type: String
+  type: Int32
 - name: season
   type: Int64
 load_ncaa_mbb_team_ids:
@@ -23277,6 +23342,8 @@ load_nfl_model_pbp:
   type: String
 - name: fumble_recovery_2_yards
   type: Int64
+- name: drive
+  type: Int64
 - name: two_point_conv_result
   type: String
 - name: extra_point_result
@@ -23301,12 +23368,12 @@ load_nfl_model_pbp:
   type: String
 - name: run_gap
   type: String
+- name: qb_dropback
+  type: Int32
 - name: pass
   type: Int64
 - name: rush
   type: Int64
-- name: qb_dropback
-  type: Int32
 - name: posteam_score
   type: Int64
 - name: defteam_score
@@ -23358,9 +23425,9 @@ load_nfl_model_pbp:
 - name: drive_game_clock_end
   type: String
 - name: drive_start_yard_line
-  type: Int64
+  type: String
 - name: drive_end_yard_line
-  type: Int64
+  type: String
 - name: drive_play_id_started
   type: Int64
 - name: drive_play_id_ended
@@ -29721,7 +29788,7 @@ load_wbb_player_crosswalk:
 - name: player_name
   type: String
 - name: espn_athlete_id
-  type: String
+  type: Int32
 - name: espn_full_name
   type: String
 - name: espn_jersey
@@ -30095,7 +30162,7 @@ load_wbb_schedule_crosswalk:
 - name: away_espn_team_id
   type: Int32
 - name: espn_game_id
-  type: String
+  type: Int32
 - name: bart_muid
   type: String
 - name: bart_team1
@@ -30487,7 +30554,7 @@ load_wnba_game_rosters:
 - name: season
   type: Int32
 - name: game_id
-  type: String
+  type: Int32
 - name: team_id
   type: Int32
 - name: team_slug
@@ -30581,7 +30648,7 @@ load_wnba_officials:
 - name: season
   type: Int32
 - name: game_id
-  type: String
+  type: Int32
 - name: official_id
   type: Int32
 - name: official_uid
@@ -30856,7 +30923,7 @@ load_wnba_player_core:
 - name: season
   type: Int32
 - name: athlete_id
-  type: Int64
+  type: Int32
 - name: guid
   type: String
 - name: uid
@@ -30935,7 +31002,7 @@ load_wnba_player_crosswalk:
 - name: player_name
   type: String
 - name: espn_athlete_id
-  type: String
+  type: Int32
 - name: espn_full_name
   type: String
 - name: espn_jersey
@@ -30943,7 +31010,7 @@ load_wnba_player_crosswalk:
 - name: espn_position
   type: String
 - name: wnba_player_id
-  type: String
+  type: Int64
 - name: wnba_player_name
   type: String
 - name: wnba_jersey_num
@@ -31078,7 +31145,7 @@ load_wnba_rosters:
 - name: team_logo
   type: String
 - name: athlete_id
-  type: String
+  type: Int32
 - name: uid
   type: String
 - name: guid
@@ -31298,15 +31365,15 @@ load_wnba_schedule_crosswalk:
 - name: away_espn_team_id
   type: Int32
 - name: espn_game_id
-  type: String
+  type: Int32
 - name: wnba_game_id
   type: String
 - name: wnba_game_code
   type: String
 - name: wnba_home_team_id
-  type: String
+  type: Int64
 - name: wnba_away_team_id
-  type: String
+  type: Int64
 - name: fox_game_id
   type: String
 - name: fox_home_team_id
@@ -32103,7 +32170,7 @@ load_wnba_team_crosswalk:
 - name: espn_mascot
   type: String
 - name: wnba_team_id
-  type: String
+  type: Int64
 - name: wnba_team_tricode
   type: String
 - name: wnba_team_name

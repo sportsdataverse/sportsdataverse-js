@@ -188,8 +188,8 @@ export interface NhlApiWebClubScheduleSeasonRow {
   away_team_airline_link?: string | null;
   /** Away team airline description. Schema `character`. */
   away_team_airline_desc?: string | null;
-  /** Winning goal scorer player identifier. Schema `double` (an id). */
-  winning_goal_scorer_player_id?: string | number | null;
+  /** Winning goal scorer player identifier. Schema `integer` (an id). */
+  winning_goal_scorer_player_id?: string | null;
   /** Winning goal scorer first initial (default). Schema `character`. */
   winning_goal_scorer_first_initial_default?: string | null;
   /** Winning goal scorer last name (default language). Schema `character`. */
@@ -204,8 +204,8 @@ export interface NhlApiWebClubScheduleSeasonRow {
   venue_es?: string | null;
   /** Venue name (French). Schema `character`. */
   venue_fr?: string | null;
-  /** NHL api-web identifier for the parent special-event record grouping multiple games under the same marquee event umbrella. Schema `double` (an id). */
-  special_event_parent_id?: string | number | null;
+  /** NHL api-web identifier for the parent special-event record grouping multiple games under the same marquee event umbrella. Schema `integer` (an id). */
+  special_event_parent_id?: string | null;
   /** English display name for a special promotional or marquee event designation attached to the game (e.g., 'Winter Classic', 'Heritage Classic'). Schema `character`. */
   special_event_name_default?: string | null;
   /** French display name for a special promotional or marquee event designation attached to the game, used in bilingual NHL communications. Schema `character`. */
@@ -737,12 +737,12 @@ export interface NhlApiWebPbpRow {
   period_descriptor_period_type?: string | null;
   /** Maximum number of regulation periods. Schema `integer`. */
   period_descriptor_max_regulation_periods?: number | null;
-  /** NHL api-web team identifier for the team credited with or responsible for the play event in the play-by-play feed. Schema `double` (an id). */
-  details_event_owner_team_id?: string | number | null;
-  /** NHL api-web player identifier for the skater who lost the faceoff on a faceoff event in the play-by-play feed. Schema `double` (an id). */
-  details_losing_player_id?: string | number | null;
-  /** NHL api-web player identifier for the skater who won the faceoff on a faceoff event in the play-by-play feed. Schema `double` (an id). */
-  details_winning_player_id?: string | number | null;
+  /** NHL api-web team identifier for the team credited with or responsible for the play event in the play-by-play feed. Schema `integer` (an id). */
+  details_event_owner_team_id?: string | null;
+  /** NHL api-web player identifier for the skater who lost the faceoff on a faceoff event in the play-by-play feed. Schema `integer` (an id). */
+  details_losing_player_id?: string | null;
+  /** NHL api-web player identifier for the skater who won the faceoff on a faceoff event in the play-by-play feed. Schema `integer` (an id). */
+  details_winning_player_id?: string | null;
   /** Horizontal rink coordinate (feet from centre ice, positive toward right side) of the play event location in the NHL api-web play-by-play feed. Schema `double`. */
   details_x_coord?: number | null;
   /** Vertical rink coordinate (feet from centre ice, positive toward one end) of the play event location in the NHL api-web play-by-play feed. Schema `double`. */
@@ -751,46 +751,46 @@ export interface NhlApiWebPbpRow {
   details_zone_code?: string | null;
   /** Classification of the shot attempt (e.g., wrist shot, slap shot, backhand, deflection) as provided in the NHL api-web play-by-play details. Schema `character`. */
   details_shot_type?: string | null;
-  /** NHL api-web player identifier for the skater who took the shot on a shot-on-goal, missed-shot, or blocked-shot event in the play-by-play feed. Schema `double` (an id). */
-  details_shooting_player_id?: string | number | null;
-  /** NHL api-web player identifier for the goaltender who was in the net at the time of the shot, goal, or missed-shot event in the play-by-play feed. Schema `double` (an id). */
-  details_goalie_in_net_id?: string | number | null;
+  /** NHL api-web player identifier for the skater who took the shot on a shot-on-goal, missed-shot, or blocked-shot event in the play-by-play feed. Schema `integer` (an id). */
+  details_shooting_player_id?: string | null;
+  /** NHL api-web player identifier for the goaltender who was in the net at the time of the shot, goal, or missed-shot event in the play-by-play feed. Schema `integer` (an id). */
+  details_goalie_in_net_id?: string | null;
   /** Cumulative shots on goal by the away team at the moment of the play event in the NHL api-web play-by-play feed. Schema `double`. */
   details_away_sog?: number | null;
   /** Cumulative shots on goal by the home team at the moment of the play event in the NHL api-web play-by-play feed. Schema `double`. */
   details_home_sog?: number | null;
   /** Primary reason or description for the play event (e.g., specific penalty infraction name) as provided in the NHL api-web play-by-play details. Schema `character`. */
   details_reason?: string | null;
-  /** NHL api-web player identifier for the skater who blocked a shot on the blocked-shot event in the play-by-play feed. Schema `double` (an id). */
-  details_blocking_player_id?: string | number | null;
-  /** NHL api-web player identifier for the skater who delivered the body check on a hit event in the play-by-play feed. Schema `double` (an id). */
-  details_hitting_player_id?: string | number | null;
-  /** NHL api-web player identifier for the skater who received the body check on a hit event in the play-by-play feed. Schema `double` (an id). */
-  details_hittee_player_id?: string | number | null;
-  /** NHL api-web player identifier for the primary player involved in the play event (used on giveaway, takeaway, and similar single-player events). Schema `double` (an id). */
-  details_player_id?: string | number | null;
+  /** NHL api-web player identifier for the skater who blocked a shot on the blocked-shot event in the play-by-play feed. Schema `integer` (an id). */
+  details_blocking_player_id?: string | null;
+  /** NHL api-web player identifier for the skater who delivered the body check on a hit event in the play-by-play feed. Schema `integer` (an id). */
+  details_hitting_player_id?: string | null;
+  /** NHL api-web player identifier for the skater who received the body check on a hit event in the play-by-play feed. Schema `integer` (an id). */
+  details_hittee_player_id?: string | null;
+  /** NHL api-web player identifier for the primary player involved in the play event (used on giveaway, takeaway, and similar single-player events). Schema `integer` (an id). */
+  details_player_id?: string | null;
   /** Structured sub-type code providing additional classification within the play event category in the NHL api-web play-by-play feed. Schema `character`. */
   details_type_code?: string | null;
   /** Short descriptor key providing additional classification of the play event (e.g., penalty type or shot outcome) in the NHL api-web play-by-play feed. Schema `character`. */
   details_desc_key?: string | null;
   /** Duration of the penalty in minutes as specified in the play event details of the NHL api-web play-by-play feed. Schema `double`. */
   details_duration?: number | null;
-  /** NHL api-web player identifier for the player who committed the infraction on a penalty event in the play-by-play feed. Schema `double` (an id). */
-  details_committed_by_player_id?: string | number | null;
-  /** NHL api-web player identifier for the player who drew (was the victim of) the penalty on a penalty event in the play-by-play feed. Schema `double` (an id). */
-  details_drawn_by_player_id?: string | number | null;
+  /** NHL api-web player identifier for the player who committed the infraction on a penalty event in the play-by-play feed. Schema `integer` (an id). */
+  details_committed_by_player_id?: string | null;
+  /** NHL api-web player identifier for the player who drew (was the victim of) the penalty on a penalty event in the play-by-play feed. Schema `integer` (an id). */
+  details_drawn_by_player_id?: string | null;
   /** URL to the power-play tracking replay video associated with this play event in the NHL api-web play-by-play feed. Schema `character`. */
   ppt_replay_url?: string | null;
-  /** NHL api-web player identifier for the skater who scored the goal on a goal event in the play-by-play feed. Schema `double` (an id). */
-  details_scoring_player_id?: string | number | null;
+  /** NHL api-web player identifier for the skater who scored the goal on a goal event in the play-by-play feed. Schema `integer` (an id). */
+  details_scoring_player_id?: string | null;
   /** Running season goal total for the scoring player at the time of the goal event in the NHL api-web play-by-play feed. Schema `double`. */
   details_scoring_player_total?: number | null;
-  /** NHL api-web player identifier for the primary (first) assist credited on a goal event in the play-by-play feed. Schema `double` (an id). */
-  details_assist1_player_id?: string | number | null;
+  /** NHL api-web player identifier for the primary (first) assist credited on a goal event in the play-by-play feed. Schema `integer` (an id). */
+  details_assist1_player_id?: string | null;
   /** Running season assist total for the primary assist player at the time of the goal event in the play-by-play feed. Schema `double`. */
   details_assist1_player_total?: number | null;
-  /** NHL api-web player identifier for the secondary (second) assist credited on a goal event in the play-by-play feed. Schema `double` (an id). */
-  details_assist2_player_id?: string | number | null;
+  /** NHL api-web player identifier for the secondary (second) assist credited on a goal event in the play-by-play feed. Schema `integer` (an id). */
+  details_assist2_player_id?: string | null;
   /** Running season assist total for the secondary assist player at the time of the goal event in the play-by-play feed. Schema `double`. */
   details_assist2_player_total?: number | null;
   /** Cumulative away-team score at the moment of the play event in the NHL api-web play-by-play feed. Schema `double`. */

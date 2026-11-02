@@ -2,7 +2,7 @@
 // Run `npm run codegen` to regenerate from tools/codegen/endpoints/releases.yaml
 // (vendored verbatim from sportsdataverse-py).
 //
-// 42 dataset loaders for `sdv.nba`: each reads a published
+// 43 dataset loaders for `sdv.nba`: each reads a published
 // SportsDataverse release asset (parquet) through src/core/releases.ts.
 
 import {
@@ -34,6 +34,7 @@ import type {
   LoadNbaStatsPossessionsRow,
   LoadNbaStatsGameLineupsRow,
   LoadNbaStatsGameMatchupsRow,
+  LoadNbaStatsInjuryReportRow,
   LoadNbaStatsPlayerBoxscoresRow,
   LoadNbaStatsPlayerGameLogsRow,
   LoadNbaStatsPlayerSeasonStatsRow,
@@ -585,6 +586,30 @@ const LOAD_NBA_STATS_GAME_MATCHUPS: ReleaseLoaderDef = {"fn":"load_nba_stats_gam
 export const loadNbaStatsGameMatchups = seasonLoader<LoadNbaStatsGameMatchupsRow>(LOAD_NBA_STATS_GAME_MATCHUPS);
 /** snake_case alias of {@link loadNbaStatsGameMatchups} (py/R parity). */
 export const load_nba_stats_game_matchups = loadNbaStatsGameMatchups;
+
+const LOAD_NBA_STATS_INJURY_REPORT: ReleaseLoaderDef = {"fn":"load_nba_stats_injury_report","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_injury_report/injury_report_{season + 1}.parquet","minSeason":2018};
+
+/**
+ * Load `nba_stats_injury_report` (sportsdataverse-data releases).
+ *
+ * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_injury_report
+ *
+ * Pass the season's START year (e.g. `2018` for the 2018-19 season); the asset is keyed by the END year and the loader translates internally, so a `season` column in the rows carries that END year.
+ *
+ * @param opts.seasons - a season or a list of seasons (>= 2018); one with no published asset is skipped with a warning.
+ * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
+ * @param opts.timeoutMs - download timeout in ms (default 300000).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @throws SeasonNotFoundError if a season is below 2018.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
+ * @throws AssetFetchError if a download fails (never reported as an empty season).
+ * @example await sdv.nba.loadNbaStatsInjuryReport({ seasons: 2025 });
+ */
+export const loadNbaStatsInjuryReport = seasonLoader<LoadNbaStatsInjuryReportRow>(LOAD_NBA_STATS_INJURY_REPORT);
+/** snake_case alias of {@link loadNbaStatsInjuryReport} (py/R parity). */
+export const load_nba_stats_injury_report = loadNbaStatsInjuryReport;
 
 /**
  * Deprecated alias for {@link loadNbaStatsPbp} (`load_nba_stats_pbp`), which reads the `nba_stats_pbp` release.

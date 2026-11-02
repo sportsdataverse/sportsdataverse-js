@@ -26,7 +26,7 @@ columns:
   type: character
   description: ''
 - name: market_id
-  type: character
+  type: integer
   description: ''
 - name: market_type
   type: character
@@ -38,7 +38,7 @@ columns:
   type: character
   description: ''
 - name: media_id
-  type: character
+  type: integer
   description: ''
 - name: media_logos
   type: character
@@ -53,7 +53,7 @@ columns:
   type: character
   description: ''
 - name: type_id
-  type: character
+  type: integer
   description: ''
 - name: type_long_name
   type: character
@@ -63,4 +63,10 @@ columns:
   description: ''
 - name: type_slug
   type: character
+  description: ''
+- name: count
+  type: integer
+  description: ''
+- name: page_count
+  type: integer
   description: ''

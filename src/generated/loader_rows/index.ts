@@ -175,6 +175,7 @@ export type {
   LoadNbaStatsPossessionsRow,
   LoadNbaStatsGameLineupsRow,
   LoadNbaStatsGameMatchupsRow,
+  LoadNbaStatsInjuryReportRow,
   LoadNbaStatsPlayerBoxscoresRow,
   LoadNbaStatsPlayerGameLogsRow,
   LoadNbaStatsPlayerSeasonStatsRow,

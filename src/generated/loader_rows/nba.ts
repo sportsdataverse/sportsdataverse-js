@@ -319,19 +319,19 @@ export interface LoadNbaScheduleRow {
   status_display_clock?: string | null;
   /** Status period. `Float64` */
   status_period?: number | null;
-  /** Unique identifier for status type. `Int32` (an id) */
+  /** ESPN's numeric game-status code, passed through unchanged. ESPN publishes no reference for these codes, so read status_type_name rather than hard-coding numbers. `Int32` (an id) */
   status_type_id?: string | null;
-  /** Status type name. `String` */
+  /** ESPN's game-status enum (STATUS_FINAL, STATUS_SCHEDULED, STATUS_POSTPONED, STATUS_CANCELED, ...), passed through unchanged. ESPN does not document the full set, and no value certifies an ordinary final as distinct from a forfeit or an awarded result. `String` */
   status_type_name?: string | null;
-  /** Status type state. `String` */
+  /** ESPN's coarse game state, passed through unchanged: pre, in or post. post covers every game that is over, whatever the reason. `String` */
   status_type_state?: string | null;
-  /** Status type completed. `Boolean` */
+  /** ESPN's completed flag, passed through unchanged: true once ESPN considers the game over. It does not separate an ordinary final from a forfeited, protested, replayed or awarded result; ESPN documents no such distinction. `Boolean` */
   status_type_completed?: boolean | null;
-  /** Status type description. `String` */
+  /** ESPN's display text for the game status (for example "Final" or "Postponed"), passed through unchanged. `String` */
   status_type_description?: string | null;
-  /** Status type detail. `String` */
+  /** ESPN's longer status text, passed through unchanged; an overtime final reads like "Final/OT". `String` */
   status_type_detail?: string | null;
-  /** Status type short detail. `String` */
+  /** ESPN's short status text for scoreboards, passed through unchanged. `String` */
   status_type_short_detail?: string | null;
   /** Format regulation periods. `Float64` */
   format_regulation_periods?: number | null;
@@ -359,7 +359,7 @@ export interface LoadNbaScheduleRow {
   home_venue_id?: string | null;
   /** Home team logo URL. `String` */
   home_logo?: string | null;
-  /** Home team score at the time of the play. `Int32` */
+  /** Home team's points as ESPN reports them: once the game is final, the full-game total including every overtime period. ESPN corrects a score in place, so this is the value ESPN showed when the release was last built. Not a final score until status_type_completed is true. `Int32` */
   home_score?: number | null;
   /** Home team's winner. `Boolean` */
   home_winner?: boolean | null;
@@ -391,7 +391,7 @@ export interface LoadNbaScheduleRow {
   away_venue_id?: string | null;
   /** Away team logo URL. `String` */
   away_logo?: string | null;
-  /** Away team score at the time of the play. `Int32` */
+  /** Away team's points as ESPN reports them: once the game is final, the full-game total including every overtime period. ESPN corrects a score in place, so this is the value ESPN showed when the release was last built. Not a final score until status_type_completed is true. `Int32` */
   away_score?: number | null;
   /** Away team's winner. `Boolean` */
   away_winner?: boolean | null;
@@ -555,7 +555,7 @@ export interface LoadNbaTeamBoxscoreRow {
 export interface LoadNbaGameRostersRow {
   /** Season year. `Int32` */
   season?: number | null;
-  /** Unique game identifier. `String` (an id) */
+  /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
   /** Unique team identifier. `Int32` (an id) */
   team_id?: string | null;
@@ -891,7 +891,7 @@ export interface LoadNbaRostersRow {
   team_alternate_color?: string | null;
   /** Team logo image URL. `String` */
   team_logo?: string | null;
-  /** Unique athlete identifier (ESPN). `String` (an id) */
+  /** Unique athlete identifier (ESPN). `Int32` (an id) */
   athlete_id?: string | null;
   /** ESPN UID string. `String` */
   uid?: string | null;
@@ -1781,6 +1781,46 @@ export interface LoadNbaStatsGameMatchupsRow {
   season?: number | null;
   /** Season-type digit: the 3rd character of game_id (and the leading digit of season_id). 1 = preseason, 2 = regular season, 3 = All-Star, 4 = playoffs, 5 = play-in, 6 = NBA Cup final, 9 = international. `String` (an id) */
   season_type_id?: string | null;
+  /** A column the loader schema does not list (a release adds columns over the seasons). */
+  [column: string]: unknown;
+}
+
+/** One row of `sdv.nba.loadNbaStatsInjuryReport` (`nba_stats_injury_report`; sdv-py loader schema `load_nba_stats_injury_report`). */
+export interface LoadNbaStatsInjuryReportRow {
+  /** Season as its ENDING year (2026 = the 2025-26 season), the published asset's stamp. `Int64` */
+  season?: number | bigint | null;
+  /** Publish time of the report version the row comes from (US Eastern, naive). The league re-publishes the report through the day, so a listing repeats once per version. `Datetime(time_unit='us', time_zone=None)` */
+  report_datetime?: Date | null;
+  /** Game date as the report prints it (US Eastern). `Date` */
+  game_date?: Date | null;
+  /** Tip time as the report prints it ("07:30 (ET)", no AM/PM). `String` */
+  game_time?: string | null;
+  /** Game as the report prints it, away@home tricodes ("CLE@ATL"). `String` */
+  report_matchup?: string | null;
+  /** Away team tricode as the report prints it. `String` */
+  away_team_abbr?: string | null;
+  /** Home team tricode as the report prints it. `String` */
+  home_team_abbr?: string | null;
+  /** Team the listing belongs to, full name as printed ("Cleveland Cavaliers"). `String` */
+  team?: string | null;
+  /** Player as the report prints it, "Last, First" ("James, LeBron"); null on a team's NOT YET SUBMITTED row. `String` */
+  report_player_name?: string | null;
+  /** Listed status in that version: Available, Probable, Questionable, Doubtful or Out; null on a NOT YET SUBMITTED row. `String` */
+  current_status?: string | null;
+  /** Reason as printed ("Injury/Illness - Left Ankle; Sprain"); "NOT YET SUBMITTED" for a team that had not filed by that version. `String` */
+  reason?: string | null;
+  /** Category column of the early report format; last printed 2019-11-14, null after. `String` */
+  category?: string | null;
+  /** Previous Status column of the early report format; last printed 2019-12-17, null after. `String` */
+  previous_status?: string | null;
+  /** stats.nba.com game id, joined on the game date and tricodes; null for a game postponed off its printed date, a playoff game that was not needed, or a Summer League game. `String` (an id) */
+  game_id?: string | null;
+  /** stats.nba.com team id of the listing's team, from its printed name. `Int64` (an id) */
+  team_id?: string | null;
+  /** stats.nba.com person id matched from the printed name (see match_method); null when unmatched. `Int64` (an id) */
+  person_id?: string | null;
+  /** How person_id was matched: exact (full name on the team's boxscores that season), family (family name and first initial, unique on the team), league (name unique league-wide that season), roster (name on the team's roster, which lists players who have not played), or null. `String` */
+  match_method?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
 }
@@ -3075,7 +3115,7 @@ export interface LoadNbaPlayerCrosswalkRow {
   team_abbreviation?: string | null;
   /** Player name. `String` */
   player_name?: string | null;
-  /** ESPN athlete id. `String` (an id) */
+  /** ESPN athlete id. `Int32` (an id) */
   espn_athlete_id?: string | null;
   /** ESPN full name. `String` */
   espn_full_name?: string | null;
@@ -3125,7 +3165,7 @@ export interface LoadNbaScheduleCrosswalkRow {
   home_espn_team_id?: string | null;
   /** ESPN away team id (NA for bart-only rows). `Int32` (an id) */
   away_espn_team_id?: string | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** ESPN game id (NA for bart-only rows). `Int32` (an id) */
   espn_game_id?: string | null;
   /** NBA Stats 10-character game id matched to the ESPN game in the crosswalk. `String` (an id) */
   nba_game_id?: string | null;
@@ -3203,7 +3243,7 @@ export interface LoadNbaTeamCrosswalkRow {
 export interface LoadNbaPlayerCoreRow {
   /** Season year. `Int32` */
   season?: number | null;
-  /** Unique athlete identifier (ESPN). `Int64` (an id) */
+  /** Unique athlete identifier (ESPN). `Int32` (an id) */
   athlete_id?: string | null;
   /** Stable cross-league team GUID. `String` */
   guid?: string | null;

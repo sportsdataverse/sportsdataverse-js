@@ -657,6 +657,7 @@ const rows = await sdv.nfl.loadNflModelPbp({ seasons: 2024, columns: ['game_id',
 | `fumble_recovery_2_player_name` | `string` | String name of one of the players with a fumble recovery. |
 | `fumble_recovery_2_team` | `string` | Team of one of the players with a fumble recovery. |
 | `fumble_recovery_2_yards` | `number \| bigint` | Yards gained by one of the players with a fumble recovery. |
+| `drive` | `number \| bigint` | Numeric drive number in the game. |
 | `two_point_conv_result` | `string` | String indicator for result of two point conversion attempt: success, failure, safety (touchback in defensive endzone is 1 point apparently), or return. |
 | `extra_point_result` | `string` | String indicator for the result of the extra point attempt: good, failed, blocked, safety (touchback in defensive endzone is 1 point apparently), or aborted. |
 | `special` | `number \| bigint` | Binary indicator if "play_type" is one of "extra_point", "field_goal", "kickoff", or "punt". |
@@ -669,9 +670,9 @@ const rows = await sdv.nfl.loadNflModelPbp({ seasons: 2024, columns: ['game_id',
 | `no_huddle` | `number \| bigint` | Binary indicator for whether or not the play was in no_huddle formation. |
 | `run_location` | `string` | String indicator for location of run: left, middle, or right. |
 | `run_gap` | `string` | String indicator for line gap of run: end, guard, or tackle |
+| `qb_dropback` | `number` | Binary indicator for whether or not the QB dropped back on the play (pass attempt, sack, or scrambled). |
 | `pass` | `number \| bigint` | Binary indicator if the play was a pass play (sacks and scrambles included). |
 | `rush` | `number \| bigint` | Binary indicator if the play was a rushing play. |
-| `qb_dropback` | `number` | Binary indicator for whether or not the QB dropped back on the play (pass attempt, sack, or scrambled). |
 | `posteam_score` | `number \| bigint` | Score the posteam at the start of the play. |
 | `defteam_score` | `number \| bigint` | Score the defteam at the start of the play. |
 | `score_differential` | `number \| bigint` | Score differential between the posteam and defteam at the start of the play. |
@@ -697,8 +698,8 @@ const rows = await sdv.nfl.loadNflModelPbp({ seasons: 2024, columns: ['game_id',
 | `drive_end_transition` | `string` | String indicating how the offense lost the ball. |
 | `drive_game_clock_start` | `string` | Game time at the beginning of a given drive. |
 | `drive_game_clock_end` | `string` | Game time at the end of a given drive. |
-| `drive_start_yard_line` | `number \| bigint` | Yards from the offense's line of scrimmage to the opponent's end zone (yardline_100) on the drive's first play, 1-99; the model-pbp parquet stores the numeric spot, not the 'OWN 20' text load_nfl_pbp carries. |
-| `drive_end_yard_line` | `number \| bigint` | Yards from the offense's line of scrimmage to the opponent's end zone (yardline_100) on the drive's last play; the model-pbp parquet stores the numeric spot, not the 'OPP 45' text load_nfl_pbp carries. |
+| `drive_start_yard_line` | `string` | Field position of the drive's first play as nflverse text: the side's team abbreviation and yard line ('ARI 10'), or '50' at midfield. |
+| `drive_end_yard_line` | `string` | Field position of the drive's last play as nflverse text: the side's team abbreviation and yard line ('ARI 35'), or '50' at midfield. |
 | `drive_play_id_started` | `string` | Play_id of the first play in the given drive. |
 | `drive_play_id_ended` | `string` | Play_id of the last play in the given drive. |
 | `drive_time_of_possession` | `string` | Time of possession in a given drive. |
