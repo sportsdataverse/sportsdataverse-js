@@ -75,18 +75,20 @@ jobs:
           name: coverage-node-${{ matrix.node-version }}
           path: coverage/lcov.info
           if-no-files-found: error
-      # Codecov (the README badge). c8 remaps dist/ to src/ through the tsc source maps. Non-fatal: a Codecov
-      # outage never fails ci. The org CODECOV_TOKEN; a fork's pull request gets an empty one, which Codecov
-      # accepts for forks.
+      # Codecov (the README badge). c8 remaps dist/ to src/ through the tsc source maps. The org CODECOV_TOKEN;
+      # a fork's pull request gets an empty one, which Codecov accepts for forks. fail_ci_if_error stops the
+      # uploader on a failed signature or checksum check (it would otherwise run the downloaded binary);
+      # continue-on-error keeps a Codecov failure from failing ci.
       - name: Upload coverage to Codecov
         if: matrix.node-version == '20.x'
+        continue-on-error: true
         uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5  # v7.1.1
         # the action reads CODECOV_TOKEN from the step env (the hardening test allows a secret only there)
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         with:
           files: coverage/lcov.info
-          fail_ci_if_error: false
+          fail_ci_if_error: true
 
   docs:
     name: docs build (Docusaurus + TypeDoc)
