@@ -2,7 +2,7 @@
 // Run `npm run codegen` to regenerate from tools/codegen/endpoints/releases.yaml
 // (vendored verbatim from sportsdataverse-py).
 //
-// 71 dataset loaders for `sdv.cfb`: each reads a published
+// 73 dataset loaders for `sdv.cfb`: each reads a published
 // SportsDataverse release asset (parquet) through src/core/releases.ts.
 
 import {
@@ -82,6 +82,8 @@ import type {
   LoadCfbGroupSeasonsRow,
   LoadCfbGroupAliasesRow,
   LoadCfbTeamGroupSeasonsRow,
+  LoadCfbTeamAliasesRow,
+  LoadCfbPlayerAliasesRow,
 } from "../loader_rows/cfb.js";
 
 const LOAD_CFB_PBP: ReleaseLoaderDef = {"fn":"load_cfb_pbp","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_cfb_pbp/play_by_play_{season}.parquet","minSeason":2004};
@@ -172,20 +174,20 @@ export const loadCfbRecruits = seasonLoader<LoadCfbRecruitsRow>(LOAD_CFB_RECRUIT
 /** snake_case alias of {@link loadCfbRecruits} (py/R parity). */
 export const load_cfb_recruits = loadCfbRecruits;
 
-const LOAD_CFB_RETURNING_PRODUCTION: ReleaseLoaderDef = {"fn":"load_cfb_returning_production","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfb_returning_production/cfb_returning_production_{season}.parquet","minSeason":2005,"idInt64":["team_id"]};
+const LOAD_CFB_RETURNING_PRODUCTION: ReleaseLoaderDef = {"fn":"load_cfb_returning_production","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfb_returning_production/cfb_returning_production_{season}.parquet","minSeason":2004,"idInt64":["team_id"]};
 
 /**
  * Load `cfb_returning_production` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/cfb_returning_production
  *
- * @param opts.seasons - a season or a list of seasons (>= 2005); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2004); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2005.
+ * @throws SeasonNotFoundError if a season is below 2004.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbReturningProduction({ seasons: 2024 });
@@ -350,20 +352,20 @@ export const loadCfbTeamTalent = seasonLoader<LoadCfbTeamTalentRow>(LOAD_CFB_TEA
 /** snake_case alias of {@link loadCfbTeamTalent} (py/R parity). */
 export const load_cfb_team_talent = loadCfbTeamTalent;
 
-const LOAD_CFB_TEAMS_CROSSWALK: ReleaseLoaderDef = {"fn":"load_cfb_teams_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfb_crosswalk/cfb_teams_crosswalk_{season}.parquet","minSeason":2013};
+const LOAD_CFB_TEAMS_CROSSWALK: ReleaseLoaderDef = {"fn":"load_cfb_teams_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfb_crosswalk/cfb_teams_crosswalk_{season}.parquet","minSeason":2004};
 
 /**
  * Load `cfb_crosswalk` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/cfb_crosswalk
  *
- * @param opts.seasons - a season or a list of seasons (>= 2013); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2004); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2013.
+ * @throws SeasonNotFoundError if a season is below 2004.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbTeamsCrosswalk({ seasons: 2024 });
@@ -372,20 +374,20 @@ export const loadCfbTeamsCrosswalk = seasonLoader<LoadCfbTeamsCrosswalkRow>(LOAD
 /** snake_case alias of {@link loadCfbTeamsCrosswalk} (py/R parity). */
 export const load_cfb_teams_crosswalk = loadCfbTeamsCrosswalk;
 
-const LOAD_CFB_SCHEDULE_CROSSWALK: ReleaseLoaderDef = {"fn":"load_cfb_schedule_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfb_crosswalk/cfb_schedule_crosswalk_{season}.parquet","minSeason":2013};
+const LOAD_CFB_SCHEDULE_CROSSWALK: ReleaseLoaderDef = {"fn":"load_cfb_schedule_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfb_crosswalk/cfb_schedule_crosswalk_{season}.parquet","minSeason":2004};
 
 /**
  * Load `cfb_crosswalk` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/cfb_crosswalk
  *
- * @param opts.seasons - a season or a list of seasons (>= 2013); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2004); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2013.
+ * @throws SeasonNotFoundError if a season is below 2004.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbScheduleCrosswalk({ seasons: 2024 });
@@ -570,20 +572,20 @@ export const loadCfbFpiWeekly = seasonLoader<LoadCfbFpiWeeklyRow>(LOAD_CFB_FPI_W
 /** snake_case alias of {@link loadCfbFpiWeekly} (py/R parity). */
 export const load_cfb_fpi_weekly = loadCfbFpiWeekly;
 
-const LOAD_CFB_POWER_INDEX: ReleaseLoaderDef = {"fn":"load_cfb_power_index","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_cfb_power_index/power_index_{season}.parquet","minSeason":2015,"idInt64":["team_id"]};
+const LOAD_CFB_POWER_INDEX: ReleaseLoaderDef = {"fn":"load_cfb_power_index","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_cfb_power_index/power_index_{season}.parquet","minSeason":2005,"idInt64":["team_id"]};
 
 /**
  * Load `espn_cfb_power_index` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_cfb_power_index
  *
- * @param opts.seasons - a season or a list of seasons (>= 2015); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2005); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2015.
+ * @throws SeasonNotFoundError if a season is below 2005.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.cfb.loadCfbPowerIndex({ seasons: 2024 });
@@ -1665,3 +1667,49 @@ const LOAD_CFB_TEAM_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_cfb_team_group
 export const loadCfbTeamGroupSeasons = seasonLoader<LoadCfbTeamGroupSeasonsRow>(LOAD_CFB_TEAM_GROUP_SEASONS);
 /** snake_case alias of {@link loadCfbTeamGroupSeasons} (py/R parity). */
 export const load_cfb_team_group_seasons = loadCfbTeamGroupSeasons;
+
+const LOAD_CFB_TEAM_ALIASES: ReleaseLoaderDef = {"fn":"load_cfb_team_aliases","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfb_groups/cfb_team_aliases.parquet"};
+
+/**
+ * Load `cfb_groups` (sportsdataverse-data releases).
+ *
+ * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/cfb_groups
+ *
+ * Note: One season-less file: every id and name another source (cbs, cfbd, fox, on3, sports247, yahoo) uses for a team, keyed on the ESPN team id (team_id, a string; team_id_source = espn), with the seasons the source shows it on that team (valid_from / valid_to, inclusive; both null for an undated curated map). id_kind says whether source_id is the source's id for this sport's team or one id for every sport of a school; a name-only row has a null source_id. A source id means something only within its source (Fox 25 is not ESPN 25), so filter on source before joining on source_id. Seasons are the STARTING year (2025 = the fall 2025 season).
+ *
+ * @param opts - optional `columns` / `timeoutMs`.
+ * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
+ * @param opts.timeoutMs - download timeout in ms (default 300000).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process). An absent asset returns no rows with a warning.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
+ * @throws AssetFetchError if a download fails (never reported as an empty season).
+ * @example await sdv.cfb.loadCfbTeamAliases();
+ */
+export const loadCfbTeamAliases = assetLoader<LoadCfbTeamAliasesRow>(LOAD_CFB_TEAM_ALIASES);
+/** snake_case alias of {@link loadCfbTeamAliases} (py/R parity). */
+export const load_cfb_team_aliases = loadCfbTeamAliases;
+
+const LOAD_CFB_PLAYER_ALIASES: ReleaseLoaderDef = {"fn":"load_cfb_player_aliases","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfb_groups/cfb_player_aliases.parquet"};
+
+/**
+ * Load `cfb_groups` (sportsdataverse-data releases).
+ *
+ * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/cfb_groups
+ *
+ * Note: One season-less file: every player id another source (cbs, fox, ncaa, yahoo) uses for an ESPN athlete (athlete_id, a string; athlete_id_source = espn), with the ESPN team the match was made on (team_id) and the seasons it held (valid_from / valid_to, inclusive). match_method and match_confidence carry the matching leg's own method and score. Filter on source before joining on source_player_id. stats.ncaa.org roster ids (source ncaa) are new every season. Seasons are the STARTING year (2025 = the fall 2025 season).
+ *
+ * @param opts - optional `columns` / `timeoutMs`.
+ * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
+ * @param opts.timeoutMs - download timeout in ms (default 300000).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process). An absent asset returns no rows with a warning.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
+ * @throws AssetFetchError if a download fails (never reported as an empty season).
+ * @example await sdv.cfb.loadCfbPlayerAliases();
+ */
+export const loadCfbPlayerAliases = assetLoader<LoadCfbPlayerAliasesRow>(LOAD_CFB_PLAYER_ALIASES);
+/** snake_case alias of {@link loadCfbPlayerAliases} (py/R parity). */
+export const load_cfb_player_aliases = loadCfbPlayerAliases;

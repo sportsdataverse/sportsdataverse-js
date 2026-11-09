@@ -2,7 +2,7 @@
 // Run `npm run codegen` to regenerate from tools/codegen/endpoints/releases.yaml
 // (vendored verbatim from sportsdataverse-py).
 //
-// 34 dataset loaders for `sdv.mlb`: each reads a published
+// 35 dataset loaders for `sdv.mlb`: each reads a published
 // SportsDataverse release asset (parquet) through src/core/releases.ts.
 
 import {
@@ -44,6 +44,7 @@ import type {
   LoadNcaaBaseballGroupSeasonsRow,
   LoadNcaaBaseballGroupAliasesRow,
   LoadNcaaBaseballTeamGroupSeasonsRow,
+  LoadMlbTeamAliasesRow,
   LoadMlbParkDimensionsRow,
 } from "../loader_rows/mlb.js";
 
@@ -399,20 +400,20 @@ export const loadMlbCommandPlus = seasonLoader<LoadMlbCommandPlusRow>(LOAD_MLB_C
 /** snake_case alias of {@link loadMlbCommandPlus} (py/R parity). */
 export const load_mlb_command_plus = loadMlbCommandPlus;
 
-const LOAD_NCAA_BASEBALL_PBP: ReleaseLoaderDef = {"fn":"load_ncaa_baseball_pbp","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/ncaa_baseball_pbp/ncaa_baseball_pbp_{season}.parquet","minSeason":2017};
+const LOAD_NCAA_BASEBALL_PBP: ReleaseLoaderDef = {"fn":"load_ncaa_baseball_pbp","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/ncaa_baseball_pbp/ncaa_baseball_pbp_{season}.parquet","minSeason":2016};
 
 /**
  * Load `ncaa_baseball_pbp` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_baseball_pbp
  *
- * @param opts.seasons - a season or a list of seasons (>= 2017); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2016); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2017.
+ * @throws SeasonNotFoundError if a season is below 2016.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadNcaaBaseballPbp({ seasons: 2023, columns: ['contest_id', 'inning', 'play_type', 'description'] });
@@ -443,20 +444,20 @@ export const loadNcaaBaseballSchedule = seasonLoader<LoadNcaaBaseballScheduleRow
 /** snake_case alias of {@link loadNcaaBaseballSchedule} (py/R parity). */
 export const load_ncaa_baseball_schedule = loadNcaaBaseballSchedule;
 
-const LOAD_NCAA_BASEBALL_TEAMS: ReleaseLoaderDef = {"fn":"load_ncaa_baseball_teams","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/ncaa_baseball_teams/ncaa_baseball_teams_{season}.parquet","minSeason":2024};
+const LOAD_NCAA_BASEBALL_TEAMS: ReleaseLoaderDef = {"fn":"load_ncaa_baseball_teams","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/ncaa_baseball_teams/ncaa_baseball_teams_{season}.parquet","minSeason":2016};
 
 /**
  * Load `ncaa_baseball_teams` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_baseball_teams
  *
- * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2016); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SeasonNotFoundError if a season is below 2016.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadNcaaBaseballTeams({ seasons: 2025 });
@@ -465,20 +466,20 @@ export const loadNcaaBaseballTeams = seasonLoader<LoadNcaaBaseballTeamsRow>(LOAD
 /** snake_case alias of {@link loadNcaaBaseballTeams} (py/R parity). */
 export const load_ncaa_baseball_teams = loadNcaaBaseballTeams;
 
-const LOAD_NCAA_BASEBALL_ROSTERS: ReleaseLoaderDef = {"fn":"load_ncaa_baseball_rosters","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/ncaa_baseball_rosters/ncaa_baseball_rosters_{season}.parquet","minSeason":2024};
+const LOAD_NCAA_BASEBALL_ROSTERS: ReleaseLoaderDef = {"fn":"load_ncaa_baseball_rosters","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/ncaa_baseball_rosters/ncaa_baseball_rosters_{season}.parquet","minSeason":2016};
 
 /**
  * Load `ncaa_baseball_rosters` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_baseball_rosters
  *
- * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2016); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SeasonNotFoundError if a season is below 2016.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadNcaaBaseballRosters({ seasons: 2025 });
@@ -487,20 +488,20 @@ export const loadNcaaBaseballRosters = seasonLoader<LoadNcaaBaseballRostersRow>(
 /** snake_case alias of {@link loadNcaaBaseballRosters} (py/R parity). */
 export const load_ncaa_baseball_rosters = loadNcaaBaseballRosters;
 
-const LOAD_NCAA_BASEBALL_LINESCORE: ReleaseLoaderDef = {"fn":"load_ncaa_baseball_linescore","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/ncaa_baseball_linescore/ncaa_baseball_linescore_{season}.parquet","minSeason":2024};
+const LOAD_NCAA_BASEBALL_LINESCORE: ReleaseLoaderDef = {"fn":"load_ncaa_baseball_linescore","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/ncaa_baseball_linescore/ncaa_baseball_linescore_{season}.parquet","minSeason":2016};
 
 /**
  * Load `ncaa_baseball_linescore` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_baseball_linescore
  *
- * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2016); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SeasonNotFoundError if a season is below 2016.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadNcaaBaseballLinescore({ seasons: 2025 });
@@ -509,20 +510,20 @@ export const loadNcaaBaseballLinescore = seasonLoader<LoadNcaaBaseballLinescoreR
 /** snake_case alias of {@link loadNcaaBaseballLinescore} (py/R parity). */
 export const load_ncaa_baseball_linescore = loadNcaaBaseballLinescore;
 
-const LOAD_NCAA_BASEBALL_TEAM_STATS: ReleaseLoaderDef = {"fn":"load_ncaa_baseball_team_stats","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/ncaa_baseball_team_stats/ncaa_baseball_team_stats_{season}.parquet","minSeason":2024};
+const LOAD_NCAA_BASEBALL_TEAM_STATS: ReleaseLoaderDef = {"fn":"load_ncaa_baseball_team_stats","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/ncaa_baseball_team_stats/ncaa_baseball_team_stats_{season}.parquet","minSeason":2016};
 
 /**
  * Load `ncaa_baseball_team_stats` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_baseball_team_stats
  *
- * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2016); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SeasonNotFoundError if a season is below 2016.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadNcaaBaseballTeamStats({ seasons: 2025, columns: ['contest_id', 'category', 'stat', 'away_value', 'home_value'] });
@@ -531,20 +532,20 @@ export const loadNcaaBaseballTeamStats = seasonLoader<LoadNcaaBaseballTeamStatsR
 /** snake_case alias of {@link loadNcaaBaseballTeamStats} (py/R parity). */
 export const load_ncaa_baseball_team_stats = loadNcaaBaseballTeamStats;
 
-const LOAD_NCAA_BASEBALL_PLAYER_STATS: ReleaseLoaderDef = {"fn":"load_ncaa_baseball_player_stats","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/ncaa_baseball_player_stats/ncaa_baseball_player_stats_{season}.parquet","minSeason":2024};
+const LOAD_NCAA_BASEBALL_PLAYER_STATS: ReleaseLoaderDef = {"fn":"load_ncaa_baseball_player_stats","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/ncaa_baseball_player_stats/ncaa_baseball_player_stats_{season}.parquet","minSeason":2016};
 
 /**
  * Load `ncaa_baseball_player_stats` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_baseball_player_stats
  *
- * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2016); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SeasonNotFoundError if a season is below 2016.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadNcaaBaseballPlayerStats({ seasons: 2025 });
@@ -553,20 +554,20 @@ export const loadNcaaBaseballPlayerStats = seasonLoader<LoadNcaaBaseballPlayerSt
 /** snake_case alias of {@link loadNcaaBaseballPlayerStats} (py/R parity). */
 export const load_ncaa_baseball_player_stats = loadNcaaBaseballPlayerStats;
 
-const LOAD_NCAA_BASEBALL_SITUATIONAL_STATS: ReleaseLoaderDef = {"fn":"load_ncaa_baseball_situational_stats","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/ncaa_baseball_situational_stats/ncaa_baseball_situational_stats_{season}.parquet","minSeason":2024};
+const LOAD_NCAA_BASEBALL_SITUATIONAL_STATS: ReleaseLoaderDef = {"fn":"load_ncaa_baseball_situational_stats","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/ncaa_baseball_situational_stats/ncaa_baseball_situational_stats_{season}.parquet","minSeason":2016};
 
 /**
  * Load `ncaa_baseball_situational_stats` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_baseball_situational_stats
  *
- * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2016); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2024.
+ * @throws SeasonNotFoundError if a season is below 2016.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadNcaaBaseballSituationalStats({ seasons: 2025 });
@@ -575,20 +576,20 @@ export const loadNcaaBaseballSituationalStats = seasonLoader<LoadNcaaBaseballSit
 /** snake_case alias of {@link loadNcaaBaseballSituationalStats} (py/R parity). */
 export const load_ncaa_baseball_situational_stats = loadNcaaBaseballSituationalStats;
 
-const LOAD_NCAA_BASEBALL_GAMES: ReleaseLoaderDef = {"fn":"load_ncaa_baseball_games","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/ncaa_baseball_games/ncaa_baseball_games_{season}.parquet","minSeason":2017};
+const LOAD_NCAA_BASEBALL_GAMES: ReleaseLoaderDef = {"fn":"load_ncaa_baseball_games","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/ncaa_baseball_games/ncaa_baseball_games_{season}.parquet","minSeason":2016};
 
 /**
  * Load `ncaa_baseball_games` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_baseball_games
  *
- * @param opts.seasons - a season or a list of seasons (>= 2017); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2016); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2017.
+ * @throws SeasonNotFoundError if a season is below 2016.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mlb.loadNcaaBaseballGames({ seasons: 2024 });
@@ -766,7 +767,7 @@ const LOAD_NCAA_BASEBALL_TEAM_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_ncaa
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_baseball_groups
  *
- * Note: One row per team per season: the SDV subdivision, conference and division group ids the team belonged to that season (null where a level does not apply), the team name as of that season, where the membership came from, and whether a second source agreed (null when only one source covers the season). team_id is a string: the stats.ncaa.org org id (not an ESPN id); team_id_source names the id space. season is the calendar year; seasons 2010-2026.
+ * Note: One row per team, id space and season: the SDV subdivision, conference and division group ids the team belonged to that season (null where a level does not apply), the team name as of that season, where the membership came from, and whether a second source agreed (null when only one source covers the season). team_id is a string in the id space team_id_source names: every D-I team has an ncaa_org row (the stats.ncaa.org org id) and, where the ncaa_baseball_crosswalk maps the school, a copy under its ESPN college-baseball team id (team_id_source espn, notes ncaa_org_id=N). The two id spaces overlap (an ESPN id can be another school's NCAA org id), so filter on team_id_source before joining on team_id. season is the calendar year; seasons 2010-2026.
  *
  * @param opts.seasons - a season or a list of seasons (>= 2010); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
@@ -782,6 +783,29 @@ const LOAD_NCAA_BASEBALL_TEAM_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_ncaa
 export const loadNcaaBaseballTeamGroupSeasons = seasonLoader<LoadNcaaBaseballTeamGroupSeasonsRow>(LOAD_NCAA_BASEBALL_TEAM_GROUP_SEASONS);
 /** snake_case alias of {@link loadNcaaBaseballTeamGroupSeasons} (py/R parity). */
 export const load_ncaa_baseball_team_group_seasons = loadNcaaBaseballTeamGroupSeasons;
+
+const LOAD_MLB_TEAM_ALIASES: ReleaseLoaderDef = {"fn":"load_mlb_team_aliases","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/mlb_groups/mlb_team_aliases.parquet"};
+
+/**
+ * Load `mlb_groups` (sportsdataverse-data releases).
+ *
+ * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mlb_groups
+ *
+ * Note: One season-less file: every id and name another source (cbs, fox, mlb, yahoo) uses for a team, keyed on the ESPN team id (team_id, a string; team_id_source = espn), with the seasons the source shows it on that team (valid_from / valid_to, inclusive; both null for an undated curated map). id_kind says whether source_id is the source's id for this sport's team or one id for every sport of a school; a name-only row has a null source_id. A source id means something only within its source (Fox 25 is not ESPN 25), so filter on source before joining on source_id. Seasons are the calendar year.
+ *
+ * @param opts - optional `columns` / `timeoutMs`.
+ * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
+ * @param opts.timeoutMs - download timeout in ms (default 300000).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process). An absent asset returns no rows with a warning.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
+ * @throws AssetFetchError if a download fails (never reported as an empty season).
+ * @example await sdv.mlb.loadMlbTeamAliases();
+ */
+export const loadMlbTeamAliases = assetLoader<LoadMlbTeamAliasesRow>(LOAD_MLB_TEAM_ALIASES);
+/** snake_case alias of {@link loadMlbTeamAliases} (py/R parity). */
+export const load_mlb_team_aliases = loadMlbTeamAliases;
 
 const LOAD_MLB_PARK_DIMENSIONS: ReleaseLoaderDef = {"fn":"load_mlb_park_dimensions","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/mlb_parks/mlb_park_dimensions.parquet"};
 

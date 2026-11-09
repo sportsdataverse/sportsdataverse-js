@@ -2,7 +2,7 @@
 // Run `npm run codegen` to regenerate from tools/codegen/endpoints/releases.yaml
 // (vendored verbatim from sportsdataverse-py).
 //
-// 27 dataset loaders for `sdv.nhl`: each reads a published
+// 28 dataset loaders for `sdv.nhl`: each reads a published
 // SportsDataverse release asset (parquet) through src/core/releases.ts.
 
 import {
@@ -38,6 +38,7 @@ import type {
   LoadNhlGroupSeasonsRow,
   LoadNhlGroupAliasesRow,
   LoadNhlTeamGroupSeasonsRow,
+  LoadNhlTeamAliasesRow,
 } from "../loader_rows/nhl.js";
 
 const LOAD_NHL_PBP: ReleaseLoaderDef = {"fn":"load_nhl_pbp","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_pbp_full/play_by_play_{season}.parquet","minSeason":2010};
@@ -638,3 +639,26 @@ const LOAD_NHL_TEAM_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_nhl_team_group
 export const loadNhlTeamGroupSeasons = seasonLoader<LoadNhlTeamGroupSeasonsRow>(LOAD_NHL_TEAM_GROUP_SEASONS);
 /** snake_case alias of {@link loadNhlTeamGroupSeasons} (py/R parity). */
 export const load_nhl_team_group_seasons = loadNhlTeamGroupSeasons;
+
+const LOAD_NHL_TEAM_ALIASES: ReleaseLoaderDef = {"fn":"load_nhl_team_aliases","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_groups/nhl_team_aliases.parquet"};
+
+/**
+ * Load `nhl_groups` (sportsdataverse-data releases).
+ *
+ * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nhl_groups
+ *
+ * Note: One season-less file: every id and name another source (cbs, fox, nhl, yahoo) uses for a team, keyed on the ESPN team id (team_id, a string; team_id_source = espn), with the seasons the source shows it on that team (valid_from / valid_to, inclusive; both null for an undated curated map). id_kind says whether source_id is the source's id for this sport's team or one id for every sport of a school; a name-only row has a null source_id. A source id means something only within its source (Fox 25 is not ESPN 25), so filter on source before joining on source_id. Seasons are the ENDING year (2025 = the 2024-25 season).
+ *
+ * @param opts - optional `columns` / `timeoutMs`.
+ * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
+ * @param opts.timeoutMs - download timeout in ms (default 300000).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process). An absent asset returns no rows with a warning.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
+ * @throws AssetFetchError if a download fails (never reported as an empty season).
+ * @example await sdv.nhl.loadNhlTeamAliases();
+ */
+export const loadNhlTeamAliases = assetLoader<LoadNhlTeamAliasesRow>(LOAD_NHL_TEAM_ALIASES);
+/** snake_case alias of {@link loadNhlTeamAliases} (py/R parity). */
+export const load_nhl_team_aliases = loadNhlTeamAliases;

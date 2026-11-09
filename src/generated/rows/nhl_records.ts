@@ -362,22 +362,22 @@ export interface NhlRecordsAwardsRow {
   id?: string | null;
   /** Whether the award was given posthumously. Schema `logical`. */
   awarded_posthumously?: boolean | null;
-  /** ESPN coach id parsed from the `$ref` URL. Schema `double` (an id). */
-  coach_id?: string | number | null;
+  /** ESPN coach id parsed from the `$ref` URL. Schema `integer` (an id). */
+  coach_id?: string | null;
   /** Date the trophy record was created. Schema `character`. */
   created_on?: string | null;
   /** Detail summary flag. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   detail_summary?: unknown;
   /** Player full name. Schema `character`. */
   full_name?: string | null;
-  /** General manager identifier, if applicable. Schema `double` (an id). */
-  general_manager_id?: string | number | null;
+  /** General manager identifier, if applicable. Schema `integer` (an id). */
+  general_manager_id?: string | null;
   /** Player headshot URL. Schema `character`. */
   image_url?: string | null;
   /** Whether the player is a rookie. Schema `logical`. */
   is_rookie?: boolean | null;
-  /** Unique player identifier. Schema `double` (an id). */
-  player_id?: string | number | null;
+  /** Unique player identifier. Schema `integer` (an id). */
+  player_id?: string | null;
   /** Player image caption flag. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_image_caption?: unknown;
   /** URL to the player image. Schema `character`. */
@@ -422,7 +422,7 @@ export interface NhlRecordsAwardsTrophySeasonRow {
   image_url?: string | null;
   /** Whether the player is a rookie. Schema `logical`. */
   is_rookie?: boolean | null;
-  /** Unique player identifier. Schema `character` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Unique player identifier. Schema `integer` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_id?: unknown;
   /** Player image caption flag. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_image_caption?: unknown;
@@ -538,7 +538,7 @@ export interface NhlRecordsCoachRow {
   player_id?: string | null;
   /** Number of Stanley Cup championships won by the coach as a head coach. Schema `integer`. */
   stanley_cup?: number | null;
-  /** Unique team identifier. Schema `character` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Unique team identifier. Schema `integer` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
   team_id?: unknown;
   /** URL to the coach's entry on the NHL's Top 100 Players list, if applicable. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   top100_player_link?: unknown;
@@ -770,8 +770,8 @@ export interface NhlRecordsCoachStanleyCupRow {
   coach_id?: string | null;
   /** Full name of the head coach in this Stanley Cup championship record. Schema `character`. */
   coach_name?: string | null;
-  /** Unique franchise identifier. Schema `double` (an id). */
-  franchise_id?: string | number | null;
+  /** Unique franchise identifier. Schema `integer` (an id). */
+  franchise_id?: string | null;
   /** Franchise name. Schema `character`. */
   franchise_name?: string | null;
   /** Maximum number of consecutive seasons in which the coach won the Stanley Cup. Schema `integer`. */
@@ -834,11 +834,11 @@ export interface NhlRecordsCoachesRow {
   last_name?: string | null;
   /** Nationality code of the official. Schema `character`. */
   nationality_code?: string | null;
-  /** Unique player identifier. Schema `double` (an id). */
-  player_id?: string | number | null;
+  /** Unique player identifier. Schema `integer` (an id). */
+  player_id?: string | null;
   /** Number of Stanley Cup championships won by the coach as a head coach or assistant coach. Schema `double`. */
   stanley_cup?: number | null;
-  /** Unique team identifier. Schema `character` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Unique team identifier. Schema `integer` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
   team_id?: unknown;
   /** URL to the coach's NHL Top 100 players recognition page, if applicable. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   top100_player_link?: unknown;
@@ -860,8 +860,8 @@ export interface NhlRecordsConsecutive100ptSeasonsRow {
   consecutive100_point_seasons?: number | null;
   /** Player first name. Schema `character`. */
   first_name?: string | null;
-  /** Unique franchise identifier. Schema `double` (an id). */
-  franchise_id?: string | number | null;
+  /** Unique franchise identifier. Schema `integer` (an id). */
+  franchise_id?: string | null;
   /** Player last name. Schema `character`. */
   last_name?: string | null;
   /** Unique player identifier. Schema `integer` (an id). */
@@ -902,7 +902,7 @@ export interface NhlRecordsDraftRow {
   birth_place?: unknown;
   /** Player country code. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   country_code?: unknown;
-  /** Central Scouting player identifier. Schema `character` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Central Scouting player identifier. Schema `integer` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
   cs_player_id?: unknown;
   /** Date the player was drafted. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   draft_date?: unknown;
@@ -910,7 +910,7 @@ export interface NhlRecordsDraftRow {
   draft_master_id?: string | null;
   /** Draft year the lottery applies to. Schema `integer`. */
   draft_year?: number | null;
-  /** Identifier of the drafting team. Schema `character` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Identifier of the drafting team. Schema `integer` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
   drafted_by_team_id?: unknown;
   /** Player first name. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   first_name?: unknown;
@@ -924,7 +924,7 @@ export interface NhlRecordsDraftRow {
   overall_pick_number?: number | null;
   /** Pick number within the round. Schema `integer`. */
   pick_in_round?: number | null;
-  /** Unique player identifier. Schema `character` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Unique player identifier. Schema `integer` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_id?: unknown;
   /** Player name. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_name?: unknown;
@@ -970,7 +970,7 @@ export interface NhlRecordsDraftByTeamRow {
   birth_place?: string | null;
   /** Player country code. Schema `character`. */
   country_code?: string | null;
-  /** Central Scouting player identifier. Schema `character` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Central Scouting player identifier. Schema `integer` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
   cs_player_id?: unknown;
   /** Date the player was drafted. Schema `character`. */
   draft_date?: string | null;
@@ -992,7 +992,7 @@ export interface NhlRecordsDraftByTeamRow {
   overall_pick_number?: number | null;
   /** Pick number within the round. Schema `integer`. */
   pick_in_round?: number | null;
-  /** Unique player identifier. Schema `character` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Unique player identifier. Schema `integer` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_id?: unknown;
   /** Player name. Schema `character`. */
   player_name?: string | null;
@@ -1280,8 +1280,8 @@ export interface NhlRecordsFranchiseTeamTotalsRow {
   home_ties?: number | null;
   /** Wins at home. Schema `double`. */
   home_wins?: number | null;
-  /** Season ID of the franchise's last season. Schema `double` (an id). */
-  last_season_id?: string | number | null;
+  /** Season ID of the franchise's last season. Schema `integer` (an id). */
+  last_season_id?: string | null;
   /** Losses. Schema `double`. */
   losses?: number | null;
   /** Total overtime losses. Schema `double`. */
@@ -1360,8 +1360,8 @@ export interface NhlRecordsFranchiseTotalsRow {
   home_ties?: number | null;
   /** Wins at home. Schema `integer`. */
   home_wins?: number | null;
-  /** Season ID of the franchise's last season. Schema `double` (an id). */
-  last_season_id?: string | number | null;
+  /** Season ID of the franchise's last season. Schema `integer` (an id). */
+  last_season_id?: string | null;
   /** Losses. Schema `integer`. */
   losses?: number | null;
   /** Total overtime losses. Schema `double`. */
@@ -1418,8 +1418,8 @@ export interface NhlRecordsFranchisesRow {
   first_season_id?: string | null;
   /** Player full name. Schema `character`. */
   full_name?: string | null;
-  /** Season ID of the franchise's last season. Schema `double` (an id). */
-  last_season_id?: string | number | null;
+  /** Season ID of the franchise's last season. Schema `integer` (an id). */
+  last_season_id?: string | null;
   /** Most recent team identifier. Schema `integer` (an id). */
   most_recent_team_id?: string | null;
   /** Team abbreviation. Schema `character`. */
@@ -1620,8 +1620,8 @@ export interface NhlRecordsGoalieCareerStatsRow {
   first_name?: string | null;
   /** First season ID for the game type. Schema `integer`. */
   first_season_for_game_type?: number | null;
-  /** Unique franchise identifier. Schema `double` (an id). */
-  franchise_id?: string | number | null;
+  /** Unique franchise identifier. Schema `integer` (an id). */
+  franchise_id?: string | null;
   /** Game seven games played. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   game_seven_games_played?: unknown;
   /** Game seven losses. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
@@ -1698,8 +1698,8 @@ export interface NhlRecordsGoalieCareerStatsWithPlayoffsRow {
   active_player?: number | null;
   /** Player first name. Schema `character`. */
   first_name?: string | null;
-  /** Unique franchise identifier. Schema `double` (an id). */
-  franchise_id?: string | number | null;
+  /** Unique franchise identifier. Schema `integer` (an id). */
+  franchise_id?: string | null;
   /** Games played. Schema `integer`. */
   games_played?: number | null;
   /** Goals against. Schema `integer`. */
@@ -1754,8 +1754,8 @@ export interface NhlRecordsGoaliePlayoffStreakRow {
   end_season?: number | null;
   /** Player first name. Schema `character`. */
   first_name?: string | null;
-  /** Unique franchise identifier. Schema `double` (an id). */
-  franchise_id?: string | number | null;
+  /** Unique franchise identifier. Schema `integer` (an id). */
+  franchise_id?: string | null;
   /** Player last name. Schema `character`. */
   last_name?: string | null;
   /** Unique player identifier. Schema `integer` (an id). */
@@ -1780,8 +1780,8 @@ export interface NhlRecordsGoalieSeasonStatsRow {
   active_player?: boolean | null;
   /** Player first name. Schema `character`. */
   first_name?: string | null;
-  /** Unique franchise identifier. Schema `double` (an id). */
-  franchise_id?: string | number | null;
+  /** Unique franchise identifier. Schema `integer` (an id). */
+  franchise_id?: string | null;
   /** Game seven games played. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
   game_seven_games_played?: unknown;
   /** Game seven losses. Schema `character`. Unexercised: null in every sdv-py capture, so its type is unchecked. */
@@ -1898,8 +1898,8 @@ export interface NhlRecordsGoalieUndefeatedStreakRow {
   end_date?: string | null;
   /** Player first name. Schema `character`. */
   first_name?: string | null;
-  /** Unique franchise identifier. Schema `double` (an id). */
-  franchise_id?: string | number | null;
+  /** Unique franchise identifier. Schema `integer` (an id). */
+  franchise_id?: string | null;
   /** Game type identifier (regular/playoffs). Schema `integer` (an id). */
   game_type_id?: string | null;
   /** Player last name. Schema `character`. */
@@ -1932,8 +1932,8 @@ export interface NhlRecordsGoalieWinPlateausRow {
   first_name?: string | null;
   /** Number of seasons in which the goalie recorded 40 or more wins, a rare single-season achievement. Schema `integer`. */
   forty_win_seasons?: number | null;
-  /** Unique franchise identifier. Schema `double` (an id). */
-  franchise_id?: string | number | null;
+  /** Unique franchise identifier. Schema `integer` (an id). */
+  franchise_id?: string | null;
   /** Player last name. Schema `character`. */
   last_name?: string | null;
   /** Unique player identifier. Schema `integer` (an id). */
@@ -1964,8 +1964,8 @@ export interface NhlRecordsGoalieWinStreakRow {
   end_date?: string | null;
   /** Player first name. Schema `character`. */
   first_name?: string | null;
-  /** Unique franchise identifier. Schema `double` (an id). */
-  franchise_id?: string | number | null;
+  /** Unique franchise identifier. Schema `integer` (an id). */
+  franchise_id?: string | null;
   /** Game type identifier (regular/playoffs). Schema `integer` (an id). */
   game_type_id?: string | null;
   /** Player last name. Schema `character`. */
@@ -2002,7 +2002,7 @@ export interface NhlRecordsHofPlayersRow {
   misc_full_name?: unknown;
   /** Office/category identifier. Schema `integer` (an id). */
   office_id?: string | null;
-  /** ESPN official id (echoed from arg). Schema `character` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** ESPN official id (echoed from arg). Schema `integer` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
   official_id?: unknown;
   /** Unique player identifier. Schema `integer` (an id). */
   player_id?: string | null;
@@ -2022,9 +2022,9 @@ export interface NhlRecordsHofPlayersByOfficeRow {
   misc_full_name?: string | null;
   /** Office/category identifier. Schema `integer` (an id). */
   office_id?: string | null;
-  /** ESPN official id (echoed from arg). Schema `character` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** ESPN official id (echoed from arg). Schema `integer` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
   official_id?: unknown;
-  /** Unique player identifier. Schema `character` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
+  /** Unique player identifier. Schema `integer` (an id). Unexercised: null in every sdv-py capture, so its type is unchecked. */
   player_id?: unknown;
 }
 
