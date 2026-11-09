@@ -1,9 +1,21 @@
-# **sportsdataverse** <a href='https://js.sportsdataverse.org/'><img src='https://raw.githubusercontent.com/sportsdataverse/sportsdataverse-js/main/docs/static/img/sdv-js-logo.png' align="right" width="20%" min-width="100px"/></a>
+# **sportsdataverse** <a href='https://js.sportsdataverse.org/'><img alt="sportsdataverse-js logo" src='https://raw.githubusercontent.com/sportsdataverse/sportsdataverse-js/main/docs/static/img/sdv-js-logo.png' align="right" width="20%" min-width="100px"/></a>
 
-![Lifecycle:maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg?style=for-the-badge&logo=github)
-[![npm](https://img.shields.io/npm/v/sportsdataverse?style=for-the-badge&logo=npm)](https://www.npmjs.com/package/sportsdataverse) [![npm downloads](https://img.shields.io/npm/dm/sportsdataverse?style=for-the-badge&logo=npm)](https://www.npmjs.com/package/sportsdataverse)
-[![Contributors](https://img.shields.io/github/contributors/sportsdataverse/sportsdataverse-js?style=for-the-badge&logo=github)](https://github.com/sportsdataverse/sportsdataverse-js/graphs/contributors)
-[![Twitter Follow](https://img.shields.io/twitter/follow/SportsDataverse?color=blue&label=%40SportsDataverse&logo=twitter&style=for-the-badge)](https://twitter.com/SportsDataverse)
+The SportsDataverse's Node.js / TypeScript client for sports data, with the same function names as sportsdataverse-py.
+
+<!-- badges: start -->
+[![npm](https://img.shields.io/npm/v/sportsdataverse?logo=npm&style=for-the-badge)](https://www.npmjs.com/package/sportsdataverse)
+[![npm downloads](https://img.shields.io/npm/dm/sportsdataverse?logo=npm&style=for-the-badge)](https://www.npmjs.com/package/sportsdataverse)
+[![Node](https://img.shields.io/node/v/sportsdataverse?logo=nodedotjs&logoColor=white&style=for-the-badge)](https://nodejs.org/)
+[![Dev version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fsportsdataverse%2Fsportsdataverse-js%2Fmain%2Fpackage.json&query=%24.version&label=dev&logo=github&style=for-the-badge)](https://github.com/sportsdataverse/sportsdataverse-js/)
+[![ci](https://img.shields.io/github/actions/workflow/status/sportsdataverse/sportsdataverse-js/ci.yml?branch=main&label=ci&logo=github&style=for-the-badge)](https://github.com/sportsdataverse/sportsdataverse-js/actions/workflows/ci.yml?query=branch%3Amain)
+[![Coverage](https://img.shields.io/codecov/c/github/sportsdataverse/sportsdataverse-js?logo=codecov&style=for-the-badge)](https://app.codecov.io/gh/sportsdataverse/sportsdataverse-js)
+[![docs](https://img.shields.io/github/deployments/sportsdataverse/sportsdataverse-js/Production?label=docs&logo=vercel&style=for-the-badge)](https://js.sportsdataverse.org)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg?style=for-the-badge&logo=github)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](https://github.com/sportsdataverse/sportsdataverse-js/blob/main/LICENSE)
+[![Contributors](https://img.shields.io/github/contributors/sportsdataverse/sportsdataverse-js?logo=github&style=for-the-badge)](https://github.com/sportsdataverse/sportsdataverse-js/graphs/contributors)
+[![GitHub stars](https://img.shields.io/github/stars/sportsdataverse/sportsdataverse-js?logo=github&style=for-the-badge)](https://github.com/sportsdataverse/sportsdataverse-js)
+[![X Follow](https://img.shields.io/twitter/follow/SportsDataverse?color=blue&label=%40SportsDataverse&logo=x&style=for-the-badge)](https://x.com/SportsDataverse)
+<!-- badges: end -->
 
 `sportsdataverse` is the SportsDataverse's **Node.js / TypeScript** client for sports
 data: the cross-league ESPN API, the leagues' own live APIs, a set of cross-sport
@@ -30,7 +42,7 @@ name in Python and JavaScript.
 
 Data freshness and pipeline status for every SportsDataverse dataset: [sportsdataverse.org/status](https://sportsdataverse.org/status).
 
-## Installation
+## **Installation**
 
 ```bash
 npm install sportsdataverse
@@ -42,7 +54,7 @@ on Node 20.19+ / 22.12+). Two optional peers unlock specific families:
 `impit` (browser TLS impersonation — stats.nba.com, stats.wnba.com, 247Sports, KenPom)
 and `playwright` (the NFL Pro email / password login).
 
-## Sources covered
+## **Sources covered**
 
 | Source | Host | Families (wrappers) | Where | Auth |
 |---|---|---|---|---|
@@ -72,7 +84,7 @@ the counts. The pre-3.0 hand-written methods (`sdv.nba.getPlayByPlay(id)` and fr
 still exist; since 4.0.0 they fetch through the same request layer (https, retries, typed
 errors), and the six stats.ncaa.org scrapers on `sdv.ncaa` are deprecated.
 
-## Quick start
+## **Quick start**
 
 Every league is a namespace on the default export. ESPN methods follow one rule,
 **`espn<League><Endpoint>`**, and every method also has a snake_case alias
@@ -197,7 +209,7 @@ Transports and auth providers (`bearerAuth`, `headerAuth`, `queryAuth`, `tokenAu
 fallback; `getConfig()` / `resetConfig()` read and reset. See the
 [Transport, auth & errors](https://js.sportsdataverse.org/docs/guides/transport-and-auth) guide.
 
-## Examples and tutorials
+## **Examples and tutorials**
 
 `examples/` holds one runnable script per topic (`NN_<topic>.mjs`), from an ESPN
 scoreboard to Statcast, NHL EDGE, PWHL Corsi, odds math, the release loaders and three
@@ -229,7 +241,7 @@ them with this package, and the plotting docs are at
 npm install sportsdataverse @sportsdataverse/sdvplot @sportsdataverse/sporty @sportsdataverse/sdvtables
 ```
 
-## How this library is built
+## **How this library is built**
 
 Almost everything callable is generated by `tools/codegen/generate.mjs` from YAML, with a
 drift gate (`npm run codegen:check`) in CI. Five surfaces, each documented under
@@ -258,7 +270,7 @@ npm run docs:examples:check                # frozen tutorial output + sources ar
 See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the workflow and [`CLAUDE.md`](CLAUDE.md) for
 the architecture deep-dive.
 
-## Documentation
+## **Documentation**
 
 - **[Guides](https://js.sportsdataverse.org/docs/guides/)** — quickstart, per-sport and provider recipes with live cells.
 - **[Tutorials](https://js.sportsdataverse.org/docs/tutorials/)** — one per example script, output frozen at build time.
@@ -267,18 +279,7 @@ the architecture deep-dive.
 - **[Playground](https://js.sportsdataverse.org/playground)** — run ESPN and native calls in the browser.
 - **[API](https://js.sportsdataverse.org/docs/api/)** (TypeDoc) · **[Changelog](https://js.sportsdataverse.org/CHANGELOG)** · **[llms.txt](https://js.sportsdataverse.org/llms.txt)**.
 
-<!-- cheatsheet-section -->
-## **Cheat sheet**
-
-A printable four-page reference, in four colour themes, for **sportsdataverse (Node.js)** — the loaders, the wrapper
-families, and what each one returns.
-
-📄 **[Download the sportsdataverse (Node.js) cheat sheet (PDF)](https://sportsdataverse.org/cheatsheets/sportsdataverse-js.pdf)**
-
-Browse the other SportsDataverse cheat sheets at
-**[sportsdataverse.org/cheatsheets](https://sportsdataverse.org/cheatsheets)**.
-
-### The SportsDataverse ecosystem
+## **The SportsDataverse**
 
 `sportsdataverse-js` is part of a family of open-source sports-data packages across
 **Node.js, Python, and R**, all under the [SportsDataverse](https://sportsdataverse.org)
@@ -318,27 +319,42 @@ umbrella.
 | [`cfbseedR`](https://cfbseedR.sportsdataverse.org) | College football season simulation, tiebreakers and CFP seeding |
 | [`nflfastR`](https://www.nflfastr.com) / [`nflverse`](https://nflverse.nflverse.com) | NFL ecosystem |
 
-## Follow the SportsDataverse (@SportsDataverse) on X and star this repo
+## **Follow the [SportsDataverse](https://x.com/SportsDataverse) on X and star this repo**
 
 [![X Follow](https://img.shields.io/twitter/follow/SportsDataverse?color=blue&label=%40SportsDataverse&logo=x&style=for-the-badge)](https://x.com/SportsDataverse)
 
 [![GitHub stars](https://img.shields.io/github/stars/sportsdataverse/sportsdataverse-js.svg?color=eee&logo=github&style=for-the-badge&label=Star%20sportsdataverse-js&maxAge=2592000)](https://github.com/sportsdataverse/sportsdataverse-js)
 
-<a href="https://github.com/sportsdataverse/sportsdataverse-js/stargazers">
+<a href="https://github.com/sportsdataverse/sportsdataverse-js">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/sportsdataverse/sportsdataverse-js/star-history/star-history-dark.svg">
     <img alt="Star history of sportsdataverse/sportsdataverse-js" src="https://raw.githubusercontent.com/sportsdataverse/sportsdataverse-js/star-history/star-history.png" width="600">
   </picture>
 </a>
 
-## Our Authors
+## **Our Authors**
 
-- [Saiem Gilani](https://twitter.com/saiemgilani)
+- [Saiem Gilani](https://x.com/saiemgilani)
 
-<a href="https://twitter.com/saiemgilani" target="blank"><img src="https://img.shields.io/twitter/follow/SaiemGilani?color=blue&label=%40SaiemGilani&logo=twitter&style=for-the-badge" alt="@SaiemGilani" /></a>
+<a href="https://x.com/saiemgilani" target="blank"><img src="https://img.shields.io/twitter/follow/saiemgilani?color=blue&label=%40saiemgilani&logo=x&style=for-the-badge" alt="@saiemgilani" /></a>
 <a href="https://github.com/saiemgilani" target="blank"><img src="https://img.shields.io/github/followers/saiemgilani?color=eee&logo=Github&style=for-the-badge" alt="@saiemgilani" /></a>
 
-## Citation
+<!-- cheatsheet-section -->
+## **Cheat sheet**
+
+A printable four-page reference, in four colour themes, for **sportsdataverse (Node.js)** — the loaders, the wrapper
+families, and what each one returns.
+
+📄 **[Download the sportsdataverse (Node.js) cheat sheet (PDF)](https://sportsdataverse.org/cheatsheets/sportsdataverse-js.pdf)**
+
+Browse the other SportsDataverse cheat sheets at
+**[sportsdataverse.org/cheatsheets](https://sportsdataverse.org/cheatsheets)**.
+
+## **Code of Conduct**
+
+Please note that the sportsdataverse-js project is released with a [Contributor Code of Conduct](https://github.com/sportsdataverse/sportsdataverse-js/blob/main/CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.
+
+## **Citations**
 
 To cite the [**`sportsdataverse`**](https://js.sportsdataverse.org) Node.js package in publications, use:
 
@@ -351,7 +367,7 @@ To cite the [**`sportsdataverse`**](https://js.sportsdataverse.org) Node.js pack
 }
 ```
 
-## License
+## **License**
 
-[MIT](LICENSE) © [Saiem Gilani](https://twitter.com/saiemgilani), part of the
+[MIT](LICENSE) © [Saiem Gilani](https://x.com/saiemgilani), part of the
 [SportsDataverse](https://sportsdataverse.org).
