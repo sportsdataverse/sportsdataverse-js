@@ -171,7 +171,9 @@ describe('parsers/sports247: site pages (parse_sports247_site_page)', () => {
     const [row, ...rest] = parse_sports247_site_page(load('sports247_site_pages', 'institution.json'));
     rest.length.should.equal(0);
     for (const col of ['key', 'location', 'state']) Number.isInteger(row[col]).should.be.true(col);
-    row.latitude.should.be.a.Number(); // "0.000000" in the payload
+    // "0.000000" / "0.000000" in the payload: 247's no-location sentinel is null (sdv-py #928)
+    should(row.latitude).be.null();
+    should(row.longitude).be.null();
     row.name.should.be.a.String();
     row.rankable.should.equal('True'); // string-boolean hybrid stays a string
   });
@@ -207,6 +209,36 @@ describe('parsers/sports247: site pages (parse_sports247_site_page)', () => {
     const rows = parse_sports247_site_page([{ Big: '9007199254740993' }, { Big: '1' }]);
     rows[0].big.should.equal(9007199254740993n);
     rows[1].big.should.equal(1n);
+  });
+
+  it('a jersey, colour or postal code stays text; a zero-padded column keeps its zeros (sdv-py #928)', () => {
+    const [row] = parse_sports247_site_page(load('sports247_site_pages', 'event.json'));
+    row.primary_color.should.equal('000000');
+    Number.isInteger(row.key).should.be.true(); // a real integer column still casts
+    parse_sports247_site_page(load('sports247_site_pages', 'recruitment_finalchoice.json'))[0].jersey.should.equal('3');
+    parse_sports247_site_page(load('sports247_site_pages', 'institution_location.json'))[0].postal_code.should.equal('32605');
+    const [r] = parse_sports247_site_page([{ PrimaryColor: '990000', Code: '007', Rank: '7' }]);
+    r.primary_color.should.equal('990000');
+    r.code.should.equal('007');
+    r.rank.should.equal(7);
+  });
+
+  it('a jersey shipped as a JSON number is text, from the integer', () => {
+    const raw = load('sports247_site_pages', 'recruitment_finalchoice.json');
+    const withNumber = JSON.parse(JSON.stringify(raw).replace('"Jersey":"3"', '"Jersey":3'));
+    parse_sports247_site_page([withNumber, { ...withNumber, Jersey: null }])
+      .map((x) => x.jersey)
+      .should.eql(['3', null]);
+  });
+
+  it('only a (0, 0) latitude / longitude pair is the no-location sentinel', () => {
+    const rows = parse_sports247_site_page([
+      { HometownLatitude: '0.000000', HometownLongitude: '0.000000' },
+      { HometownLatitude: '0.000000', HometownLongitude: '32.58' },
+      { HometownLatitude: '51.4779', HometownLongitude: '0.000000' },
+    ]);
+    rows.map((x) => x.hometown_latitude).should.eql([null, 0, 51.4779]);
+    rows.map((x) => x.hometown_longitude).should.eql([null, 32.58, 0]);
   });
 
   it('empty / malformed payloads are []', () => {
@@ -264,11 +296,12 @@ describe('parsers/sports247: attached returns schemas agree in NAMES and TYPES',
     });
   }
 
-  it('the type check catches a mistyped column (sdv-py@719de79 typed latitude character)', () => {
+  it('the type check catches a mistyped column (sdv-py@719de79 typed numeric columns character)', () => {
     const rows = parse_sports247_site_page(load('sports247_site_pages', 'institution.json'));
     const columns = readSchema(['schemas'], def('sports247_site_pages', 'institution').returnsSchema);
     typeMismatches(rows, columns).should.eql([]);
-    const stale = columns.map((c) => (c.name === 'latitude' ? { ...c, type: 'character' } : c));
-    typeMismatches(rows, stale).some((m) => m.startsWith('latitude: character')).should.be.true();
+    // `key`, not `latitude`: this capture's (0, 0) location is null since sdv-py #928, so it has no value to check
+    const stale = columns.map((c) => (c.name === 'key' ? { ...c, type: 'character' } : c));
+    typeMismatches(rows, stale).some((m) => m.startsWith('key: character')).should.be.true();
   });
 });
