@@ -112,11 +112,13 @@ await sdv.mbb.espnMbbPlayerNews({ athlete_id: '…' });
 // snake_case alias (py/R parity): sdv.mbb.espn_mbb_player_news(...)
 ```
 
-## `espnMbbCalendar`
+## `espnMbbCalendarSite`
 
-MBB — calendar (ESPN site.api.espn.com).
+MBB — calendar site (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/calendar`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_mbb_calendar` / `espnMbbCalendar`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -133,8 +135,8 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 **Example:**
 
 ```js
-await sdv.mbb.espnMbbCalendar({});
-// snake_case alias (py/R parity): sdv.mbb.espn_mbb_calendar(...)
+await sdv.mbb.espnMbbCalendarSite({});
+// snake_case alias (py/R parity): sdv.mbb.espn_mbb_calendar_site(...)
 ```
 
 ## `espnMbbConferences`

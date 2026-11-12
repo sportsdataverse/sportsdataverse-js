@@ -14,7 +14,7 @@ sidebar_position: 50
 
 # `sdv.mlb` — dataset loaders
 
-34 loaders reading the published sportsdataverse-data releases (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias and resolves to an array of plain row objects (or `{ [column]: values[] }` with `format: "columns"`).
+35 loaders reading the published sportsdataverse-data releases (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias and resolves to an array of plain row objects (or `{ [column]: values[] }` with `format: "columns"`).
 
 - **Size:** row objects cost ~60-100 bytes per cell on the heap, so before decoding each season a loader adds its rows × columns (from the parquet footer) to a running total and checks it against `maxCells` — by default heap limit / 100 for rows (≈45M cells on Node's default 4 GB heap) and heap limit / 30 for `format: "columns"` — and throws a catchable `SdvError` instead of running out of memory. Play-by-play is the usual case: pass `columns`, use `format: "columns"`, or raise the heap (`node --max-old-space-size=8192`).
 - **Seasons:** `seasons` takes one season or a list. A season with no published asset (HTTP 404) is skipped with a warning (loaders marked so in their `seasons` row — sdv-py's hand-written ones — throw `NoDataError` instead); any other failure raises `AssetFetchError` (a failed download is never an empty season); a season below the loader's floor raises `SeasonNotFoundError` before anything is fetched. Multi-season results union the columns, null-filling gaps, and cast a column whose type changed between seasons to the common type (an integer id that became a string → strings, "123" not "123.0"), as sdv-py's `diagonal_relaxed` concat does.
@@ -39,15 +39,15 @@ sidebar_position: 50
 | [`loadMlbXera`](#loadmlbxera) | [mlb_pitching_models](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mlb_pitching_models) | 2015+ |
 | [`loadMlbStuffPlus`](#loadmlbstuffplus) | [mlb_pitching_models](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mlb_pitching_models) | 2015+ |
 | [`loadMlbCommandPlus`](#loadmlbcommandplus) | [mlb_pitching_models](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mlb_pitching_models) | 2015+ |
-| [`loadNcaaBaseballPbp`](#loadncaabaseballpbp) | [ncaa_baseball_pbp](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_baseball_pbp) | 2017+ |
+| [`loadNcaaBaseballPbp`](#loadncaabaseballpbp) | [ncaa_baseball_pbp](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_baseball_pbp) | 2016+ |
 | [`loadNcaaBaseballSchedule`](#loadncaabaseballschedule) | [ncaa_baseball_schedules](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_baseball_schedules) | 2012+ |
-| [`loadNcaaBaseballTeams`](#loadncaabaseballteams) | [ncaa_baseball_teams](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_baseball_teams) | 2024+ |
-| [`loadNcaaBaseballRosters`](#loadncaabaseballrosters) | [ncaa_baseball_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_baseball_rosters) | 2024+ |
-| [`loadNcaaBaseballLinescore`](#loadncaabaseballlinescore) | [ncaa_baseball_linescore](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_baseball_linescore) | 2024+ |
-| [`loadNcaaBaseballTeamStats`](#loadncaabaseballteamstats) | [ncaa_baseball_team_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_baseball_team_stats) | 2024+ |
-| [`loadNcaaBaseballPlayerStats`](#loadncaabaseballplayerstats) | [ncaa_baseball_player_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_baseball_player_stats) | 2024+ |
-| [`loadNcaaBaseballSituationalStats`](#loadncaabaseballsituationalstats) | [ncaa_baseball_situational_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_baseball_situational_stats) | 2024+ |
-| [`loadNcaaBaseballGames`](#loadncaabaseballgames) | [ncaa_baseball_games](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_baseball_games) | 2017+ |
+| [`loadNcaaBaseballTeams`](#loadncaabaseballteams) | [ncaa_baseball_teams](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_baseball_teams) | 2016+ |
+| [`loadNcaaBaseballRosters`](#loadncaabaseballrosters) | [ncaa_baseball_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_baseball_rosters) | 2016+ |
+| [`loadNcaaBaseballLinescore`](#loadncaabaseballlinescore) | [ncaa_baseball_linescore](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_baseball_linescore) | 2016+ |
+| [`loadNcaaBaseballTeamStats`](#loadncaabaseballteamstats) | [ncaa_baseball_team_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_baseball_team_stats) | 2016+ |
+| [`loadNcaaBaseballPlayerStats`](#loadncaabaseballplayerstats) | [ncaa_baseball_player_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_baseball_player_stats) | 2016+ |
+| [`loadNcaaBaseballSituationalStats`](#loadncaabaseballsituationalstats) | [ncaa_baseball_situational_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_baseball_situational_stats) | 2016+ |
+| [`loadNcaaBaseballGames`](#loadncaabaseballgames) | [ncaa_baseball_games](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_baseball_games) | 2016+ |
 | [`loadMlbGroups`](#loadmlbgroups) | [mlb_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mlb_groups) | one asset |
 | [`loadMlbGroupSeasons`](#loadmlbgroupseasons) | [mlb_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mlb_groups) | one asset |
 | [`loadMlbGroupAliases`](#loadmlbgroupaliases) | [mlb_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mlb_groups) | one asset |
@@ -56,6 +56,7 @@ sidebar_position: 50
 | [`loadNcaaBaseballGroupSeasons`](#loadncaabaseballgroupseasons) | [ncaa_baseball_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_baseball_groups) | one asset |
 | [`loadNcaaBaseballGroupAliases`](#loadncaabaseballgroupaliases) | [ncaa_baseball_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_baseball_groups) | one asset |
 | [`loadNcaaBaseballTeamGroupSeasons`](#loadncaabaseballteamgroupseasons) | [ncaa_baseball_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_baseball_groups) | 2010+ |
+| [`loadMlbTeamAliases`](#loadmlbteamaliases) | [mlb_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mlb_groups) | one asset |
 | [`loadMlbParkDimensions`](#loadmlbparkdimensions) | [mlb_parks](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mlb_parks) | one asset |
 
 ## `loadMlbRe24Matrix`
@@ -707,7 +708,7 @@ Release: [ncaa_baseball_pbp](https://github.com/sportsdataverse/sportsdataverse-
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2017) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2016) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -806,7 +807,7 @@ Release: [ncaa_baseball_teams](https://github.com/sportsdataverse/sportsdatavers
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2016) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -834,7 +835,7 @@ Release: [ncaa_baseball_rosters](https://github.com/sportsdataverse/sportsdatave
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2016) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -873,7 +874,7 @@ Release: [ncaa_baseball_linescore](https://github.com/sportsdataverse/sportsdata
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2016) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -913,7 +914,7 @@ Release: [ncaa_baseball_team_stats](https://github.com/sportsdataverse/sportsdat
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2016) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -952,7 +953,7 @@ Release: [ncaa_baseball_player_stats](https://github.com/sportsdataverse/sportsd
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2016) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -1035,7 +1036,7 @@ Release: [ncaa_baseball_situational_stats](https://github.com/sportsdataverse/sp
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2016) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -1092,7 +1093,7 @@ Release: [ncaa_baseball_games](https://github.com/sportsdataverse/sportsdatavers
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2017) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2016) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -1372,7 +1373,7 @@ const rows = await sdv.mlb.loadNcaaBaseballGroupAliases();
 Release: [ncaa_baseball_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_baseball_groups) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/ncaa_baseball_groups/ncaa_baseball_team_group_seasons_{season}.parquet`
 
 :::caution[Coverage]
-One row per team per season: the SDV subdivision, conference and division group ids the team belonged to that season (null where a level does not apply), the team name as of that season, where the membership came from, and whether a second source agreed (null when only one source covers the season). team_id is a string: the stats.ncaa.org org id (not an ESPN id); team_id_source names the id space. season is the calendar year; seasons 2010-2026.
+One row per team, id space and season: the SDV subdivision, conference and division group ids the team belonged to that season (null where a level does not apply), the team name as of that season, where the membership came from, and whether a second source agreed (null when only one source covers the season). team_id is a string in the id space team_id_source names: every D-I team has an ncaa_org row (the stats.ncaa.org org id) and, where the ncaa_baseball_crosswalk maps the school, a copy under its ESPN college-baseball team id (team_id_source espn, notes ncaa_org_id=N). The two id spaces overlap (an ESPN id can be another school's NCAA org id), so filter on team_id_source before joining on team_id. season is the calendar year; seasons 2010-2026.
 :::
 
 | option | type | required | description |
@@ -1405,6 +1406,45 @@ const rows = await sdv.mlb.loadNcaaBaseballTeamGroupSeasons({ seasons: 2024 });
 | `source` | `string` | Source the membership was taken from -- the most reliable per-season source for that era. |
 | `sources_agree` | `boolean` | Whether a second source agreed on the membership; null when only one source covers the season. |
 | `notes` | `string` | Builder notes on the team-season, such as a source disagreement or which of several listed memberships was kept. |
+
+## `loadMlbTeamAliases`
+
+Release: [mlb_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mlb_groups) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/mlb_groups/mlb_team_aliases.parquet`
+
+:::caution[Coverage]
+One season-less file: every id and name another source (cbs, fox, mlb, yahoo) uses for a team, keyed on the ESPN team id (team_id, a string; team_id_source = espn), with the seasons the source shows it on that team (valid_from / valid_to, inclusive; both null for an undated curated map). id_kind says whether source_id is the source's id for this sport's team or one id for every sport of a school; a name-only row has a null source_id. A source id means something only within its source (Fox 25 is not ESPN 25), so filter on source before joining on source_id. Seasons are the calendar year.
+:::
+
+| option | type | required | description |
+|---|---|---|---|
+| `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
+| `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
+
+```js
+const rows = await sdv.mlb.loadMlbTeamAliases();
+// snake_case alias (py/R parity): sdv.mlb.load_mlb_team_aliases(...)
+```
+
+**Returns** (one row per record; every column optional and nullable):
+
+**Row type:** `LoadMlbTeamAliasesRow` (exported from the package root).
+
+| col_name | type | description |
+|---|---|---|
+| `league` | `string` | League code of the table ("mlb"). |
+| `team_id` | `string` | ESPN team id the alias points to, as a string (e.g. "150"); the same id as team_id in load_mlb_team_group_seasons. Join on it to reach ESPN team data. |
+| `team_id_source` | `string` | Id space of team_id; always "espn" in this table. |
+| `source` | `string` | Provider that uses this id or name (in this table: cbs, fox, mlb, yahoo). |
+| `source_id` | `string` | The source's own id for the team (e.g. Fox 25, Yahoo nba.t.1); null for a name-only row. It means something only within its source (Fox 25 is Ohio State, ESPN 25 is California), so filter on source first. |
+| `id_kind` | `string` | "team" when source_id is the source's id for this sport's team, or "school" when it is one id for every sport of a school (the stats.ncaa.org org id, 247Sports institutionKey, On3 orgKey). |
+| `name_kind` | `string` | Kind of label in value: "name" or "abbreviation"; null when the row carries only an id. An id with both a name and an abbreviation is two rows. |
+| `value` | `string` | The source's own spelling of the team name or abbreviation; null when the row carries only an id. |
+| `valid_from` | `number` | First season the source shows this id or name on the team, inclusive (calendar year); null, with valid_to, for an undated curated map. |
+| `valid_to` | `number` | Last season the source shows this id or name on the team, inclusive (calendar year); null, with valid_from, for an undated curated map. A gap in the source splits the window into two rows. |
+| `match_method` | `string` | How the row was tied to the ESPN team: "deterministic" (a formula or shared key, e.g. Yahoo \{league\}.t.\{espn id\}; CFBD ids are ESPN ids), "crosswalk" (carried from a published crosswalk leg), "curated" (a cited map), or for a hand-captured team directory row "alias", "exact_name" (normalized name) or "dict" (curated name dictionary). |
+| `evidence` | `string` | The release asset or sportsdataverse/sdv-reference-data file the row came from. |
 
 ## `loadMlbParkDimensions`
 

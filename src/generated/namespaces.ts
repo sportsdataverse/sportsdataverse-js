@@ -3752,8 +3752,10 @@ export interface CfbWrappers {
   espn_cfb_award: Wrapper<Row[], EspnAwardParams>;
   /** CFB — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/football/leagues/college-football/awards` */
   espn_cfb_awards: Wrapper<Row[], EspnAwardsParams>;
-  /** CFB — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/football/college-football/calendar` */
+  /** Pre-v4 name of `espn_cfb_calendar_site`: forwards to it and warns once per process. @deprecated Renamed `espn_cfb_calendar_site` in v4. */
   espn_cfb_calendar: Wrapper<Row[], EspnCalendarParams>;
+  /** CFB — calendar site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/football/college-football/calendar` */
+  espn_cfb_calendar_site: Wrapper<Row[], EspnCalendarParams>;
   /** CFB — cdn boxscore (ESPN cdn.espn.com (espn.com page data)). `GET https://cdn.espn.com/core/college-football/boxscore?xhr=1` */
   espn_cfb_cdn_boxscore: SectionedWrapper<ParsedTables, {}, EspnCdnBoxscoreParams>;
   /** CFB — cdn playbyplay (ESPN cdn.espn.com (espn.com page data)). `GET https://cdn.espn.com/core/college-football/playbyplay?xhr=1` */
@@ -4106,8 +4108,10 @@ export interface CfbWrappers {
   espnCfbAward: Wrapper<Row[], EspnAwardParams>;
   /** CFB — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/football/leagues/college-football/awards` */
   espnCfbAwards: Wrapper<Row[], EspnAwardsParams>;
-  /** CFB — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/football/college-football/calendar` */
+  /** Pre-v4 name of `espnCfbCalendarSite`: forwards to it and warns once per process. @deprecated Renamed `espnCfbCalendarSite` in v4. */
   espnCfbCalendar: Wrapper<Row[], EspnCalendarParams>;
+  /** CFB — calendar site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/football/college-football/calendar` */
+  espnCfbCalendarSite: Wrapper<Row[], EspnCalendarParams>;
   /** CFB — cdn boxscore (ESPN cdn.espn.com (espn.com page data)). `GET https://cdn.espn.com/core/college-football/boxscore?xhr=1` */
   espnCfbCdnBoxscore: SectionedWrapper<ParsedTables, {}, EspnCdnBoxscoreParams>;
   /** CFB — cdn playbyplay (ESPN cdn.espn.com (espn.com page data)). `GET https://cdn.espn.com/core/college-football/playbyplay?xhr=1` */
@@ -10600,8 +10604,10 @@ export interface MbbWrappers {
   espn_mbb_award: Wrapper<Row[], EspnAwardParams>;
   /** MBB — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/awards` */
   espn_mbb_awards: Wrapper<Row[], EspnAwardsParams>;
-  /** MBB — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/calendar` */
+  /** Pre-v4 name of `espn_mbb_calendar_site`: forwards to it and warns once per process. @deprecated Renamed `espn_mbb_calendar_site` in v4. */
   espn_mbb_calendar: Wrapper<Row[], EspnCalendarParams>;
+  /** MBB — calendar site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/calendar` */
+  espn_mbb_calendar_site: Wrapper<Row[], EspnCalendarParams>;
   /** MBB — cdn boxscore (ESPN cdn.espn.com (espn.com page data)). `GET https://cdn.espn.com/core/mens-college-basketball/boxscore?xhr=1` */
   espn_mbb_cdn_boxscore: SectionedWrapper<ParsedTables, {}, EspnCdnBoxscoreParams>;
   /** MBB — cdn playbyplay (ESPN cdn.espn.com (espn.com page data)). `GET https://cdn.espn.com/core/mens-college-basketball/playbyplay?xhr=1` */
@@ -10938,8 +10944,10 @@ export interface MbbWrappers {
   espnMbbAward: Wrapper<Row[], EspnAwardParams>;
   /** MBB — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/awards` */
   espnMbbAwards: Wrapper<Row[], EspnAwardsParams>;
-  /** MBB — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/calendar` */
+  /** Pre-v4 name of `espnMbbCalendarSite`: forwards to it and warns once per process. @deprecated Renamed `espnMbbCalendarSite` in v4. */
   espnMbbCalendar: Wrapper<Row[], EspnCalendarParams>;
+  /** MBB — calendar site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/calendar` */
+  espnMbbCalendarSite: Wrapper<Row[], EspnCalendarParams>;
   /** MBB — cdn boxscore (ESPN cdn.espn.com (espn.com page data)). `GET https://cdn.espn.com/core/mens-college-basketball/boxscore?xhr=1` */
   espnMbbCdnBoxscore: SectionedWrapper<ParsedTables, {}, EspnCdnBoxscoreParams>;
   /** MBB — cdn playbyplay (ESPN cdn.espn.com (espn.com page data)). `GET https://cdn.espn.com/core/mens-college-basketball/playbyplay?xhr=1` */
@@ -12066,8 +12074,10 @@ export interface MlbWrappers {
   espn_mlb_award: Wrapper<Row[], EspnAwardParams>;
   /** MLB — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/awards` */
   espn_mlb_awards: Wrapper<Row[], EspnAwardsParams>;
-  /** MLB — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/calendar` */
+  /** Pre-v4 name of `espn_mlb_calendar_site`: forwards to it and warns once per process. @deprecated Renamed `espn_mlb_calendar_site` in v4. */
   espn_mlb_calendar: Wrapper<Row[], EspnCalendarParams>;
+  /** MLB — calendar site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/calendar` */
+  espn_mlb_calendar_site: Wrapper<Row[], EspnCalendarParams>;
   /** MLB — cdn boxscore (ESPN cdn.espn.com (espn.com page data)). `GET https://cdn.espn.com/core/mlb/boxscore?xhr=1` */
   espn_mlb_cdn_boxscore: SectionedWrapper<ParsedTables, {}, EspnCdnBoxscoreParams>;
   /** MLB — cdn playbyplay (ESPN cdn.espn.com (espn.com page data)). `GET https://cdn.espn.com/core/mlb/playbyplay?xhr=1` */
@@ -12394,8 +12404,10 @@ export interface MlbWrappers {
   espnMlbAward: Wrapper<Row[], EspnAwardParams>;
   /** MLB — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/baseball/leagues/mlb/awards` */
   espnMlbAwards: Wrapper<Row[], EspnAwardsParams>;
-  /** MLB — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/calendar` */
+  /** Pre-v4 name of `espnMlbCalendarSite`: forwards to it and warns once per process. @deprecated Renamed `espnMlbCalendarSite` in v4. */
   espnMlbCalendar: Wrapper<Row[], EspnCalendarParams>;
+  /** MLB — calendar site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/calendar` */
+  espnMlbCalendarSite: Wrapper<Row[], EspnCalendarParams>;
   /** MLB — cdn boxscore (ESPN cdn.espn.com (espn.com page data)). `GET https://cdn.espn.com/core/mlb/boxscore?xhr=1` */
   espnMlbCdnBoxscore: SectionedWrapper<ParsedTables, {}, EspnCdnBoxscoreParams>;
   /** MLB — cdn playbyplay (ESPN cdn.espn.com (espn.com page data)). `GET https://cdn.espn.com/core/mlb/playbyplay?xhr=1` */
@@ -14192,8 +14204,10 @@ export interface NbaWrappers {
   espn_nba_award: Wrapper<Row[], EspnAwardParams>;
   /** NBA — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/awards` */
   espn_nba_awards: Wrapper<Row[], EspnAwardsParams>;
-  /** NBA — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba/calendar` */
+  /** Pre-v4 name of `espn_nba_calendar_site`: forwards to it and warns once per process. @deprecated Renamed `espn_nba_calendar_site` in v4. */
   espn_nba_calendar: Wrapper<Row[], EspnCalendarParams>;
+  /** NBA — calendar site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba/calendar` */
+  espn_nba_calendar_site: Wrapper<Row[], EspnCalendarParams>;
   /** NBA — cdn boxscore (ESPN cdn.espn.com (espn.com page data)). `GET https://cdn.espn.com/core/nba/boxscore?xhr=1` */
   espn_nba_cdn_boxscore: SectionedWrapper<ParsedTables, {}, EspnCdnBoxscoreParams>;
   /** NBA — cdn playbyplay (ESPN cdn.espn.com (espn.com page data)). `GET https://cdn.espn.com/core/nba/playbyplay?xhr=1` */
@@ -14516,8 +14530,10 @@ export interface NbaWrappers {
   espnNbaAward: Wrapper<Row[], EspnAwardParams>;
   /** NBA — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/awards` */
   espnNbaAwards: Wrapper<Row[], EspnAwardsParams>;
-  /** NBA — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba/calendar` */
+  /** Pre-v4 name of `espnNbaCalendarSite`: forwards to it and warns once per process. @deprecated Renamed `espnNbaCalendarSite` in v4. */
   espnNbaCalendar: Wrapper<Row[], EspnCalendarParams>;
+  /** NBA — calendar site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba/calendar` */
+  espnNbaCalendarSite: Wrapper<Row[], EspnCalendarParams>;
   /** NBA — cdn boxscore (ESPN cdn.espn.com (espn.com page data)). `GET https://cdn.espn.com/core/nba/boxscore?xhr=1` */
   espnNbaCdnBoxscore: SectionedWrapper<ParsedTables, {}, EspnCdnBoxscoreParams>;
   /** NBA — cdn playbyplay (ESPN cdn.espn.com (espn.com page data)). `GET https://cdn.espn.com/core/nba/playbyplay?xhr=1` */
@@ -18972,8 +18988,10 @@ export interface NflWrappers {
   espn_nfl_award: Wrapper<Row[], EspnAwardParams>;
   /** NFL — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/awards` */
   espn_nfl_awards: Wrapper<Row[], EspnAwardsParams>;
-  /** NFL — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/football/nfl/calendar` */
+  /** Pre-v4 name of `espn_nfl_calendar_site`: forwards to it and warns once per process. @deprecated Renamed `espn_nfl_calendar_site` in v4. */
   espn_nfl_calendar: Wrapper<Row[], EspnCalendarParams>;
+  /** NFL — calendar site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/football/nfl/calendar` */
+  espn_nfl_calendar_site: Wrapper<Row[], EspnCalendarParams>;
   /** NFL — cdn boxscore (ESPN cdn.espn.com (espn.com page data)). `GET https://cdn.espn.com/core/nfl/boxscore?xhr=1` */
   espn_nfl_cdn_boxscore: SectionedWrapper<ParsedTables, {}, EspnCdnBoxscoreParams>;
   /** NFL — cdn playbyplay (ESPN cdn.espn.com (espn.com page data)). `GET https://cdn.espn.com/core/nfl/playbyplay?xhr=1` */
@@ -19300,8 +19318,10 @@ export interface NflWrappers {
   espnNflAward: Wrapper<Row[], EspnAwardParams>;
   /** NFL — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/awards` */
   espnNflAwards: Wrapper<Row[], EspnAwardsParams>;
-  /** NFL — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/football/nfl/calendar` */
+  /** Pre-v4 name of `espnNflCalendarSite`: forwards to it and warns once per process. @deprecated Renamed `espnNflCalendarSite` in v4. */
   espnNflCalendar: Wrapper<Row[], EspnCalendarParams>;
+  /** NFL — calendar site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/football/nfl/calendar` */
+  espnNflCalendarSite: Wrapper<Row[], EspnCalendarParams>;
   /** NFL — cdn boxscore (ESPN cdn.espn.com (espn.com page data)). `GET https://cdn.espn.com/core/nfl/boxscore?xhr=1` */
   espnNflCdnBoxscore: SectionedWrapper<ParsedTables, {}, EspnCdnBoxscoreParams>;
   /** NFL — cdn playbyplay (ESPN cdn.espn.com (espn.com page data)). `GET https://cdn.espn.com/core/nfl/playbyplay?xhr=1` */
@@ -26896,8 +26916,10 @@ export interface WbbWrappers {
   espn_wbb_award: Wrapper<Row[], EspnAwardParams>;
   /** WBB — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/awards` */
   espn_wbb_awards: Wrapper<Row[], EspnAwardsParams>;
-  /** WBB — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/calendar` */
+  /** Pre-v4 name of `espn_wbb_calendar_site`: forwards to it and warns once per process. @deprecated Renamed `espn_wbb_calendar_site` in v4. */
   espn_wbb_calendar: Wrapper<Row[], EspnCalendarParams>;
+  /** WBB — calendar site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/calendar` */
+  espn_wbb_calendar_site: Wrapper<Row[], EspnCalendarParams>;
   /** WBB — cdn boxscore (ESPN cdn.espn.com (espn.com page data)). `GET https://cdn.espn.com/core/womens-college-basketball/boxscore?xhr=1` */
   espn_wbb_cdn_boxscore: SectionedWrapper<ParsedTables, {}, EspnCdnBoxscoreParams>;
   /** WBB — cdn playbyplay (ESPN cdn.espn.com (espn.com page data)). `GET https://cdn.espn.com/core/womens-college-basketball/playbyplay?xhr=1` */
@@ -27148,10 +27170,12 @@ export interface WbbWrappers {
   espn_wbb_season_weeks: Wrapper<Row[], EspnSeasonWeeksParams>;
   /** WBB — seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/seasons` */
   espn_wbb_seasons: Wrapper<Row[], EspnSeasonsParams>;
-  /** WBB — standings (ESPN site.api.espn.com (v2)). `GET https://site.api.espn.com/apis/v2/sports/basketball/womens-college-basketball/standings` */
+  /** Pre-v4 name of `espn_wbb_standings_site`: forwards to it and warns once per process. @deprecated Renamed `espn_wbb_standings_site` in v4. */
   espn_wbb_standings: Wrapper<Row[], EspnStandingsParams>;
   /** WBB — standings core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/standings` */
   espn_wbb_standings_core: Wrapper<Row[], EspnStandingsCoreParams>;
+  /** WBB — standings site (ESPN site.api.espn.com (v2)). `GET https://site.api.espn.com/apis/v2/sports/basketball/womens-college-basketball/standings` */
+  espn_wbb_standings_site: Wrapper<Row[], EspnStandingsParams>;
   /** WBB — statistics league (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/statistics` */
   espn_wbb_statistics_league: Wrapper<Row[], EspnStatisticsLeagueParams>;
   /** WBB — summary (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/summary` */
@@ -27174,8 +27198,10 @@ export interface WbbWrappers {
   espn_wbb_team_news: Wrapper<Row[], EspnTeamNewsParams>;
   /** WBB — team record (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/teams/{team_id}/record` */
   espn_wbb_team_record: Wrapper<Row[], EspnTeamRecordParams>;
-  /** WBB — team roster (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/teams/{team_id}/roster` */
+  /** Pre-v4 name of `espn_wbb_team_roster_site`: forwards to it and warns once per process. @deprecated Renamed `espn_wbb_team_roster_site` in v4. */
   espn_wbb_team_roster: Wrapper<Row[], EspnTeamRosterParams>;
+  /** WBB — team roster site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/teams/{team_id}/roster` */
+  espn_wbb_team_roster_site: Wrapper<Row[], EspnTeamRosterParams>;
   /** WBB — team schedule (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/teams/{team_id}/schedule` */
   espn_wbb_team_schedule: Wrapper<Row[], EspnTeamScheduleParams>;
   /** WBB — team transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/teams/{team_id}/transactions` */
@@ -27234,8 +27260,10 @@ export interface WbbWrappers {
   espnWbbAward: Wrapper<Row[], EspnAwardParams>;
   /** WBB — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/awards` */
   espnWbbAwards: Wrapper<Row[], EspnAwardsParams>;
-  /** WBB — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/calendar` */
+  /** Pre-v4 name of `espnWbbCalendarSite`: forwards to it and warns once per process. @deprecated Renamed `espnWbbCalendarSite` in v4. */
   espnWbbCalendar: Wrapper<Row[], EspnCalendarParams>;
+  /** WBB — calendar site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/calendar` */
+  espnWbbCalendarSite: Wrapper<Row[], EspnCalendarParams>;
   /** WBB — cdn boxscore (ESPN cdn.espn.com (espn.com page data)). `GET https://cdn.espn.com/core/womens-college-basketball/boxscore?xhr=1` */
   espnWbbCdnBoxscore: SectionedWrapper<ParsedTables, {}, EspnCdnBoxscoreParams>;
   /** WBB — cdn playbyplay (ESPN cdn.espn.com (espn.com page data)). `GET https://cdn.espn.com/core/womens-college-basketball/playbyplay?xhr=1` */
@@ -27486,10 +27514,12 @@ export interface WbbWrappers {
   espnWbbSeasonWeekRankings: Wrapper<Row[], EspnSeasonWeekRankingsParams>;
   /** WBB — season weeks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/seasons/{season}/types/{season_type}/weeks` */
   espnWbbSeasonWeeks: Wrapper<Row[], EspnSeasonWeeksParams>;
-  /** WBB — standings (ESPN site.api.espn.com (v2)). `GET https://site.api.espn.com/apis/v2/sports/basketball/womens-college-basketball/standings` */
+  /** Pre-v4 name of `espnWbbStandingsSite`: forwards to it and warns once per process. @deprecated Renamed `espnWbbStandingsSite` in v4. */
   espnWbbStandings: Wrapper<Row[], EspnStandingsParams>;
   /** WBB — standings core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/standings` */
   espnWbbStandingsCore: Wrapper<Row[], EspnStandingsCoreParams>;
+  /** WBB — standings site (ESPN site.api.espn.com (v2)). `GET https://site.api.espn.com/apis/v2/sports/basketball/womens-college-basketball/standings` */
+  espnWbbStandingsSite: Wrapper<Row[], EspnStandingsParams>;
   /** WBB — statistics league (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/statistics` */
   espnWbbStatisticsLeague: Wrapper<Row[], EspnStatisticsLeagueParams>;
   /** WBB — summary (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/summary` */
@@ -27512,8 +27542,10 @@ export interface WbbWrappers {
   espnWbbTeamNews: Wrapper<Row[], EspnTeamNewsParams>;
   /** WBB — team record (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/teams/{team_id}/record` */
   espnWbbTeamRecord: Wrapper<Row[], EspnTeamRecordParams>;
-  /** WBB — team roster (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/teams/{team_id}/roster` */
+  /** Pre-v4 name of `espnWbbTeamRosterSite`: forwards to it and warns once per process. @deprecated Renamed `espnWbbTeamRosterSite` in v4. */
   espnWbbTeamRoster: Wrapper<Row[], EspnTeamRosterParams>;
+  /** WBB — team roster site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/teams/{team_id}/roster` */
+  espnWbbTeamRosterSite: Wrapper<Row[], EspnTeamRosterParams>;
   /** WBB — team schedule (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/teams/{team_id}/schedule` */
   espnWbbTeamSchedule: Wrapper<Row[], EspnTeamScheduleParams>;
   /** WBB — teams core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/womens-college-basketball/teams` */
@@ -28876,8 +28908,10 @@ export interface WnbaWrappers {
   espn_wnba_award: Wrapper<Row[], EspnAwardParams>;
   /** WNBA — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/awards` */
   espn_wnba_awards: Wrapper<Row[], EspnAwardsParams>;
-  /** WNBA — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/calendar` */
+  /** Pre-v4 name of `espn_wnba_calendar_site`: forwards to it and warns once per process. @deprecated Renamed `espn_wnba_calendar_site` in v4. */
   espn_wnba_calendar: Wrapper<Row[], EspnCalendarParams>;
+  /** WNBA — calendar site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/calendar` */
+  espn_wnba_calendar_site: Wrapper<Row[], EspnCalendarParams>;
   /** WNBA — cdn boxscore (ESPN cdn.espn.com (espn.com page data)). `GET https://cdn.espn.com/core/wnba/boxscore?xhr=1` */
   espn_wnba_cdn_boxscore: SectionedWrapper<ParsedTables, {}, EspnCdnBoxscoreParams>;
   /** WNBA — cdn playbyplay (ESPN cdn.espn.com (espn.com page data)). `GET https://cdn.espn.com/core/wnba/playbyplay?xhr=1` */
@@ -28894,8 +28928,10 @@ export interface WnbaWrappers {
   espn_wnba_coach_season: Wrapper<Row[], EspnCoachSeasonParams>;
   /** WNBA — conferences (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/groups` */
   espn_wnba_conferences: Wrapper<Row[], EspnConferencesParams>;
-  /** WNBA — draft (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/draft` */
+  /** Pre-v4 name of `espn_wnba_draft_site`: forwards to it and warns once per process. @deprecated Renamed `espn_wnba_draft_site` in v4. */
   espn_wnba_draft: Wrapper<Row[], EspnDraftParams>;
+  /** WNBA — draft site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/draft` */
+  espn_wnba_draft_site: Wrapper<Row[], EspnDraftParams>;
   /** Pre-v4 name of `espn_wnba_game`: forwards to it and warns once per process. @deprecated Renamed `espn_wnba_game` in v4. */
   espn_wnba_event: Wrapper<Row[], EspnEventParams>;
   /** Pre-v4 name of `espn_wnba_game_broadcasts`: forwards to it and warns once per process. @deprecated Renamed `espn_wnba_game_broadcasts` in v4. */
@@ -29114,10 +29150,12 @@ export interface WnbaWrappers {
   espn_wnba_season_weeks: Wrapper<Row[], EspnSeasonWeeksParams>;
   /** WNBA — seasons (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/seasons` */
   espn_wnba_seasons: Wrapper<Row[], EspnSeasonsParams>;
-  /** WNBA — standings (ESPN site.api.espn.com (v2)). `GET https://site.api.espn.com/apis/v2/sports/basketball/wnba/standings` */
+  /** Pre-v4 name of `espn_wnba_standings_site`: forwards to it and warns once per process. @deprecated Renamed `espn_wnba_standings_site` in v4. */
   espn_wnba_standings: Wrapper<Row[], EspnStandingsParams>;
   /** WNBA — standings core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/standings` */
   espn_wnba_standings_core: Wrapper<Row[], EspnStandingsCoreParams>;
+  /** WNBA — standings site (ESPN site.api.espn.com (v2)). `GET https://site.api.espn.com/apis/v2/sports/basketball/wnba/standings` */
+  espn_wnba_standings_site: Wrapper<Row[], EspnStandingsParams>;
   /** WNBA — statistics league (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/statistics` */
   espn_wnba_statistics_league: Wrapper<Row[], EspnStatisticsLeagueParams>;
   /** WNBA — summary (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/summary` */
@@ -29140,8 +29178,10 @@ export interface WnbaWrappers {
   espn_wnba_team_news: Wrapper<Row[], EspnTeamNewsParams>;
   /** WNBA — team record (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/teams/{team_id}/record` */
   espn_wnba_team_record: Wrapper<Row[], EspnTeamRecordParams>;
-  /** WNBA — team roster (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/teams/{team_id}/roster` */
+  /** Pre-v4 name of `espn_wnba_team_roster_site`: forwards to it and warns once per process. @deprecated Renamed `espn_wnba_team_roster_site` in v4. */
   espn_wnba_team_roster: Wrapper<Row[], EspnTeamRosterParams>;
+  /** WNBA — team roster site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/teams/{team_id}/roster` */
+  espn_wnba_team_roster_site: Wrapper<Row[], EspnTeamRosterParams>;
   /** WNBA — team schedule (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/teams/{team_id}/schedule` */
   espn_wnba_team_schedule: Wrapper<Row[], EspnTeamScheduleParams>;
   /** WNBA — team transactions (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/teams/{team_id}/transactions` */
@@ -29200,8 +29240,10 @@ export interface WnbaWrappers {
   espnWnbaAward: Wrapper<Row[], EspnAwardParams>;
   /** WNBA — awards (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/awards` */
   espnWnbaAwards: Wrapper<Row[], EspnAwardsParams>;
-  /** WNBA — calendar (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/calendar` */
+  /** Pre-v4 name of `espnWnbaCalendarSite`: forwards to it and warns once per process. @deprecated Renamed `espnWnbaCalendarSite` in v4. */
   espnWnbaCalendar: Wrapper<Row[], EspnCalendarParams>;
+  /** WNBA — calendar site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/calendar` */
+  espnWnbaCalendarSite: Wrapper<Row[], EspnCalendarParams>;
   /** WNBA — cdn boxscore (ESPN cdn.espn.com (espn.com page data)). `GET https://cdn.espn.com/core/wnba/boxscore?xhr=1` */
   espnWnbaCdnBoxscore: SectionedWrapper<ParsedTables, {}, EspnCdnBoxscoreParams>;
   /** WNBA — cdn playbyplay (ESPN cdn.espn.com (espn.com page data)). `GET https://cdn.espn.com/core/wnba/playbyplay?xhr=1` */
@@ -29218,8 +29260,10 @@ export interface WnbaWrappers {
   espnWnbaCoachSeason: Wrapper<Row[], EspnCoachSeasonParams>;
   /** WNBA — conferences (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/groups` */
   espnWnbaConferences: Wrapper<Row[], EspnConferencesParams>;
-  /** WNBA — draft (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/draft` */
+  /** Pre-v4 name of `espnWnbaDraftSite`: forwards to it and warns once per process. @deprecated Renamed `espnWnbaDraftSite` in v4. */
   espnWnbaDraft: Wrapper<Row[], EspnDraftParams>;
+  /** WNBA — draft site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/draft` */
+  espnWnbaDraftSite: Wrapper<Row[], EspnDraftParams>;
   /** Pre-v4 name of `espnWnbaGame`: forwards to it and warns once per process. @deprecated Renamed `espnWnbaGame` in v4. */
   espnWnbaEvent: Wrapper<Row[], EspnEventParams>;
   /** Pre-v4 name of `espnWnbaGameBroadcasts`: forwards to it and warns once per process. @deprecated Renamed `espnWnbaGameBroadcasts` in v4. */
@@ -29438,10 +29482,12 @@ export interface WnbaWrappers {
   espnWnbaSeasonWeekPowerindex: Wrapper<Row[], EspnSeasonWeekPowerindexParams>;
   /** WNBA — season weeks (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/seasons/{season}/types/{season_type}/weeks` */
   espnWnbaSeasonWeeks: Wrapper<Row[], EspnSeasonWeeksParams>;
-  /** WNBA — standings (ESPN site.api.espn.com (v2)). `GET https://site.api.espn.com/apis/v2/sports/basketball/wnba/standings` */
+  /** Pre-v4 name of `espnWnbaStandingsSite`: forwards to it and warns once per process. @deprecated Renamed `espnWnbaStandingsSite` in v4. */
   espnWnbaStandings: Wrapper<Row[], EspnStandingsParams>;
   /** WNBA — standings core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/standings` */
   espnWnbaStandingsCore: Wrapper<Row[], EspnStandingsCoreParams>;
+  /** WNBA — standings site (ESPN site.api.espn.com (v2)). `GET https://site.api.espn.com/apis/v2/sports/basketball/wnba/standings` */
+  espnWnbaStandingsSite: Wrapper<Row[], EspnStandingsParams>;
   /** WNBA — statistics league (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/statistics` */
   espnWnbaStatisticsLeague: Wrapper<Row[], EspnStatisticsLeagueParams>;
   /** WNBA — summary (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/summary` */
@@ -29464,8 +29510,10 @@ export interface WnbaWrappers {
   espnWnbaTeamNews: Wrapper<Row[], EspnTeamNewsParams>;
   /** WNBA — team record (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/teams/{team_id}/record` */
   espnWnbaTeamRecord: Wrapper<Row[], EspnTeamRecordParams>;
-  /** WNBA — team roster (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/teams/{team_id}/roster` */
+  /** Pre-v4 name of `espnWnbaTeamRosterSite`: forwards to it and warns once per process. @deprecated Renamed `espnWnbaTeamRosterSite` in v4. */
   espnWnbaTeamRoster: Wrapper<Row[], EspnTeamRosterParams>;
+  /** WNBA — team roster site (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/teams/{team_id}/roster` */
+  espnWnbaTeamRosterSite: Wrapper<Row[], EspnTeamRosterParams>;
   /** WNBA — team schedule (ESPN site.api.espn.com). `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/teams/{team_id}/schedule` */
   espnWnbaTeamSchedule: Wrapper<Row[], EspnTeamScheduleParams>;
   /** WNBA — teams core (ESPN sports.core.api.espn.com (core v2)). `GET https://sports.core.api.espn.com/v2/sports/basketball/leagues/wnba/teams` */

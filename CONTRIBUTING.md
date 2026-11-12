@@ -93,7 +93,7 @@ Three kinds of callables:
   standalone `sdv.<provider>.*` namespaces. `npm run codegen` prints the current
   counts.
 
-- **Release loaders** — **323 `load*` functions**, one per entry of sdv-py's
+- **Release loaders** — **341 `load*` functions**, one per entry of sdv-py's
   `releases.yaml` (see [Release dataset loaders](#release-dataset-loaders)).
 
 Every wrapper returns raw JSON by default; `{ parsed: true }` runs it through a
@@ -257,7 +257,7 @@ npm run codegen                 # then regenerate as usual
 
 ## Release dataset loaders
 
-The 323 `load*` functions read the published SportsDataverse / nflverse release
+The 341 `load*` functions read the published SportsDataverse / nflverse release
 parquet. They are generated, not hand-written:
 
 - **Source of truth:** sdv-py's `releases.yaml` (vendored verbatim to

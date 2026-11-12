@@ -6,7 +6,7 @@
     "espnLeagues": 40,
     "flatWrappers": 1060,
     "flatFamilies": 27,
-    "loaders": 326
+    "loaders": 341
   },
   "sources": [
     {
@@ -793,42 +793,42 @@
           "api": "loaders:cfb",
           "label": "sdv.cfb loaders",
           "host": "github.com",
-          "count": 71,
+          "count": 73,
           "ownership": "loaders"
         },
         {
           "api": "loaders:mbb",
           "label": "sdv.mbb loaders",
           "host": "github.com",
-          "count": 34,
+          "count": 36,
           "ownership": "loaders"
         },
         {
           "api": "loaders:mlb",
           "label": "sdv.mlb loaders",
           "host": "github.com",
-          "count": 34,
+          "count": 35,
           "ownership": "loaders"
         },
         {
           "api": "loaders:nba",
           "label": "sdv.nba loaders",
           "host": "github.com",
-          "count": 42,
+          "count": 45,
           "ownership": "loaders"
         },
         {
           "api": "loaders:nfl",
           "label": "sdv.nfl loaders",
           "host": "github.com",
-          "count": 29,
+          "count": 31,
           "ownership": "loaders"
         },
         {
           "api": "loaders:nhl",
           "label": "sdv.nhl loaders",
           "host": "github.com",
-          "count": 27,
+          "count": 28,
           "ownership": "loaders"
         },
         {
@@ -842,14 +842,14 @@
           "api": "loaders:wbb",
           "label": "sdv.wbb loaders",
           "host": "github.com",
-          "count": 34,
+          "count": 36,
           "ownership": "loaders"
         },
         {
           "api": "loaders:wnba",
           "label": "sdv.wnba loaders",
           "host": "github.com",
-          "count": 34,
+          "count": 36,
           "ownership": "loaders"
         }
       ],
@@ -875,13 +875,13 @@
         "wbb",
         "wnba"
       ],
-      "wrapperCount": 326,
+      "wrapperCount": 341,
       "auth": "none",
       "ownership": "loaders",
       "parity": null,
       "descriptionFill": {
-        "filled": 15673,
-        "total": 15929
+        "filled": 15976,
+        "total": 16232
       },
       "docsPath": "/docs/reference/#dataset-loaders",
       "note": "Pre-built parquet datasets (`load*`) published as GitHub release assets."

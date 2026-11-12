@@ -144,6 +144,7 @@ const CFG: LeagueConfig = {
     "ncaa"
   ],
   "publicShorts": {
+    "calendar": "calendar_site",
     "athlete_stats": "player_stats_v3"
   }
 };
@@ -789,19 +790,19 @@ const CALENDAR_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * MBB — calendar (ESPN site.api.espn.com).
+ * MBB — calendar site (ESPN site.api.espn.com).
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/calendar`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
- * @example await sdv.mbb.espnMbbCalendar({});
- * @see https://js.sportsdataverse.org/docs/mbb/reference/site#espnmbbcalendar
+ * @example await sdv.mbb.espnMbbCalendarSite({});
+ * @see https://js.sportsdataverse.org/docs/mbb/reference/site#espnmbbcalendarsite
  */
-export const espnMbbCalendar: Wrapper<Row[], EspnCalendarParams> = (params: WrapperParams = {}) =>
+export const espnMbbCalendarSite: Wrapper<Row[], EspnCalendarParams> = (params: WrapperParams = {}) =>
   callWrapper(CALENDAR_DEF, CFG, params);
-/** snake_case alias of {@link espnMbbCalendar} (py/R parity). */
-export const espn_mbb_calendar = espnMbbCalendar;
+/** snake_case alias of {@link espnMbbCalendarSite} (py/R parity). */
+export const espn_mbb_calendar_site = espnMbbCalendarSite;
 
 const CDN_BOXSCORE_DEF: WrapperDef = {
   "short": "cdn_boxscore",
@@ -2158,12 +2159,12 @@ const LEADERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/mens-college-basketball/statistics/byathlete`
  *
- * @param params.category - `number | string` — the statistics category.
+ * @param params.category - `number | string` — Leaderboard population: the athletes ranked in that category, whose values it fills (other categories come back null). Football takes `<group>:<category>` (`offense:passing`, `offense:rushing`, `offense:receiving`, `defense:defensive`, `scoring:scoring`); a bare `passing` is rejected with HTTP 400 (ValueError). Basketball takes the bare name (`offensive`).
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
  * @param params.limit - `number | string` — the maximum number of items to return; default `50`.
  * @param params.page - `number | string` — the page of a paginated Core v2 list (1-based); default `1`.
- * @param params.sort - `number | string` — the sort key and direction, e.g. `offensive.avgPoints:desc`.
+ * @param params.sort - `number | string` — Sort key `<category>.<statName>:<asc|desc>`, the names in the payload's categories (`passing.passingYards:desc`, `offensive.avgPoints:desc`). A stat without its category is rejected with HTTP 400 (ValueError).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.mbb.espnMbbLeaders({});

@@ -1127,6 +1127,8 @@ export interface LoadNflModelPbpRow {
   fumble_recovery_2_team?: string | null;
   /** Yards gained by one of the players with a fumble recovery. `Int64` */
   fumble_recovery_2_yards?: number | bigint | null;
+  /** Numeric drive number in the game. `Int64` */
+  drive?: number | bigint | null;
   /** String indicator for result of two point conversion attempt: success, failure, safety (touchback in defensive endzone is 1 point apparently), or return. `String` */
   two_point_conv_result?: string | null;
   /** String indicator for the result of the extra point attempt: good, failed, blocked, safety (touchback in defensive endzone is 1 point apparently), or aborted. `String` */
@@ -1151,12 +1153,12 @@ export interface LoadNflModelPbpRow {
   run_location?: string | null;
   /** String indicator for line gap of run: end, guard, or tackle `String` */
   run_gap?: string | null;
+  /** Binary indicator for whether or not the QB dropped back on the play (pass attempt, sack, or scrambled). `Int32` */
+  qb_dropback?: number | null;
   /** Binary indicator if the play was a pass play (sacks and scrambles included). `Int64` */
   pass?: number | bigint | null;
   /** Binary indicator if the play was a rushing play. `Int64` */
   rush?: number | bigint | null;
-  /** Binary indicator for whether or not the QB dropped back on the play (pass attempt, sack, or scrambled). `Int32` */
-  qb_dropback?: number | null;
   /** Score the posteam at the start of the play. `Int64` */
   posteam_score?: number | bigint | null;
   /** Score the defteam at the start of the play. `Int64` */
@@ -1207,10 +1209,10 @@ export interface LoadNflModelPbpRow {
   drive_game_clock_start?: string | null;
   /** Game time at the end of a given drive. `String` */
   drive_game_clock_end?: string | null;
-  /** Yards from the offense's line of scrimmage to the opponent's end zone (yardline_100) on the drive's first play, 1-99; the model-pbp parquet stores the numeric spot, not the 'OWN 20' text load_nfl_pbp carries. `Int64` */
-  drive_start_yard_line?: number | bigint | null;
-  /** Yards from the offense's line of scrimmage to the opponent's end zone (yardline_100) on the drive's last play; the model-pbp parquet stores the numeric spot, not the 'OPP 45' text load_nfl_pbp carries. `Int64` */
-  drive_end_yard_line?: number | bigint | null;
+  /** Field position of the drive's first play as nflverse text: the side's team abbreviation and yard line ('ARI 10'), or '50' at midfield. `String` */
+  drive_start_yard_line?: string | null;
+  /** Field position of the drive's last play as nflverse text: the side's team abbreviation and yard line ('ARI 35'), or '50' at midfield. `String` */
+  drive_end_yard_line?: string | null;
   /** Play_id of the first play in the given drive. `Int64` (an id) */
   drive_play_id_started?: string | null;
   /** Play_id of the last play in the given drive. `Int64` (an id) */
@@ -6185,6 +6187,66 @@ export interface LoadNflTeamGroupSeasonsRow {
   sources_agree?: boolean | null;
   /** Builder notes on the team-season, such as a source disagreement or which of several listed memberships was kept. `String` */
   notes?: string | null;
+  /** A column the loader schema does not list (a release adds columns over the seasons). */
+  [column: string]: unknown;
+}
+
+/** One row of `sdv.nfl.loadNflTeamAliases` (`nfl_groups`; sdv-py loader schema `load_nfl_team_aliases`). */
+export interface LoadNflTeamAliasesRow {
+  /** League code of the table ("nfl"). `String` */
+  league?: string | null;
+  /** ESPN team id the alias points to, as a string (e.g. "150"); the same id as team_id in load_nfl_team_group_seasons. Join on it to reach ESPN team data. `String` (an id) */
+  team_id?: string | null;
+  /** Id space of team_id; always "espn" in this table. `String` */
+  team_id_source?: string | null;
+  /** Provider that uses this id or name (in this table: cbs, fox, yahoo). `String` */
+  source?: string | null;
+  /** The source's own id for the team (e.g. Fox 25, Yahoo nba.t.1); null for a name-only row. It means something only within its source (Fox 25 is Ohio State, ESPN 25 is California), so filter on source first. `String` (an id) */
+  source_id?: string | null;
+  /** "team" when source_id is the source's id for this sport's team, or "school" when it is one id for every sport of a school (the stats.ncaa.org org id, 247Sports institutionKey, On3 orgKey). `String` */
+  id_kind?: string | null;
+  /** Kind of label in value: "name" or "abbreviation"; null when the row carries only an id. An id with both a name and an abbreviation is two rows. `String` */
+  name_kind?: string | null;
+  /** The source's own spelling of the team name or abbreviation; null when the row carries only an id. `String` */
+  value?: string | null;
+  /** First season the source shows this id or name on the team, inclusive (STARTING year: 2025 = the 2025-26 season); null, with valid_to, for an undated curated map. `Int32` */
+  valid_from?: number | null;
+  /** Last season the source shows this id or name on the team, inclusive (STARTING year: 2025 = the 2025-26 season); null, with valid_from, for an undated curated map. A gap in the source splits the window into two rows. `Int32` */
+  valid_to?: number | null;
+  /** How the row was tied to the ESPN team: "deterministic" (a formula or shared key, e.g. Yahoo {league}.t.{espn id}; CFBD ids are ESPN ids), "crosswalk" (carried from a published crosswalk leg), "curated" (a cited map), or for a hand-captured team directory row "alias", "exact_name" (normalized name) or "dict" (curated name dictionary). `String` */
+  match_method?: string | null;
+  /** The release asset or sportsdataverse/sdv-reference-data file the row came from. `String` */
+  evidence?: string | null;
+  /** A column the loader schema does not list (a release adds columns over the seasons). */
+  [column: string]: unknown;
+}
+
+/** One row of `sdv.nfl.loadNflPlayerAliases` (`nfl_groups`; sdv-py loader schema `load_nfl_player_aliases`). */
+export interface LoadNflPlayerAliasesRow {
+  /** League code of the table ("nfl"). `String` */
+  league?: string | null;
+  /** ESPN athlete id the provider id points to, as a string (e.g. "4433134"). Join on it to reach ESPN player data. `String` (an id) */
+  athlete_id?: string | null;
+  /** Id space of athlete_id; always "espn" in this table. `String` */
+  athlete_id_source?: string | null;
+  /** Provider whose player id this is (in this table: cbs, fox, yahoo). `String` */
+  source?: string | null;
+  /** The source's own player id (e.g. Yahoo nfl.p.8040, Fox 76284). It means something only within its source, so filter on source first. `String` (an id) */
+  source_player_id?: string | null;
+  /** ESPN team id (a string) the athlete was on in these seasons: the team block the match was made in, an ESPN team-season of load_nfl_team_group_seasons. `String` (an id) */
+  team_id?: string | null;
+  /** The source's own team id when the matching leg gives one (the season's stats.ncaa.org team id; the Fox / Yahoo / CBS team for the NFL); null otherwise. `String` (an id) */
+  source_team_id?: string | null;
+  /** First season the id is on that team, inclusive (STARTING year: 2025 = the 2025-26 season). `Int32` */
+  valid_from?: number | null;
+  /** Last season the id is on that team, inclusive (STARTING year: 2025 = the 2025-26 season). A gap or a change of match method splits the window into two rows. `Int32` */
+  valid_to?: number | null;
+  /** The matching leg's own method (exact_name, fuzzy_jw, the NCAA tiers name_jersey / name / last_jersey / jaro_winkler, CFB rosters name); crosswalk for a leg that names none; propagated when a pair matched in another season was carried to this provider id; override for a hand-verified override. `String` */
+  match_method?: string | null;
+  /** The leg's own match confidence where it gives one (the lowest in the window); the NCAA tiers score 1.0 / 0.95 / 0.9 / 0.85; null otherwise. `Float64` */
+  match_confidence?: number | null;
+  /** The release asset or sportsdataverse/sdv-reference-data file the row came from. `String` */
+  evidence?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
 }

@@ -6,7 +6,24 @@ and renders at <https://js.sportsdataverse.org/CHANGELOG>.
 
 ## Unreleased
 
+### Changed
+
+#### Vendor sync to sportsdataverse-py `1624574990`
+
+- The vendored sdv-py codegen YAML, returns schemas and `releases.yaml` follow sportsdataverse-py@162457499026b2cf06ab979302a7ffc34b1f357e (was b4229f1ceda5).
+- 15 new release loaders (341 in all): `load_nba_stats_injury_report`, and team and player alias tables for nfl, cfb, nba, wnba, mbb, wbb, mlb and nhl (`load_<lg>_team_aliases`, `load_<lg>_player_aliases`).
+
+### Deprecated
+
+#### The 12 ESPN site wrappers sdv-py shadows are `*_site` (mirrors sdv-py #903)
+
+- In the leagues where sdv-py hand-writes a function of the same name, the generated site-v2 wrapper now takes sdv-py's `*_site` name, so the public names stay sdv-py's: `espn_{cfb,mbb,mlb,nba,nfl,wbb,wnba}_calendar_site`, `espn_wnba_draft_site`, `espn_{wbb,wnba}_standings_site` and `espn_{wbb,wnba}_team_roster_site`. The old names keep working as deprecated aliases that warn once. The other leagues keep `espn_<lg>_calendar` and the rest unchanged.
+
 ### Fixed
+
+#### 247Sports site pages: labels stay text, the (0, 0) location is null (mirrors sdv-py #928)
+
+- `parse_sports247_site_page` keeps a jersey, colour or postal-code column as text whatever it holds (`postal_code` `"32605"`, `primary_color` `"000000"`); one 247 ships as a JSON number becomes text from the integer (`"3"`). Any other zero-padded column (`"007"`) stays text, so a cast never loses its zeros; id columns keep the v4 id rule. A latitude / longitude pair that is exactly (0, 0), 247's no-location sentinel, is `null`; a lone 0 is kept.
 
 #### ESPN Site v2 rankings parse (mirrors sdv-py #732)
 

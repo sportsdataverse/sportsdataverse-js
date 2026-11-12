@@ -1722,3 +1722,33 @@ export interface LoadNhlTeamGroupSeasonsRow {
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
 }
+
+/** One row of `sdv.nhl.loadNhlTeamAliases` (`nhl_groups`; sdv-py loader schema `load_nhl_team_aliases`). */
+export interface LoadNhlTeamAliasesRow {
+  /** League code of the table ("nhl"). `String` */
+  league?: string | null;
+  /** ESPN team id the alias points to, as a string (e.g. "150"); the same id as team_id in load_nhl_team_group_seasons. Join on it to reach ESPN team data. `String` (an id) */
+  team_id?: string | null;
+  /** Id space of team_id; always "espn" in this table. `String` */
+  team_id_source?: string | null;
+  /** Provider that uses this id or name (in this table: cbs, fox, nhl, yahoo). `String` */
+  source?: string | null;
+  /** The source's own id for the team (e.g. Fox 25, Yahoo nba.t.1); null for a name-only row. It means something only within its source (Fox 25 is Ohio State, ESPN 25 is California), so filter on source first. `String` (an id) */
+  source_id?: string | null;
+  /** "team" when source_id is the source's id for this sport's team, or "school" when it is one id for every sport of a school (the stats.ncaa.org org id, 247Sports institutionKey, On3 orgKey). `String` */
+  id_kind?: string | null;
+  /** Kind of label in value: "name" or "abbreviation"; null when the row carries only an id. An id with both a name and an abbreviation is two rows. `String` */
+  name_kind?: string | null;
+  /** The source's own spelling of the team name or abbreviation; null when the row carries only an id. `String` */
+  value?: string | null;
+  /** First season the source shows this id or name on the team, inclusive (ENDING year: 2025 = the 2024-25 season); null, with valid_to, for an undated curated map. `Int32` */
+  valid_from?: number | null;
+  /** Last season the source shows this id or name on the team, inclusive (ENDING year: 2025 = the 2024-25 season); null, with valid_from, for an undated curated map. A gap in the source splits the window into two rows. `Int32` */
+  valid_to?: number | null;
+  /** How the row was tied to the ESPN team: "deterministic" (a formula or shared key, e.g. Yahoo {league}.t.{espn id}; CFBD ids are ESPN ids), "crosswalk" (carried from a published crosswalk leg), "curated" (a cited map), or for a hand-captured team directory row "alias", "exact_name" (normalized name) or "dict" (curated name dictionary). `String` */
+  match_method?: string | null;
+  /** The release asset or sportsdataverse/sdv-reference-data file the row came from. `String` */
+  evidence?: string | null;
+  /** A column the loader schema does not list (a release adds columns over the seasons). */
+  [column: string]: unknown;
+}

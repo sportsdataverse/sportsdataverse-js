@@ -1546,12 +1546,20 @@ function parse_sports247_institution_rankings(raw) {
 }
 var INT_RE = /^[+-]?\d+$/;
 var FLOAT_RE = /^[+-]?(?:\d+\.?\d*|\.\d+)(?:[eE][+-]?\d+)?$/;
+var ZERO_PADDED_RE = /^\s*[+-]?0\d/;
+var TEXT_SUFFIXES = ["jersey", "color", "postal_code"];
 function castNumericStrings(rows) {
   const columns = new Set(rows.flatMap((r) => Object.keys(r)));
   for (const col of columns) {
     const present = rows.filter((r) => r[col] !== void 0 && r[col] !== null);
-    if (!present.length || !present.every((r) => typeof r[col] === "string")) continue;
+    if (!present.length) continue;
+    if (TEXT_SUFFIXES.some((s) => col.endsWith(s))) {
+      for (const r of present) if (typeof r[col] === "number") r[col] = String(r[col]);
+      continue;
+    }
+    if (!present.every((r) => typeof r[col] === "string")) continue;
     const values = present.map((r) => r[col]);
+    if (!isIdColumn(col) && values.some((v) => ZERO_PADDED_RE.test(v))) continue;
     if (values.every((v) => INT_RE.test(v))) {
       const nums = values.map(Number);
       if (isIdColumn(col)) {
@@ -1565,6 +1573,15 @@ function castNumericStrings(rows) {
     } else if (values.every((v) => FLOAT_RE.test(v))) {
       present.forEach((r, i) => r[col] = Number(values[i]));
     }
+  }
+  for (const lat of [...columns].filter((c) => c.endsWith("latitude"))) {
+    const lon = `${lat.slice(0, -"latitude".length)}longitude`;
+    if (!columns.has(lon)) continue;
+    for (const r of rows)
+      if (r[lat] === 0 && r[lon] === 0) {
+        r[lat] = null;
+        r[lon] = null;
+      }
   }
   return rows;
 }

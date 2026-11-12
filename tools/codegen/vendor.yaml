@@ -46,7 +46,7 @@
 # A family with an overlay/<family>.yaml gets it merged on top.
 source:
   repo: sportsdataverse/sportsdataverse-py
-  ref: b4229f1ceda5734973fdd96742ca6ff724fd5b0c
+  ref: 162457499026b2cf06ab979302a7ffc34b1f357e
 
 # Copied verbatim (no transform, not generated here).
 # espn_rename_map.yaml: sdv-py's curated ESPN renames, read by generate.mjs.
@@ -94,6 +94,19 @@ py_reserved:
   - espn_wbb_player_stats
   - espn_wnba_player_stats
   - nhl_pbp
+  # sdv-py #903 (B-M31): hand-written at package level, so py's generated site-v2 wrapper is *_site
+  - espn_cfb_calendar
+  - espn_mbb_calendar
+  - espn_mlb_calendar
+  - espn_nba_calendar
+  - espn_nfl_calendar
+  - espn_wbb_calendar
+  - espn_wnba_calendar
+  - espn_wnba_draft
+  - espn_wbb_standings
+  - espn_wnba_standings
+  - espn_wbb_team_roster
+  - espn_wnba_team_roster
   - nhl_schedule
 
 families:

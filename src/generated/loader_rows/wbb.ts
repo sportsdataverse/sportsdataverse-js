@@ -323,19 +323,19 @@ export interface LoadWbbScheduleRow {
   status_display_clock?: string | null;
   /** Status period. `Float64` */
   status_period?: number | null;
-  /** Unique identifier for status type. `Int32` (an id) */
+  /** ESPN's numeric game-status code, passed through unchanged. ESPN publishes no reference for these codes, so read status_type_name rather than hard-coding numbers. `Int32` (an id) */
   status_type_id?: string | null;
-  /** Status type name. `String` */
+  /** ESPN's game-status enum (STATUS_FINAL, STATUS_SCHEDULED, STATUS_POSTPONED, STATUS_CANCELED, ...), passed through unchanged. ESPN does not document the full set, and no value certifies an ordinary final as distinct from a forfeit or an awarded result. `String` */
   status_type_name?: string | null;
-  /** Status type state. `String` */
+  /** ESPN's coarse game state, passed through unchanged: pre, in or post. post covers every game that is over, whatever the reason. `String` */
   status_type_state?: string | null;
-  /** Status type completed. `Boolean` */
+  /** ESPN's completed flag, passed through unchanged: true once ESPN considers the game over. It does not separate an ordinary final from a forfeited, protested, replayed or awarded result; ESPN documents no such distinction. `Boolean` */
   status_type_completed?: boolean | null;
-  /** Status type description. `String` */
+  /** ESPN's display text for the game status (for example "Final" or "Postponed"), passed through unchanged. `String` */
   status_type_description?: string | null;
-  /** Status type detail. `String` */
+  /** ESPN's longer status text, passed through unchanged; an overtime final reads like "Final/OT". `String` */
   status_type_detail?: string | null;
-  /** Status type short detail. `String` */
+  /** ESPN's short status text for scoreboards, passed through unchanged. `String` */
   status_type_short_detail?: string | null;
   /** Format regulation periods. `Float64` */
   format_regulation_periods?: number | null;
@@ -365,7 +365,7 @@ export interface LoadWbbScheduleRow {
   home_logo?: string | null;
   /** Unique identifier for home conference. `Int32` (an id) */
   home_conference_id?: string | null;
-  /** Home team score at the time of the play. `Int32` */
+  /** Home team's points as ESPN reports them: once the game is final, the full-game total including every overtime period. ESPN corrects a score in place, so this is the value ESPN showed when the release was last built. Not a final score until status_type_completed is true. `Int32` */
   home_score?: number | null;
   /** Home team's winner. `Boolean` */
   home_winner?: boolean | null;
@@ -401,7 +401,7 @@ export interface LoadWbbScheduleRow {
   away_logo?: string | null;
   /** Unique identifier for away conference. `Int32` (an id) */
   away_conference_id?: string | null;
-  /** Away team score at the time of the play. `Int32` */
+  /** Away team's points as ESPN reports them: once the game is final, the full-game total including every overtime period. ESPN corrects a score in place, so this is the value ESPN showed when the release was last built. Not a final score until status_type_completed is true. `Int32` */
   away_score?: number | null;
   /** Away team's winner. `Boolean` */
   away_winner?: boolean | null;
@@ -981,7 +981,7 @@ export interface LoadWbbPlayerCrosswalkRow {
   team_abbreviation?: string | null;
   /** Player name. `String` */
   player_name?: string | null;
-  /** ESPN athlete id. `String` (an id) */
+  /** ESPN athlete id. `Int32` (an id) */
   espn_athlete_id?: string | null;
   /** ESPN full name. `String` */
   espn_full_name?: string | null;
@@ -1021,7 +1021,7 @@ export interface LoadWbbScheduleCrosswalkRow {
   home_espn_team_id?: string | null;
   /** ESPN away team id (NA for bart-only rows). `Int32` (an id) */
   away_espn_team_id?: string | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** ESPN game id (NA for bart-only rows). `Int32` (an id) */
   espn_game_id?: string | null;
   /** Torvik muid (NA for espn-only rows). `String` */
   bart_muid?: string | null;
@@ -1921,19 +1921,19 @@ export interface LoadNcaaWbbPossessionsRow {
   away_score?: number | bigint | null;
   /** Points scored. `Int64` */
   pts?: number | bigint | null;
-  /** 1 when the possession's made field goal was assisted, else 0. `Int64` */
+  /** Count of the possession's events that carry an assisting second player (0, 1, rarely 2) -- a count, not a flag, kept from the R source for parity. `Int64` */
   is_assisted?: number | bigint | null;
   /** 1 for transition possessions, else 0. `Int64` */
   is_transition?: number | bigint | null;
   /** 1 for possessions in garbage time under the score-margin and clock rule, else 0. `Int64` */
   is_garbage_time?: number | bigint | null;
-  /** Event type that opened the possession (e.g., a defensive rebound or a made-basket inbound). `String` */
+  /** Event type of the play immediately before the possession's first event (what started it, e.g. a defensive rebound or a made basket), not the possession's own first event. `String` */
   start_event_type?: string | null;
-  /** Clock time in seconds at the possession's first shot attempt, from the possession segmentation engine. `Int64` */
+  /** Seconds into the possession (poss_length) at its first field-goal attempt; null when the possession had no shot. `Int64` */
   first_shot_time?: number | bigint | null;
-  /** Shot class of the possession's first attempt (rim, mid-range, or three). `String` */
+  /** stats.ncaa.org event name of the possession's first field-goal attempt ("Layup", "Three Point Jumper", "Two Point Jumper", "Hook", "Dunk", "Tip In"); null when the possession had no shot. `String` */
   first_shot_type?: string | null;
-  /** Clock time in seconds at the possession's final event. `Int64` */
+  /** Seconds into the possession (poss_length) at its final event. `Int64` */
   last_event_time?: number | bigint | null;
   /** Event type that ended the possession (e.g., a made shot, turnover, or defensive rebound). `String` */
   last_event_type?: string | null;
@@ -2391,6 +2391,66 @@ export interface LoadWbbTeamGroupSeasonsRow {
   sources_agree?: boolean | null;
   /** Builder notes on the team-season, such as a source disagreement or which of several listed memberships was kept. `String` */
   notes?: string | null;
+  /** A column the loader schema does not list (a release adds columns over the seasons). */
+  [column: string]: unknown;
+}
+
+/** One row of `sdv.wbb.loadWbbTeamAliases` (`wbb_groups`; sdv-py loader schema `load_wbb_team_aliases`). */
+export interface LoadWbbTeamAliasesRow {
+  /** League code of the table ("wbb"). `String` */
+  league?: string | null;
+  /** ESPN team id the alias points to, as a string (e.g. "150"); the same id as team_id in load_wbb_team_group_seasons. Join on it to reach ESPN team data. `String` (an id) */
+  team_id?: string | null;
+  /** Id space of team_id; always "espn" in this table. `String` */
+  team_id_source?: string | null;
+  /** Provider that uses this id or name (in this table: fox, ncaa, on3, sports247, torvik, yahoo). "sports247" is 247Sports. `String` */
+  source?: string | null;
+  /** The source's own id for the team (e.g. Fox 25, Yahoo nba.t.1); null for a name-only row. It means something only within its source (Fox 25 is Ohio State, ESPN 25 is California), so filter on source first. `String` (an id) */
+  source_id?: string | null;
+  /** "team" when source_id is the source's id for this sport's team, or "school" when it is one id for every sport of a school (the stats.ncaa.org org id, 247Sports institutionKey, On3 orgKey). `String` */
+  id_kind?: string | null;
+  /** Kind of label in value: "name" or "abbreviation"; null when the row carries only an id. An id with both a name and an abbreviation is two rows. `String` */
+  name_kind?: string | null;
+  /** The source's own spelling of the team name or abbreviation; null when the row carries only an id. `String` */
+  value?: string | null;
+  /** First season the source shows this id or name on the team, inclusive (ENDING year: 2025 = the 2024-25 season); null, with valid_to, for an undated curated map. `Int32` */
+  valid_from?: number | null;
+  /** Last season the source shows this id or name on the team, inclusive (ENDING year: 2025 = the 2024-25 season); null, with valid_from, for an undated curated map. A gap in the source splits the window into two rows. `Int32` */
+  valid_to?: number | null;
+  /** How the row was tied to the ESPN team: "deterministic" (a formula or shared key, e.g. Yahoo {league}.t.{espn id}; CFBD ids are ESPN ids), "crosswalk" (carried from a published crosswalk leg), "curated" (a cited map), or for a hand-captured team directory row "alias", "exact_name" (normalized name) or "dict" (curated name dictionary). `String` */
+  match_method?: string | null;
+  /** The release asset or sportsdataverse/sdv-reference-data file the row came from. `String` */
+  evidence?: string | null;
+  /** A column the loader schema does not list (a release adds columns over the seasons). */
+  [column: string]: unknown;
+}
+
+/** One row of `sdv.wbb.loadWbbPlayerAliases` (`wbb_groups`; sdv-py loader schema `load_wbb_player_aliases`). */
+export interface LoadWbbPlayerAliasesRow {
+  /** League code of the table ("wbb"). `String` */
+  league?: string | null;
+  /** ESPN athlete id the provider id points to, as a string (e.g. "4433134"). Join on it to reach ESPN player data; the ESPN player loaders (load_wbb_player_core and its siblings) carry it as Int32, so cast first with pl.col("athlete_id").cast(pl.Int32). `String` (an id) */
+  athlete_id?: string | null;
+  /** Id space of athlete_id; always "espn" in this table. `String` */
+  athlete_id_source?: string | null;
+  /** Provider whose player id this is (in this table: fox, ncaa). `String` */
+  source?: string | null;
+  /** The source's own player id (e.g. Fox 76284). It means something only within its source, so filter on source first. stats.ncaa.org roster ids (source ncaa) are new every season. `String` (an id) */
+  source_player_id?: string | null;
+  /** ESPN team id (a string) the athlete was on in these seasons: the team block the match was made in, an ESPN team-season of load_wbb_team_group_seasons. `String` (an id) */
+  team_id?: string | null;
+  /** The source's own team id when the matching leg gives one (the season's stats.ncaa.org team id; the Fox / Yahoo / CBS team for the NFL); null otherwise. `String` (an id) */
+  source_team_id?: string | null;
+  /** First season the id is on that team, inclusive (ENDING year: 2025 = the 2024-25 season). `Int32` */
+  valid_from?: number | null;
+  /** Last season the id is on that team, inclusive (ENDING year: 2025 = the 2024-25 season). A gap or a change of match method splits the window into two rows. `Int32` */
+  valid_to?: number | null;
+  /** The matching leg's own method (exact_name, fuzzy_jw, the NCAA tiers name_jersey / name / last_jersey / jaro_winkler, CFB rosters name); crosswalk for a leg that names none; propagated when a pair matched in another season was carried to this provider id; override for a hand-verified override. `String` */
+  match_method?: string | null;
+  /** The leg's own match confidence where it gives one (the lowest in the window); the NCAA tiers score 1.0 / 0.95 / 0.9 / 0.85; null otherwise. `Float64` */
+  match_confidence?: number | null;
+  /** The release asset or sportsdataverse/sdv-reference-data file the row came from. `String` */
+  evidence?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
 }

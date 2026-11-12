@@ -76,6 +76,7 @@ export const ESPN_DEPRECATED_ALIASES: Record<string, Record<string, string>> = {
     "espn_cfb_athlete_stats": "espn_cfb_player_stats_v3",
     "espn_cfb_athlete_vs_athlete": "espn_cfb_player_vs_player",
     "espn_cfb_athletes_index": "espn_cfb_players_index",
+    "espn_cfb_calendar": "espn_cfb_calendar_site",
     "espn_cfb_event": "espn_cfb_game",
     "espn_cfb_event_broadcasts": "espn_cfb_game_broadcasts",
     "espn_cfb_event_competition": "espn_cfb_game_competition",
@@ -516,6 +517,7 @@ export const ESPN_DEPRECATED_ALIASES: Record<string, Record<string, string>> = {
     "espn_mbb_athlete_stats": "espn_mbb_player_stats_v3",
     "espn_mbb_athlete_vs_athlete": "espn_mbb_player_vs_player",
     "espn_mbb_athletes_index": "espn_mbb_players_index",
+    "espn_mbb_calendar": "espn_mbb_calendar_site",
     "espn_mbb_event": "espn_mbb_game",
     "espn_mbb_event_broadcasts": "espn_mbb_game_broadcasts",
     "espn_mbb_event_competition": "espn_mbb_game_competition",
@@ -615,6 +617,7 @@ export const ESPN_DEPRECATED_ALIASES: Record<string, Record<string, string>> = {
     "espn_mlb_athlete_stats": "espn_mlb_player_stats_v3",
     "espn_mlb_athlete_vs_athlete": "espn_mlb_player_vs_player",
     "espn_mlb_athletes_index": "espn_mlb_players_index",
+    "espn_mlb_calendar": "espn_mlb_calendar_site",
     "espn_mlb_event": "espn_mlb_game",
     "espn_mlb_event_broadcasts": "espn_mlb_game_broadcasts",
     "espn_mlb_event_competition": "espn_mlb_game_competition",
@@ -711,6 +714,7 @@ export const ESPN_DEPRECATED_ALIASES: Record<string, Record<string, string>> = {
     "espn_nba_athlete_stats": "espn_nba_player_stats_v3",
     "espn_nba_athlete_vs_athlete": "espn_nba_player_vs_player",
     "espn_nba_athletes_index": "espn_nba_players_index",
+    "espn_nba_calendar": "espn_nba_calendar_site",
     "espn_nba_event": "espn_nba_game",
     "espn_nba_event_broadcasts": "espn_nba_game_broadcasts",
     "espn_nba_event_competition": "espn_nba_game_competition",
@@ -759,6 +763,7 @@ export const ESPN_DEPRECATED_ALIASES: Record<string, Record<string, string>> = {
     "espn_nfl_athlete_stats": "espn_nfl_player_stats_v3",
     "espn_nfl_athlete_vs_athlete": "espn_nfl_player_vs_player",
     "espn_nfl_athletes_index": "espn_nfl_players_index",
+    "espn_nfl_calendar": "espn_nfl_calendar_site",
     "espn_nfl_event": "espn_nfl_game",
     "espn_nfl_event_broadcasts": "espn_nfl_game_broadcasts",
     "espn_nfl_event_competition": "espn_nfl_game_competition",
@@ -1143,6 +1148,7 @@ export const ESPN_DEPRECATED_ALIASES: Record<string, Record<string, string>> = {
     "espn_wbb_athlete_stats": "espn_wbb_player_stats_v3",
     "espn_wbb_athlete_vs_athlete": "espn_wbb_player_vs_player",
     "espn_wbb_athletes_index": "espn_wbb_players_index",
+    "espn_wbb_calendar": "espn_wbb_calendar_site",
     "espn_wbb_event": "espn_wbb_game",
     "espn_wbb_event_broadcasts": "espn_wbb_game_broadcasts",
     "espn_wbb_event_competition": "espn_wbb_game_competition",
@@ -1170,7 +1176,9 @@ export const ESPN_DEPRECATED_ALIASES: Record<string, Record<string, string>> = {
     "espn_wbb_events": "espn_wbb_games",
     "espn_wbb_recruiting_athletes": "espn_wbb_recruiting_players",
     "espn_wbb_season_athletes": "espn_wbb_season_players",
-    "espn_wbb_season_week_events": "espn_wbb_season_week_games"
+    "espn_wbb_season_week_events": "espn_wbb_season_week_games",
+    "espn_wbb_standings": "espn_wbb_standings_site",
+    "espn_wbb_team_roster": "espn_wbb_team_roster_site"
   },
   "wc": {
     "espn_wc_athlete_awards": "espn_wc_player_awards",
@@ -1289,6 +1297,8 @@ export const ESPN_DEPRECATED_ALIASES: Record<string, Record<string, string>> = {
     "espn_wnba_athlete_stats": "espn_wnba_player_stats_v3",
     "espn_wnba_athlete_vs_athlete": "espn_wnba_player_vs_player",
     "espn_wnba_athletes_index": "espn_wnba_players_index",
+    "espn_wnba_calendar": "espn_wnba_calendar_site",
+    "espn_wnba_draft": "espn_wnba_draft_site",
     "espn_wnba_event": "espn_wnba_game",
     "espn_wnba_event_broadcasts": "espn_wnba_game_broadcasts",
     "espn_wnba_event_competition": "espn_wnba_game_competition",
@@ -1315,7 +1325,9 @@ export const ESPN_DEPRECATED_ALIASES: Record<string, Record<string, string>> = {
     "espn_wnba_event_status": "espn_wnba_game_status",
     "espn_wnba_events": "espn_wnba_games",
     "espn_wnba_season_athletes": "espn_wnba_season_players",
-    "espn_wnba_season_week_events": "espn_wnba_season_week_games"
+    "espn_wnba_season_week_events": "espn_wnba_season_week_games",
+    "espn_wnba_standings": "espn_wnba_standings_site",
+    "espn_wnba_team_roster": "espn_wnba_team_roster_site"
   },
   "wwc": {
     "espn_wwc_athlete_awards": "espn_wwc_player_awards",

@@ -321,19 +321,19 @@ export interface LoadWnbaScheduleRow {
   status_display_clock?: string | null;
   /** Status period. `Float64` */
   status_period?: number | null;
-  /** Unique identifier for status type. `Int32` (an id) */
+  /** ESPN's numeric game-status code, passed through unchanged. ESPN publishes no reference for these codes, so read status_type_name rather than hard-coding numbers. `Int32` (an id) */
   status_type_id?: string | null;
-  /** Status type name. `String` */
+  /** ESPN's game-status enum (STATUS_FINAL, STATUS_SCHEDULED, STATUS_POSTPONED, STATUS_CANCELED, ...), passed through unchanged. ESPN does not document the full set, and no value certifies an ordinary final as distinct from a forfeit or an awarded result. `String` */
   status_type_name?: string | null;
-  /** Status type state. `String` */
+  /** ESPN's coarse game state, passed through unchanged: pre, in or post. post covers every game that is over, whatever the reason. `String` */
   status_type_state?: string | null;
-  /** Status type completed. `Boolean` */
+  /** ESPN's completed flag, passed through unchanged: true once ESPN considers the game over. It does not separate an ordinary final from a forfeited, protested, replayed or awarded result; ESPN documents no such distinction. `Boolean` */
   status_type_completed?: boolean | null;
-  /** Status type description. `String` */
+  /** ESPN's display text for the game status (for example "Final" or "Postponed"), passed through unchanged. `String` */
   status_type_description?: string | null;
-  /** Status type detail. `String` */
+  /** ESPN's longer status text, passed through unchanged; an overtime final reads like "Final/OT". `String` */
   status_type_detail?: string | null;
-  /** Status type short detail. `String` */
+  /** ESPN's short status text for scoreboards, passed through unchanged. `String` */
   status_type_short_detail?: string | null;
   /** Format regulation periods. `Float64` */
   format_regulation_periods?: number | null;
@@ -361,7 +361,7 @@ export interface LoadWnbaScheduleRow {
   home_venue_id?: string | null;
   /** Home team logo URL. `String` */
   home_logo?: string | null;
-  /** Home team score at the time of the play. `Int32` */
+  /** Home team's points as ESPN reports them: once the game is final, the full-game total including every overtime period. ESPN corrects a score in place, so this is the value ESPN showed when the release was last built. Not a final score until status_type_completed is true. `Int32` */
   home_score?: number | null;
   /** Home team's winner. `Boolean` */
   home_winner?: boolean | null;
@@ -393,7 +393,7 @@ export interface LoadWnbaScheduleRow {
   away_venue_id?: string | null;
   /** Away team logo URL. `String` */
   away_logo?: string | null;
-  /** Away team score at the time of the play. `Int32` */
+  /** Away team's points as ESPN reports them: once the game is final, the full-game total including every overtime period. ESPN corrects a score in place, so this is the value ESPN showed when the release was last built. Not a final score until status_type_completed is true. `Int32` */
   away_score?: number | null;
   /** Away team's winner. `Boolean` */
   away_winner?: boolean | null;
@@ -631,7 +631,7 @@ export interface LoadWnbaDraftRow {
 export interface LoadWnbaGameRostersRow {
   /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** Unique game identifier. `String` (an id) */
+  /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
   /** Unique team identifier. `Int32` (an id) */
   team_id?: string | null;
@@ -681,7 +681,7 @@ export interface LoadWnbaGameRostersRow {
 export interface LoadWnbaOfficialsRow {
   /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** Unique game identifier. `String` (an id) */
+  /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
   /** Unique official / referee identifier. `Int32` (an id) */
   official_id?: string | null;
@@ -763,7 +763,7 @@ export interface LoadWnbaRostersRow {
   team_alternate_color?: string | null;
   /** Team logo image URL. `String` */
   team_logo?: string | null;
-  /** Unique athlete identifier (ESPN). `String` (an id) */
+  /** Unique athlete identifier (ESPN). `Int32` (an id) */
   athlete_id?: string | null;
   /** ESPN UID string. `String` */
   uid?: string | null;
@@ -969,7 +969,7 @@ export interface LoadWnbaPlayerCrosswalkRow {
   team_abbreviation?: string | null;
   /** Player name. `String` */
   player_name?: string | null;
-  /** ESPN athlete id. `String` (an id) */
+  /** ESPN athlete id. `Int32` (an id) */
   espn_athlete_id?: string | null;
   /** ESPN full name. `String` */
   espn_full_name?: string | null;
@@ -977,7 +977,7 @@ export interface LoadWnbaPlayerCrosswalkRow {
   espn_jersey?: string | null;
   /** ESPN position abbreviation. `String` */
   espn_position?: string | null;
-  /** Player identifier on stats.wnba.com matched to the ESPN player. `String` (an id) */
+  /** Player identifier on stats.wnba.com matched to the ESPN player. `Int64` (an id) */
   wnba_player_id?: string | null;
   /** Player display name on the stats.wnba.com side of the crosswalk. `String` */
   wnba_player_name?: string | null;
@@ -1019,15 +1019,15 @@ export interface LoadWnbaScheduleCrosswalkRow {
   home_espn_team_id?: string | null;
   /** ESPN away team id (NA for bart-only rows). `Int32` (an id) */
   away_espn_team_id?: string | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** ESPN game id (NA for bart-only rows). `Int32` (an id) */
   espn_game_id?: string | null;
   /** Game identifier on stats.wnba.com matched to the ESPN game. `String` (an id) */
   wnba_game_id?: string | null;
   /** stats.wnba.com game code (date/matchup slug) for the matched game. `String` */
   wnba_game_code?: string | null;
-  /** Home team identifier on stats.wnba.com for the matched game. `String` (an id) */
+  /** Home team identifier on stats.wnba.com for the matched game. `Int64` (an id) */
   wnba_home_team_id?: string | null;
-  /** Away team identifier on stats.wnba.com for the matched game. `String` (an id) */
+  /** Away team identifier on stats.wnba.com for the matched game. `Int64` (an id) */
   wnba_away_team_id?: string | null;
   /** Fox Sports game id (string), filled when the crosswalk is built with fox=True from Fox's per-date scoreboard, matched on the US-Eastern date and the two teams in either home/away order; null otherwise and where Fox lists no matching game. `String` (an id) */
   fox_game_id?: string | null;
@@ -1061,7 +1061,7 @@ export interface LoadWnbaTeamCrosswalkRow {
   espn_location?: string | null;
   /** ESPN team mascot/nickname. `String` */
   espn_mascot?: string | null;
-  /** WNBA Stats team id. `String` (an id) */
+  /** WNBA Stats team id. `Int64` (an id) */
   wnba_team_id?: string | null;
   /** WNBA Stats tricode. `String` */
   wnba_team_tricode?: string | null;
@@ -1093,7 +1093,7 @@ export interface LoadWnbaTeamCrosswalkRow {
 export interface LoadWnbaPlayerCoreRow {
   /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
-  /** Unique athlete identifier (ESPN). `Int64` (an id) */
+  /** Unique athlete identifier (ESPN). `Int32` (an id) */
   athlete_id?: string | null;
   /** Stable cross-league team GUID. `String` */
   guid?: string | null;
@@ -1185,21 +1185,21 @@ export interface LoadWnbaPlayerImpactRow {
   season?: number | bigint | null;
   /** Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). `String` */
   season_type?: string | null;
-  /** Offensive RAPM: ridge-regularized on/off impact on team offense, in points per 100 possessions. `Float64` */
+  /** Offensive RAPM: ridge-regularized on/off impact on team offense, in points per 100 possessions, at the fixed WNBA penalty described under rapm. `Float64` */
   o_rapm?: number | null;
-  /** Defensive RAPM: ridge-regularized on/off impact on team defense, in points per 100 possessions. `Float64` */
+  /** Defensive RAPM: ridge-regularized on/off impact on team defense, in points per 100 possessions, at the fixed WNBA penalty described under rapm. `Float64` */
   d_rapm?: number | null;
-  /** Total RAPM: offensive plus defensive regularized on/off impact, in points per 100 possessions. `Float64` */
+  /** Total RAPM: offensive plus defensive regularized on/off impact, in points per 100 possessions. The ridge penalty is one fixed WNBA value (1,931, sportsdataverse.nba.nba_rapm.RAPM_PENALTY) in every season and season type, so the scale compares across seasons (regular-season sd 1.47 to 2.13 per 100 over players with 200 possessions, 1997-2026; fewer possessions shrink harder, so part of a spread difference is sample size). Seasons published before November 2026 were fit at a per-season RidgeCV pick: 1,931 in 23 of 30 regular seasons, but 5,179 or 13,895 in 1999, 2001, 2002, 2004, 2011, 2014 and 2016 (sd 0.32 to 0.93 there) and 268 to 100,000 in the playoffs. Do not compare those seasons with others or with values fit at the fixed penalty. `Float64` */
   rapm?: number | null;
   /** Offensive possessions the player was on the floor for in the RAPM sample. `Int64` */
   off_poss?: number | bigint | null;
   /** Defensive possessions the player was on the floor for in the RAPM sample. `Int64` */
   def_poss?: number | bigint | null;
-  /** Offensive prior-informed RAPM: ridge shrunk toward a box-score prior, in points per 100 possessions. `Float64` */
+  /** Offensive prior-informed RAPM per 100 possessions: the ridge fit shrunk toward the player's box-score (SPM) prior. In releases fit with sportsdataverse-py #1137 or later it is relative to an average player, up to any offset the SPM prior carries (possession-weighted league mean near 0: 2025 +0.45). A player with no prior (a rookie, or no previous-season SPM) is shrunk toward 0 instead. Releases fit before #1137, whatever their build date, fit no intercept, so the league's points per possession leaked into every coefficient: o_adj_rapm averaged about +10.97 and d_adj_rapm -9.60 (2025), a thinly-used player kept less of that offset, and only their sum, adj_rapm, read on a common scale. `Float64` */
   o_adj_rapm?: number | null;
-  /** Defensive prior-informed RAPM: ridge shrunk toward a box-score prior, in points per 100 possessions. `Float64` */
+  /** Defensive prior-informed RAPM per 100 possessions, positive for a defender who lowers opponent scoring. In releases fit with sportsdataverse-py #1137 or later it is relative to an average player, up to any offset the SPM prior carries (possession-weighted league mean near 0: 2025 +0.11). Releases fit before #1137, whatever their build date, averaged about -9.60 here (see o_adj_rapm). `Float64` */
   d_adj_rapm?: number | null;
-  /** Total prior-informed RAPM (offense plus defense), in points per 100 possessions. `Float64` */
+  /** Total prior-informed RAPM per 100 possessions, exactly the sum of o_adj_rapm and d_adj_rapm. Releases fit with sportsdataverse-py #1137 or later fit the ridge with an unpenalized intercept; releases fit before it (whatever their build date) fit none, which leaned this total toward heavy-minute players. Releases fit with #1150 or later also use one ridge penalty per league (NBA 3,728, WNBA 2,683) and the SPM prior doubled (nba_adj_rapm.ADJ_RAPM_PENALTY / ADJ_RAPM_PRIOR_SCALE); earlier ones took a per-season RidgeCV pick, whose spread collapsed in some seasons (WNBA 2004 sd 0.64 against plain RAPM's 1.47). `Float64` */
   adj_rapm?: number | null;
   /** Offensive statistical plus-minus: box-score features regressed onto the offensive RAPM target, per 100 possessions. `Float64` */
   ospm?: number | null;
@@ -1211,20 +1211,122 @@ export interface LoadWnbaPlayerImpactRow {
   min?: number | null;
   /** Games played. `Int64` */
   gp?: number | bigint | null;
-  /** Offensive box plus/minus. `Float64` */
+  /** Offensive box plus-minus per 100 possessions for this season and season type only, team-adjusted on its own so a team's minute-weighted obpm is its offensive rating minus the league's, divided by 5 (a traded player counted with his first team; league minute-weighted mean near 0). Releases fit before sportsdataverse-py #1148 put the whole team adjustment here (regular-season league minute-weighted mean about -2.9). `Float64` */
   obpm?: number | null;
-  /** Defensive box plus/minus. `Float64` */
+  /** Defensive box plus-minus per 100 possessions for this season and season type only: bpm minus obpm, so a team's minute-weighted dbpm is (the league's offensive rating minus its defensive rating) / 5, positive for a good defense (league minute-weighted mean near 0). Releases fit before sportsdataverse-py #1148 left it unadjusted (regular-season league minute-weighted mean about +2.9, mostly positive). `Float64` */
   dbpm?: number | null;
-  /** Career box plus/minus. `Float64` */
+  /** Box plus-minus (BPM 2.0) per 100 possessions for this season and season type only, not a career value: the box-score estimate of total impact. The team adjustment makes a team's minute-weighted bpm its net rating per 100 divided by 5 (the five %Min slots sum to the net rating; a traded player's minutes count with the first team he appears for in the logs). Releases fit before sportsdataverse-py #1148 targeted the full net rating, five times BPM 2.0's team mean. `Float64` */
   bpm?: number | null;
   /** Wins above replacement implied by the player's impact and playing time, calibrated from team points-per-win. `Float64` */
   war?: number | null;
-  /** DARKO-style Kalman-filtered estimate of the player's current skill level. `Float64` */
+  /** BOBAN Kalman-filtered estimate of the player's current skill level. `Float64` */
+  boban_filtered_skill?: number | null;
+  /** BOBAN projected forward rating, including the empirical aging-curve drift. `Float64` */
+  boban_projected_rating?: number | null;
+  /** Posterior standard deviation of the BOBAN projected rating. `Float64` */
+  boban_projected_sd?: number | null;
+  /** Deprecated alias of boban_filtered_skill, kept for one release; use that column. `Float64` */
   darko_filtered_skill?: number | null;
-  /** DARKO-style projected forward rating, including the empirical aging-curve drift. `Float64` */
+  /** Deprecated alias of boban_projected_rating, kept for one release; use that column. `Float64` */
   darko_projected_rating?: number | null;
-  /** Posterior standard deviation of the DARKO-style projected rating. `Float64` */
+  /** Deprecated alias of boban_projected_sd, kept for one release; use that column. `Float64` */
   darko_projected_sd?: number | null;
+  /** Possessions o_rapm is measured over: off_poss, his offensive possessions. o_rapm_rank and o_rapm_pct are set only when it reaches 610, the WNBA sample at which a player's on-court rating of the same side is half signal (sportsdataverse._common.rate_gates.ON_OFF_MIN_N); a regularized or box rating is less noisy, so the gate is conservative. `Int64` */
+  o_rapm_n?: number | bigint | null;
+  /** Possessions d_rapm is measured over: def_poss, his defensive possessions. d_rapm_rank and d_rapm_pct are set only when it reaches 1,200, the WNBA sample at which a player's on-court rating of the same side is half signal (sportsdataverse._common.rate_gates.ON_OFF_MIN_N); a regularized or box rating is less noisy, so the gate is conservative. `Int64` */
+  d_rapm_n?: number | bigint | null;
+  /** Possessions rapm is measured over: off_poss + def_poss, his possessions at both ends. rapm_rank and rapm_pct are set only when it reaches 1,600, the WNBA sample at which a player's on-court rating of the same side is half signal (sportsdataverse._common.rate_gates.ON_OFF_MIN_N); a regularized or box rating is less noisy, so the gate is conservative. `Int64` */
+  rapm_n?: number | bigint | null;
+  /** Possessions o_adj_rapm is measured over: off_poss, his offensive possessions. o_adj_rapm_rank and o_adj_rapm_pct are set only when it reaches 610, the WNBA sample at which a player's on-court rating of the same side is half signal (sportsdataverse._common.rate_gates.ON_OFF_MIN_N); a regularized or box rating is less noisy, so the gate is conservative. `Int64` */
+  o_adj_rapm_n?: number | bigint | null;
+  /** Possessions d_adj_rapm is measured over: def_poss, his defensive possessions. d_adj_rapm_rank and d_adj_rapm_pct are set only when it reaches 1,200, the WNBA sample at which a player's on-court rating of the same side is half signal (sportsdataverse._common.rate_gates.ON_OFF_MIN_N); a regularized or box rating is less noisy, so the gate is conservative. `Int64` */
+  d_adj_rapm_n?: number | bigint | null;
+  /** Possessions adj_rapm is measured over: off_poss + def_poss, his possessions at both ends. adj_rapm_rank and adj_rapm_pct are set only when it reaches 1,600, the WNBA sample at which a player's on-court rating of the same side is half signal (sportsdataverse._common.rate_gates.ON_OFF_MIN_N); a regularized or box rating is less noisy, so the gate is conservative. `Int64` */
+  adj_rapm_n?: number | bigint | null;
+  /** Possessions ospm is measured over: off_poss, his offensive possessions. ospm_rank and ospm_pct are set only when it reaches 610, the WNBA sample at which a player's on-court rating of the same side is half signal (sportsdataverse._common.rate_gates.ON_OFF_MIN_N); a regularized or box rating is less noisy, so the gate is conservative. `Int64` */
+  ospm_n?: number | bigint | null;
+  /** Possessions dspm is measured over: def_poss, his defensive possessions. dspm_rank and dspm_pct are set only when it reaches 1,200, the WNBA sample at which a player's on-court rating of the same side is half signal (sportsdataverse._common.rate_gates.ON_OFF_MIN_N); a regularized or box rating is less noisy, so the gate is conservative. `Int64` */
+  dspm_n?: number | bigint | null;
+  /** Possessions spm is measured over: off_poss + def_poss, his possessions at both ends. spm_rank and spm_pct are set only when it reaches 1,600, the WNBA sample at which a player's on-court rating of the same side is half signal (sportsdataverse._common.rate_gates.ON_OFF_MIN_N); a regularized or box rating is less noisy, so the gate is conservative. `Int64` */
+  spm_n?: number | bigint | null;
+  /** Possessions obpm is measured over: off_poss, his offensive possessions. obpm_rank and obpm_pct are set only when it reaches 610, the WNBA sample at which a player's on-court rating of the same side is half signal (sportsdataverse._common.rate_gates.ON_OFF_MIN_N); a regularized or box rating is less noisy, so the gate is conservative. `Int64` */
+  obpm_n?: number | bigint | null;
+  /** Possessions dbpm is measured over: def_poss, his defensive possessions. dbpm_rank and dbpm_pct are set only when it reaches 1,200, the WNBA sample at which a player's on-court rating of the same side is half signal (sportsdataverse._common.rate_gates.ON_OFF_MIN_N); a regularized or box rating is less noisy, so the gate is conservative. `Int64` */
+  dbpm_n?: number | bigint | null;
+  /** Possessions bpm is measured over: off_poss + def_poss, his possessions at both ends. bpm_rank and bpm_pct are set only when it reaches 1,600, the WNBA sample at which a player's on-court rating of the same side is half signal (sportsdataverse._common.rate_gates.ON_OFF_MIN_N); a regularized or box rating is less noisy, so the gate is conservative. `Int64` */
+  bpm_n?: number | bigint | null;
+  /** Possessions behind war: off_poss + def_poss. war is a count, not a rate, so its rank has no sample gate. `Int64` */
+  war_n?: number | bigint | null;
+  /** Possessions behind boban_filtered_skill: off_poss + def_poss, this season's possessions at both ends. The boban filtered skill is a multi-season Kalman estimate with no single-side sample, so it takes the net on-court gate, the closest existing one: boban_filtered_skill_rank and boban_filtered_skill_pct are set only when this reaches 1,600. Conservative, since the filter also carries earlier seasons. `Int64` */
+  boban_filtered_skill_n?: number | bigint | null;
+  /** Possessions behind boban_projected_rating: off_poss + def_poss, this season's possessions at both ends. The boban next-season projection is a multi-season Kalman estimate with no single-side sample, so it takes the net on-court gate, the closest existing one: boban_projected_rating_rank and boban_projected_rating_pct are set only when this reaches 1,600. Conservative, since the filter also carries earlier seasons. `Int64` */
+  boban_projected_rating_n?: number | bigint | null;
+  /** Possessions behind boban_projected_sd: off_poss + def_poss, this season's possessions at both ends. The boban projection's standard deviation is a multi-season Kalman estimate with no single-side sample, so it takes the net on-court gate, the closest existing one: boban_projected_sd_rank and boban_projected_sd_pct are set only when this reaches 1,600. Conservative, since the filter also carries earlier seasons. `Int64` */
+  boban_projected_sd_n?: number | bigint | null;
+  /** Rank of o_rapm among the season and season type's ranked players, 1 = best (higher is better), ties averaged; null when o_rapm_n is under 610, and null when its season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value in the group is equal. Regular-season gates: a playoff run rarely reaches one. `Float64` */
+  o_rapm_rank?: number | null;
+  /** Rank of d_rapm among the season and season type's ranked players, 1 = best (higher is better), ties averaged; null when d_rapm_n is under 1,200, and null when its season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value in the group is equal. Regular-season gates: a playoff run rarely reaches one. `Float64` */
+  d_rapm_rank?: number | null;
+  /** Rank of rapm among the season and season type's ranked players, 1 = best (higher is better), ties averaged; null when rapm_n is under 1,600, and null when its season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value in the group is equal. Regular-season gates: a playoff run rarely reaches one. `Float64` */
+  rapm_rank?: number | null;
+  /** Rank of o_adj_rapm among the season and season type's ranked players, 1 = best (higher is better), ties averaged; null when o_adj_rapm_n is under 610, and null when its season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value in the group is equal. Regular-season gates: a playoff run rarely reaches one. `Float64` */
+  o_adj_rapm_rank?: number | null;
+  /** Rank of d_adj_rapm among the season and season type's ranked players, 1 = best (higher is better), ties averaged; null when d_adj_rapm_n is under 1,200, and null when its season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value in the group is equal. Regular-season gates: a playoff run rarely reaches one. `Float64` */
+  d_adj_rapm_rank?: number | null;
+  /** Rank of adj_rapm among the season and season type's ranked players, 1 = best (higher is better), ties averaged; null when adj_rapm_n is under 1,600, and null when its season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value in the group is equal. Regular-season gates: a playoff run rarely reaches one. `Float64` */
+  adj_rapm_rank?: number | null;
+  /** Rank of ospm among the season and season type's ranked players, 1 = best (higher is better), ties averaged; null when ospm_n is under 610, and null when its season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value in the group is equal. Regular-season gates: a playoff run rarely reaches one. `Float64` */
+  ospm_rank?: number | null;
+  /** Rank of dspm among the season and season type's ranked players, 1 = best (higher is better), ties averaged; null when dspm_n is under 1,200, and null when its season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value in the group is equal. Regular-season gates: a playoff run rarely reaches one. `Float64` */
+  dspm_rank?: number | null;
+  /** Rank of spm among the season and season type's ranked players, 1 = best (higher is better), ties averaged; null when spm_n is under 1,600, and null when its season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value in the group is equal. Regular-season gates: a playoff run rarely reaches one. `Float64` */
+  spm_rank?: number | null;
+  /** Rank of obpm among the season and season type's ranked players, 1 = best (higher is better), ties averaged; null when obpm_n is under 610, and null when its season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value in the group is equal. Regular-season gates: a playoff run rarely reaches one. `Float64` */
+  obpm_rank?: number | null;
+  /** Rank of dbpm among the season and season type's ranked players, 1 = best (higher is better), ties averaged; null when dbpm_n is under 1,200, and null when its season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value in the group is equal. Regular-season gates: a playoff run rarely reaches one. `Float64` */
+  dbpm_rank?: number | null;
+  /** Rank of bpm among the season and season type's ranked players, 1 = best (higher is better), ties averaged; null when bpm_n is under 1,600, and null when its season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value in the group is equal. Regular-season gates: a playoff run rarely reaches one. `Float64` */
+  bpm_rank?: number | null;
+  /** Rank of war among the season and season type's ranked players, 1 = best (higher is better), ties averaged; ungated (every player with a finite war qualifies), null when its season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value in the group is equal. `Float64` */
+  war_rank?: number | null;
+  /** Rank of boban_filtered_skill among the season and season type's ranked players, 1 = best (higher is better), ties averaged; null when boban_filtered_skill_n is under 1,600, when season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value is equal. `Float64` */
+  boban_filtered_skill_rank?: number | null;
+  /** Rank of boban_projected_rating among the season and season type's ranked players, 1 = best (higher is better), ties averaged; null when boban_projected_rating_n is under 1,600, when season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value is equal. `Float64` */
+  boban_projected_rating_rank?: number | null;
+  /** Rank of boban_projected_sd among the season and season type's ranked players, ASCENDING: 1 = the smallest sd, the most certain projection; ties averaged; null when boban_projected_sd_n is under 1,600, when season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value is equal. `Float64` */
+  boban_projected_sd_rank?: number | null;
+  /** Percentile of o_rapm_rank, 100 * (n + 1 - rank) / (n + 1) over the n ranked players of the season and season type; null where the rank is. `Float64` */
+  o_rapm_pct?: number | null;
+  /** Percentile of d_rapm_rank, 100 * (n + 1 - rank) / (n + 1) over the n ranked players of the season and season type; null where the rank is. `Float64` */
+  d_rapm_pct?: number | null;
+  /** Percentile of rapm_rank, 100 * (n + 1 - rank) / (n + 1) over the n ranked players of the season and season type; null where the rank is. `Float64` */
+  rapm_pct?: number | null;
+  /** Percentile of o_adj_rapm_rank, 100 * (n + 1 - rank) / (n + 1) over the n ranked players of the season and season type; null where the rank is. `Float64` */
+  o_adj_rapm_pct?: number | null;
+  /** Percentile of d_adj_rapm_rank, 100 * (n + 1 - rank) / (n + 1) over the n ranked players of the season and season type; null where the rank is. `Float64` */
+  d_adj_rapm_pct?: number | null;
+  /** Percentile of adj_rapm_rank, 100 * (n + 1 - rank) / (n + 1) over the n ranked players of the season and season type; null where the rank is. `Float64` */
+  adj_rapm_pct?: number | null;
+  /** Percentile of ospm_rank, 100 * (n + 1 - rank) / (n + 1) over the n ranked players of the season and season type; null where the rank is. `Float64` */
+  ospm_pct?: number | null;
+  /** Percentile of dspm_rank, 100 * (n + 1 - rank) / (n + 1) over the n ranked players of the season and season type; null where the rank is. `Float64` */
+  dspm_pct?: number | null;
+  /** Percentile of spm_rank, 100 * (n + 1 - rank) / (n + 1) over the n ranked players of the season and season type; null where the rank is. `Float64` */
+  spm_pct?: number | null;
+  /** Percentile of obpm_rank, 100 * (n + 1 - rank) / (n + 1) over the n ranked players of the season and season type; null where the rank is. `Float64` */
+  obpm_pct?: number | null;
+  /** Percentile of dbpm_rank, 100 * (n + 1 - rank) / (n + 1) over the n ranked players of the season and season type; null where the rank is. `Float64` */
+  dbpm_pct?: number | null;
+  /** Percentile of bpm_rank, 100 * (n + 1 - rank) / (n + 1) over the n ranked players of the season and season type; null where the rank is. `Float64` */
+  bpm_pct?: number | null;
+  /** Percentile of war_rank, 100 * (n + 1 - rank) / (n + 1) over the n ranked players of the season and season type; null where the rank is. `Float64` */
+  war_pct?: number | null;
+  /** Percentile of boban_filtered_skill_rank, 100 * (n + 1 - rank) / (n + 1) over the n ranked players of the season and season type; null where the rank is. `Float64` */
+  boban_filtered_skill_pct?: number | null;
+  /** Percentile of boban_projected_rating_rank, 100 * (n + 1 - rank) / (n + 1) over the n ranked players of the season and season type; null where the rank is. `Float64` */
+  boban_projected_rating_pct?: number | null;
+  /** Percentile of boban_projected_sd_rank, 100 * (n + 1 - rank) / (n + 1): high means a more certain projection (a smaller sd), not a larger one; null where the rank is. `Float64` */
+  boban_projected_sd_pct?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
 }
@@ -1437,7 +1539,7 @@ export interface LoadWnbaStatsPossessionsRow {
   start_seconds_remaining?: number | null;
   /** Seconds remaining in the period when the possession ended. `Float64` */
   end_seconds_remaining?: number | null;
-  /** Points scored. `Int64` */
+  /** Points the offense scored in the possession (its score step), plus any score it made while on defense since its previous possession (a technical free throw, say), credited here with its shots. `Int64` */
   points?: number | bigint | null;
   /** True when the possession continued after an offensive rebound (contains a second-chance segment). `Boolean` */
   is_second_chance?: boolean | null;
@@ -1941,6 +2043,66 @@ export interface LoadWnbaTeamGroupSeasonsRow {
   sources_agree?: boolean | null;
   /** Builder notes on the team-season, such as a source disagreement or which of several listed memberships was kept. `String` */
   notes?: string | null;
+  /** A column the loader schema does not list (a release adds columns over the seasons). */
+  [column: string]: unknown;
+}
+
+/** One row of `sdv.wnba.loadWnbaTeamAliases` (`wnba_groups`; sdv-py loader schema `load_wnba_team_aliases`). */
+export interface LoadWnbaTeamAliasesRow {
+  /** League code of the table ("wnba"). `String` */
+  league?: string | null;
+  /** ESPN team id the alias points to, as a string (e.g. "150"); the same id as team_id in load_wnba_team_group_seasons. Join on it to reach ESPN team data. `String` (an id) */
+  team_id?: string | null;
+  /** Id space of team_id; always "espn" in this table. `String` */
+  team_id_source?: string | null;
+  /** Provider that uses this id or name (in this table: fox, wnba_stats, yahoo). `String` */
+  source?: string | null;
+  /** The source's own id for the team (e.g. Fox 25, Yahoo nba.t.1); null for a name-only row. It means something only within its source (Fox 25 is Ohio State, ESPN 25 is California), so filter on source first. `String` (an id) */
+  source_id?: string | null;
+  /** "team" when source_id is the source's id for this sport's team, or "school" when it is one id for every sport of a school (the stats.ncaa.org org id, 247Sports institutionKey, On3 orgKey). `String` */
+  id_kind?: string | null;
+  /** Kind of label in value: "name" or "abbreviation"; null when the row carries only an id. An id with both a name and an abbreviation is two rows. `String` */
+  name_kind?: string | null;
+  /** The source's own spelling of the team name or abbreviation; null when the row carries only an id. `String` */
+  value?: string | null;
+  /** First season the source shows this id or name on the team, inclusive (calendar year); null, with valid_to, for an undated curated map. `Int32` */
+  valid_from?: number | null;
+  /** Last season the source shows this id or name on the team, inclusive (calendar year); null, with valid_from, for an undated curated map. A gap in the source splits the window into two rows. `Int32` */
+  valid_to?: number | null;
+  /** How the row was tied to the ESPN team: "deterministic" (a formula or shared key, e.g. Yahoo {league}.t.{espn id}; CFBD ids are ESPN ids), "crosswalk" (carried from a published crosswalk leg), "curated" (a cited map), or for a hand-captured team directory row "alias", "exact_name" (normalized name) or "dict" (curated name dictionary). `String` */
+  match_method?: string | null;
+  /** The release asset or sportsdataverse/sdv-reference-data file the row came from. `String` */
+  evidence?: string | null;
+  /** A column the loader schema does not list (a release adds columns over the seasons). */
+  [column: string]: unknown;
+}
+
+/** One row of `sdv.wnba.loadWnbaPlayerAliases` (`wnba_groups`; sdv-py loader schema `load_wnba_player_aliases`). */
+export interface LoadWnbaPlayerAliasesRow {
+  /** League code of the table ("wnba"). `String` */
+  league?: string | null;
+  /** ESPN athlete id the provider id points to, as a string (e.g. "4433134"). Join on it to reach ESPN player data; the ESPN player loaders (load_wnba_player_core and its siblings) carry it as Int32, so cast first with pl.col("athlete_id").cast(pl.Int32). `String` (an id) */
+  athlete_id?: string | null;
+  /** Id space of athlete_id; always "espn" in this table. `String` */
+  athlete_id_source?: string | null;
+  /** Provider whose player id this is (in this table: fox, wnba_stats, yahoo). `String` */
+  source?: string | null;
+  /** The source's own player id (e.g. Yahoo wnba.p.5010, Fox 76284). It means something only within its source, so filter on source first. `String` (an id) */
+  source_player_id?: string | null;
+  /** ESPN team id (a string) the athlete was on in these seasons: the team block the match was made in, an ESPN team-season of load_wnba_team_group_seasons. `String` (an id) */
+  team_id?: string | null;
+  /** The source's own team id when the matching leg gives one (the season's stats.ncaa.org team id; the Fox / Yahoo / CBS team for the NFL); null otherwise. `String` (an id) */
+  source_team_id?: string | null;
+  /** First season the id is on that team, inclusive (calendar year). `Int32` */
+  valid_from?: number | null;
+  /** Last season the id is on that team, inclusive (calendar year). A gap or a change of match method splits the window into two rows. `Int32` */
+  valid_to?: number | null;
+  /** The matching leg's own method (exact_name, fuzzy_jw, the NCAA tiers name_jersey / name / last_jersey / jaro_winkler, CFB rosters name); crosswalk for a leg that names none; propagated when a pair matched in another season was carried to this provider id; override for a hand-verified override. `String` */
+  match_method?: string | null;
+  /** The leg's own match confidence where it gives one (the lowest in the window); the NCAA tiers score 1.0 / 0.95 / 0.9 / 0.85; null otherwise. `Float64` */
+  match_confidence?: number | null;
+  /** The release asset or sportsdataverse/sdv-reference-data file the row came from. `String` */
+  evidence?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
 }

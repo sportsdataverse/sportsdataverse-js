@@ -112,11 +112,13 @@ await sdv.nba.espnNbaPlayerNews({ athlete_id: '…' });
 // snake_case alias (py/R parity): sdv.nba.espn_nba_player_news(...)
 ```
 
-## `espnNbaCalendar`
+## `espnNbaCalendarSite`
 
-NBA — calendar (ESPN site.api.espn.com).
+NBA — calendar site (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/nba/calendar`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nba_calendar` / `espnNbaCalendar`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -133,8 +135,8 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 **Example:**
 
 ```js
-await sdv.nba.espnNbaCalendar({});
-// snake_case alias (py/R parity): sdv.nba.espn_nba_calendar(...)
+await sdv.nba.espnNbaCalendarSite({});
+// snake_case alias (py/R parity): sdv.nba.espn_nba_calendar_site(...)
 ```
 
 ## `espnNbaConferences`

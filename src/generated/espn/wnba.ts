@@ -137,6 +137,10 @@ const CFG: LeagueConfig = {
     "universal"
   ],
   "publicShorts": {
+    "calendar": "calendar_site",
+    "draft": "draft_site",
+    "team_roster": "team_roster_site",
+    "standings": "standings_site",
     "athlete_stats": "player_stats_v3"
   }
 };
@@ -782,19 +786,19 @@ const CALENDAR_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * WNBA — calendar (ESPN site.api.espn.com).
+ * WNBA — calendar site (ESPN site.api.espn.com).
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/calendar`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
- * @example await sdv.wnba.espnWnbaCalendar({});
- * @see https://js.sportsdataverse.org/docs/wnba/reference/site#espnwnbacalendar
+ * @example await sdv.wnba.espnWnbaCalendarSite({});
+ * @see https://js.sportsdataverse.org/docs/wnba/reference/site#espnwnbacalendarsite
  */
-export const espnWnbaCalendar: Wrapper<Row[], EspnCalendarParams> = (params: WrapperParams = {}) =>
+export const espnWnbaCalendarSite: Wrapper<Row[], EspnCalendarParams> = (params: WrapperParams = {}) =>
   callWrapper(CALENDAR_DEF, CFG, params);
-/** snake_case alias of {@link espnWnbaCalendar} (py/R parity). */
-export const espn_wnba_calendar = espnWnbaCalendar;
+/** snake_case alias of {@link espnWnbaCalendarSite} (py/R parity). */
+export const espn_wnba_calendar_site = espnWnbaCalendarSite;
 
 const CDN_BOXSCORE_DEF: WrapperDef = {
   "short": "cdn_boxscore",
@@ -1082,19 +1086,19 @@ const DRAFT_DEF: WrapperDef = {
   "queryParams": []
 };
 /**
- * WNBA — draft (ESPN site.api.espn.com).
+ * WNBA — draft site (ESPN site.api.espn.com).
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/draft`
  *
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
- * @example await sdv.wnba.espnWnbaDraft({});
- * @see https://js.sportsdataverse.org/docs/wnba/reference/site#espnwnbadraft
+ * @example await sdv.wnba.espnWnbaDraftSite({});
+ * @see https://js.sportsdataverse.org/docs/wnba/reference/site#espnwnbadraftsite
  */
-export const espnWnbaDraft: Wrapper<Row[], EspnDraftParams> = (params: WrapperParams = {}) =>
+export const espnWnbaDraftSite: Wrapper<Row[], EspnDraftParams> = (params: WrapperParams = {}) =>
   callWrapper(DRAFT_DEF, CFG, params);
-/** snake_case alias of {@link espnWnbaDraft} (py/R parity). */
-export const espn_wnba_draft = espnWnbaDraft;
+/** snake_case alias of {@link espnWnbaDraftSite} (py/R parity). */
+export const espn_wnba_draft_site = espnWnbaDraftSite;
 
 const EVENT_DEF: WrapperDef = {
   "short": "event",
@@ -2153,12 +2157,12 @@ const LEADERS_DEF: WrapperDef = {
  *
  * **Endpoint:** `GET https://site.web.api.espn.com/apis/common/v3/sports/basketball/wnba/statistics/byathlete`
  *
- * @param params.category - `number | string` — the statistics category.
+ * @param params.category - `number | string` — Leaderboard population: the athletes ranked in that category, whose values it fills (other categories come back null). Football takes `<group>:<category>` (`offense:passing`, `offense:rushing`, `offense:receiving`, `defense:defensive`, `scoring:scoring`); a bare `passing` is rejected with HTTP 400 (ValueError). Basketball takes the bare name (`offensive`).
  * @param params.season - `number | string` — the season year (the year the season ends for winter sports, e.g. `2025` for 2024-25).
  * @param params.season_type - `number | string` — the season type: `1` preseason, `2` regular season, `3` postseason.
  * @param params.limit - `number | string` — the maximum number of items to return; default `50`.
  * @param params.page - `number | string` — the page of a paginated Core v2 list (1-based); default `1`.
- * @param params.sort - `number | string` — the sort key and direction, e.g. `offensive.avgPoints:desc`.
+ * @param params.sort - `number | string` — Sort key `<category>.<statName>:<asc|desc>`, the names in the payload's categories (`passing.passingYards:desc`, `offensive.avgPoints:desc`). A stat without its category is rejected with HTTP 400 (ValueError).
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
  * @example await sdv.wnba.espnWnbaLeaders({});
@@ -3271,7 +3275,7 @@ const STANDINGS_DEF: WrapperDef = {
   ]
 };
 /**
- * WNBA — standings (ESPN site.api.espn.com (v2)).
+ * WNBA — standings site (ESPN site.api.espn.com (v2)).
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/v2/sports/basketball/wnba/standings`
  *
@@ -3280,13 +3284,13 @@ const STANDINGS_DEF: WrapperDef = {
  * @param params.standings_type - `number | string` — the `type` ESPN query parameter.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
- * @example await sdv.wnba.espnWnbaStandings({});
- * @see https://js.sportsdataverse.org/docs/wnba/reference/site#espnwnbastandings
+ * @example await sdv.wnba.espnWnbaStandingsSite({});
+ * @see https://js.sportsdataverse.org/docs/wnba/reference/site#espnwnbastandingssite
  */
-export const espnWnbaStandings: Wrapper<Row[], EspnStandingsParams> = (params: WrapperParams = {}) =>
+export const espnWnbaStandingsSite: Wrapper<Row[], EspnStandingsParams> = (params: WrapperParams = {}) =>
   callWrapper(STANDINGS_DEF, CFG, params);
-/** snake_case alias of {@link espnWnbaStandings} (py/R parity). */
-export const espn_wnba_standings = espnWnbaStandings;
+/** snake_case alias of {@link espnWnbaStandingsSite} (py/R parity). */
+export const espn_wnba_standings_site = espnWnbaStandingsSite;
 
 const STANDINGS_CORE_DEF: WrapperDef = {
   "short": "standings_core",
@@ -3637,7 +3641,7 @@ const TEAM_ROSTER_DEF: WrapperDef = {
   ]
 };
 /**
- * WNBA — team roster (ESPN site.api.espn.com).
+ * WNBA — team roster site (ESPN site.api.espn.com).
  *
  * **Endpoint:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/teams/{team_id}/roster`
  *
@@ -3645,13 +3649,13 @@ const TEAM_ROSTER_DEF: WrapperDef = {
  * @param params.limit - `number | string` — the maximum number of items to return; default `500`.
  * @param params.parsed - `boolean` — when `true`, route the payload through this endpoint's tidy.js parser and return rows instead of raw JSON.
  * @returns `Promise<Row[]>` with `{ parsed: true }` (rows are untyped: not parity-verified yet); the raw ESPN payload (`unknown`) otherwise.
- * @example await sdv.wnba.espnWnbaTeamRoster({ team_id: '…' });
- * @see https://js.sportsdataverse.org/docs/wnba/reference/site#espnwnbateamroster
+ * @example await sdv.wnba.espnWnbaTeamRosterSite({ team_id: '…' });
+ * @see https://js.sportsdataverse.org/docs/wnba/reference/site#espnwnbateamrostersite
  */
-export const espnWnbaTeamRoster: Wrapper<Row[], EspnTeamRosterParams> = (params: WrapperParams = {}) =>
+export const espnWnbaTeamRosterSite: Wrapper<Row[], EspnTeamRosterParams> = (params: WrapperParams = {}) =>
   callWrapper(TEAM_ROSTER_DEF, CFG, params);
-/** snake_case alias of {@link espnWnbaTeamRoster} (py/R parity). */
-export const espn_wnba_team_roster = espnWnbaTeamRoster;
+/** snake_case alias of {@link espnWnbaTeamRosterSite} (py/R parity). */
+export const espn_wnba_team_roster_site = espnWnbaTeamRosterSite;
 
 const TEAM_SCHEDULE_DEF: WrapperDef = {
   "short": "team_schedule",

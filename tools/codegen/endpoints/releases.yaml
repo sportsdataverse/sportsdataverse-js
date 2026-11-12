@@ -49,7 +49,7 @@ loaders:
   base: sdv_releases
   url: cfb_returning_production/cfb_returning_production_{season}.parquet
   tag: cfb_returning_production
-  min_season: 2005
+  min_season: 2004
   example_args:
     seasons: 2024
   id_int64:
@@ -127,7 +127,7 @@ loaders:
   base: sdv_releases
   url: cfb_crosswalk/cfb_teams_crosswalk_{season}.parquet
   tag: cfb_crosswalk
-  min_season: 2013
+  min_season: 2004
   example_args:
     seasons: 2024
 - fn: load_cfb_schedule_crosswalk
@@ -135,7 +135,7 @@ loaders:
   base: sdv_releases
   url: cfb_crosswalk/cfb_schedule_crosswalk_{season}.parquet
   tag: cfb_crosswalk
-  min_season: 2013
+  min_season: 2004
   example_args:
     seasons: 2024
 # --- ESPN per-game / per-season datasets from the cfb-data python dual-write
@@ -211,7 +211,7 @@ loaders:
   base: sdv_releases
   url: espn_cfb_power_index/power_index_{season}.parquet
   tag: espn_cfb_power_index
-  min_season: 2015
+  min_season: 2005
   id_int64:
   - team_id
   example_args:
@@ -691,7 +691,7 @@ loaders:
   base: sdv_releases
   url: espn_nba_player_boxscores/player_box_{season}.parquet
   tag: espn_nba_player_boxscores
-  min_season: 2002
+  min_season: 1994
   example_args:
     seasons: 2024
 - fn: load_nba_schedule
@@ -699,7 +699,7 @@ loaders:
   base: sdv_releases
   url: espn_nba_schedules/nba_schedule_{season}.parquet
   tag: espn_nba_schedules
-  min_season: 2002
+  min_season: 1994
   example_args:
     seasons: 2024
 - fn: load_nba_team_boxscore
@@ -707,7 +707,7 @@ loaders:
   base: sdv_releases
   url: espn_nba_team_boxscores/team_box_{season}.parquet
   tag: espn_nba_team_boxscores
-  min_season: 2002
+  min_season: 1994
   example_args:
     seasons: 2024
 - fn: load_nhl_pbp
@@ -763,7 +763,7 @@ loaders:
   base: sdv_releases
   url: espn_womens_college_basketball_schedules/wbb_schedule_{season}.parquet
   tag: espn_womens_college_basketball_schedules
-  min_season: 2002
+  min_season: 2001
   example_args:
     seasons: 2024
 - fn: load_wbb_team_boxscore
@@ -811,7 +811,7 @@ loaders:
   base: sdv_releases
   url: espn_wnba_schedules/wnba_schedule_{season}.parquet
   tag: espn_wnba_schedules
-  min_season: 2002
+  min_season: 1997
   example_args:
     seasons: 2024
 - fn: load_wnba_team_boxscore
@@ -827,7 +827,8 @@ loaders:
   base: sdv_releases
   url: espn_mens_college_basketball_shots/shots_{season}.parquet
   tag: espn_mens_college_basketball_shots
-  min_season: 2025
+  min_season: 2003
+  notes: "Published seasons: 2003 and 2006 onward; the release has no 2004 or 2005 asset (the MBB pbp release has the same gap). A request for either is skipped with a warning, and a request for only those returns the documented columns with zero rows."
   example_args:
     seasons: 2025
 - fn: load_mbb_standings
@@ -851,6 +852,7 @@ loaders:
   base: sdv_releases
   url: espn_mens_college_basketball_rosters/rosters_{season}.parquet
   tag: espn_mens_college_basketball_rosters
+  id_int32: [athlete_id]
   min_season: 2025
   example_args:
     seasons: 2025
@@ -859,7 +861,7 @@ loaders:
   base: sdv_releases
   url: espn_mens_college_basketball_officials/officials_{season}.parquet
   tag: espn_mens_college_basketball_officials
-  min_season: 2025
+  min_season: 2003
   example_args:
     seasons: 2025
 - fn: load_mbb_game_rosters
@@ -867,7 +869,8 @@ loaders:
   base: sdv_releases
   url: espn_mens_college_basketball_game_rosters/game_rosters_{season}.parquet
   tag: espn_mens_college_basketball_game_rosters
-  min_season: 2025
+  id_int32: [game_id]
+  min_season: 2002
   example_args:
     seasons: 2025
 - fn: load_mbb_team_season_stats
@@ -883,6 +886,7 @@ loaders:
   base: sdv_releases
   url: espn_nba_game_rosters/game_rosters_{season}.parquet
   tag: espn_nba_game_rosters
+  id_int32: [game_id]
   min_season: 2002
   example_args:
     seasons: 2002
@@ -915,7 +919,7 @@ loaders:
   base: sdv_releases
   url: espn_nba_player_season_stats/player_season_stats_{season}.parquet
   tag: espn_nba_player_season_stats
-  min_season: 2002
+  min_season: 1994
   example_args:
     seasons: 2025
 - fn: load_nba_team_season_stats
@@ -939,6 +943,7 @@ loaders:
   base: sdv_releases
   url: espn_nba_rosters/rosters_{season}.parquet
   tag: espn_nba_rosters
+  id_int32: [athlete_id]
   min_season: 2025
   example_args:
     seasons: 2025
@@ -947,7 +952,7 @@ loaders:
   base: sdv_releases
   url: espn_wnba_draft/draft_{season}.parquet
   tag: espn_wnba_draft
-  min_season: 2026
+  min_season: 2018
   example_args:
     seasons: 2026
 - fn: load_wnba_game_rosters
@@ -955,7 +960,8 @@ loaders:
   base: sdv_releases
   url: espn_wnba_game_rosters/game_rosters_{season}.parquet
   tag: espn_wnba_game_rosters
-  min_season: 2024
+  id_int32: [game_id]
+  min_season: 2002
   example_args:
     seasons: 2024
 - fn: load_wnba_officials
@@ -963,7 +969,9 @@ loaders:
   base: sdv_releases
   url: espn_wnba_officials/officials_{season}.parquet
   tag: espn_wnba_officials
-  min_season: 2024
+  id_int32: [game_id]
+  min_season: 2003
+  notes: "Published seasons: every season from the floor except 2022 and 2023, which the release has no asset for; a request for one is skipped with a warning."
   example_args:
     seasons: 2024
 - fn: load_wnba_player_season_stats
@@ -971,7 +979,8 @@ loaders:
   base: sdv_releases
   url: espn_wnba_player_season_stats/player_season_stats_{season}.parquet
   tag: espn_wnba_player_season_stats
-  min_season: 2024
+  min_season: 2002
+  notes: "Published seasons: every season from the floor except 2022 and 2023, which the release has no asset for; a request for one is skipped with a warning."
   example_args:
     seasons: 2024
 - fn: load_wnba_rosters
@@ -979,6 +988,7 @@ loaders:
   base: sdv_releases
   url: espn_wnba_rosters/rosters_{season}.parquet
   tag: espn_wnba_rosters
+  id_int32: [athlete_id]
   min_season: 2024
   example_args:
     seasons: 2024
@@ -987,7 +997,7 @@ loaders:
   base: sdv_releases
   url: espn_wnba_shots/shots_{season}.parquet
   tag: espn_wnba_shots
-  min_season: 2024
+  min_season: 2002
   example_args:
     seasons: 2024
 - fn: load_wnba_standings
@@ -995,7 +1005,8 @@ loaders:
   base: sdv_releases
   url: espn_wnba_standings/standings_{season}.parquet
   tag: espn_wnba_standings
-  min_season: 2024
+  min_season: 2002
+  notes: "Published seasons: every season from the floor except 2022 and 2023, which the release has no asset for; a request for one is skipped with a warning."
   example_args:
     seasons: 2024
 - fn: load_wnba_team_season_stats
@@ -1003,7 +1014,8 @@ loaders:
   base: sdv_releases
   url: espn_wnba_team_season_stats/team_season_stats_{season}.parquet
   tag: espn_wnba_team_season_stats
-  min_season: 2024
+  min_season: 2002
+  notes: "Published seasons: every season from the floor except 2022 and 2023, which the release has no asset for; a request for one is skipped with a warning."
   example_args:
     seasons: 2024
 - fn: load_wbb_game_rosters
@@ -1011,7 +1023,8 @@ loaders:
   base: sdv_releases
   url: espn_womens_college_basketball_game_rosters/game_rosters_{season}.parquet
   tag: espn_womens_college_basketball_game_rosters
-  min_season: 2026
+  id_int32: [game_id]
+  min_season: 2004
   example_args:
     seasons: 2026
 - fn: load_wbb_officials
@@ -1019,7 +1032,8 @@ loaders:
   base: sdv_releases
   url: espn_womens_college_basketball_officials/officials_{season}.parquet
   tag: espn_womens_college_basketball_officials
-  min_season: 2026
+  min_season: 2014
+  notes: "Published seasons: every season from the floor except 2024 and 2025, which the release has no asset for; a request for one is skipped with a warning."
   example_args:
     seasons: 2026
 - fn: load_wbb_player_season_stats
@@ -1027,7 +1041,8 @@ loaders:
   base: sdv_releases
   url: espn_womens_college_basketball_player_season_stats/player_season_stats_{season}.parquet
   tag: espn_womens_college_basketball_player_season_stats
-  min_season: 2026
+  min_season: 2006
+  notes: "Published seasons: every season from the floor except 2024 and 2025, which the release has no asset for; a request for one is skipped with a warning."
   example_args:
     seasons: 2026
 - fn: load_wbb_rosters
@@ -1043,7 +1058,7 @@ loaders:
   base: sdv_releases
   url: espn_womens_college_basketball_shots/shots_{season}.parquet
   tag: espn_womens_college_basketball_shots
-  min_season: 2026
+  min_season: 2004
   example_args:
     seasons: 2026
 - fn: load_wbb_standings
@@ -1051,7 +1066,8 @@ loaders:
   base: sdv_releases
   url: espn_womens_college_basketball_standings/standings_{season}.parquet
   tag: espn_womens_college_basketball_standings
-  min_season: 2026
+  min_season: 2003
+  notes: "Published seasons: every season from the floor except 2005, 2024 and 2025, which the release has no asset for; a request for one is skipped with a warning."
   example_args:
     seasons: 2026
 - fn: load_wbb_team_season_stats
@@ -1059,7 +1075,8 @@ loaders:
   base: sdv_releases
   url: espn_womens_college_basketball_team_season_stats/team_season_stats_{season}.parquet
   tag: espn_womens_college_basketball_team_season_stats
-  min_season: 2026
+  min_season: 2010
+  notes: "Published seasons: every season from the floor except 2024 and 2025, which the release has no asset for; a request for one is skipped with a warning."
   example_args:
     seasons: 2026
 - fn: load_nba_stats_schedules
@@ -1156,6 +1173,14 @@ loaders:
   min_season: 2017
   example_args:
     seasons: 2025
+- fn: load_nba_stats_injury_report
+  league: nba
+  base: sdv_releases
+  url: nba_stats_injury_report/injury_report_{season + 1}.parquet
+  tag: nba_stats_injury_report
+  min_season: 2018
+  example_args:
+    seasons: 2025
 - fn: load_nba_stats_pbp_v3
   league: nba
   base: sdv_releases
@@ -1214,6 +1239,10 @@ loaders:
   min_season: 1996
   example_args:
     seasons: 2025
+  see_also:
+  - name: sdvplot
+    note: court_coords() converts x_legacy / y_legacy to the court surface("nba") draws
+    url: https://sdvplot.sportsdataverse.org/
 - fn: load_nba_stats_standings
   league: nba
   base: sdv_releases
@@ -1251,6 +1280,7 @@ loaders:
   base: sdv_releases
   url: mbb_crosswalk/mbb_player_crosswalk_{season}.parquet
   tag: mbb_crosswalk
+  id_int32: [espn_team_id, espn_athlete_id]
   min_season: 2025
   example_args:
     seasons: 2026
@@ -1259,7 +1289,8 @@ loaders:
   base: sdv_releases
   url: mbb_crosswalk/mbb_schedule_crosswalk_{season}.parquet
   tag: mbb_crosswalk
-  min_season: 2025
+  id_int32: [espn_game_id, home_espn_team_id, away_espn_team_id]
+  min_season: 2008
   example_args:
     seasons: 2026
 - fn: load_mbb_team_crosswalk
@@ -1267,6 +1298,7 @@ loaders:
   base: sdv_releases
   url: mbb_crosswalk/mbb_team_crosswalk_{season}.parquet
   tag: mbb_crosswalk
+  id_int32: [espn_team_id]
   min_season: 2002
   example_args:
     seasons: 2026
@@ -1275,6 +1307,7 @@ loaders:
   base: sdv_releases
   url: wbb_crosswalk/wbb_player_crosswalk_{season}.parquet
   tag: wbb_crosswalk
+  id_int32: [espn_team_id, espn_athlete_id]
   min_season: 2014
   example_args:
     seasons: 2026
@@ -1283,7 +1316,8 @@ loaders:
   base: sdv_releases
   url: wbb_crosswalk/wbb_schedule_crosswalk_{season}.parquet
   tag: wbb_crosswalk
-  min_season: 2026
+  id_int32: [espn_game_id, home_espn_team_id, away_espn_team_id]
+  min_season: 2021
   example_args:
     seasons: 2026
 - fn: load_wbb_team_crosswalk
@@ -1291,7 +1325,8 @@ loaders:
   base: sdv_releases
   url: wbb_crosswalk/wbb_team_crosswalk_{season}.parquet
   tag: wbb_crosswalk
-  min_season: 2014
+  id_int32: [espn_team_id]
+  min_season: 2002
   example_args:
     seasons: 2026
 - fn: load_nba_player_crosswalk
@@ -1299,6 +1334,7 @@ loaders:
   base: sdv_releases
   url: nba_crosswalk/nba_player_crosswalk_{season}.parquet
   tag: nba_crosswalk
+  id_int32: [espn_team_id, espn_athlete_id]
   min_season: 2002
   example_args:
     seasons: 2026
@@ -1307,7 +1343,8 @@ loaders:
   base: sdv_releases
   url: nba_crosswalk/nba_schedule_crosswalk_{season}.parquet
   tag: nba_crosswalk
-  min_season: 2026
+  id_int32: [espn_game_id, home_espn_team_id, away_espn_team_id]
+  min_season: 2002
   example_args:
     seasons: 2026
 - fn: load_nba_team_crosswalk
@@ -1315,7 +1352,8 @@ loaders:
   base: sdv_releases
   url: nba_crosswalk/nba_team_crosswalk_{season}.parquet
   tag: nba_crosswalk
-  min_season: 2026
+  id_int32: [espn_team_id]
+  min_season: 2002
   example_args:
     seasons: 2026
 - fn: load_wnba_player_crosswalk
@@ -1323,7 +1361,10 @@ loaders:
   base: sdv_releases
   url: wnba_crosswalk/wnba_player_crosswalk_{season}.parquet
   tag: wnba_crosswalk
+  id_int64: [wnba_player_id]
+  id_int32: [espn_team_id, espn_athlete_id]
   min_season: 2002
+  notes: "wnba_player_id is Int64, as WNBA Stats ships player_id / person_id, so the bridge joins without a cast."
   example_args:
     seasons: 2026
 - fn: load_wnba_schedule_crosswalk
@@ -1331,7 +1372,10 @@ loaders:
   base: sdv_releases
   url: wnba_crosswalk/wnba_schedule_crosswalk_{season}.parquet
   tag: wnba_crosswalk
-  min_season: 2026
+  id_int64: [wnba_home_team_id, wnba_away_team_id]
+  id_int32: [espn_game_id, home_espn_team_id, away_espn_team_id]
+  min_season: 2002
+  notes: "wnba_game_id stays String, the WNBA Stats game id's dtype; the wnba_*_team_id bridge ids are Int64, as WNBA Stats ships team_id."
   example_args:
     seasons: 2026
 - fn: load_wnba_team_crosswalk
@@ -1339,7 +1383,10 @@ loaders:
   base: sdv_releases
   url: wnba_crosswalk/wnba_team_crosswalk_{season}.parquet
   tag: wnba_crosswalk
-  min_season: 2026
+  id_int64: [wnba_team_id]
+  id_int32: [espn_team_id]
+  min_season: 2002
+  notes: "wnba_team_id is Int64, as WNBA Stats ships team_id, so the bridge joins without a cast."
   example_args:
     seasons: 2026
 - fn: load_nba_player_core
@@ -1347,7 +1394,8 @@ loaders:
   base: sdv_releases
   url: espn_nba_player_core/player_core_{season}.parquet
   tag: espn_nba_player_core
-  min_season: 2002
+  id_int32: [athlete_id]
+  min_season: 1994
   example_args:
     seasons: 2025
 - fn: load_wnba_player_core
@@ -1355,6 +1403,7 @@ loaders:
   base: sdv_releases
   url: espn_wnba_player_core/player_core_{season}.parquet
   tag: espn_wnba_player_core
+  id_int32: [athlete_id]
   min_season: 2003
   example_args:
     seasons: 2025
@@ -1363,6 +1412,7 @@ loaders:
   base: sdv_releases
   url: espn_mens_college_basketball_player_core/player_core_{season}.parquet
   tag: espn_mens_college_basketball_player_core
+  id_int32: [athlete_id]
   min_season: 2003
   example_args:
     seasons: 2025
@@ -1371,6 +1421,7 @@ loaders:
   base: sdv_releases
   url: espn_womens_college_basketball_player_core/player_core_{season}.parquet
   tag: espn_womens_college_basketball_player_core
+  id_int32: [athlete_id]
   min_season: 2004
   example_args:
     seasons: 2025
@@ -1379,7 +1430,12 @@ loaders:
   base: sdv_releases
   url: wnba_player_impact/wnba_player_impact_{season}.parquet
   tag: wnba_player_impact
+  notes: "The BOBAN (Bayesian Online Box-Augmented Net) columns boban_filtered_skill, boban_projected_rating and boban_projected_sd were renamed from darko_*; the loader returns both names for one release, so move to boban_* now (darko_* is deprecated and will be removed)."
   min_season: 1997
+  column_aliases:
+    boban_filtered_skill: darko_filtered_skill
+    boban_projected_rating: darko_projected_rating
+    boban_projected_sd: darko_projected_sd
   example_args:
     seasons: 2024
 - fn: load_ncaa_baseball_pbp
@@ -1387,7 +1443,7 @@ loaders:
   base: sdv_releases
   url: ncaa_baseball_pbp/ncaa_baseball_pbp_{season}.parquet
   tag: ncaa_baseball_pbp
-  min_season: 2017
+  min_season: 2016
   example_args:
     seasons: 2023
 - fn: load_ncaa_baseball_schedule
@@ -1403,7 +1459,7 @@ loaders:
   base: sdv_releases
   url: ncaa_baseball_teams/ncaa_baseball_teams_{season}.parquet
   tag: ncaa_baseball_teams
-  min_season: 2024
+  min_season: 2016
   example_args:
     seasons: 2025
 - fn: load_ncaa_baseball_rosters
@@ -1411,7 +1467,7 @@ loaders:
   base: sdv_releases
   url: ncaa_baseball_rosters/ncaa_baseball_rosters_{season}.parquet
   tag: ncaa_baseball_rosters
-  min_season: 2024
+  min_season: 2016
   example_args:
     seasons: 2025
 - fn: load_ncaa_baseball_linescore
@@ -1419,7 +1475,7 @@ loaders:
   base: sdv_releases
   url: ncaa_baseball_linescore/ncaa_baseball_linescore_{season}.parquet
   tag: ncaa_baseball_linescore
-  min_season: 2024
+  min_season: 2016
   example_args:
     seasons: 2025
 - fn: load_ncaa_baseball_team_stats
@@ -1427,7 +1483,7 @@ loaders:
   base: sdv_releases
   url: ncaa_baseball_team_stats/ncaa_baseball_team_stats_{season}.parquet
   tag: ncaa_baseball_team_stats
-  min_season: 2024
+  min_season: 2016
   example_args:
     seasons: 2025
 - fn: load_ncaa_baseball_player_stats
@@ -1435,7 +1491,7 @@ loaders:
   base: sdv_releases
   url: ncaa_baseball_player_stats/ncaa_baseball_player_stats_{season}.parquet
   tag: ncaa_baseball_player_stats
-  min_season: 2024
+  min_season: 2016
   example_args:
     seasons: 2025
 - fn: load_ncaa_baseball_situational_stats
@@ -1443,7 +1499,7 @@ loaders:
   base: sdv_releases
   url: ncaa_baseball_situational_stats/ncaa_baseball_situational_stats_{season}.parquet
   tag: ncaa_baseball_situational_stats
-  min_season: 2024
+  min_season: 2016
   example_args:
     seasons: 2025
 - fn: load_ncaa_baseball_games
@@ -1451,7 +1507,7 @@ loaders:
   base: sdv_releases
   url: ncaa_baseball_games/ncaa_baseball_games_{season}.parquet
   tag: ncaa_baseball_games
-  min_season: 2017
+  min_season: 2016
   example_args:
     seasons: 2024
 - fn: load_nba_player_impact
@@ -1459,7 +1515,12 @@ loaders:
   base: sdv_releases
   url: nba_player_impact/nba_player_impact_{season}.parquet
   tag: nba_player_impact
+  notes: "The BOBAN (Bayesian Online Box-Augmented Net) columns boban_filtered_skill, boban_projected_rating and boban_projected_sd were renamed from darko_*; the loader returns both names for one release, so move to boban_* now (darko_* is deprecated and will be removed)."
   min_season: 1996
+  column_aliases:
+    boban_filtered_skill: darko_filtered_skill
+    boban_projected_rating: darko_projected_rating
+    boban_projected_sd: darko_projected_sd
   example_args:
     seasons: 2024
 - fn: load_nhl_game_info
@@ -1791,7 +1852,8 @@ loaders:
   base: sdv_releases
   url: wnba_stats_coaches/coaches_{season}.parquet
   tag: wnba_stats_coaches
-  min_season: 2026
+  min_season: 1997
+  notes: "Published seasons: every season from the floor except 2019, which the release has no asset for; a request for one is skipped with a warning."
   example_args:
     seasons: 2026
 - fn: load_wnba_stats_draft
@@ -1799,7 +1861,7 @@ loaders:
   base: sdv_releases
   url: wnba_stats_draft/draft_{season}.parquet
   tag: wnba_stats_draft
-  min_season: 2025
+  min_season: 1997
   example_args:
     seasons: 2025
 - fn: load_wnba_stats_game_rosters
@@ -1807,7 +1869,7 @@ loaders:
   base: sdv_releases
   url: wnba_stats_game_rosters/game_rosters_{season}.parquet
   tag: wnba_stats_game_rosters
-  min_season: 2026
+  min_season: 1997
   example_args:
     seasons: 2026
 - fn: load_wnba_stats_officials
@@ -1815,7 +1877,7 @@ loaders:
   base: sdv_releases
   url: wnba_stats_officials/officials_{season}.parquet
   tag: wnba_stats_officials
-  min_season: 2026
+  min_season: 2004
   example_args:
     seasons: 2026
 - fn: load_wnba_stats_pbp
@@ -1864,7 +1926,7 @@ loaders:
   base: sdv_releases
   url: wnba_stats_rosters/rosters_{season}.parquet
   tag: wnba_stats_rosters
-  min_season: 2026
+  min_season: 1997
   example_args:
     seasons: 2026
 - fn: load_wnba_stats_schedules
@@ -1883,6 +1945,10 @@ loaders:
   min_season: 1997
   example_args:
     seasons: 2026
+  see_also:
+  - name: sdvplot
+    note: court_coords() converts x_legacy / y_legacy to the court surface("wnba") draws
+    url: https://sdvplot.sportsdataverse.org/
 - fn: load_wnba_stats_team_boxscores
   league: wnba
   base: sdv_releases
@@ -2165,6 +2231,7 @@ loaders:
   base: sdv_releases
   url: ncaa_mbb_pbp/ncaa_mbb_pbp_{season}.parquet
   tag: ncaa_mbb_pbp
+  id_int32: [espn_game_id, home_espn_team_id, away_espn_team_id, event_team_espn_team_id, poss_team_espn_team_id]
   min_season: 2010
   example_args:
     seasons: 2024
@@ -2181,6 +2248,7 @@ loaders:
   base: sdv_releases
   url: ncaa_mbb_player_box/ncaa_mbb_player_box_{season}.parquet
   tag: ncaa_mbb_player_box
+  id_int32: [espn_game_id, home_espn_team_id, away_espn_team_id, team_espn_team_id]
   min_season: 2010
   example_args:
     seasons: 2024
@@ -2189,6 +2257,7 @@ loaders:
   base: sdv_releases
   url: ncaa_mbb_team_box/ncaa_mbb_team_box_{season}.parquet
   tag: ncaa_mbb_team_box
+  id_int32: [espn_game_id, home_espn_team_id, away_espn_team_id, team_espn_team_id]
   min_season: 2010
   example_args:
     seasons: 2024
@@ -2221,6 +2290,7 @@ loaders:
   base: sdv_releases
   url: ncaa_mbb_possessions/ncaa_mbb_possessions_{season}.parquet
   tag: ncaa_mbb_possessions
+  id_int32: [espn_game_id, home_espn_team_id, away_espn_team_id, poss_team_espn_team_id]
   min_season: 2010
   example_args:
     seasons: 2024
@@ -2245,6 +2315,7 @@ loaders:
   base: sdv_releases
   url: ncaa_mbb_shots/ncaa_mbb_shots_{season}.parquet
   tag: ncaa_mbb_shots
+  id_int32: [espn_game_id, espn_team_id]
   min_season: 2019
   example_args:
     seasons: 2024
@@ -2698,7 +2769,95 @@ loaders:
   min_season: 2010
   example_args:
     seasons: 2024
-  notes: "One row per team per season: the SDV subdivision, conference and division group ids the team belonged to that season (null where a level does not apply), the team name as of that season, where the membership came from, and whether a second source agreed (null when only one source covers the season). team_id is a string: the stats.ncaa.org org id (not an ESPN id); team_id_source names the id space. season is the calendar year; seasons 2010-2026."
+  notes: "One row per team, id space and season: the SDV subdivision, conference and division group ids the team belonged to that season (null where a level does not apply), the team name as of that season, where the membership came from, and whether a second source agreed (null when only one source covers the season). team_id is a string in the id space team_id_source names: every D-I team has an ncaa_org row (the stats.ncaa.org org id) and, where the ncaa_baseball_crosswalk maps the school, a copy under its ESPN college-baseball team id (team_id_source espn, notes ncaa_org_id=N). The two id spaces overlap (an ESPN id can be another school's NCAA org id), so filter on team_id_source before joining on team_id. season is the calendar year; seasons 2010-2026."
+# --- {league}_groups: team_aliases (8 leagues) and player_aliases (6 leagues), built by
+# sportsdataverse/sdv-reference-data beside the four group tables. Season-less; every id is
+# Utf8 as published. The _unmatched / _rates side files are diagnostics and get no loader.
+# NFL entries are docs metadata only: load_nfl_*_aliases are hand-written in nfl_loaders.py. ---
+- fn: load_nfl_team_aliases
+  league: nfl
+  base: sdv_releases
+  url: nfl_groups/nfl_team_aliases.parquet
+  tag: nfl_groups
+  notes: "One season-less file: every id and name another source (cbs, fox, yahoo) uses for a team, keyed on the ESPN team id (team_id, a string; team_id_source = espn), with the seasons the source shows it on that team (valid_from / valid_to, inclusive; both null for an undated curated map). id_kind says whether source_id is the source's id for this sport's team or one id for every sport of a school; a name-only row has a null source_id. A source id means something only within its source (Fox 25 is not ESPN 25), so filter on source before joining on source_id. Seasons are the STARTING year (2025 = the 2025-26 season)."
+- fn: load_cfb_team_aliases
+  league: cfb
+  base: sdv_releases
+  url: cfb_groups/cfb_team_aliases.parquet
+  tag: cfb_groups
+  notes: "One season-less file: every id and name another source (cbs, cfbd, fox, on3, sports247, yahoo) uses for a team, keyed on the ESPN team id (team_id, a string; team_id_source = espn), with the seasons the source shows it on that team (valid_from / valid_to, inclusive; both null for an undated curated map). id_kind says whether source_id is the source's id for this sport's team or one id for every sport of a school; a name-only row has a null source_id. A source id means something only within its source (Fox 25 is not ESPN 25), so filter on source before joining on source_id. Seasons are the STARTING year (2025 = the fall 2025 season)."
+- fn: load_nba_team_aliases
+  league: nba
+  base: sdv_releases
+  url: nba_groups/nba_team_aliases.parquet
+  tag: nba_groups
+  notes: "One season-less file: every id and name another source (cbs, fox, nba_stats, yahoo) uses for a team, keyed on the ESPN team id (team_id, a string; team_id_source = espn), with the seasons the source shows it on that team (valid_from / valid_to, inclusive; both null for an undated curated map). id_kind says whether source_id is the source's id for this sport's team or one id for every sport of a school; a name-only row has a null source_id. A source id means something only within its source (Fox 25 is not ESPN 25), so filter on source before joining on source_id. Seasons are the ENDING year (2025 = the 2024-25 season)."
+- fn: load_wnba_team_aliases
+  league: wnba
+  base: sdv_releases
+  url: wnba_groups/wnba_team_aliases.parquet
+  tag: wnba_groups
+  notes: "One season-less file: every id and name another source (fox, wnba_stats, yahoo) uses for a team, keyed on the ESPN team id (team_id, a string; team_id_source = espn), with the seasons the source shows it on that team (valid_from / valid_to, inclusive; both null for an undated curated map). id_kind says whether source_id is the source's id for this sport's team or one id for every sport of a school; a name-only row has a null source_id. A source id means something only within its source (Fox 25 is not ESPN 25), so filter on source before joining on source_id. Seasons are the calendar year."
+- fn: load_mbb_team_aliases
+  league: mbb
+  base: sdv_releases
+  url: mbb_groups/mbb_team_aliases.parquet
+  tag: mbb_groups
+  notes: "One season-less file: every id and name another source (fox, kenpom, ncaa, on3, sports247, torvik, yahoo) uses for a team, keyed on the ESPN team id (team_id, a string; team_id_source = espn), with the seasons the source shows it on that team (valid_from / valid_to, inclusive; both null for an undated curated map). id_kind says whether source_id is the source's id for this sport's team or one id for every sport of a school; a name-only row has a null source_id. A source id means something only within its source (Fox 25 is not ESPN 25), so filter on source before joining on source_id. Seasons are the ENDING year (2025 = the 2024-25 season)."
+- fn: load_wbb_team_aliases
+  league: wbb
+  base: sdv_releases
+  url: wbb_groups/wbb_team_aliases.parquet
+  tag: wbb_groups
+  notes: "One season-less file: every id and name another source (fox, ncaa, on3, sports247, torvik, yahoo) uses for a team, keyed on the ESPN team id (team_id, a string; team_id_source = espn), with the seasons the source shows it on that team (valid_from / valid_to, inclusive; both null for an undated curated map). id_kind says whether source_id is the source's id for this sport's team or one id for every sport of a school; a name-only row has a null source_id. A source id means something only within its source (Fox 25 is not ESPN 25), so filter on source before joining on source_id. Seasons are the ENDING year (2025 = the 2024-25 season)."
+- fn: load_mlb_team_aliases
+  league: mlb
+  base: sdv_releases
+  url: mlb_groups/mlb_team_aliases.parquet
+  tag: mlb_groups
+  notes: "One season-less file: every id and name another source (cbs, fox, mlb, yahoo) uses for a team, keyed on the ESPN team id (team_id, a string; team_id_source = espn), with the seasons the source shows it on that team (valid_from / valid_to, inclusive; both null for an undated curated map). id_kind says whether source_id is the source's id for this sport's team or one id for every sport of a school; a name-only row has a null source_id. A source id means something only within its source (Fox 25 is not ESPN 25), so filter on source before joining on source_id. Seasons are the calendar year."
+- fn: load_nhl_team_aliases
+  league: nhl
+  base: sdv_releases
+  url: nhl_groups/nhl_team_aliases.parquet
+  tag: nhl_groups
+  notes: "One season-less file: every id and name another source (cbs, fox, nhl, yahoo) uses for a team, keyed on the ESPN team id (team_id, a string; team_id_source = espn), with the seasons the source shows it on that team (valid_from / valid_to, inclusive; both null for an undated curated map). id_kind says whether source_id is the source's id for this sport's team or one id for every sport of a school; a name-only row has a null source_id. A source id means something only within its source (Fox 25 is not ESPN 25), so filter on source before joining on source_id. Seasons are the ENDING year (2025 = the 2024-25 season)."
+- fn: load_nfl_player_aliases
+  league: nfl
+  base: sdv_releases
+  url: nfl_groups/nfl_player_aliases.parquet
+  tag: nfl_groups
+  notes: "One season-less file: every player id another source (cbs, fox, yahoo) uses for an ESPN athlete (athlete_id, a string; athlete_id_source = espn), with the ESPN team the match was made on (team_id) and the seasons it held (valid_from / valid_to, inclusive). match_method and match_confidence carry the matching leg's own method and score. Filter on source before joining on source_player_id. Seasons are the STARTING year (2025 = the 2025-26 season)."
+- fn: load_cfb_player_aliases
+  league: cfb
+  base: sdv_releases
+  url: cfb_groups/cfb_player_aliases.parquet
+  tag: cfb_groups
+  notes: "One season-less file: every player id another source (cbs, fox, ncaa, yahoo) uses for an ESPN athlete (athlete_id, a string; athlete_id_source = espn), with the ESPN team the match was made on (team_id) and the seasons it held (valid_from / valid_to, inclusive). match_method and match_confidence carry the matching leg's own method and score. Filter on source before joining on source_player_id. stats.ncaa.org roster ids (source ncaa) are new every season. Seasons are the STARTING year (2025 = the fall 2025 season)."
+- fn: load_nba_player_aliases
+  league: nba
+  base: sdv_releases
+  url: nba_groups/nba_player_aliases.parquet
+  tag: nba_groups
+  notes: "One season-less file: every player id another source (fox, nba_stats, yahoo) uses for an ESPN athlete (athlete_id, a string; athlete_id_source = espn), with the ESPN team the match was made on (team_id) and the seasons it held (valid_from / valid_to, inclusive). match_method and match_confidence carry the matching leg's own method and score. Filter on source before joining on source_player_id. Seasons are the ENDING year (2025 = the 2024-25 season)."
+- fn: load_wnba_player_aliases
+  league: wnba
+  base: sdv_releases
+  url: wnba_groups/wnba_player_aliases.parquet
+  tag: wnba_groups
+  notes: "One season-less file: every player id another source (fox, wnba_stats, yahoo) uses for an ESPN athlete (athlete_id, a string; athlete_id_source = espn), with the ESPN team the match was made on (team_id) and the seasons it held (valid_from / valid_to, inclusive). match_method and match_confidence carry the matching leg's own method and score. Filter on source before joining on source_player_id. Seasons are the calendar year."
+- fn: load_mbb_player_aliases
+  league: mbb
+  base: sdv_releases
+  url: mbb_groups/mbb_player_aliases.parquet
+  tag: mbb_groups
+  notes: "One season-less file: every player id another source (fox, kenpom, ncaa) uses for an ESPN athlete (athlete_id, a string; athlete_id_source = espn), with the ESPN team the match was made on (team_id) and the seasons it held (valid_from / valid_to, inclusive). match_method and match_confidence carry the matching leg's own method and score. Filter on source before joining on source_player_id. stats.ncaa.org roster ids (source ncaa) are new every season. Seasons are the ENDING year (2025 = the 2024-25 season)."
+- fn: load_wbb_player_aliases
+  league: wbb
+  base: sdv_releases
+  url: wbb_groups/wbb_player_aliases.parquet
+  tag: wbb_groups
+  notes: "One season-less file: every player id another source (fox, ncaa) uses for an ESPN athlete (athlete_id, a string; athlete_id_source = espn), with the ESPN team the match was made on (team_id) and the seasons it held (valid_from / valid_to, inclusive). match_method and match_confidence carry the matching leg's own method and score. Filter on source before joining on source_player_id. stats.ncaa.org roster ids (source ncaa) are new every season. Seasons are the ENDING year (2025 = the 2024-25 season)."
 # --- mlb_parks: MLB park dimensions (sportsdataverse/sdv-reference-data). One
 # season-less venue x season table; fences in feet at MLB's seven markers. ---
 - fn: load_mlb_park_dimensions

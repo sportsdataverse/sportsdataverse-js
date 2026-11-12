@@ -112,11 +112,13 @@ await sdv.nfl.espnNflPlayerNews({ athlete_id: '…' });
 // snake_case alias (py/R parity): sdv.nfl.espn_nfl_player_news(...)
 ```
 
-## `espnNflCalendar`
+## `espnNflCalendarSite`
 
-NFL — calendar (ESPN site.api.espn.com).
+NFL — calendar site (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/football/nfl/calendar`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_nfl_calendar` / `espnNflCalendar`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -133,8 +135,8 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 **Example:**
 
 ```js
-await sdv.nfl.espnNflCalendar({});
-// snake_case alias (py/R parity): sdv.nfl.espn_nfl_calendar(...)
+await sdv.nfl.espnNflCalendarSite({});
+// snake_case alias (py/R parity): sdv.nfl.espn_nfl_calendar_site(...)
 ```
 
 ## `espnNflConferences`

@@ -14,7 +14,7 @@ sidebar_position: 50
 
 # `sdv.wbb` — dataset loaders
 
-34 loaders reading the published sportsdataverse-data releases (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias and resolves to an array of plain row objects (or `{ [column]: values[] }` with `format: "columns"`).
+36 loaders reading the published sportsdataverse-data releases (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias and resolves to an array of plain row objects (or `{ [column]: values[] }` with `format: "columns"`).
 
 - **Size:** row objects cost ~60-100 bytes per cell on the heap, so before decoding each season a loader adds its rows × columns (from the parquet footer) to a running total and checks it against `maxCells` — by default heap limit / 100 for rows (≈45M cells on Node's default 4 GB heap) and heap limit / 30 for `format: "columns"` — and throws a catchable `SdvError` instead of running out of memory. Play-by-play is the usual case: pass `columns`, use `format: "columns"`, or raise the heap (`node --max-old-space-size=8192`).
 - **Seasons:** `seasons` takes one season or a list. A season with no published asset (HTTP 404) is skipped with a warning (loaders marked so in their `seasons` row — sdv-py's hand-written ones — throw `NoDataError` instead); any other failure raises `AssetFetchError` (a failed download is never an empty season); a season below the loader's floor raises `SeasonNotFoundError` before anything is fetched. Multi-season results union the columns, null-filling gaps, and cast a column whose type changed between seasons to the common type (an integer id that became a string → strings, "123" not "123.0"), as sdv-py's `diagonal_relaxed` concat does.
@@ -25,20 +25,20 @@ sidebar_position: 50
 |---|---|---|
 | [`loadWbbPbp`](#loadwbbpbp) | [espn_womens_college_basketball_pbp](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_pbp) | 2002+ |
 | [`loadWbbPlayerBoxscore`](#loadwbbplayerboxscore) | [espn_womens_college_basketball_player_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_player_boxscores) | 2002+ |
-| [`loadWbbSchedule`](#loadwbbschedule) | [espn_womens_college_basketball_schedules](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_schedules) | 2002+ |
+| [`loadWbbSchedule`](#loadwbbschedule) | [espn_womens_college_basketball_schedules](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_schedules) | 2001+ |
 | [`loadWbbTeamBoxscore`](#loadwbbteamboxscore) | [espn_womens_college_basketball_team_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_team_boxscores) | 2002+ |
 | [`loadWbbRatings`](#loadwbbratings) | [wbb_ratings](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wbb_ratings) | 2008+ |
 | [`loadWbbPlayerValue`](#loadwbbplayervalue) | [wbb_player_value](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wbb_player_value) | 2014+ |
-| [`loadWbbGameRosters`](#loadwbbgamerosters) | [espn_womens_college_basketball_game_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_game_rosters) | 2026+ |
-| [`loadWbbOfficials`](#loadwbbofficials) | [espn_womens_college_basketball_officials](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_officials) | 2026+ |
-| [`loadWbbPlayerSeasonStats`](#loadwbbplayerseasonstats) | [espn_womens_college_basketball_player_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_player_season_stats) | 2026+ |
+| [`loadWbbGameRosters`](#loadwbbgamerosters) | [espn_womens_college_basketball_game_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_game_rosters) | 2004+ |
+| [`loadWbbOfficials`](#loadwbbofficials) | [espn_womens_college_basketball_officials](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_officials) | 2014+ |
+| [`loadWbbPlayerSeasonStats`](#loadwbbplayerseasonstats) | [espn_womens_college_basketball_player_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_player_season_stats) | 2006+ |
 | [`loadWbbRosters`](#loadwbbrosters) | [espn_womens_college_basketball_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_rosters) | 2026+ |
-| [`loadWbbShots`](#loadwbbshots) | [espn_womens_college_basketball_shots](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_shots) | 2026+ |
-| [`loadWbbStandings`](#loadwbbstandings) | [espn_womens_college_basketball_standings](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_standings) | 2026+ |
-| [`loadWbbTeamSeasonStats`](#loadwbbteamseasonstats) | [espn_womens_college_basketball_team_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_team_season_stats) | 2026+ |
+| [`loadWbbShots`](#loadwbbshots) | [espn_womens_college_basketball_shots](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_shots) | 2004+ |
+| [`loadWbbStandings`](#loadwbbstandings) | [espn_womens_college_basketball_standings](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_standings) | 2003+ |
+| [`loadWbbTeamSeasonStats`](#loadwbbteamseasonstats) | [espn_womens_college_basketball_team_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_team_season_stats) | 2010+ |
 | [`loadWbbPlayerCrosswalk`](#loadwbbplayercrosswalk) | [wbb_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wbb_crosswalk) | 2014+ |
-| [`loadWbbScheduleCrosswalk`](#loadwbbschedulecrosswalk) | [wbb_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wbb_crosswalk) | 2026+ |
-| [`loadWbbTeamCrosswalk`](#loadwbbteamcrosswalk) | [wbb_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wbb_crosswalk) | 2014+ |
+| [`loadWbbScheduleCrosswalk`](#loadwbbschedulecrosswalk) | [wbb_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wbb_crosswalk) | 2021+ |
+| [`loadWbbTeamCrosswalk`](#loadwbbteamcrosswalk) | [wbb_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wbb_crosswalk) | 2002+ |
 | [`loadWbbPlayerCore`](#loadwbbplayercore) | [espn_womens_college_basketball_player_core](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_player_core) | 2004+ |
 | [`loadNcaaWbbRapm`](#loadncaawbbrapm) | [ncaa_wbb_rapm](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_wbb_rapm) | 2011+ |
 | [`loadNcaaWbbPbp`](#loadncaawbbpbp) | [ncaa_wbb_pbp](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/ncaa_wbb_pbp) | 2010+ |
@@ -57,6 +57,8 @@ sidebar_position: 50
 | [`loadWbbGroupSeasons`](#loadwbbgroupseasons) | [wbb_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wbb_groups) | one asset |
 | [`loadWbbGroupAliases`](#loadwbbgroupaliases) | [wbb_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wbb_groups) | one asset |
 | [`loadWbbTeamGroupSeasons`](#loadwbbteamgroupseasons) | [wbb_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wbb_groups) | 2002+ |
+| [`loadWbbTeamAliases`](#loadwbbteamaliases) | [wbb_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wbb_groups) | one asset |
+| [`loadWbbPlayerAliases`](#loadwbbplayeraliases) | [wbb_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wbb_groups) | one asset |
 
 ## `loadWbbPbp`
 
@@ -238,7 +240,7 @@ Release: [espn_womens_college_basketball_schedules](https://github.com/sportsdat
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2001) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -281,13 +283,13 @@ const rows = await sdv.wbb.loadWbbSchedule({ seasons: 2024 });
 | `status_clock` | `number` | Status clock. |
 | `status_display_clock` | `string` | Status display clock. |
 | `status_period` | `number` | Status period. |
-| `status_type_id` | `string` | Unique identifier for status type. |
-| `status_type_name` | `string` | Status type name. |
-| `status_type_state` | `string` | Status type state. |
-| `status_type_completed` | `boolean` | Status type completed. |
-| `status_type_description` | `string` | Status type description. |
-| `status_type_detail` | `string` | Status type detail. |
-| `status_type_short_detail` | `string` | Status type short detail. |
+| `status_type_id` | `string` | ESPN's numeric game-status code, passed through unchanged. ESPN publishes no reference for these codes, so read status_type_name rather than hard-coding numbers. |
+| `status_type_name` | `string` | ESPN's game-status enum (STATUS_FINAL, STATUS_SCHEDULED, STATUS_POSTPONED, STATUS_CANCELED, ...), passed through unchanged. ESPN does not document the full set, and no value certifies an ordinary final as distinct from a forfeit or an awarded result. |
+| `status_type_state` | `string` | ESPN's coarse game state, passed through unchanged: pre, in or post. post covers every game that is over, whatever the reason. |
+| `status_type_completed` | `boolean` | ESPN's completed flag, passed through unchanged: true once ESPN considers the game over. It does not separate an ordinary final from a forfeited, protested, replayed or awarded result; ESPN documents no such distinction. |
+| `status_type_description` | `string` | ESPN's display text for the game status (for example "Final" or "Postponed"), passed through unchanged. |
+| `status_type_detail` | `string` | ESPN's longer status text, passed through unchanged; an overtime final reads like "Final/OT". |
+| `status_type_short_detail` | `string` | ESPN's short status text for scoreboards, passed through unchanged. |
 | `format_regulation_periods` | `number` | Format regulation periods. |
 | `home_id` | `string` | Unique identifier for home. |
 | `home_uid` | `string` | Home team's uid. |
@@ -302,7 +304,7 @@ const rows = await sdv.wbb.loadWbbSchedule({ seasons: 2024 });
 | `home_venue_id` | `string` | Unique identifier for home venue. |
 | `home_logo` | `string` | Home team logo URL. |
 | `home_conference_id` | `string` | Unique identifier for home conference. |
-| `home_score` | `number` | Home team score at the time of the play. |
+| `home_score` | `number` | Home team's points as ESPN reports them: once the game is final, the full-game total including every overtime period. ESPN corrects a score in place, so this is the value ESPN showed when the release was last built. Not a final score until status_type_completed is true. |
 | `home_winner` | `boolean` | Home team's winner. |
 | `home_current_rank` | `number` | Poll ranking ESPN listed for the home team at game time (unranked teams carry a sentinel value). |
 | `home_linescores` | `string` | Period-by-period scores for the home team as a delimited string from ESPN's schedule feed. |
@@ -320,7 +322,7 @@ const rows = await sdv.wbb.loadWbbSchedule({ seasons: 2024 });
 | `away_venue_id` | `string` | Unique identifier for away venue. |
 | `away_logo` | `string` | Away team logo URL. |
 | `away_conference_id` | `string` | Unique identifier for away conference. |
-| `away_score` | `number` | Away team score at the time of the play. |
+| `away_score` | `number` | Away team's points as ESPN reports them: once the game is final, the full-game total including every overtime period. ESPN corrects a score in place, so this is the value ESPN showed when the release was last built. Not a final score until status_type_completed is true. |
 | `away_winner` | `boolean` | Away team's winner. |
 | `away_current_rank` | `number` | Poll ranking ESPN listed for the away team at game time (unranked teams carry a sentinel value). |
 | `away_linescores` | `string` | Period-by-period scores for the away team as a delimited string from ESPN's schedule feed. |
@@ -507,7 +509,7 @@ Release: [espn_womens_college_basketball_game_rosters](https://github.com/sports
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -551,9 +553,13 @@ const rows = await sdv.wbb.loadWbbGameRosters({ seasons: 2026 });
 
 Release: [espn_womens_college_basketball_officials](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_officials) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_womens_college_basketball_officials/officials_{season}.parquet`
 
+:::caution[Coverage]
+Published seasons: every season from the floor except 2024 and 2025, which the release has no asset for; a request for one is skipped with a warning.
+:::
+
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2014) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -586,9 +592,13 @@ const rows = await sdv.wbb.loadWbbOfficials({ seasons: 2026 });
 
 Release: [espn_womens_college_basketball_player_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_player_season_stats) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_womens_college_basketball_player_season_stats/player_season_stats_{season}.parquet`
 
+:::caution[Coverage]
+Published seasons: every season from the floor except 2024 and 2025, which the release has no asset for; a request for one is skipped with a warning.
+:::
+
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2006) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -688,7 +698,7 @@ Release: [espn_womens_college_basketball_shots](https://github.com/sportsdataver
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -730,9 +740,13 @@ const rows = await sdv.wbb.loadWbbShots({ seasons: 2026 });
 
 Release: [espn_womens_college_basketball_standings](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_standings) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_womens_college_basketball_standings/standings_{season}.parquet`
 
+:::caution[Coverage]
+Published seasons: every season from the floor except 2005, 2024 and 2025, which the release has no asset for; a request for one is skipped with a warning.
+:::
+
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2003) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -778,9 +792,13 @@ const rows = await sdv.wbb.loadWbbStandings({ seasons: 2026 });
 
 Release: [espn_womens_college_basketball_team_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_team_season_stats) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_womens_college_basketball_team_season_stats/team_season_stats_{season}.parquet`
 
+:::caution[Coverage]
+Published seasons: every season from the floor except 2024 and 2025, which the release has no asset for; a request for one is skipped with a warning.
+:::
+
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -861,7 +879,7 @@ Release: [wbb_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2021) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -898,7 +916,7 @@ Release: [wbb_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2014) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -1563,13 +1581,13 @@ const rows = await sdv.wbb.loadNcaaWbbPossessions({ seasons: 2024, columns: ['ga
 | `home_score` | `number \| bigint` | Home team score at the time of the play. |
 | `away_score` | `number \| bigint` | Away team score at the time of the play. |
 | `pts` | `number \| bigint` | Points scored. |
-| `is_assisted` | `number \| bigint` | 1 when the possession's made field goal was assisted, else 0. |
+| `is_assisted` | `number \| bigint` | Count of the possession's events that carry an assisting second player (0, 1, rarely 2) -- a count, not a flag, kept from the R source for parity. |
 | `is_transition` | `number \| bigint` | 1 for transition possessions, else 0. |
 | `is_garbage_time` | `number \| bigint` | 1 for possessions in garbage time under the score-margin and clock rule, else 0. |
-| `start_event_type` | `string` | Event type that opened the possession (e.g., a defensive rebound or a made-basket inbound). |
-| `first_shot_time` | `number \| bigint` | Clock time in seconds at the possession's first shot attempt, from the possession segmentation engine. |
-| `first_shot_type` | `string` | Shot class of the possession's first attempt (rim, mid-range, or three). |
-| `last_event_time` | `number \| bigint` | Clock time in seconds at the possession's final event. |
+| `start_event_type` | `string` | Event type of the play immediately before the possession's first event (what started it, e.g. a defensive rebound or a made basket), not the possession's own first event. |
+| `first_shot_time` | `number \| bigint` | Seconds into the possession (poss_length) at its first field-goal attempt; null when the possession had no shot. |
+| `first_shot_type` | `string` | stats.ncaa.org event name of the possession's first field-goal attempt ("Layup", "Three Point Jumper", "Two Point Jumper", "Hook", "Dunk", "Tip In"); null when the possession had no shot. |
+| `last_event_time` | `number \| bigint` | Seconds into the possession (poss_length) at its final event. |
 | `last_event_type` | `string` | Event type that ended the possession (e.g., a made shot, turnover, or defensive rebound). |
 | `contest_id` | `string` |  |
 | `home_ncaa_team_id` | `string` | stats.ncaa.org team identifier for the home team. |
@@ -1979,5 +1997,83 @@ const rows = await sdv.wbb.loadWbbTeamGroupSeasons({ seasons: 2024 });
 | `source` | `string` | Source the membership was taken from -- the most reliable per-season source for that era. |
 | `sources_agree` | `boolean` | Whether a second source agreed on the membership; null when only one source covers the season. |
 | `notes` | `string` | Builder notes on the team-season, such as a source disagreement or which of several listed memberships was kept. |
+
+## `loadWbbTeamAliases`
+
+Release: [wbb_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wbb_groups) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wbb_groups/wbb_team_aliases.parquet`
+
+:::caution[Coverage]
+One season-less file: every id and name another source (fox, ncaa, on3, sports247, torvik, yahoo) uses for a team, keyed on the ESPN team id (team_id, a string; team_id_source = espn), with the seasons the source shows it on that team (valid_from / valid_to, inclusive; both null for an undated curated map). id_kind says whether source_id is the source's id for this sport's team or one id for every sport of a school; a name-only row has a null source_id. A source id means something only within its source (Fox 25 is not ESPN 25), so filter on source before joining on source_id. Seasons are the ENDING year (2025 = the 2024-25 season).
+:::
+
+| option | type | required | description |
+|---|---|---|---|
+| `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
+| `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
+
+```js
+const rows = await sdv.wbb.loadWbbTeamAliases();
+// snake_case alias (py/R parity): sdv.wbb.load_wbb_team_aliases(...)
+```
+
+**Returns** (one row per record; every column optional and nullable):
+
+**Row type:** `LoadWbbTeamAliasesRow` (exported from the package root).
+
+| col_name | type | description |
+|---|---|---|
+| `league` | `string` | League code of the table ("wbb"). |
+| `team_id` | `string` | ESPN team id the alias points to, as a string (e.g. "150"); the same id as team_id in load_wbb_team_group_seasons. Join on it to reach ESPN team data. |
+| `team_id_source` | `string` | Id space of team_id; always "espn" in this table. |
+| `source` | `string` | Provider that uses this id or name (in this table: fox, ncaa, on3, sports247, torvik, yahoo). "sports247" is 247Sports. |
+| `source_id` | `string` | The source's own id for the team (e.g. Fox 25, Yahoo nba.t.1); null for a name-only row. It means something only within its source (Fox 25 is Ohio State, ESPN 25 is California), so filter on source first. |
+| `id_kind` | `string` | "team" when source_id is the source's id for this sport's team, or "school" when it is one id for every sport of a school (the stats.ncaa.org org id, 247Sports institutionKey, On3 orgKey). |
+| `name_kind` | `string` | Kind of label in value: "name" or "abbreviation"; null when the row carries only an id. An id with both a name and an abbreviation is two rows. |
+| `value` | `string` | The source's own spelling of the team name or abbreviation; null when the row carries only an id. |
+| `valid_from` | `number` | First season the source shows this id or name on the team, inclusive (ENDING year: 2025 = the 2024-25 season); null, with valid_to, for an undated curated map. |
+| `valid_to` | `number` | Last season the source shows this id or name on the team, inclusive (ENDING year: 2025 = the 2024-25 season); null, with valid_from, for an undated curated map. A gap in the source splits the window into two rows. |
+| `match_method` | `string` | How the row was tied to the ESPN team: "deterministic" (a formula or shared key, e.g. Yahoo \{league\}.t.\{espn id\}; CFBD ids are ESPN ids), "crosswalk" (carried from a published crosswalk leg), "curated" (a cited map), or for a hand-captured team directory row "alias", "exact_name" (normalized name) or "dict" (curated name dictionary). |
+| `evidence` | `string` | The release asset or sportsdataverse/sdv-reference-data file the row came from. |
+
+## `loadWbbPlayerAliases`
+
+Release: [wbb_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wbb_groups) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wbb_groups/wbb_player_aliases.parquet`
+
+:::caution[Coverage]
+One season-less file: every player id another source (fox, ncaa) uses for an ESPN athlete (athlete_id, a string; athlete_id_source = espn), with the ESPN team the match was made on (team_id) and the seasons it held (valid_from / valid_to, inclusive). match_method and match_confidence carry the matching leg's own method and score. Filter on source before joining on source_player_id. stats.ncaa.org roster ids (source ncaa) are new every season. Seasons are the ENDING year (2025 = the 2024-25 season).
+:::
+
+| option | type | required | description |
+|---|---|---|---|
+| `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
+| `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
+
+```js
+const rows = await sdv.wbb.loadWbbPlayerAliases();
+// snake_case alias (py/R parity): sdv.wbb.load_wbb_player_aliases(...)
+```
+
+**Returns** (one row per record; every column optional and nullable):
+
+**Row type:** `LoadWbbPlayerAliasesRow` (exported from the package root).
+
+| col_name | type | description |
+|---|---|---|
+| `league` | `string` | League code of the table ("wbb"). |
+| `athlete_id` | `string` | ESPN athlete id the provider id points to, as a string (e.g. "4433134"). Join on it to reach ESPN player data; the ESPN player loaders (load_wbb_player_core and its siblings) carry it as Int32, so cast first with pl.col("athlete_id").cast(pl.Int32). |
+| `athlete_id_source` | `string` | Id space of athlete_id; always "espn" in this table. |
+| `source` | `string` | Provider whose player id this is (in this table: fox, ncaa). |
+| `source_player_id` | `string` | The source's own player id (e.g. Fox 76284). It means something only within its source, so filter on source first. stats.ncaa.org roster ids (source ncaa) are new every season. |
+| `team_id` | `string` | ESPN team id (a string) the athlete was on in these seasons: the team block the match was made in, an ESPN team-season of load_wbb_team_group_seasons. |
+| `source_team_id` | `string` | The source's own team id when the matching leg gives one (the season's stats.ncaa.org team id; the Fox / Yahoo / CBS team for the NFL); null otherwise. |
+| `valid_from` | `number` | First season the id is on that team, inclusive (ENDING year: 2025 = the 2024-25 season). |
+| `valid_to` | `number` | Last season the id is on that team, inclusive (ENDING year: 2025 = the 2024-25 season). A gap or a change of match method splits the window into two rows. |
+| `match_method` | `string` | The matching leg's own method (exact_name, fuzzy_jw, the NCAA tiers name_jersey / name / last_jersey / jaro_winkler, CFB rosters name); crosswalk for a leg that names none; propagated when a pair matched in another season was carried to this provider id; override for a hand-verified override. |
+| `match_confidence` | `number` | The leg's own match confidence where it gives one (the lowest in the window); the NCAA tiers score 1.0 / 0.95 / 0.9 / 0.85; null otherwise. |
+| `evidence` | `string` | The release asset or sportsdataverse/sdv-reference-data file the row came from. |
 
 _Generated by tools/codegen/generate.mjs from tools/codegen/endpoints/releases.yaml (vendored from sdv-py) — see [How this library is built](/docs/architecture/loaders)._

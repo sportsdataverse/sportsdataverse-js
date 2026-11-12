@@ -14,7 +14,7 @@ sidebar_position: 50
 
 # `sdv.wnba` — dataset loaders
 
-34 loaders reading the published sportsdataverse-data releases (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias and resolves to an array of plain row objects (or `{ [column]: values[] }` with `format: "columns"`).
+36 loaders reading the published sportsdataverse-data releases (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias and resolves to an array of plain row objects (or `{ [column]: values[] }` with `format: "columns"`).
 
 - **Size:** row objects cost ~60-100 bytes per cell on the heap, so before decoding each season a loader adds its rows × columns (from the parquet footer) to a running total and checks it against `maxCells` — by default heap limit / 100 for rows (≈45M cells on Node's default 4 GB heap) and heap limit / 30 for `format: "columns"` — and throws a catchable `SdvError` instead of running out of memory. Play-by-play is the usual case: pass `columns`, use `format: "columns"`, or raise the heap (`node --max-old-space-size=8192`).
 - **Seasons:** `seasons` takes one season or a list. A season with no published asset (HTTP 404) is skipped with a warning (loaders marked so in their `seasons` row — sdv-py's hand-written ones — throw `NoDataError` instead); any other failure raises `AssetFetchError` (a failed download is never an empty season); a season below the loader's floor raises `SeasonNotFoundError` before anything is fetched. Multi-season results union the columns, null-filling gaps, and cast a column whose type changed between seasons to the common type (an integer id that became a string → strings, "123" not "123.0"), as sdv-py's `diagonal_relaxed` concat does.
@@ -25,31 +25,31 @@ sidebar_position: 50
 |---|---|---|
 | [`loadWnbaPbp`](#loadwnbapbp) | [espn_wnba_pbp](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_pbp) | 2002+ |
 | [`loadWnbaPlayerBoxscore`](#loadwnbaplayerboxscore) | [espn_wnba_player_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_player_boxscores) | 2002+ |
-| [`loadWnbaSchedule`](#loadwnbaschedule) | [espn_wnba_schedules](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_schedules) | 2002+ |
+| [`loadWnbaSchedule`](#loadwnbaschedule) | [espn_wnba_schedules](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_schedules) | 1997+ |
 | [`loadWnbaTeamBoxscore`](#loadwnbateamboxscore) | [espn_wnba_team_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_team_boxscores) | 2002+ |
-| [`loadWnbaDraft`](#loadwnbadraft) | [espn_wnba_draft](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_draft) | 2026+ |
-| [`loadWnbaGameRosters`](#loadwnbagamerosters) | [espn_wnba_game_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_game_rosters) | 2024+ |
-| [`loadWnbaOfficials`](#loadwnbaofficials) | [espn_wnba_officials](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_officials) | 2024+ |
-| [`loadWnbaPlayerSeasonStats`](#loadwnbaplayerseasonstats) | [espn_wnba_player_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_player_season_stats) | 2024+ |
+| [`loadWnbaDraft`](#loadwnbadraft) | [espn_wnba_draft](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_draft) | 2018+ |
+| [`loadWnbaGameRosters`](#loadwnbagamerosters) | [espn_wnba_game_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_game_rosters) | 2002+ |
+| [`loadWnbaOfficials`](#loadwnbaofficials) | [espn_wnba_officials](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_officials) | 2003+ |
+| [`loadWnbaPlayerSeasonStats`](#loadwnbaplayerseasonstats) | [espn_wnba_player_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_player_season_stats) | 2002+ |
 | [`loadWnbaRosters`](#loadwnbarosters) | [espn_wnba_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_rosters) | 2024+ |
-| [`loadWnbaShots`](#loadwnbashots) | [espn_wnba_shots](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_shots) | 2024+ |
-| [`loadWnbaStandings`](#loadwnbastandings) | [espn_wnba_standings](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_standings) | 2024+ |
-| [`loadWnbaTeamSeasonStats`](#loadwnbateamseasonstats) | [espn_wnba_team_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_team_season_stats) | 2024+ |
+| [`loadWnbaShots`](#loadwnbashots) | [espn_wnba_shots](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_shots) | 2002+ |
+| [`loadWnbaStandings`](#loadwnbastandings) | [espn_wnba_standings](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_standings) | 2002+ |
+| [`loadWnbaTeamSeasonStats`](#loadwnbateamseasonstats) | [espn_wnba_team_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_team_season_stats) | 2002+ |
 | [`loadWnbaPlayerCrosswalk`](#loadwnbaplayercrosswalk) | [wnba_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_crosswalk) | 2002+ |
-| [`loadWnbaScheduleCrosswalk`](#loadwnbaschedulecrosswalk) | [wnba_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_crosswalk) | 2026+ |
-| [`loadWnbaTeamCrosswalk`](#loadwnbateamcrosswalk) | [wnba_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_crosswalk) | 2026+ |
+| [`loadWnbaScheduleCrosswalk`](#loadwnbaschedulecrosswalk) | [wnba_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_crosswalk) | 2002+ |
+| [`loadWnbaTeamCrosswalk`](#loadwnbateamcrosswalk) | [wnba_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_crosswalk) | 2002+ |
 | [`loadWnbaPlayerCore`](#loadwnbaplayercore) | [espn_wnba_player_core](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_player_core) | 2003+ |
 | [`loadWnbaPlayerImpact`](#loadwnbaplayerimpact) | [wnba_player_impact](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_player_impact) | 1997+ |
-| [`loadWnbaStatsCoaches`](#loadwnbastatscoaches) | [wnba_stats_coaches](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_coaches) | 2026+ |
-| [`loadWnbaStatsDraft`](#loadwnbastatsdraft) | [wnba_stats_draft](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_draft) | 2025+ |
-| [`loadWnbaStatsGameRosters`](#loadwnbastatsgamerosters) | [wnba_stats_game_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_game_rosters) | 2026+ |
-| [`loadWnbaStatsOfficials`](#loadwnbastatsofficials) | [wnba_stats_officials](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_officials) | 2026+ |
+| [`loadWnbaStatsCoaches`](#loadwnbastatscoaches) | [wnba_stats_coaches](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_coaches) | 1997+ |
+| [`loadWnbaStatsDraft`](#loadwnbastatsdraft) | [wnba_stats_draft](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_draft) | 1997+ |
+| [`loadWnbaStatsGameRosters`](#loadwnbastatsgamerosters) | [wnba_stats_game_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_game_rosters) | 1997+ |
+| [`loadWnbaStatsOfficials`](#loadwnbastatsofficials) | [wnba_stats_officials](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_officials) | 2004+ |
 | [`loadWnbaStatsPbp`](#loadwnbastatspbp) | [wnba_stats_pbp](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_pbp) | 1997+ |
 | [`loadWnbaStatsPossessions`](#loadwnbastatspossessions) | [wnba_stats_possessions](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_possessions) | 1997+ |
 | [`loadWnbaStatsGameLineups`](#loadwnbastatsgamelineups) | [wnba_stats_game_lineups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_game_lineups) | 1997+ |
 | [`loadWnbaStatsPlayerBoxscores`](#loadwnbastatsplayerboxscores) | [wnba_stats_player_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_player_boxscores) | 2026+ |
 | [`loadWnbaStatsPlayerGameLogs`](#loadwnbastatsplayergamelogs) | [wnba_stats_player_game_logs](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_player_game_logs) | 1997+ |
-| [`loadWnbaStatsRosters`](#loadwnbastatsrosters) | [wnba_stats_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_rosters) | 2026+ |
+| [`loadWnbaStatsRosters`](#loadwnbastatsrosters) | [wnba_stats_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_rosters) | 1997+ |
 | [`loadWnbaStatsSchedules`](#loadwnbastatsschedules) | [wnba_stats_schedules](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_schedules) | 1997+ |
 | [`loadWnbaStatsShots`](#loadwnbastatsshots) | [wnba_stats_shots](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_shots) | 1997+ |
 | [`loadWnbaStatsTeamBoxscores`](#loadwnbastatsteamboxscores) | [wnba_stats_team_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_team_boxscores) | 2026+ |
@@ -57,6 +57,8 @@ sidebar_position: 50
 | [`loadWnbaGroupSeasons`](#loadwnbagroupseasons) | [wnba_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_groups) | one asset |
 | [`loadWnbaGroupAliases`](#loadwnbagroupaliases) | [wnba_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_groups) | one asset |
 | [`loadWnbaTeamGroupSeasons`](#loadwnbateamgroupseasons) | [wnba_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_groups) | 1997+ |
+| [`loadWnbaTeamAliases`](#loadwnbateamaliases) | [wnba_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_groups) | one asset |
+| [`loadWnbaPlayerAliases`](#loadwnbaplayeraliases) | [wnba_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_groups) | one asset |
 
 ## `loadWnbaPbp`
 
@@ -237,7 +239,7 @@ Release: [espn_wnba_schedules](https://github.com/sportsdataverse/sportsdatavers
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 1997) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -280,13 +282,13 @@ const rows = await sdv.wnba.loadWnbaSchedule({ seasons: 2024 });
 | `status_clock` | `number` | Status clock. |
 | `status_display_clock` | `string` | Status display clock. |
 | `status_period` | `number` | Status period. |
-| `status_type_id` | `string` | Unique identifier for status type. |
-| `status_type_name` | `string` | Status type name. |
-| `status_type_state` | `string` | Status type state. |
-| `status_type_completed` | `boolean` | Status type completed. |
-| `status_type_description` | `string` | Status type description. |
-| `status_type_detail` | `string` | Status type detail. |
-| `status_type_short_detail` | `string` | Status type short detail. |
+| `status_type_id` | `string` | ESPN's numeric game-status code, passed through unchanged. ESPN publishes no reference for these codes, so read status_type_name rather than hard-coding numbers. |
+| `status_type_name` | `string` | ESPN's game-status enum (STATUS_FINAL, STATUS_SCHEDULED, STATUS_POSTPONED, STATUS_CANCELED, ...), passed through unchanged. ESPN does not document the full set, and no value certifies an ordinary final as distinct from a forfeit or an awarded result. |
+| `status_type_state` | `string` | ESPN's coarse game state, passed through unchanged: pre, in or post. post covers every game that is over, whatever the reason. |
+| `status_type_completed` | `boolean` | ESPN's completed flag, passed through unchanged: true once ESPN considers the game over. It does not separate an ordinary final from a forfeited, protested, replayed or awarded result; ESPN documents no such distinction. |
+| `status_type_description` | `string` | ESPN's display text for the game status (for example "Final" or "Postponed"), passed through unchanged. |
+| `status_type_detail` | `string` | ESPN's longer status text, passed through unchanged; an overtime final reads like "Final/OT". |
+| `status_type_short_detail` | `string` | ESPN's short status text for scoreboards, passed through unchanged. |
 | `format_regulation_periods` | `number` | Format regulation periods. |
 | `home_id` | `string` | Unique identifier for home. |
 | `home_uid` | `string` | Home team's uid. |
@@ -300,7 +302,7 @@ const rows = await sdv.wnba.loadWnbaSchedule({ seasons: 2024 });
 | `home_is_active` | `boolean` | Home team's is active. |
 | `home_venue_id` | `string` | Unique identifier for home venue. |
 | `home_logo` | `string` | Home team logo URL. |
-| `home_score` | `number` | Home team score at the time of the play. |
+| `home_score` | `number` | Home team's points as ESPN reports them: once the game is final, the full-game total including every overtime period. ESPN corrects a score in place, so this is the value ESPN showed when the release was last built. Not a final score until status_type_completed is true. |
 | `home_winner` | `boolean` | Home team's winner. |
 | `home_linescores` | `string` | Stringified list of the home team's period-by-period scores from the ESPN schedule feed. |
 | `home_records` | `string` | Stringified list of the home team's record summaries (overall/home/away) from the ESPN schedule feed. |
@@ -316,7 +318,7 @@ const rows = await sdv.wnba.loadWnbaSchedule({ seasons: 2024 });
 | `away_is_active` | `boolean` | Away team's is active. |
 | `away_venue_id` | `string` | Unique identifier for away venue. |
 | `away_logo` | `string` | Away team logo URL. |
-| `away_score` | `number` | Away team score at the time of the play. |
+| `away_score` | `number` | Away team's points as ESPN reports them: once the game is final, the full-game total including every overtime period. ESPN corrects a score in place, so this is the value ESPN showed when the release was last built. Not a final score until status_type_completed is true. |
 | `away_winner` | `boolean` | Away team's winner. |
 | `away_linescores` | `string` | Stringified list of the away team's period-by-period scores from the ESPN schedule feed. |
 | `away_records` | `string` | Stringified list of the away team's record summaries (overall/home/away) from the ESPN schedule feed. |
@@ -421,7 +423,7 @@ Release: [espn_wnba_draft](https://github.com/sportsdataverse/sportsdataverse-da
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2018) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -480,7 +482,7 @@ Release: [espn_wnba_game_rosters](https://github.com/sportsdataverse/sportsdatav
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -524,9 +526,13 @@ const rows = await sdv.wnba.loadWnbaGameRosters({ seasons: 2024 });
 
 Release: [espn_wnba_officials](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_officials) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_wnba_officials/officials_{season}.parquet`
 
+:::caution[Coverage]
+Published seasons: every season from the floor except 2022 and 2023, which the release has no asset for; a request for one is skipped with a warning.
+:::
+
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2003) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -559,9 +565,13 @@ const rows = await sdv.wnba.loadWnbaOfficials({ seasons: 2024 });
 
 Release: [espn_wnba_player_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_player_season_stats) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_wnba_player_season_stats/player_season_stats_{season}.parquet`
 
+:::caution[Coverage]
+Published seasons: every season from the floor except 2022 and 2023, which the release has no asset for; a request for one is skipped with a warning.
+:::
+
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -661,7 +671,7 @@ Release: [espn_wnba_shots](https://github.com/sportsdataverse/sportsdataverse-da
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -703,9 +713,13 @@ const rows = await sdv.wnba.loadWnbaShots({ seasons: 2024 });
 
 Release: [espn_wnba_standings](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_standings) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_wnba_standings/standings_{season}.parquet`
 
+:::caution[Coverage]
+Published seasons: every season from the floor except 2022 and 2023, which the release has no asset for; a request for one is skipped with a warning.
+:::
+
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -751,9 +765,13 @@ const rows = await sdv.wnba.loadWnbaStandings({ seasons: 2024 });
 
 Release: [espn_wnba_team_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_team_season_stats) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_wnba_team_season_stats/team_season_stats_{season}.parquet`
 
+:::caution[Coverage]
+Published seasons: every season from the floor except 2022 and 2023, which the release has no asset for; a request for one is skipped with a warning.
+:::
+
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2024) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -790,6 +808,10 @@ const rows = await sdv.wnba.loadWnbaTeamSeasonStats({ seasons: 2024 });
 ## `loadWnbaPlayerCrosswalk`
 
 Release: [wnba_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_crosswalk) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wnba_crosswalk/wnba_player_crosswalk_{season}.parquet`
+
+:::caution[Coverage]
+wnba_player_id is Int64, as WNBA Stats ships player_id / person_id, so the bridge joins without a cast.
+:::
 
 | option | type | required | description |
 |---|---|---|---|
@@ -836,9 +858,13 @@ const rows = await sdv.wnba.loadWnbaPlayerCrosswalk({ seasons: 2026 });
 
 Release: [wnba_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_crosswalk) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wnba_crosswalk/wnba_schedule_crosswalk_{season}.parquet`
 
+:::caution[Coverage]
+wnba_game_id stays String, the WNBA Stats game id's dtype; the wnba_*_team_id bridge ids are Int64, as WNBA Stats ships team_id.
+:::
+
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -876,9 +902,13 @@ const rows = await sdv.wnba.loadWnbaScheduleCrosswalk({ seasons: 2026 });
 
 Release: [wnba_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_crosswalk) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wnba_crosswalk/wnba_team_crosswalk_{season}.parquet`
 
+:::caution[Coverage]
+wnba_team_id is Int64, as WNBA Stats ships team_id, so the bridge joins without a cast.
+:::
+
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -979,6 +1009,10 @@ const rows = await sdv.wnba.loadWnbaPlayerCore({ seasons: 2025 });
 
 Release: [wnba_player_impact](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_player_impact) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wnba_player_impact/wnba_player_impact_{season}.parquet`
 
+:::caution[Coverage]
+The BOBAN (Bayesian Online Box-Augmented Net) columns boban_filtered_skill, boban_projected_rating and boban_projected_sd were renamed from darko_*; the loader returns both names for one release, so move to boban_* now (darko_* is deprecated and will be removed).
+:::
+
 | option | type | required | description |
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 1997) |
@@ -1006,34 +1040,89 @@ const rows = await sdv.wnba.loadWnbaPlayerImpact({ seasons: 2024 });
 | `teams` | `string` | Nested list of member-team membership spans. |
 | `season` | `number \| bigint` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
 | `season_type` | `string` | Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). |
-| `o_rapm` | `number` | Offensive RAPM: ridge-regularized on/off impact on team offense, in points per 100 possessions. |
-| `d_rapm` | `number` | Defensive RAPM: ridge-regularized on/off impact on team defense, in points per 100 possessions. |
-| `rapm` | `number` | Total RAPM: offensive plus defensive regularized on/off impact, in points per 100 possessions. |
+| `o_rapm` | `number` | Offensive RAPM: ridge-regularized on/off impact on team offense, in points per 100 possessions, at the fixed WNBA penalty described under rapm. |
+| `d_rapm` | `number` | Defensive RAPM: ridge-regularized on/off impact on team defense, in points per 100 possessions, at the fixed WNBA penalty described under rapm. |
+| `rapm` | `number` | Total RAPM: offensive plus defensive regularized on/off impact, in points per 100 possessions. The ridge penalty is one fixed WNBA value (1,931, sportsdataverse.nba.nba_rapm.RAPM_PENALTY) in every season and season type, so the scale compares across seasons (regular-season sd 1.47 to 2.13 per 100 over players with 200 possessions, 1997-2026; fewer possessions shrink harder, so part of a spread difference is sample size). Seasons published before November 2026 were fit at a per-season RidgeCV pick: 1,931 in 23 of 30 regular seasons, but 5,179 or 13,895 in 1999, 2001, 2002, 2004, 2011, 2014 and 2016 (sd 0.32 to 0.93 there) and 268 to 100,000 in the playoffs. Do not compare those seasons with others or with values fit at the fixed penalty. |
 | `off_poss` | `number \| bigint` | Offensive possessions the player was on the floor for in the RAPM sample. |
 | `def_poss` | `number \| bigint` | Defensive possessions the player was on the floor for in the RAPM sample. |
-| `o_adj_rapm` | `number` | Offensive prior-informed RAPM: ridge shrunk toward a box-score prior, in points per 100 possessions. |
-| `d_adj_rapm` | `number` | Defensive prior-informed RAPM: ridge shrunk toward a box-score prior, in points per 100 possessions. |
-| `adj_rapm` | `number` | Total prior-informed RAPM (offense plus defense), in points per 100 possessions. |
+| `o_adj_rapm` | `number` | Offensive prior-informed RAPM per 100 possessions: the ridge fit shrunk toward the player's box-score (SPM) prior. In releases fit with sportsdataverse-py #1137 or later it is relative to an average player, up to any offset the SPM prior carries (possession-weighted league mean near 0: 2025 +0.45). A player with no prior (a rookie, or no previous-season SPM) is shrunk toward 0 instead. Releases fit before #1137, whatever their build date, fit no intercept, so the league's points per possession leaked into every coefficient: o_adj_rapm averaged about +10.97 and d_adj_rapm -9.60 (2025), a thinly-used player kept less of that offset, and only their sum, adj_rapm, read on a common scale. |
+| `d_adj_rapm` | `number` | Defensive prior-informed RAPM per 100 possessions, positive for a defender who lowers opponent scoring. In releases fit with sportsdataverse-py #1137 or later it is relative to an average player, up to any offset the SPM prior carries (possession-weighted league mean near 0: 2025 +0.11). Releases fit before #1137, whatever their build date, averaged about -9.60 here (see o_adj_rapm). |
+| `adj_rapm` | `number` | Total prior-informed RAPM per 100 possessions, exactly the sum of o_adj_rapm and d_adj_rapm. Releases fit with sportsdataverse-py #1137 or later fit the ridge with an unpenalized intercept; releases fit before it (whatever their build date) fit none, which leaned this total toward heavy-minute players. Releases fit with #1150 or later also use one ridge penalty per league (NBA 3,728, WNBA 2,683) and the SPM prior doubled (nba_adj_rapm.ADJ_RAPM_PENALTY / ADJ_RAPM_PRIOR_SCALE); earlier ones took a per-season RidgeCV pick, whose spread collapsed in some seasons (WNBA 2004 sd 0.64 against plain RAPM's 1.47). |
 | `ospm` | `number` | Offensive statistical plus-minus: box-score features regressed onto the offensive RAPM target, per 100 possessions. |
 | `dspm` | `number` | Defensive statistical plus-minus: box-score features regressed onto the defensive RAPM target, per 100 possessions. |
 | `spm` | `number` | Statistical plus-minus: offensive plus defensive box-score estimate of the RAPM target, per 100 possessions. |
 | `min` | `number` | Minutes played. |
 | `gp` | `number \| bigint` | Games played. |
-| `obpm` | `number` | Offensive box plus/minus. |
-| `dbpm` | `number` | Defensive box plus/minus. |
-| `bpm` | `number` | Career box plus/minus. |
+| `obpm` | `number` | Offensive box plus-minus per 100 possessions for this season and season type only, team-adjusted on its own so a team's minute-weighted obpm is its offensive rating minus the league's, divided by 5 (a traded player counted with his first team; league minute-weighted mean near 0). Releases fit before sportsdataverse-py #1148 put the whole team adjustment here (regular-season league minute-weighted mean about -2.9). |
+| `dbpm` | `number` | Defensive box plus-minus per 100 possessions for this season and season type only: bpm minus obpm, so a team's minute-weighted dbpm is (the league's offensive rating minus its defensive rating) / 5, positive for a good defense (league minute-weighted mean near 0). Releases fit before sportsdataverse-py #1148 left it unadjusted (regular-season league minute-weighted mean about +2.9, mostly positive). |
+| `bpm` | `number` | Box plus-minus (BPM 2.0) per 100 possessions for this season and season type only, not a career value: the box-score estimate of total impact. The team adjustment makes a team's minute-weighted bpm its net rating per 100 divided by 5 (the five %Min slots sum to the net rating; a traded player's minutes count with the first team he appears for in the logs). Releases fit before sportsdataverse-py #1148 targeted the full net rating, five times BPM 2.0's team mean. |
 | `war` | `number` | Wins above replacement implied by the player's impact and playing time, calibrated from team points-per-win. |
-| `darko_filtered_skill` | `number` | DARKO-style Kalman-filtered estimate of the player's current skill level. |
-| `darko_projected_rating` | `number` | DARKO-style projected forward rating, including the empirical aging-curve drift. |
-| `darko_projected_sd` | `number` | Posterior standard deviation of the DARKO-style projected rating. |
+| `boban_filtered_skill` | `number` | BOBAN Kalman-filtered estimate of the player's current skill level. |
+| `boban_projected_rating` | `number` | BOBAN projected forward rating, including the empirical aging-curve drift. |
+| `boban_projected_sd` | `number` | Posterior standard deviation of the BOBAN projected rating. |
+| `darko_filtered_skill` | `number` | Deprecated alias of boban_filtered_skill, kept for one release; use that column. |
+| `darko_projected_rating` | `number` | Deprecated alias of boban_projected_rating, kept for one release; use that column. |
+| `darko_projected_sd` | `number` | Deprecated alias of boban_projected_sd, kept for one release; use that column. |
+| `o_rapm_n` | `number \| bigint` | Possessions o_rapm is measured over: off_poss, his offensive possessions. o_rapm_rank and o_rapm_pct are set only when it reaches 610, the WNBA sample at which a player's on-court rating of the same side is half signal (sportsdataverse._common.rate_gates.ON_OFF_MIN_N); a regularized or box rating is less noisy, so the gate is conservative. |
+| `d_rapm_n` | `number \| bigint` | Possessions d_rapm is measured over: def_poss, his defensive possessions. d_rapm_rank and d_rapm_pct are set only when it reaches 1,200, the WNBA sample at which a player's on-court rating of the same side is half signal (sportsdataverse._common.rate_gates.ON_OFF_MIN_N); a regularized or box rating is less noisy, so the gate is conservative. |
+| `rapm_n` | `number \| bigint` | Possessions rapm is measured over: off_poss + def_poss, his possessions at both ends. rapm_rank and rapm_pct are set only when it reaches 1,600, the WNBA sample at which a player's on-court rating of the same side is half signal (sportsdataverse._common.rate_gates.ON_OFF_MIN_N); a regularized or box rating is less noisy, so the gate is conservative. |
+| `o_adj_rapm_n` | `number \| bigint` | Possessions o_adj_rapm is measured over: off_poss, his offensive possessions. o_adj_rapm_rank and o_adj_rapm_pct are set only when it reaches 610, the WNBA sample at which a player's on-court rating of the same side is half signal (sportsdataverse._common.rate_gates.ON_OFF_MIN_N); a regularized or box rating is less noisy, so the gate is conservative. |
+| `d_adj_rapm_n` | `number \| bigint` | Possessions d_adj_rapm is measured over: def_poss, his defensive possessions. d_adj_rapm_rank and d_adj_rapm_pct are set only when it reaches 1,200, the WNBA sample at which a player's on-court rating of the same side is half signal (sportsdataverse._common.rate_gates.ON_OFF_MIN_N); a regularized or box rating is less noisy, so the gate is conservative. |
+| `adj_rapm_n` | `number \| bigint` | Possessions adj_rapm is measured over: off_poss + def_poss, his possessions at both ends. adj_rapm_rank and adj_rapm_pct are set only when it reaches 1,600, the WNBA sample at which a player's on-court rating of the same side is half signal (sportsdataverse._common.rate_gates.ON_OFF_MIN_N); a regularized or box rating is less noisy, so the gate is conservative. |
+| `ospm_n` | `number \| bigint` | Possessions ospm is measured over: off_poss, his offensive possessions. ospm_rank and ospm_pct are set only when it reaches 610, the WNBA sample at which a player's on-court rating of the same side is half signal (sportsdataverse._common.rate_gates.ON_OFF_MIN_N); a regularized or box rating is less noisy, so the gate is conservative. |
+| `dspm_n` | `number \| bigint` | Possessions dspm is measured over: def_poss, his defensive possessions. dspm_rank and dspm_pct are set only when it reaches 1,200, the WNBA sample at which a player's on-court rating of the same side is half signal (sportsdataverse._common.rate_gates.ON_OFF_MIN_N); a regularized or box rating is less noisy, so the gate is conservative. |
+| `spm_n` | `number \| bigint` | Possessions spm is measured over: off_poss + def_poss, his possessions at both ends. spm_rank and spm_pct are set only when it reaches 1,600, the WNBA sample at which a player's on-court rating of the same side is half signal (sportsdataverse._common.rate_gates.ON_OFF_MIN_N); a regularized or box rating is less noisy, so the gate is conservative. |
+| `obpm_n` | `number \| bigint` | Possessions obpm is measured over: off_poss, his offensive possessions. obpm_rank and obpm_pct are set only when it reaches 610, the WNBA sample at which a player's on-court rating of the same side is half signal (sportsdataverse._common.rate_gates.ON_OFF_MIN_N); a regularized or box rating is less noisy, so the gate is conservative. |
+| `dbpm_n` | `number \| bigint` | Possessions dbpm is measured over: def_poss, his defensive possessions. dbpm_rank and dbpm_pct are set only when it reaches 1,200, the WNBA sample at which a player's on-court rating of the same side is half signal (sportsdataverse._common.rate_gates.ON_OFF_MIN_N); a regularized or box rating is less noisy, so the gate is conservative. |
+| `bpm_n` | `number \| bigint` | Possessions bpm is measured over: off_poss + def_poss, his possessions at both ends. bpm_rank and bpm_pct are set only when it reaches 1,600, the WNBA sample at which a player's on-court rating of the same side is half signal (sportsdataverse._common.rate_gates.ON_OFF_MIN_N); a regularized or box rating is less noisy, so the gate is conservative. |
+| `war_n` | `number \| bigint` | Possessions behind war: off_poss + def_poss. war is a count, not a rate, so its rank has no sample gate. |
+| `boban_filtered_skill_n` | `number \| bigint` | Possessions behind boban_filtered_skill: off_poss + def_poss, this season's possessions at both ends. The boban filtered skill is a multi-season Kalman estimate with no single-side sample, so it takes the net on-court gate, the closest existing one: boban_filtered_skill_rank and boban_filtered_skill_pct are set only when this reaches 1,600. Conservative, since the filter also carries earlier seasons. |
+| `boban_projected_rating_n` | `number \| bigint` | Possessions behind boban_projected_rating: off_poss + def_poss, this season's possessions at both ends. The boban next-season projection is a multi-season Kalman estimate with no single-side sample, so it takes the net on-court gate, the closest existing one: boban_projected_rating_rank and boban_projected_rating_pct are set only when this reaches 1,600. Conservative, since the filter also carries earlier seasons. |
+| `boban_projected_sd_n` | `number \| bigint` | Possessions behind boban_projected_sd: off_poss + def_poss, this season's possessions at both ends. The boban projection's standard deviation is a multi-season Kalman estimate with no single-side sample, so it takes the net on-court gate, the closest existing one: boban_projected_sd_rank and boban_projected_sd_pct are set only when this reaches 1,600. Conservative, since the filter also carries earlier seasons. |
+| `o_rapm_rank` | `number` | Rank of o_rapm among the season and season type's ranked players, 1 = best (higher is better), ties averaged; null when o_rapm_n is under 610, and null when its season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value in the group is equal. Regular-season gates: a playoff run rarely reaches one. |
+| `d_rapm_rank` | `number` | Rank of d_rapm among the season and season type's ranked players, 1 = best (higher is better), ties averaged; null when d_rapm_n is under 1,200, and null when its season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value in the group is equal. Regular-season gates: a playoff run rarely reaches one. |
+| `rapm_rank` | `number` | Rank of rapm among the season and season type's ranked players, 1 = best (higher is better), ties averaged; null when rapm_n is under 1,600, and null when its season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value in the group is equal. Regular-season gates: a playoff run rarely reaches one. |
+| `o_adj_rapm_rank` | `number` | Rank of o_adj_rapm among the season and season type's ranked players, 1 = best (higher is better), ties averaged; null when o_adj_rapm_n is under 610, and null when its season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value in the group is equal. Regular-season gates: a playoff run rarely reaches one. |
+| `d_adj_rapm_rank` | `number` | Rank of d_adj_rapm among the season and season type's ranked players, 1 = best (higher is better), ties averaged; null when d_adj_rapm_n is under 1,200, and null when its season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value in the group is equal. Regular-season gates: a playoff run rarely reaches one. |
+| `adj_rapm_rank` | `number` | Rank of adj_rapm among the season and season type's ranked players, 1 = best (higher is better), ties averaged; null when adj_rapm_n is under 1,600, and null when its season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value in the group is equal. Regular-season gates: a playoff run rarely reaches one. |
+| `ospm_rank` | `number` | Rank of ospm among the season and season type's ranked players, 1 = best (higher is better), ties averaged; null when ospm_n is under 610, and null when its season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value in the group is equal. Regular-season gates: a playoff run rarely reaches one. |
+| `dspm_rank` | `number` | Rank of dspm among the season and season type's ranked players, 1 = best (higher is better), ties averaged; null when dspm_n is under 1,200, and null when its season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value in the group is equal. Regular-season gates: a playoff run rarely reaches one. |
+| `spm_rank` | `number` | Rank of spm among the season and season type's ranked players, 1 = best (higher is better), ties averaged; null when spm_n is under 1,600, and null when its season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value in the group is equal. Regular-season gates: a playoff run rarely reaches one. |
+| `obpm_rank` | `number` | Rank of obpm among the season and season type's ranked players, 1 = best (higher is better), ties averaged; null when obpm_n is under 610, and null when its season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value in the group is equal. Regular-season gates: a playoff run rarely reaches one. |
+| `dbpm_rank` | `number` | Rank of dbpm among the season and season type's ranked players, 1 = best (higher is better), ties averaged; null when dbpm_n is under 1,200, and null when its season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value in the group is equal. Regular-season gates: a playoff run rarely reaches one. |
+| `bpm_rank` | `number` | Rank of bpm among the season and season type's ranked players, 1 = best (higher is better), ties averaged; null when bpm_n is under 1,600, and null when its season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value in the group is equal. Regular-season gates: a playoff run rarely reaches one. |
+| `war_rank` | `number` | Rank of war among the season and season type's ranked players, 1 = best (higher is better), ties averaged; ungated (every player with a finite war qualifies), null when its season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value in the group is equal. |
+| `boban_filtered_skill_rank` | `number` | Rank of boban_filtered_skill among the season and season type's ranked players, 1 = best (higher is better), ties averaged; null when boban_filtered_skill_n is under 1,600, when season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value is equal. |
+| `boban_projected_rating_rank` | `number` | Rank of boban_projected_rating among the season and season type's ranked players, 1 = best (higher is better), ties averaged; null when boban_projected_rating_n is under 1,600, when season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value is equal. |
+| `boban_projected_sd_rank` | `number` | Rank of boban_projected_sd among the season and season type's ranked players, ASCENDING: 1 = the smallest sd, the most certain projection; ties averaged; null when boban_projected_sd_n is under 1,600, when season or season_type is null, in a group of fewer than 10 ranked players, or when every ranked value is equal. |
+| `o_rapm_pct` | `number` | Percentile of o_rapm_rank, 100 * (n + 1 - rank) / (n + 1) over the n ranked players of the season and season type; null where the rank is. |
+| `d_rapm_pct` | `number` | Percentile of d_rapm_rank, 100 * (n + 1 - rank) / (n + 1) over the n ranked players of the season and season type; null where the rank is. |
+| `rapm_pct` | `number` | Percentile of rapm_rank, 100 * (n + 1 - rank) / (n + 1) over the n ranked players of the season and season type; null where the rank is. |
+| `o_adj_rapm_pct` | `number` | Percentile of o_adj_rapm_rank, 100 * (n + 1 - rank) / (n + 1) over the n ranked players of the season and season type; null where the rank is. |
+| `d_adj_rapm_pct` | `number` | Percentile of d_adj_rapm_rank, 100 * (n + 1 - rank) / (n + 1) over the n ranked players of the season and season type; null where the rank is. |
+| `adj_rapm_pct` | `number` | Percentile of adj_rapm_rank, 100 * (n + 1 - rank) / (n + 1) over the n ranked players of the season and season type; null where the rank is. |
+| `ospm_pct` | `number` | Percentile of ospm_rank, 100 * (n + 1 - rank) / (n + 1) over the n ranked players of the season and season type; null where the rank is. |
+| `dspm_pct` | `number` | Percentile of dspm_rank, 100 * (n + 1 - rank) / (n + 1) over the n ranked players of the season and season type; null where the rank is. |
+| `spm_pct` | `number` | Percentile of spm_rank, 100 * (n + 1 - rank) / (n + 1) over the n ranked players of the season and season type; null where the rank is. |
+| `obpm_pct` | `number` | Percentile of obpm_rank, 100 * (n + 1 - rank) / (n + 1) over the n ranked players of the season and season type; null where the rank is. |
+| `dbpm_pct` | `number` | Percentile of dbpm_rank, 100 * (n + 1 - rank) / (n + 1) over the n ranked players of the season and season type; null where the rank is. |
+| `bpm_pct` | `number` | Percentile of bpm_rank, 100 * (n + 1 - rank) / (n + 1) over the n ranked players of the season and season type; null where the rank is. |
+| `war_pct` | `number` | Percentile of war_rank, 100 * (n + 1 - rank) / (n + 1) over the n ranked players of the season and season type; null where the rank is. |
+| `boban_filtered_skill_pct` | `number` | Percentile of boban_filtered_skill_rank, 100 * (n + 1 - rank) / (n + 1) over the n ranked players of the season and season type; null where the rank is. |
+| `boban_projected_rating_pct` | `number` | Percentile of boban_projected_rating_rank, 100 * (n + 1 - rank) / (n + 1) over the n ranked players of the season and season type; null where the rank is. |
+| `boban_projected_sd_pct` | `number` | Percentile of boban_projected_sd_rank, 100 * (n + 1 - rank) / (n + 1): high means a more certain projection (a smaller sd), not a larger one; null where the rank is. |
 
 ## `loadWnbaStatsCoaches`
 
 Release: [wnba_stats_coaches](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_coaches) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wnba_stats_coaches/coaches_{season}.parquet`
 
+:::caution[Coverage]
+Published seasons: every season from the floor except 2019, which the release has no asset for; a request for one is skipped with a warning.
+:::
+
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 1997) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -1068,7 +1157,7 @@ Release: [wnba_stats_draft](https://github.com/sportsdataverse/sportsdataverse-d
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2025) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 1997) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -1106,7 +1195,7 @@ Release: [wnba_stats_game_rosters](https://github.com/sportsdataverse/sportsdata
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 1997) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -1140,7 +1229,7 @@ Release: [wnba_stats_officials](https://github.com/sportsdataverse/sportsdataver
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -1258,7 +1347,7 @@ const rows = await sdv.wnba.loadWnbaStatsPossessions({ seasons: 2025 });
 | `end_order_index` | `number \| bigint` | order_index of the last event in the possession; joins to the wnba_stats_pbp table. |
 | `start_seconds_remaining` | `number` | Seconds remaining in the period when the possession began. |
 | `end_seconds_remaining` | `number` | Seconds remaining in the period when the possession ended. |
-| `points` | `number \| bigint` | Points scored. |
+| `points` | `number \| bigint` | Points the offense scored in the possession (its score step), plus any score it made while on defense since its previous possession (a technical free throw, say), credited here with its shots. |
 | `is_second_chance` | `boolean` | True when the possession continued after an offensive rebound (contains a second-chance segment). |
 | `number_in_period` | `number \| bigint` | Possession number within the period, resetting to 1 at each period start. |
 | `possession_start_type` | `string` | How the possession began: OffDeadball, OffTimeout, OffMadeShot, OffMissedShot, or OffLiveBallTurnover. |
@@ -1445,7 +1534,7 @@ Release: [wnba_stats_rosters](https://github.com/sportsdataverse/sportsdataverse
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2026) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 1997) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -1754,5 +1843,83 @@ const rows = await sdv.wnba.loadWnbaTeamGroupSeasons({ seasons: 2024 });
 | `source` | `string` | Source the membership was taken from -- the most reliable per-season source for that era. |
 | `sources_agree` | `boolean` | Whether a second source agreed on the membership; null when only one source covers the season. |
 | `notes` | `string` | Builder notes on the team-season, such as a source disagreement or which of several listed memberships was kept. |
+
+## `loadWnbaTeamAliases`
+
+Release: [wnba_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_groups) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wnba_groups/wnba_team_aliases.parquet`
+
+:::caution[Coverage]
+One season-less file: every id and name another source (fox, wnba_stats, yahoo) uses for a team, keyed on the ESPN team id (team_id, a string; team_id_source = espn), with the seasons the source shows it on that team (valid_from / valid_to, inclusive; both null for an undated curated map). id_kind says whether source_id is the source's id for this sport's team or one id for every sport of a school; a name-only row has a null source_id. A source id means something only within its source (Fox 25 is not ESPN 25), so filter on source before joining on source_id. Seasons are the calendar year.
+:::
+
+| option | type | required | description |
+|---|---|---|---|
+| `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
+| `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
+
+```js
+const rows = await sdv.wnba.loadWnbaTeamAliases();
+// snake_case alias (py/R parity): sdv.wnba.load_wnba_team_aliases(...)
+```
+
+**Returns** (one row per record; every column optional and nullable):
+
+**Row type:** `LoadWnbaTeamAliasesRow` (exported from the package root).
+
+| col_name | type | description |
+|---|---|---|
+| `league` | `string` | League code of the table ("wnba"). |
+| `team_id` | `string` | ESPN team id the alias points to, as a string (e.g. "150"); the same id as team_id in load_wnba_team_group_seasons. Join on it to reach ESPN team data. |
+| `team_id_source` | `string` | Id space of team_id; always "espn" in this table. |
+| `source` | `string` | Provider that uses this id or name (in this table: fox, wnba_stats, yahoo). |
+| `source_id` | `string` | The source's own id for the team (e.g. Fox 25, Yahoo nba.t.1); null for a name-only row. It means something only within its source (Fox 25 is Ohio State, ESPN 25 is California), so filter on source first. |
+| `id_kind` | `string` | "team" when source_id is the source's id for this sport's team, or "school" when it is one id for every sport of a school (the stats.ncaa.org org id, 247Sports institutionKey, On3 orgKey). |
+| `name_kind` | `string` | Kind of label in value: "name" or "abbreviation"; null when the row carries only an id. An id with both a name and an abbreviation is two rows. |
+| `value` | `string` | The source's own spelling of the team name or abbreviation; null when the row carries only an id. |
+| `valid_from` | `number` | First season the source shows this id or name on the team, inclusive (calendar year); null, with valid_to, for an undated curated map. |
+| `valid_to` | `number` | Last season the source shows this id or name on the team, inclusive (calendar year); null, with valid_from, for an undated curated map. A gap in the source splits the window into two rows. |
+| `match_method` | `string` | How the row was tied to the ESPN team: "deterministic" (a formula or shared key, e.g. Yahoo \{league\}.t.\{espn id\}; CFBD ids are ESPN ids), "crosswalk" (carried from a published crosswalk leg), "curated" (a cited map), or for a hand-captured team directory row "alias", "exact_name" (normalized name) or "dict" (curated name dictionary). |
+| `evidence` | `string` | The release asset or sportsdataverse/sdv-reference-data file the row came from. |
+
+## `loadWnbaPlayerAliases`
+
+Release: [wnba_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_groups) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wnba_groups/wnba_player_aliases.parquet`
+
+:::caution[Coverage]
+One season-less file: every player id another source (fox, wnba_stats, yahoo) uses for an ESPN athlete (athlete_id, a string; athlete_id_source = espn), with the ESPN team the match was made on (team_id) and the seasons it held (valid_from / valid_to, inclusive). match_method and match_confidence carry the matching leg's own method and score. Filter on source before joining on source_player_id. Seasons are the calendar year.
+:::
+
+| option | type | required | description |
+|---|---|---|---|
+| `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
+| `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
+
+```js
+const rows = await sdv.wnba.loadWnbaPlayerAliases();
+// snake_case alias (py/R parity): sdv.wnba.load_wnba_player_aliases(...)
+```
+
+**Returns** (one row per record; every column optional and nullable):
+
+**Row type:** `LoadWnbaPlayerAliasesRow` (exported from the package root).
+
+| col_name | type | description |
+|---|---|---|
+| `league` | `string` | League code of the table ("wnba"). |
+| `athlete_id` | `string` | ESPN athlete id the provider id points to, as a string (e.g. "4433134"). Join on it to reach ESPN player data; the ESPN player loaders (load_wnba_player_core and its siblings) carry it as Int32, so cast first with pl.col("athlete_id").cast(pl.Int32). |
+| `athlete_id_source` | `string` | Id space of athlete_id; always "espn" in this table. |
+| `source` | `string` | Provider whose player id this is (in this table: fox, wnba_stats, yahoo). |
+| `source_player_id` | `string` | The source's own player id (e.g. Yahoo wnba.p.5010, Fox 76284). It means something only within its source, so filter on source first. |
+| `team_id` | `string` | ESPN team id (a string) the athlete was on in these seasons: the team block the match was made in, an ESPN team-season of load_wnba_team_group_seasons. |
+| `source_team_id` | `string` | The source's own team id when the matching leg gives one (the season's stats.ncaa.org team id; the Fox / Yahoo / CBS team for the NFL); null otherwise. |
+| `valid_from` | `number` | First season the id is on that team, inclusive (calendar year). |
+| `valid_to` | `number` | Last season the id is on that team, inclusive (calendar year). A gap or a change of match method splits the window into two rows. |
+| `match_method` | `string` | The matching leg's own method (exact_name, fuzzy_jw, the NCAA tiers name_jersey / name / last_jersey / jaro_winkler, CFB rosters name); crosswalk for a leg that names none; propagated when a pair matched in another season was carried to this provider id; override for a hand-verified override. |
+| `match_confidence` | `number` | The leg's own match confidence where it gives one (the lowest in the window); the NCAA tiers score 1.0 / 0.95 / 0.9 / 0.85; null otherwise. |
+| `evidence` | `string` | The release asset or sportsdataverse/sdv-reference-data file the row came from. |
 
 _Generated by tools/codegen/generate.mjs from tools/codegen/endpoints/releases.yaml (vendored from sdv-py) — see [How this library is built](/docs/architecture/loaders)._

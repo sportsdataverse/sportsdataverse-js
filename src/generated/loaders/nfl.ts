@@ -2,7 +2,7 @@
 // Run `npm run codegen` to regenerate from tools/codegen/endpoints/releases.yaml
 // (vendored verbatim from sportsdataverse-py).
 //
-// 29 dataset loaders for `sdv.nfl`: each reads a published
+// 31 dataset loaders for `sdv.nfl`: each reads a published
 // SportsDataverse release asset (parquet) through src/core/releases.ts.
 
 import {
@@ -40,6 +40,8 @@ import type {
   LoadNflGroupSeasonsRow,
   LoadNflGroupAliasesRow,
   LoadNflTeamGroupSeasonsRow,
+  LoadNflTeamAliasesRow,
+  LoadNflPlayerAliasesRow,
 } from "../loader_rows/nfl.js";
 
 const LOAD_NFL_PBP: ReleaseLoaderDef = {"fn":"load_nfl_pbp","url":"https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_{season}.parquet","minSeason":1999,"onMissing":"raise"};
@@ -736,3 +738,49 @@ const LOAD_NFL_TEAM_GROUP_SEASONS: ReleaseLoaderDef = {"fn":"load_nfl_team_group
 export const loadNflTeamGroupSeasons = seasonLoader<LoadNflTeamGroupSeasonsRow>(LOAD_NFL_TEAM_GROUP_SEASONS);
 /** snake_case alias of {@link loadNflTeamGroupSeasons} (py/R parity). */
 export const load_nfl_team_group_seasons = loadNflTeamGroupSeasons;
+
+const LOAD_NFL_TEAM_ALIASES: ReleaseLoaderDef = {"fn":"load_nfl_team_aliases","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nfl_groups/nfl_team_aliases.parquet"};
+
+/**
+ * Load `nfl_groups` (sportsdataverse-data releases).
+ *
+ * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nfl_groups
+ *
+ * Note: One season-less file: every id and name another source (cbs, fox, yahoo) uses for a team, keyed on the ESPN team id (team_id, a string; team_id_source = espn), with the seasons the source shows it on that team (valid_from / valid_to, inclusive; both null for an undated curated map). id_kind says whether source_id is the source's id for this sport's team or one id for every sport of a school; a name-only row has a null source_id. A source id means something only within its source (Fox 25 is not ESPN 25), so filter on source before joining on source_id. Seasons are the STARTING year (2025 = the 2025-26 season).
+ *
+ * @param opts - optional `columns` / `timeoutMs`.
+ * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
+ * @param opts.timeoutMs - download timeout in ms (default 300000).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process). An absent asset returns no rows with a warning.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
+ * @throws AssetFetchError if a download fails (never reported as an empty season).
+ * @example await sdv.nfl.loadNflTeamAliases();
+ */
+export const loadNflTeamAliases = assetLoader<LoadNflTeamAliasesRow>(LOAD_NFL_TEAM_ALIASES);
+/** snake_case alias of {@link loadNflTeamAliases} (py/R parity). */
+export const load_nfl_team_aliases = loadNflTeamAliases;
+
+const LOAD_NFL_PLAYER_ALIASES: ReleaseLoaderDef = {"fn":"load_nfl_player_aliases","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nfl_groups/nfl_player_aliases.parquet"};
+
+/**
+ * Load `nfl_groups` (sportsdataverse-data releases).
+ *
+ * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nfl_groups
+ *
+ * Note: One season-less file: every player id another source (cbs, fox, yahoo) uses for an ESPN athlete (athlete_id, a string; athlete_id_source = espn), with the ESPN team the match was made on (team_id) and the seasons it held (valid_from / valid_to, inclusive). match_method and match_confidence carry the matching leg's own method and score. Filter on source before joining on source_player_id. Seasons are the STARTING year (2025 = the 2025-26 season).
+ *
+ * @param opts - optional `columns` / `timeoutMs`.
+ * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
+ * @param opts.timeoutMs - download timeout in ms (default 300000).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process). An absent asset returns no rows with a warning.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
+ * @throws AssetFetchError if a download fails (never reported as an empty season).
+ * @example await sdv.nfl.loadNflPlayerAliases();
+ */
+export const loadNflPlayerAliases = assetLoader<LoadNflPlayerAliasesRow>(LOAD_NFL_PLAYER_ALIASES);
+/** snake_case alias of {@link loadNflPlayerAliases} (py/R parity). */
+export const load_nfl_player_aliases = loadNflPlayerAliases;
