@@ -241,6 +241,12 @@ describe('parsers/sports247: site pages (parse_sports247_site_page)', () => {
     rows.map((x) => x.hometown_longitude).should.eql([null, 32.58, 0]);
   });
 
+  it('a latitude with no matching longitude column is left as cast', () => {
+    parse_sports247_site_page([{ BirthLatitude: '0.000000', Longitude: '0.000000' }]).should.eql([
+      { birth_latitude: 0, longitude: 0 },
+    ]);
+  });
+
   it('empty / malformed payloads are []', () => {
     for (const bad of [null, undefined, {}, [], [{}], [1, 'x'], 'nope']) {
       parse_sports247_site_page(bad).should.eql([]);
