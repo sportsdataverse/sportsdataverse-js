@@ -112,11 +112,13 @@ await sdv.wbb.espnWbbPlayerNews({ athlete_id: '…' });
 // snake_case alias (py/R parity): sdv.wbb.espn_wbb_player_news(...)
 ```
 
-## `espnWbbCalendar`
+## `espnWbbCalendarSite`
 
-WBB — calendar (ESPN site.api.espn.com).
+WBB — calendar site (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/calendar`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wbb_calendar` / `espnWbbCalendar`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -133,8 +135,8 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 **Example:**
 
 ```js
-await sdv.wbb.espnWbbCalendar({});
-// snake_case alias (py/R parity): sdv.wbb.espn_wbb_calendar(...)
+await sdv.wbb.espnWbbCalendarSite({});
+// snake_case alias (py/R parity): sdv.wbb.espn_wbb_calendar_site(...)
 ```
 
 ## `espnWbbConferences`
@@ -331,11 +333,13 @@ await sdv.wbb.espnWbbScoreboard({});
 // snake_case alias (py/R parity): sdv.wbb.espn_wbb_scoreboard(...)
 ```
 
-## `espnWbbStandings`
+## `espnWbbStandingsSite`
 
-WBB — standings (ESPN site.api.espn.com (v2)).
+WBB — standings site (ESPN site.api.espn.com (v2)).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/v2/sports/basketball/womens-college-basketball/standings`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wbb_standings` / `espnWbbStandings`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -385,8 +389,8 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 **Example:**
 
 ```js
-await sdv.wbb.espnWbbStandings({});
-// snake_case alias (py/R parity): sdv.wbb.espn_wbb_standings(...)
+await sdv.wbb.espnWbbStandingsSite({});
+// snake_case alias (py/R parity): sdv.wbb.espn_wbb_standings_site(...)
 ```
 
 ## `espnWbbStatisticsLeague`
@@ -634,11 +638,13 @@ await sdv.wbb.espnWbbTeamRecord({ team_id: '…' });
 // snake_case alias (py/R parity): sdv.wbb.espn_wbb_team_record(...)
 ```
 
-## `espnWbbTeamRoster`
+## `espnWbbTeamRosterSite`
 
-WBB — team roster (ESPN site.api.espn.com).
+WBB — team roster site (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/womens-college-basketball/teams/{team_id}/roster`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wbb_team_roster` / `espnWbbTeamRoster`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -724,8 +730,8 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 **Example:**
 
 ```js
-await sdv.wbb.espnWbbTeamRoster({ team_id: '…' });
-// snake_case alias (py/R parity): sdv.wbb.espn_wbb_team_roster(...)
+await sdv.wbb.espnWbbTeamRosterSite({ team_id: '…' });
+// snake_case alias (py/R parity): sdv.wbb.espn_wbb_team_roster_site(...)
 ```
 
 ## `espnWbbTeamSchedule`

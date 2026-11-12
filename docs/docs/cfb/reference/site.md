@@ -112,11 +112,13 @@ await sdv.cfb.espnCfbPlayerNews({ athlete_id: '…' });
 // snake_case alias (py/R parity): sdv.cfb.espn_cfb_player_news(...)
 ```
 
-## `espnCfbCalendar`
+## `espnCfbCalendarSite`
 
-CFB — calendar (ESPN site.api.espn.com).
+CFB — calendar site (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/football/college-football/calendar`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_cfb_calendar` / `espnCfbCalendar`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -133,8 +135,8 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 **Example:**
 
 ```js
-await sdv.cfb.espnCfbCalendar({});
-// snake_case alias (py/R parity): sdv.cfb.espn_cfb_calendar(...)
+await sdv.cfb.espnCfbCalendarSite({});
+// snake_case alias (py/R parity): sdv.cfb.espn_cfb_calendar_site(...)
 ```
 
 ## `espnCfbConferences`

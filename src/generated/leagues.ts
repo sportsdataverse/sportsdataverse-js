@@ -12,6 +12,7 @@ export const LEAGUES: LeagueConfig[] = [
       "universal"
     ],
     "publicShorts": {
+      "calendar": "calendar_site",
       "athlete_stats": "player_stats_v3"
     }
   },
@@ -23,6 +24,10 @@ export const LEAGUES: LeagueConfig[] = [
       "universal"
     ],
     "publicShorts": {
+      "calendar": "calendar_site",
+      "draft": "draft_site",
+      "team_roster": "team_roster_site",
+      "standings": "standings_site",
       "athlete_stats": "player_stats_v3"
     }
   },
@@ -123,6 +128,7 @@ export const LEAGUES: LeagueConfig[] = [
       "ncaa"
     ],
     "publicShorts": {
+      "calendar": "calendar_site",
       "athlete_stats": "player_stats_v3"
     }
   },
@@ -135,6 +141,9 @@ export const LEAGUES: LeagueConfig[] = [
       "ncaa"
     ],
     "publicShorts": {
+      "calendar": "calendar_site",
+      "team_roster": "team_roster_site",
+      "standings": "standings_site",
       "athlete_stats": "player_stats_v3"
     }
   },
@@ -148,6 +157,7 @@ export const LEAGUES: LeagueConfig[] = [
       "football"
     ],
     "publicShorts": {
+      "calendar": "calendar_site",
       "season_groups": "groups",
       "season_futures": "futures",
       "season_powerindex": "team_powerindex",
@@ -165,6 +175,7 @@ export const LEAGUES: LeagueConfig[] = [
       "football"
     ],
     "publicShorts": {
+      "calendar": "calendar_site",
       "athlete_stats": "player_stats_v3"
     }
   },
@@ -177,6 +188,7 @@ export const LEAGUES: LeagueConfig[] = [
       "mlb"
     ],
     "publicShorts": {
+      "calendar": "calendar_site",
       "athlete_stats": "player_stats_v3"
     }
   },

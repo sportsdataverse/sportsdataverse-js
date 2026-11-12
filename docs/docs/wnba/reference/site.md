@@ -112,11 +112,13 @@ await sdv.wnba.espnWnbaPlayerNews({ athlete_id: '…' });
 // snake_case alias (py/R parity): sdv.wnba.espn_wnba_player_news(...)
 ```
 
-## `espnWnbaCalendar`
+## `espnWnbaCalendarSite`
 
-WNBA — calendar (ESPN site.api.espn.com).
+WNBA — calendar site (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/calendar`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_calendar` / `espnWnbaCalendar`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -133,8 +135,8 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaCalendar({});
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_calendar(...)
+await sdv.wnba.espnWnbaCalendarSite({});
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_calendar_site(...)
 ```
 
 ## `espnWnbaConferences`
@@ -158,11 +160,13 @@ await sdv.wnba.espnWnbaConferences({});
 // snake_case alias (py/R parity): sdv.wnba.espn_wnba_conferences(...)
 ```
 
-## `espnWnbaDraft`
+## `espnWnbaDraftSite`
 
-WNBA — draft (ESPN site.api.espn.com).
+WNBA — draft site (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/draft`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_draft` / `espnWnbaDraft`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -179,8 +183,8 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaDraft({});
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_draft(...)
+await sdv.wnba.espnWnbaDraftSite({});
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_draft_site(...)
 ```
 
 ## `espnWnbaInjuries`
@@ -331,11 +335,13 @@ await sdv.wnba.espnWnbaScoreboard({});
 // snake_case alias (py/R parity): sdv.wnba.espn_wnba_scoreboard(...)
 ```
 
-## `espnWnbaStandings`
+## `espnWnbaStandingsSite`
 
-WNBA — standings (ESPN site.api.espn.com (v2)).
+WNBA — standings site (ESPN site.api.espn.com (v2)).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/v2/sports/basketball/wnba/standings`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_standings` / `espnWnbaStandings`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -385,8 +391,8 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaStandings({});
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_standings(...)
+await sdv.wnba.espnWnbaStandingsSite({});
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_standings_site(...)
 ```
 
 ## `espnWnbaStatisticsLeague`
@@ -634,11 +640,13 @@ await sdv.wnba.espnWnbaTeamRecord({ team_id: '…' });
 // snake_case alias (py/R parity): sdv.wnba.espn_wnba_team_record(...)
 ```
 
-## `espnWnbaTeamRoster`
+## `espnWnbaTeamRosterSite`
 
-WNBA — team roster (ESPN site.api.espn.com).
+WNBA — team roster site (ESPN site.api.espn.com).
 
 **Endpoint URL:** `GET https://site.api.espn.com/apis/site/v2/sports/basketball/wnba/teams/{team_id}/roster`
+
+**Deprecated aliases (pre-v4 names, still callable):** `espn_wnba_team_roster` / `espnWnbaTeamRoster`
 
 | API param | JS | required | description |
 |---|---|---|---|
@@ -724,8 +732,8 @@ _Rows are untyped `Row[]` (not parity-verified yet)._
 **Example:**
 
 ```js
-await sdv.wnba.espnWnbaTeamRoster({ team_id: '…' });
-// snake_case alias (py/R parity): sdv.wnba.espn_wnba_team_roster(...)
+await sdv.wnba.espnWnbaTeamRosterSite({ team_id: '…' });
+// snake_case alias (py/R parity): sdv.wnba.espn_wnba_team_roster_site(...)
 ```
 
 ## `espnWnbaTeamSchedule`

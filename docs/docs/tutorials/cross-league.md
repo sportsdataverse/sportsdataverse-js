@@ -166,14 +166,14 @@ Output of `node examples/13_discover_and_utilities.mjs` (offline, against the co
 ## Largest namespaces (functionCount)
 | namespace | functions |
 | --------- | --------- |
-| sdv.mlb   | 410       |
-| sdv.nhl   | 350       |
-| sdv.nba   | 349       |
-| sdv.wnba  | 323       |
-| sdv.nfl   | 318       |
-| sdv.cfb   | 263       |
-| sdv.mbb   | 254       |
-| sdv.wbb   | 220       |
+| sdv.mlb   | 412       |
+| sdv.nba   | 353       |
+| sdv.nhl   | 351       |
+| sdv.wnba  | 329       |
+| sdv.nfl   | 321       |
+| sdv.cfb   | 266       |
+| sdv.mbb   | 257       |
+| sdv.wbb   | 225       |
 | sdv.yahoo | 214       |
 | sdv.cbs   | 180       |
 (53 rows, first 10 shown)

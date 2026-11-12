@@ -466,7 +466,15 @@ function conventionRename(short) {
 
 // py `_ESPN_COLLISION_VERSIONED`: version-qualify (rather than skip) these when
 // the convention name is taken (web v3 /athletes/{id}/stats is the "v3" payload).
-const ESPN_COLLISION_VERSIONED = { athlete_stats: "player_stats_v3" };
+// sdv-py #903 (B-M31) adds the *_site forms: the same rule renames a generated wrapper whose bare name a py
+// hand-written function holds (`espn_cfb_calendar` -> `espn_cfb_calendar_site`), in the shadowed leagues only.
+const ESPN_COLLISION_VERSIONED = {
+  athlete_stats: "player_stats_v3",
+  calendar: "calendar_site",
+  draft: "draft_site",
+  standings: "standings_site",
+  team_roster: "team_roster_site",
+};
 
 /**
  * py `_espn_league_views` pass 2: `short -> public short` for one league. The
@@ -491,6 +499,12 @@ function espnLeagueNames(league, wrappers) {
       else if (ESPN_COLLISION_VERSIONED[w.short] && !taken(full(ESPN_COLLISION_VERSIONED[w.short]), used)) {
         name = full(ESPN_COLLISION_VERSIONED[w.short]);
       }
+    }
+    // py B-M31: a name py's hand-written function holds (py_reserved) is version-qualified when a free versioned
+    // form exists, so `espn_nba_calendar` is py's hand-written calendar and this wrapper is `espn_nba_calendar_site`.
+    if (PY_RESERVED.has(name) && ESPN_COLLISION_VERSIONED[w.short]) {
+      const versioned = full(ESPN_COLLISION_VERSIONED[w.short]);
+      if (!taken(versioned, used)) name = versioned;
     }
     if (!name.startsWith(full(""))) throw new Error(`espn_rename_map.yaml: ${base} -> ${name} leaves the espn_${league.prefix}_ namespace`);
     used.add(name);

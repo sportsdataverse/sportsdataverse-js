@@ -14,7 +14,7 @@ sidebar_position: 50
 
 # `sdv.nfl` — dataset loaders
 
-29 loaders reading the published nflverse data releases / sportsdataverse-data releases (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias and resolves to an array of plain row objects (or `{ [column]: values[] }` with `format: "columns"`).
+31 loaders reading the published nflverse data releases / sportsdataverse-data releases (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias and resolves to an array of plain row objects (or `{ [column]: values[] }` with `format: "columns"`).
 
 - **Size:** row objects cost ~60-100 bytes per cell on the heap, so before decoding each season a loader adds its rows × columns (from the parquet footer) to a running total and checks it against `maxCells` — by default heap limit / 100 for rows (≈45M cells on Node's default 4 GB heap) and heap limit / 30 for `format: "columns"` — and throws a catchable `SdvError` instead of running out of memory. Play-by-play is the usual case: pass `columns`, use `format: "columns"`, or raise the heap (`node --max-old-space-size=8192`).
 - **Seasons:** `seasons` takes one season or a list. A season with no published asset (HTTP 404) is skipped with a warning (loaders marked so in their `seasons` row — sdv-py's hand-written ones — throw `NoDataError` instead); any other failure raises `AssetFetchError` (a failed download is never an empty season); a season below the loader's floor raises `SeasonNotFoundError` before anything is fetched. Multi-season results union the columns, null-filling gaps, and cast a column whose type changed between seasons to the common type (an integer id that became a string → strings, "123" not "123.0"), as sdv-py's `diagonal_relaxed` concat does.
@@ -52,6 +52,8 @@ sidebar_position: 50
 | [`loadNflGroupSeasons`](#loadnflgroupseasons) | [nfl_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nfl_groups) | one asset |
 | [`loadNflGroupAliases`](#loadnflgroupaliases) | [nfl_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nfl_groups) | one asset |
 | [`loadNflTeamGroupSeasons`](#loadnflteamgroupseasons) | [nfl_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nfl_groups) | 1970+ |
+| [`loadNflTeamAliases`](#loadnflteamaliases) | [nfl_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nfl_groups) | one asset |
+| [`loadNflPlayerAliases`](#loadnflplayeraliases) | [nfl_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nfl_groups) | one asset |
 
 ## `loadNflPbp`
 
@@ -657,6 +659,7 @@ const rows = await sdv.nfl.loadNflModelPbp({ seasons: 2024, columns: ['game_id',
 | `fumble_recovery_2_player_name` | `string` | String name of one of the players with a fumble recovery. |
 | `fumble_recovery_2_team` | `string` | Team of one of the players with a fumble recovery. |
 | `fumble_recovery_2_yards` | `number \| bigint` | Yards gained by one of the players with a fumble recovery. |
+| `drive` | `number \| bigint` | Numeric drive number in the game. |
 | `two_point_conv_result` | `string` | String indicator for result of two point conversion attempt: success, failure, safety (touchback in defensive endzone is 1 point apparently), or return. |
 | `extra_point_result` | `string` | String indicator for the result of the extra point attempt: good, failed, blocked, safety (touchback in defensive endzone is 1 point apparently), or aborted. |
 | `special` | `number \| bigint` | Binary indicator if "play_type" is one of "extra_point", "field_goal", "kickoff", or "punt". |
@@ -669,9 +672,9 @@ const rows = await sdv.nfl.loadNflModelPbp({ seasons: 2024, columns: ['game_id',
 | `no_huddle` | `number \| bigint` | Binary indicator for whether or not the play was in no_huddle formation. |
 | `run_location` | `string` | String indicator for location of run: left, middle, or right. |
 | `run_gap` | `string` | String indicator for line gap of run: end, guard, or tackle |
+| `qb_dropback` | `number` | Binary indicator for whether or not the QB dropped back on the play (pass attempt, sack, or scrambled). |
 | `pass` | `number \| bigint` | Binary indicator if the play was a pass play (sacks and scrambles included). |
 | `rush` | `number \| bigint` | Binary indicator if the play was a rushing play. |
-| `qb_dropback` | `number` | Binary indicator for whether or not the QB dropped back on the play (pass attempt, sack, or scrambled). |
 | `posteam_score` | `number \| bigint` | Score the posteam at the start of the play. |
 | `defteam_score` | `number \| bigint` | Score the defteam at the start of the play. |
 | `score_differential` | `number \| bigint` | Score differential between the posteam and defteam at the start of the play. |
@@ -697,8 +700,8 @@ const rows = await sdv.nfl.loadNflModelPbp({ seasons: 2024, columns: ['game_id',
 | `drive_end_transition` | `string` | String indicating how the offense lost the ball. |
 | `drive_game_clock_start` | `string` | Game time at the beginning of a given drive. |
 | `drive_game_clock_end` | `string` | Game time at the end of a given drive. |
-| `drive_start_yard_line` | `number \| bigint` | Yards from the offense's line of scrimmage to the opponent's end zone (yardline_100) on the drive's first play, 1-99; the model-pbp parquet stores the numeric spot, not the 'OWN 20' text load_nfl_pbp carries. |
-| `drive_end_yard_line` | `number \| bigint` | Yards from the offense's line of scrimmage to the opponent's end zone (yardline_100) on the drive's last play; the model-pbp parquet stores the numeric spot, not the 'OPP 45' text load_nfl_pbp carries. |
+| `drive_start_yard_line` | `string` | Field position of the drive's first play as nflverse text: the side's team abbreviation and yard line ('ARI 10'), or '50' at midfield. |
+| `drive_end_yard_line` | `string` | Field position of the drive's last play as nflverse text: the side's team abbreviation and yard line ('ARI 35'), or '50' at midfield. |
 | `drive_play_id_started` | `string` | Play_id of the first play in the given drive. |
 | `drive_play_id_ended` | `string` | Play_id of the last play in the given drive. |
 | `drive_time_of_possession` | `string` | Time of possession in a given drive. |
@@ -3821,5 +3824,83 @@ const rows = await sdv.nfl.loadNflTeamGroupSeasons({ seasons: 2024 });
 | `source` | `string` | Source the membership was taken from -- the most reliable per-season source for that era. |
 | `sources_agree` | `boolean` | Whether a second source agreed on the membership; null when only one source covers the season. |
 | `notes` | `string` | Builder notes on the team-season, such as a source disagreement or which of several listed memberships was kept. |
+
+## `loadNflTeamAliases`
+
+Release: [nfl_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nfl_groups) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nfl_groups/nfl_team_aliases.parquet`
+
+:::caution[Coverage]
+One season-less file: every id and name another source (cbs, fox, yahoo) uses for a team, keyed on the ESPN team id (team_id, a string; team_id_source = espn), with the seasons the source shows it on that team (valid_from / valid_to, inclusive; both null for an undated curated map). id_kind says whether source_id is the source's id for this sport's team or one id for every sport of a school; a name-only row has a null source_id. A source id means something only within its source (Fox 25 is not ESPN 25), so filter on source before joining on source_id. Seasons are the STARTING year (2025 = the 2025-26 season).
+:::
+
+| option | type | required | description |
+|---|---|---|---|
+| `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
+| `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
+
+```js
+const rows = await sdv.nfl.loadNflTeamAliases();
+// snake_case alias (py/R parity): sdv.nfl.load_nfl_team_aliases(...)
+```
+
+**Returns** (one row per record; every column optional and nullable):
+
+**Row type:** `LoadNflTeamAliasesRow` (exported from the package root).
+
+| col_name | type | description |
+|---|---|---|
+| `league` | `string` | League code of the table ("nfl"). |
+| `team_id` | `string` | ESPN team id the alias points to, as a string (e.g. "150"); the same id as team_id in load_nfl_team_group_seasons. Join on it to reach ESPN team data. |
+| `team_id_source` | `string` | Id space of team_id; always "espn" in this table. |
+| `source` | `string` | Provider that uses this id or name (in this table: cbs, fox, yahoo). |
+| `source_id` | `string` | The source's own id for the team (e.g. Fox 25, Yahoo nba.t.1); null for a name-only row. It means something only within its source (Fox 25 is Ohio State, ESPN 25 is California), so filter on source first. |
+| `id_kind` | `string` | "team" when source_id is the source's id for this sport's team, or "school" when it is one id for every sport of a school (the stats.ncaa.org org id, 247Sports institutionKey, On3 orgKey). |
+| `name_kind` | `string` | Kind of label in value: "name" or "abbreviation"; null when the row carries only an id. An id with both a name and an abbreviation is two rows. |
+| `value` | `string` | The source's own spelling of the team name or abbreviation; null when the row carries only an id. |
+| `valid_from` | `number` | First season the source shows this id or name on the team, inclusive (STARTING year: 2025 = the 2025-26 season); null, with valid_to, for an undated curated map. |
+| `valid_to` | `number` | Last season the source shows this id or name on the team, inclusive (STARTING year: 2025 = the 2025-26 season); null, with valid_from, for an undated curated map. A gap in the source splits the window into two rows. |
+| `match_method` | `string` | How the row was tied to the ESPN team: "deterministic" (a formula or shared key, e.g. Yahoo \{league\}.t.\{espn id\}; CFBD ids are ESPN ids), "crosswalk" (carried from a published crosswalk leg), "curated" (a cited map), or for a hand-captured team directory row "alias", "exact_name" (normalized name) or "dict" (curated name dictionary). |
+| `evidence` | `string` | The release asset or sportsdataverse/sdv-reference-data file the row came from. |
+
+## `loadNflPlayerAliases`
+
+Release: [nfl_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nfl_groups) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nfl_groups/nfl_player_aliases.parquet`
+
+:::caution[Coverage]
+One season-less file: every player id another source (cbs, fox, yahoo) uses for an ESPN athlete (athlete_id, a string; athlete_id_source = espn), with the ESPN team the match was made on (team_id) and the seasons it held (valid_from / valid_to, inclusive). match_method and match_confidence carry the matching leg's own method and score. Filter on source before joining on source_player_id. Seasons are the STARTING year (2025 = the 2025-26 season).
+:::
+
+| option | type | required | description |
+|---|---|---|---|
+| `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
+| `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
+
+```js
+const rows = await sdv.nfl.loadNflPlayerAliases();
+// snake_case alias (py/R parity): sdv.nfl.load_nfl_player_aliases(...)
+```
+
+**Returns** (one row per record; every column optional and nullable):
+
+**Row type:** `LoadNflPlayerAliasesRow` (exported from the package root).
+
+| col_name | type | description |
+|---|---|---|
+| `league` | `string` | League code of the table ("nfl"). |
+| `athlete_id` | `string` | ESPN athlete id the provider id points to, as a string (e.g. "4433134"). Join on it to reach ESPN player data. |
+| `athlete_id_source` | `string` | Id space of athlete_id; always "espn" in this table. |
+| `source` | `string` | Provider whose player id this is (in this table: cbs, fox, yahoo). |
+| `source_player_id` | `string` | The source's own player id (e.g. Yahoo nfl.p.8040, Fox 76284). It means something only within its source, so filter on source first. |
+| `team_id` | `string` | ESPN team id (a string) the athlete was on in these seasons: the team block the match was made in, an ESPN team-season of load_nfl_team_group_seasons. |
+| `source_team_id` | `string` | The source's own team id when the matching leg gives one (the season's stats.ncaa.org team id; the Fox / Yahoo / CBS team for the NFL); null otherwise. |
+| `valid_from` | `number` | First season the id is on that team, inclusive (STARTING year: 2025 = the 2025-26 season). |
+| `valid_to` | `number` | Last season the id is on that team, inclusive (STARTING year: 2025 = the 2025-26 season). A gap or a change of match method splits the window into two rows. |
+| `match_method` | `string` | The matching leg's own method (exact_name, fuzzy_jw, the NCAA tiers name_jersey / name / last_jersey / jaro_winkler, CFB rosters name); crosswalk for a leg that names none; propagated when a pair matched in another season was carried to this provider id; override for a hand-verified override. |
+| `match_confidence` | `number` | The leg's own match confidence where it gives one (the lowest in the window); the NCAA tiers score 1.0 / 0.95 / 0.9 / 0.85; null otherwise. |
+| `evidence` | `string` | The release asset or sportsdataverse/sdv-reference-data file the row came from. |
 
 _Generated by tools/codegen/generate.mjs from tools/codegen/endpoints/releases.yaml (vendored from sdv-py) — see [How this library is built](/docs/architecture/loaders)._

@@ -76,6 +76,8 @@ export type {
   LoadCfbGroupSeasonsRow,
   LoadCfbGroupAliasesRow,
   LoadCfbTeamGroupSeasonsRow,
+  LoadCfbTeamAliasesRow,
+  LoadCfbPlayerAliasesRow,
 } from "./cfb.js";
 
 export type {
@@ -113,6 +115,8 @@ export type {
   LoadMbbGroupSeasonsRow,
   LoadMbbGroupAliasesRow,
   LoadMbbTeamGroupSeasonsRow,
+  LoadMbbTeamAliasesRow,
+  LoadMbbPlayerAliasesRow,
 } from "./mbb.js";
 
 export type {
@@ -149,6 +153,7 @@ export type {
   LoadNcaaBaseballGroupSeasonsRow,
   LoadNcaaBaseballGroupAliasesRow,
   LoadNcaaBaseballTeamGroupSeasonsRow,
+  LoadMlbTeamAliasesRow,
   LoadMlbParkDimensionsRow,
 } from "./mlb.js";
 
@@ -175,6 +180,7 @@ export type {
   LoadNbaStatsPossessionsRow,
   LoadNbaStatsGameLineupsRow,
   LoadNbaStatsGameMatchupsRow,
+  LoadNbaStatsInjuryReportRow,
   LoadNbaStatsPlayerBoxscoresRow,
   LoadNbaStatsPlayerGameLogsRow,
   LoadNbaStatsPlayerSeasonStatsRow,
@@ -192,6 +198,8 @@ export type {
   LoadNbaGroupSeasonsRow,
   LoadNbaGroupAliasesRow,
   LoadNbaTeamGroupSeasonsRow,
+  LoadNbaTeamAliasesRow,
+  LoadNbaPlayerAliasesRow,
 } from "./nba.js";
 
 export type {
@@ -224,6 +232,8 @@ export type {
   LoadNflGroupSeasonsRow,
   LoadNflGroupAliasesRow,
   LoadNflTeamGroupSeasonsRow,
+  LoadNflTeamAliasesRow,
+  LoadNflPlayerAliasesRow,
 } from "./nfl.js";
 
 export type {
@@ -254,6 +264,7 @@ export type {
   LoadNhlGroupSeasonsRow,
   LoadNhlGroupAliasesRow,
   LoadNhlTeamGroupSeasonsRow,
+  LoadNhlTeamAliasesRow,
 } from "./nhl.js";
 
 export type {
@@ -315,6 +326,8 @@ export type {
   LoadWbbGroupSeasonsRow,
   LoadWbbGroupAliasesRow,
   LoadWbbTeamGroupSeasonsRow,
+  LoadWbbTeamAliasesRow,
+  LoadWbbPlayerAliasesRow,
 } from "./wbb.js";
 
 export type {
@@ -352,4 +365,6 @@ export type {
   LoadWnbaGroupSeasonsRow,
   LoadWnbaGroupAliasesRow,
   LoadWnbaTeamGroupSeasonsRow,
+  LoadWnbaTeamAliasesRow,
+  LoadWnbaPlayerAliasesRow,
 } from "./wnba.js";

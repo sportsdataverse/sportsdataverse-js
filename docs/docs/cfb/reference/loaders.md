@@ -14,7 +14,7 @@ sidebar_position: 50
 
 # `sdv.cfb` — dataset loaders
 
-71 loaders reading the published sportsdataverse-data releases / sportsdataverse raw data (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias and resolves to an array of plain row objects (or `{ [column]: values[] }` with `format: "columns"`).
+73 loaders reading the published sportsdataverse-data releases / sportsdataverse raw data (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias and resolves to an array of plain row objects (or `{ [column]: values[] }` with `format: "columns"`).
 
 - **Size:** row objects cost ~60-100 bytes per cell on the heap, so before decoding each season a loader adds its rows × columns (from the parquet footer) to a running total and checks it against `maxCells` — by default heap limit / 100 for rows (≈45M cells on Node's default 4 GB heap) and heap limit / 30 for `format: "columns"` — and throws a catchable `SdvError` instead of running out of memory. Play-by-play is the usual case: pass `columns`, use `format: "columns"`, or raise the heap (`node --max-old-space-size=8192`).
 - **Seasons:** `seasons` takes one season or a list. A season with no published asset (HTTP 404) is skipped with a warning (loaders marked so in their `seasons` row — sdv-py's hand-written ones — throw `NoDataError` instead); any other failure raises `AssetFetchError` (a failed download is never an empty season); a season below the loader's floor raises `SeasonNotFoundError` before anything is fetched. Multi-season results union the columns, null-filling gaps, and cast a column whose type changed between seasons to the common type (an integer id that became a string → strings, "123" not "123.0"), as sdv-py's `diagonal_relaxed` concat does.
@@ -27,7 +27,7 @@ sidebar_position: 50
 | [`loadCfbRatings`](#loadcfbratings) | [cfb_ratings](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/cfb_ratings) | 2004+ |
 | [`loadCfbRecruitingProj`](#loadcfbrecruitingproj) | [cfb_recruiting_proj](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/cfb_recruiting_proj) | 2016+ |
 | [`loadCfbRecruits`](#loadcfbrecruits) | [cfb_recruits](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/cfb_recruits) | 2002+ |
-| [`loadCfbReturningProduction`](#loadcfbreturningproduction) | [cfb_returning_production](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/cfb_returning_production) | 2005+ |
+| [`loadCfbReturningProduction`](#loadcfbreturningproduction) | [cfb_returning_production](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/cfb_returning_production) | 2004+ |
 | [`loadCfbRosters`](#loadcfbrosters) | [espn_cfb_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_cfb_rosters) | 2004+ |
 | [`loadCfbRostersCfbd`](#loadcfbrosterscfbd) | [cfbfastR-data](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/cfbfastR-data) | 2003+ |
 | [`loadCfbSchedule`](#loadcfbschedule) | [cfb_schedules](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/cfb_schedules) | 2001+ |
@@ -35,8 +35,8 @@ sidebar_position: 50
 | [`loadCfbTeams`](#loadcfbteams) | [espn_cfb_teams](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_cfb_teams) | 2001+ |
 | [`loadCfbTeamPortal`](#loadcfbteamportal) | [cfb_team_portal](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/cfb_team_portal) | 2015+ |
 | [`loadCfbTeamTalent`](#loadcfbteamtalent) | [cfb_team_talent](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/cfb_team_talent) | 2005+ |
-| [`loadCfbTeamsCrosswalk`](#loadcfbteamscrosswalk) | [cfb_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/cfb_crosswalk) | 2013+ |
-| [`loadCfbScheduleCrosswalk`](#loadcfbschedulecrosswalk) | [cfb_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/cfb_crosswalk) | 2013+ |
+| [`loadCfbTeamsCrosswalk`](#loadcfbteamscrosswalk) | [cfb_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/cfb_crosswalk) | 2004+ |
+| [`loadCfbScheduleCrosswalk`](#loadcfbschedulecrosswalk) | [cfb_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/cfb_crosswalk) | 2004+ |
 | [`loadCfbTeamBox`](#loadcfbteambox) | [espn_cfb_team_box](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_cfb_team_box) | 2004+ |
 | [`loadCfbPlayerBox`](#loadcfbplayerbox) | [espn_cfb_player_box](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_cfb_player_box) | 2004+ |
 | [`loadCfbDrives`](#loadcfbdrives) | [espn_cfb_drives](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_cfb_drives) | 2004+ |
@@ -45,7 +45,7 @@ sidebar_position: 50
 | [`loadCfbLinescores`](#loadcfblinescores) | [espn_cfb_linescores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_cfb_linescores) | 2004+ |
 | [`loadCfbBetting`](#loadcfbbetting) | [espn_cfb_betting](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_cfb_betting) | 2004+ |
 | [`loadCfbFpiWeekly`](#loadcfbfpiweekly) | [cfb_fpi_weekly](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/cfb_fpi_weekly) | 2005+ |
-| [`loadCfbPowerIndex`](#loadcfbpowerindex) | [espn_cfb_power_index](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_cfb_power_index) | 2015+ |
+| [`loadCfbPowerIndex`](#loadcfbpowerindex) | [espn_cfb_power_index](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_cfb_power_index) | 2005+ |
 | [`loadCfbAdvTeam`](#loadcfbadvteam) | [espn_cfb_adv_team](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_cfb_adv_team) | 2004+ |
 | [`loadCfbAdvPassing`](#loadcfbadvpassing) | [espn_cfb_adv_passing](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_cfb_adv_passing) | 2004+ |
 | [`loadCfbAdvRushing`](#loadcfbadvrushing) | [espn_cfb_adv_rushing](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_cfb_adv_rushing) | 2004+ |
@@ -94,6 +94,8 @@ sidebar_position: 50
 | [`loadCfbGroupSeasons`](#loadcfbgroupseasons) | [cfb_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/cfb_groups) | one asset |
 | [`loadCfbGroupAliases`](#loadcfbgroupaliases) | [cfb_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/cfb_groups) | one asset |
 | [`loadCfbTeamGroupSeasons`](#loadcfbteamgroupseasons) | [cfb_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/cfb_groups) | 1869+ |
+| [`loadCfbTeamAliases`](#loadcfbteamaliases) | [cfb_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/cfb_groups) | one asset |
+| [`loadCfbPlayerAliases`](#loadcfbplayeraliases) | [cfb_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/cfb_groups) | one asset |
 
 ## `loadCfbPbp`
 
@@ -317,6 +319,7 @@ const rows = await sdv.cfb.loadCfbPbp({ seasons: 2024, columns: ['game_id', 'per
 | `homeFavorite` | `boolean` | True when the home team was favoured by the spread. |
 | `gameSpreadAvailable` | `boolean` | True when a spread was available for the game. |
 | `overUnder` | `number` | Over/under total used as a model input. |
+| `overUnderAvailable` | `boolean` | False when overUnder is the 55.5 default (the line had a spread and no total), True for a market total; null when an odds_override did not say. Absent from releases built before the column existed. |
 | `homeTeamSpread` | `number` | ESPN's home-team Spread for the game, stamped on every play. |
 | `clock.minutes` | `number \| bigint` | Minutes remaining on the game clock at the play. |
 | `clock.seconds` | `number \| bigint` | Seconds component of the game clock at the play. |
@@ -354,7 +357,7 @@ const rows = await sdv.cfb.loadCfbPbp({ seasons: 2024, columns: ['game_id', 'per
 | `start.defPosTeamTimeouts` | `number \| bigint` | ESPN's `defPosTeamTimeouts` value for the play state at the start of the play. |
 | `end.posTeamTimeouts` | `number \| bigint` | ESPN's `posTeamTimeouts` value for the play state at the end of the play. |
 | `end.defPosTeamTimeouts` | `number \| bigint` | ESPN's `defPosTeamTimeouts` value for the play state at the end of the play. |
-| `firstHalfKickoffTeamId` | `string` | ESPN id of the team that received the opening kickoff. |
+| `firstHalfKickoffTeamId` | `string` | ESPN id of the team that kicked the opening kickoff (it receives the second-half kickoff), one value per game. |
 | `start.yard` | `number \| bigint` | ESPN's `yard` value for the play state at the start of the play. |
 | `end.yard` | `number \| bigint` | ESPN's `yard` value for the play state at the end of the play. |
 | `lag_scoringPlay` | `boolean` | Value of scoringPlay on the previous play, used for sequence-aware derivations. |
@@ -466,10 +469,10 @@ const rows = await sdv.cfb.loadCfbPbp({ seasons: 2024, columns: ['game_id', 'per
 | `stopped_run` | `boolean` | True when the rush was stopped at or behind the line of scrimmage. |
 | `opportunity_run` | `boolean` | True when a rush reached 4 yards -- the carries on which the blocking did its job. Matches cfbfastR's espn_cfb_15 definition. Assets published before the 2026-08 fix carry the inverted (4 yards or fewer) flag. |
 | `highlight_run` | `boolean` | True when the rush gained 8 or more yards. |
-| `adj_rush_yardage` | `number \| bigint` | Rushing yards capped at 8, the input to the line-yards decomposition. |
-| `line_yards` | `number` | Yards credited to the offensive line on a rush, using the standard sliding scale: 1.2x the capped yardage on a loss, all of it through 3 yards, half of each yard from 4 to 8, and a 5.5-yard ceiling beyond that. |
-| `second_level_yards` | `number` | Rushing yards earned from 4 to 8, split evenly between line and carrier under the line-yards decomposition. |
-| `open_field_yards` | `number \| bigint` | Rushing yards gained beyond 8, credited to the ball carrier rather than the line. |
+| `adj_rush_yardage` | `number \| bigint` | Rushing yards capped at 10, the input to the line-yards decomposition. Assets published before the 2026-10 line-yards fix cap at 8. |
+| `line_yards` | `number` | Yards credited to the offensive line on a rush, on the standard adjusted-line-yards band: 1.2x the yardage on a loss, all of yards 0-4, half of each yard from 5 to 10, and nothing beyond 10 (a 7-yard ceiling). Line, second-level and open-field yards sum to the carry on every gain. Assets published before the 2026-10 line-yards fix carry the old band (all of yards 0-3, half of 4-8, a 5.5-yard ceiling). |
+| `second_level_yards` | `number` | The ball carrier's half of yards 5-10 of a rush (the line takes the other half); 0 on carries of 4 yards or fewer. Assets published before the 2026-10 line-yards fix carry the old band here: half of yards 4-8 in college football, half of yards 5-8 in the NFL (where the old parts came up half a yard short of the carry). |
+| `open_field_yards` | `number \| bigint` | Rushing yards gained beyond 10, credited to the ball carrier rather than the line. Assets published before the 2026-10 line-yards fix count the yards beyond 8. |
 | `highlight_yards` | `number` | Second-level plus open-field yards -- the yardage credited to the carrier. |
 | `opp_highlight_yards` | `number` | Highlight yards earned on opportunity runs, isolating carrier production on carries where the blocking succeeded. Assets published before the 2026-08 fix are identically 0 here, because the inverted opportunity_run gate could never co-occur with non-zero highlight yards. |
 | `short_rush_success` | `boolean` | True when a short-yardage rush gained the yardage needed. |
@@ -735,7 +738,7 @@ Release: [cfb_returning_production](https://github.com/sportsdataverse/sportsdat
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2005) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -1199,7 +1202,7 @@ Release: [cfb_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2013) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -1234,7 +1237,7 @@ Release: [cfb_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2013) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -1795,7 +1798,7 @@ Release: [espn_cfb_power_index](https://github.com/sportsdataverse/sportsdataver
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2015) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2005) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -3022,7 +3025,7 @@ const rows = await sdv.cfb.loadCfbTeamSummaries({ seasons: 2024 });
 | `turnover_margin_rank` | `number` | National rank of turnover_margin, 1 = largest margin. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. |
 | `havoc_margin_rank` | `number` | National rank of havoc_margin, 1 = largest margin. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. |
 | `total_available_yards_off` | `number` | Available yards are the yards a drive could theoretically gain, summed from each drive's starting distance to the opponent goal line. Total available yards on the team's own drives (ESPN's drive team). A drive's start is its header oriented to agree with its first snap, or that snap when the header is a 0 or missing placeholder. |
-| `total_gained_yards_off` | `number \| bigint` | Total yards the team gained across its own drives, each drive's gain capped at its available yards. |
+| `total_gained_yards_off` | `number` | Total yards the team gained across its own drives, each drive's gain capped at its available yards. |
 | `pts_per_opp_off_n` | `number \| bigint` | Sample size behind pts_per_opp_off: the number of scoring opportunities on the team's own drives. 0 when there were none, and pts_per_opp_off is then null. |
 | `pts_per_drive_off_n` | `number \| bigint` | Sample size behind pts_per_drive_off: the number of the team's own drives it is computed over. 0 when there were none, and pts_per_drive_off is then null. Can sit slightly below drives_off, which also counts drive ids holding only a stray snap. |
 | `start_position_off` | `number` | Average drive start position, measured in yards from the opponent goal line, with the team on offense. |
@@ -3037,7 +3040,7 @@ const rows = await sdv.cfb.loadCfbTeamSummaries({ seasons: 2024 });
 | `start_position_off_rank` | `number` | National rank of the team's average drive start position, measured in yards from the opponent goal line with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. |
 | `drive_start_ep_off_rank` | `number` | National rank of the team's average expected points (EP) at the first snap of a drive, over the drives the side owned with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. |
 | `total_available_yards_def` | `number` | Available yards are the yards a drive could theoretically gain, summed from each drive's starting distance to the opponent goal line. Total available yards on opponents' drives against the team's defense (ESPN's drive team). A drive's start is its header oriented to agree with its first snap, or that snap when the header is a 0 or missing placeholder. |
-| `total_gained_yards_def` | `number \| bigint` | Total yards the team allowed across opponents' drives against its defense, each drive's gain capped at its available yards. |
+| `total_gained_yards_def` | `number` | Total yards the team allowed across opponents' drives against its defense, each drive's gain capped at its available yards. |
 | `pts_per_opp_def_n` | `number \| bigint` | Sample size behind pts_per_opp_def: the number of scoring opportunities on opponents' drives against the team's defense. 0 when there were none, and pts_per_opp_def is then null. |
 | `pts_per_drive_def_n` | `number \| bigint` | Sample size behind pts_per_drive_def: the number of opponents' drives against the team's defense it is computed over. 0 when there were none, and pts_per_drive_def is then null. Can sit slightly below drives_def, which also counts drive ids holding only a stray snap. |
 | `start_position_def` | `number` | Average drive start position, measured in yards from the opponent goal line, with the team on defense (i.e. allowed to opponents). |
@@ -3052,7 +3055,7 @@ const rows = await sdv.cfb.loadCfbTeamSummaries({ seasons: 2024 });
 | `start_position_def_rank` | `number` | National rank of the team's average drive start position, measured in yards from the opponent goal line with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. |
 | `drive_start_ep_def_rank` | `number` | National rank of the team's average expected points (EP) at the first snap of a drive, over the drives the side owned with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. |
 | `total_available_yards_margin` | `number` | Available yards on the team's own drives minus available yards on drives it defended. |
-| `total_gained_yards_margin` | `number \| bigint` | Yards the team gained minus yards it allowed. |
+| `total_gained_yards_margin` | `number` | Yards the team gained minus yards it allowed. |
 | `available_yards_pct_margin` | `number` | Available-yards share gained by the offense minus the share allowed by the defense. Higher is better. |
 | `pts_per_opp_margin` | `number` | pts_per_opp_off minus pts_per_opp_def. Null when either side is null. Higher is better. |
 | `pts_per_drive_margin` | `number` | pts_per_drive_off minus pts_per_drive_def: attributed drive-result points per owned drive minus those per opponents' owned drive. Null when either side is null. Higher is better. |
@@ -3623,6 +3626,13 @@ const rows = await sdv.cfb.loadCfbTeamSummaries({ seasons: 2024 });
 | `net_adj_epa_conf_pct` | `number` | Percentile (0-100) of net_adj_epa among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. |
 | `off_strength_faced_conf_pct` | `number` | Percentile (0-100) of off_strength_faced among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. |
 | `def_strength_faced_conf_pct` | `number` | Percentile (0-100) of def_strength_faced among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. |
+| `deserved_wins` | `number` | Sum of the team's paper_share over the games in the row's span: the wins the Paper Index says its play earned (sportsdataverse.analytics.paper_index.deserved_wins). |
+| `luck_wins` | `number` | wins minus deserved_wins; positive means the team won more games than its play deserved. |
+| `luck_z` | `number` | luck_wins / sqrt(sum(p * (1 - p))) over the team's game shares p: luck in standard deviations of a sum of independent Bernoulli(p) wins; null when that variance is 0. |
+| `luck_wins_rank` | `number` | National rank of luck_wins, 1 = the most wins above what its play deserved. Null when luck_wins is null: unranked, not last. |
+| `luck_z_rank` | `number` | National rank of luck_z, 1 = the luckiest in standard deviations. Null when luck_z is null: unranked, not last. |
+| `paper_index_games_n` | `number \| bigint` | Games in the row's span that the Paper Index scored for the team (completed, not tied, both sides at least 20 scrimmage snaps); deserved_wins and luck are sums over these games. |
+| `paper_index_span` | `string` | Where the season sits relative to the Paper Index fit (sportsdataverse.analytics.paper_index TRAIN_SEASONS / HOLDOUT_SEASONS): train (in-sample, its games were part of the fit), holdout (scored out of sample) or out_of_span (scored, never seen by the fit). |
 
 ## `loadCfbAdvTeamGamelog`
 
@@ -3984,7 +3994,7 @@ const rows = await sdv.cfb.loadCfbTeamSummariesWeekly({ seasons: 2024 });
 | `turnover_margin_rank` | `number` | National rank of turnover_margin, 1 = largest margin. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. |
 | `havoc_margin_rank` | `number` | National rank of havoc_margin, 1 = largest margin. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. |
 | `total_available_yards_off` | `number` | Available yards are the yards a drive could theoretically gain, summed from each drive's starting distance to the opponent goal line. Total available yards on the team's own drives (ESPN's drive team). A drive's start is its header oriented to agree with its first snap, or that snap when the header is a 0 or missing placeholder. |
-| `total_gained_yards_off` | `number \| bigint` | Total yards the team gained across its own drives, each drive's gain capped at its available yards. |
+| `total_gained_yards_off` | `number` | Total yards the team gained across its own drives, each drive's gain capped at its available yards. |
 | `pts_per_opp_off_n` | `number \| bigint` | Sample size behind pts_per_opp_off: the number of scoring opportunities on the team's own drives. 0 when there were none, and pts_per_opp_off is then null. |
 | `pts_per_drive_off_n` | `number \| bigint` | Sample size behind pts_per_drive_off: the number of the team's own drives it is computed over. 0 when there were none, and pts_per_drive_off is then null. Can sit slightly below drives_off, which also counts drive ids holding only a stray snap. |
 | `start_position_off` | `number` | Average drive start position, measured in yards from the opponent goal line, with the team on offense. |
@@ -3999,7 +4009,7 @@ const rows = await sdv.cfb.loadCfbTeamSummariesWeekly({ seasons: 2024 });
 | `start_position_off_rank` | `number` | National rank of the team's average drive start position, measured in yards from the opponent goal line with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. |
 | `drive_start_ep_off_rank` | `number` | National rank of the team's average expected points (EP) at the first snap of a drive, over the drives the side owned with the team on offense, where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. |
 | `total_available_yards_def` | `number` | Available yards are the yards a drive could theoretically gain, summed from each drive's starting distance to the opponent goal line. Total available yards on opponents' drives against the team's defense (ESPN's drive team). A drive's start is its header oriented to agree with its first snap, or that snap when the header is a 0 or missing placeholder. |
-| `total_gained_yards_def` | `number \| bigint` | Total yards the team allowed across opponents' drives against its defense, each drive's gain capped at its available yards. |
+| `total_gained_yards_def` | `number` | Total yards the team allowed across opponents' drives against its defense, each drive's gain capped at its available yards. |
 | `pts_per_opp_def_n` | `number \| bigint` | Sample size behind pts_per_opp_def: the number of scoring opportunities on opponents' drives against the team's defense. 0 when there were none, and pts_per_opp_def is then null. |
 | `pts_per_drive_def_n` | `number \| bigint` | Sample size behind pts_per_drive_def: the number of opponents' drives against the team's defense it is computed over. 0 when there were none, and pts_per_drive_def is then null. Can sit slightly below drives_def, which also counts drive ids holding only a stray snap. |
 | `start_position_def` | `number` | Average drive start position, measured in yards from the opponent goal line, with the team on defense (i.e. allowed to opponents). |
@@ -4014,7 +4024,7 @@ const rows = await sdv.cfb.loadCfbTeamSummariesWeekly({ seasons: 2024 });
 | `start_position_def_rank` | `number` | National rank of the team's average drive start position, measured in yards from the opponent goal line with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. |
 | `drive_start_ep_def_rank` | `number` | National rank of the team's average expected points (EP) at the first snap of a drive, over the drives the side owned with the team on defense (i.e. allowed to opponents), where 1 is best. Null when the metric is null or the column holds fewer than two distinct values: unranked, not last. |
 | `total_available_yards_margin` | `number` | Available yards on the team's own drives minus available yards on drives it defended. |
-| `total_gained_yards_margin` | `number \| bigint` | Yards the team gained minus yards it allowed. |
+| `total_gained_yards_margin` | `number` | Yards the team gained minus yards it allowed. |
 | `available_yards_pct_margin` | `number` | Available-yards share gained by the offense minus the share allowed by the defense. Higher is better. |
 | `pts_per_opp_margin` | `number` | pts_per_opp_off minus pts_per_opp_def. Null when either side is null. Higher is better. |
 | `pts_per_drive_margin` | `number` | pts_per_drive_off minus pts_per_drive_def: attributed drive-result points per owned drive minus those per opponents' owned drive. Null when either side is null. Higher is better. |
@@ -4585,6 +4595,13 @@ const rows = await sdv.cfb.loadCfbTeamSummariesWeekly({ seasons: 2024 });
 | `net_adj_epa_conf_pct` | `number` | Percentile (0-100) of net_adj_epa among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. |
 | `off_strength_faced_conf_pct` | `number` | Percentile (0-100) of off_strength_faced among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. |
 | `def_strength_faced_conf_pct` | `number` | Percentile (0-100) of def_strength_faced among teams in the same conference, where 100 is best. Direction is already encoded in the matching rank, so a lower-is-better metric still scores 100 at its best. Null when the metric is null, for an FBS Independent (not a conference), or when fewer than 5 teams in the conference have the metric. Rows with a null metric are excluded from the denominator. |
+| `deserved_wins` | `number` | Sum of the team's paper_share over the games in the row's span: the wins the Paper Index says its play earned (sportsdataverse.analytics.paper_index.deserved_wins). |
+| `luck_wins` | `number` | wins minus deserved_wins; positive means the team won more games than its play deserved. |
+| `luck_z` | `number` | luck_wins / sqrt(sum(p * (1 - p))) over the team's game shares p: luck in standard deviations of a sum of independent Bernoulli(p) wins; null when that variance is 0. |
+| `luck_wins_rank` | `number` | National rank of luck_wins, 1 = the most wins above what its play deserved. Null when luck_wins is null: unranked, not last. |
+| `luck_z_rank` | `number` | National rank of luck_z, 1 = the luckiest in standard deviations. Null when luck_z is null: unranked, not last. |
+| `paper_index_games_n` | `number \| bigint` | Games in the row's span that the Paper Index scored for the team (completed, not tied, both sides at least 20 scrimmage snaps); deserved_wins and luck are sums over these games. |
+| `paper_index_span` | `string` | Where the season sits relative to the Paper Index fit (sportsdataverse.analytics.paper_index TRAIN_SEASONS / HOLDOUT_SEASONS): train (in-sample, its games were part of the fit), holdout (scored out of sample) or out_of_span (scored, never seen by the fit). |
 | `through_week` | `number` | Regular-season week this cumulative snapshot covers -- the row reflects the team's state through the end of that week. One asset holds every week, so filter on this column. |
 
 ## `loadCfbUsagePlayers`
@@ -8100,5 +8117,83 @@ const rows = await sdv.cfb.loadCfbTeamGroupSeasons({ seasons: 2024 });
 | `source` | `string` | Source the membership was taken from -- the most reliable per-season source for that era. |
 | `sources_agree` | `boolean` | Whether a second source agreed on the membership; null when only one source covers the season. |
 | `notes` | `string` | Builder notes on the team-season, such as a source disagreement or which of several listed memberships was kept. |
+
+## `loadCfbTeamAliases`
+
+Release: [cfb_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/cfb_groups) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfb_groups/cfb_team_aliases.parquet`
+
+:::caution[Coverage]
+One season-less file: every id and name another source (cbs, cfbd, fox, on3, sports247, yahoo) uses for a team, keyed on the ESPN team id (team_id, a string; team_id_source = espn), with the seasons the source shows it on that team (valid_from / valid_to, inclusive; both null for an undated curated map). id_kind says whether source_id is the source's id for this sport's team or one id for every sport of a school; a name-only row has a null source_id. A source id means something only within its source (Fox 25 is not ESPN 25), so filter on source before joining on source_id. Seasons are the STARTING year (2025 = the fall 2025 season).
+:::
+
+| option | type | required | description |
+|---|---|---|---|
+| `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
+| `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
+
+```js
+const rows = await sdv.cfb.loadCfbTeamAliases();
+// snake_case alias (py/R parity): sdv.cfb.load_cfb_team_aliases(...)
+```
+
+**Returns** (one row per record; every column optional and nullable):
+
+**Row type:** `LoadCfbTeamAliasesRow` (exported from the package root).
+
+| col_name | type | description |
+|---|---|---|
+| `league` | `string` | League code of the table ("cfb"). |
+| `team_id` | `string` | ESPN team id the alias points to, as a string (e.g. "150"); the same id as team_id in load_cfb_team_group_seasons. Join on it to reach ESPN team data. |
+| `team_id_source` | `string` | Id space of team_id; always "espn" in this table. |
+| `source` | `string` | Provider that uses this id or name (in this table: cbs, cfbd, fox, on3, sports247, yahoo). "sports247" is 247Sports. |
+| `source_id` | `string` | The source's own id for the team (e.g. Fox 25, Yahoo nba.t.1); null for a name-only row. It means something only within its source (Fox 25 is Ohio State, ESPN 25 is California), so filter on source first. |
+| `id_kind` | `string` | "team" when source_id is the source's id for this sport's team, or "school" when it is one id for every sport of a school (the stats.ncaa.org org id, 247Sports institutionKey, On3 orgKey). |
+| `name_kind` | `string` | Kind of label in value: "name" or "abbreviation"; null when the row carries only an id. An id with both a name and an abbreviation is two rows. |
+| `value` | `string` | The source's own spelling of the team name or abbreviation; null when the row carries only an id. |
+| `valid_from` | `number` | First season the source shows this id or name on the team, inclusive (STARTING year: 2025 = the fall 2025 season); null, with valid_to, for an undated curated map. |
+| `valid_to` | `number` | Last season the source shows this id or name on the team, inclusive (STARTING year: 2025 = the fall 2025 season); null, with valid_from, for an undated curated map. A gap in the source splits the window into two rows. |
+| `match_method` | `string` | How the row was tied to the ESPN team: "deterministic" (a formula or shared key, e.g. Yahoo \{league\}.t.\{espn id\}; CFBD ids are ESPN ids), "crosswalk" (carried from a published crosswalk leg), "curated" (a cited map), or for a hand-captured team directory row "alias", "exact_name" (normalized name) or "dict" (curated name dictionary). |
+| `evidence` | `string` | The release asset or sportsdataverse/sdv-reference-data file the row came from. |
+
+## `loadCfbPlayerAliases`
+
+Release: [cfb_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/cfb_groups) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/cfb_groups/cfb_player_aliases.parquet`
+
+:::caution[Coverage]
+One season-less file: every player id another source (cbs, fox, ncaa, yahoo) uses for an ESPN athlete (athlete_id, a string; athlete_id_source = espn), with the ESPN team the match was made on (team_id) and the seasons it held (valid_from / valid_to, inclusive). match_method and match_confidence carry the matching leg's own method and score. Filter on source before joining on source_player_id. stats.ncaa.org roster ids (source ncaa) are new every season. Seasons are the STARTING year (2025 = the fall 2025 season).
+:::
+
+| option | type | required | description |
+|---|---|---|---|
+| `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
+| `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
+
+```js
+const rows = await sdv.cfb.loadCfbPlayerAliases();
+// snake_case alias (py/R parity): sdv.cfb.load_cfb_player_aliases(...)
+```
+
+**Returns** (one row per record; every column optional and nullable):
+
+**Row type:** `LoadCfbPlayerAliasesRow` (exported from the package root).
+
+| col_name | type | description |
+|---|---|---|
+| `league` | `string` | League code of the table ("cfb"). |
+| `athlete_id` | `string` | ESPN athlete id the provider id points to, as a string (e.g. "4433134"). Join on it to reach ESPN player data; the ESPN player loaders (load_cfb_player_box and its siblings) carry it as Int64, so cast first with pl.col("athlete_id").cast(pl.Int64). |
+| `athlete_id_source` | `string` | Id space of athlete_id; always "espn" in this table. |
+| `source` | `string` | Provider whose player id this is (in this table: cbs, fox, ncaa, yahoo). |
+| `source_player_id` | `string` | The source's own player id (e.g. Yahoo ncaaf.p.316907, Fox 76284). It means something only within its source, so filter on source first. stats.ncaa.org roster ids (source ncaa) are new every season. |
+| `team_id` | `string` | ESPN team id (a string) the athlete was on in these seasons: the team block the match was made in, an ESPN team-season of load_cfb_team_group_seasons. |
+| `source_team_id` | `string` | The source's own team id when the matching leg gives one (the season's stats.ncaa.org team id; the Fox / Yahoo / CBS team for the NFL); null otherwise. |
+| `valid_from` | `number` | First season the id is on that team, inclusive (STARTING year: 2025 = the fall 2025 season). |
+| `valid_to` | `number` | Last season the id is on that team, inclusive (STARTING year: 2025 = the fall 2025 season). A gap or a change of match method splits the window into two rows. |
+| `match_method` | `string` | The matching leg's own method (exact_name, fuzzy_jw, the NCAA tiers name_jersey / name / last_jersey / jaro_winkler, CFB rosters name); crosswalk for a leg that names none; propagated when a pair matched in another season was carried to this provider id; override for a hand-verified override. |
+| `match_confidence` | `number` | The leg's own match confidence where it gives one (the lowest in the window); the NCAA tiers score 1.0 / 0.95 / 0.9 / 0.85; null otherwise. |
+| `evidence` | `string` | The release asset or sportsdataverse/sdv-reference-data file the row came from. |
 
 _Generated by tools/codegen/generate.mjs from tools/codegen/endpoints/releases.yaml (vendored from sdv-py) — see [How this library is built](/docs/architecture/loaders)._

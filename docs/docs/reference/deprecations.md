@@ -58,7 +58,7 @@ v4 renamed the generated wrappers to **sdv-py's names**, so the same endpoint ha
 - CBS: sdv-py's 16 short names replace the ones JS had picked.
 - 3.0.0 (the last published 3.x) named five native families by their sdv-py file stem: `mlb_api_*`, `cbs_napi_*`, `fox_bifrost_*`, `yahoo_shangrila_*` and `sdv.recruiting.sports247_*`. Each forwards to the same endpoint's v4 name.
 
-Every pre-v4 name below still works: it forwards to the new function and emits one `DeprecationWarning` per name per process. The aliases will be removed in a future major release. **1766** names are deprecated, each in both its snake_case and camelCase form.
+Every pre-v4 name below still works: it forwards to the new function and emits one `DeprecationWarning` per name per process. The aliases will be removed in a future major release. **1778** names are deprecated, each in both its snake_case and camelCase form.
 
 ## `sdv.bundesliga`
 
@@ -237,6 +237,7 @@ Every pre-v4 name below still works: it forwards to the new function and emits o
 | `espn_cfb_athlete_stats` / `espnCfbAthleteStats` | `espn_cfb_player_stats_v3` / `espnCfbPlayerStatsV3` |
 | `espn_cfb_athlete_vs_athlete` / `espnCfbAthleteVsAthlete` | `espn_cfb_player_vs_player` / `espnCfbPlayerVsPlayer` |
 | `espn_cfb_athletes_index` / `espnCfbAthletesIndex` | `espn_cfb_players_index` / `espnCfbPlayersIndex` |
+| `espn_cfb_calendar` / `espnCfbCalendar` | `espn_cfb_calendar_site` / `espnCfbCalendarSite` |
 | `espn_cfb_event` / `espnCfbEvent` | `espn_cfb_game` / `espnCfbGame` |
 | `espn_cfb_event_broadcasts` / `espnCfbEventBroadcasts` | `espn_cfb_game_broadcasts` / `espnCfbGameBroadcasts` |
 | `espn_cfb_event_competition` / `espnCfbEventCompetition` | `espn_cfb_game_competition` / `espnCfbGameCompetition` |
@@ -780,6 +781,7 @@ Every pre-v4 name below still works: it forwards to the new function and emits o
 | `espn_mbb_athlete_stats` / `espnMbbAthleteStats` | `espn_mbb_player_stats_v3` / `espnMbbPlayerStatsV3` |
 | `espn_mbb_athlete_vs_athlete` / `espnMbbAthleteVsAthlete` | `espn_mbb_player_vs_player` / `espnMbbPlayerVsPlayer` |
 | `espn_mbb_athletes_index` / `espnMbbAthletesIndex` | `espn_mbb_players_index` / `espnMbbPlayersIndex` |
+| `espn_mbb_calendar` / `espnMbbCalendar` | `espn_mbb_calendar_site` / `espnMbbCalendarSite` |
 | `espn_mbb_event` / `espnMbbEvent` | `espn_mbb_game` / `espnMbbGame` |
 | `espn_mbb_event_broadcasts` / `espnMbbEventBroadcasts` | `espn_mbb_game_broadcasts` / `espnMbbGameBroadcasts` |
 | `espn_mbb_event_competition` / `espnMbbEventCompetition` | `espn_mbb_game_competition` / `espnMbbGameCompetition` |
@@ -885,6 +887,7 @@ Every pre-v4 name below still works: it forwards to the new function and emits o
 | `espn_mlb_athlete_stats` / `espnMlbAthleteStats` | `espn_mlb_player_stats_v3` / `espnMlbPlayerStatsV3` |
 | `espn_mlb_athlete_vs_athlete` / `espnMlbAthleteVsAthlete` | `espn_mlb_player_vs_player` / `espnMlbPlayerVsPlayer` |
 | `espn_mlb_athletes_index` / `espnMlbAthletesIndex` | `espn_mlb_players_index` / `espnMlbPlayersIndex` |
+| `espn_mlb_calendar` / `espnMlbCalendar` | `espn_mlb_calendar_site` / `espnMlbCalendarSite` |
 | `espn_mlb_event` / `espnMlbEvent` | `espn_mlb_game` / `espnMlbGame` |
 | `espn_mlb_event_broadcasts` / `espnMlbEventBroadcasts` | `espn_mlb_game_broadcasts` / `espnMlbGameBroadcasts` |
 | `espn_mlb_event_competition` / `espnMlbEventCompetition` | `espn_mlb_game_competition` / `espnMlbGameCompetition` |
@@ -1065,6 +1068,7 @@ Every pre-v4 name below still works: it forwards to the new function and emits o
 | `espn_nba_athlete_stats` / `espnNbaAthleteStats` | `espn_nba_player_stats_v3` / `espnNbaPlayerStatsV3` |
 | `espn_nba_athlete_vs_athlete` / `espnNbaAthleteVsAthlete` | `espn_nba_player_vs_player` / `espnNbaPlayerVsPlayer` |
 | `espn_nba_athletes_index` / `espnNbaAthletesIndex` | `espn_nba_players_index` / `espnNbaPlayersIndex` |
+| `espn_nba_calendar` / `espnNbaCalendar` | `espn_nba_calendar_site` / `espnNbaCalendarSite` |
 | `espn_nba_event` / `espnNbaEvent` | `espn_nba_game` / `espnNbaGame` |
 | `espn_nba_event_broadcasts` / `espnNbaEventBroadcasts` | `espn_nba_game_broadcasts` / `espnNbaGameBroadcasts` |
 | `espn_nba_event_competition` / `espnNbaEventCompetition` | `espn_nba_game_competition` / `espnNbaGameCompetition` |
@@ -1116,6 +1120,7 @@ Every pre-v4 name below still works: it forwards to the new function and emits o
 | `espn_nfl_athlete_stats` / `espnNflAthleteStats` | `espn_nfl_player_stats_v3` / `espnNflPlayerStatsV3` |
 | `espn_nfl_athlete_vs_athlete` / `espnNflAthleteVsAthlete` | `espn_nfl_player_vs_player` / `espnNflPlayerVsPlayer` |
 | `espn_nfl_athletes_index` / `espnNflAthletesIndex` | `espn_nfl_players_index` / `espnNflPlayersIndex` |
+| `espn_nfl_calendar` / `espnNflCalendar` | `espn_nfl_calendar_site` / `espnNflCalendarSite` |
 | `espn_nfl_event` / `espnNflEvent` | `espn_nfl_game` / `espnNflGame` |
 | `espn_nfl_event_broadcasts` / `espnNflEventBroadcasts` | `espn_nfl_game_broadcasts` / `espnNflGameBroadcasts` |
 | `espn_nfl_event_competition` / `espnNflEventCompetition` | `espn_nfl_game_competition` / `espnNflGameCompetition` |
@@ -1596,6 +1601,7 @@ Every pre-v4 name below still works: it forwards to the new function and emits o
 | `espn_wbb_athlete_stats` / `espnWbbAthleteStats` | `espn_wbb_player_stats_v3` / `espnWbbPlayerStatsV3` |
 | `espn_wbb_athlete_vs_athlete` / `espnWbbAthleteVsAthlete` | `espn_wbb_player_vs_player` / `espnWbbPlayerVsPlayer` |
 | `espn_wbb_athletes_index` / `espnWbbAthletesIndex` | `espn_wbb_players_index` / `espnWbbPlayersIndex` |
+| `espn_wbb_calendar` / `espnWbbCalendar` | `espn_wbb_calendar_site` / `espnWbbCalendarSite` |
 | `espn_wbb_event` / `espnWbbEvent` | `espn_wbb_game` / `espnWbbGame` |
 | `espn_wbb_event_broadcasts` / `espnWbbEventBroadcasts` | `espn_wbb_game_broadcasts` / `espnWbbGameBroadcasts` |
 | `espn_wbb_event_competition` / `espnWbbEventCompetition` | `espn_wbb_game_competition` / `espnWbbGameCompetition` |
@@ -1624,6 +1630,8 @@ Every pre-v4 name below still works: it forwards to the new function and emits o
 | `espn_wbb_recruiting_athletes` / `espnWbbRecruitingAthletes` | `espn_wbb_recruiting_players` / `espnWbbRecruitingPlayers` |
 | `espn_wbb_season_athletes` / `espnWbbSeasonAthletes` | `espn_wbb_season_players` / `espnWbbSeasonPlayers` |
 | `espn_wbb_season_week_events` / `espnWbbSeasonWeekEvents` | `espn_wbb_season_week_games` / `espnWbbSeasonWeekGames` |
+| `espn_wbb_standings` / `espnWbbStandings` | `espn_wbb_standings_site` / `espnWbbStandingsSite` |
+| `espn_wbb_team_roster` / `espnWbbTeamRoster` | `espn_wbb_team_roster_site` / `espnWbbTeamRosterSite` |
 
 ## `sdv.wc`
 
@@ -1751,6 +1759,8 @@ Every pre-v4 name below still works: it forwards to the new function and emits o
 | `espn_wnba_athlete_stats` / `espnWnbaAthleteStats` | `espn_wnba_player_stats_v3` / `espnWnbaPlayerStatsV3` |
 | `espn_wnba_athlete_vs_athlete` / `espnWnbaAthleteVsAthlete` | `espn_wnba_player_vs_player` / `espnWnbaPlayerVsPlayer` |
 | `espn_wnba_athletes_index` / `espnWnbaAthletesIndex` | `espn_wnba_players_index` / `espnWnbaPlayersIndex` |
+| `espn_wnba_calendar` / `espnWnbaCalendar` | `espn_wnba_calendar_site` / `espnWnbaCalendarSite` |
+| `espn_wnba_draft` / `espnWnbaDraft` | `espn_wnba_draft_site` / `espnWnbaDraftSite` |
 | `espn_wnba_event` / `espnWnbaEvent` | `espn_wnba_game` / `espnWnbaGame` |
 | `espn_wnba_event_broadcasts` / `espnWnbaEventBroadcasts` | `espn_wnba_game_broadcasts` / `espnWnbaGameBroadcasts` |
 | `espn_wnba_event_competition` / `espnWnbaEventCompetition` | `espn_wnba_game_competition` / `espnWnbaGameCompetition` |
@@ -1778,6 +1788,8 @@ Every pre-v4 name below still works: it forwards to the new function and emits o
 | `espn_wnba_events` / `espnWnbaEvents` | `espn_wnba_games` / `espnWnbaGames` |
 | `espn_wnba_season_athletes` / `espnWnbaSeasonAthletes` | `espn_wnba_season_players` / `espnWnbaSeasonPlayers` |
 | `espn_wnba_season_week_events` / `espnWnbaSeasonWeekEvents` | `espn_wnba_season_week_games` / `espnWnbaSeasonWeekGames` |
+| `espn_wnba_standings` / `espnWnbaStandings` | `espn_wnba_standings_site` / `espnWnbaStandingsSite` |
+| `espn_wnba_team_roster` / `espnWnbaTeamRoster` | `espn_wnba_team_roster_site` / `espnWnbaTeamRosterSite` |
 
 ## `sdv.wwc`
 

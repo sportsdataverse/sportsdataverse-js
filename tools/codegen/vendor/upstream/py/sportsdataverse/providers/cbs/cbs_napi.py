@@ -4,19 +4,20 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Dict, List, Optional, Union  # noqa: F401
+from typing import Dict, List, Optional, Union  # noqa: F401
 
-from sportsdataverse._codegen_runtime import _get
-from sportsdataverse.cbs.cbs_napi_parsers import (
+# Imported at runtime, not under TYPE_CHECKING: typing.get_type_hints() evaluates the
+# annotations below and raised NameError on ``pl`` / ``pd`` (R858-4).
+import pandas as pd  # noqa: F401
+import polars as pl  # noqa: F401
+
+from sportsdataverse.providers.cbs.cbs_napi_runtime import _get
+from sportsdataverse.providers.cbs.cbs_napi_parsers import (
     parse_cbs_napi,
     parse_cbs_napi_scoring_drives,
     parse_cbs_napi_scoring_plays,
     parse_cbs_napi_standings,
 )
-
-if TYPE_CHECKING:  # pragma: no cover -- annotation-only imports (PEP 563 defers eval)
-    import pandas as pd
-    import polars as pl
 
 __all__ = [
     "cbs_bulk",
@@ -138,14 +139,14 @@ def cbs_bulk(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_bulk
+            from sportsdataverse.providers.cbs import cbs_bulk
             cbs_bulk()
 
         See Also:
@@ -206,14 +207,14 @@ def cbs_client_config(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_client_config
+            from sportsdataverse.providers.cbs import cbs_client_config
             cbs_client_config(client_name='cbs')
 
         See Also:
@@ -262,14 +263,14 @@ def cbs_coach_rankings(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_coach_rankings
+            from sportsdataverse.providers.cbs import cbs_coach_rankings
             cbs_coach_rankings()
 
         See Also:
@@ -315,14 +316,14 @@ def cbs_coach_team_associations(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_coach_team_associations
+            from sportsdataverse.providers.cbs import cbs_coach_team_associations
             cbs_coach_team_associations()
 
         See Also:
@@ -372,14 +373,14 @@ def cbs_division_subdivisions(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_division_subdivisions
+            from sportsdataverse.providers.cbs import cbs_division_subdivisions
             cbs_division_subdivisions()
 
         See Also:
@@ -425,14 +426,14 @@ def cbs_endpoint_registry(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_endpoint_registry
+            from sportsdataverse.providers.cbs import cbs_endpoint_registry
             cbs_endpoint_registry()
 
         See Also:
@@ -480,14 +481,14 @@ def cbs_event(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_event
+            from sportsdataverse.providers.cbs import cbs_event
             cbs_event()
 
         See Also:
@@ -534,14 +535,14 @@ def cbs_event_entrants(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_event_entrants
+            from sportsdataverse.providers.cbs import cbs_event_entrants
             cbs_event_entrants()
 
         See Also:
@@ -585,14 +586,14 @@ def cbs_event_leaderboard(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_event_leaderboard
+            from sportsdataverse.providers.cbs import cbs_event_leaderboard
             cbs_event_leaderboard()
 
         See Also:
@@ -636,14 +637,14 @@ def cbs_event_seasons(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_event_seasons
+            from sportsdataverse.providers.cbs import cbs_event_seasons
             cbs_event_seasons()
 
         See Also:
@@ -687,14 +688,14 @@ def cbs_event_venues(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_event_venues
+            from sportsdataverse.providers.cbs import cbs_event_venues
             cbs_event_venues()
 
         See Also:
@@ -742,14 +743,14 @@ def cbs_game(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_game
+            from sportsdataverse.providers.cbs import cbs_game
             cbs_game()
 
         See Also:
@@ -796,14 +797,14 @@ def cbs_game_betting_splits(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_game_betting_splits
+            from sportsdataverse.providers.cbs import cbs_game_betting_splits
             cbs_game_betting_splits()
 
         See Also:
@@ -847,14 +848,14 @@ def cbs_game_boxscore(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_game_boxscore
+            from sportsdataverse.providers.cbs import cbs_game_boxscore
             cbs_game_boxscore()
 
         See Also:
@@ -898,14 +899,14 @@ def cbs_game_content_preview(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_game_content_preview
+            from sportsdataverse.providers.cbs import cbs_game_content_preview
             cbs_game_content_preview()
 
         See Also:
@@ -949,14 +950,14 @@ def cbs_game_content_recap(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_game_content_recap
+            from sportsdataverse.providers.cbs import cbs_game_content_recap
             cbs_game_content_recap()
 
         See Also:
@@ -1002,14 +1003,14 @@ def cbs_game_content_story(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_game_content_story
+            from sportsdataverse.providers.cbs import cbs_game_content_story
             cbs_game_content_story()
 
         See Also:
@@ -1055,14 +1056,14 @@ def cbs_game_featured(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_game_featured
+            from sportsdataverse.providers.cbs import cbs_game_featured
             cbs_game_featured()
 
         See Also:
@@ -1108,14 +1109,14 @@ def cbs_game_lineup(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_game_lineup
+            from sportsdataverse.providers.cbs import cbs_game_lineup
             cbs_game_lineup()
 
         See Also:
@@ -1171,14 +1172,14 @@ def cbs_game_odds(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_game_odds
+            from sportsdataverse.providers.cbs import cbs_game_odds
             cbs_game_odds()
 
         See Also:
@@ -1228,14 +1229,14 @@ def cbs_game_odds_hq(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_game_odds_hq
+            from sportsdataverse.providers.cbs import cbs_game_odds_hq
             cbs_game_odds_hq()
 
         See Also:
@@ -1279,14 +1280,14 @@ def cbs_game_outcomes(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_game_outcomes
+            from sportsdataverse.providers.cbs import cbs_game_outcomes
             cbs_game_outcomes()
 
         See Also:
@@ -1334,14 +1335,14 @@ def cbs_game_probable_players(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_game_probable_players
+            from sportsdataverse.providers.cbs import cbs_game_probable_players
             cbs_game_probable_players()
 
         See Also:
@@ -1398,14 +1399,14 @@ def cbs_game_props(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_game_props
+            from sportsdataverse.providers.cbs import cbs_game_props
             cbs_game_props()
 
         See Also:
@@ -1455,14 +1456,14 @@ def cbs_game_rtwp(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_game_rtwp
+            from sportsdataverse.providers.cbs import cbs_game_rtwp
             cbs_game_rtwp()
 
         See Also:
@@ -1506,14 +1507,14 @@ def cbs_game_ruwt_highlights(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_game_ruwt_highlights
+            from sportsdataverse.providers.cbs import cbs_game_ruwt_highlights
             cbs_game_ruwt_highlights()
 
         See Also:
@@ -1557,14 +1558,14 @@ def cbs_game_scoring_boxscores(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_game_scoring_boxscores
+            from sportsdataverse.providers.cbs import cbs_game_scoring_boxscores
             cbs_game_scoring_boxscores()
 
         See Also:
@@ -1608,14 +1609,14 @@ def cbs_game_scoring_drives(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_game_scoring_drives
+            from sportsdataverse.providers.cbs import cbs_game_scoring_drives
             cbs_game_scoring_drives()
 
         See Also:
@@ -1659,14 +1660,14 @@ def cbs_game_scoring_leaders(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_game_scoring_leaders
+            from sportsdataverse.providers.cbs import cbs_game_scoring_leaders
             cbs_game_scoring_leaders()
 
         See Also:
@@ -1710,14 +1711,14 @@ def cbs_game_scoring_player_stats(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_game_scoring_player_stats
+            from sportsdataverse.providers.cbs import cbs_game_scoring_player_stats
             cbs_game_scoring_player_stats()
 
         See Also:
@@ -1761,14 +1762,14 @@ def cbs_game_scoring_plays(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_game_scoring_plays
+            from sportsdataverse.providers.cbs import cbs_game_scoring_plays
             cbs_game_scoring_plays()
 
         See Also:
@@ -1812,14 +1813,14 @@ def cbs_game_scoring_rosters(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_game_scoring_rosters
+            from sportsdataverse.providers.cbs import cbs_game_scoring_rosters
             cbs_game_scoring_rosters()
 
         See Also:
@@ -1863,14 +1864,14 @@ def cbs_game_scoring_scoreboard(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_game_scoring_scoreboard
+            from sportsdataverse.providers.cbs import cbs_game_scoring_scoreboard
             cbs_game_scoring_scoreboard()
 
         See Also:
@@ -1914,14 +1915,14 @@ def cbs_game_scoring_scores(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_game_scoring_scores
+            from sportsdataverse.providers.cbs import cbs_game_scoring_scores
             cbs_game_scoring_scores()
 
         See Also:
@@ -1965,14 +1966,14 @@ def cbs_game_scoring_team_stats(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_game_scoring_team_stats
+            from sportsdataverse.providers.cbs import cbs_game_scoring_team_stats
             cbs_game_scoring_team_stats()
 
         See Also:
@@ -2016,14 +2017,14 @@ def cbs_game_scoring_winprob(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_game_scoring_winprob
+            from sportsdataverse.providers.cbs import cbs_game_scoring_winprob
             cbs_game_scoring_winprob()
 
         See Also:
@@ -2067,14 +2068,14 @@ def cbs_game_scoring_ytd_player_stats(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_game_scoring_ytd_player_stats
+            from sportsdataverse.providers.cbs import cbs_game_scoring_ytd_player_stats
             cbs_game_scoring_ytd_player_stats()
 
         See Also:
@@ -2118,14 +2119,14 @@ def cbs_game_scoring_ytd_team_stats(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_game_scoring_ytd_team_stats
+            from sportsdataverse.providers.cbs import cbs_game_scoring_ytd_team_stats
             cbs_game_scoring_ytd_team_stats()
 
         See Also:
@@ -2169,14 +2170,14 @@ def cbs_game_ticket(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_game_ticket
+            from sportsdataverse.providers.cbs import cbs_game_ticket
             cbs_game_ticket()
 
         See Also:
@@ -2220,14 +2221,14 @@ def cbs_game_weather(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_game_weather
+            from sportsdataverse.providers.cbs import cbs_game_weather
             cbs_game_weather()
 
         See Also:
@@ -2271,14 +2272,14 @@ def cbs_golf_event_markets(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_golf_event_markets
+            from sportsdataverse.providers.cbs import cbs_golf_event_markets
             cbs_golf_event_markets()
 
         See Also:
@@ -2325,14 +2326,14 @@ def cbs_golf_player_markets(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_golf_player_markets
+            from sportsdataverse.providers.cbs import cbs_golf_player_markets
             cbs_golf_player_markets(player_id=1751796)
 
         See Also:
@@ -2383,14 +2384,14 @@ def cbs_golfer_results(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_golfer_results
+            from sportsdataverse.providers.cbs import cbs_golfer_results
             cbs_golfer_results(player_id=1751796)
 
         See Also:
@@ -2440,14 +2441,14 @@ def cbs_league(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_league
+            from sportsdataverse.providers.cbs import cbs_league
             cbs_league(league_id=59)
 
         See Also:
@@ -2496,14 +2497,14 @@ def cbs_league_teams(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_league_teams
+            from sportsdataverse.providers.cbs import cbs_league_teams
             cbs_league_teams(league_id=59)
 
         See Also:
@@ -2549,14 +2550,14 @@ def cbs_odds(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_odds
+            from sportsdataverse.providers.cbs import cbs_odds
             cbs_odds()
 
         See Also:
@@ -2607,14 +2608,14 @@ def cbs_player(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_player
+            from sportsdataverse.providers.cbs import cbs_player
             cbs_player(player_id=1751796)
 
         See Also:
@@ -2663,14 +2664,14 @@ def cbs_player_combine_data(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_player_combine_data
+            from sportsdataverse.providers.cbs import cbs_player_combine_data
             cbs_player_combine_data(player_id=1751796)
 
         See Also:
@@ -2719,14 +2720,14 @@ def cbs_player_depth_charts(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_player_depth_charts
+            from sportsdataverse.providers.cbs import cbs_player_depth_charts
             cbs_player_depth_charts(player_id=1751796)
 
         See Also:
@@ -2780,14 +2781,14 @@ def cbs_player_draft_info(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_player_draft_info
+            from sportsdataverse.providers.cbs import cbs_player_draft_info
             cbs_player_draft_info(player_id=1751796)
 
         See Also:
@@ -2840,14 +2841,14 @@ def cbs_player_encyclopedia(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_player_encyclopedia
+            from sportsdataverse.providers.cbs import cbs_player_encyclopedia
             cbs_player_encyclopedia(player_id=1751796)
 
         See Also:
@@ -2895,14 +2896,14 @@ def cbs_player_futures(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_player_futures
+            from sportsdataverse.providers.cbs import cbs_player_futures
             cbs_player_futures(player_id=1751796)
 
         See Also:
@@ -2953,14 +2954,14 @@ def cbs_player_game_stats(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_player_game_stats
+            from sportsdataverse.providers.cbs import cbs_player_game_stats
             cbs_player_game_stats(player_id=1751796)
 
         See Also:
@@ -3009,14 +3010,14 @@ def cbs_player_hockey_meta(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_player_hockey_meta
+            from sportsdataverse.providers.cbs import cbs_player_hockey_meta
             cbs_player_hockey_meta(player_id=1751796)
 
         See Also:
@@ -3063,14 +3064,14 @@ def cbs_player_injuries(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_player_injuries
+            from sportsdataverse.providers.cbs import cbs_player_injuries
             cbs_player_injuries(player_id=1751796)
 
         See Also:
@@ -3117,14 +3118,14 @@ def cbs_player_meta_baseball(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_player_meta_baseball
+            from sportsdataverse.providers.cbs import cbs_player_meta_baseball
             cbs_player_meta_baseball(player_id=1751796)
 
         See Also:
@@ -3169,14 +3170,14 @@ def cbs_player_meta_golf(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_player_meta_golf
+            from sportsdataverse.providers.cbs import cbs_player_meta_golf
             cbs_player_meta_golf(player_id=1751796)
 
         See Also:
@@ -3223,14 +3224,14 @@ def cbs_player_outlook(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_player_outlook
+            from sportsdataverse.providers.cbs import cbs_player_outlook
             cbs_player_outlook(player_id=1751796)
 
         See Also:
@@ -3279,14 +3280,14 @@ def cbs_player_position_rankings(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_player_position_rankings
+            from sportsdataverse.providers.cbs import cbs_player_position_rankings
             cbs_player_position_rankings(player_id=1751796)
 
         See Also:
@@ -3343,14 +3344,14 @@ def cbs_player_rankings(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_player_rankings
+            from sportsdataverse.providers.cbs import cbs_player_rankings
             cbs_player_rankings(player_id=1751796)
 
         See Also:
@@ -3403,14 +3404,14 @@ def cbs_player_recruit_associations(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_player_recruit_associations
+            from sportsdataverse.providers.cbs import cbs_player_recruit_associations
             cbs_player_recruit_associations(player_id=1751796)
 
         See Also:
@@ -3467,14 +3468,14 @@ def cbs_player_standings(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_player_standings
+            from sportsdataverse.providers.cbs import cbs_player_standings
             cbs_player_standings(player_id=1751796)
 
         See Also:
@@ -3539,14 +3540,14 @@ def cbs_player_stats(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_player_stats
+            from sportsdataverse.providers.cbs import cbs_player_stats
             cbs_player_stats(player_id=1751796)
 
         See Also:
@@ -3605,14 +3606,14 @@ def cbs_player_team_associations(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_player_team_associations
+            from sportsdataverse.providers.cbs import cbs_player_team_associations
             cbs_player_team_associations(player_id=1751796)
 
         See Also:
@@ -3671,14 +3672,14 @@ def cbs_player_transactions(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_player_transactions
+            from sportsdataverse.providers.cbs import cbs_player_transactions
             cbs_player_transactions(player_id=1751796)
 
         See Also:
@@ -3729,14 +3730,14 @@ def cbs_recruit_rankings(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_recruit_rankings
+            from sportsdataverse.providers.cbs import cbs_recruit_rankings
             cbs_recruit_rankings(player_id=1751796)
 
         See Also:
@@ -3785,14 +3786,14 @@ def cbs_season(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_season
+            from sportsdataverse.providers.cbs import cbs_season
             cbs_season(season_id=59)
 
         See Also:
@@ -3842,14 +3843,14 @@ def cbs_season_teams(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_season_teams
+            from sportsdataverse.providers.cbs import cbs_season_teams
             cbs_season_teams(season_id=59)
 
         See Also:
@@ -3898,14 +3899,14 @@ def cbs_sport(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_sport
+            from sportsdataverse.providers.cbs import cbs_sport
             cbs_sport(sport_id=1)
 
         See Also:
@@ -3952,14 +3953,14 @@ def cbs_sport_leagues(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_sport_leagues
+            from sportsdataverse.providers.cbs import cbs_sport_leagues
             cbs_sport_leagues(sport_id=1)
 
         See Also:
@@ -4004,14 +4005,14 @@ def cbs_team_futures(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_team_futures
+            from sportsdataverse.providers.cbs import cbs_team_futures
             cbs_team_futures(team_id=404)
 
         See Also:
@@ -4058,14 +4059,14 @@ def cbs_team_metadata(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_team_metadata
+            from sportsdataverse.providers.cbs import cbs_team_metadata
             cbs_team_metadata(team_id=404)
 
         See Also:
@@ -4114,14 +4115,14 @@ def cbs_team_players(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_team_players
+            from sportsdataverse.providers.cbs import cbs_team_players
             cbs_team_players(team_id=404)
 
         See Also:
@@ -4172,14 +4173,14 @@ def cbs_team_polls(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_team_polls
+            from sportsdataverse.providers.cbs import cbs_team_polls
             cbs_team_polls(team_id=404)
 
         See Also:
@@ -4233,14 +4234,14 @@ def cbs_team_rankings(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_team_rankings
+            from sportsdataverse.providers.cbs import cbs_team_rankings
             cbs_team_rankings(team_id=404)
 
         See Also:
@@ -4289,14 +4290,14 @@ def cbs_team_rankings_sportsline(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_team_rankings_sportsline
+            from sportsdataverse.providers.cbs import cbs_team_rankings_sportsline
             cbs_team_rankings_sportsline(team_id=404)
 
         See Also:
@@ -4351,14 +4352,14 @@ def cbs_team_seasons(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_team_seasons
+            from sportsdataverse.providers.cbs import cbs_team_seasons
             cbs_team_seasons(team_id=404)
 
         See Also:
@@ -4415,14 +4416,14 @@ def cbs_team_standings(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_team_standings
+            from sportsdataverse.providers.cbs import cbs_team_standings
             cbs_team_standings(team_id=404)
 
         See Also:
@@ -4473,14 +4474,14 @@ def cbs_team_standings_sportsline(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_team_standings_sportsline
+            from sportsdataverse.providers.cbs import cbs_team_standings_sportsline
             cbs_team_standings_sportsline(team_id=404)
 
         See Also:
@@ -4535,14 +4536,14 @@ def cbs_team_stats(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_team_stats
+            from sportsdataverse.providers.cbs import cbs_team_stats
             cbs_team_stats(team_id=404)
 
         See Also:
@@ -4593,14 +4594,14 @@ def cbs_venue(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_venue
+            from sportsdataverse.providers.cbs import cbs_venue
             cbs_venue()
 
         See Also:
@@ -4646,14 +4647,14 @@ def cbs_venue_metadata(
         A polars/pandas DataFrame by default; the raw JSON ``Dict`` when ``return_parsed=False``.
 
     Raises:
-        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body). An unknown id is NOT an exception -- NAPI answers it with HTTP 200 plus an ``{error|errors|warnings}`` envelope, which parses to a zero-row frame.
-        NoDataError: The host answered 404 -- the requested resource does not exist.
+        NoDataError: The host answered 404 -- the requested resource does not exist. The id is unknown -- NAPI answers it with HTTP 200 plus a ``warnings`` entry whose ``code`` is 404 (or with an HTTP 404).
+        AssetFetchError: The fetch failed (a non-2xx answer or a connection failure after retries, e.g. 401/403/429/5xx, or an empty or unreadable 200 body) -- the answer is unknown, not empty. The fetch failed (a non-2xx answer or a connection failure after retries, or an empty or unreadable 200 body).
         ValueError: The host answered 400 / 422 -- the request is wrong; retrying cannot help.
 
     Example:
         Quick start::
 
-            from sportsdataverse.cbs import cbs_venue_metadata
+            from sportsdataverse.providers.cbs import cbs_venue_metadata
             cbs_venue_metadata()
 
         See Also:

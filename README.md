@@ -26,7 +26,7 @@ parser layer, one error vocabulary and TypeScript types for every call.
 - **1060 flat-API wrappers across 27 families** — 14 league families on their league
   namespace (MLB Stats, Statcast, NHL ×4, NFL.com, stats.nba.com, …) and 13 provider
   families on their own (HockeyTech, The Odds API, CBS, Fox, Yahoo, 247Sports, On3, …).
-- **323 dataset loaders** (`load*`) that read the release parquet directly.
+- **341 dataset loaders** (`load*`) that read the release parquet directly.
 - `{ parsed: true }` on any wrapper → tidy, snake_cased rows, typed where verified.
 
 It is the Node.js sister to [`sportsdataverse-py`](https://py.sportsdataverse.org/) and the
@@ -77,7 +77,7 @@ and `playwright` (the NFL Pro email / password login).
 | Fox Sports | `api.foxsports.com` | `fox` 38 | `sdv.fox` | public `apikey`, defaulted |
 | Yahoo Sports | `graphite-secure.sports.yahoo.com`, `api-secure.sports.yahoo.com` | `yahoo` 107 · `yahoo_scores` 2 | `sdv.yahoo` | none |
 | HockeyTech / LeagueStat | `lscluster.hockeytech.com` | `hockeytech` 16 + shifts / TOI / Corsi analytics | `sdv.hockeytech` (PWHL, AHL, OHL, WHL, QMJHL + 15 more: 20 leagues) | none (per-league public keys) |
-| Release datasets | GitHub release parquet (`sportsdataverse-data`, nflverse) | 323 `load*` loaders | `sdv.cfb` 71 · `nba` 41 · `mbb` 34 · `wbb` 34 · `wnba` 34 · `mlb` 32 · `nfl` 29 · `nhl` 27 · `pwhl` 21 | none |
+| Release datasets | GitHub release parquet (`sportsdataverse-data`, nflverse) | 341 `load*` loaders | `sdv.cfb` 73 · `nba` 45 · `mbb` 36 · `wbb` 36 · `wnba` 36 · `mlb` 35 · `nfl` 31 · `nhl` 28 · `pwhl` 21 | none |
 
 The same table, per league, is on each league's reference page; `npm run codegen` prints
 the counts. The pre-3.0 hand-written methods (`sdv.nba.getPlayByPlay(id)` and friends)
@@ -151,7 +151,7 @@ await sdv.fox.foxApiScoreboard({ parsed: true });
 
 ### Dataset loaders
 
-The 323 `load*` functions (one per entry of sportsdataverse-py's `releases.yaml`) read the
+The 341 `load*` functions (one per entry of sportsdataverse-py's `releases.yaml`) read the
 published parquet assets — play-by-play with EPA / WP, schedules, rosters, box scores,
 ratings, player value — and resolve to plain row objects with a `Load<Name>Row` type:
 
