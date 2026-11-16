@@ -583,6 +583,16 @@ export interface LoadMbbRatingsRow {
   rank?: number | bigint | null;
   /** Within-season z-score of adj_em, computed as adj_em minus the season mean divided by the season standard deviation, so each season is centered at zero with unit spread. `Float64` */
   adj_em_z?: number | null;
+  /** Adjusted offensive efficiency with the season sim's preseason prior blended in: the same fixed point as adj_o, each Division I team shrunk toward last season's regressed rating as if it had played prior_games extra games at it. `Float64` */
+  adj_o_blend?: number | null;
+  /** Adjusted defensive efficiency with the preseason prior blended in, on the same basis as adj_o_blend (lower is better). `Float64` */
+  adj_d_blend?: number | null;
+  /** adj_o_blend - adj_d_blend: the adjusted efficiency margin with the preseason prior, the rating the pregame projection uses. A team with g games is rated about g / (g + prior_games) on this season. `Float64` */
+  adj_em_blend?: number | null;
+  /** Dense rank of adj_em_blend within the season (1 = best). `Int64` */
+  rank_blend?: number | bigint | null;
+  /** The preseason prior's weight in games (4 men, 3 women, fit by tools/fit_preseason_prior.py); 0 when the previous season is not released, and the blend then equals the raw rating. The five blend columns are in season assets built after 2026-11-13 (#1193); an asset published before then lacks them until the producer rebuilds it. `Float64` */
+  prior_games?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
 }
@@ -965,6 +975,8 @@ export interface LoadMbbPlayerCrosswalkRow {
   yahoo_player_name?: string | null;
   /** KenPom player id (string), matched by hoopR-mbb-data on the normalized name within the ESPN team (a repeated name broken by jersey), then on last name plus jersey. Null for players KenPom does not list, which includes every ESPN roster row without minutes, and for every row when the build ran without the private KenPom capture. Added by the data repo, so the live player-crosswalk builder does not emit it. `String` (an id) */
   kp_player_id?: string | null;
+  /** stats.ncaa.org player id for that season (string, the player_id of the load_ncaa_mbb_* releases), from the ncaa rows of load_mbb_player_aliases valid that season, preferring an id made on the row's ESPN team; null when no NCAA id matches or the match is ambiguous, and on every row of a season before 2010 (2009-10; season is the ending year). `String` (an id) */
+  ncaa_player_id?: string | null;
   /** Combination of matched sources, e.g. "fox+bart" / "fox_only" / "bart_only" / "espn_only". `String` */
   match_method?: string | null;
   /** Jaro-Winkler score or 1 for exact (NA if none). `Float64` */
@@ -1001,6 +1013,8 @@ export interface LoadMbbScheduleCrosswalkRow {
   fox_game_id?: string | null;
   /** Yahoo Sports game id, ncaab.g.<YYYYMMDD US-Eastern date><home Yahoo team id, 4 digits>, filled when built with yahoo=True and checked against the ids Yahoo lists, so a neutral-site game carries the side Yahoo calls home; null otherwise and where Yahoo lists no such game (a non-Division-I home team). `String` (an id) */
   yahoo_game_id?: string | null;
+  /** stats.ncaa.org contest id (string, the contest_id of the load_ncaa_mbb_* releases), matched on the game date and the two teams' ESPN ids through the NCAA team crosswalk, then on one team's only game that day; null when no stats.ncaa.org game matches uniquely (a non-Division-I opponent), and on every row of a season before 2010 (2009-10, the first stats.ncaa.org season; season is the ending year). `String` (an id) */
+  ncaa_contest_id?: string | null;
   /** Combination of matched sources, e.g. "fox+bart" / "fox_only" / "bart_only" / "espn_only". `String` */
   match_method?: string | null;
   /** Jaro-Winkler score or 1 for exact (NA if none). `Float64` */
@@ -2249,7 +2263,7 @@ export interface LoadNcaaMbbRapmWithinTeamRow {
 
 /** One row of `sdv.mbb.loadNcaaMbbRapm` (`ncaa_mbb_rapm`; sdv-py loader schema `load_ncaa_mbb_rapm`). */
 export interface LoadNcaaMbbRapmRow {
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
   /** Unique player identifier. `String` (an id) */
   player_id?: string | null;

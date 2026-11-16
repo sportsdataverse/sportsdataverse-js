@@ -14,7 +14,7 @@ sidebar_position: 50
 
 # `sdv.wnba` — dataset loaders
 
-36 loaders reading the published sportsdataverse-data releases (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias and resolves to an array of plain row objects (or `{ [column]: values[] }` with `format: "columns"`).
+38 loaders reading the published sportsdataverse-data releases (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias and resolves to an array of plain row objects (or `{ [column]: values[] }` with `format: "columns"`).
 
 - **Size:** row objects cost ~60-100 bytes per cell on the heap, so before decoding each season a loader adds its rows × columns (from the parquet footer) to a running total and checks it against `maxCells` — by default heap limit / 100 for rows (≈45M cells on Node's default 4 GB heap) and heap limit / 30 for `format: "columns"` — and throws a catchable `SdvError` instead of running out of memory. Play-by-play is the usual case: pass `columns`, use `format: "columns"`, or raise the heap (`node --max-old-space-size=8192`).
 - **Seasons:** `seasons` takes one season or a list. A season with no published asset (HTTP 404) is skipped with a warning (loaders marked so in their `seasons` row — sdv-py's hand-written ones — throw `NoDataError` instead); any other failure raises `AssetFetchError` (a failed download is never an empty season); a season below the loader's floor raises `SeasonNotFoundError` before anything is fetched. Multi-season results union the columns, null-filling gaps, and cast a column whose type changed between seasons to the common type (an integer id that became a string → strings, "123" not "123.0"), as sdv-py's `diagonal_relaxed` concat does.
@@ -26,29 +26,31 @@ sidebar_position: 50
 | [`loadWnbaPbp`](#loadwnbapbp) | [espn_wnba_pbp](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_pbp) | 2002+ |
 | [`loadWnbaPlayerBoxscore`](#loadwnbaplayerboxscore) | [espn_wnba_player_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_player_boxscores) | 2002+ |
 | [`loadWnbaSchedule`](#loadwnbaschedule) | [espn_wnba_schedules](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_schedules) | 1997+ |
-| [`loadWnbaTeamBoxscore`](#loadwnbateamboxscore) | [espn_wnba_team_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_team_boxscores) | 2002+ |
+| [`loadWnbaTeamBoxscore`](#loadwnbateamboxscore) | [espn_wnba_team_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_team_boxscores) | 2003+ |
 | [`loadWnbaDraft`](#loadwnbadraft) | [espn_wnba_draft](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_draft) | 2018+ |
 | [`loadWnbaGameRosters`](#loadwnbagamerosters) | [espn_wnba_game_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_game_rosters) | 2002+ |
 | [`loadWnbaOfficials`](#loadwnbaofficials) | [espn_wnba_officials](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_officials) | 2003+ |
-| [`loadWnbaPlayerSeasonStats`](#loadwnbaplayerseasonstats) | [espn_wnba_player_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_player_season_stats) | 2002+ |
+| [`loadWnbaPlayerSeasonStats`](#loadwnbaplayerseasonstats) | [espn_wnba_player_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_player_season_stats) | 1997+ |
 | [`loadWnbaRosters`](#loadwnbarosters) | [espn_wnba_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_rosters) | 2024+ |
 | [`loadWnbaShots`](#loadwnbashots) | [espn_wnba_shots](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_shots) | 2002+ |
 | [`loadWnbaStandings`](#loadwnbastandings) | [espn_wnba_standings](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_standings) | 2002+ |
-| [`loadWnbaTeamSeasonStats`](#loadwnbateamseasonstats) | [espn_wnba_team_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_team_season_stats) | 2002+ |
+| [`loadWnbaTeamSeasonStats`](#loadwnbateamseasonstats) | [espn_wnba_team_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_team_season_stats) | 1997+ |
 | [`loadWnbaPlayerCrosswalk`](#loadwnbaplayercrosswalk) | [wnba_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_crosswalk) | 2002+ |
 | [`loadWnbaScheduleCrosswalk`](#loadwnbaschedulecrosswalk) | [wnba_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_crosswalk) | 2002+ |
 | [`loadWnbaTeamCrosswalk`](#loadwnbateamcrosswalk) | [wnba_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_crosswalk) | 2002+ |
-| [`loadWnbaPlayerCore`](#loadwnbaplayercore) | [espn_wnba_player_core](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_player_core) | 2003+ |
+| [`loadWnbaPlayerCore`](#loadwnbaplayercore) | [espn_wnba_player_core](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_player_core) | 2002+ |
 | [`loadWnbaPlayerImpact`](#loadwnbaplayerimpact) | [wnba_player_impact](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_player_impact) | 1997+ |
 | [`loadWnbaStatsCoaches`](#loadwnbastatscoaches) | [wnba_stats_coaches](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_coaches) | 1997+ |
 | [`loadWnbaStatsDraft`](#loadwnbastatsdraft) | [wnba_stats_draft](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_draft) | 1997+ |
 | [`loadWnbaStatsGameRosters`](#loadwnbastatsgamerosters) | [wnba_stats_game_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_game_rosters) | 1997+ |
+| [`loadWnbaStatsMetricCurves`](#loadwnbastatsmetriccurves) | [wnba_stats_metric_curves](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_metric_curves) | 1997+ |
 | [`loadWnbaStatsOfficials`](#loadwnbastatsofficials) | [wnba_stats_officials](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_officials) | 2004+ |
 | [`loadWnbaStatsPbp`](#loadwnbastatspbp) | [wnba_stats_pbp](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_pbp) | 1997+ |
 | [`loadWnbaStatsPossessions`](#loadwnbastatspossessions) | [wnba_stats_possessions](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_possessions) | 1997+ |
 | [`loadWnbaStatsGameLineups`](#loadwnbastatsgamelineups) | [wnba_stats_game_lineups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_game_lineups) | 1997+ |
 | [`loadWnbaStatsPlayerBoxscores`](#loadwnbastatsplayerboxscores) | [wnba_stats_player_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_player_boxscores) | 2026+ |
 | [`loadWnbaStatsPlayerGameLogs`](#loadwnbastatsplayergamelogs) | [wnba_stats_player_game_logs](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_player_game_logs) | 1997+ |
+| [`loadWnbaStatsRollingWindows`](#loadwnbastatsrollingwindows) | [wnba_stats_rolling_windows](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_rolling_windows) | 1997+ |
 | [`loadWnbaStatsRosters`](#loadwnbastatsrosters) | [wnba_stats_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_rosters) | 1997+ |
 | [`loadWnbaStatsSchedules`](#loadwnbastatsschedules) | [wnba_stats_schedules](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_schedules) | 1997+ |
 | [`loadWnbaStatsShots`](#loadwnbastatsshots) | [wnba_stats_shots](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_shots) | 1997+ |
@@ -340,7 +342,7 @@ Release: [espn_wnba_team_boxscores](https://github.com/sportsdataverse/sportsdat
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2003) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -420,6 +422,10 @@ const rows = await sdv.wnba.loadWnbaTeamBoxscore({ seasons: 2024 });
 ## `loadWnbaDraft`
 
 Release: [espn_wnba_draft](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_draft) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_wnba_draft/draft_{season}.parquet`
+
+:::caution[Coverage]
+ESPN has no WNBA drafts before 2018 (the site and core draft endpoints return no picks); load_wnba_stats_draft covers 1997 onward, keyed on WNBA Stats ids.
+:::
 
 | option | type | required | description |
 |---|---|---|---|
@@ -526,10 +532,6 @@ const rows = await sdv.wnba.loadWnbaGameRosters({ seasons: 2024 });
 
 Release: [espn_wnba_officials](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_officials) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_wnba_officials/officials_{season}.parquet`
 
-:::caution[Coverage]
-Published seasons: every season from the floor except 2022 and 2023, which the release has no asset for; a request for one is skipped with a warning.
-:::
-
 | option | type | required | description |
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2003) |
@@ -565,13 +567,9 @@ const rows = await sdv.wnba.loadWnbaOfficials({ seasons: 2024 });
 
 Release: [espn_wnba_player_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_player_season_stats) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_wnba_player_season_stats/player_season_stats_{season}.parquet`
 
-:::caution[Coverage]
-Published seasons: every season from the floor except 2022 and 2023, which the release has no asset for; a request for one is skipped with a warning.
-:::
-
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 1997) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -608,6 +606,10 @@ const rows = await sdv.wnba.loadWnbaPlayerSeasonStats({ seasons: 2024 });
 ## `loadWnbaRosters`
 
 Release: [espn_wnba_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_rosters) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_wnba_rosters/rosters_{season}.parquet`
+
+:::caution[Coverage]
+ESPN serves only current rosters; load_wnba_stats_rosters covers 1997 onward, keyed on WNBA Stats ids, and load_wnba_player_crosswalk maps them to ESPN athlete ids.
+:::
 
 | option | type | required | description |
 |---|---|---|---|
@@ -713,10 +715,6 @@ const rows = await sdv.wnba.loadWnbaShots({ seasons: 2024 });
 
 Release: [espn_wnba_standings](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_standings) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_wnba_standings/standings_{season}.parquet`
 
-:::caution[Coverage]
-Published seasons: every season from the floor except 2022 and 2023, which the release has no asset for; a request for one is skipped with a warning.
-:::
-
 | option | type | required | description |
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
@@ -765,13 +763,9 @@ const rows = await sdv.wnba.loadWnbaStandings({ seasons: 2024 });
 
 Release: [espn_wnba_team_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_team_season_stats) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_wnba_team_season_stats/team_season_stats_{season}.parquet`
 
-:::caution[Coverage]
-Published seasons: every season from the floor except 2022 and 2023, which the release has no asset for; a request for one is skipped with a warning.
-:::
-
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 1997) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -951,7 +945,7 @@ Release: [espn_wnba_player_core](https://github.com/sportsdataverse/sportsdatave
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2003) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -1222,6 +1216,48 @@ const rows = await sdv.wnba.loadWnbaStatsGameRosters({ seasons: 2026 });
 | `team_abbreviation` | `string` | Short team abbreviation (e.g. 'LAS'). |
 | `season` | `number` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
 | `game_id` | `string` | Unique game identifier. |
+
+## `loadWnbaStatsMetricCurves`
+
+Release: [wnba_stats_metric_curves](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_metric_curves) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wnba_stats_metric_curves/metric_curves_{season}.parquet`
+
+:::caution[Coverage]
+One row per (entity, metric, shot-distance bucket): the fg_pct_by_shot_distance curve, at league, team and player level, that sportsdataverse.analytics.metric_curves.metric_curves builds from the WNBA Stats shots. entity_id and team_id are the WNBA Stats team / person ids, cast to Int64: a player row's entity_id joins person_id in load_wnba_stats_shots and player_id in load_wnba_stats_rosters, and team_id joins their team_id.
+:::
+
+| option | type | required | description |
+|---|---|---|---|
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 1997) |
+| `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
+| `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
+
+```js
+const rows = await sdv.wnba.loadWnbaStatsMetricCurves({ seasons: 2025 });
+// snake_case alias (py/R parity): sdv.wnba.load_wnba_stats_metric_curves(...)
+```
+
+**Returns** (one row per record; every column optional and nullable):
+
+**Row type:** `LoadWnbaStatsMetricCurvesRow` (exported from the package root).
+
+| col_name | type | description |
+|---|---|---|
+| `season` | `number \| bigint` | Season the curve covers, the ENDING year as the nba_stats assets key it (1997 = 1996-97); WNBA rows carry the calendar year. |
+| `entity_type` | `string` | Aggregation level of the row: "league" (every shot), "team" or "player". |
+| `entity_id` | `string` | Id of the entity the row describes, Int64 - the stats team_id on team rows and the person_id on player rows; null on league rows. |
+| `entity_name` | `string` | Display name of the player or team as the stats shots carry it; null on league rows. |
+| `team_id` | `string` | On player rows, the stats team_id of most of the player's shots that season (Int64); null on league and team rows. |
+| `id_source` | `string` | Id system of entity_id / team_id, 'nba_stats' (NBA) or 'wnba_stats' (WNBA). |
+| `metric` | `string` | Curve name; every row is 'fg_pct_by_shot_distance'. |
+| `down` | `number \| bigint` | Not used for shots (a football axis of the shared schema); always null. |
+| `x_lo` | `number` | Inclusive lower edge of the shot-distance bucket, in feet (edges fixed in metric_curves.BUCKET_EDGES). |
+| `x_hi` | `number` | Exclusive upper edge of the shot-distance bucket, in feet; a shot at exactly x_hi belongs to the next bucket up. |
+| `attempts` | `number \| bigint` | Field-goal attempts in the bucket; always positive, since an empty bucket has no row. |
+| `successes` | `number \| bigint` | Made field goals in the bucket. |
+| `rate` | `number` | successes divided by attempts (field-goal percentage), computed exactly with no smoothing. |
+| `epa_per_att` | `number` | Not used for shots; always null. |
 
 ## `loadWnbaStatsOfficials`
 
@@ -1527,6 +1563,55 @@ const rows = await sdv.wnba.loadWnbaStatsPlayerGameLogs({ seasons: 2025 });
 | `player_name` | `string` | Player name. |
 | `fantasy_pts` | `number` | Fantasy points. |
 | `measure_type` | `string` | Stats API measure-type slice the row was pulled from (e.g. 'Base'). |
+
+## `loadWnbaStatsRollingWindows`
+
+Release: [wnba_stats_rolling_windows](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_rolling_windows) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wnba_stats_rolling_windows/rolling_windows_{season}.parquet`
+
+:::caution[Coverage]
+One row per (player, metric, window unit, window size): the rolling-window shooting form (fg_pct over field-goal attempts, fg3_pct over three-point attempts) that sportsdataverse.analytics.rolling_windows.rolling_windows builds from the WNBA Stats shots through the season's last game (as_of_date). entity_id and team_id are cast to Int64, the WNBA Stats person / team id dtype: entity_id joins person_id in load_wnba_stats_shots and player_id in load_wnba_stats_rosters.
+:::
+
+| option | type | required | description |
+|---|---|---|---|
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 1997) |
+| `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
+| `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
+
+```js
+const rows = await sdv.wnba.loadWnbaStatsRollingWindows({ seasons: 2025 });
+// snake_case alias (py/R parity): sdv.wnba.load_wnba_stats_rolling_windows(...)
+```
+
+**Returns** (one row per record; every column optional and nullable):
+
+**Row type:** `LoadWnbaStatsRollingWindowsRow` (exported from the package root).
+
+| col_name | type | description |
+|---|---|---|
+| `season` | `number \| bigint` | Season the rows describe, the ENDING year as the nba_stats assets key it (2026 = 2025-26); WNBA rows carry the calendar year. |
+| `entity_type` | `string` | Aggregation level of the row; every published row is 'player'. |
+| `entity_id` | `string` | The player's stats person_id (Int64). |
+| `entity_name` | `string` | The player's name on their latest shot through the season. |
+| `team_id` | `string` | Stats team_id (Int64) of the player's latest shot through the season, so a player traded mid-season carries the new team. |
+| `metric` | `string` | Rate the window averages, 'fg_pct' (field-goal attempts) or 'fg3_pct' (three-point attempts). |
+| `window_unit` | `string` | Event the window counts, 'fga' or 'fg3a'. |
+| `window_n` | `number \| bigint` | Window size, in window_unit events. |
+| `cur` | `number` | Mean of the player's last window_n events through the season. |
+| `prev` | `number` | Mean of the window_n events immediately before cur's window; null unless a full window of earlier history exists. |
+| `season_start` | `number` | Mean of the window_n events immediately before the season started (form entering the season). |
+| `career_baseline` | `number` | Mean of every event before cur's window, earlier events in the same season included; null unless a full window of history precedes it. |
+| `delta_prev` | `number` | cur minus prev. |
+| `delta_season` | `number` | cur minus season_start. |
+| `delta_career` | `number` | cur minus career_baseline. |
+| `delta_prev_rank` | `number \| bigint` | Rank of delta_prev among qualified rows of the same metric and window (1 = biggest riser, ties share the lowest rank); null unless qualified and prev exists. |
+| `n` | `number \| bigint` | Events in cur's window; below window_n for a short career. |
+| `qualified` | `boolean` | True when n equals window_n (the window is full); filter on it before building a hottest-players list. |
+| `last_event_date` | `Date` | Date of the player's latest event in the window. |
+| `as_of_date` | `Date` | Date of the latest event in the season's shots, the cutoff every row is computed through. |
+| `id_source` | `string` | Id system of entity_id / team_id, 'nba_stats' (NBA) or 'wnba_stats' (WNBA). |
 
 ## `loadWnbaStatsRosters`
 

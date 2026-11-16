@@ -23,20 +23,20 @@ sidebar_position: 50
 
 | Loader | Release | Seasons |
 |---|---|---|
-| [`loadWbbPbp`](#loadwbbpbp) | [espn_womens_college_basketball_pbp](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_pbp) | 2002+ |
-| [`loadWbbPlayerBoxscore`](#loadwbbplayerboxscore) | [espn_womens_college_basketball_player_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_player_boxscores) | 2002+ |
+| [`loadWbbPbp`](#loadwbbpbp) | [espn_womens_college_basketball_pbp](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_pbp) | 2004+ |
+| [`loadWbbPlayerBoxscore`](#loadwbbplayerboxscore) | [espn_womens_college_basketball_player_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_player_boxscores) | 2004+ |
 | [`loadWbbSchedule`](#loadwbbschedule) | [espn_womens_college_basketball_schedules](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_schedules) | 2001+ |
-| [`loadWbbTeamBoxscore`](#loadwbbteamboxscore) | [espn_womens_college_basketball_team_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_team_boxscores) | 2002+ |
-| [`loadWbbRatings`](#loadwbbratings) | [wbb_ratings](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wbb_ratings) | 2008+ |
+| [`loadWbbTeamBoxscore`](#loadwbbteamboxscore) | [espn_womens_college_basketball_team_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_team_boxscores) | 2004+ |
+| [`loadWbbRatings`](#loadwbbratings) | [wbb_ratings](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wbb_ratings) | 2009+ |
 | [`loadWbbPlayerValue`](#loadwbbplayervalue) | [wbb_player_value](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wbb_player_value) | 2014+ |
 | [`loadWbbGameRosters`](#loadwbbgamerosters) | [espn_womens_college_basketball_game_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_game_rosters) | 2004+ |
 | [`loadWbbOfficials`](#loadwbbofficials) | [espn_womens_college_basketball_officials](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_officials) | 2014+ |
-| [`loadWbbPlayerSeasonStats`](#loadwbbplayerseasonstats) | [espn_womens_college_basketball_player_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_player_season_stats) | 2006+ |
+| [`loadWbbPlayerSeasonStats`](#loadwbbplayerseasonstats) | [espn_womens_college_basketball_player_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_player_season_stats) | 2010+ |
 | [`loadWbbRosters`](#loadwbbrosters) | [espn_womens_college_basketball_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_rosters) | 2026+ |
 | [`loadWbbShots`](#loadwbbshots) | [espn_womens_college_basketball_shots](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_shots) | 2004+ |
-| [`loadWbbStandings`](#loadwbbstandings) | [espn_womens_college_basketball_standings](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_standings) | 2003+ |
+| [`loadWbbStandings`](#loadwbbstandings) | [espn_womens_college_basketball_standings](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_standings) | 2001+ |
 | [`loadWbbTeamSeasonStats`](#loadwbbteamseasonstats) | [espn_womens_college_basketball_team_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_team_season_stats) | 2010+ |
-| [`loadWbbPlayerCrosswalk`](#loadwbbplayercrosswalk) | [wbb_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wbb_crosswalk) | 2014+ |
+| [`loadWbbPlayerCrosswalk`](#loadwbbplayercrosswalk) | [wbb_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wbb_crosswalk) | 2007+ |
 | [`loadWbbScheduleCrosswalk`](#loadwbbschedulecrosswalk) | [wbb_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wbb_crosswalk) | 2021+ |
 | [`loadWbbTeamCrosswalk`](#loadwbbteamcrosswalk) | [wbb_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wbb_crosswalk) | 2002+ |
 | [`loadWbbPlayerCore`](#loadwbbplayercore) | [espn_womens_college_basketball_player_core](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_player_core) | 2004+ |
@@ -66,7 +66,7 @@ Release: [espn_womens_college_basketball_pbp](https://github.com/sportsdataverse
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -106,7 +106,7 @@ const rows = await sdv.wbb.loadWbbPbp({ seasons: 2024, columns: ['game_id', 'seq
 | `athlete_id_1` | `string` | Primary athlete identifier (e.g. shooter). |
 | `athlete_id_2` | `string` | Secondary athlete identifier (e.g. assister / fouler). |
 | `game_id` | `string` | Unique game identifier. |
-| `season` | `number` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number` | Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. |
 | `season_type` | `number` | Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). |
 | `home_team_id` | `string` | Unique identifier for the home team. |
 | `home_team_name` | `string` | Home team name. |
@@ -161,7 +161,7 @@ Release: [espn_womens_college_basketball_player_boxscores](https://github.com/sp
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -179,7 +179,7 @@ const rows = await sdv.wbb.loadWbbPlayerBoxscore({ seasons: 2024 });
 | col_name | type | description |
 |---|---|---|
 | `game_id` | `string` | Unique game identifier. |
-| `season` | `number` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number` | Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. |
 | `season_type` | `number` | Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). |
 | `game_date` | `Date` | Game date (YYYY-MM-DD). |
 | `game_date_time` | `Date` | Game start date/time (ISO 8601). |
@@ -328,7 +328,7 @@ const rows = await sdv.wbb.loadWbbSchedule({ seasons: 2024 });
 | `away_linescores` | `string` | Period-by-period scores for the away team as a delimited string from ESPN's schedule feed. |
 | `away_records` | `string` | Record strings (overall and split records) for the away team from ESPN's schedule feed. |
 | `game_id` | `string` | Unique game identifier. |
-| `season` | `number` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number` | Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. |
 | `season_type` | `number` | Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). |
 | `status_type_alt_detail` | `string` | Status type alt detail. |
 | `tournament_id` | `string` | ESPN tournament identifier. |
@@ -359,7 +359,7 @@ Release: [espn_womens_college_basketball_team_boxscores](https://github.com/spor
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -377,7 +377,7 @@ const rows = await sdv.wbb.loadWbbTeamBoxscore({ seasons: 2024 });
 | col_name | type | description |
 |---|---|---|
 | `game_id` | `string` | Unique game identifier. |
-| `season` | `number` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number` | Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. |
 | `season_type` | `number` | Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). |
 | `game_date` | `Date` | Game date (YYYY-MM-DD). |
 | `game_date_time` | `Date` | Game start date/time (ISO 8601). |
@@ -441,7 +441,7 @@ Release: [wbb_ratings](https://github.com/sportsdataverse/sportsdataverse-data/r
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2008) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2009) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -458,7 +458,7 @@ const rows = await sdv.wbb.loadWbbRatings({ seasons: 2025 });
 
 | col_name | type | description |
 |---|---|---|
-| `season` | `number \| bigint` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number \| bigint` | Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. |
 | `team_id` | `string` | Unique team identifier. |
 | `adj_o` | `number` | Adj o. |
 | `adj_d` | `number` | Adj d. |
@@ -469,6 +469,11 @@ const rows = await sdv.wbb.loadWbbRatings({ seasons: 2025 });
 | `games` | `number \| bigint` | Games played. |
 | `rank` | `number \| bigint` | Rank. |
 | `adj_em_z` | `number` | Within-season z-score of adj_em, computed as adj_em minus the season mean divided by the season standard deviation over every team in the frame, so it is mean 0 and standard deviation 1 per season. |
+| `adj_o_blend` | `number` | Adjusted offensive efficiency with the season sim's preseason prior blended in: the same fixed point as adj_o, each Division I team shrunk toward last season's regressed rating as if it had played prior_games extra games at it. |
+| `adj_d_blend` | `number` | Adjusted defensive efficiency with the preseason prior blended in, on the same basis as adj_o_blend (lower is better). |
+| `adj_em_blend` | `number` | adj_o_blend - adj_d_blend: the adjusted efficiency margin with the preseason prior, the rating the pregame projection uses. A team with g games is rated about g / (g + prior_games) on this season. |
+| `rank_blend` | `number \| bigint` | Dense rank of adj_em_blend within the season (1 = best). |
+| `prior_games` | `number` | The preseason prior's weight in games (4 men, 3 women, fit by tools/fit_preseason_prior.py); 0 when the previous season is not released, and the blend then equals the raw rating. The five blend columns are in season assets built after 2026-11-13 (#1193); an asset published before then lacks them until the producer rebuilds it. |
 
 ## `loadWbbPlayerValue`
 
@@ -495,7 +500,7 @@ const rows = await sdv.wbb.loadWbbPlayerValue({ seasons: 2025 });
 |---|---|---|
 | `player_id` | `string` | Unique player identifier. |
 | `player` | `string` | Player name. |
-| `season` | `number \| bigint` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number \| bigint` | Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. |
 | `team_id` | `string` | Unique team identifier. |
 | `min` | `number` | Minutes played. |
 | `box_obpm` | `number` | Box-score offensive plus/minus for the player, the offensive half of box BPM. |
@@ -526,7 +531,7 @@ const rows = await sdv.wbb.loadWbbGameRosters({ seasons: 2026 });
 
 | col_name | type | description |
 |---|---|---|
-| `season` | `number` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number` | Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. |
 | `game_id` | `string` | Unique game identifier. |
 | `team_id` | `string` | Unique team identifier. |
 | `team_slug` | `string` | URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). |
@@ -553,10 +558,6 @@ const rows = await sdv.wbb.loadWbbGameRosters({ seasons: 2026 });
 
 Release: [espn_womens_college_basketball_officials](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_officials) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_womens_college_basketball_officials/officials_{season}.parquet`
 
-:::caution[Coverage]
-Published seasons: every season from the floor except 2024 and 2025, which the release has no asset for; a request for one is skipped with a warning.
-:::
-
 | option | type | required | description |
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2014) |
@@ -576,7 +577,7 @@ const rows = await sdv.wbb.loadWbbOfficials({ seasons: 2026 });
 
 | col_name | type | description |
 |---|---|---|
-| `season` | `number` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number` | Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. |
 | `game_id` | `string` | Unique game identifier. |
 | `official_id` | `string` | Unique official / referee identifier. |
 | `official_uid` | `string` | ESPN's globally unique resource identifier for the official, read from the core-api items[] uid key; that payload never ships it, so the column is null for every published row. |
@@ -592,13 +593,9 @@ const rows = await sdv.wbb.loadWbbOfficials({ seasons: 2026 });
 
 Release: [espn_womens_college_basketball_player_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_player_season_stats) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_womens_college_basketball_player_season_stats/player_season_stats_{season}.parquet`
 
-:::caution[Coverage]
-Published seasons: every season from the floor except 2024 and 2025, which the release has no asset for; a request for one is skipped with a warning.
-:::
-
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2006) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -615,7 +612,7 @@ const rows = await sdv.wbb.loadWbbPlayerSeasonStats({ seasons: 2026 });
 
 | col_name | type | description |
 |---|---|---|
-| `season` | `number` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number` | Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. |
 | `athlete_id` | `string` | Unique athlete identifier (ESPN). |
 | `athlete_display_name` | `string` | Athlete display name (full). |
 | `athlete_first_name` | `string` |  |
@@ -655,7 +652,7 @@ const rows = await sdv.wbb.loadWbbRosters({ seasons: 2026 });
 
 | col_name | type | description |
 |---|---|---|
-| `season` | `number` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number` | Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. |
 | `team_id` | `string` | Unique team identifier. |
 | `team_slug` | `string` | URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). |
 | `team_abbreviation` | `string` | Short team abbreviation (e.g. 'LAS'). |
@@ -716,7 +713,7 @@ const rows = await sdv.wbb.loadWbbShots({ seasons: 2026 });
 | col_name | type | description |
 |---|---|---|
 | `game_id` | `string` | Unique game identifier. |
-| `season` | `number` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number` | Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. |
 | `period_number` | `number` | Numeric period (1-4 for quarters; 5+ for OT). |
 | `clock_display_value` | `string` | Game clock display string (e.g. '8:32'). |
 | `team_id` | `string` | Unique team identifier. |
@@ -740,13 +737,9 @@ const rows = await sdv.wbb.loadWbbShots({ seasons: 2026 });
 
 Release: [espn_womens_college_basketball_standings](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_standings) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_womens_college_basketball_standings/standings_{season}.parquet`
 
-:::caution[Coverage]
-Published seasons: every season from the floor except 2005, 2024 and 2025, which the release has no asset for; a request for one is skipped with a warning.
-:::
-
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2003) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2001) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -763,7 +756,7 @@ const rows = await sdv.wbb.loadWbbStandings({ seasons: 2026 });
 
 | col_name | type | description |
 |---|---|---|
-| `season` | `number` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number` | Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. |
 | `group_id` | `string` | ESPN group id. |
 | `group_name` | `string` |  |
 | `group_abbreviation` | `string` |  |
@@ -792,10 +785,6 @@ const rows = await sdv.wbb.loadWbbStandings({ seasons: 2026 });
 
 Release: [espn_womens_college_basketball_team_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_team_season_stats) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_womens_college_basketball_team_season_stats/team_season_stats_{season}.parquet`
 
-:::caution[Coverage]
-Published seasons: every season from the floor except 2024 and 2025, which the release has no asset for; a request for one is skipped with a warning.
-:::
-
 | option | type | required | description |
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2010) |
@@ -815,7 +804,7 @@ const rows = await sdv.wbb.loadWbbTeamSeasonStats({ seasons: 2026 });
 
 | col_name | type | description |
 |---|---|---|
-| `season` | `number` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number` | Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. |
 | `team_id` | `string` | Unique team identifier. |
 | `team_slug` | `string` | URL-safe team identifier (e.g. 'lasvegas-aces' / 'aces'). |
 | `team_abbreviation` | `string` | Short team abbreviation (e.g. 'LAS'). |
@@ -838,7 +827,7 @@ Release: [wbb_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2014) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2007) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -855,7 +844,7 @@ const rows = await sdv.wbb.loadWbbPlayerCrosswalk({ seasons: 2026 });
 
 | col_name | type | description |
 |---|---|---|
-| `season` | `number` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number` | Season as its 4-digit ending year (integer; 2026 = 2025-26), the year in the asset name. |
 | `espn_team_id` | `string` | ESPN team id (canonical key). |
 | `team_abbreviation` | `string` | Short team abbreviation (e.g. 'LAS'). |
 | `player_name` | `string` | Player name. |
@@ -869,6 +858,7 @@ const rows = await sdv.wbb.loadWbbPlayerCrosswalk({ seasons: 2026 });
 | `fox_position_group` | `string` | Fox position group label (NA if unmatched). |
 | `yahoo_player_id` | `string` | Yahoo player id (NA placeholder). |
 | `yahoo_player_name` | `string` | Yahoo player name (NA placeholder). |
+| `ncaa_player_id` | `string` | stats.ncaa.org player id for that season (string, the player_id of the load_ncaa_wbb_* releases), from the ncaa rows of load_wbb_player_aliases valid that season, preferring an id made on the row's ESPN team; null when no NCAA id matches or the match is ambiguous, and on every row of a season before 2010 (2009-10; season is the ending year). |
 | `match_method` | `string` | Combination of matched sources, e.g. "fox+bart" / "fox_only" / "bart_only" / "espn_only". |
 | `match_confidence` | `number` | Jaro-Winkler score or 1 for exact (NA if none). |
 | `match_keys` | `string` | NA (reserved for future use). |
@@ -896,7 +886,7 @@ const rows = await sdv.wbb.loadWbbScheduleCrosswalk({ seasons: 2026 });
 
 | col_name | type | description |
 |---|---|---|
-| `season` | `number` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number` | Season as its 4-digit ending year (integer; 2026 = 2025-26), the year in the asset name. |
 | `game_date` | `Date` | Game date (YYYY-MM-DD). |
 | `home_espn_team_id` | `string` | ESPN home team id (NA for bart-only rows). |
 | `away_espn_team_id` | `string` | ESPN away team id (NA for bart-only rows). |
@@ -907,6 +897,7 @@ const rows = await sdv.wbb.loadWbbScheduleCrosswalk({ seasons: 2026 });
 | `bart_winner` | `string` | Torvik winner name (NA for espn-only rows). |
 | `fox_game_id` | `string` | Fox Sports game id (string), filled when the crosswalk is built with fox=True from Fox's per-date scoreboard, matched on the US-Eastern date and the two teams in either home/away order; null otherwise and where Fox lists no matching game. |
 | `yahoo_game_id` | `string` | Yahoo Sports game id, ncaaw.g.\<YYYYMMDD US-Eastern date\>\<home Yahoo team id, 4 digits\>, filled when built with yahoo=True and checked against the ids Yahoo lists, so a neutral-site game carries the side Yahoo calls home; null otherwise and where Yahoo lists no such game (a non-Division-I home team). |
+| `ncaa_contest_id` | `string` | stats.ncaa.org contest id (string, the contest_id of the load_ncaa_wbb_* releases), matched on the game date and the two teams' ESPN ids through the NCAA team crosswalk, then on one team's only game that day; null when no stats.ncaa.org game matches uniquely (a non-Division-I opponent), and on every row of a season before 2010 (2009-10, the first stats.ncaa.org season; season is the ending year). |
 | `match_method` | `string` | Combination of matched sources, e.g. "fox+bart" / "fox_only" / "bart_only" / "espn_only". |
 | `match_confidence` | `number` | Jaro-Winkler score or 1 for exact (NA if none). |
 
@@ -933,7 +924,7 @@ const rows = await sdv.wbb.loadWbbTeamCrosswalk({ seasons: 2026 });
 
 | col_name | type | description |
 |---|---|---|
-| `season` | `number` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number` | Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. |
 | `espn_team_id` | `string` | ESPN team id (canonical key). |
 | `espn_abbreviation` | `string` | ESPN abbreviation. |
 | `espn_display_name` | `string` | ESPN display name (school + mascot). |
@@ -975,7 +966,7 @@ const rows = await sdv.wbb.loadWbbPlayerCore({ seasons: 2025 });
 
 | col_name | type | description |
 |---|---|---|
-| `season` | `number` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number` | Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. |
 | `athlete_id` | `string` | Unique athlete identifier (ESPN). |
 | `guid` | `string` | Stable cross-league team GUID. |
 | `uid` | `string` | ESPN UID string. |
@@ -1035,7 +1026,7 @@ const rows = await sdv.wbb.loadNcaaWbbRapm({ seasons: 2024 });
 
 | col_name | type | description |
 |---|---|---|
-| `season` | `number` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number` | Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. |
 | `player_id` | `string` | Unique player identifier. |
 | `person_id` | `string` | Unique player identifier (V3 endpoints). |
 | `player` | `string` | Player name. |
@@ -1156,7 +1147,7 @@ const rows = await sdv.wbb.loadNcaaWbbPbp({ seasons: 2024, columns: ['game_date'
 | `is_team_turnover` | `boolean` | Flag marking a turnover charged to the team rather than an individual player. |
 | `timeout_type` | `string` | Type of timeout called (e.g. full, 30-second, media). |
 | `challenge_outcome` | `string` | Outcome of a coach's challenge or video-review event, when present. |
-| `season` | `number \| bigint` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number \| bigint` | Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. |
 
 ## `loadNcaaWbbSchedule`
 
@@ -1187,7 +1178,7 @@ const rows = await sdv.wbb.loadNcaaWbbSchedule({ seasons: 2024 });
 | `away` | `string` | Away record. |
 | `home_score` | `number \| bigint` | Home team score at the time of the play. |
 | `away_score` | `number \| bigint` | Away team score at the time of the play. |
-| `season` | `number \| bigint` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number \| bigint` | Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. |
 
 ## `loadNcaaWbbPlayerBox`
 
@@ -1336,7 +1327,7 @@ const rows = await sdv.wbb.loadNcaaWbbPlayerBox({ seasons: 2024 });
 | `player_id` | `string` | Unique player identifier. |
 | `clean_name` | `string` | Normalized (diacritics- and punctuation-cleaned) player name used to join across the NCAA datasets. |
 | `espn_game_id` | `string` | ESPN game id (NA for bart-only rows). |
-| `season` | `number \| bigint` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number \| bigint` | Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. |
 
 ## `loadNcaaWbbTeamBox`
 
@@ -1441,7 +1432,7 @@ const rows = await sdv.wbb.loadNcaaWbbTeamBox({ seasons: 2024 });
 | `team_ncaa_team_id` | `string` | stats.ncaa.org team identifier of the team the row belongs to. |
 | `team_espn_team_id` | `string` | ESPN team identifier of the team, via the NCAA-to-ESPN crosswalk. |
 | `espn_game_id` | `string` | ESPN game id (NA for bart-only rows). |
-| `season` | `number \| bigint` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number \| bigint` | Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. |
 
 ## `loadNcaaWbbRosters`
 
@@ -1466,7 +1457,7 @@ const rows = await sdv.wbb.loadNcaaWbbRosters({ seasons: 2024 });
 
 | col_name | type | description |
 |---|---|---|
-| `season` | `number \| bigint` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number \| bigint` | Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. |
 | `team` | `string` | Team-side label or team identifier. |
 | `player` | `string` | Player name. |
 | `games` | `number \| bigint` | Games played. |
@@ -1494,7 +1485,7 @@ const rows = await sdv.wbb.loadNcaaWbbTeamRosters({ seasons: 2024 });
 
 | col_name | type | description |
 |---|---|---|
-| `season` | `number \| bigint` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number \| bigint` | Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. |
 | `team_id` | `string` | Unique team identifier. |
 | `team` | `string` | Team-side label or team identifier. |
 | `player_id` | `string` | Unique player identifier. |
@@ -1537,7 +1528,7 @@ const rows = await sdv.wbb.loadNcaaWbbTeamIds({ seasons: 2024 });
 | `team` | `string` | Team-side label or team identifier. |
 | `conference` | `string` | Filter players or teams by conference. |
 | `id` | `string` | Unique play identification number |
-| `season` | `number \| bigint` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number \| bigint` | Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. |
 
 ## `loadNcaaWbbPossessions`
 
@@ -1617,7 +1608,7 @@ const rows = await sdv.wbb.loadNcaaWbbPossessions({ seasons: 2024, columns: ['ga
 | `away_5_player_id` | `string` | stats.ncaa.org player identifier for the away slot-5 on-floor player. |
 | `away_5_clean_name` | `string` | Normalized (diacritics- and punctuation-cleaned) name of the away slot-5 on-floor player. |
 | `espn_game_id` | `string` | ESPN game id (NA for bart-only rows). |
-| `season` | `number \| bigint` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number \| bigint` | Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. |
 
 ## `loadNcaaWbbLineups`
 
@@ -1718,7 +1709,7 @@ const rows = await sdv.wbb.loadNcaaWbbLineups({ seasons: 2024 });
 | `opp_foul` | `number \| bigint` | Opponent fouls committed while the lineup was on the floor during the stint. |
 | `stint_num` | `number \| bigint` | Sequential on-floor stint number for the lineup within the game. |
 | `contest_id` | `string` |  |
-| `season` | `number \| bigint` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number \| bigint` | Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. |
 
 ## `loadNcaaWbbMatchupStints`
 
@@ -1744,7 +1735,7 @@ const rows = await sdv.wbb.loadNcaaWbbMatchupStints({ seasons: 2024 });
 | col_name | type | description |
 |---|---|---|
 | `contest_id` | `string` |  |
-| `season` | `number \| bigint` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number \| bigint` | Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. |
 | `game_date` | `string` | Game date (YYYY-MM-DD). |
 | `home` | `string` | Home. |
 | `away` | `string` | Away record. |
@@ -1800,7 +1791,7 @@ const rows = await sdv.wbb.loadNcaaWbbShots({ seasons: 2024 });
 
 | col_name | type | description |
 |---|---|---|
-| `season` | `number \| bigint` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number \| bigint` | Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. |
 | `team_id` | `string` | Unique team identifier. |
 | `shooter_id` | `string` | Unique identifier for shooter. |
 | `shot_x` | `number` | Court x-coordinate of the attempt in feet, decoded from the stats.ncaa.org shot-chart map. |
@@ -1850,7 +1841,7 @@ const rows = await sdv.wbb.loadNcaaWbbRapmWithinTeam({ seasons: 2024 });
 | `team_off_poss` | `number` | Team offensive possessions underlying the within-team fit. |
 | `num_players` | `number \| bigint` | Number of players in the team's RAPM design matrix. |
 | `rapm_net` | `number` | Net RAPM — the sum of the offensive and defensive components, per 100 possessions. |
-| `season` | `number` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number` | Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. |
 | `player_id` | `string` | Unique player identifier. |
 | `team_id` | `string` | Unique team identifier. |
 | `person_id` | `string` | Unique player identifier (V3 endpoints). |

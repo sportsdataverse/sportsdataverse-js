@@ -2,7 +2,7 @@
 // Run `npm run codegen` to regenerate from tools/codegen/endpoints/releases.yaml
 // (vendored verbatim from sportsdataverse-py).
 //
-// 36 dataset loaders for `sdv.wnba`: each reads a published
+// 38 dataset loaders for `sdv.wnba`: each reads a published
 // SportsDataverse release asset (parquet) through src/core/releases.ts.
 
 import {
@@ -31,12 +31,14 @@ import type {
   LoadWnbaStatsCoachesRow,
   LoadWnbaStatsDraftRow,
   LoadWnbaStatsGameRostersRow,
+  LoadWnbaStatsMetricCurvesRow,
   LoadWnbaStatsOfficialsRow,
   LoadWnbaStatsPbpRow,
   LoadWnbaStatsPossessionsRow,
   LoadWnbaStatsGameLineupsRow,
   LoadWnbaStatsPlayerBoxscoresRow,
   LoadWnbaStatsPlayerGameLogsRow,
+  LoadWnbaStatsRollingWindowsRow,
   LoadWnbaStatsRostersRow,
   LoadWnbaStatsSchedulesRow,
   LoadWnbaStatsShotsRow,
@@ -115,20 +117,20 @@ export const loadWnbaSchedule = seasonLoader<LoadWnbaScheduleRow>(LOAD_WNBA_SCHE
 /** snake_case alias of {@link loadWnbaSchedule} (py/R parity). */
 export const load_wnba_schedule = loadWnbaSchedule;
 
-const LOAD_WNBA_TEAM_BOXSCORE: ReleaseLoaderDef = {"fn":"load_wnba_team_boxscore","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_wnba_team_boxscores/team_box_{season}.parquet","minSeason":2002};
+const LOAD_WNBA_TEAM_BOXSCORE: ReleaseLoaderDef = {"fn":"load_wnba_team_boxscore","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_wnba_team_boxscores/team_box_{season}.parquet","minSeason":2003};
 
 /**
  * Load `espn_wnba_team_boxscores` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_team_boxscores
  *
- * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2003); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SeasonNotFoundError if a season is below 2003.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaTeamBoxscore({ seasons: 2024 });
@@ -143,6 +145,8 @@ const LOAD_WNBA_DRAFT: ReleaseLoaderDef = {"fn":"load_wnba_draft","url":"https:/
  * Load `espn_wnba_draft` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_draft
+ *
+ * Note: ESPN has no WNBA drafts before 2018 (the site and core draft endpoints return no picks); load_wnba_stats_draft covers 1997 onward, keyed on WNBA Stats ids.
  *
  * @param opts.seasons - a season or a list of seasons (>= 2018); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
@@ -188,8 +192,6 @@ const LOAD_WNBA_OFFICIALS: ReleaseLoaderDef = {"fn":"load_wnba_officials","url":
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_officials
  *
- * Note: Published seasons: every season from the floor except 2022 and 2023, which the release has no asset for; a request for one is skipped with a warning.
- *
  * @param opts.seasons - a season or a list of seasons (>= 2003); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
@@ -205,22 +207,20 @@ export const loadWnbaOfficials = seasonLoader<LoadWnbaOfficialsRow>(LOAD_WNBA_OF
 /** snake_case alias of {@link loadWnbaOfficials} (py/R parity). */
 export const load_wnba_officials = loadWnbaOfficials;
 
-const LOAD_WNBA_PLAYER_SEASON_STATS: ReleaseLoaderDef = {"fn":"load_wnba_player_season_stats","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_wnba_player_season_stats/player_season_stats_{season}.parquet","minSeason":2002};
+const LOAD_WNBA_PLAYER_SEASON_STATS: ReleaseLoaderDef = {"fn":"load_wnba_player_season_stats","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_wnba_player_season_stats/player_season_stats_{season}.parquet","minSeason":1997};
 
 /**
  * Load `espn_wnba_player_season_stats` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_player_season_stats
  *
- * Note: Published seasons: every season from the floor except 2022 and 2023, which the release has no asset for; a request for one is skipped with a warning.
- *
- * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 1997); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SeasonNotFoundError if a season is below 1997.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaPlayerSeasonStats({ seasons: 2024 });
@@ -235,6 +235,8 @@ const LOAD_WNBA_ROSTERS: ReleaseLoaderDef = {"fn":"load_wnba_rosters","url":"htt
  * Load `espn_wnba_rosters` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_rosters
+ *
+ * Note: ESPN serves only current rosters; load_wnba_stats_rosters covers 1997 onward, keyed on WNBA Stats ids, and load_wnba_player_crosswalk maps them to ESPN athlete ids.
  *
  * @param opts.seasons - a season or a list of seasons (>= 2024); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
@@ -280,8 +282,6 @@ const LOAD_WNBA_STANDINGS: ReleaseLoaderDef = {"fn":"load_wnba_standings","url":
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_standings
  *
- * Note: Published seasons: every season from the floor except 2022 and 2023, which the release has no asset for; a request for one is skipped with a warning.
- *
  * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
@@ -297,22 +297,20 @@ export const loadWnbaStandings = seasonLoader<LoadWnbaStandingsRow>(LOAD_WNBA_ST
 /** snake_case alias of {@link loadWnbaStandings} (py/R parity). */
 export const load_wnba_standings = loadWnbaStandings;
 
-const LOAD_WNBA_TEAM_SEASON_STATS: ReleaseLoaderDef = {"fn":"load_wnba_team_season_stats","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_wnba_team_season_stats/team_season_stats_{season}.parquet","minSeason":2002};
+const LOAD_WNBA_TEAM_SEASON_STATS: ReleaseLoaderDef = {"fn":"load_wnba_team_season_stats","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_wnba_team_season_stats/team_season_stats_{season}.parquet","minSeason":1997};
 
 /**
  * Load `espn_wnba_team_season_stats` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_team_season_stats
  *
- * Note: Published seasons: every season from the floor except 2022 and 2023, which the release has no asset for; a request for one is skipped with a warning.
- *
- * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 1997); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SeasonNotFoundError if a season is below 1997.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaTeamSeasonStats({ seasons: 2024 });
@@ -393,20 +391,20 @@ export const loadWnbaTeamCrosswalk = seasonLoader<LoadWnbaTeamCrosswalkRow>(LOAD
 /** snake_case alias of {@link loadWnbaTeamCrosswalk} (py/R parity). */
 export const load_wnba_team_crosswalk = loadWnbaTeamCrosswalk;
 
-const LOAD_WNBA_PLAYER_CORE: ReleaseLoaderDef = {"fn":"load_wnba_player_core","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_wnba_player_core/player_core_{season}.parquet","minSeason":2003};
+const LOAD_WNBA_PLAYER_CORE: ReleaseLoaderDef = {"fn":"load_wnba_player_core","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_wnba_player_core/player_core_{season}.parquet","minSeason":2002};
 
 /**
  * Load `espn_wnba_player_core` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_wnba_player_core
  *
- * @param opts.seasons - a season or a list of seasons (>= 2003); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2003.
+ * @throws SeasonNotFoundError if a season is below 2002.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wnba.loadWnbaPlayerCore({ seasons: 2025 });
@@ -506,6 +504,30 @@ const LOAD_WNBA_STATS_GAME_ROSTERS: ReleaseLoaderDef = {"fn":"load_wnba_stats_ga
 export const loadWnbaStatsGameRosters = seasonLoader<LoadWnbaStatsGameRostersRow>(LOAD_WNBA_STATS_GAME_ROSTERS);
 /** snake_case alias of {@link loadWnbaStatsGameRosters} (py/R parity). */
 export const load_wnba_stats_game_rosters = loadWnbaStatsGameRosters;
+
+const LOAD_WNBA_STATS_METRIC_CURVES: ReleaseLoaderDef = {"fn":"load_wnba_stats_metric_curves","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wnba_stats_metric_curves/metric_curves_{season}.parquet","minSeason":1997,"idInt64":["entity_id","team_id"]};
+
+/**
+ * Load `wnba_stats_metric_curves` (sportsdataverse-data releases).
+ *
+ * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_metric_curves
+ *
+ * Note: One row per (entity, metric, shot-distance bucket): the fg_pct_by_shot_distance curve, at league, team and player level, that sportsdataverse.analytics.metric_curves.metric_curves builds from the WNBA Stats shots. entity_id and team_id are the WNBA Stats team / person ids, cast to Int64: a player row's entity_id joins person_id in load_wnba_stats_shots and player_id in load_wnba_stats_rosters, and team_id joins their team_id.
+ *
+ * @param opts.seasons - a season or a list of seasons (>= 1997); one with no published asset is skipped with a warning.
+ * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
+ * @param opts.timeoutMs - download timeout in ms (default 300000).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @throws SeasonNotFoundError if a season is below 1997.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
+ * @throws AssetFetchError if a download fails (never reported as an empty season).
+ * @example await sdv.wnba.loadWnbaStatsMetricCurves({ seasons: 2025 });
+ */
+export const loadWnbaStatsMetricCurves = seasonLoader<LoadWnbaStatsMetricCurvesRow>(LOAD_WNBA_STATS_METRIC_CURVES);
+/** snake_case alias of {@link loadWnbaStatsMetricCurves} (py/R parity). */
+export const load_wnba_stats_metric_curves = loadWnbaStatsMetricCurves;
 
 const LOAD_WNBA_STATS_OFFICIALS: ReleaseLoaderDef = {"fn":"load_wnba_stats_officials","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wnba_stats_officials/officials_{season}.parquet","minSeason":2004};
 
@@ -638,6 +660,30 @@ const LOAD_WNBA_STATS_PLAYER_GAME_LOGS: ReleaseLoaderDef = {"fn":"load_wnba_stat
 export const loadWnbaStatsPlayerGameLogs = seasonLoader<LoadWnbaStatsPlayerGameLogsRow>(LOAD_WNBA_STATS_PLAYER_GAME_LOGS);
 /** snake_case alias of {@link loadWnbaStatsPlayerGameLogs} (py/R parity). */
 export const load_wnba_stats_player_game_logs = loadWnbaStatsPlayerGameLogs;
+
+const LOAD_WNBA_STATS_ROLLING_WINDOWS: ReleaseLoaderDef = {"fn":"load_wnba_stats_rolling_windows","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wnba_stats_rolling_windows/rolling_windows_{season}.parquet","minSeason":1997,"idInt64":["entity_id","team_id"]};
+
+/**
+ * Load `wnba_stats_rolling_windows` (sportsdataverse-data releases).
+ *
+ * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wnba_stats_rolling_windows
+ *
+ * Note: One row per (player, metric, window unit, window size): the rolling-window shooting form (fg_pct over field-goal attempts, fg3_pct over three-point attempts) that sportsdataverse.analytics.rolling_windows.rolling_windows builds from the WNBA Stats shots through the season's last game (as_of_date). entity_id and team_id are cast to Int64, the WNBA Stats person / team id dtype: entity_id joins person_id in load_wnba_stats_shots and player_id in load_wnba_stats_rosters.
+ *
+ * @param opts.seasons - a season or a list of seasons (>= 1997); one with no published asset is skipped with a warning.
+ * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
+ * @param opts.timeoutMs - download timeout in ms (default 300000).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @throws SeasonNotFoundError if a season is below 1997.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
+ * @throws AssetFetchError if a download fails (never reported as an empty season).
+ * @example await sdv.wnba.loadWnbaStatsRollingWindows({ seasons: 2025 });
+ */
+export const loadWnbaStatsRollingWindows = seasonLoader<LoadWnbaStatsRollingWindowsRow>(LOAD_WNBA_STATS_ROLLING_WINDOWS);
+/** snake_case alias of {@link loadWnbaStatsRollingWindows} (py/R parity). */
+export const load_wnba_stats_rolling_windows = loadWnbaStatsRollingWindows;
 
 const LOAD_WNBA_STATS_ROSTERS: ReleaseLoaderDef = {"fn":"load_wnba_stats_rosters","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wnba_stats_rosters/rosters_{season}.parquet","minSeason":1997};
 

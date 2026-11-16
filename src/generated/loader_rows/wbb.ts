@@ -53,7 +53,7 @@ export interface LoadWbbPbpRow {
   athlete_id_2?: string | null;
   /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
   /** Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). `Int32` */
   season_type?: number | null;
@@ -157,7 +157,7 @@ export interface LoadWbbPbpRow {
 export interface LoadWbbPlayerBoxscoreRow {
   /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
   /** Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). `Int32` */
   season_type?: number | null;
@@ -413,7 +413,7 @@ export interface LoadWbbScheduleRow {
   away_records?: string | null;
   /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
   /** Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). `Int32` */
   season_type?: number | null;
@@ -469,7 +469,7 @@ export interface LoadWbbScheduleRow {
 export interface LoadWbbTeamBoxscoreRow {
   /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
   /** Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). `Int32` */
   season_type?: number | null;
@@ -589,7 +589,7 @@ export interface LoadWbbTeamBoxscoreRow {
 
 /** One row of `sdv.wbb.loadWbbRatings` (`wbb_ratings`; sdv-py loader schema `load_wbb_ratings`). */
 export interface LoadWbbRatingsRow {
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int64` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. `Int64` */
   season?: number | bigint | null;
   /** Unique team identifier. `String` (an id) */
   team_id?: string | null;
@@ -611,6 +611,16 @@ export interface LoadWbbRatingsRow {
   rank?: number | bigint | null;
   /** Within-season z-score of adj_em, computed as adj_em minus the season mean divided by the season standard deviation over every team in the frame, so it is mean 0 and standard deviation 1 per season. `Float64` */
   adj_em_z?: number | null;
+  /** Adjusted offensive efficiency with the season sim's preseason prior blended in: the same fixed point as adj_o, each Division I team shrunk toward last season's regressed rating as if it had played prior_games extra games at it. `Float64` */
+  adj_o_blend?: number | null;
+  /** Adjusted defensive efficiency with the preseason prior blended in, on the same basis as adj_o_blend (lower is better). `Float64` */
+  adj_d_blend?: number | null;
+  /** adj_o_blend - adj_d_blend: the adjusted efficiency margin with the preseason prior, the rating the pregame projection uses. A team with g games is rated about g / (g + prior_games) on this season. `Float64` */
+  adj_em_blend?: number | null;
+  /** Dense rank of adj_em_blend within the season (1 = best). `Int64` */
+  rank_blend?: number | bigint | null;
+  /** The preseason prior's weight in games (4 men, 3 women, fit by tools/fit_preseason_prior.py); 0 when the previous season is not released, and the blend then equals the raw rating. The five blend columns are in season assets built after 2026-11-13 (#1193); an asset published before then lacks them until the producer rebuilds it. `Float64` */
+  prior_games?: number | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
 }
@@ -621,7 +631,7 @@ export interface LoadWbbPlayerValueRow {
   player_id?: string | null;
   /** Player name. `String` */
   player?: string | null;
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int64` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. `Int64` */
   season?: number | bigint | null;
   /** Unique team identifier. `String` (an id) */
   team_id?: string | null;
@@ -641,7 +651,7 @@ export interface LoadWbbPlayerValueRow {
 
 /** One row of `sdv.wbb.loadWbbGameRosters` (`espn_womens_college_basketball_game_rosters`; sdv-py loader schema `load_wbb_game_rosters`). */
 export interface LoadWbbGameRostersRow {
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
   /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
@@ -691,7 +701,7 @@ export interface LoadWbbGameRostersRow {
 
 /** One row of `sdv.wbb.loadWbbOfficials` (`espn_womens_college_basketball_officials`; sdv-py loader schema `load_wbb_officials`). */
 export interface LoadWbbOfficialsRow {
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
   /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
@@ -719,7 +729,7 @@ export interface LoadWbbOfficialsRow {
 
 /** One row of `sdv.wbb.loadWbbPlayerSeasonStats` (`espn_womens_college_basketball_player_season_stats`; sdv-py loader schema `load_wbb_player_season_stats`). */
 export interface LoadWbbPlayerSeasonStatsRow {
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
   /** Unique athlete identifier (ESPN). `Int32` (an id) */
   athlete_id?: string | null;
@@ -757,7 +767,7 @@ export interface LoadWbbPlayerSeasonStatsRow {
 
 /** One row of `sdv.wbb.loadWbbRosters` (`espn_womens_college_basketball_rosters`; sdv-py loader schema `load_wbb_rosters`). */
 export interface LoadWbbRostersRow {
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
   /** Unique team identifier. `Int32` (an id) */
   team_id?: string | null;
@@ -837,7 +847,7 @@ export interface LoadWbbRostersRow {
 export interface LoadWbbShotsRow {
   /** Unique game identifier. `Int32` (an id) */
   game_id?: string | null;
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
   /** Numeric period (1-4 for quarters; 5+ for OT). `Int32` */
   period_number?: number | null;
@@ -881,7 +891,7 @@ export interface LoadWbbShotsRow {
 
 /** One row of `sdv.wbb.loadWbbStandings` (`espn_womens_college_basketball_standings`; sdv-py loader schema `load_wbb_standings`). */
 export interface LoadWbbStandingsRow {
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
   /** ESPN group id. `Int32` (an id) */
   group_id?: string | null;
@@ -935,7 +945,7 @@ export interface LoadWbbStandingsRow {
 
 /** One row of `sdv.wbb.loadWbbTeamSeasonStats` (`espn_womens_college_basketball_team_season_stats`; sdv-py loader schema `load_wbb_team_season_stats`). */
 export interface LoadWbbTeamSeasonStatsRow {
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
   /** Unique team identifier. `Int32` (an id) */
   team_id?: string | null;
@@ -973,7 +983,7 @@ export interface LoadWbbTeamSeasonStatsRow {
 
 /** One row of `sdv.wbb.loadWbbPlayerCrosswalk` (`wbb_crosswalk`; sdv-py loader schema `load_wbb_player_crosswalk`). */
 export interface LoadWbbPlayerCrosswalkRow {
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26), the year in the asset name. `Int32` */
   season?: number | null;
   /** ESPN team id (canonical key). `Int32` (an id) */
   espn_team_id?: string | null;
@@ -1001,6 +1011,8 @@ export interface LoadWbbPlayerCrosswalkRow {
   yahoo_player_id?: string | null;
   /** Yahoo player name (NA placeholder). `String` */
   yahoo_player_name?: string | null;
+  /** stats.ncaa.org player id for that season (string, the player_id of the load_ncaa_wbb_* releases), from the ncaa rows of load_wbb_player_aliases valid that season, preferring an id made on the row's ESPN team; null when no NCAA id matches or the match is ambiguous, and on every row of a season before 2010 (2009-10; season is the ending year). `String` (an id) */
+  ncaa_player_id?: string | null;
   /** Combination of matched sources, e.g. "fox+bart" / "fox_only" / "bart_only" / "espn_only". `String` */
   match_method?: string | null;
   /** Jaro-Winkler score or 1 for exact (NA if none). `Float64` */
@@ -1013,7 +1025,7 @@ export interface LoadWbbPlayerCrosswalkRow {
 
 /** One row of `sdv.wbb.loadWbbScheduleCrosswalk` (`wbb_crosswalk`; sdv-py loader schema `load_wbb_schedule_crosswalk`). */
 export interface LoadWbbScheduleCrosswalkRow {
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26), the year in the asset name. `Int32` */
   season?: number | null;
   /** Game date (YYYY-MM-DD). `Date` */
   game_date?: Date | null;
@@ -1035,6 +1047,8 @@ export interface LoadWbbScheduleCrosswalkRow {
   fox_game_id?: string | null;
   /** Yahoo Sports game id, ncaaw.g.<YYYYMMDD US-Eastern date><home Yahoo team id, 4 digits>, filled when built with yahoo=True and checked against the ids Yahoo lists, so a neutral-site game carries the side Yahoo calls home; null otherwise and where Yahoo lists no such game (a non-Division-I home team). `String` (an id) */
   yahoo_game_id?: string | null;
+  /** stats.ncaa.org contest id (string, the contest_id of the load_ncaa_wbb_* releases), matched on the game date and the two teams' ESPN ids through the NCAA team crosswalk, then on one team's only game that day; null when no stats.ncaa.org game matches uniquely (a non-Division-I opponent), and on every row of a season before 2010 (2009-10, the first stats.ncaa.org season; season is the ending year). `String` (an id) */
+  ncaa_contest_id?: string | null;
   /** Combination of matched sources, e.g. "fox+bart" / "fox_only" / "bart_only" / "espn_only". `String` */
   match_method?: string | null;
   /** Jaro-Winkler score or 1 for exact (NA if none). `Float64` */
@@ -1045,7 +1059,7 @@ export interface LoadWbbScheduleCrosswalkRow {
 
 /** One row of `sdv.wbb.loadWbbTeamCrosswalk` (`wbb_crosswalk`; sdv-py loader schema `load_wbb_team_crosswalk`). */
 export interface LoadWbbTeamCrosswalkRow {
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
   /** ESPN team id (canonical key). `Int32` (an id) */
   espn_team_id?: string | null;
@@ -1087,7 +1101,7 @@ export interface LoadWbbTeamCrosswalkRow {
 
 /** One row of `sdv.wbb.loadWbbPlayerCore` (`espn_womens_college_basketball_player_core`; sdv-py loader schema `load_wbb_player_core`). */
 export interface LoadWbbPlayerCoreRow {
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
   /** Unique athlete identifier (ESPN). `Int32` (an id) */
   athlete_id?: string | null;
@@ -1165,7 +1179,7 @@ export interface LoadWbbPlayerCoreRow {
 
 /** One row of `sdv.wbb.loadNcaaWbbRapm` (`ncaa_wbb_rapm`; sdv-py loader schema `load_ncaa_wbb_rapm`). */
 export interface LoadNcaaWbbRapmRow {
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
   /** Unique player identifier. `String` (an id) */
   player_id?: string | null;
@@ -1265,19 +1279,19 @@ export interface LoadNcaaWbbPbpRow {
   contest_id?: string | null;
   /** stats.ncaa.org team identifier for the home team. `String` (an id) */
   home_ncaa_team_id?: string | null;
-  /** ESPN home team id (NA for bart-only rows). `String` (an id) */
+  /** ESPN home team id (NA for bart-only rows). `Int32` (an id) */
   home_espn_team_id?: string | null;
   /** stats.ncaa.org team identifier for the away team. `String` (an id) */
   away_ncaa_team_id?: string | null;
-  /** ESPN away team id (NA for bart-only rows). `String` (an id) */
+  /** ESPN away team id (NA for bart-only rows). `Int32` (an id) */
   away_espn_team_id?: string | null;
   /** stats.ncaa.org team identifier of the team credited with the event. `String` (an id) */
   event_team_ncaa_team_id?: string | null;
-  /** ESPN team identifier of the team credited with the event, via the NCAA-to-ESPN crosswalk. `String` (an id) */
+  /** ESPN team identifier of the team credited with the event, via the NCAA-to-ESPN crosswalk. `Int32` (an id) */
   event_team_espn_team_id?: string | null;
   /** stats.ncaa.org team identifier of the team in possession. `String` (an id) */
   poss_team_ncaa_team_id?: string | null;
-  /** ESPN team identifier of the team in possession, via the NCAA-to-ESPN crosswalk. `String` (an id) */
+  /** ESPN team identifier of the team in possession, via the NCAA-to-ESPN crosswalk. `Int32` (an id) */
   poss_team_espn_team_id?: string | null;
   /** stats.ncaa.org player identifier for player_1, resolved through the roster name matcher. `String` (an id) */
   player_1_id?: string | null;
@@ -1327,7 +1341,7 @@ export interface LoadNcaaWbbPbpRow {
   away_5_player_id?: string | null;
   /** Normalized (diacritics- and punctuation-cleaned) name of the away slot-5 on-floor player. `String` */
   away_5_clean_name?: string | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** ESPN game id (NA for bart-only rows). `Int32` (an id) */
   espn_game_id?: string | null;
   /** Flag marking the shot as a fast-break attempt, from the stats.ncaa.org play text. `Boolean` */
   is_fastbreak?: boolean | null;
@@ -1365,7 +1379,7 @@ export interface LoadNcaaWbbPbpRow {
   timeout_type?: string | null;
   /** Outcome of a coach's challenge or video-review event, when present. `String` */
   challenge_outcome?: string | null;
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int64` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. `Int64` */
   season?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1385,7 +1399,7 @@ export interface LoadNcaaWbbScheduleRow {
   home_score?: number | bigint | null;
   /** Away team score at the time of the play. `Int64` */
   away_score?: number | bigint | null;
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int64` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. `Int64` */
   season?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1625,23 +1639,23 @@ export interface LoadNcaaWbbPlayerBoxRow {
   contest_id?: string | null;
   /** stats.ncaa.org team identifier for the home team. `String` (an id) */
   home_ncaa_team_id?: string | null;
-  /** ESPN home team id (NA for bart-only rows). `String` (an id) */
+  /** ESPN home team id (NA for bart-only rows). `Int32` (an id) */
   home_espn_team_id?: string | null;
   /** stats.ncaa.org team identifier for the away team. `String` (an id) */
   away_ncaa_team_id?: string | null;
-  /** ESPN away team id (NA for bart-only rows). `String` (an id) */
+  /** ESPN away team id (NA for bart-only rows). `Int32` (an id) */
   away_espn_team_id?: string | null;
   /** stats.ncaa.org team identifier of the player's team. `String` (an id) */
   team_ncaa_team_id?: string | null;
-  /** ESPN team identifier of the player's team, via the NCAA-to-ESPN crosswalk. `String` (an id) */
+  /** ESPN team identifier of the player's team, via the NCAA-to-ESPN crosswalk. `Int32` (an id) */
   team_espn_team_id?: string | null;
   /** Unique player identifier. `String` (an id) */
   player_id?: string | null;
   /** Normalized (diacritics- and punctuation-cleaned) player name used to join across the NCAA datasets. `String` */
   clean_name?: string | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** ESPN game id (NA for bart-only rows). `Int32` (an id) */
   espn_game_id?: string | null;
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int64` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. `Int64` */
   season?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1797,19 +1811,19 @@ export interface LoadNcaaWbbTeamBoxRow {
   contest_id?: string | null;
   /** stats.ncaa.org team identifier for the home team. `String` (an id) */
   home_ncaa_team_id?: string | null;
-  /** ESPN home team id (NA for bart-only rows). `String` (an id) */
+  /** ESPN home team id (NA for bart-only rows). `Int32` (an id) */
   home_espn_team_id?: string | null;
   /** stats.ncaa.org team identifier for the away team. `String` (an id) */
   away_ncaa_team_id?: string | null;
-  /** ESPN away team id (NA for bart-only rows). `String` (an id) */
+  /** ESPN away team id (NA for bart-only rows). `Int32` (an id) */
   away_espn_team_id?: string | null;
   /** stats.ncaa.org team identifier of the team the row belongs to. `String` (an id) */
   team_ncaa_team_id?: string | null;
-  /** ESPN team identifier of the team, via the NCAA-to-ESPN crosswalk. `String` (an id) */
+  /** ESPN team identifier of the team, via the NCAA-to-ESPN crosswalk. `Int32` (an id) */
   team_espn_team_id?: string | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** ESPN game id (NA for bart-only rows). `Int32` (an id) */
   espn_game_id?: string | null;
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int64` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. `Int64` */
   season?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1817,7 +1831,7 @@ export interface LoadNcaaWbbTeamBoxRow {
 
 /** One row of `sdv.wbb.loadNcaaWbbRosters` (`ncaa_wbb_rosters`; sdv-py loader schema `load_ncaa_wbb_rosters`). */
 export interface LoadNcaaWbbRostersRow {
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int64` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. `Int64` */
   season?: number | bigint | null;
   /** Team-side label or team identifier. `String` */
   team?: string | null;
@@ -1831,7 +1845,7 @@ export interface LoadNcaaWbbRostersRow {
 
 /** One row of `sdv.wbb.loadNcaaWbbTeamRosters` (`ncaa_wbb_team_rosters`; sdv-py loader schema `load_ncaa_wbb_team_rosters`). */
 export interface LoadNcaaWbbTeamRostersRow {
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int64` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. `Int64` */
   season?: number | bigint | null;
   /** Unique team identifier. `String` (an id) */
   team_id?: string | null;
@@ -1875,7 +1889,7 @@ export interface LoadNcaaWbbTeamIdsRow {
   conference?: string | null;
   /** Unique play identification number `String` (an id) */
   id?: string | null;
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int64` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. `Int64` */
   season?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -1941,15 +1955,15 @@ export interface LoadNcaaWbbPossessionsRow {
   contest_id?: string | null;
   /** stats.ncaa.org team identifier for the home team. `String` (an id) */
   home_ncaa_team_id?: string | null;
-  /** ESPN home team id (NA for bart-only rows). `String` (an id) */
+  /** ESPN home team id (NA for bart-only rows). `Int32` (an id) */
   home_espn_team_id?: string | null;
   /** stats.ncaa.org team identifier for the away team. `String` (an id) */
   away_ncaa_team_id?: string | null;
-  /** ESPN away team id (NA for bart-only rows). `String` (an id) */
+  /** ESPN away team id (NA for bart-only rows). `Int32` (an id) */
   away_espn_team_id?: string | null;
   /** stats.ncaa.org team identifier of the team in possession. `String` (an id) */
   poss_team_ncaa_team_id?: string | null;
-  /** ESPN team identifier of the team in possession, via the NCAA-to-ESPN crosswalk. `String` (an id) */
+  /** ESPN team identifier of the team in possession, via the NCAA-to-ESPN crosswalk. `Int32` (an id) */
   poss_team_espn_team_id?: string | null;
   /** stats.ncaa.org player identifier for the home slot-1 on-floor player. `String` (an id) */
   home_1_player_id?: string | null;
@@ -1991,9 +2005,9 @@ export interface LoadNcaaWbbPossessionsRow {
   away_5_player_id?: string | null;
   /** Normalized (diacritics- and punctuation-cleaned) name of the away slot-5 on-floor player. `String` */
   away_5_clean_name?: string | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** ESPN game id (NA for bart-only rows). `Int32` (an id) */
   espn_game_id?: string | null;
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int64` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. `Int64` */
   season?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -2153,7 +2167,7 @@ export interface LoadNcaaWbbLineupsRow {
   stint_num?: number | bigint | null;
   /** `String` (an id) */
   contest_id?: string | null;
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int64` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. `Int64` */
   season?: number | bigint | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -2163,7 +2177,7 @@ export interface LoadNcaaWbbLineupsRow {
 export interface LoadNcaaWbbMatchupStintsRow {
   /** `String` (an id) */
   contest_id?: string | null;
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int64` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. `Int64` */
   season?: number | bigint | null;
   /** Game date (YYYY-MM-DD). `String` */
   game_date?: string | null;
@@ -2233,7 +2247,7 @@ export interface LoadNcaaWbbMatchupStintsRow {
 
 /** One row of `sdv.wbb.loadNcaaWbbShots` (`ncaa_wbb_shots`; sdv-py loader schema `load_ncaa_wbb_shots`). */
 export interface LoadNcaaWbbShotsRow {
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int64` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. `Int64` */
   season?: number | bigint | null;
   /** Unique team identifier. `String` (an id) */
   team_id?: string | null;
@@ -2263,13 +2277,13 @@ export interface LoadNcaaWbbShotsRow {
   contest_id?: string | null;
   /** stats.ncaa.org team identifier of the shooting team. `String` (an id) */
   ncaa_team_id?: string | null;
-  /** ESPN team id (canonical key). `String` (an id) */
+  /** ESPN team id (canonical key). `Int32` (an id) */
   espn_team_id?: string | null;
   /** stats.ncaa.org player identifier of the shooter. `String` (an id) */
   shooter_player_id?: string | null;
   /** Normalized (diacritics- and punctuation-cleaned) name of the shooter. `String` */
   shooter_clean_name?: string | null;
-  /** ESPN game id (NA for bart-only rows). `String` (an id) */
+  /** ESPN game id (NA for bart-only rows). `Int32` (an id) */
   espn_game_id?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -2291,7 +2305,7 @@ export interface LoadNcaaWbbRapmWithinTeamRow {
   num_players?: number | bigint | null;
   /** Net RAPM — the sum of the offensive and defensive components, per 100 possessions. `Float64` */
   rapm_net?: number | null;
-  /** Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. `Int32` */
+  /** Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. `Int32` */
   season?: number | null;
   /** Unique player identifier. `String` (an id) */
   player_id?: string | null;
