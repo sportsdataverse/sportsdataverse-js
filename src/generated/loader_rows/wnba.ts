@@ -1419,6 +1419,40 @@ export interface LoadWnbaStatsGameRostersRow {
   [column: string]: unknown;
 }
 
+/** One row of `sdv.wnba.loadWnbaStatsMetricCurves` (`wnba_stats_metric_curves`; sdv-py loader schema `load_wnba_stats_metric_curves`). */
+export interface LoadWnbaStatsMetricCurvesRow {
+  /** Season the curve covers, the ENDING year as the nba_stats assets key it (1997 = 1996-97); WNBA rows carry the calendar year. `Int64` */
+  season?: number | bigint | null;
+  /** Aggregation level of the row: "league" (every shot), "team" or "player". `String` */
+  entity_type?: string | null;
+  /** Id of the entity the row describes, Int64 - the stats team_id on team rows and the person_id on player rows; null on league rows. `Int64` (an id) */
+  entity_id?: string | null;
+  /** Display name of the player or team as the stats shots carry it; null on league rows. `String` */
+  entity_name?: string | null;
+  /** On player rows, the stats team_id of most of the player's shots that season (Int64); null on league and team rows. `Int64` (an id) */
+  team_id?: string | null;
+  /** Id system of entity_id / team_id, 'nba_stats' (NBA) or 'wnba_stats' (WNBA). `String` */
+  id_source?: string | null;
+  /** Curve name; every row is 'fg_pct_by_shot_distance'. `String` */
+  metric?: string | null;
+  /** Not used for shots (a football axis of the shared schema); always null. `Int64` */
+  down?: number | bigint | null;
+  /** Inclusive lower edge of the shot-distance bucket, in feet (edges fixed in metric_curves.BUCKET_EDGES). `Float64` */
+  x_lo?: number | null;
+  /** Exclusive upper edge of the shot-distance bucket, in feet; a shot at exactly x_hi belongs to the next bucket up. `Float64` */
+  x_hi?: number | null;
+  /** Field-goal attempts in the bucket; always positive, since an empty bucket has no row. `Int64` */
+  attempts?: number | bigint | null;
+  /** Made field goals in the bucket. `Int64` */
+  successes?: number | bigint | null;
+  /** successes divided by attempts (field-goal percentage), computed exactly with no smoothing. `Float64` */
+  rate?: number | null;
+  /** Not used for shots; always null. `Float64` */
+  epa_per_att?: number | null;
+  /** A column the loader schema does not list (a release adds columns over the seasons). */
+  [column: string]: unknown;
+}
+
 /** One row of `sdv.wnba.loadWnbaStatsOfficials` (`wnba_stats_officials`; sdv-py loader schema `load_wnba_stats_officials`). */
 export interface LoadWnbaStatsOfficialsRow {
   /** Unique official / referee identifier. `Int64` (an id) */
@@ -1773,6 +1807,54 @@ export interface LoadWnbaStatsPlayerGameLogsRow {
   fantasy_pts?: number | null;
   /** Stats API measure-type slice the row was pulled from (e.g. 'Base'). `String` */
   measure_type?: string | null;
+  /** A column the loader schema does not list (a release adds columns over the seasons). */
+  [column: string]: unknown;
+}
+
+/** One row of `sdv.wnba.loadWnbaStatsRollingWindows` (`wnba_stats_rolling_windows`; sdv-py loader schema `load_wnba_stats_rolling_windows`). */
+export interface LoadWnbaStatsRollingWindowsRow {
+  /** Season the rows describe, the ENDING year as the nba_stats assets key it (2026 = 2025-26); WNBA rows carry the calendar year. `Int64` */
+  season?: number | bigint | null;
+  /** Aggregation level of the row; every published row is 'player'. `String` */
+  entity_type?: string | null;
+  /** The player's stats person_id (Int64). `Int64` (an id) */
+  entity_id?: string | null;
+  /** The player's name on their latest shot through the season. `String` */
+  entity_name?: string | null;
+  /** Stats team_id (Int64) of the player's latest shot through the season, so a player traded mid-season carries the new team. `Int64` (an id) */
+  team_id?: string | null;
+  /** Rate the window averages, 'fg_pct' (field-goal attempts) or 'fg3_pct' (three-point attempts). `String` */
+  metric?: string | null;
+  /** Event the window counts, 'fga' or 'fg3a'. `String` */
+  window_unit?: string | null;
+  /** Window size, in window_unit events. `Int64` */
+  window_n?: number | bigint | null;
+  /** Mean of the player's last window_n events through the season. `Float64` */
+  cur?: number | null;
+  /** Mean of the window_n events immediately before cur's window; null unless a full window of earlier history exists. `Float64` */
+  prev?: number | null;
+  /** Mean of the window_n events immediately before the season started (form entering the season). `Float64` */
+  season_start?: number | null;
+  /** Mean of every event before cur's window, earlier events in the same season included; null unless a full window of history precedes it. `Float64` */
+  career_baseline?: number | null;
+  /** cur minus prev. `Float64` */
+  delta_prev?: number | null;
+  /** cur minus season_start. `Float64` */
+  delta_season?: number | null;
+  /** cur minus career_baseline. `Float64` */
+  delta_career?: number | null;
+  /** Rank of delta_prev among qualified rows of the same metric and window (1 = biggest riser, ties share the lowest rank); null unless qualified and prev exists. `Int64` */
+  delta_prev_rank?: number | bigint | null;
+  /** Events in cur's window; below window_n for a short career. `Int64` */
+  n?: number | bigint | null;
+  /** True when n equals window_n (the window is full); filter on it before building a hottest-players list. `Boolean` */
+  qualified?: boolean | null;
+  /** Date of the player's latest event in the window. `Date` */
+  last_event_date?: Date | null;
+  /** Date of the latest event in the season's shots, the cutoff every row is computed through. `Date` */
+  as_of_date?: Date | null;
+  /** Id system of entity_id / team_id, 'nba_stats' (NBA) or 'wnba_stats' (WNBA). `String` */
+  id_source?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
 }

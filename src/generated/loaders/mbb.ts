@@ -49,20 +49,22 @@ import type {
   LoadMbbPlayerAliasesRow,
 } from "../loader_rows/mbb.js";
 
-const LOAD_MBB_PBP: ReleaseLoaderDef = {"fn":"load_mbb_pbp","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_mens_college_basketball_pbp/play_by_play_{season}.parquet","minSeason":2002};
+const LOAD_MBB_PBP: ReleaseLoaderDef = {"fn":"load_mbb_pbp","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_mens_college_basketball_pbp/play_by_play_{season}.parquet","minSeason":2003};
 
 /**
  * Load `espn_mens_college_basketball_pbp` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_pbp
  *
- * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
+ * Note: Published seasons: every season from the floor except 2004 and 2005, which the release has no asset for; a request for one is skipped with a warning.
+ *
+ * @param opts.seasons - a season or a list of seasons (>= 2003); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SeasonNotFoundError if a season is below 2003.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadMbbPbp({ seasons: 2024, columns: ['game_id', 'sequence_number', 'type_text', 'text', 'score_value'] });
@@ -71,20 +73,20 @@ export const loadMbbPbp = seasonLoader<LoadMbbPbpRow>(LOAD_MBB_PBP);
 /** snake_case alias of {@link loadMbbPbp} (py/R parity). */
 export const load_mbb_pbp = loadMbbPbp;
 
-const LOAD_MBB_PLAYER_BOXSCORE: ReleaseLoaderDef = {"fn":"load_mbb_player_boxscore","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_mens_college_basketball_player_boxscores/player_box_{season}.parquet","minSeason":2002};
+const LOAD_MBB_PLAYER_BOXSCORE: ReleaseLoaderDef = {"fn":"load_mbb_player_boxscore","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_mens_college_basketball_player_boxscores/player_box_{season}.parquet","minSeason":2003};
 
 /**
  * Load `espn_mens_college_basketball_player_boxscores` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_player_boxscores
  *
- * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2003); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SeasonNotFoundError if a season is below 2003.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadMbbPlayerBoxscore({ seasons: 2024 });
@@ -115,20 +117,20 @@ export const loadMbbSchedule = seasonLoader<LoadMbbScheduleRow>(LOAD_MBB_SCHEDUL
 /** snake_case alias of {@link loadMbbSchedule} (py/R parity). */
 export const load_mbb_schedule = loadMbbSchedule;
 
-const LOAD_MBB_TEAM_BOXSCORE: ReleaseLoaderDef = {"fn":"load_mbb_team_boxscore","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_mens_college_basketball_team_boxscores/team_box_{season}.parquet","minSeason":2002};
+const LOAD_MBB_TEAM_BOXSCORE: ReleaseLoaderDef = {"fn":"load_mbb_team_boxscore","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_mens_college_basketball_team_boxscores/team_box_{season}.parquet","minSeason":2003};
 
 /**
  * Load `espn_mens_college_basketball_team_boxscores` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_team_boxscores
  *
- * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2003); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SeasonNotFoundError if a season is below 2003.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadMbbTeamBoxscore({ seasons: 2024 });
@@ -227,20 +229,20 @@ export const loadMbbStandings = seasonLoader<LoadMbbStandingsRow>(LOAD_MBB_STAND
 /** snake_case alias of {@link loadMbbStandings} (py/R parity). */
 export const load_mbb_standings = loadMbbStandings;
 
-const LOAD_MBB_PLAYER_SEASON_STATS: ReleaseLoaderDef = {"fn":"load_mbb_player_season_stats","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_mens_college_basketball_player_season_stats/player_season_stats_{season}.parquet","minSeason":2025};
+const LOAD_MBB_PLAYER_SEASON_STATS: ReleaseLoaderDef = {"fn":"load_mbb_player_season_stats","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_mens_college_basketball_player_season_stats/player_season_stats_{season}.parquet","minSeason":2003};
 
 /**
  * Load `espn_mens_college_basketball_player_season_stats` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_player_season_stats
  *
- * @param opts.seasons - a season or a list of seasons (>= 2025); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2003); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2025.
+ * @throws SeasonNotFoundError if a season is below 2003.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadMbbPlayerSeasonStats({ seasons: 2025 });
@@ -277,6 +279,8 @@ const LOAD_MBB_OFFICIALS: ReleaseLoaderDef = {"fn":"load_mbb_officials","url":"h
  * Load `espn_mens_college_basketball_officials` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_officials
+ *
+ * Note: Published seasons: every season from the floor except 2010, which the release has no asset for; a request for one is skipped with a warning.
  *
  * @param opts.seasons - a season or a list of seasons (>= 2003); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
@@ -337,20 +341,20 @@ export const loadMbbTeamSeasonStats = seasonLoader<LoadMbbTeamSeasonStatsRow>(LO
 /** snake_case alias of {@link loadMbbTeamSeasonStats} (py/R parity). */
 export const load_mbb_team_season_stats = loadMbbTeamSeasonStats;
 
-const LOAD_MBB_PLAYER_CROSSWALK: ReleaseLoaderDef = {"fn":"load_mbb_player_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/mbb_crosswalk/mbb_player_crosswalk_{season}.parquet","minSeason":2025};
+const LOAD_MBB_PLAYER_CROSSWALK: ReleaseLoaderDef = {"fn":"load_mbb_player_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/mbb_crosswalk/mbb_player_crosswalk_{season}.parquet","minSeason":2004};
 
 /**
  * Load `mbb_crosswalk` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mbb_crosswalk
  *
- * @param opts.seasons - a season or a list of seasons (>= 2025); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2004); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2025.
+ * @throws SeasonNotFoundError if a season is below 2004.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.mbb.loadMbbPlayerCrosswalk({ seasons: 2026 });

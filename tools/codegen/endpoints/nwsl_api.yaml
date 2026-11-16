@@ -1,4 +1,4 @@
-# VENDORED from sportsdataverse/sportsdataverse-py@162457499026b2cf06ab979302a7ffc34b1f357e
+# VENDORED from sportsdataverse/sportsdataverse-py@39e9f0e77c2c8c4a8522352fedb866b566e834f0
 # tools/codegen/endpoints/nwsl_api.yaml by tools/codegen/vendor.mjs.
 # DO NOT EDIT: run `npm run vendor`. JS-only endpoints / patches go in
 # tools/codegen/overlay/nwsl_api.yaml; shared changes land in sdv-py first.

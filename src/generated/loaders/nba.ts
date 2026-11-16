@@ -2,7 +2,7 @@
 // Run `npm run codegen` to regenerate from tools/codegen/endpoints/releases.yaml
 // (vendored verbatim from sportsdataverse-py).
 //
-// 45 dataset loaders for `sdv.nba`: each reads a published
+// 49 dataset loaders for `sdv.nba`: each reads a published
 // SportsDataverse release asset (parquet) through src/core/releases.ts.
 
 import {
@@ -24,11 +24,13 @@ import type {
   LoadNbaTeamSeasonStatsRow,
   LoadNbaDraftRow,
   LoadNbaRostersRow,
+  LoadNbaDepthChartsRow,
   LoadNbaStatsSchedulesRow,
   LoadNbaStatsCoachesRow,
   LoadNbaStatsDraftRow,
   LoadNbaStatsGameRostersRow,
   LoadNbaStatsLineupsRow,
+  LoadNbaStatsMetricCurvesRow,
   LoadNbaStatsOfficialsRow,
   LoadNbaStatsPbpRow,
   LoadNbaStatsPossessionsRow,
@@ -37,7 +39,9 @@ import type {
   LoadNbaStatsInjuryReportRow,
   LoadNbaStatsPlayerBoxscoresRow,
   LoadNbaStatsPlayerGameLogsRow,
+  LoadNbaStatsTeamGameLogsRow,
   LoadNbaStatsPlayerSeasonStatsRow,
+  LoadNbaStatsRollingWindowsRow,
   LoadNbaStatsRostersRow,
   LoadNbaStatsShotsRow,
   LoadNbaStatsStandingsRow,
@@ -144,20 +148,20 @@ export const loadNbaTeamBoxscore = seasonLoader<LoadNbaTeamBoxscoreRow>(LOAD_NBA
 /** snake_case alias of {@link loadNbaTeamBoxscore} (py/R parity). */
 export const load_nba_team_boxscore = loadNbaTeamBoxscore;
 
-const LOAD_NBA_GAME_ROSTERS: ReleaseLoaderDef = {"fn":"load_nba_game_rosters","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_game_rosters/game_rosters_{season}.parquet","minSeason":2002};
+const LOAD_NBA_GAME_ROSTERS: ReleaseLoaderDef = {"fn":"load_nba_game_rosters","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_game_rosters/game_rosters_{season}.parquet","minSeason":1994};
 
 /**
  * Load `espn_nba_game_rosters` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_nba_game_rosters
  *
- * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 1994); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SeasonNotFoundError if a season is below 1994.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaGameRosters({ seasons: 2002 });
@@ -166,20 +170,20 @@ export const loadNbaGameRosters = seasonLoader<LoadNbaGameRostersRow>(LOAD_NBA_G
 /** snake_case alias of {@link loadNbaGameRosters} (py/R parity). */
 export const load_nba_game_rosters = loadNbaGameRosters;
 
-const LOAD_NBA_OFFICIALS: ReleaseLoaderDef = {"fn":"load_nba_officials","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_officials/officials_{season}.parquet","minSeason":2002};
+const LOAD_NBA_OFFICIALS: ReleaseLoaderDef = {"fn":"load_nba_officials","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_officials/officials_{season}.parquet","minSeason":1994};
 
 /**
  * Load `espn_nba_officials` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_nba_officials
  *
- * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 1994); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SeasonNotFoundError if a season is below 1994.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaOfficials({ seasons: 2002 });
@@ -254,20 +258,20 @@ export const loadNbaPlayerSeasonStats = seasonLoader<LoadNbaPlayerSeasonStatsRow
 /** snake_case alias of {@link loadNbaPlayerSeasonStats} (py/R parity). */
 export const load_nba_player_season_stats = loadNbaPlayerSeasonStats;
 
-const LOAD_NBA_TEAM_SEASON_STATS: ReleaseLoaderDef = {"fn":"load_nba_team_season_stats","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_team_season_stats/team_season_stats_{season}.parquet","minSeason":2002};
+const LOAD_NBA_TEAM_SEASON_STATS: ReleaseLoaderDef = {"fn":"load_nba_team_season_stats","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_team_season_stats/team_season_stats_{season}.parquet","minSeason":1994};
 
 /**
  * Load `espn_nba_team_season_stats` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_nba_team_season_stats
  *
- * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 1994); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SeasonNotFoundError if a season is below 1994.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaTeamSeasonStats({ seasons: 2025 });
@@ -319,6 +323,30 @@ const LOAD_NBA_ROSTERS: ReleaseLoaderDef = {"fn":"load_nba_rosters","url":"https
 export const loadNbaRosters = seasonLoader<LoadNbaRostersRow>(LOAD_NBA_ROSTERS);
 /** snake_case alias of {@link loadNbaRosters} (py/R parity). */
 export const load_nba_rosters = loadNbaRosters;
+
+const LOAD_NBA_DEPTH_CHARTS: ReleaseLoaderDef = {"fn":"load_nba_depth_charts","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_depthcharts/depthcharts_{season}.parquet","minSeason":2027};
+
+/**
+ * Load `espn_nba_depthcharts` (sportsdataverse-data releases).
+ *
+ * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_nba_depthcharts
+ *
+ * Note: ESPN team depth charts, snapshotted daily: one row per (as_of_date, team, position slot, depth rank), so filter to one as_of_date (the latest is the current chart) before counting players. The release starts with the 2026-27 season (season 2027), first snapshot 2026-09-08.
+ *
+ * @param opts.seasons - a season or a list of seasons (>= 2027); one with no published asset is skipped with a warning.
+ * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
+ * @param opts.timeoutMs - download timeout in ms (default 300000).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @throws SeasonNotFoundError if a season is below 2027.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
+ * @throws AssetFetchError if a download fails (never reported as an empty season).
+ * @example await sdv.nba.loadNbaDepthCharts({ seasons: 2027 });
+ */
+export const loadNbaDepthCharts = seasonLoader<LoadNbaDepthChartsRow>(LOAD_NBA_DEPTH_CHARTS);
+/** snake_case alias of {@link loadNbaDepthCharts} (py/R parity). */
+export const load_nba_depth_charts = loadNbaDepthCharts;
 
 const LOAD_NBA_STATS_SCHEDULES: ReleaseLoaderDef = {"fn":"load_nba_stats_schedules","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_schedules/nba_schedule_{season + 1}.parquet","minSeason":1996};
 
@@ -468,6 +496,32 @@ export const loadNbaStatsLineupsV3 = deprecatedLoader<typeof loadNbaStatsGameLin
 );
 /** snake_case alias of {@link loadNbaStatsLineupsV3} (py/R parity). */
 export const load_nba_stats_lineups_v3 = loadNbaStatsLineupsV3;
+
+const LOAD_NBA_STATS_METRIC_CURVES: ReleaseLoaderDef = {"fn":"load_nba_stats_metric_curves","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_metric_curves/metric_curves_{season + 1}.parquet","minSeason":1996,"idInt64":["entity_id","team_id"]};
+
+/**
+ * Load `nba_stats_metric_curves` (sportsdataverse-data releases).
+ *
+ * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_metric_curves
+ *
+ * Note: One row per (entity, metric, shot-distance bucket): the fg_pct_by_shot_distance curve, at league, team and player level, that sportsdataverse.analytics.metric_curves.metric_curves builds from the NBA Stats shots. entity_id and team_id are the NBA Stats team / person ids, cast to Int64: a player row's entity_id joins person_id in load_nba_stats_shots and player_id in load_nba_stats_rosters, and team_id joins their team_id.
+ *
+ * Pass the season's START year (e.g. `1996` for the 1996-97 season); the asset is keyed by the END year and the loader translates internally, so a `season` column in the rows carries that END year.
+ *
+ * @param opts.seasons - a season or a list of seasons (>= 1996); one with no published asset is skipped with a warning.
+ * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
+ * @param opts.timeoutMs - download timeout in ms (default 300000).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @throws SeasonNotFoundError if a season is below 1996.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
+ * @throws AssetFetchError if a download fails (never reported as an empty season).
+ * @example await sdv.nba.loadNbaStatsMetricCurves({ seasons: 2025 });
+ */
+export const loadNbaStatsMetricCurves = seasonLoader<LoadNbaStatsMetricCurvesRow>(LOAD_NBA_STATS_METRIC_CURVES);
+/** snake_case alias of {@link loadNbaStatsMetricCurves} (py/R parity). */
+export const load_nba_stats_metric_curves = loadNbaStatsMetricCurves;
 
 const LOAD_NBA_STATS_OFFICIALS: ReleaseLoaderDef = {"fn":"load_nba_stats_officials","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_officials/officials_{season + 1}.parquet","minSeason":1996};
 
@@ -688,6 +742,30 @@ export const loadNbaStatsPlayerGameLogs = seasonLoader<LoadNbaStatsPlayerGameLog
 /** snake_case alias of {@link loadNbaStatsPlayerGameLogs} (py/R parity). */
 export const load_nba_stats_player_game_logs = loadNbaStatsPlayerGameLogs;
 
+const LOAD_NBA_STATS_TEAM_GAME_LOGS: ReleaseLoaderDef = {"fn":"load_nba_stats_team_game_logs","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_team_game_logs/team_game_logs_{season + 1}.parquet","minSeason":1996};
+
+/**
+ * Load `nba_stats_team_game_logs` (sportsdataverse-data releases).
+ *
+ * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_team_game_logs
+ *
+ * Pass the season's START year (e.g. `1996` for the 1996-97 season); the asset is keyed by the END year and the loader translates internally, so a `season` column in the rows carries that END year.
+ *
+ * @param opts.seasons - a season or a list of seasons (>= 1996); one with no published asset is skipped with a warning.
+ * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
+ * @param opts.timeoutMs - download timeout in ms (default 300000).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @throws SeasonNotFoundError if a season is below 1996.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
+ * @throws AssetFetchError if a download fails (never reported as an empty season).
+ * @example await sdv.nba.loadNbaStatsTeamGameLogs({ seasons: 2025 });
+ */
+export const loadNbaStatsTeamGameLogs = seasonLoader<LoadNbaStatsTeamGameLogsRow>(LOAD_NBA_STATS_TEAM_GAME_LOGS);
+/** snake_case alias of {@link loadNbaStatsTeamGameLogs} (py/R parity). */
+export const load_nba_stats_team_game_logs = loadNbaStatsTeamGameLogs;
+
 const LOAD_NBA_STATS_PLAYER_SEASON_STATS: ReleaseLoaderDef = {"fn":"load_nba_stats_player_season_stats","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_player_season_stats/player_season_stats_{season + 1}.parquet","minSeason":1996};
 
 /**
@@ -738,6 +816,32 @@ export const loadNbaStatsPossessionsV3 = deprecatedLoader<typeof loadNbaStatsPos
 );
 /** snake_case alias of {@link loadNbaStatsPossessionsV3} (py/R parity). */
 export const load_nba_stats_possessions_v3 = loadNbaStatsPossessionsV3;
+
+const LOAD_NBA_STATS_ROLLING_WINDOWS: ReleaseLoaderDef = {"fn":"load_nba_stats_rolling_windows","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_rolling_windows/rolling_windows_{season + 1}.parquet","minSeason":1996,"idInt64":["entity_id","team_id"]};
+
+/**
+ * Load `nba_stats_rolling_windows` (sportsdataverse-data releases).
+ *
+ * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_rolling_windows
+ *
+ * Note: One row per (player, metric, window unit, window size): the rolling-window shooting form (fg_pct over field-goal attempts, fg3_pct over three-point attempts) that sportsdataverse.analytics.rolling_windows.rolling_windows builds from the NBA Stats shots through the season's last game (as_of_date). entity_id and team_id are cast to Int64, the NBA Stats person / team id dtype: entity_id joins person_id in load_nba_stats_shots and player_id in load_nba_stats_rosters.
+ *
+ * Pass the season's START year (e.g. `1996` for the 1996-97 season); the asset is keyed by the END year and the loader translates internally, so a `season` column in the rows carries that END year.
+ *
+ * @param opts.seasons - a season or a list of seasons (>= 1996); one with no published asset is skipped with a warning.
+ * @param opts.columns - read only these columns (default: all).
+ * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
+ * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
+ * @param opts.timeoutMs - download timeout in ms (default 300000).
+ * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
+ * @throws SeasonNotFoundError if a season is below 1996.
+ * @throws SdvError if the data is over `maxCells` (checked before decoding).
+ * @throws AssetFetchError if a download fails (never reported as an empty season).
+ * @example await sdv.nba.loadNbaStatsRollingWindows({ seasons: 2025 });
+ */
+export const loadNbaStatsRollingWindows = seasonLoader<LoadNbaStatsRollingWindowsRow>(LOAD_NBA_STATS_ROLLING_WINDOWS);
+/** snake_case alias of {@link loadNbaStatsRollingWindows} (py/R parity). */
+export const load_nba_stats_rolling_windows = loadNbaStatsRollingWindows;
 
 const LOAD_NBA_STATS_ROSTERS: ReleaseLoaderDef = {"fn":"load_nba_stats_rosters","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_rosters/rosters_{season + 1}.parquet","minSeason":1996};
 
@@ -859,12 +963,14 @@ export const loadNbaStatsTeamSeasonStats = seasonLoader<LoadNbaStatsTeamSeasonSt
 /** snake_case alias of {@link loadNbaStatsTeamSeasonStats} (py/R parity). */
 export const load_nba_stats_team_season_stats = loadNbaStatsTeamSeasonStats;
 
-const LOAD_NBA_PLAYER_CROSSWALK: ReleaseLoaderDef = {"fn":"load_nba_player_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_crosswalk/nba_player_crosswalk_{season}.parquet","minSeason":2002};
+const LOAD_NBA_PLAYER_CROSSWALK: ReleaseLoaderDef = {"fn":"load_nba_player_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_crosswalk/nba_player_crosswalk_{season}.parquet","minSeason":2002,"idInt64":["nba_player_id"]};
 
 /**
  * Load `nba_crosswalk` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_crosswalk
+ *
+ * Note: nba_player_id is Int64, as NBA Stats ships player_id / person_id, so the bridge joins without a cast.
  *
  * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
@@ -881,12 +987,14 @@ export const loadNbaPlayerCrosswalk = seasonLoader<LoadNbaPlayerCrosswalkRow>(LO
 /** snake_case alias of {@link loadNbaPlayerCrosswalk} (py/R parity). */
 export const load_nba_player_crosswalk = loadNbaPlayerCrosswalk;
 
-const LOAD_NBA_SCHEDULE_CROSSWALK: ReleaseLoaderDef = {"fn":"load_nba_schedule_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_crosswalk/nba_schedule_crosswalk_{season}.parquet","minSeason":2002};
+const LOAD_NBA_SCHEDULE_CROSSWALK: ReleaseLoaderDef = {"fn":"load_nba_schedule_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_crosswalk/nba_schedule_crosswalk_{season}.parquet","minSeason":2002,"idInt64":["nba_home_team_id","nba_away_team_id"]};
 
 /**
  * Load `nba_crosswalk` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_crosswalk
+ *
+ * Note: nba_game_id stays String, the zero-padded NBA Stats game id (0022300001); the nba_*_team_id bridge ids are Int64, as NBA Stats ships team_id.
  *
  * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
@@ -903,12 +1011,14 @@ export const loadNbaScheduleCrosswalk = seasonLoader<LoadNbaScheduleCrosswalkRow
 /** snake_case alias of {@link loadNbaScheduleCrosswalk} (py/R parity). */
 export const load_nba_schedule_crosswalk = loadNbaScheduleCrosswalk;
 
-const LOAD_NBA_TEAM_CROSSWALK: ReleaseLoaderDef = {"fn":"load_nba_team_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_crosswalk/nba_team_crosswalk_{season}.parquet","minSeason":2002};
+const LOAD_NBA_TEAM_CROSSWALK: ReleaseLoaderDef = {"fn":"load_nba_team_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_crosswalk/nba_team_crosswalk_{season}.parquet","minSeason":2002,"idInt64":["nba_team_id"]};
 
 /**
  * Load `nba_crosswalk` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_crosswalk
+ *
+ * Note: nba_team_id is Int64, as NBA Stats ships team_id, so the bridge joins without a cast.
  *
  * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
@@ -947,7 +1057,7 @@ export const loadNbaPlayerCore = seasonLoader<LoadNbaPlayerCoreRow>(LOAD_NBA_PLA
 /** snake_case alias of {@link loadNbaPlayerCore} (py/R parity). */
 export const load_nba_player_core = loadNbaPlayerCore;
 
-const LOAD_NBA_PLAYER_IMPACT: ReleaseLoaderDef = {"fn":"load_nba_player_impact","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_player_impact/nba_player_impact_{season}.parquet","minSeason":1996};
+const LOAD_NBA_PLAYER_IMPACT: ReleaseLoaderDef = {"fn":"load_nba_player_impact","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_player_impact/nba_player_impact_{season}.parquet","minSeason":1997};
 
 /**
  * Load `nba_player_impact` (sportsdataverse-data releases).
@@ -956,13 +1066,13 @@ const LOAD_NBA_PLAYER_IMPACT: ReleaseLoaderDef = {"fn":"load_nba_player_impact",
  *
  * Note: The BOBAN (Bayesian Online Box-Augmented Net) columns boban_filtered_skill, boban_projected_rating and boban_projected_sd were renamed from darko_*; the loader returns both names for one release, so move to boban_* now (darko_* is deprecated and will be removed).
  *
- * @param opts.seasons - a season or a list of seasons (>= 1996); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 1997); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 1996.
+ * @throws SeasonNotFoundError if a season is below 1997.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.nba.loadNbaPlayerImpact({ seasons: 2024 });

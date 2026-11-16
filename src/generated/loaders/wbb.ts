@@ -49,20 +49,20 @@ import type {
   LoadWbbPlayerAliasesRow,
 } from "../loader_rows/wbb.js";
 
-const LOAD_WBB_PBP: ReleaseLoaderDef = {"fn":"load_wbb_pbp","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_womens_college_basketball_pbp/play_by_play_{season}.parquet","minSeason":2002};
+const LOAD_WBB_PBP: ReleaseLoaderDef = {"fn":"load_wbb_pbp","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_womens_college_basketball_pbp/play_by_play_{season}.parquet","minSeason":2004};
 
 /**
  * Load `espn_womens_college_basketball_pbp` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_pbp
  *
- * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2004); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SeasonNotFoundError if a season is below 2004.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadWbbPbp({ seasons: 2024, columns: ['game_id', 'sequence_number', 'type_text', 'text', 'score_value'] });
@@ -71,20 +71,20 @@ export const loadWbbPbp = seasonLoader<LoadWbbPbpRow>(LOAD_WBB_PBP);
 /** snake_case alias of {@link loadWbbPbp} (py/R parity). */
 export const load_wbb_pbp = loadWbbPbp;
 
-const LOAD_WBB_PLAYER_BOXSCORE: ReleaseLoaderDef = {"fn":"load_wbb_player_boxscore","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_womens_college_basketball_player_boxscores/player_box_{season}.parquet","minSeason":2002};
+const LOAD_WBB_PLAYER_BOXSCORE: ReleaseLoaderDef = {"fn":"load_wbb_player_boxscore","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_womens_college_basketball_player_boxscores/player_box_{season}.parquet","minSeason":2004};
 
 /**
  * Load `espn_womens_college_basketball_player_boxscores` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_player_boxscores
  *
- * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2004); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SeasonNotFoundError if a season is below 2004.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadWbbPlayerBoxscore({ seasons: 2024 });
@@ -115,20 +115,20 @@ export const loadWbbSchedule = seasonLoader<LoadWbbScheduleRow>(LOAD_WBB_SCHEDUL
 /** snake_case alias of {@link loadWbbSchedule} (py/R parity). */
 export const load_wbb_schedule = loadWbbSchedule;
 
-const LOAD_WBB_TEAM_BOXSCORE: ReleaseLoaderDef = {"fn":"load_wbb_team_boxscore","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_womens_college_basketball_team_boxscores/team_box_{season}.parquet","minSeason":2002};
+const LOAD_WBB_TEAM_BOXSCORE: ReleaseLoaderDef = {"fn":"load_wbb_team_boxscore","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_womens_college_basketball_team_boxscores/team_box_{season}.parquet","minSeason":2004};
 
 /**
  * Load `espn_womens_college_basketball_team_boxscores` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_team_boxscores
  *
- * @param opts.seasons - a season or a list of seasons (>= 2002); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2004); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2002.
+ * @throws SeasonNotFoundError if a season is below 2004.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadWbbTeamBoxscore({ seasons: 2024 });
@@ -137,20 +137,20 @@ export const loadWbbTeamBoxscore = seasonLoader<LoadWbbTeamBoxscoreRow>(LOAD_WBB
 /** snake_case alias of {@link loadWbbTeamBoxscore} (py/R parity). */
 export const load_wbb_team_boxscore = loadWbbTeamBoxscore;
 
-const LOAD_WBB_RATINGS: ReleaseLoaderDef = {"fn":"load_wbb_ratings","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wbb_ratings/wbb_ratings_{season}.parquet","minSeason":2008};
+const LOAD_WBB_RATINGS: ReleaseLoaderDef = {"fn":"load_wbb_ratings","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wbb_ratings/wbb_ratings_{season}.parquet","minSeason":2009};
 
 /**
  * Load `wbb_ratings` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wbb_ratings
  *
- * @param opts.seasons - a season or a list of seasons (>= 2008); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2009); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2008.
+ * @throws SeasonNotFoundError if a season is below 2009.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadWbbRatings({ seasons: 2025 });
@@ -210,8 +210,6 @@ const LOAD_WBB_OFFICIALS: ReleaseLoaderDef = {"fn":"load_wbb_officials","url":"h
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_officials
  *
- * Note: Published seasons: every season from the floor except 2024 and 2025, which the release has no asset for; a request for one is skipped with a warning.
- *
  * @param opts.seasons - a season or a list of seasons (>= 2014); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
@@ -227,22 +225,20 @@ export const loadWbbOfficials = seasonLoader<LoadWbbOfficialsRow>(LOAD_WBB_OFFIC
 /** snake_case alias of {@link loadWbbOfficials} (py/R parity). */
 export const load_wbb_officials = loadWbbOfficials;
 
-const LOAD_WBB_PLAYER_SEASON_STATS: ReleaseLoaderDef = {"fn":"load_wbb_player_season_stats","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_womens_college_basketball_player_season_stats/player_season_stats_{season}.parquet","minSeason":2006};
+const LOAD_WBB_PLAYER_SEASON_STATS: ReleaseLoaderDef = {"fn":"load_wbb_player_season_stats","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_womens_college_basketball_player_season_stats/player_season_stats_{season}.parquet","minSeason":2010};
 
 /**
  * Load `espn_womens_college_basketball_player_season_stats` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_player_season_stats
  *
- * Note: Published seasons: every season from the floor except 2024 and 2025, which the release has no asset for; a request for one is skipped with a warning.
- *
- * @param opts.seasons - a season or a list of seasons (>= 2006); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2010); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2006.
+ * @throws SeasonNotFoundError if a season is below 2010.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadWbbPlayerSeasonStats({ seasons: 2026 });
@@ -295,22 +291,20 @@ export const loadWbbShots = seasonLoader<LoadWbbShotsRow>(LOAD_WBB_SHOTS);
 /** snake_case alias of {@link loadWbbShots} (py/R parity). */
 export const load_wbb_shots = loadWbbShots;
 
-const LOAD_WBB_STANDINGS: ReleaseLoaderDef = {"fn":"load_wbb_standings","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_womens_college_basketball_standings/standings_{season}.parquet","minSeason":2003};
+const LOAD_WBB_STANDINGS: ReleaseLoaderDef = {"fn":"load_wbb_standings","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_womens_college_basketball_standings/standings_{season}.parquet","minSeason":2001};
 
 /**
  * Load `espn_womens_college_basketball_standings` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_standings
  *
- * Note: Published seasons: every season from the floor except 2005, 2024 and 2025, which the release has no asset for; a request for one is skipped with a warning.
- *
- * @param opts.seasons - a season or a list of seasons (>= 2003); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2001); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2003.
+ * @throws SeasonNotFoundError if a season is below 2001.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadWbbStandings({ seasons: 2026 });
@@ -325,8 +319,6 @@ const LOAD_WBB_TEAM_SEASON_STATS: ReleaseLoaderDef = {"fn":"load_wbb_team_season
  * Load `espn_womens_college_basketball_team_season_stats` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_womens_college_basketball_team_season_stats
- *
- * Note: Published seasons: every season from the floor except 2024 and 2025, which the release has no asset for; a request for one is skipped with a warning.
  *
  * @param opts.seasons - a season or a list of seasons (>= 2010); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
@@ -343,20 +335,20 @@ export const loadWbbTeamSeasonStats = seasonLoader<LoadWbbTeamSeasonStatsRow>(LO
 /** snake_case alias of {@link loadWbbTeamSeasonStats} (py/R parity). */
 export const load_wbb_team_season_stats = loadWbbTeamSeasonStats;
 
-const LOAD_WBB_PLAYER_CROSSWALK: ReleaseLoaderDef = {"fn":"load_wbb_player_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wbb_crosswalk/wbb_player_crosswalk_{season}.parquet","minSeason":2014};
+const LOAD_WBB_PLAYER_CROSSWALK: ReleaseLoaderDef = {"fn":"load_wbb_player_crosswalk","url":"https://github.com/sportsdataverse/sportsdataverse-data/releases/download/wbb_crosswalk/wbb_player_crosswalk_{season}.parquet","minSeason":2007};
 
 /**
  * Load `wbb_crosswalk` (sportsdataverse-data releases).
  *
  * Source: https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/wbb_crosswalk
  *
- * @param opts.seasons - a season or a list of seasons (>= 2014); one with no published asset is skipped with a warning.
+ * @param opts.seasons - a season or a list of seasons (>= 2007); one with no published asset is skipped with a warning.
  * @param opts.columns - read only these columns (default: all).
  * @param opts.format - `"rows"` (default) or `"columns"` (`{ [column]: values[] }`, ~4x lighter).
  * @param opts.maxCells - size guard (rows × leaf columns); default scales with the heap, `Infinity` disables.
  * @param opts.timeoutMs - download timeout in ms (default 300000).
  * @returns One plain object per row (or column arrays with `format: "columns"`). Id columns (`id`, `*_id`, `*_ids`, `game_pk`, `athlete_id_1`, `id_play`, `playerId`, `start.team.id`, …) of integers are exact decimal strings whatever their stored width (INT32, INT64 or DOUBLE); other INT64 columns are numbers when every value is a safe integer, else BigInt (one warning per column per process).
- * @throws SeasonNotFoundError if a season is below 2014.
+ * @throws SeasonNotFoundError if a season is below 2007.
  * @throws SdvError if the data is over `maxCells` (checked before decoding).
  * @throws AssetFetchError if a download fails (never reported as an empty season).
  * @example await sdv.wbb.loadWbbPlayerCrosswalk({ seasons: 2026 });

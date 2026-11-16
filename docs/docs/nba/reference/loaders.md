@@ -14,7 +14,7 @@ sidebar_position: 50
 
 # `sdv.nba` — dataset loaders
 
-45 loaders reading the published sportsdataverse-data releases (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias and resolves to an array of plain row objects (or `{ [column]: values[] }` with `format: "columns"`).
+49 loaders reading the published sportsdataverse-data releases (parquet) — the JS mirror of sportsdataverse-py's `load_*` functions. Each is a camelCase export plus its snake_case alias and resolves to an array of plain row objects (or `{ [column]: values[] }` with `format: "columns"`).
 
 - **Size:** row objects cost ~60-100 bytes per cell on the heap, so before decoding each season a loader adds its rows × columns (from the parquet footer) to a running total and checks it against `maxCells` — by default heap limit / 100 for rows (≈45M cells on Node's default 4 GB heap) and heap limit / 30 for `format: "columns"` — and throws a catchable `SdvError` instead of running out of memory. Play-by-play is the usual case: pass `columns`, use `format: "columns"`, or raise the heap (`node --max-old-space-size=8192`).
 - **Seasons:** `seasons` takes one season or a list. A season with no published asset (HTTP 404) is skipped with a warning (loaders marked so in their `seasons` row — sdv-py's hand-written ones — throw `NoDataError` instead); any other failure raises `AssetFetchError` (a failed download is never an empty season); a season below the loader's floor raises `SeasonNotFoundError` before anything is fetched. Multi-season results union the columns, null-filling gaps, and cast a column whose type changed between seasons to the common type (an integer id that became a string → strings, "123" not "123.0"), as sdv-py's `diagonal_relaxed` concat does.
@@ -27,20 +27,22 @@ sidebar_position: 50
 | [`loadNbaPlayerBoxscore`](#loadnbaplayerboxscore) | [espn_nba_player_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_nba_player_boxscores) | 1994+ |
 | [`loadNbaSchedule`](#loadnbaschedule) | [espn_nba_schedules](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_nba_schedules) | 1994+ |
 | [`loadNbaTeamBoxscore`](#loadnbateamboxscore) | [espn_nba_team_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_nba_team_boxscores) | 1994+ |
-| [`loadNbaGameRosters`](#loadnbagamerosters) | [espn_nba_game_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_nba_game_rosters) | 2002+ |
-| [`loadNbaOfficials`](#loadnbaofficials) | [espn_nba_officials](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_nba_officials) | 2002+ |
+| [`loadNbaGameRosters`](#loadnbagamerosters) | [espn_nba_game_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_nba_game_rosters) | 1994+ |
+| [`loadNbaOfficials`](#loadnbaofficials) | [espn_nba_officials](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_nba_officials) | 1994+ |
 | [`loadNbaShots`](#loadnbashots) | [espn_nba_shots](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_nba_shots) | 2002+ |
 | [`loadNbaStandings`](#loadnbastandings) | [espn_nba_standings](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_nba_standings) | 2002+ |
 | [`loadNbaPlayerSeasonStats`](#loadnbaplayerseasonstats) | [espn_nba_player_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_nba_player_season_stats) | 1994+ |
-| [`loadNbaTeamSeasonStats`](#loadnbateamseasonstats) | [espn_nba_team_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_nba_team_season_stats) | 2002+ |
+| [`loadNbaTeamSeasonStats`](#loadnbateamseasonstats) | [espn_nba_team_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_nba_team_season_stats) | 1994+ |
 | [`loadNbaDraft`](#loadnbadraft) | [espn_nba_draft](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_nba_draft) | 2003+ |
 | [`loadNbaRosters`](#loadnbarosters) | [espn_nba_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_nba_rosters) | 2025+ |
+| [`loadNbaDepthCharts`](#loadnbadepthcharts) | [espn_nba_depthcharts](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_nba_depthcharts) | 2027+ |
 | [`loadNbaStatsSchedules`](#loadnbastatsschedules) | [nba_stats_schedules](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_schedules) | 1996+ |
 | [`loadNbaStatsCoaches`](#loadnbastatscoaches) | [nba_stats_coaches](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_coaches) | 1996+ |
 | [`loadNbaStatsDraft`](#loadnbastatsdraft) | [nba_stats_draft](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_draft) | 1996+ |
 | [`loadNbaStatsGameRosters`](#loadnbastatsgamerosters) | [nba_stats_game_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_game_rosters) | 1996+ |
 | [`loadNbaStatsLineups`](#loadnbastatslineups) | [nba_stats_lineups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_lineups) | 2007+ |
 | [`loadNbaStatsLineupsV3`](#loadnbastatslineupsv3) *(deprecated)* | [nba_stats_game_lineups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_game_lineups) | 1996+ |
+| [`loadNbaStatsMetricCurves`](#loadnbastatsmetriccurves) | [nba_stats_metric_curves](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_metric_curves) | 1996+ |
 | [`loadNbaStatsOfficials`](#loadnbastatsofficials) | [nba_stats_officials](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_officials) | 1996+ |
 | [`loadNbaStatsPbp`](#loadnbastatspbp) | [nba_stats_pbp](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_pbp) | 1996+ |
 | [`loadNbaStatsPossessions`](#loadnbastatspossessions) | [nba_stats_possessions](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_possessions) | 1996+ |
@@ -50,8 +52,10 @@ sidebar_position: 50
 | [`loadNbaStatsPbpV3`](#loadnbastatspbpv3) *(deprecated)* | [nba_stats_pbp](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_pbp) | 1996+ |
 | [`loadNbaStatsPlayerBoxscores`](#loadnbastatsplayerboxscores) | [nba_stats_player_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_player_boxscores) | 1996+ |
 | [`loadNbaStatsPlayerGameLogs`](#loadnbastatsplayergamelogs) | [nba_stats_player_game_logs](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_player_game_logs) | 1996+ |
+| [`loadNbaStatsTeamGameLogs`](#loadnbastatsteamgamelogs) | [nba_stats_team_game_logs](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_team_game_logs) | 1996+ |
 | [`loadNbaStatsPlayerSeasonStats`](#loadnbastatsplayerseasonstats) | [nba_stats_player_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_player_season_stats) | 1996+ |
 | [`loadNbaStatsPossessionsV3`](#loadnbastatspossessionsv3) *(deprecated)* | [nba_stats_possessions](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_possessions) | 1996+ |
+| [`loadNbaStatsRollingWindows`](#loadnbastatsrollingwindows) | [nba_stats_rolling_windows](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_rolling_windows) | 1996+ |
 | [`loadNbaStatsRosters`](#loadnbastatsrosters) | [nba_stats_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_rosters) | 1996+ |
 | [`loadNbaStatsShots`](#loadnbastatsshots) | [nba_stats_shots](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_shots) | 1996+ |
 | [`loadNbaStatsStandings`](#loadnbastatsstandings) | [nba_stats_standings](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_standings) | 1996+ |
@@ -61,7 +65,7 @@ sidebar_position: 50
 | [`loadNbaScheduleCrosswalk`](#loadnbaschedulecrosswalk) | [nba_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_crosswalk) | 2002+ |
 | [`loadNbaTeamCrosswalk`](#loadnbateamcrosswalk) | [nba_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_crosswalk) | 2002+ |
 | [`loadNbaPlayerCore`](#loadnbaplayercore) | [espn_nba_player_core](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_nba_player_core) | 1994+ |
-| [`loadNbaPlayerImpact`](#loadnbaplayerimpact) | [nba_player_impact](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_player_impact) | 1996+ |
+| [`loadNbaPlayerImpact`](#loadnbaplayerimpact) | [nba_player_impact](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_player_impact) | 1997+ |
 | [`loadNbaGroups`](#loadnbagroups) | [nba_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_groups) | one asset |
 | [`loadNbaGroupSeasons`](#loadnbagroupseasons) | [nba_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_groups) | one asset |
 | [`loadNbaGroupAliases`](#loadnbagroupaliases) | [nba_groups](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_groups) | one asset |
@@ -432,7 +436,7 @@ Release: [espn_nba_game_rosters](https://github.com/sportsdataverse/sportsdatave
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 1994) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -478,7 +482,7 @@ Release: [espn_nba_officials](https://github.com/sportsdataverse/sportsdataverse
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 1994) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -640,7 +644,7 @@ Release: [espn_nba_team_season_stats](https://github.com/sportsdataverse/sportsd
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 1994) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -792,6 +796,52 @@ const rows = await sdv.nba.loadNbaRosters({ seasons: 2025 });
 | `status_id` | `string` | Status identifier. |
 | `status_name` | `string` | Status label. |
 | `status_type` | `string` | Status type. |
+
+## `loadNbaDepthCharts`
+
+Release: [espn_nba_depthcharts](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_nba_depthcharts) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_depthcharts/depthcharts_{season}.parquet`
+
+:::caution[Coverage]
+ESPN team depth charts, snapshotted daily: one row per (as_of_date, team, position slot, depth rank), so filter to one as_of_date (the latest is the current chart) before counting players. The release starts with the 2026-27 season (season 2027), first snapshot 2026-09-08.
+:::
+
+| option | type | required | description |
+|---|---|---|---|
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2027) |
+| `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
+| `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
+
+```js
+const rows = await sdv.nba.loadNbaDepthCharts({ seasons: 2027 });
+// snake_case alias (py/R parity): sdv.nba.load_nba_depth_charts(...)
+```
+
+**Returns** (one row per record; every column optional and nullable):
+
+**Row type:** `LoadNbaDepthChartsRow` (exported from the package root).
+
+| col_name | type | description |
+|---|---|---|
+| `as_of_date` | `Date` | Date of the daily snapshot the row belongs to; one ESPN depth chart per team per as_of_date, so filter to one date (the latest is the current chart). |
+| `league` | `string` | League slug of the source ESPN depth chart, always 'nba'. |
+| `season` | `number \| bigint` | ESPN season, the ENDING year (2027 = 2026-27). |
+| `season_type` | `number \| bigint` | ESPN season type at the snapshot (1 preseason, 2 regular season). |
+| `team_id` | `string` | ESPN NBA team id of the depth chart (Int64, e.g. 1 for the Atlanta Hawks), the id the ESPN NBA schedule and box releases carry. |
+| `team_display_name` | `string` | Full team name as ESPN displays it (e.g. 'Atlanta Hawks'). |
+| `team_abbreviation` | `string` | ESPN team abbreviation (e.g. 'ATL'). |
+| `group_id` | `string` | ESPN depth-chart group id; NBA teams publish a single group, 1. |
+| `group_name` | `string` | Name of the ESPN depth-chart group, 'Depth Chart' for every NBA row. |
+| `position_slot` | `string` | Lower-case position key of the slot on the chart (pg, sg, sf, pf, c). |
+| `position_id` | `string` | ESPN position id of the slot (1 PG, 2 SG, 5 SF, 6 PF, 9 C). |
+| `position_abbreviation` | `string` | Upper-case position abbreviation of the slot (PG, SG, SF, PF, C). |
+| `position_name` | `string` | Full position name of the slot (e.g. 'Point Guard'). |
+| `depth_rank` | `number \| bigint` | Order of the athlete within the slot, 1 = starter; the chart lists each team's whole roster. |
+| `athlete_id` | `string` | ESPN athlete id of the listed player. |
+| `athlete_display_name` | `string` | Player's full name as ESPN displays it. |
+| `athlete_short_name` | `string` | Player's abbreviated name as ESPN displays it (e.g. 'O. Okongwu'). |
+| `espn_timestamp` | `string` | ESPN's last-updated time of the team's depth chart at the snapshot, ISO 8601 UTC text. |
 
 ## `loadNbaStatsSchedules`
 
@@ -1203,6 +1253,50 @@ const rows = await sdv.nba.loadNbaStatsLineupsV3({ seasons: 2025 });
 | `away_player_4` | `number \| bigint` | NBA Stats player id of the away on-court player 4 of 5 for the row. |
 | `away_player_5` | `number \| bigint` | NBA Stats player id of the away on-court player 5 of 5 for the row. |
 | `season` | `number \| bigint` | Season year. |
+
+## `loadNbaStatsMetricCurves`
+
+Release: [nba_stats_metric_curves](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_metric_curves) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_metric_curves/metric_curves_{season + 1}.parquet`
+
+:::caution[Coverage]
+One row per (entity, metric, shot-distance bucket): the fg_pct_by_shot_distance curve, at league, team and player level, that sportsdataverse.analytics.metric_curves.metric_curves builds from the NBA Stats shots. entity_id and team_id are the NBA Stats team / person ids, cast to Int64: a player row's entity_id joins person_id in load_nba_stats_shots and player_id in load_nba_stats_rosters, and team_id joins their team_id.
+:::
+
+Pass the season's START year (e.g. `1996` for the 1996-97 season); the asset is keyed by the END year and the loader translates internally, so a `season` column in the rows carries that END year.
+
+| option | type | required | description |
+|---|---|---|---|
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 1996) |
+| `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
+| `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
+
+```js
+const rows = await sdv.nba.loadNbaStatsMetricCurves({ seasons: 2025 });
+// snake_case alias (py/R parity): sdv.nba.load_nba_stats_metric_curves(...)
+```
+
+**Returns** (one row per record; every column optional and nullable):
+
+**Row type:** `LoadNbaStatsMetricCurvesRow` (exported from the package root).
+
+| col_name | type | description |
+|---|---|---|
+| `season` | `number \| bigint` | Season the curve covers, the ENDING year as the nba_stats assets key it (1997 = 1996-97); WNBA rows carry the calendar year. |
+| `entity_type` | `string` | Aggregation level of the row: "league" (every shot), "team" or "player". |
+| `entity_id` | `string` | Id of the entity the row describes, Int64 - the stats team_id on team rows and the person_id on player rows; null on league rows. |
+| `entity_name` | `string` | Display name of the player or team as the stats shots carry it; null on league rows. |
+| `team_id` | `string` | On player rows, the stats team_id of most of the player's shots that season (Int64); null on league and team rows. |
+| `id_source` | `string` | Id system of entity_id / team_id, 'nba_stats' (NBA) or 'wnba_stats' (WNBA). |
+| `metric` | `string` | Curve name; every row is 'fg_pct_by_shot_distance'. |
+| `down` | `number \| bigint` | Not used for shots (a football axis of the shared schema); always null. |
+| `x_lo` | `number` | Inclusive lower edge of the shot-distance bucket, in feet (edges fixed in metric_curves.BUCKET_EDGES). |
+| `x_hi` | `number` | Exclusive upper edge of the shot-distance bucket, in feet; a shot at exactly x_hi belongs to the next bucket up. |
+| `attempts` | `number \| bigint` | Field-goal attempts in the bucket; always positive, since an empty bucket has no row. |
+| `successes` | `number \| bigint` | Made field goals in the bucket. |
+| `rate` | `number` | successes divided by attempts (field-goal percentage), computed exactly with no smoothing. |
+| `epa_per_att` | `number` | Not used for shots; always null. |
 
 ## `loadNbaStatsOfficials`
 
@@ -1699,37 +1793,97 @@ const rows = await sdv.nba.loadNbaStatsPlayerGameLogs({ seasons: 2025 });
 
 | col_name | type | description |
 |---|---|---|
-| `season_id` | `string` | Unique season identifier. |
-| `team_id` | `string` | Unique team identifier. |
-| `team_abbreviation` | `string` | Short team abbreviation (e.g. 'LAS'). |
-| `team_name` | `string` | Full team display name (e.g. 'Las Vegas Aces'). |
-| `game_id` | `string` | Unique game identifier. |
-| `game_date` | `string` | Game date (YYYY-MM-DD). |
-| `matchup` | `string` | Matchup. |
-| `wl` | `string` | Wl. |
+| `season_id` | `string` | stats.nba.com composite season id: season-type digit + start year ('22023' = 2023-24 regular season). |
+| `player_id` | `string` | stats.nba.com person id of the player. |
+| `player_name` | `string` | Player display name, e.g. 'LeBron James'. |
+| `team_id` | `string` | stats.nba.com id of the player's team. |
+| `team_abbreviation` | `string` | Three-letter team abbreviation. |
+| `team_name` | `string` | Team name as stats.nba.com ships it (nickname or full name, by season). |
+| `game_id` | `string` | stats.nba.com game id (10-digit string, leading zeros kept). |
+| `game_date` | `string` | Game date, 'YYYY-MM-DD'. |
+| `matchup` | `string` | Matchup from the team's side: 'BOS vs. NYK' at home, 'BOS @ NYK' away. |
+| `wl` | `string` | Game result for the player's team: 'W' or 'L'. |
 | `min` | `number \| bigint` | Minutes played. |
 | `fgm` | `number \| bigint` | Field goals made. |
-| `fga` | `number \| bigint` | Field goal attempts. |
-| `fg_pct` | `number` | Field goal percentage (0-1). |
+| `fga` | `number \| bigint` | Field goals attempted. |
+| `fg_pct` | `number` | Field-goal percentage (0-1). |
 | `fg3m` | `number \| bigint` | Three-point field goals made. |
-| `fg3a` | `number \| bigint` | Three-point field goal attempts. |
-| `fg3_pct` | `number` | Three-point field goal percentage (0-1). |
+| `fg3a` | `number \| bigint` | Three-point field goals attempted. |
+| `fg3_pct` | `number` | Three-point percentage (0-1). |
 | `ftm` | `number \| bigint` | Free throws made. |
-| `fta` | `number \| bigint` | Free throw attempts. |
-| `ft_pct` | `number` | Free throw percentage (0-1). |
-| `oreb` | `number \| bigint` | Offensive rebounds. |
-| `dreb` | `number \| bigint` | Defensive rebounds. |
-| `reb` | `number \| bigint` | Rebounds per game. |
-| `ast` | `number \| bigint` | Assists. |
-| `stl` | `number \| bigint` | Steals. |
-| `blk` | `number \| bigint` | Blocks. |
-| `tov` | `number \| bigint` | Turnovers. |
-| `pf` | `number \| bigint` | Personal fouls. |
-| `pts` | `number \| bigint` | Points scored. |
-| `plus_minus` | `number \| bigint` | Plus/minus point differential while on court. |
-| `video_available` | `number \| bigint` | Video available. |
-| `season` | `number` | Season year. |
-| `season_type` | `string` | Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). |
+| `fta` | `number \| bigint` | Free throws attempted. |
+| `ft_pct` | `number` | Free-throw percentage (0-1). |
+| `oreb` | `number \| bigint` | Offensive rebounds collected. |
+| `dreb` | `number \| bigint` | Defensive rebounds collected. |
+| `reb` | `number \| bigint` | Total rebounds collected. |
+| `ast` | `number \| bigint` | Assists credited. |
+| `stl` | `number \| bigint` | Steals recorded. |
+| `blk` | `number \| bigint` | Total shots blocked. |
+| `tov` | `number \| bigint` | Turnovers committed. |
+| `pf` | `number \| bigint` | Personal fouls committed. |
+| `pts` | `number \| bigint` | Total points scored. |
+| `plus_minus` | `number \| bigint` | Team point differential while the player was on court. |
+| `fantasy_pts` | `number` | Fantasy points (stats.nba.com scoring). |
+| `video_available` | `number \| bigint` | 1 when stats.nba.com has video for the game, else 0. |
+| `season` | `number` | Season as its 4-digit END year (2025 = 2024-25), the published asset's stamp. |
+| `season_type` | `string` | Portion of the season: 'regular-season' or 'playoffs'. |
+
+## `loadNbaStatsTeamGameLogs`
+
+Release: [nba_stats_team_game_logs](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_team_game_logs) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_team_game_logs/team_game_logs_{season + 1}.parquet`
+
+Pass the season's START year (e.g. `1996` for the 1996-97 season); the asset is keyed by the END year and the loader translates internally, so a `season` column in the rows carries that END year.
+
+| option | type | required | description |
+|---|---|---|---|
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 1996) |
+| `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
+| `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
+
+```js
+const rows = await sdv.nba.loadNbaStatsTeamGameLogs({ seasons: 2025 });
+// snake_case alias (py/R parity): sdv.nba.load_nba_stats_team_game_logs(...)
+```
+
+**Returns** (one row per record; every column optional and nullable):
+
+**Row type:** `LoadNbaStatsTeamGameLogsRow` (exported from the package root).
+
+| col_name | type | description |
+|---|---|---|
+| `season_id` | `string` | stats.nba.com composite season id: season-type digit + start year ('22023' = 2023-24 regular season). |
+| `team_id` | `string` | stats.nba.com team id. |
+| `team_abbreviation` | `string` | Three-letter team abbreviation. |
+| `team_name` | `string` | Team name as stats.nba.com ships it (nickname or full name, by season). |
+| `game_id` | `string` | stats.nba.com game id (10-digit string, leading zeros kept). |
+| `game_date` | `string` | Game date, 'YYYY-MM-DD'. |
+| `matchup` | `string` | Matchup from the team's side: 'BOS vs. NYK' at home, 'BOS @ NYK' away. |
+| `wl` | `string` | Game result for the team: 'W' or 'L'. |
+| `min` | `number \| bigint` | Minutes played. |
+| `fgm` | `number \| bigint` | Field goals made. |
+| `fga` | `number \| bigint` | Field goals attempted. |
+| `fg_pct` | `number` | Field-goal percentage (0-1). |
+| `fg3m` | `number \| bigint` | Three-point field goals made. |
+| `fg3a` | `number \| bigint` | Three-point field goals attempted. |
+| `fg3_pct` | `number` | Three-point percentage (0-1). |
+| `ftm` | `number \| bigint` | Free throws made. |
+| `fta` | `number \| bigint` | Free throws attempted. |
+| `ft_pct` | `number` | Free-throw percentage (0-1). |
+| `oreb` | `number \| bigint` | Offensive rebounds collected. |
+| `dreb` | `number \| bigint` | Defensive rebounds collected. |
+| `reb` | `number \| bigint` | Total rebounds collected. |
+| `ast` | `number \| bigint` | Assists credited. |
+| `stl` | `number \| bigint` | Steals recorded. |
+| `blk` | `number \| bigint` | Total shots blocked. |
+| `tov` | `number \| bigint` | Turnovers committed. |
+| `pf` | `number \| bigint` | Personal fouls committed. |
+| `pts` | `number \| bigint` | Total points scored. |
+| `plus_minus` | `number \| bigint` | Plus-minus point differential. |
+| `video_available` | `number \| bigint` | 1 when stats.nba.com has video for the game, else 0. |
+| `season` | `number` | Season as its 4-digit END year (2025 = 2024-25), the published asset's stamp. |
+| `season_type` | `string` | Portion of the season: 'regular-season' or 'playoffs'. |
 
 ## `loadNbaStatsPlayerSeasonStats`
 
@@ -2031,6 +2185,57 @@ const rows = await sdv.nba.loadNbaStatsPossessionsV3({ seasons: 2025 });
 | `def_player_5` | `number \| bigint` | NBA Stats player id of defensive on-court player 5 of 5 for the possession. |
 | `lineup_source` | `string` | Provenance of the on-court lineup identification for the row (how the five-man units were resolved). |
 | `season` | `number \| bigint` | Season year. |
+
+## `loadNbaStatsRollingWindows`
+
+Release: [nba_stats_rolling_windows](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_stats_rolling_windows) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_rolling_windows/rolling_windows_{season + 1}.parquet`
+
+:::caution[Coverage]
+One row per (player, metric, window unit, window size): the rolling-window shooting form (fg_pct over field-goal attempts, fg3_pct over three-point attempts) that sportsdataverse.analytics.rolling_windows.rolling_windows builds from the NBA Stats shots through the season's last game (as_of_date). entity_id and team_id are cast to Int64, the NBA Stats person / team id dtype: entity_id joins person_id in load_nba_stats_shots and player_id in load_nba_stats_rosters.
+:::
+
+Pass the season's START year (e.g. `1996` for the 1996-97 season); the asset is keyed by the END year and the loader translates internally, so a `season` column in the rows carries that END year.
+
+| option | type | required | description |
+|---|---|---|---|
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 1996) |
+| `columns` | `string[]` | no | read only these columns |
+| `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
+| `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
+| `timeoutMs` | `number` | no | download timeout in ms (default 300000) |
+
+```js
+const rows = await sdv.nba.loadNbaStatsRollingWindows({ seasons: 2025 });
+// snake_case alias (py/R parity): sdv.nba.load_nba_stats_rolling_windows(...)
+```
+
+**Returns** (one row per record; every column optional and nullable):
+
+**Row type:** `LoadNbaStatsRollingWindowsRow` (exported from the package root).
+
+| col_name | type | description |
+|---|---|---|
+| `season` | `number \| bigint` | Season the rows describe, the ENDING year as the nba_stats assets key it (2026 = 2025-26); WNBA rows carry the calendar year. |
+| `entity_type` | `string` | Aggregation level of the row; every published row is 'player'. |
+| `entity_id` | `string` | The player's stats person_id (Int64). |
+| `entity_name` | `string` | The player's name on their latest shot through the season. |
+| `team_id` | `string` | Stats team_id (Int64) of the player's latest shot through the season, so a player traded mid-season carries the new team. |
+| `metric` | `string` | Rate the window averages, 'fg_pct' (field-goal attempts) or 'fg3_pct' (three-point attempts). |
+| `window_unit` | `string` | Event the window counts, 'fga' or 'fg3a'. |
+| `window_n` | `number \| bigint` | Window size, in window_unit events. |
+| `cur` | `number` | Mean of the player's last window_n events through the season. |
+| `prev` | `number` | Mean of the window_n events immediately before cur's window; null unless a full window of earlier history exists. |
+| `season_start` | `number` | Mean of the window_n events immediately before the season started (form entering the season). |
+| `career_baseline` | `number` | Mean of every event before cur's window, earlier events in the same season included; null unless a full window of history precedes it. |
+| `delta_prev` | `number` | cur minus prev. |
+| `delta_season` | `number` | cur minus season_start. |
+| `delta_career` | `number` | cur minus career_baseline. |
+| `delta_prev_rank` | `number \| bigint` | Rank of delta_prev among qualified rows of the same metric and window (1 = biggest riser, ties share the lowest rank); null unless qualified and prev exists. |
+| `n` | `number \| bigint` | Events in cur's window; below window_n for a short career. |
+| `qualified` | `boolean` | True when n equals window_n (the window is full); filter on it before building a hottest-players list. |
+| `last_event_date` | `Date` | Date of the player's latest event in the window. |
+| `as_of_date` | `Date` | Date of the latest event in the season's shots, the cutoff every row is computed through. |
+| `id_source` | `string` | Id system of entity_id / team_id, 'nba_stats' (NBA) or 'wnba_stats' (WNBA). |
 
 ## `loadNbaStatsRosters`
 
@@ -2504,6 +2709,10 @@ const rows = await sdv.nba.loadNbaStatsTeamSeasonStats({ seasons: 2025 });
 
 Release: [nba_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_crosswalk) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_crosswalk/nba_player_crosswalk_{season}.parquet`
 
+:::caution[Coverage]
+nba_player_id is Int64, as NBA Stats ships player_id / person_id, so the bridge joins without a cast.
+:::
+
 | option | type | required | description |
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
@@ -2549,6 +2758,10 @@ const rows = await sdv.nba.loadNbaPlayerCrosswalk({ seasons: 2026 });
 
 Release: [nba_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_crosswalk) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_crosswalk/nba_schedule_crosswalk_{season}.parquet`
 
+:::caution[Coverage]
+nba_game_id stays String, the zero-padded NBA Stats game id (0022300001); the nba_*_team_id bridge ids are Int64, as NBA Stats ships team_id.
+:::
+
 | option | type | required | description |
 |---|---|---|---|
 | `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
@@ -2588,6 +2801,10 @@ const rows = await sdv.nba.loadNbaScheduleCrosswalk({ seasons: 2026 });
 ## `loadNbaTeamCrosswalk`
 
 Release: [nba_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nba_crosswalk) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_crosswalk/nba_team_crosswalk_{season}.parquet`
+
+:::caution[Coverage]
+nba_team_id is Int64, as NBA Stats ships team_id, so the bridge joins without a cast.
+:::
 
 | option | type | required | description |
 |---|---|---|---|
@@ -2700,7 +2917,7 @@ The BOBAN (Bayesian Online Box-Augmented Net) columns boban_filtered_skill, boba
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 1996) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 1997) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |

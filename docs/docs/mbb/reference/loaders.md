@@ -23,20 +23,20 @@ sidebar_position: 50
 
 | Loader | Release | Seasons |
 |---|---|---|
-| [`loadMbbPbp`](#loadmbbpbp) | [espn_mens_college_basketball_pbp](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_pbp) | 2002+ |
-| [`loadMbbPlayerBoxscore`](#loadmbbplayerboxscore) | [espn_mens_college_basketball_player_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_player_boxscores) | 2002+ |
+| [`loadMbbPbp`](#loadmbbpbp) | [espn_mens_college_basketball_pbp](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_pbp) | 2003+ |
+| [`loadMbbPlayerBoxscore`](#loadmbbplayerboxscore) | [espn_mens_college_basketball_player_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_player_boxscores) | 2003+ |
 | [`loadMbbSchedule`](#loadmbbschedule) | [espn_mens_college_basketball_schedules](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_schedules) | 2002+ |
-| [`loadMbbTeamBoxscore`](#loadmbbteamboxscore) | [espn_mens_college_basketball_team_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_team_boxscores) | 2002+ |
+| [`loadMbbTeamBoxscore`](#loadmbbteamboxscore) | [espn_mens_college_basketball_team_boxscores](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_team_boxscores) | 2003+ |
 | [`loadMbbRatings`](#loadmbbratings) | [mbb_ratings](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mbb_ratings) | 2006+ |
 | [`loadMbbPlayerValue`](#loadmbbplayervalue) | [mbb_player_value](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mbb_player_value) | 2006+ |
 | [`loadMbbShots`](#loadmbbshots) | [espn_mens_college_basketball_shots](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_shots) | 2003+ |
 | [`loadMbbStandings`](#loadmbbstandings) | [espn_mens_college_basketball_standings](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_standings) | 2003+ |
-| [`loadMbbPlayerSeasonStats`](#loadmbbplayerseasonstats) | [espn_mens_college_basketball_player_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_player_season_stats) | 2025+ |
+| [`loadMbbPlayerSeasonStats`](#loadmbbplayerseasonstats) | [espn_mens_college_basketball_player_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_player_season_stats) | 2003+ |
 | [`loadMbbRosters`](#loadmbbrosters) | [espn_mens_college_basketball_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_rosters) | 2025+ |
 | [`loadMbbOfficials`](#loadmbbofficials) | [espn_mens_college_basketball_officials](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_officials) | 2003+ |
 | [`loadMbbGameRosters`](#loadmbbgamerosters) | [espn_mens_college_basketball_game_rosters](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_game_rosters) | 2002+ |
 | [`loadMbbTeamSeasonStats`](#loadmbbteamseasonstats) | [espn_mens_college_basketball_team_season_stats](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_team_season_stats) | 2003+ |
-| [`loadMbbPlayerCrosswalk`](#loadmbbplayercrosswalk) | [mbb_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mbb_crosswalk) | 2025+ |
+| [`loadMbbPlayerCrosswalk`](#loadmbbplayercrosswalk) | [mbb_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mbb_crosswalk) | 2004+ |
 | [`loadMbbScheduleCrosswalk`](#loadmbbschedulecrosswalk) | [mbb_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mbb_crosswalk) | 2008+ |
 | [`loadMbbTeamCrosswalk`](#loadmbbteamcrosswalk) | [mbb_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/mbb_crosswalk) | 2002+ |
 | [`loadMbbPlayerCore`](#loadmbbplayercore) | [espn_mens_college_basketball_player_core](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_player_core) | 2003+ |
@@ -64,9 +64,13 @@ sidebar_position: 50
 
 Release: [espn_mens_college_basketball_pbp](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_pbp) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_mens_college_basketball_pbp/play_by_play_{season}.parquet`
 
+:::caution[Coverage]
+Published seasons: every season from the floor except 2004 and 2005, which the release has no asset for; a request for one is skipped with a warning.
+:::
+
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2003) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -154,7 +158,7 @@ Release: [espn_mens_college_basketball_player_boxscores](https://github.com/spor
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2003) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -344,7 +348,7 @@ Release: [espn_mens_college_basketball_team_boxscores](https://github.com/sports
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2002) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2003) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -455,6 +459,11 @@ const rows = await sdv.mbb.loadMbbRatings({ seasons: 2025 });
 | `games` | `number \| bigint` | Games played. |
 | `rank` | `number \| bigint` | Rank. |
 | `adj_em_z` | `number` | Within-season z-score of adj_em, computed as adj_em minus the season mean divided by the season standard deviation, so each season is centered at zero with unit spread. |
+| `adj_o_blend` | `number` | Adjusted offensive efficiency with the season sim's preseason prior blended in: the same fixed point as adj_o, each Division I team shrunk toward last season's regressed rating as if it had played prior_games extra games at it. |
+| `adj_d_blend` | `number` | Adjusted defensive efficiency with the preseason prior blended in, on the same basis as adj_o_blend (lower is better). |
+| `adj_em_blend` | `number` | adj_o_blend - adj_d_blend: the adjusted efficiency margin with the preseason prior, the rating the pregame projection uses. A team with g games is rated about g / (g + prior_games) on this season. |
+| `rank_blend` | `number \| bigint` | Dense rank of adj_em_blend within the season (1 = best). |
+| `prior_games` | `number` | The preseason prior's weight in games (4 men, 3 women, fit by tools/fit_preseason_prior.py); 0 when the previous season is not released, and the blend then equals the raw rating. The five blend columns are in season assets built after 2026-11-13 (#1193); an asset published before then lacks them until the producer rebuilds it. |
 
 ## `loadMbbPlayerValue`
 
@@ -591,7 +600,7 @@ Release: [espn_mens_college_basketball_player_season_stats](https://github.com/s
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2025) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2003) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -687,6 +696,10 @@ const rows = await sdv.mbb.loadMbbRosters({ seasons: 2025 });
 ## `loadMbbOfficials`
 
 Release: [espn_mens_college_basketball_officials](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_mens_college_basketball_officials) · asset `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_mens_college_basketball_officials/officials_{season}.parquet`
+
+:::caution[Coverage]
+Published seasons: every season from the floor except 2010, which the release has no asset for; a request for one is skipped with a warning.
+:::
 
 | option | type | required | description |
 |---|---|---|---|
@@ -807,7 +820,7 @@ Release: [mbb_crosswalk](https://github.com/sportsdataverse/sportsdataverse-data
 
 | option | type | required | description |
 |---|---|---|---|
-| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2025) |
+| `seasons` | `number \| number[]` | yes | season(s) to load (>= 2004) |
 | `columns` | `string[]` | no | read only these columns |
 | `format` | `"rows" \| "columns"` | no | row objects (default) or column arrays |
 | `maxCells` | `number` | no | size guard; default scales with the heap, `Infinity` disables |
@@ -839,6 +852,7 @@ const rows = await sdv.mbb.loadMbbPlayerCrosswalk({ seasons: 2026 });
 | `yahoo_player_id` | `string` | Yahoo player id (NA placeholder). |
 | `yahoo_player_name` | `string` | Yahoo player name (NA placeholder). |
 | `kp_player_id` | `string` | KenPom player id (string), matched by hoopR-mbb-data on the normalized name within the ESPN team (a repeated name broken by jersey), then on last name plus jersey. Null for players KenPom does not list, which includes every ESPN roster row without minutes, and for every row when the build ran without the private KenPom capture. Added by the data repo, so the live player-crosswalk builder does not emit it. |
+| `ncaa_player_id` | `string` | stats.ncaa.org player id for that season (string, the player_id of the load_ncaa_mbb_* releases), from the ncaa rows of load_mbb_player_aliases valid that season, preferring an id made on the row's ESPN team; null when no NCAA id matches or the match is ambiguous, and on every row of a season before 2010 (2009-10; season is the ending year). |
 | `match_method` | `string` | Combination of matched sources, e.g. "fox+bart" / "fox_only" / "bart_only" / "espn_only". |
 | `match_confidence` | `number` | Jaro-Winkler score or 1 for exact (NA if none). |
 | `match_keys` | `string` | NA (reserved for future use). |
@@ -878,6 +892,7 @@ const rows = await sdv.mbb.loadMbbScheduleCrosswalk({ seasons: 2026 });
 | `kp_game_id` | `string` | KenPom game id (string), matched by hoopR-mbb-data on the game date and the unordered pair of ESPN team ids. Null where KenPom lists no matching game, and for every row when the build ran without the private KenPom capture. |
 | `fox_game_id` | `string` | Fox Sports game id (string), filled when the crosswalk is built with fox=True from Fox's per-date scoreboard, matched on the US-Eastern date and the two teams in either home/away order; null otherwise and where Fox lists no matching game. |
 | `yahoo_game_id` | `string` | Yahoo Sports game id, ncaab.g.\<YYYYMMDD US-Eastern date\>\<home Yahoo team id, 4 digits\>, filled when built with yahoo=True and checked against the ids Yahoo lists, so a neutral-site game carries the side Yahoo calls home; null otherwise and where Yahoo lists no such game (a non-Division-I home team). |
+| `ncaa_contest_id` | `string` | stats.ncaa.org contest id (string, the contest_id of the load_ncaa_mbb_* releases), matched on the game date and the two teams' ESPN ids through the NCAA team crosswalk, then on one team's only game that day; null when no stats.ncaa.org game matches uniquely (a non-Division-I opponent), and on every row of a season before 2010 (2009-10, the first stats.ncaa.org season; season is the ending year). |
 | `match_method` | `string` | Combination of matched sources, e.g. "fox+bart" / "fox_only" / "bart_only" / "espn_only". |
 | `match_confidence` | `number` | Jaro-Winkler score or 1 for exact (NA if none). |
 
@@ -1817,7 +1832,7 @@ const rows = await sdv.mbb.loadNcaaMbbRapm({ seasons: 2024 });
 
 | col_name | type | description |
 |---|---|---|
-| `season` | `number` | Season as a 4-digit starting year (integer). A 'YYYY-YY' string is not accepted. |
+| `season` | `number` | Season as its 4-digit ending year (integer; 2026 = 2025-26). A 'YYYY-YY' string is not accepted. |
 | `player_id` | `string` | Unique player identifier. |
 | `person_id` | `string` | Unique player identifier (V3 endpoints). |
 | `player` | `string` | Player name. |

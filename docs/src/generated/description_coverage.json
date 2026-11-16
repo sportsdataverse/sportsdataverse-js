@@ -28,9 +28,9 @@
       "rate": 1
     },
     "loaders": {
-      "filled": 15976,
-      "total": 16232,
-      "rate": 0.9842
+      "filled": 16118,
+      "total": 16374,
+      "rate": 0.9844
     },
     "mlb": {
       "filled": 1605,
@@ -139,9 +139,9 @@
     }
   },
   "totals": {
-    "filled": 62609,
-    "total": 67205,
-    "rate": 0.9316
+    "filled": 62751,
+    "total": 67347,
+    "rate": 0.9318
   },
   "breaking_pages": 263
 }

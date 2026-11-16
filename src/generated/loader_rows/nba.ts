@@ -949,6 +949,48 @@ export interface LoadNbaRostersRow {
   [column: string]: unknown;
 }
 
+/** One row of `sdv.nba.loadNbaDepthCharts` (`espn_nba_depthcharts`; sdv-py loader schema `load_nba_depth_charts`). */
+export interface LoadNbaDepthChartsRow {
+  /** Date of the daily snapshot the row belongs to; one ESPN depth chart per team per as_of_date, so filter to one date (the latest is the current chart). `Date` */
+  as_of_date?: Date | null;
+  /** League slug of the source ESPN depth chart, always 'nba'. `String` */
+  league?: string | null;
+  /** ESPN season, the ENDING year (2027 = 2026-27). `Int64` */
+  season?: number | bigint | null;
+  /** ESPN season type at the snapshot (1 preseason, 2 regular season). `Int64` */
+  season_type?: number | bigint | null;
+  /** ESPN NBA team id of the depth chart (Int64, e.g. 1 for the Atlanta Hawks), the id the ESPN NBA schedule and box releases carry. `Int64` (an id) */
+  team_id?: string | null;
+  /** Full team name as ESPN displays it (e.g. 'Atlanta Hawks'). `String` */
+  team_display_name?: string | null;
+  /** ESPN team abbreviation (e.g. 'ATL'). `String` */
+  team_abbreviation?: string | null;
+  /** ESPN depth-chart group id; NBA teams publish a single group, 1. `Int64` (an id) */
+  group_id?: string | null;
+  /** Name of the ESPN depth-chart group, 'Depth Chart' for every NBA row. `String` */
+  group_name?: string | null;
+  /** Lower-case position key of the slot on the chart (pg, sg, sf, pf, c). `String` */
+  position_slot?: string | null;
+  /** ESPN position id of the slot (1 PG, 2 SG, 5 SF, 6 PF, 9 C). `Int64` (an id) */
+  position_id?: string | null;
+  /** Upper-case position abbreviation of the slot (PG, SG, SF, PF, C). `String` */
+  position_abbreviation?: string | null;
+  /** Full position name of the slot (e.g. 'Point Guard'). `String` */
+  position_name?: string | null;
+  /** Order of the athlete within the slot, 1 = starter; the chart lists each team's whole roster. `Int64` */
+  depth_rank?: number | bigint | null;
+  /** ESPN athlete id of the listed player. `Int64` (an id) */
+  athlete_id?: string | null;
+  /** Player's full name as ESPN displays it. `String` */
+  athlete_display_name?: string | null;
+  /** Player's abbreviated name as ESPN displays it (e.g. 'O. Okongwu'). `String` */
+  athlete_short_name?: string | null;
+  /** ESPN's last-updated time of the team's depth chart at the snapshot, ISO 8601 UTC text. `String` */
+  espn_timestamp?: string | null;
+  /** A column the loader schema does not list (a release adds columns over the seasons). */
+  [column: string]: unknown;
+}
+
 /** One row of `sdv.nba.loadNbaStatsSchedules` (`nba_stats_schedules`; sdv-py loader schema `load_nba_stats_schedules`). */
 export interface LoadNbaStatsSchedulesRow {
   /** Unique game identifier. `String` (an id) */
@@ -1445,6 +1487,40 @@ export interface LoadNbaStatsLineupsRow {
   [column: string]: unknown;
 }
 
+/** One row of `sdv.nba.loadNbaStatsMetricCurves` (`nba_stats_metric_curves`; sdv-py loader schema `load_nba_stats_metric_curves`). */
+export interface LoadNbaStatsMetricCurvesRow {
+  /** Season the curve covers, the ENDING year as the nba_stats assets key it (1997 = 1996-97); WNBA rows carry the calendar year. `Int64` */
+  season?: number | bigint | null;
+  /** Aggregation level of the row: "league" (every shot), "team" or "player". `String` */
+  entity_type?: string | null;
+  /** Id of the entity the row describes, Int64 - the stats team_id on team rows and the person_id on player rows; null on league rows. `Int64` (an id) */
+  entity_id?: string | null;
+  /** Display name of the player or team as the stats shots carry it; null on league rows. `String` */
+  entity_name?: string | null;
+  /** On player rows, the stats team_id of most of the player's shots that season (Int64); null on league and team rows. `Int64` (an id) */
+  team_id?: string | null;
+  /** Id system of entity_id / team_id, 'nba_stats' (NBA) or 'wnba_stats' (WNBA). `String` */
+  id_source?: string | null;
+  /** Curve name; every row is 'fg_pct_by_shot_distance'. `String` */
+  metric?: string | null;
+  /** Not used for shots (a football axis of the shared schema); always null. `Int64` */
+  down?: number | bigint | null;
+  /** Inclusive lower edge of the shot-distance bucket, in feet (edges fixed in metric_curves.BUCKET_EDGES). `Float64` */
+  x_lo?: number | null;
+  /** Exclusive upper edge of the shot-distance bucket, in feet; a shot at exactly x_hi belongs to the next bucket up. `Float64` */
+  x_hi?: number | null;
+  /** Field-goal attempts in the bucket; always positive, since an empty bucket has no row. `Int64` */
+  attempts?: number | bigint | null;
+  /** Made field goals in the bucket. `Int64` */
+  successes?: number | bigint | null;
+  /** successes divided by attempts (field-goal percentage), computed exactly with no smoothing. `Float64` */
+  rate?: number | null;
+  /** Not used for shots; always null. `Float64` */
+  epa_per_att?: number | null;
+  /** A column the loader schema does not list (a release adds columns over the seasons). */
+  [column: string]: unknown;
+}
+
 /** One row of `sdv.nba.loadNbaStatsOfficials` (`nba_stats_officials`; sdv-py loader schema `load_nba_stats_officials`). */
 export interface LoadNbaStatsOfficialsRow {
   /** Unique official / referee identifier. `Int64` (an id) */
@@ -1907,67 +1983,141 @@ export interface LoadNbaStatsPlayerBoxscoresRow {
 
 /** One row of `sdv.nba.loadNbaStatsPlayerGameLogs` (`nba_stats_player_game_logs`; sdv-py loader schema `load_nba_stats_player_game_logs`). */
 export interface LoadNbaStatsPlayerGameLogsRow {
-  /** Unique season identifier. `String` (an id) */
+  /** stats.nba.com composite season id: season-type digit + start year ('22023' = 2023-24 regular season). `String` (an id) */
   season_id?: string | null;
-  /** Unique team identifier. `Int64` (an id) */
+  /** stats.nba.com person id of the player. `Int64` (an id) */
+  player_id?: string | null;
+  /** Player display name, e.g. 'LeBron James'. `String` */
+  player_name?: string | null;
+  /** stats.nba.com id of the player's team. `Int64` (an id) */
   team_id?: string | null;
-  /** Short team abbreviation (e.g. 'LAS'). `String` */
+  /** Three-letter team abbreviation. `String` */
   team_abbreviation?: string | null;
-  /** Full team display name (e.g. 'Las Vegas Aces'). `String` */
+  /** Team name as stats.nba.com ships it (nickname or full name, by season). `String` */
   team_name?: string | null;
-  /** Unique game identifier. `String` (an id) */
+  /** stats.nba.com game id (10-digit string, leading zeros kept). `String` (an id) */
   game_id?: string | null;
-  /** Game date (YYYY-MM-DD). `String` */
+  /** Game date, 'YYYY-MM-DD'. `String` */
   game_date?: string | null;
-  /** Matchup. `String` */
+  /** Matchup from the team's side: 'BOS vs. NYK' at home, 'BOS @ NYK' away. `String` */
   matchup?: string | null;
-  /** Wl. `String` */
+  /** Game result for the player's team: 'W' or 'L'. `String` */
   wl?: string | null;
   /** Minutes played. `Int64` */
   min?: number | bigint | null;
   /** Field goals made. `Int64` */
   fgm?: number | bigint | null;
-  /** Field goal attempts. `Int64` */
+  /** Field goals attempted. `Int64` */
   fga?: number | bigint | null;
-  /** Field goal percentage (0-1). `Float64` */
+  /** Field-goal percentage (0-1). `Float64` */
   fg_pct?: number | null;
   /** Three-point field goals made. `Int64` */
   fg3m?: number | bigint | null;
-  /** Three-point field goal attempts. `Int64` */
+  /** Three-point field goals attempted. `Int64` */
   fg3a?: number | bigint | null;
-  /** Three-point field goal percentage (0-1). `Float64` */
+  /** Three-point percentage (0-1). `Float64` */
   fg3_pct?: number | null;
   /** Free throws made. `Int64` */
   ftm?: number | bigint | null;
-  /** Free throw attempts. `Int64` */
+  /** Free throws attempted. `Int64` */
   fta?: number | bigint | null;
-  /** Free throw percentage (0-1). `Float64` */
+  /** Free-throw percentage (0-1). `Float64` */
   ft_pct?: number | null;
-  /** Offensive rebounds. `Int64` */
+  /** Offensive rebounds collected. `Int64` */
   oreb?: number | bigint | null;
-  /** Defensive rebounds. `Int64` */
+  /** Defensive rebounds collected. `Int64` */
   dreb?: number | bigint | null;
-  /** Rebounds per game. `Int64` */
+  /** Total rebounds collected. `Int64` */
   reb?: number | bigint | null;
-  /** Assists. `Int64` */
+  /** Assists credited. `Int64` */
   ast?: number | bigint | null;
-  /** Steals. `Int64` */
+  /** Steals recorded. `Int64` */
   stl?: number | bigint | null;
-  /** Blocks. `Int64` */
+  /** Total shots blocked. `Int64` */
   blk?: number | bigint | null;
-  /** Turnovers. `Int64` */
+  /** Turnovers committed. `Int64` */
   tov?: number | bigint | null;
-  /** Personal fouls. `Int64` */
+  /** Personal fouls committed. `Int64` */
   pf?: number | bigint | null;
-  /** Points scored. `Int64` */
+  /** Total points scored. `Int64` */
   pts?: number | bigint | null;
-  /** Plus/minus point differential while on court. `Int64` */
+  /** Team point differential while the player was on court. `Int64` */
   plus_minus?: number | bigint | null;
-  /** Video available. `Int64` */
+  /** Fantasy points (stats.nba.com scoring). `Float64` */
+  fantasy_pts?: number | null;
+  /** 1 when stats.nba.com has video for the game, else 0. `Int64` */
   video_available?: number | bigint | null;
-  /** Season year. `Int32` */
+  /** Season as its 4-digit END year (2025 = 2024-25), the published asset's stamp. `Int32` */
   season?: number | null;
-  /** Season type (1=pre-season, 2=regular season, 3=postseason, 4=off-season for ESPN; or string label for WNBA Stats). `String` */
+  /** Portion of the season: 'regular-season' or 'playoffs'. `String` */
+  season_type?: string | null;
+  /** A column the loader schema does not list (a release adds columns over the seasons). */
+  [column: string]: unknown;
+}
+
+/** One row of `sdv.nba.loadNbaStatsTeamGameLogs` (`nba_stats_team_game_logs`; sdv-py loader schema `load_nba_stats_team_game_logs`). */
+export interface LoadNbaStatsTeamGameLogsRow {
+  /** stats.nba.com composite season id: season-type digit + start year ('22023' = 2023-24 regular season). `String` (an id) */
+  season_id?: string | null;
+  /** stats.nba.com team id. `Int64` (an id) */
+  team_id?: string | null;
+  /** Three-letter team abbreviation. `String` */
+  team_abbreviation?: string | null;
+  /** Team name as stats.nba.com ships it (nickname or full name, by season). `String` */
+  team_name?: string | null;
+  /** stats.nba.com game id (10-digit string, leading zeros kept). `String` (an id) */
+  game_id?: string | null;
+  /** Game date, 'YYYY-MM-DD'. `String` */
+  game_date?: string | null;
+  /** Matchup from the team's side: 'BOS vs. NYK' at home, 'BOS @ NYK' away. `String` */
+  matchup?: string | null;
+  /** Game result for the team: 'W' or 'L'. `String` */
+  wl?: string | null;
+  /** Minutes played. `Int64` */
+  min?: number | bigint | null;
+  /** Field goals made. `Int64` */
+  fgm?: number | bigint | null;
+  /** Field goals attempted. `Int64` */
+  fga?: number | bigint | null;
+  /** Field-goal percentage (0-1). `Float64` */
+  fg_pct?: number | null;
+  /** Three-point field goals made. `Int64` */
+  fg3m?: number | bigint | null;
+  /** Three-point field goals attempted. `Int64` */
+  fg3a?: number | bigint | null;
+  /** Three-point percentage (0-1). `Float64` */
+  fg3_pct?: number | null;
+  /** Free throws made. `Int64` */
+  ftm?: number | bigint | null;
+  /** Free throws attempted. `Int64` */
+  fta?: number | bigint | null;
+  /** Free-throw percentage (0-1). `Float64` */
+  ft_pct?: number | null;
+  /** Offensive rebounds collected. `Int64` */
+  oreb?: number | bigint | null;
+  /** Defensive rebounds collected. `Int64` */
+  dreb?: number | bigint | null;
+  /** Total rebounds collected. `Int64` */
+  reb?: number | bigint | null;
+  /** Assists credited. `Int64` */
+  ast?: number | bigint | null;
+  /** Steals recorded. `Int64` */
+  stl?: number | bigint | null;
+  /** Total shots blocked. `Int64` */
+  blk?: number | bigint | null;
+  /** Turnovers committed. `Int64` */
+  tov?: number | bigint | null;
+  /** Personal fouls committed. `Int64` */
+  pf?: number | bigint | null;
+  /** Total points scored. `Int64` */
+  pts?: number | bigint | null;
+  /** Plus-minus point differential. `Int64` */
+  plus_minus?: number | bigint | null;
+  /** 1 when stats.nba.com has video for the game, else 0. `Int64` */
+  video_available?: number | bigint | null;
+  /** Season as its 4-digit END year (2025 = 2024-25), the published asset's stamp. `Int32` */
+  season?: number | null;
+  /** Portion of the season: 'regular-season' or 'playoffs'. `String` */
   season_type?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
@@ -2395,6 +2545,54 @@ export interface LoadNbaStatsPlayerSeasonStatsRow {
   pct_pfd_rank?: number | bigint | null;
   /** League rank of the row's share of the team's points scored accounted for by the player while on the floor for the season and split. `Int64` */
   pct_pts_rank?: number | bigint | null;
+  /** A column the loader schema does not list (a release adds columns over the seasons). */
+  [column: string]: unknown;
+}
+
+/** One row of `sdv.nba.loadNbaStatsRollingWindows` (`nba_stats_rolling_windows`; sdv-py loader schema `load_nba_stats_rolling_windows`). */
+export interface LoadNbaStatsRollingWindowsRow {
+  /** Season the rows describe, the ENDING year as the nba_stats assets key it (2026 = 2025-26); WNBA rows carry the calendar year. `Int64` */
+  season?: number | bigint | null;
+  /** Aggregation level of the row; every published row is 'player'. `String` */
+  entity_type?: string | null;
+  /** The player's stats person_id (Int64). `Int64` (an id) */
+  entity_id?: string | null;
+  /** The player's name on their latest shot through the season. `String` */
+  entity_name?: string | null;
+  /** Stats team_id (Int64) of the player's latest shot through the season, so a player traded mid-season carries the new team. `Int64` (an id) */
+  team_id?: string | null;
+  /** Rate the window averages, 'fg_pct' (field-goal attempts) or 'fg3_pct' (three-point attempts). `String` */
+  metric?: string | null;
+  /** Event the window counts, 'fga' or 'fg3a'. `String` */
+  window_unit?: string | null;
+  /** Window size, in window_unit events. `Int64` */
+  window_n?: number | bigint | null;
+  /** Mean of the player's last window_n events through the season. `Float64` */
+  cur?: number | null;
+  /** Mean of the window_n events immediately before cur's window; null unless a full window of earlier history exists. `Float64` */
+  prev?: number | null;
+  /** Mean of the window_n events immediately before the season started (form entering the season). `Float64` */
+  season_start?: number | null;
+  /** Mean of every event before cur's window, earlier events in the same season included; null unless a full window of history precedes it. `Float64` */
+  career_baseline?: number | null;
+  /** cur minus prev. `Float64` */
+  delta_prev?: number | null;
+  /** cur minus season_start. `Float64` */
+  delta_season?: number | null;
+  /** cur minus career_baseline. `Float64` */
+  delta_career?: number | null;
+  /** Rank of delta_prev among qualified rows of the same metric and window (1 = biggest riser, ties share the lowest rank); null unless qualified and prev exists. `Int64` */
+  delta_prev_rank?: number | bigint | null;
+  /** Events in cur's window; below window_n for a short career. `Int64` */
+  n?: number | bigint | null;
+  /** True when n equals window_n (the window is full); filter on it before building a hottest-players list. `Boolean` */
+  qualified?: boolean | null;
+  /** Date of the player's latest event in the window. `Date` */
+  last_event_date?: Date | null;
+  /** Date of the latest event in the season's shots, the cutoff every row is computed through. `Date` */
+  as_of_date?: Date | null;
+  /** Id system of entity_id / team_id, 'nba_stats' (NBA) or 'wnba_stats' (WNBA). `String` */
+  id_source?: string | null;
   /** A column the loader schema does not list (a release adds columns over the seasons). */
   [column: string]: unknown;
 }
@@ -3123,7 +3321,7 @@ export interface LoadNbaPlayerCrosswalkRow {
   espn_jersey?: string | null;
   /** ESPN position abbreviation. `String` */
   espn_position?: string | null;
-  /** NBA Stats player id side of the ESPN-to-NBA player crosswalk. `String` (an id) */
+  /** NBA Stats player id side of the ESPN-to-NBA player crosswalk. `Int64` (an id) */
   nba_player_id?: string | null;
   /** Player name as listed by the NBA Stats API. `String` */
   nba_player_name?: string | null;
@@ -3171,9 +3369,9 @@ export interface LoadNbaScheduleCrosswalkRow {
   nba_game_id?: string | null;
   /** NBA game code (date and matchup string) from the NBA Stats API. `String` */
   nba_game_code?: string | null;
-  /** NBA Stats team id of the home team. `String` (an id) */
+  /** NBA Stats team id of the home team. `Int64` (an id) */
   nba_home_team_id?: string | null;
-  /** NBA Stats team id of the away team. `String` (an id) */
+  /** NBA Stats team id of the away team. `Int64` (an id) */
   nba_away_team_id?: string | null;
   /** Fox Sports game id (string), filled when the crosswalk is built with fox=True from Fox's per-date scoreboard, matched on the US-Eastern date and the two teams in either home/away order; null otherwise and where Fox lists no matching game. `String` (an id) */
   fox_game_id?: string | null;
@@ -3207,7 +3405,7 @@ export interface LoadNbaTeamCrosswalkRow {
   espn_location?: string | null;
   /** ESPN mascot/nickname. `String` */
   espn_mascot?: string | null;
-  /** NBA Stats team id side of the ESPN-to-NBA team crosswalk. `String` (an id) */
+  /** NBA Stats team id side of the ESPN-to-NBA team crosswalk. `Int64` (an id) */
   nba_team_id?: string | null;
   /** Team abbreviation as listed by the NBA Stats API. `String` */
   nba_team_abbreviation?: string | null;

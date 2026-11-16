@@ -1225,6 +1225,18 @@ export interface LoadNflModelPbpRow {
   series_result?: string | null;
   /** 1: scored touchdown, gained enough yards for first down. `Int32` */
   series_success?: number | null;
+  /** Name of the passer as nflfastR clean_pbp derives it (scrambles included) -- parsed from desc, then the name its id carries most often; on a 1999-2005 charted scramble the scrambling QB (nflfastR PR 536). `String` */
+  passer?: string | null;
+  /** GSIS id of the passer as nflfastR clean_pbp derives it -- the most frequent passer_player_id of that name within the possession team and season. `String` (an id) */
+  passer_id?: string | null;
+  /** Name of the rusher as nflfastR clean_pbp derives it (no scrambles) -- parsed from desc, null when the play has a passer. `String` */
+  rusher?: string | null;
+  /** GSIS id of the rusher as nflfastR clean_pbp derives it -- the most frequent rusher_player_id of that name within the possession team and season; on an aborted snap, the player charged with the fumble. `String` (an id) */
+  rusher_id?: string | null;
+  /** Name of the targeted receiver as nflfastR clean_pbp derives it -- parsed from desc, then the name the id carries most often; also set on 2003-2008 incompletions, whose NFL.com stats name no target. Null when no pass names one, or when no play of that name in the possession team's season carries a receiver_player_id. `String` */
+  receiver?: string | null;
+  /** GSIS id of the targeted receiver as nflfastR clean_pbp derives it -- the most frequent receiver_player_id of that name within the possession team and season, so it is filled where receiver_player_id is null as long as another play of that name carries one (otherwise null, and receiver with it). `String` (an id) */
+  receiver_id?: string | null;
   /** Using the scoring event probabilities, the estimated expected points with respect to the possession team for the given play. `Float64` */
   ep?: number | null;
   /** Predicted probability of the posteam scoring a TD next. 'Next' in this context means the next score in the same game half. `Float64` */
